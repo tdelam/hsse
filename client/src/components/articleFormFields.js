@@ -1,0 +1,45 @@
+export default [
+    { label: 'Name', name: 'articleName' },
+
+    { label: 'System', name: 'system' },
+    { label: 'Eligibility', name: 'eligible' },
+    { label: 'Harvest Date', name: 'harvestDate' },
+
+    // General Article Informatrion
+    //{ label: 'Reference Id', name: 'refId' },
+    { label: 'Update Date', name: 'updateDate' },
+    { label: 'Live Date', name: 'liveDate' },
+    { label: '', name: 'referenceType' },
+    { label: '', name: 'documentType' },
+    { label: '', name: 'title' },
+    { label: '', name: 'authors' },
+    { label: '', name: 'authorEmail' },
+    { label: '', name: 'publishedDate' },
+    { label: '', name: 'citationEnglish' },
+    { label: '', name: 'citationFrench' },
+    { label: '', name: 'keywords' },
+    { label: '', name: 'customkeywords' },
+    { label: '', name: 'journalEdition' },
+    { label: '', name: 'volume' },
+    { label: '', name: 'issue' },
+    { label: '', name: 'startPage' },
+    { label: '', name: 'endPage' },
+    { label: '', name: 'editors' },
+    { label: '', name: 'publishedPlace' },
+    { label: '', name: 'publisher' },
+    { label: '', name: 'abstract' },
+    { label: '', name: 'uniqueIdDOI' },
+    { label: '', name: 'amstar' },
+    { label: '', name: 'amstarScore' },
+    { label: '', name: 'amStarScoreTotal' },
+    { label: '', name: 'meshTerms' },
+    { label: '', name: 'lastYearLitSearch' },
+    { label: '', name: 'cochrane' },
+    { label: '', name: 'cochraneIssueDate' },
+    { label: '', name: 'epochReview' },
+    { label: '', name: 'general' },
+    { label: '', name: 'hotDocs' },
+
+    // PDF Text
+
+];

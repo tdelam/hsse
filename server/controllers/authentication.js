@@ -1,0 +1,213 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jwt-simple');
+const nodemailer = require('nodemailer');
+const aws = require('aws-sdk');
+
+const config = require('../config/baseConfig');
+aws.config.update({
+    accessKeyId: config.accessKeyId,
+    secretAccessKey: config.secretAccessKey,
+    region: config.region,
+});
+
+const UserModelClass = mongoose.model('users');
+
+const userToken = (user) => {
+    const timestamp = new Date().getTime();
+    return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+}
+
+
+/*
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'pj55xncdxkaztz7o@ethereal.email', // generated ethereal user
+        pass: 'x3FfF2hgRDhQEpKJ16' // generated ethereal password
+    }
+});
+
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: config.gmailUser,
+        pass: config.gmailPassword
+    }
+});
+*/
+
+const transporter = nodemailer.createTransport({
+    SES: new aws.SES({
+        apiVersion: '2010-12-01'
+    })
+});
+
+const sendConfirmation = (args, emailToken) => {
+    
+    const confirmationUrl = `${config.backendServer}/confirmuser/${emailToken}`;
+     transporter.sendMail({
+        to: args.email,
+        subject: 'Confirm Registration Email',
+        html: `Please click this email to confirm your email: <Link href="${confirmationUrl}">${confirmationUrl}</Link>`,
+    }, (err, info) => {
+        console.log(info.envelope);
+        console.log(info.messageId);
+    });
+}
+
+const sendResetEmail = (args, emailToken) => {
+
+    console.log("*********** sending email *******");
+    
+    const resetUrl = `${config.frontendServer}/resetpassword/${emailToken}`;
+     transporter.sendMail({
+        to: args.email,
+        subject: 'Reset Password Email',
+        html: `Please click this to reset your password: <Link href="${resetUrl}">${resetUrl}</Link>`,
+    });
+}
+
+exports.signin = (req, res, next) => {
+    res.send({ token: userToken(req.user) });
+}
+
+exports.signup = (req, res, next) => {
+    const { email } = req.body;
+    const { password } = req.body;
+
+    if ( !email || !password) {
+        return res.status(422).send({ error: 'You must provide email and password'});
+    }
+
+    UserModelClass.findOne({ email }, (err, existingUser) => {
+        
+        if (err) { return next(err); }
+
+        if (existingUser) {
+            return res.status(422).send({ error: 'Email is in use' });
+        }
+
+        const newUser = new UserModelClass({
+            email,
+            password
+        });
+/*
+        newUser.save( (err) => {
+            res.json({ token: userToken(newUser) });
+        });
+*/
+
+    newUser.save( (err) => {
+        res.json({ message: "Email confirmation sent!" });
+    });
+
+    console.log(`email: ${email}, password: ${password}`);
+
+    sendConfirmation(newUser, userToken(newUser));
+
+    });
+    
+}
+
+exports.confirmUser = (req, res, next) => {
+
+    const { sub } = jwt.decode(req.params.token, config.secret);
+
+    UserModelClass.update({ _id: sub }, { $set: { confirmed: true }}, function (err, user) {
+
+        if(err) { 
+            console.log("****** There was an error *******"); 
+            return next(err); 
+        }
+
+    });
+
+
+    return res.redirect(config.frontendServer + "/signin" );
+
+}
+
+exports.resetPassword = (req, res, next) => {
+
+    console.log("**************** INSIDE RESET PASSWORD *******************");
+
+    const { sub } = jwt.decode(req.params.token, config.secret);
+
+
+    
+
+    const { password } = req.body;
+    const { confirmPassword } = req.body;
+
+    console.log("****************" + password + " - " + confirmPassword +  "*******************");
+
+    var hashedPassword = "";
+
+    if ( !password || !confirmPassword ) {
+        console.log("You must provide password and confirmPassword");
+        return res.status(422).send({
+            error: 'You must provide password and confirmPassword'
+        });
+    } else if ( password !== confirmPassword ) {
+        console.log("Your password and confirmPassword must match");
+        return res.status(422).send({ 
+            error: 'Your password and confirmPassword must match'
+        });
+    }
+
+    console.log("**************** inside resetPassword2 *******************");
+
+    bcrypt.genSalt(10, function(err, salt) {
+        if (err) { return next(err); }
+
+        bcrypt.hash(password, salt, null, function(err, hash) {
+            if(err) { return next(err); }
+
+            UserModelClass.update({ _id: sub }, { $set: { password: hash }}, function (err, user) {
+
+                if(err) { 
+                    console.log("*************** ERROR SAVING NEW PASSWORD *******************");
+                    return next(err); 
+                }
+        
+                console.log("**************** PASSWORD SAVED! *******************");
+        
+            });
+
+            next();
+
+        })
+
+        return res.redirect(config.frontendServer + "/successfulpasswordreset" ); 
+    });
+
+}
+
+exports.sendPasswordResetEmail = (req, res, next) => {
+
+    const { email } = req.body;
+
+    if ( !email ) {
+        return res.status(422).send({ error: 'You must provide email'});
+    }
+
+    UserModelClass.findOne({ email }, (err, existingUser) => {
+        
+        if (err) { return next(err); }
+
+        if (existingUser) {
+
+            sendResetEmail(existingUser, userToken(existingUser));
+            console.log("**************** SENDING RESSET EMAIL ***********************");
+            
+
+        } else { console.log("************" + email + "************ FOUND ONE ***************");
+            return res.status(422).send({ error: 'User is not registered' });
+        }
+
+    });
+}
