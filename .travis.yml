@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t kwadwosakyi/hsse-admin-client -f ./client/Dockerfile.dev ./client
+  - docker build -t sakksoftware/hsse-admin-client -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run kwadwosakyi/hsse-admin-client-test -- --coverage
+  - docker run sakksoftware/hsse-admin-client-test -- --coverage
 
 after_success:
-  - docker build -t kwadwosakyi/hsse-admin-client ./client
-  - docker build -t kwadwosakyi/hsse-nginx ./nginx
-  - docker build -t kwadwosakyi/hsse-server ./server
+  - docker build -t sakksoftware/hsse-admin-client ./client
+  - docker build -t sakksoftware/hsse-nginx ./nginx
+  - docker build -t sakksoftware/hsse-server ./server
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push kwadwosakyi/hsse-admin-client
-  - docker push kwadwosakyi/hsse-nginx
-  - docker push kwadwosakyi/hsse-server
+  - docker push sakksoftware/hsse-admin-client
+  - docker push sakksoftware/hsse-nginx
+  - docker push sakksoftware/hsse-server
