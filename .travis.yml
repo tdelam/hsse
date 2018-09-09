@@ -6,7 +6,7 @@ before_install:
   - docker build -t kwadwosakyi/hsse-admin-client -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run kwadwosakyi/hsse-admin-client test -- --coverage
+  - docker run kwadwosakyi/hsse-admin-client-test -- --coverage
 
 after_success:
   - docker build -t kwadwosakyi/hsse-admin-client ./client
