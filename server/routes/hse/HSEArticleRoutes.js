@@ -8,8 +8,8 @@ const config = require('../../config/baseConfig');
 module.exports = (app) => {
     
     // app.get('/api/hsearticles', requireSignin, HSEArticleController.list);
-    app.get('/api/hsearticle/:articleId', HSEArticleController.read);
-    app.post('/api/hsearticles', HSEArticleController.create);
-    app.delete('/api/hsearticles/:articleId', HSEArticleController.delete);
+    app.get('/hsearticle/:articleId', HSEArticleController.read);
+    app.post('/hsearticles', HSEArticleController.create);
+    app.delete('/hsearticles/:articleId', HSEArticleController.delete);
     
 };
