@@ -51,8 +51,8 @@ const transporter = nodemailer.createTransport({
 */
 
 const transporter = nodemailer.createTransport(ses({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY,
+    accessKeyId: process.env.HSSE_SES_ACCESS_KEY,
+    secretAccessKey: process.env.HSSE_SES_SECRET_KEY,
     region: 'us-east-1'
 }));
 

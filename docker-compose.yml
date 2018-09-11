@@ -16,8 +16,14 @@ services:
         - /app/node_modules
         - ./server:/app
       environment:
-        - HSSE_ADMIN_CLIENT=hsse-admin-client
-        
+        - HSSE_SES_ACCESS_KEY=AKIAI3L2YFYP5YH6LTTQ
+        - HSSE_SES_SECRET_KEY=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
+        - MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
+        - NODE_ENV=development
+        - SECRET=akfjlaksdj;lasfjasdfljiasdfasfksldf
+        - FRONTEND_SERVER=http://hsse-admin-client
+        - BACKEND_SERVER=http://hsse-server
+        - REGION=us-east-1
     hsse-admin-client:
       build:
         context: ./client

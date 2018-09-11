@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 
+require('dotenv').config();
+
 require('./models/User')
 require('./models/hse/HSEArticle');
 require('./models/sse/SSEArticle');
 require('./models/Stage');
 
-const baseConfig = require('./config/baseConfig');
-
 mongoose.connect(
-    baseConfig.mongoUri,
+    process.env.MONGO_URI,
     { useNewUrlParser: true },
     
     err => {
@@ -27,12 +27,13 @@ const app = express();
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
+
 require('./routes/authRoutes')(app);
 require('./routes/hse/HSEArticleRoutes')(app);
 require('./routes/sse/SSEArticleRoutes')(app);
 require('./routes/stageRoutes')(app);
 
-app.get('/', (requestAnimationFrame, res) => {
+app.get('/', (req, res) => {
     res.send({ message: 'Welcome McMaster Health Sciences!'});
 }); 
 
