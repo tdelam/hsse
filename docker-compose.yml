@@ -16,8 +16,8 @@ services:
         - /app/node_modules
         - ./server:/app
       environment:
-        - HSSE_SES_ACCESS_KEY=AKIAI3L2YFYP5YH6LTTQ
-        - HSSE_SES_SECRET_KEY=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
+        - HSSE_SES_ACCESS_KEY=AKIAJLYCLI5GYDMRIATA
+        - HSSE_SES_SECRET_KEY=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
         - MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
         - NODE_ENV=development
         - SECRET=akfjlaksdj;lasfjasdfljiasdfasfksldf
