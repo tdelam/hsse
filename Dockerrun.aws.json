@@ -4,7 +4,7 @@
       {
         "name": "client",
         "image": "sakksoftware/hsse-admin-client",
-        "hostname": "client",
+        "hostname": "hsse-admin-client",
         "essential": false,
         "memory": 128
       },
