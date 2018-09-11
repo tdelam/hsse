@@ -19,7 +19,7 @@
         "name": "nginx",
         "image": "sakksoftware/hsse-nginx",
         "hostname": "nginx",
-        "essential": false,
+        "essential": true,
         "portMappings": [
           {
             "hostPort": 80,
