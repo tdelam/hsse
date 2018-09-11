@@ -8,8 +8,8 @@ const ses = require('nodemailer-ses-transport');
 const config = require('../config/baseConfig');
 /*
 aws.config.update({
-    accessKeyId: 'AKIAIXSJTIZCOM7ZARQQ',
-    secretAccessKey: 'Ah5r+aUkdZbCJsynZjR6Sk/DwRAhXOYWu/m+R+6mpeml',
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
     region: 'us-east-1',
 });
 */
@@ -51,8 +51,8 @@ const transporter = nodemailer.createTransport({
 */
 
 const transporter = nodemailer.createTransport(ses({
-    accessKeyId: 'AKIAI3L2YFYP5YH6LTTQ',
-    secretAccessKey: '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',
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
     region: 'us-east-1'
 }));
 
