@@ -32,7 +32,7 @@ services:
         - /app/node_modules
         - ./client:/app
       environment:
-        - HSSE_SERVER_HOST=hsse_server
+        - BACKEND_SERVER=hsse_server
     hsse-admin-client-test:
       build:
         context: ./client
