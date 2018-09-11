@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const SSEArticleSchema = new Schema({
-    articleName: { type: String, unique: true },
+    //articleName: { type: String, unique: true },
 
     system: { type: String },
     eligible: { type: Boolean, default: false },

@@ -15,7 +15,7 @@ const store = createStore(
 )
 */
 
-export default ({ children, initialState = {} }) => {
+export default ({ children, initialState = { auth: { authenticated: localStorage.getItem('token') } } }) => {
 
     const store = createStore(
         reducers,

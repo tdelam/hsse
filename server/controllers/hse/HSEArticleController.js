@@ -11,6 +11,7 @@ exports.create = (req, res) => {
 
     newHSEArticle.save( (err) => {
         if(err) {
+            console.log(err);
             return res.status(422).send({
                 message: 'Unable to save new article'
             });

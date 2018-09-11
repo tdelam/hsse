@@ -41,7 +41,7 @@ class App extends Component {
               <Route path="/dashboard" component={ Dashboard } />
 
               <Route path="/hsearticlequick/new" component={ HSEArticleQuickNew } />
-              <Route path="/dashboard" component={ Dashboard } />
+    
 
             </div>
           </div>

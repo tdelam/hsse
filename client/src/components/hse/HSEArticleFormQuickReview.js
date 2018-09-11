@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 
-const HSEArticleFormQuickReview = ({ onCancel, formValues, submitHSEArticle, history }) => {
+const HSEArticleFormQuickReview = ({ onCancel, formValues, onHSEArticleSubmit, history }) => {
     return (
         <div>
             <br />
@@ -19,19 +19,20 @@ const HSEArticleFormQuickReview = ({ onCancel, formValues, submitHSEArticle, his
 
             <div>
                 <label>Authors</label>
-                <div>{ formValues.authors }</div>
+                <h5>{ formValues.authors }</h5>
             </div>
+            <br />
 
             <div>
                 <label>Published Date</label>
-                <div>{ formValues.pubblishedDate }</div>
+                <h5>{ formValues.publishedDate }</h5>
             </div>
+            <br />
 
             <div>
                 <label>Journal</label>
-                <div>{ formValues.journalEdition }</div>
+                <h5>{ formValues.journalEdition }</h5>
             </div>
-
             <br />
 
             <button
@@ -42,7 +43,7 @@ const HSEArticleFormQuickReview = ({ onCancel, formValues, submitHSEArticle, his
             </button>
             <span> </span>
             <button 
-                onClick={ () => submitHSEArticle(formValues, history) }
+                onClick={ () => onHSEArticleSubmit(formValues, history) }
                 className="btn btn-success"
             >
                 Add Article

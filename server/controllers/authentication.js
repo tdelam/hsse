@@ -3,14 +3,16 @@ const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jwt-simple');
 const nodemailer = require('nodemailer');
 const aws = require('aws-sdk');
+const ses = require('nodemailer-ses-transport');
 
 const config = require('../config/baseConfig');
+/*
 aws.config.update({
-    accessKeyId: config.accessKeyId,
-    secretAccessKey: config.secretAccessKey,
-    region: config.region,
+    accessKeyId: 'AKIAIXSJTIZCOM7ZARQQ',
+    secretAccessKey: 'Ah5r+aUkdZbCJsynZjR6Sk/DwRAhXOYWu/m+R+6mpeml',
+    region: 'us-east-1',
 });
-
+*/
 const UserModelClass = mongoose.model('users');
 
 const userToken = (user) => {
@@ -38,24 +40,31 @@ const transporter = nodemailer.createTransport({
         pass: config.gmailPassword
     }
 });
-*/
 
+
+// create Nodemailer SES transporter
 const transporter = nodemailer.createTransport({
     SES: new aws.SES({
         apiVersion: '2010-12-01'
     })
 });
+*/
+
+const transporter = nodemailer.createTransport(ses({
+    accessKeyId: 'AKIAI3L2YFYP5YH6LTTQ',
+    secretAccessKey: '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',
+    region: 'us-east-1'
+}));
+
 
 const sendConfirmation = (args, emailToken) => {
     
     const confirmationUrl = `${config.backendServer}/confirmuser/${emailToken}`;
      transporter.sendMail({
+        from: 'sakksoftware@gmail.com',
         to: args.email,
         subject: 'Confirm Registration Email',
         html: `Please click this email to confirm your email: <Link href="${confirmationUrl}">${confirmationUrl}</Link>`,
-    }, (err, info) => {
-        console.log(info.envelope);
-        console.log(info.messageId);
     });
 }
 
@@ -105,7 +114,7 @@ exports.signup = (req, res, next) => {
         res.json({ message: "Email confirmation sent!" });
     });
 
-    console.log(`email: ${email}, password: ${password}`);
+    //console.log(`email: ${email}, password: ${password}`);
 
     sendConfirmation(newUser, userToken(newUser));
 

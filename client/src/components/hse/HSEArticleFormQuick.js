@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 
-// import requireAuth from '../requireAuth';
 // import articleFormFieldsQuick from '../articleFormFieldsQuick';
 
 class HSEArticleFormQuick extends Component {
@@ -29,10 +28,12 @@ class HSEArticleFormQuick extends Component {
         return(
             <div>
                 <br />
-                <form onSubmit={this.props.handleSubmit( this.props.onArticleHSESubmit )} >
+                <br />
+                <form onSubmit={this.props.handleSubmit( this.props.onHSEArticleSubmit )} >
                 <h2>Add HSE Article</h2>
                 <br />
-                <div className="form-group">
+                <br />
+                <fieldset className="form-group">
                     <label>Title</label>
                     <Field
                         name="title"
@@ -40,7 +41,8 @@ class HSEArticleFormQuick extends Component {
                         component="textarea"
                         className="form-control"
                     />
-                </div>
+                </fieldset>
+                <br />
 
                 {/*</fieldset>
                 <fieldset className="form-group">*/}
@@ -54,18 +56,20 @@ class HSEArticleFormQuick extends Component {
                         className="form-control"
                     />
                 </div>
+                <br />
 
-                <div className="form-group">
+                <fieldset className="form-group">
                     <label>Published Date</label>
                     <Field
                         name="publishedDate"
                         type="date"
-                        component="textarea"
+                        component="input"
                         className="form-control"
                     />
-                </div>
+                </fieldset>
+                <br />
 
-                <div className="form-group">
+                <fieldset className="form-group">
                     <label>Journal</label>
                     <Field
                         name="journalEdition"
@@ -73,7 +77,7 @@ class HSEArticleFormQuick extends Component {
                         component="input"
                         className="form-control"
                     />
-                </div>
+                </fieldset>
                 
                 {/*<div>{this.props.errorMessage}</div>*/}
 

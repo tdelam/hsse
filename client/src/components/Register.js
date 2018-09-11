@@ -43,7 +43,7 @@ class Register extends Component {
                     className="form-control"
                 />
                 
-                {/*<div>{this.props.errorMessage}</div>*/}
+                <div>{this.props.errorMessage}</div>
                 <br />
                 <button action="submit" className="btn btn-primary">Register</button>
                 </div>

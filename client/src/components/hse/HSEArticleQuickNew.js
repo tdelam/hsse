@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 
+import requireAuth from '../requireAuth';
+
 import HSEArticleFormQuick from './HSEArticleFormQuick';
 import HSEArticleFormQuickReview from './HSEArticleFormQuickReview';
 
@@ -22,7 +24,7 @@ class HSEArticleQuickNew extends Component {
 
         return (
             <HSEArticleFormQuick 
-                onArticleHSESubmit={ () => this.setState({ showFormReview: true })} 
+                onHSEArticleSubmit={ () => this.setState({ showFormReview: true }) } 
             />
         );
 
@@ -38,5 +40,5 @@ class HSEArticleQuickNew extends Component {
 }
 
 export default reduxForm({
-    form: 'HSEArticleQuickForm'
-})(HSEArticleQuickNew);
+    form: 'HSEArticleFormQuick'
+})(requireAuth(HSEArticleQuickNew));

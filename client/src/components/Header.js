@@ -17,7 +17,10 @@ class Header extends Component {
                         <Link className="nav-link" to="/signout">Sign out</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/articles/new">Upload Article</Link>
+                        <Link className="nav-link" to="/hsearticlequick/new">Upload HSE Article</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/ssearticlequick/new">Upload SSE Article</Link>
                     </li>
                 </ul>
             );
@@ -39,15 +42,15 @@ class Header extends Component {
 
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-                <Link className="navbar-brand" to="">McMaster Health</Link>
+                <Link className="navbar-brand" to="">McMaster Health Forum</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarColor01">
+                <div className="collapse navbar-collapse" id="navbarColor01" >
                     { this.renderLinks() }
                 </div>
-              </nav>
+            </nav>
         );
     }
 }

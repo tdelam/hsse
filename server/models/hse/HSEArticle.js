@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const HSEArticleSchema = new Schema({
-    articleName: { type: String, unique: true },
+    //articleName: { type: String },
 
     system: { type: String },
     eligible: { type: Boolean, default: false },
@@ -18,7 +18,7 @@ const HSEArticleSchema = new Schema({
     documentType: { type: String },
     questionType: { type: String },
     title: { type: String },
-    authors: { type: [String] },
+    authors: { type: String },
     authorEmail: { type: String },
     publishedDate: { type: Date },
     citationEnglish: { type: [String] },
