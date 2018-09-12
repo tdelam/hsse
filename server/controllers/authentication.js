@@ -17,7 +17,7 @@ const UserModelClass = mongoose.model('users');
 
 const userToken = (user) => {
     const timestamp = new Date().getTime();
-    return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+    return jwt.encode({ sub: user.id, iat: timestamp }, process.env.JWT_SECRET);
 }
 
 
@@ -124,7 +124,7 @@ exports.signup = (req, res, next) => {
 
 exports.confirmUser = (req, res, next) => {
 
-    const { sub } = jwt.decode(req.params.token, config.secret);
+    const { sub } = jwt.decode(req.params.token, process.env.JWT_SECRET);
 
     UserModelClass.update({ _id: sub }, { $set: { confirmed: true }}, function (err, user) {
 
@@ -144,7 +144,7 @@ exports.resetPassword = (req, res, next) => {
 
     console.log("**************** INSIDE RESET PASSWORD *******************");
 
-    const { sub } = jwt.decode(req.params.token, config.secret);
+    const { sub } = jwt.decode(req.params.token, process.env.JWT_SECRET);
 
 
     
