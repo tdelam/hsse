@@ -3,7 +3,7 @@ import { AUTH_USER, AUTH_ERROR, CONFIRM_USER_EMAIL, FORGOT_PASSWORD_EMAIL, CREAT
 
 //const backendServer = "https://nameless-hollows-27940.herokuapp.com";
 //const backendServer = "http://localhost:5000/";
-const backendServer = "/";
+const backendServer = "/api";
 
 export const signup = (formProps, callback) => async dispatch => {
   
