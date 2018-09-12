@@ -20,7 +20,7 @@ services:
         - HSSE_SES_SECRET_KEY=/wHiDDJf26cGwckFCLXpeCkkAaSc/rE9XRDnG5XO
         - MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
         - NODE_ENV=development
-        - SECRET=akfjlaksdj;lasfjasdfljiasdfasfksldf
+        - JWT_SECRET=akfjlaksdj;lasfjasdfljiasdfasfksldf
         - FRONTEND_SERVER=http://hsse-admin-client
         - BACKEND_SERVER=http://hsse-server
         - REGION=us-east-1

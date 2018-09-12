@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('../config/keys');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
@@ -31,7 +30,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
-    secretOrKey: config.secret
+    secretOrKey: process.env.JWT_SECRET
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
