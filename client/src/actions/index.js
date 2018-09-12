@@ -9,7 +9,7 @@ export const signup = (formProps, callback) => async dispatch => {
   
   try {
     await axios.post(
-      `${backendServer}api/signup`,
+      `${backendServer}/signup`,
       formProps
     );
 
@@ -28,7 +28,7 @@ export const signin = (formProps, callback) => async dispatch => {
   
   try {
     const response = await axios.post(
-      `${backendServer}api/signin`,
+      `${backendServer}/signin`,
       formProps
     );
 
@@ -48,7 +48,7 @@ export const signin = (formProps, callback) => async dispatch => {
 export const resetPassword = (formProps, token, callback) => async dispatch => {
   try {
     await axios.post(
-      `${backendServer}api/resetpassword/${token}`,
+      `${backendServer}/resetpassword/${token}`,
       formProps
     );
 
@@ -63,7 +63,7 @@ export const resetPassword = (formProps, token, callback) => async dispatch => {
 export const forgotpassword = (formProps, callback) => async dispatch => {
   try {
     await axios.post(
-      `${backendServer}api/forgotpassword`,
+      `${backendServer}/forgotpassword`,
       formProps
     );
 
@@ -93,7 +93,7 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
   
   try {
     const response = await axios.post(
-      `${backendServer}api/hsearticles`,
+      `${backendServer}/hsearticles`,
       values
     );
 
