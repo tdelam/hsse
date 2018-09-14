@@ -74,6 +74,7 @@ const sendResetEmail = (args, emailToken) => {
     
     const resetUrl = `${config.frontendServer}/resetpassword/${emailToken}`;
      transporter.sendMail({
+        from: 'sakksoftware@gmail.com',
         to: args.email,
         subject: 'Reset Password Email',
         html: `Please click this to reset your password: <Link href="${resetUrl}">${resetUrl}</Link>`,
