@@ -52,7 +52,7 @@ const HSEArticleFormQuickReview = ({ onCancel, formValues, onHSEArticleSubmit, h
     );
 };
 
-function mapStateToProps(state) {console.log(state);
+function mapStateToProps(state) {
     return { formValues: state.form.HSEArticleFormQuick.values }
 }
 

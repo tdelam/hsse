@@ -13,8 +13,8 @@ services:
         context: ./server
         dockerfile: Dockerfile.dev
       volumes:
+        - ./server:/app:rw
         - /app/node_modules
-        - ./server:/app
       environment:
         - HSSE_SES_ACCESS_KEY=AKIAJLYCLI5GYDMRIATA
         - HSSE_SES_SECRET_KEY=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
@@ -29,15 +29,16 @@ services:
         context: ./client
         dockerfile: Dockerfile.dev
       volumes:
+        - ./client:/app:rw
         - /app/node_modules
-        - ./client:/app
       environment:
+        - CHOKIDAR_USEPOLLING=true
         - BACKEND_SERVER=hsse_server
     hsse-admin-client-test:
       build:
         context: ./client
         dockerfile: Dockerfile.dev
       volumes:
+        - ./client:/app:rw
         - /app/node_modules
-        - ./client:/app
       command: ["npm", "run", "test"]
