@@ -16,13 +16,15 @@ services:
         - ./server:/app:rw
         - /app/node_modules
       environment:
-        - HSSE_SES_ACCESS_KEY=AKIAJLYCLI5GYDMRIATA
-        - HSSE_SES_SECRET_KEY=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
+        - CHOKIDAR_USEPOLLING=true
+        - BACKEND_SERVER=hsse_server
+        - HSSE_SES_ACCESS_KEY=AKIAI2YSACG5DA5IKPYA
+        - HSSE_SES_SECRET_KEY=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
         - MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
         - NODE_ENV=development
         - JWT_SECRET=akfjlaksdjlasfjasdfljiasdfasfksldf
-        - FRONTEND_SERVER=http://hsse-admin-client
-        - BACKEND_SERVER=http://hsse-server
+        - FRONTEND_SERVER=http://localhost:3050
+        - BACKEND_SERVER=http://localhost:3050/api
         - REGION=us-east-1
     hsse-admin-client:
       build:
@@ -33,7 +35,7 @@ services:
         - /app/node_modules
       environment:
         - CHOKIDAR_USEPOLLING=true
-        - BACKEND_SERVER=hsse_server
+        - BACKEND_SERVER=http://localhost:3050/api
     hsse-admin-client-test:
       build:
         context: ./client
@@ -41,4 +43,7 @@ services:
       volumes:
         - ./client:/app:rw
         - /app/node_modules
+      environment:
+        - CHOKIDAR_USEPOLLING=true
+        - BACKEND_SERVER=http://localhost:3050/api
       command: ["npm", "run", "test"]

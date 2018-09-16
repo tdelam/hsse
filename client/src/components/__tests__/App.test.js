@@ -8,29 +8,23 @@ import Header from '../Header';
 let wrapper;
 
 beforeEach(() => {
-/*    
+    /*
     wrapper = mount(
         <Root>
             <App />
         </Root>
     );
-*/
+    */
 });
 
 afterEach(() => {
-/*
-    wrapper.unmount();
-*/
+
+    // wrapper.unmount();
+
 });
 
 it('shows header', () => {
-/*
-    expect(wrapper.find(Header).length).toEqual(1);
-*/
-});
 
-it('shows header', () => {
-/*
-    expect(wrapper.find(Header).length).toEqual(1);
-*/
+    // expect(wrapper.find(Header).length).toEqual(1);
+
 });

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jwt-simple');
 const nodemailer = require('nodemailer');
-const aws = require('aws-sdk');
+//const aws = require('aws-sdk');
 const ses = require('nodemailer-ses-transport');
 
 const config = require('../config/baseConfig');
@@ -53,7 +53,7 @@ const transporter = nodemailer.createTransport({
 const transporter = nodemailer.createTransport(ses({
     accessKeyId: process.env.HSSE_SES_ACCESS_KEY,
     secretAccessKey: process.env.HSSE_SES_SECRET_KEY,
-    region: 'us-east-1'
+    region: process.env.REGION
 }));
 
 
@@ -64,7 +64,7 @@ const sendConfirmation = (args, emailToken) => {
         from: 'sakksoftware@gmail.com',
         to: args.email,
         subject: 'Confirm Registration Email',
-        html: `Please click this email to confirm your email: <Link href="${confirmationUrl}">${confirmationUrl}</Link>`,
+        html: `Please click this email to confirm your email: <a href="${confirmationUrl}">${confirmationUrl}</a>`,
     });
 }
 
@@ -77,7 +77,7 @@ const sendResetEmail = (args, emailToken) => {
         from: 'sakksoftware@gmail.com',
         to: args.email,
         subject: 'Reset Password Email',
-        html: `Please click this to reset your password: <Link href="${resetUrl}">${resetUrl}</Link>`,
+        html: `Please click this to reset your password: <a href="${resetUrl}">${resetUrl}</a>`,
     });
 }
 

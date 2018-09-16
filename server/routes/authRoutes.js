@@ -18,7 +18,7 @@ module.exports = (app) => {
     });
 
     app.post('/signin', requireSignin, Authentication.signin);
-    app.post('/api/signup', Authentication.signup);
+    app.post('/signup', Authentication.signup);
     
     app.get('/confirmuser/:token', Authentication.confirmUser);
     app.post('/forgotpassword', Authentication.sendPasswordResetEmail);
