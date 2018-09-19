@@ -16,6 +16,7 @@ import Dashboard from './Dashboard';
 import Landing from './Landing';
 
 import HSEArticleQuickNew from './hse/HSEArticleQuickNew';
+import HSEBatchUpload from './hse/HSEBatchUpload';
 
 
 import '../styles/bootstrap.css';
@@ -41,7 +42,7 @@ class App extends Component {
               <Route path="/dashboard" component={ Dashboard } />
 
               <Route path="/hsearticlequick/new" component={ HSEArticleQuickNew } />
-    
+              <Route path="/hsearticlebatchupload/new" component={ HSEBatchUpload } />    
 
             </div>
           </div>

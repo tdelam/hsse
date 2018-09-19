@@ -20,7 +20,13 @@ class Header extends Component {
                         <Link className="nav-link" to="/hsearticlequick/new">Upload HSE Article</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/hsearticlebatchupload/new">| Upload HSE Article Batch | </Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" to="/ssearticlequick/new">Upload SSE Article</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/ssearticlebatchupload/new">| Upload SSE Article Batch | </Link>
                     </li>
                 </ul>
             );
