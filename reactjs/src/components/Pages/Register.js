@@ -74,7 +74,8 @@ class Register extends Component {
                 <div className="card card-flat">
                     <div className="card-header text-center bg-dark">
                         <a href="">
-                            <img className="block-center" src="img/logo.png" alt="Logo"/>
+                            {/*<img className="block-center" src="img/logo.png" alt="Logo"/>*/}
+                            <h2 style={{color: '#fff'}}>HSSE</h2>
                         </a>
                     </div>
                     <div className="card-body">

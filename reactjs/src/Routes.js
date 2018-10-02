@@ -6,7 +6,7 @@ import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 // import BaseHorizontal from './components/Layout/BaseHorizontal';
 
-import DashboardV1 from './components/Dashboard/DashboardV1';
+// import DashboardV1 from './components/Dashboard/DashboardV1';
 import DashboardV2 from './components/Dashboard/DashboardV2';
 import DashboardV3 from './components/Dashboard/DashboardV3';
 
@@ -184,14 +184,14 @@ const Routes = ({ location }) => {
                             <Route path="/form-wizard" component={FormWizard}/>
                             <Route path="/form-upload" component={FormUpload}/>
                             <Route path="/form-cropper" component={FormCropper}/>
-
+                            
                             {/*Charts*/}
                             <Route path="/chart-flot" component={ChartFlot}/>
                             <Route path="/chart-radial" component={ChartRadial}/>
                             <Route path="/chart-chartjs" component={ChartChartJS}/>
                             <Route path="/chart-morris" component={ChartMorris}/>
                             <Route path="/chart-chartist" component={ChartChartist}/>
-
+                            
                             {/*Table*/}
                             <Route path="/table-standard" component={TableStandard}/>
                             <Route path="/table-extended" component={TableExtended}/>

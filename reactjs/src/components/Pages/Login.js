@@ -9,7 +9,6 @@ import * as actions from '../../actions';
 
 import FormValidator from '../Forms/FormValidator.js';
 
-
 class Login extends Component {
 
     state = {
@@ -66,10 +65,10 @@ class Login extends Component {
         e.preventDefault()
     }
 
-    gotoDashboard = () => this.props.history.push('/dashboard');
+    gotoDashboard = () => this.props.history.push('/dashboardv2');
 
-    handleSubmit({ email, password }) {
-        this.props.signin({ email, password }, this.gotoDashboard);
+    handleSubmit = (formProps) => {
+        this.props.signin(formProps, this.gotoDashboard);
     }
 
     /* Simplify error check */
@@ -81,7 +80,7 @@ class Login extends Component {
     }    
 
 
-    renderEmailField = () => {
+    renderEmailField = ({input}) => {
         return <Input type="email"
             name="email"
             className="border-right-0"
@@ -90,10 +89,11 @@ class Login extends Component {
             onChange={this.validateOnChange}
             data-validate='["required", "email"]'
             //value={this.state.formLogin.email}
+            {...input}
         />
     }
 
-    renderPasswordField = () => {
+    renderPasswordField = ({input}) => {
         return <Input type="password"
             id="id-password"
             name="password"
@@ -103,6 +103,7 @@ class Login extends Component {
             onChange={this.validateOnChange}
             data-validate='["required"]'
             //value={this.state.formLogin.password}
+            {...input}
         />
     }
 
@@ -116,12 +117,13 @@ class Login extends Component {
                 <div className="card card-flat">
                     <div className="card-header text-center bg-dark">
                         <a href="">
-                            <img className="block-center rounded" src="img/logo.png" alt="Logo"/>
+                            {/*<img className="block-center rounded" src="img/logo.png" alt="Logo"/>*/}
+                            <h2 style={{color: '#fff'}}>HSSE</h2>
                         </a>
                     </div>
                     <div className="card-body">
                         <p className="text-center py-2">SIGN IN</p>
-                        <form className="mb-3" name="formLogin" onSubmit={ handleSubmit(this.handleSubmit.bind(this))}>
+                        <form className="mb-3" name="formLogin" onSubmit={ handleSubmit(this.handleSubmit)}>
                             <div className="form-group">
                                 <div className="input-group with-focus">
                                     <Field
@@ -143,8 +145,8 @@ class Login extends Component {
                             <div className="form-group">
                                 <div className="input-group with-focus">
                                     <Field 
-                                        name="password",
-                                        type="text",
+                                        name="password"
+                                        type="password"
                                         component={this.renderPasswordField}
                                         autoComplete="none"
                                         className="form-control"
@@ -167,7 +169,7 @@ class Login extends Component {
                                     <Link to="recover" className="text-muted">Forgot your password?</Link>
                                 </div>
                             </div>
-                            <button className="btn btn-block btn-primary mt-3" action="submit" type="submit">Login</button>
+                            <button className="btn btn-block btn-primary mt-3" type="submit">Login</button>
                         </form>
                         <p className="pt-3 text-center">Need to Signup?</p>
                         <Link to="register" className="btn btn-block btn-secondary">Register Now</Link>
@@ -192,6 +194,5 @@ function mapStateToProps(state) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'login',
-        fields: ['email', 'password']
+        form: 'login'
     })) (Login);
