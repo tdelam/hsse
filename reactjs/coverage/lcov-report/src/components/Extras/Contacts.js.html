@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Extras/Contacts.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Extras</a> Contacts.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/9</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import ContentWrapper <span class="cstat-no" title="statement not covered" >from '../Layout/ContentWrapper';<span class="cstat-no" title="statement not covered" ></span></span>
+import { Row, Col,<span class="cstat-no" title="statement not covered" > Card, CardBody, CardF</span>ooter, Dr<span class="fstat-no" title="function not covered" >opdown, DropdownMenu, D</span>ropdow<span class="cstat-no" title="statement not covered" >nToggle, DropdownItem } from 'reactstrap';</span>
+&nbsp;
+const ContactCard = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >pr</span>ops =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >    &lt;Card className="card-default"&gt;</span>
+        &lt;CardBody className="text-center"&gt;
+            &lt;img className="mb-2 img-fluid rounded-circle thumb64" src={props.imgsrc} alt="Contact"/&gt;
+            &lt;h4&gt;{props.name}&lt;/h4&gt;
+            &lt;p&gt;{props.desc}&lt;/p&gt;
+        &lt;/CardBody&gt;
+        &lt;CardFooter className="d-flex"&gt;
+            &lt;div&gt;
+                &lt;button type="button" className="btn btn-xs btn-primary"&gt;Send message&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div className="ml-auto"&gt;
+                &lt;button type="button" className="btn btn-xs btn-secondary"&gt;View&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/CardFooter&gt;
+    &lt;/Card&gt;
+)
+&nbsp;
+&nbsp;
+class Contacts extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    state = {
+        dropdownOpen: false
+    }
+&nbsp;
+    toggle = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({</span>
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;Contacts
+                    &lt;div className="ml-auto"&gt;
+                        &lt;Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}&gt;
+                            &lt;DropdownToggle color="link"&gt;
+                                &lt;em className="fa fa-ellipsis-v fa-lg"&gt;&lt;/em&gt;
+                            &lt;/DropdownToggle&gt;
+                            &lt;DropdownMenu className="dropdown-menu-right-forced animated fadeInLeft"&gt;
+                                &lt;DropdownItem&gt;
+                                    &lt;em className="fa-fw fa fa-plus mr-2"&gt;&lt;/em&gt;
+                                    &lt;span&gt;New contact&lt;/span&gt;
+                                &lt;/DropdownItem&gt;
+                                &lt;DropdownItem&gt;
+                                    &lt;em className="fa-fw fas fa-share mr-2"&gt;&lt;/em&gt;
+                                    &lt;span&gt;Import contact&lt;/span&gt;
+                                &lt;/DropdownItem&gt;
+                                &lt;DropdownItem&gt;
+                                    &lt;em className="fa-fw fas fa-reply mr-2"&gt;&lt;/em&gt;
+                                    &lt;span&gt;Export contacts&lt;/span&gt;
+                                &lt;/DropdownItem&gt;
+                            &lt;/DropdownMenu&gt;
+                        &lt;/Dropdown&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;Row&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/02.jpg" name="Audrey Hunt" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/03.jpg" name="Leonard Price" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/04.jpg" name="Jamie Stephens" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/05.jpg" name="Tara Nelson" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/06.jpg" name="Constance Cook" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/07.jpg" name="Laura Palmr" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/08.jpg" name="Audrey Hunt" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/09.jpg" name="Leslie Mckinney" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg="4" sm="6"&gt;
+                        &lt;ContactCard imgsrc="img/user/04.jpg" name="Brian Mills" desc="Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!"/&gt;
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
+            &lt;/ContentWrapper&gt;
+            );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default Contacts;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

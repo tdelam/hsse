@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Forms/FormValidation.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Forms</a> FormValidation.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/19</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import ContentWrapper <span class="cstat-no" title="statement not covered" >from '../Layout/ContentWrapper';<span class="cstat-no" title="statement not covered" ></span></span>
+import { Row, Col,<span class="cstat-no" title="statement not covered" > Input, Card, CardHead</span>er, CardBody, CardFooter, CustomInput } from 'reactstrap';
+&nbsp;
+import FormValidator <span class="cstat-no" title="statement not covered" >from './FormValidator.js';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+/**
+ * Validation flow using controlled components
+ *
+ * 1- User type on input
+ * 2- onChange event trigger validation
+ * 3- Validate methods are listed using "data-validate"
+ *    attribute. Content must be an array in json format.
+ * 4- The validation returns an object with format {[input name]: status}
+ *    where status is an array of boolean per each method
+ * 5- Methods that requires an argument, read the 'data-param' attribute
+ * 6- Similarly, onSubmit event does a bulk validation on all form elements
+ */
+&nbsp;
+class FormValidation extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    state = {
+        /* Group each form state in an object.
+           Property name MUST match the form name */
+        formRegister: {
+            email: '',
+            password: '',
+            password2: '',
+            terms: false
+        },
+        formLogin: {
+            email: '',
+            password: ''
+        },
+        formDemo: {
+            text: '',
+            email: '',
+            number: '',
+            integer: '',
+            alphanum: '',
+            url: '',
+            password: '',
+            password2: '',
+            minlength: '',
+            maxlength: '',
+            length: '',
+            minval: '',
+            maxval: '',
+            list: ''
+        }
+    }
+&nbsp;
+     /**
+      * Validate input using onChange event
+      * @param  {String} formName The name of the form in the state object
+      * @return {Function} a function used for the event
+      */
+    validateOnChange = even<span class="fstat-no" title="function not covered" >t </span>=&gt; {
+        const input = even<span class="cstat-no" title="statement not covered" >t.target;</span>
+        const form = inpu<span class="cstat-no" title="statement not covered" >t.form</span>
+        const value = inpu<span class="cstat-no" title="statement not covered" >t.type === 'checkbox' ? input.checked : input.value;</span>
+&nbsp;
+        const result = Form<span class="cstat-no" title="statement not covered" >Validator.validate(input);</span>
+&nbsp;
+        this<span class="cstat-no" title="statement not covered" >.setState({</span>
+            [form.name]: {
+                ...this.state[form.name],
+                [input.name]: value,
+                errors: {
+                    ...this.state[form.name].errors,
+                    [input.name]: result
+                }
+            }
+        });
+&nbsp;
+    }
+&nbsp;
+    onSubmit = e =&gt;<span class="fstat-no" title="function not covered" > {</span>
+        const form = e.ta<span class="cstat-no" title="statement not covered" >rget;</span>
+        const inputs = [...<span class="cstat-no" title="statement not covered" >form.elements].filter(i =&gt;<span class="fstat-no" title="function not covered" > [</span>'IN<span class="cstat-no" title="statement not covered" >PUT', 'SELECT'].includes(i.nodeName))</span></span>
+&nbsp;
+        cons<span class="cstat-no" title="statement not covered" >t { errors, hasError } = FormValidator.bulkVa</span>lidate(inputs)<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+&nbsp;
+        this<span class="cstat-no" title="statement not covered" >.setState({</span>
+            [form.name]: {
+                ...this.state[form.name],
+                errors
+            }
+        });
+&nbsp;
+        cons<span class="cstat-no" title="statement not covered" >ole.log(hasError ? 'Form has errors. Check!' : 'Form Submitted!')</span>
+&nbsp;
+        e.pr<span class="cstat-no" title="statement not covered" >eventDefault()</span>
+    }
+&nbsp;
+    /* Simplify error check */
+    hasError = (for<span class="fstat-no" title="function not covered" >mN</span>ame, inputName, method) =&gt; {
+        retu<span class="cstat-no" title="statement not covered" >rn  this.state[formName] &amp;&amp;</span>
+                this.state[formName].errors &amp;&amp;
+                this.state[formName].errors[inputName] &amp;&amp;
+                this.state[formName].errors[inputName][method]
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;
+                    &lt;div&gt;Form Validation
+                        &lt;small&gt;Form validation based on Controlled Components.&lt;/small&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                { /* START row */ }
+                &lt;Row&gt;
+                    &lt;Col lg={ 6 }&gt;
+                        &lt;form onSubmit={this.onSubmit} name="formRegister" action=""&gt;
+                            { /* START card */ }
+                            &lt;Card className="card-default"&gt;
+                                &lt;CardHeader&gt;
+                                    &lt;div className="card-title"&gt;Form Register&lt;/div&gt;
+                                &lt;/CardHeader&gt;
+                                &lt;CardBody&gt;
+                                    &lt;div className="form-group"&gt;
+                                        &lt;label className="col-form-label"&gt;Email Address *&lt;/label&gt;
+                                        &lt;Input type="email"
+                                            name="email"
+                                            invalid={this.hasError('formRegister','email','required')||this.hasError('formRegister','email','email')}
+                                            onChange={this.validateOnChange}
+                                            data-validate='["required", "email"]'
+                                            value={this.state.formRegister.email}/&gt;
+                                        { this.hasError('formRegister','email','required') &amp;&amp; &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt; }
+                                        { this.hasError('formRegister','email','email') &amp;&amp; &lt;span className="invalid-feedback"&gt;Field must be valid email&lt;/span&gt; }
+                                    &lt;/div&gt;
+                                    &lt;div className="form-group"&gt;
+                                        &lt;label className="col-form-label"&gt;Password *&lt;/label&gt;
+                                        &lt;Input type="text"
+                                            id="id-password"
+                                            name="password"
+                                            invalid={this.hasError('formRegister','password','required')}
+                                            onChange={this.validateOnChange}
+                                            data-validate='["required"]'
+                                            value={this.state.formRegister.password}
+                                        /&gt;
+                                        &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="form-group"&gt;
+                                        &lt;label className="col-form-label"&gt;Confirm Password *&lt;/label&gt;
+                                        &lt;Input type="text" name="password2"
+                                            invalid={this.hasError('formRegister','password2','equalto')}
+                                            onChange={this.validateOnChange}
+                                            data-validate='["equalto"]'
+                                            value={this.state.formRegister.password2}
+                                            data-param="id-password"
+                                        /&gt;
+                                        &lt;span className="invalid-feedback"&gt;Field must be equal to previous&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="required"&gt;* Required fields&lt;/div&gt;
+                                &lt;/CardBody&gt;
+                                &lt;CardFooter&gt;
+                                    &lt;div className="d-flex align-items-center"&gt;
+                                        &lt;CustomInput type="checkbox" id="terms"
+                                            name="terms"
+                                            label="I agree with the terms"
+                                            invalid={this.hasError('formRegister','terms','required')}
+                                            onChange={this.validateOnChange}
+                                            data-validate='["required"]'
+                                            checked={this.state.formRegister.terms}&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt;
+                                            &lt;/CustomInput&gt;
+                                        &lt;div className="ml-auto"&gt;
+                                            &lt;button type="submit" className="btn btn-primary"&gt;Register&lt;/button&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/CardFooter&gt;
+                            &lt;/Card&gt;
+                            { /* END card */ }
+                        &lt;/form&gt;
+                    &lt;/Col&gt;
+                    &lt;Col lg={ 6 }&gt;
+                        &lt;form onSubmit={this.onSubmit} method="post" name="formLogin"&gt;
+                            { /* START card */ }
+                            &lt;Card className="card-default"&gt;
+                                &lt;CardHeader&gt;
+                                    &lt;div className="card-title"&gt;Form Login&lt;/div&gt;
+                                &lt;/CardHeader&gt;
+                                &lt;CardBody&gt;
+                                    &lt;div className="form-group"&gt;
+                                        &lt;label className="col-form-label"&gt;Email Address *&lt;/label&gt;
+                                        &lt;Input type="email"
+                                            name="email"
+                                            invalid={this.hasError('formLogin','email','required')||this.hasError('formLogin','email','email')}
+                                            onChange={this.validateOnChange}
+                                            data-validate='["required", "email"]'
+                                            value={this.state.formLogin.email}/&gt;
+                                        { this.hasError('formLogin','email','required') &amp;&amp; &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt; }
+                                        { this.hasError('formLogin','email','email') &amp;&amp; &lt;span className="invalid-feedback"&gt;Field must be valid email&lt;/span&gt; }
+                                    &lt;/div&gt;
+                                    &lt;div className="form-group"&gt;
+                                        &lt;label className="col-form-label"&gt;Password *&lt;/label&gt;
+                                        &lt;Input type="text"
+                                            id="id-password"
+                                            name="password"
+                                            invalid={this.hasError('formLogin','password','required')}
+                                            onChange={this.validateOnChange}
+                                            data-validate='["required"]'
+                                            value={this.state.formLogin.password}
+                                        /&gt;
+                                        &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="required"&gt;* Required fields&lt;/div&gt;
+                                &lt;/CardBody&gt;
+                                &lt;CardFooter&gt;
+                                    &lt;button type="submit" className="btn btn-primary"&gt;Login&lt;/button&gt;
+                                &lt;/CardFooter&gt;
+                            &lt;/Card&gt;
+                            { /* END card */ }
+                        &lt;/form&gt;
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
+                { /* END row */ }
+                { /* START row */ }
+                &lt;Row&gt;
+                    &lt;div className="col-md-12"&gt;
+                        &lt;form onSubmit={this.onSubmit} action="" name="formDemo"&gt;
+                            { /* START card */ }
+                            &lt;Card className="card-default"&gt;
+                                &lt;CardHeader&gt;
+                                    &lt;div className="card-title"&gt;Fields validation&lt;/div&gt;
+                                &lt;/CardHeader&gt;
+                                &lt;CardBody&gt;
+                                    &lt;legend className="mb-4"&gt;Type validation&lt;/legend&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Required Text&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="text"
+                                                    invalid={this.hasError('formDemo','text','required')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["required"]'
+                                                    value={this.state.formDemo.text}
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Email&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="email"
+                                                    name="email"
+                                                    invalid={this.hasError('formDemo','email','required')||this.hasError('formDemo','email','email')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["required", "email"]'
+                                                    value={this.state.formDemo.email}/&gt;
+                                                { this.hasError('formDemo','email','required') &amp;&amp; &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt; }
+                                                { this.hasError('formDemo','email','email') &amp;&amp; &lt;span className="invalid-feedback"&gt;Field must be valid email&lt;/span&gt; }
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;&lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Number&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="number"
+                                                    invalid={this.hasError('formDemo','number','number')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["number"]'
+                                                    value={this.state.formDemo.number}/&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must be valid number&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Integer&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="integer"
+                                                    invalid={this.hasError('formDemo','integer','integer')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["integer"]'
+                                                    value={this.state.formDemo.integer}/&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must be an integer&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Alphanum&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="alphanum"
+                                                    invalid={this.hasError('formDemo','alphanum','alphanum')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["alphanum"]'
+                                                    value={this.state.formDemo.alphanum}/&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must be alpha numeric&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Url&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="url"
+                                                    invalid={this.hasError('formDemo','url','url')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["url"]'
+                                                    value={this.state.formDemo.url}/&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must be valid url&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Equal to&lt;/label&gt;
+                                            &lt;div className="col-sm-3"&gt;
+                                                &lt;Input type="text"
+                                                    id="id-source"
+                                                    name="password"
+                                                    invalid={this.hasError('formDemo','password','required')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["required"]'
+                                                    value={this.state.formDemo.password}
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field is required&lt;/span&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="col-sm-3"&gt;
+                                                &lt;Input type="text" name="password2"
+                                                    invalid={this.hasError('formDemo','password2','equalto')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["equalto"]'
+                                                    value={this.state.formDemo.password2}
+                                                    data-param="id-source"
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must be equal to previous&lt;/span&gt;
+                                            &lt;/div&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;legend className="mb-4"&gt;Range validation&lt;/legend&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Minlength&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="minlength"
+                                                    invalid={this.hasError('formDemo','minlength','minlen')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["minlen"]'
+                                                    value={this.state.formDemo.minlength}
+                                                    data-param="6"
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must have a valid length&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                                &lt;code&gt;Min length of 6&lt;/code&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Maxlength&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="maxlength"
+                                                    invalid={this.hasError('formDemo','maxlength','maxlen')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["maxlen"]'
+                                                    value={this.state.formDemo.maxlength}
+                                                    data-param="10"
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must have a valid length&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                                &lt;code&gt;Max length of 10&lt;/code&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Length&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="length"
+                                                    invalid={this.hasError('formDemo','length','len')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["len"]'
+                                                    value={this.state.formDemo.length}
+                                                    data-param="[6, 10]"
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must have a valid length&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                                &lt;code&gt;Length between 6 and 10&lt;/code&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Min&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="number"
+                                                    name="minval"
+                                                    invalid={this.hasError('formDemo','minval','min')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["min"]'
+                                                    value={this.state.formDemo.minval}
+                                                    data-param="6"
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must have a minimun value&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                                &lt;code&gt;Min value 6&lt;/code&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;Max&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="number"
+                                                    name="maxval"
+                                                    invalid={this.hasError('formDemo','maxval','max')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["max"]'
+                                                    value={this.state.formDemo.maxval}
+                                                    data-param="6"
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field must have a maximun value&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                                &lt;code&gt;Max value 6&lt;/code&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                    &lt;fieldset&gt;
+                                        &lt;div className="form-group row align-items-center"&gt;
+                                            &lt;label className="col-md-2 col-form-label"&gt;List&lt;/label&gt;
+                                            &lt;Col md={ 6 }&gt;
+                                                &lt;Input type="text"
+                                                    name="list"
+                                                    invalid={this.hasError('formDemo','list','list')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["list"]'
+                                                    value={this.state.formDemo.list}
+                                                    data-param='["red", "pink", "black"]'
+                                                /&gt;
+                                                &lt;span className="invalid-feedback"&gt;Field content not allowed&lt;/span&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col md={ 4 }&gt;
+                                                &lt;code&gt;Only allowed ["red", "pink", "black"]&lt;/code&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/div&gt;
+                                    &lt;/fieldset&gt;
+                                &lt;/CardBody&gt;
+                                &lt;CardFooter className="text-center"&gt;
+                                    &lt;button type="submit" className="btn btn-info"&gt;Run validation&lt;/button&gt;
+                                &lt;/CardFooter&gt;
+                            &lt;/Card&gt;
+                            { /* END card */ }
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+                &lt;/Row&gt;
+                { /* END row */ }
+            &lt;/ContentWrapper&gt;
+            );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default FormValidation;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

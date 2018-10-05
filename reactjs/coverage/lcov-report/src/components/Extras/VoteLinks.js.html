@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Extras/VoteLinks.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Extras</a> VoteLinks.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/11</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types';<span class="cstat-no" title="statement not covered" ></span></span>
+import ContentWrapper <span class="cstat-no" title="statement not covered" >from '../Layout/ContentWrapper';<span class="cstat-no" title="statement not covered" ></span></span>
+import { Card, Tab<span class="cstat-no" title="statement not covered" >le, Nav, NavItem, NavL</span>ink, Pagi<span class="fstat-no" title="function not covered" >nation, PaginationItem,</span> Pagin<span class="cstat-no" title="statement not covered" >ationLink } from 'reactstrap';</span>
+&nbsp;
+/**
+ * A simple card component to reuse code.
+ * See usage below in VoteLinks component.
+ * (add more props to fully customize component)
+ */
+class VoteCard extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    static propTypes = {
+        /** current number of votes */
+        votes: PropTypes.number.isRequired,
+        /** topic of entry */
+        topic: PropTypes.string.isRequired,
+        /** title of the entry */
+        title: PropTypes.string.isRequired,
+        /** post date in string format */
+        posted: PropTypes.string.isRequired,
+        /** name of the author */
+        author: PropTypes.string.isRequired
+    }
+    state = { votes: this.props.votes }
+    sumVote = () =<span class="fstat-no" title="function not covered" >&gt; </span>this<span class="cstat-no" title="statement not covered" >.setState({ votes: this.state.votes + 1 })</span>
+    subVote = () =<span class="fstat-no" title="function not covered" >&gt; </span>this<span class="cstat-no" title="statement not covered" >.setState({ votes: this.state.votes - 1 })</span>
+    render  = () <span class="fstat-no" title="function not covered" >=&gt;</span> (
+<span class="cstat-no" title="statement not covered" >        &lt;Card&gt;</span>
+            &lt;Table responsive&gt;
+                &lt;tbody&gt;
+                    &lt;tr&gt;
+                        &lt;td className="b0 wd-xxs text-center"&gt;
+                            &lt;p&gt;
+                                &lt;button type="button" className="btn btn-link" onClick={this.sumVote}&gt;
+                                    &lt;em className="fa fa-angle-up fa-lg"&gt;&lt;/em&gt;
+                                &lt;/button&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;{this.state.votes}&lt;/p&gt;
+                            &lt;p className="mb-0" &gt;
+                                &lt;button type="button" className="btn btn-link" onClick={this.subVote}&gt;
+                                    &lt;em className="fa fa-angle-down fa-lg"&gt;&lt;/em&gt;
+                                &lt;/button&gt;
+                            &lt;/p&gt;
+                        &lt;/td&gt;
+                        &lt;td className="b0 wd-xs d-none d-md-table-cell"&gt;
+                            &lt;a href="#dummy"&gt;
+                                &lt;img className="img-fluid thumb64" src="img/dummy.png" alt="Dummy"/&gt;
+                            &lt;/a&gt;
+                        &lt;/td&gt;
+                        &lt;td className="b0"&gt;
+                            &lt;p className="h4 mt-0"&gt;
+                                &lt;span className="rounded badge bg-gray-lighter px-4 mr-2 text-sm d-none d-lg-inline"&gt;
+                                    &lt;span className="text-muted"&gt;{this.props.topic}&lt;/span&gt;
+                                &lt;/span&gt;
+                                &lt;a className="align-middle text-bold link-unstyled" href="#title"&gt;
+                                    {this.props.title}
+                                &lt;/a&gt;
+                            &lt;/p&gt;
+                            &lt;div className="text-sm text-muted"&gt;
+                                {this.props.children}
+                                &lt;br/&gt;{this.props.posted}
+                                &lt;span&gt; - &lt;/span&gt;
+                                &lt;a className="text-bold" href="#author"&gt;{this.props.author}&lt;/a&gt;<span class="cstat-no" title="statement not covered" ></span>
+                            &lt;/div&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/Table&gt;
+        &lt;/Card&gt;
+    )
+}
+&nbsp;
+&nbsp;
+class VoteLinks extends Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;
+                    &lt;div&gt;User links
+                        &lt;small&gt;Vestibulum pretium aliquam scelerisque.&lt;/small&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+&nbsp;
+                &lt;Nav pills className="my-3"&gt;
+                    &lt;NavItem&gt;
+                        &lt;NavLink href="#popular" active className="py-1"&gt;Popular&lt;/NavLink&gt;
+                    &lt;/NavItem&gt;
+                    &lt;NavItem&gt;
+                        &lt;NavLink href="#new" className="py-1"&gt;New&lt;/NavLink&gt;
+                    &lt;/NavItem&gt;
+                    &lt;NavItem&gt;
+                        &lt;NavLink href="#recent" className="py-1"&gt;Recent&lt;/NavLink&gt;
+                    &lt;/NavItem&gt;
+                &lt;/Nav&gt;
+&nbsp;
+                &lt;VoteCard votes={10} posted="5 hours ago" author="harperray" topic="question" title="[Lorem Ipsum] Phasellus ullamcorper rhoncus sagittis."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={20} posted="yesterday" author="harperray" topic="culture" title="Donec volutpat tristique laoreet Pellentesque sed purus libero."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={27} posted="3 days ago" author="harperray" topic="peding" title="Suspendisse ullamcorper eros eget augue ultrices feugiat."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={10} posted="last week" author="harperray" topic="news" title="Sed porta fermentum felis in molestie."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={5}  posted="2 weeks ago" author="harperray"topic="education" title="Aenean eu odio vitae augue elementum molestie sed quis turpis."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={10} posted="2 months ago" author="harperray" topic="programming" title="Sed tempor lacinia tempus. Curabitur sit amet lacus id odio volutpat faucibus nec quis enim."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={-1} posted="2 months ago" author="harperray" topic="tech" title="Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi in leo odio."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+                &lt;VoteCard votes={300} posted="5 months ago" author="harperray" topic="question" title="Quisque risus ante, laoreet a sagittis quis, dignissim luctus purus."&gt;
+                    In ac turpis vitae ante pretium cursus. Suspendisse nisl arcu, venenatis elementum lacinia sed.
+                &lt;/VoteCard&gt;
+&nbsp;
+                &lt;Pagination size="sm"&gt;
+                    &lt;PaginationItem&gt;
+                        &lt;PaginationLink href=""&gt;1&lt;/PaginationLink&gt;
+                    &lt;/PaginationItem&gt;
+                    &lt;PaginationItem&gt;
+                        &lt;PaginationLink href=""&gt;2&lt;/PaginationLink&gt;
+                    &lt;/PaginationItem&gt;
+                    &lt;PaginationItem&gt;
+                        &lt;PaginationLink href=""&gt;3&lt;/PaginationLink&gt;
+                    &lt;/PaginationItem&gt;
+                    &lt;PaginationItem&gt;
+                        &lt;PaginationLink next href="" /&gt;
+                    &lt;/PaginationItem&gt;
+                &lt;/Pagination&gt;
+&nbsp;
+            &lt;/ContentWrapper&gt;
+        );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default VoteLinks;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,1847 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Dashboard/DashboardV1.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Dashboard</a> DashboardV1.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/21</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import { translate, <span class="cstat-no" title="statement not covered" >Trans } from 'react-i18ne</span>xt';
+import ContentWrapper <span class="cstat-no" title="statement not covered" >from '../Layout/ContentWrapper';<span class="cstat-no" title="statement not covered" ></span></span>
+import { Row, Col,<span class="cstat-no" title="statement not covered" > Dropdown, DropdownTog</span>gle, DropdownMenu, DropdownItem } from 'reactstrap';
+import EasyPieChart <span class="cstat-no" title="statement not covered" >from 'easy-pie-chart';<span class="cstat-no" title="statement not covered" ></span></span>
+&nbsp;
+import CardTool <span class="cstat-no" title="statement not covered" >from '../Common/CardTool'<span class="cstat-no" title="statement not covered" ></span></span>
+import Sparkline f<span class="cstat-no" title="statement not covered" >rom '../Common/Sparklines';<span class="cstat-no" title="statement not covered" ></span></span>
+import Scrollable <span class="cstat-no" title="statement not covered" >from '../Common/Scrollable'<span class="cstat-no" title="statement not covered" ></span></span>
+import FlotC<span class="cstat-no" title="statement not covered" >hart from '../Charts/Flot'</span>;<span class="cstat-no" title="statement not covered" ></span>
+import Now <span class="cstat-no" title="statement not covered" >from '../Common/Now';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+class DashboardV1 extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    state = {
+        flotData: [{
+            "label": "Uniques",
+            "color": "#768294",
+            "data": [
+                ["Mar", 70],["Apr", 85],["May", 59],["Jun", 93],["Jul", 66],["Aug", 86],["Sep", 60]
+            ]
+        }, {
+            "label": "Recurrent",
+            "color": "#1f92fe",
+            "data": [
+                ["Mar", 21],["Apr", 12],["May", 27],["Jun", 24],["Jul", 16],["Aug", 39],["Sep", 15]
+            ]
+        }],
+&nbsp;
+        flotOptions: {
+            series: {
+                lines: {
+                    show: false
+                },
+                points: {
+                    show: true,
+                    radius: 4
+                },
+                splines: {
+                    show: true,
+                    tension: 0.4,
+                    lineWidth: 1,
+                    fill: 0.5
+                }
+            },
+            grid: {
+                borderColor: '#eee',
+                borderWidth: 1,
+                hoverable: true,
+                backgroundColor: '#fcfcfc'
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: (lab<span class="fstat-no" title="function not covered" >el</span>, x, y) =&gt; x + <span class="cstat-no" title="statement not covered" >' : ' + y</span>
+            },
+            xaxis: {
+                tickColor: '#fcfcfc',
+                mode: 'categories'
+            },
+            yaxis: {
+                min: 0,
+                max: 150, // optional: use it for a clear represetation
+                tickColor: '#eee',
+                //position: 'right' or 'left',
+                tickFormatter: v =&gt;<span class="fstat-no" title="function not covered" > v</span> /*<span class="cstat-no" title="statement not covered" > +</span> ' visitors'*/
+            },
+            shadowSize: 0
+        },
+&nbsp;
+        dropdownOpen: false
+&nbsp;
+    }
+&nbsp;
+    componentDidMount() {
+        // Easy pie
+        let pieOptions1 = {
+            animate: {
+                duration: 800,
+                enabled: true
+            },
+            barColor: '#23b7e5',
+            trackColor: 'rgba(200,200,200,0.4)',
+            scaleColor: false,
+            lineWidth: 10,
+            lineCap: 'round',
+            size: 145
+        };
+        new EasyPieChart(this.refs.easypie, pieOptions1);
+    }
+&nbsp;
+    changeLanguage = lng <span class="fstat-no" title="function not covered" >=&gt;</span> {
+        this<span class="cstat-no" title="statement not covered" >.props.i18n.changeLanguage(lng);</span>
+    }
+&nbsp;
+    toggle = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({</span>
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        // Usse t function instead of Trans component
+        // const { t } = this.props;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;
+                    &lt;div&gt;Dashboard
+                        &lt;small&gt;&lt;Trans i18nKey='dashboard.WELCOME'&gt;&lt;/Trans&gt;&lt;/small&gt;
+                    &lt;/div&gt;
+                    { /* START Language list */ }
+                    &lt;div className="ml-auto"&gt;
+                        &lt;Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}&gt;
+                            &lt;DropdownToggle&gt;
+                                English
+                            &lt;/DropdownToggle&gt;
+                            &lt;DropdownMenu className="dropdown-menu-right-forced animated fadeInUpShort"&gt;
+                                &lt;DropdownItem onClick={() =&gt; this.changeLanguage('en')}&gt;English&lt;/Dr<span class="fstat-no" title="function not covered" >op</span>down<span class="cstat-no" title="statement not covered" >Item&gt;</span>
+                                &lt;DropdownItem onClick={() =&gt; this.changeLanguage('es')}&gt;Spanish&lt;/Dr<span class="fstat-no" title="function not covered" >op</span>down<span class="cstat-no" title="statement not covered" >Item&gt;</span>
+                            &lt;/DropdownMenu&gt;
+                        &lt;/Dropdown&gt;
+                    &lt;/div&gt;
+                    { /* END Language list */ }
+                &lt;/div&gt;
+                { /* START cards box */ }
+                &lt;Row&gt;
+                    &lt;Col xl={ 3 } md={ 6 }&gt;
+                        { /* START card */ }
+                        &lt;div className="card flex-row align-items-center align-items-stretch border-0"&gt;
+                            &lt;div className="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"&gt;
+                                &lt;em className="icon-cloud-upload fa-3x"&gt;&lt;/em&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-8 py-3 bg-primary rounded-right"&gt;
+                                &lt;div className="h2 mt-0"&gt;1700&lt;/div&gt;
+                                &lt;div className="text-uppercase"&gt;Uploads&lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/Col&gt;
+                    &lt;Col xl={ 3 } md={ 6 }&gt;
+                        { /* START card */ }
+                        &lt;div className="card flex-row align-items-center align-items-stretch border-0"&gt;
+                            &lt;div className="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"&gt;
+                                &lt;em className="icon-globe fa-3x"&gt;&lt;/em&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-8 py-3 bg-purple rounded-right"&gt;
+                                &lt;div className="h2 mt-0"&gt;700
+                                    &lt;small&gt;GB&lt;/small&gt;
+                                &lt;/div&gt;
+                                &lt;div className="text-uppercase"&gt;Quota&lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/Col&gt;
+                    &lt;Col xl={ 3 } lg={ 6 } md={ 12 }&gt;
+                        { /* START card */ }
+                        &lt;div className="card flex-row align-items-center align-items-stretch border-0"&gt;
+                            &lt;div className="col-4 d-flex align-items-center bg-green-dark justify-content-center rounded-left"&gt;
+                                &lt;em className="icon-bubbles fa-3x"&gt;&lt;/em&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-8 py-3 bg-green rounded-right"&gt;
+                                &lt;div className="h2 mt-0"&gt;500&lt;/div&gt;
+                                &lt;div className="text-uppercase"&gt;Reviews&lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/Col&gt;
+                    &lt;Col xl={ 3 } lg={ 6 } md={ 12 }&gt;
+                        { /* START date card */ }
+                        &lt;div className="card flex-row align-items-center align-items-stretch border-0"&gt;
+                            &lt;div className="col-4 d-flex align-items-center bg-green justify-content-center rounded-left"&gt;
+                                &lt;div className="text-center"&gt;
+                                    &lt;Now format="MMMM" className="text-sm" /&gt;
+                                    &lt;br /&gt;
+                                    &lt;Now format="D" className="h2 mt0" /&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-8 py-3 rounded-right"&gt;
+                                &lt;Now format="dddd" className="text-uppercase" /&gt;
+                                &lt;br /&gt;
+                                &lt;Now format="h:mm" className="h2 mt0 mr-sm" /&gt;
+                                &lt;Now format="a" className="text-muted text-sm" /&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        { /* END date card */ }
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
+                { /* END cards box */ }
+                &lt;Row&gt;
+                    { /* START dashboard main content */ }
+                    &lt;Col xl={ 9 }&gt;
+                        { /* START chart */ }
+                        &lt;Row&gt;
+                            &lt;Col xl={ 12 }&gt;
+                                { /* START card */ }
+                                &lt;div className="card card-default"&gt;
+                                    &lt;div className="card-header"&gt;
+                                        &lt;CardTool refresh onRefresh={(_,done) =&gt; setTimeout(done,2000)}/&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+                                        &lt;div className="card-title"&gt;Inbound visitor statistics&lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="card-body"&gt;
+                                        &lt;FlotChart data={this.state.flotData} options={this.state.flotOptions} height="250px" /&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                { /* END widget */ }
+                            &lt;/Col&gt;
+                        &lt;/Row&gt;
+                        { /* END chart */ }
+                        &lt;Row&gt;
+                            &lt;Col xl={ 12 }&gt;
+                                &lt;div className="card border-0"&gt;
+                                    &lt;div className="row row-flush"&gt;
+                                        &lt;div className="col-lg-2 col-md-3 col-6 bg-info py-4 d-flex align-items-center justify-content-center rounded-left"&gt;
+                                            &lt;em className="wi wi-day-sunny fa-4x"&gt;&lt;/em&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="col-lg-2 col-md-3 col-6 py-2 br d-flex align-items-center justify-content-center"&gt;
+                                            &lt;div&gt;
+                                                &lt;div className="h1 m-0 text-bold"&gt;32&amp;deg;&lt;/div&gt;
+                                                &lt;div className="text-uppercase"&gt;Clear&lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="col-lg-2 col-md-3 d-none d-md-block py-2 text-center br"&gt;
+                                            &lt;div className="text-info text-sm"&gt;10 AM&lt;/div&gt;
+                                            &lt;div className="text-muted text-md"&gt;
+                                                &lt;em className="wi wi-day-cloudy"&gt;&lt;/em&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-info"&gt;
+                                                &lt;span className="text-muted"&gt;20%&lt;/span&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-muted"&gt;27&amp;deg;&lt;/div&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="col-lg-2 col-md-3 d-none d-md-block py-2 text-center br"&gt;
+                                            &lt;div className="text-info text-sm"&gt;11 AM&lt;/div&gt;
+                                            &lt;div className="text-muted text-md"&gt;
+                                                &lt;em className="wi wi-day-cloudy"&gt;&lt;/em&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-info"&gt;
+                                                &lt;span className="text-muted"&gt;30%&lt;/span&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-muted"&gt;28&amp;deg;&lt;/div&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="col-lg-2 py-2 text-center br d-none d-lg-block"&gt;
+                                            &lt;div className="text-info text-sm"&gt;12 PM&lt;/div&gt;
+                                            &lt;div className="text-muted text-md"&gt;
+                                                &lt;em className="wi wi-day-cloudy"&gt;&lt;/em&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-info"&gt;
+                                                &lt;span className="text-muted"&gt;20%&lt;/span&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-muted"&gt;30&amp;deg;&lt;/div&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="col-lg-2 py-2 text-center d-none d-lg-block"&gt;
+                                            &lt;div className="text-info text-sm"&gt;1 PM&lt;/div&gt;
+                                            &lt;div className="text-muted text-md"&gt;
+                                                &lt;em className="wi wi-day-sunny-overcast"&gt;&lt;/em&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-info"&gt;
+                                                &lt;span className="text-muted"&gt;0%&lt;/span&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="text-muted"&gt;30&amp;deg;&lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/Col&gt;
+                        &lt;/Row&gt;
+                        &lt;Row&gt;
+                            &lt;Col xl={ 4 }&gt;
+                                { /* START card */ }
+                                &lt;div className="card border-0"&gt;
+                                    &lt;div className="card-body"&gt;
+                                        &lt;div className="d-flex"&gt;
+                                            &lt;h3 className="text-muted mt-0"&gt;300&lt;/h3&gt;
+                                            &lt;em className="ml-auto text-muted fa fa-coffee fa-2x"&gt;&lt;/em&gt;
+                                        &lt;/div&gt;
+                                        &lt;Sparkline options={{
+                                                type:'line',
+                                                height:80,
+                                                width:'100%',
+                                                lineWidth:2,
+                                                lineColor:'#7266ba',
+                                                spotColor:'#888',
+                                                fillColor: 'transparent',
+                                                minSpotColor:'#7266ba',
+                                                maxSpotColor:'#7266ba',
+                                                highlightLineColor:'#fff',
+                                                spotRadius:3,
+                                                resize:true
+                                            }}
+                                            values={[1,3,4,7,5,9,4,4,7,5,9,6,4]}
+                                            className="pv-lg"/&gt;
+                                        &lt;p&gt;
+                                            &lt;small className="text-muted"&gt;Actual progress&lt;/small&gt;
+                                        &lt;/p&gt;
+                                        &lt;div className="progress progress-xs"&gt;
+                                            &lt;div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width: "80%"}} className="progress-bar progress-bar-info progress-bar-striped"&gt;
+                                                &lt;span className="sr-only"&gt;80% Complete&lt;/span&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                { /* END widget */ }
+                            &lt;/Col&gt;
+                            &lt;Col xl={ 8 }&gt;
+                                &lt;div className="card card-default"&gt;
+                                    &lt;div className="card-header"&gt;
+                                        &lt;div className="px-2 float-right badge badge-danger"&gt;5&lt;/div&gt;
+                                        &lt;div className="px-2 mr-2 float-right badge badge-success"&gt;12&lt;/div&gt;
+                                        &lt;div className="card-title"&gt;Team messages&lt;/div&gt;
+                                    &lt;/div&gt;
+                                    {/* START list group */}
+                                    &lt;Scrollable className="list-group" height="180"&gt;
+                                        {/* START list group item */}
+                                        &lt;div className="list-group-item list-group-item-action"&gt;
+                                            &lt;div className="media"&gt;
+                                                &lt;img className="align-self-start mx-2 circle thumb32" src="img/user/02.jpg" alt="Avatar" /&gt;
+                                                &lt;div className="media-body text-truncate"&gt;
+                                                    &lt;p className="mb-1"&gt;
+                                                        &lt;strong className="text-primary"&gt;
+                                                     &lt;span className="circle bg-success circle-lg text-left"&gt;&lt;/span&gt;
+                                                     &lt;span&gt;Catherine Ellis&lt;/span&gt;
+                                                  &lt;/strong&gt;
+                                                    &lt;/p&gt;
+                                                    &lt;p className="mb-1 text-sm"&gt;Cras sit amet nibh libero, in gravida nulla. Nulla...&lt;/p&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="ml-auto"&gt;
+                                                    &lt;small className="text-muted ml-2"&gt;2h&lt;/small&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        {/* END list group item */}
+                                        {/* START list group item */}
+                                        &lt;div className="list-group-item list-group-item-action"&gt;
+                                            &lt;div className="media"&gt;
+                                                &lt;img className="align-self-start mx-2 circle thumb32" src="img/user/03.jpg" alt="Avatar" /&gt;
+                                                &lt;div className="media-body text-truncate"&gt;
+                                                    &lt;p className="mb-1"&gt;
+                                                        &lt;strong className="text-primary"&gt;
+                                                     &lt;span className="circle bg-success circle-lg text-left"&gt;&lt;/span&gt;
+                                                     &lt;span&gt;Jessica Silva&lt;/span&gt;
+                                                  &lt;/strong&gt;
+                                                    &lt;/p&gt;
+                                                    &lt;p className="mb-1 text-sm"&gt;Cras sit amet nibh libero, in gravida nulla. Nulla...&lt;/p&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="ml-auto"&gt;
+                                                    &lt;small className="text-muted ml-2"&gt;3h&lt;/small&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        {/* END list group item */}
+                                        {/* START list group item */}
+                                        &lt;div className="list-group-item list-group-item-action"&gt;
+                                            &lt;div className="media"&gt;
+                                                &lt;img className="align-self-start mx-2 circle thumb32" src="img/user/09.jpg" alt="Avatar" /&gt;
+                                                &lt;div className="media-body text-truncate"&gt;
+                                                    &lt;p className="mb-1"&gt;
+                                                        &lt;strong className="text-primary"&gt;
+                                                     &lt;span className="circle bg-danger circle-lg text-left"&gt;&lt;/span&gt;
+                                                     &lt;span&gt;Jessie Wells&lt;/span&gt;
+                                                  &lt;/strong&gt;
+                                                    &lt;/p&gt;
+                                                    &lt;p className="mb-1 text-sm"&gt;Cras sit amet nibh libero, in gravida nulla. Nulla...&lt;/p&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="ml-auto"&gt;
+                                                    &lt;small className="text-muted ml-2"&gt;4h&lt;/small&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        {/* END list group item */}
+                                        {/* START list group item */}
+                                        &lt;div className="list-group-item list-group-item-action"&gt;
+                                            &lt;div className="media"&gt;
+                                                &lt;img className="align-self-start mx-2 circle thumb32" src="img/user/12.jpg" alt="Avatar" /&gt;
+                                                &lt;div className="media-body text-truncate"&gt;
+                                                    &lt;p className="mb-1"&gt;
+                                                        &lt;strong className="text-primary"&gt;
+                                                     &lt;span className="circle bg-danger circle-lg text-left"&gt;&lt;/span&gt;
+                                                     &lt;span&gt;Rosa Burke&lt;/span&gt;
+                                                  &lt;/strong&gt;
+                                                    &lt;/p&gt;
+                                                    &lt;p className="mb-1 text-sm"&gt;Cras sit amet nibh libero, in gravida nulla. Nulla...&lt;/p&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="ml-auto"&gt;
+                                                    &lt;small className="text-muted ml-2"&gt;1d&lt;/small&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        {/* END list group item */}
+                                        {/* START list group item */}
+                                        &lt;div className="list-group-item list-group-item-action"&gt;
+                                            &lt;div className="media"&gt;
+                                                &lt;img className="align-self-start mx-2 circle thumb32" src="img/user/10.jpg" alt="Avatar" /&gt;
+                                                &lt;div className="media-body text-truncate"&gt;
+                                                    &lt;p className="mb-1"&gt;
+                                                        &lt;strong className="text-primary"&gt;
+                                                     &lt;span className="circle bg-danger circle-lg text-left"&gt;&lt;/span&gt;
+                                                     &lt;span&gt;Michelle Lane&lt;/span&gt;
+                                                  &lt;/strong&gt;
+                                                    &lt;/p&gt;
+                                                    &lt;p className="mb-1 text-sm"&gt;Mauris eleifend, libero nec cursus lacinia...&lt;/p&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="ml-auto"&gt;
+                                                    &lt;small className="text-muted ml-2"&gt;2d&lt;/small&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                        {/* END list group item */}
+                                    &lt;/Scrollable&gt;
+                                    {/* END list group */}
+                                    {/* START card footer */}
+                                    &lt;div className="card-footer clearfix"&gt;
+                                        &lt;div className="input-group"&gt;
+                                            &lt;input className="form-control form-control-sm" type="text" placeholder="Search message .." /&gt;
+                                            &lt;span className="input-group-btn"&gt;
+                                                &lt;button className="btn btn-secondary btn-sm" type="submit"&gt;
+                                                    &lt;i className="fa fa-search"&gt;&lt;/i&gt;
+                                                &lt;/button&gt;
+                                            &lt;/span&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    {/* END card-footer */}
+                                &lt;/div&gt;
+                            &lt;/Col&gt;
+                        &lt;/Row&gt;
+                    &lt;/Col&gt;
+                    { /* END dashboard main content */ }
+                    { /* START dashboard sidebar */ }
+                    &lt;Col xl={ 3 }&gt;
+                        { /* START loader widget */ }
+                        &lt;div className="card card-default"&gt;
+                            &lt;div className="card-body"&gt;
+                                &lt;a className="text-muted float-right" href=""&gt;
+                                    &lt;em className="fa fa-arrow-right"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                                &lt;div className="text-info"&gt;Average Monthly Uploads&lt;/div&gt;
+                                &lt;div className="text-center py-4"&gt;
+                                    &lt;div ref="easypie" data-percent="70" className="easypie-chart easypie-chart-lg"&gt;
+                                        &lt;span&gt;70%&lt;/span&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;Sparkline options={{
+                                        barColor:'#23b7e5',
+                                        height:30,
+                                        barWidth:5,
+                                        barSpacing:2
+                                    }}
+                                    values="5,4,8,7,8,5,4,6,5,5,9,4,6,3,4,7,5,4,7"
+                                    className="text-center"/&gt;
+                            &lt;/div&gt;
+                            &lt;div className="card-footer"&gt;
+                                &lt;p className="text-muted"&gt;
+                                    &lt;em className="fa fa-upload fa-fw"&gt;&lt;/em&gt;
+                                    &lt;span&gt;This Month&lt;/span&gt;
+                                    &lt;span className="text-dark"&gt;1000 Gb&lt;/span&gt;
+                                &lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        { /* END loader widget */ }
+                        { /* START messages and activity */ }
+                        &lt;div className="card card-default"&gt;
+                            &lt;div className="card-header"&gt;
+                                &lt;div className="card-title"&gt;Latest activities&lt;/div&gt;
+                            &lt;/div&gt;
+                            {/* START list group */}
+                            &lt;div className="list-group"&gt;
+                                {/* START list group item */}
+                                &lt;div className="list-group-item"&gt;
+                                   &lt;div className="media"&gt;
+                                      &lt;div className="align-self-start mr-2"&gt;
+                                         &lt;span className="fa-stack"&gt;
+                                            &lt;em className="fa fa-circle fa-stack-2x text-purple"&gt;&lt;/em&gt;
+                                            &lt;em className="fas fa-cloud-upload-alt fa-stack-1x fa-inverse text-white"&gt;&lt;/em&gt;
+                                         &lt;/span&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="media-body text-truncate"&gt;
+                                         &lt;p className="mb-1"&gt;&lt;a className="text-purple m-0" href=""&gt;NEW FILE&lt;/a&gt;
+                                         &lt;/p&gt;
+                                         &lt;p className="m-0"&gt;
+                                            &lt;small&gt;&lt;a href=""&gt;Bootstrap.xls&lt;/a&gt;
+                                            &lt;/small&gt;
+                                         &lt;/p&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="ml-auto"&gt;
+                                         &lt;small className="text-muted ml-2"&gt;15m&lt;/small&gt;
+                                      &lt;/div&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                {/* END list group item */}
+                                {/* START list group item */}
+                                &lt;div className="list-group-item"&gt;
+                                   &lt;div className="media"&gt;
+                                      &lt;div className="align-self-start mr-2"&gt;
+                                         &lt;span className="fa-stack"&gt;
+                                            &lt;em className="fa fa-circle fa-stack-2x text-info"&gt;&lt;/em&gt;
+                                            &lt;em className="far fa-file-alt fa-stack-1x fa-inverse text-white"&gt;&lt;/em&gt;
+                                         &lt;/span&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="media-body text-truncate"&gt;
+                                         &lt;p className="mb-1"&gt;&lt;a className="text-info m-0" href=""&gt;NEW DOCUMENT&lt;/a&gt;
+                                         &lt;/p&gt;
+                                         &lt;p className="m-0"&gt;
+                                            &lt;small&gt;&lt;a href=""&gt;Bootstrap.doc&lt;/a&gt;
+                                            &lt;/small&gt;
+                                         &lt;/p&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="ml-auto"&gt;
+                                         &lt;small className="text-muted ml-2"&gt;2h&lt;/small&gt;
+                                      &lt;/div&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                {/* END list group item */}
+                                {/* START list group item */}
+                                &lt;div className="list-group-item"&gt;
+                                   &lt;div className="media"&gt;
+                                      &lt;div className="align-self-start mr-2"&gt;
+                                         &lt;span className="fa-stack"&gt;
+                                            &lt;em className="fa fa-circle fa-stack-2x text-danger"&gt;&lt;/em&gt;
+                                            &lt;em className="fa fa-exclamation fa-stack-1x fa-inverse text-white"&gt;&lt;/em&gt;
+                                         &lt;/span&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="media-body text-truncate"&gt;
+                                         &lt;p className="mb-1"&gt;&lt;a className="text-danger m-0" href=""&gt;BROADCAST&lt;/a&gt;
+                                         &lt;/p&gt;
+                                         &lt;p className="m-0"&gt;&lt;a href=""&gt;Read&lt;/a&gt;
+                                         &lt;/p&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="ml-auto"&gt;
+                                         &lt;small className="text-muted ml-2"&gt;5h&lt;/small&gt;
+                                      &lt;/div&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                {/* END list group item */}
+                                {/* START list group item */}
+                                &lt;div className="list-group-item"&gt;
+                                   &lt;div className="media"&gt;
+                                      &lt;div className="align-self-start mr-2"&gt;
+                                         &lt;span className="fa-stack"&gt;
+                                            &lt;em className="fa fa-circle fa-stack-2x text-success"&gt;&lt;/em&gt;
+                                            &lt;em className="far fa-clock fa-stack-1x fa-inverse text-white"&gt;&lt;/em&gt;
+                                         &lt;/span&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="media-body text-truncate"&gt;
+                                         &lt;p className="mb-1"&gt;&lt;a className="text-success m-0" href=""&gt;NEW MEETING&lt;/a&gt;
+                                         &lt;/p&gt;
+                                         &lt;p className="m-0"&gt;
+                                            &lt;small&gt;On
+                                               &lt;em&gt;10/12/2015 09:00 am&lt;/em&gt;
+                                            &lt;/small&gt;
+                                         &lt;/p&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="ml-auto"&gt;
+                                         &lt;small className="text-muted ml-2"&gt;15h&lt;/small&gt;
+                                      &lt;/div&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                {/* END list group item */}
+                                {/* START list group item */}
+                                &lt;div className="list-group-item"&gt;
+                                   &lt;div className="media"&gt;
+                                      &lt;div className="align-self-start mr-2"&gt;
+                                         &lt;span className="fa-stack"&gt;
+                                            &lt;em className="fa fa-circle fa-stack-2x text-warning"&gt;&lt;/em&gt;
+                                            &lt;em className="fa fa-tasks fa-stack-1x fa-inverse text-white"&gt;&lt;/em&gt;
+                                         &lt;/span&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="media-body text-truncate"&gt;
+                                         &lt;p className="mb-1"&gt;&lt;a className="text-warning m-0" href=""&gt;TASKS COMPLETION&lt;/a&gt;
+                                         &lt;/p&gt;
+                                         &lt;div className="progress progress-xs m-0"&gt;
+                                            &lt;div className="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" style={{width: '22%'}}&gt;
+                                               &lt;span className="sr-only"&gt;22% Complete&lt;/span&gt;
+                                            &lt;/div&gt;
+                                         &lt;/div&gt;
+                                      &lt;/div&gt;
+                                      &lt;div className="ml-auto"&gt;
+                                         &lt;small className="text-muted ml-2"&gt;1w&lt;/small&gt;
+                                      &lt;/div&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                {/* END list group item */}
+                             &lt;/div&gt;
+                             {/* END list group */}
+                            {/* START card footer */}
+                            &lt;div className="card-footer"&gt;&lt;a className="text-sm" href=""&gt;Load more&lt;/a&gt;&lt;/div&gt;
+                            {/* END card-footer */}
+                        &lt;/div&gt;
+                        { /* END messages and activity */ }
+                    &lt;/Col&gt;
+                    { /* END dashboard sidebar */ }
+                &lt;/Row&gt;
+            &lt;/ContentWrapper&gt;
+            );
+&nbsp;
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default translate('translations')(DashboardV1);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

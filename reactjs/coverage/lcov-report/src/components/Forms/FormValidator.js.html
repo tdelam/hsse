@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Forms/FormValidator.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Forms</a> FormValidator.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/84</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// https://gi<span class="cstat-no" title="statement not covered" >thub.com/chriso/validator.js<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
+import validator <span class="cstat-no" title="statement not covered" >from 'validator';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+/**
+ * Helper methods to validate form inputs
+ * using controlled components
+ */
+const FormValidator = <span class="cstat-no" title="statement not covered" >{</span>
+    /**
+     * Validate input element
+     * @param element Dome element of the input
+     * Uses the following attributes
+     *     data-validate: array in json format with validation methods
+     *     data-param: used to provide arguments for certain methods.
+     */
+    validate(element) {
+&nbsp;
+        const isCheckbox = <span class="cstat-no" title="statement not covered" >element.type === 'checkbox';</span>
+        const value = <span class="cstat-no" title="statement not covered" >isCheckbox ? element.checked : element.value;</span>
+        const name = <span class="cstat-no" title="statement not covered" >element.name;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!name) <span class="cstat-no" title="statement not covered" >throw new Error('Input name must not be empty.');</span></span>
+&nbsp;
+        // use getAttribute to support IE10+
+        const param = <span class="cstat-no" title="statement not covered" >element.getAttribute('data-param');</span>
+        const validations = <span class="cstat-no" title="statement not covered" >JSON.parse(element.getAttribute('data-validate'));</span>
+&nbsp;
+        let result = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >        if(validations &amp;&amp; validations.length) {</span>
+            /*  Result of each validation must be true if the input is invalid
+                and false if valid. */
+<span class="cstat-no" title="statement not covered" >            validations.forEach(<span class="fstat-no" title="function not covered" >m </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                switch (m) {</span>
+                    case 'required':
+<span class="cstat-no" title="statement not covered" >                        result[m] = isCheckbox ? value === false : validator.isEmpty(value)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'email':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isEmail(value)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'number':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isNumeric(value)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'integer':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isInt(value)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'alphanum':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isAlphanumeric(value)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'url':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isURL(value)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'equalto':
+                        // here we expect a valid ID as param
+                        const value2 = <span class="cstat-no" title="statement not covered" >document.getElementById(param).value;</span>
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.equals(value, value2)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'minlen':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isLength(value, { min: param })</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'maxlen':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isLength(value, { max: param })</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'len':
+<span class="cstat-no" title="statement not covered" >                        const [min, max] =</span> JSON.parse(par<span class="cstat-no" title="statement not covered" >am)<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isLength(value, { min, max })</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'min':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isInt(value, { min: validator.toInt(param) })</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'max':
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isInt(value, { max: validator.toInt(param) })</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'list':
+                        const list = <span class="cstat-no" title="statement not covered" >JSON.parse(param)</span>
+<span class="cstat-no" title="statement not covered" >                        result[m] = !validator.isIn(value, list)</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    default:
+<span class="cstat-no" title="statement not covered" >                        throw new Error('Unrecognized validator.');</span>
+                }
+&nbsp;
+            })
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return result;</span>
+    },
+&nbsp;
+    /**
+     * Bulk validation of input elements.
+     * Used with form elements collection.
+     * @param  {Array} inputs Array for DOM element
+     * @return {Object}       Contains array of error and a flag to
+     *                        indicate if there was a validation error
+     */
+    bulkValidate(inputs) {
+        let errors = <span class="cstat-no" title="statement not covered" >{},</span>
+            hasErro<span class="cstat-no" title="statement not covered" >r = fa</span>lse;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        inputs.forEach(<span class="fstat-no" title="function not covered" >in</span>put =&gt; {</span>
+            let result = <span class="cstat-no" title="statement not covered" >this.validate(input)</span>
+<span class="cstat-no" title="statement not covered" >            errors = { ...errors, [input.name]: result }</span>
+<span class="cstat-no" title="statement not covered" >            if (!hasError) <span class="cstat-no" title="statement not covered" >hasError = Object.keys(result).some(<span class="fstat-no" title="function not covered" >va</span>l =&gt; <span class="cstat-no" title="statement not covered" >result[val])</span></span></span>
+        })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            errors,
+            hasError
+        }
+    }<span class="cstat-no" title="statement not covered" ></span>
+}
+&nbsp;
+export default FormValidator;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

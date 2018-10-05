@@ -1,0 +1,1826 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Forms/FormStandard.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Forms</a> FormStandard.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/10</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import ContentWrapper <span class="cstat-no" title="statement not covered" >from '../Layout/ContentWrapper';<span class="cstat-no" title="statement not covered" ></span></span>
+import {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+    Row,
+    Col,
+    Card,
+    CardHeader,
+    CardBody,
+    FormGroup,
+    FormFeedback,
+    FormText,
+    Label,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupButtonDropdown,
+    InputGroupText,
+    Input,
+    Button,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem } from 'reactstrap';
+&nbsp;
+class FormStandard extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    state = {
+        dropdownOpen: false,
+        splitButtonOpen: false
+    }
+&nbsp;
+    toggleDropDown = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({</span>
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
+&nbsp;
+    toggleSplit = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({</span>
+            splitButtonOpen: !this.state.splitButtonOpen
+        });
+    }
+&nbsp;
+    onSubmit = e =&gt;<span class="fstat-no" title="function not covered" > {</span>
+        cons<span class="cstat-no" title="statement not covered" >ole.log('Form submitted..');</span>
+        e.pr<span class="cstat-no" title="statement not covered" >eventDefault();</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;
+                    &lt;div&gt;Form Elements
+                        &lt;small&gt;Standard and custom elements for any form&lt;/small&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                {/* START card */}
+                &lt;Card className="card-default"&gt;
+                    &lt;CardHeader&gt;Inline form&lt;/CardHeader&gt;
+                    &lt;CardBody&gt;
+                        &lt;form onSubmit={this.onSubmit}&gt;
+                          &lt;div className="form-row align-items-center"&gt;
+                            &lt;div className="col-auto"&gt;
+                              &lt;label className="sr-only" htmlFor="inlineFormInput"&gt;Name&lt;/label&gt;
+                              &lt;Input type="text" className="mb-2" id="inlineFormInput" placeholder="Jane Doe"/&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-auto"&gt;
+                              &lt;label className="sr-only" htmlFor="inlineFormInputGroup"&gt;Username&lt;/label&gt;
+                              &lt;InputGroup className="mb-2"&gt;
+                                &lt;InputGroupAddon addonType="prepend"&gt;@&lt;/InputGroupAddon&gt;
+                                &lt;Input placeholder="username" /&gt;
+                              &lt;/InputGroup&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-auto"&gt;
+                                &lt;div className="checkbox c-checkbox"&gt;
+                                    &lt;label className="mb-1"&gt;
+                                        &lt;Input type="checkbox"/&gt;
+                                        &lt;span className="fa fa-check"&gt;&lt;/span&gt;Remember&lt;/label&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div className="col-auto"&gt;
+                              &lt;button type="submit" className="btn btn-primary mb-2"&gt;Submit&lt;/button&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                        &lt;/form&gt;
+                    &lt;/CardBody&gt;
+                &lt;/Card&gt;
+                {/* END card */}
+                {/* START row */}
+                &lt;div className="row"&gt;
+                    &lt;div className="col-md-6"&gt;
+                        {/* START card */}
+                        &lt;Card className="card-default"&gt;
+                            &lt;CardHeader&gt;Stacked form&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                &lt;form onSubmit={this.onSubmit}&gt;
+                                    &lt;FormGroup&gt;
+                                        &lt;label&gt;Email address&lt;/label&gt;
+                                        &lt;Input type="email" placeholder="Enter email"/&gt;
+                                    &lt;/FormGroup&gt;
+                                    &lt;FormGroup&gt;
+                                        &lt;label&gt;Password&lt;/label&gt;
+                                        &lt;Input type="password" placeholder="Password"/&gt;
+                                    &lt;/FormGroup&gt;
+                                    &lt;div className="checkbox c-checkbox"&gt;
+                                        &lt;label&gt;
+                                            &lt;Input type="checkbox" defaultChecked=""/&gt;
+                                            &lt;span className="fa fa-times"&gt;&lt;/span&gt;Check me out&lt;/label&gt;
+                                    &lt;/div&gt;
+                                    &lt;button className="btn btn-sm btn-secondary" type="submit"&gt;Submit&lt;/button&gt;
+                                &lt;/form&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        {/* END card */}
+                    &lt;/div&gt;
+                    &lt;div className="col-md-6"&gt;
+                        {/* START card */}
+                        &lt;Card className="card-default"&gt;
+                            &lt;CardHeader&gt;Horizontal form&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                &lt;form className="form-horizontal" onSubmit={this.onSubmit}&gt;
+                                    &lt;FormGroup row&gt;
+                                        &lt;label className="col-xl-2 col-form-label"&gt;Email&lt;/label&gt;
+                                        &lt;div className="col-xl-10"&gt;
+                                            &lt;Input type="email" placeholder="Email"/&gt;
+                                        &lt;/div&gt;
+                                    &lt;/FormGroup&gt;
+                                    &lt;FormGroup row&gt;
+                                        &lt;label className="col-xl-2 col-form-label"&gt;Password&lt;/label&gt;
+                                        &lt;div className="col-xl-10"&gt;
+                                            &lt;Input type="password" placeholder="Password"/&gt;
+                                        &lt;/div&gt;
+                                    &lt;/FormGroup&gt;
+                                    &lt;FormGroup row&gt;
+                                        &lt;div className="col-xl-10"&gt;
+                                            &lt;div className="checkbox c-checkbox"&gt;
+                                                &lt;label&gt;
+                                                    &lt;Input type="checkbox" defaultChecked=""/&gt;
+                                                    &lt;span className="fa fa-check"&gt;&lt;/span&gt;Remember me&lt;/label&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/FormGroup&gt;
+                                    &lt;FormGroup row&gt;
+                                        &lt;div className="col-xl-10"&gt;
+                                            &lt;button className="btn btn-sm btn-secondary" type="submit"&gt;Sign in&lt;/button&gt;
+                                        &lt;/div&gt;
+                                    &lt;/FormGroup&gt;
+                                &lt;/form&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        {/* END card */}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                {/* END row */}
+                {/* START card */}
+                &lt;Card className="card-default"&gt;
+                    &lt;CardHeader&gt;Form elements&lt;/CardHeader&gt;
+                    &lt;CardBody&gt;
+                        &lt;form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}&gt;
+                            &lt;fieldset&gt;
+                                &lt;legend&gt;Classic inputs&lt;/legend&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Rounded Corners&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input className="form-control-rounded" type="text"/&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;With help&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input type="text"/&gt;
+                                        &lt;span className="form-text"&gt;A block of help text that breaks onto a new line and may extend beyond one line.&lt;/span&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label" htmlFor="input-id-1"&gt;Label focus&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input id="input-id-1" type="text"/&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Password&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input type="password" name="password"/&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Placeholder&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input type="text" placeholder="placeholder"/&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Disabled&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input type="text" placeholder="Disabled input here..." disabled=""/&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Static control&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Input plaintext&gt;Some plain text/ static value&lt;/Input&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Checkboxes and radios&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;FormGroup check&gt;
+                                            &lt;Label check&gt;
+                                                &lt;Input type="radio" name="radio1" /&gt;{' '} Option one is this and that—be sure to include why it's great
+                                            &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup check&gt;
+                                            &lt;Label check&gt;
+                                                &lt;Input type="radio" name="radio1" /&gt;{' '} Option two can be something else and selecting it will deselect option one
+                                            &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup check disabled&gt;
+                                            &lt;Label check&gt;
+                                                &lt;Input type="radio" name="radio1" disabled /&gt;{' '} Option three is disabled
+                                            &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup check&gt;
+                                            &lt;Label check&gt;
+                                                &lt;Input type="checkbox" /&gt;{' '} Check me out
+                                            &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Inline checkboxes and Radios&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;FormGroup check inline&gt;
+                                          &lt;Label check&gt;
+                                            &lt;Input type="checkbox" /&gt; Some input
+                                          &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup check inline&gt;
+                                          &lt;Label check&gt;
+                                             &lt;Input type="checkbox" /&gt; Some other input
+                                          &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup check inline&gt;
+                                          &lt;Label check&gt;
+                                            &lt;Input type="radio" name="inlineradio" /&gt; Some input
+                                          &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup check inline&gt;
+                                          &lt;Label check&gt;
+                                             &lt;Input type="radio" name="inlineradio" /&gt; Some other input
+                                          &lt;/Label&gt;
+                                        &lt;/FormGroup&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset className="last-child"&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Select&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;select defaultValue="" className="custom-select custom-select-lg mb-3"&gt;
+                                            &lt;option&gt;Open this select menu&lt;/option&gt;
+                                            &lt;option defaultValue="1"&gt;One&lt;/option&gt;
+                                            &lt;option defaultValue="2"&gt;Two&lt;/option&gt;
+                                            &lt;option defaultValue="3"&gt;Three&lt;/option&gt;
+                                        &lt;/select&gt;
+                                        &lt;select defaultValue="" className="custom-select custom-select-sm"&gt;
+                                            &lt;option&gt;Open this select menu&lt;/option&gt;
+                                            &lt;option defaultValue="1"&gt;One&lt;/option&gt;
+                                            &lt;option defaultValue="2"&gt;Two&lt;/option&gt;
+                                            &lt;option defaultValue="3"&gt;Three&lt;/option&gt;
+                                        &lt;/select&gt;
+                                        &lt;div className="row mt-3"&gt;
+                                            &lt;div className="col-xl-4"&gt;
+                                                &lt;select defaultValue="" className="custom-select" multiple=""&gt;
+                                                    &lt;option&gt;Open this select menu&lt;/option&gt;
+                                                    &lt;option defaultValue="1"&gt;One&lt;/option&gt;
+                                                    &lt;option defaultValue="2"&gt;Two&lt;/option&gt;
+                                                    &lt;option defaultValue="3"&gt;Three&lt;/option&gt;
+                                                &lt;/select&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;legend&gt;Input variants&lt;/legend&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Custom Checkboxes &amp;amp; radios&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;div className="checkbox c-checkbox"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="checkbox" defaultValue=""/&gt;
+                                                &lt;span className="fa fa-check"&gt;&lt;/span&gt;Option one&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="checkbox c-checkbox"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="checkbox" defaultChecked="" defaultValue=""/&gt;
+                                                &lt;span className="fa fa-check"&gt;&lt;/span&gt;Option two defaultChecke&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="checkbox c-checkbox"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/&gt;
+                                                &lt;span className="fa fa-check"&gt;&lt;/span&gt;Option three defaultChecke and disabled&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="checkbox c-checkbox"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="checkbox" disabled="" defaultValue=""/&gt;
+                                                &lt;span className="fa fa-check"&gt;&lt;/span&gt;Option four disabled&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="c-radio"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="radio" name="a" defaultValue="option1"/&gt;
+                                                &lt;span className="fa fa-circle"&gt;&lt;/span&gt;Option one&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="c-radio"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="radio" name="a" defaultValue="option2" defaultChecked=""/&gt;
+                                                &lt;span className="fa fa-circle"&gt;&lt;/span&gt;Option two defaultChecke&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="c-radio"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="radio" defaultValue="option2" defaultChecked="" disabled=""/&gt;
+                                                &lt;span className="fa fa-circle"&gt;&lt;/span&gt;Option three defaultChecke and disabled&lt;/label&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="c-radio"&gt;
+                                            &lt;label&gt;
+                                                &lt;Input type="radio" name="a" disabled=""/&gt;
+                                                &lt;span className="fa fa-circle"&gt;&lt;/span&gt;Option four disabled&lt;/label&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Inline checkboxes&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;label className="c-checkbox"&gt;
+                                            &lt;Input id="inlineCheckbox10" type="checkbox" defaultValue="option1"/&gt;
+                                            &lt;span className="fa fa-check"&gt;&lt;/span&gt;a&lt;/label&gt;
+                                        &lt;label className="c-checkbox"&gt;
+                                            &lt;Input id="inlineCheckbox20" type="checkbox" defaultValue="option2"/&gt;
+                                            &lt;span className="fa fa-check"&gt;&lt;/span&gt;b&lt;/label&gt;
+                                        &lt;label className="c-checkbox"&gt;
+                                            &lt;Input id="inlineCheckbox30" type="checkbox" defaultValue="option3"/&gt;
+                                            &lt;span className="fa fa-check"&gt;&lt;/span&gt;c&lt;/label&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Rounded&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;label className="checkbox c-checkbox c-checkbox-rounded"&gt;
+                                            &lt;Input id="roundedcheckbox10" type="checkbox" defaultChecked/&gt;
+                                            &lt;span className="fa fa-check"&gt;&lt;/span&gt;Lorem&lt;/label&gt;
+                                        &lt;label className="checkbox c-checkbox c-checkbox-rounded"&gt;
+                                            &lt;Input id="roundedcheckbox20" type="checkbox"/&gt;
+                                            &lt;span className="fa fa-check"&gt;&lt;/span&gt;Ipsum&lt;/label&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Inline radios&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;label className="c-radio"&gt;
+                                            &lt;Input id="inlineradio1" type="radio" name="i-radio" defaultValue="option1" defaultChecked/&gt;
+                                            &lt;span className="fa fa-circle"&gt;&lt;/span&gt;a&lt;/label&gt;
+                                        &lt;label className="c-radio"&gt;
+                                            &lt;Input id="inlineradio2" type="radio" name="i-radio" defaultValue="option2"/&gt;
+                                            &lt;span className="fa fa-circle"&gt;&lt;/span&gt;b&lt;/label&gt;
+                                        &lt;label className="c-radio"&gt;
+                                            &lt;Input id="inlineradio3" type="radio" name="i-radio" defaultValue="option3"/&gt;
+                                            &lt;span className="fa fa-circle"&gt;&lt;/span&gt;c&lt;/label&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Custom icons&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;label className="c-radio"&gt;
+                                            &lt;Input id="inlineradio10" type="radio" name="i-radio" defaultValue="option1" defaultChecked/&gt;
+                                            &lt;span className="fa fa-check"&gt;&lt;/span&gt;a&lt;/label&gt;
+                                        &lt;label className="c-radio"&gt;
+                                            &lt;Input id="inlineradio20" type="radio" name="i-radio" defaultValue="option2" defaultChecked/&gt;
+                                            &lt;span className="fa fa-user"&gt;&lt;/span&gt;b&lt;/label&gt;
+                                        &lt;label className="c-radio"&gt;
+                                            &lt;Input id="inlineradio30" type="radio" name="i-radio" defaultValue="option3" defaultChecked/&gt;
+                                            &lt;span className="fa fa-tint"&gt;&lt;/span&gt;c&lt;/label&gt;
+                                        &lt;br/&gt;
+                                        &lt;label className="c-checkbox"&gt;
+                                            &lt;Input id="inlinecheckbox10" type="checkbox" defaultValue="option1" defaultChecked/&gt;
+                                            &lt;span className="fa fa-star"&gt;&lt;/span&gt;a&lt;/label&gt;
+                                        &lt;label className="c-checkbox"&gt;
+                                            &lt;Input id="inlinecheckbox20" type="checkbox" defaultValue="option2" defaultChecked/&gt;
+                                            &lt;span className="fa fa-heart"&gt;&lt;/span&gt;b&lt;/label&gt;
+                                        &lt;label className="c-checkbox"&gt;
+                                            &lt;Input id="inlinecheckbox30" type="checkbox" defaultValue="option3" defaultChecked/&gt;
+                                            &lt;span className="fa fa-bell"&gt;&lt;/span&gt;c&lt;/label&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Input validation&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;FormGroup&gt;
+                                          &lt;Label for="exampleEmail"&gt;Input without validation&lt;/Label&gt;
+                                          &lt;Input /&gt;
+                                          &lt;FormFeedback&gt;You will not be able to see this&lt;/FormFeedback&gt;
+                                          &lt;FormText&gt;Example help text that remains unchanged.&lt;/FormText&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup&gt;
+                                          &lt;Label for="exampleEmail"&gt;Valid input&lt;/Label&gt;
+                                          &lt;Input valid /&gt;
+                                          &lt;FormFeedback valid&gt;Sweet! that name is available&lt;/FormFeedback&gt;
+                                          &lt;FormText&gt;Example help text that remains unchanged.&lt;/FormText&gt;
+                                        &lt;/FormGroup&gt;
+                                        &lt;FormGroup&gt;
+                                          &lt;Label for="examplePassword"&gt;Invalid input&lt;/Label&gt;
+                                          &lt;Input invalid /&gt;
+                                          &lt;FormFeedback&gt;Oh noes! that name is already taken&lt;/FormFeedback&gt;
+                                          &lt;FormText&gt;Example help text that remains unchanged.&lt;/FormText&gt;
+                                        &lt;/FormGroup&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Column sizing&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;Row&gt;
+                                            &lt;Col lg="2"&gt;
+                                                &lt;Input type="text" placeholder=".col-lg-2"/&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col lg="3"&gt;
+                                                &lt;Input type="text" placeholder=".col-lg-3"/&gt;
+                                            &lt;/Col&gt;
+                                            &lt;Col lg="4"&gt;
+                                                &lt;Input type="text" placeholder=".col-lg-4"/&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/Row&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Input groups&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;InputGroupAddon addonType="prepend"&gt;@&lt;/InputGroupAddon&gt;
+                                        &lt;Input placeholder="username" /&gt;
+                                      &lt;/InputGroup&gt;
+                                      &lt;br /&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;InputGroupAddon addonType="prepend"&gt;
+                                          &lt;InputGroupText&gt;
+                                            &lt;Input addon type="checkbox" aria-label="Checkbox for following text input" /&gt;
+                                          &lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                        &lt;Input placeholder="Check it out" /&gt;
+                                      &lt;/InputGroup&gt;
+                                      &lt;br /&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;Input placeholder="username" /&gt;
+                                        &lt;InputGroupAddon addonType="append"&gt;@example.com&lt;/InputGroupAddon&gt;
+                                      &lt;/InputGroup&gt;
+                                      &lt;br /&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;InputGroupAddon addonType="prepend"&gt;
+                                          &lt;InputGroupText&gt;$&lt;/InputGroupText&gt;
+                                          &lt;InputGroupText&gt;$&lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                        &lt;Input placeholder="Dolla dolla billz yo!" /&gt;
+                                        &lt;InputGroupAddon addonType="append"&gt;
+                                          &lt;InputGroupText&gt;$&lt;/InputGroupText&gt;
+                                          &lt;InputGroupText&gt;$&lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                      &lt;/InputGroup&gt;
+                                      &lt;br /&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;InputGroupAddon addonType="prepend"&gt;$&lt;/InputGroupAddon&gt;
+                                        &lt;Input placeholder="Amount" type="number" step="1" /&gt;
+                                        &lt;InputGroupAddon addonType="append"&gt;.00&lt;/InputGroupAddon&gt;
+                                      &lt;/InputGroup&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Button addons&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;InputGroupAddon addonType="prepend"&gt;
+                                          &lt;InputGroupText&gt;To the Left!&lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                        &lt;Input /&gt;
+                                      &lt;/InputGroup&gt;
+                                      &lt;br /&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;Input /&gt;
+                                        &lt;InputGroupAddon addonType="append"&gt;
+                                          &lt;InputGroupText&gt;To the Right!&lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                      &lt;/InputGroup&gt;
+                                      &lt;br /&gt;
+                                      &lt;InputGroup&gt;
+                                        &lt;InputGroupAddon addonType="prepend"&gt;
+                                          &lt;InputGroupText&gt;To the Left!&lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                        &lt;Input placeholder="and..." /&gt;
+                                        &lt;InputGroupAddon addonType="append"&gt;
+                                          &lt;InputGroupText&gt;To the Right!&lt;/InputGroupText&gt;
+                                        &lt;/InputGroupAddon&gt;
+                                      &lt;/InputGroup&gt;
+                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;FormGroup row&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;With dropdowns&lt;/label&gt;
+                                    &lt;div className="col-md-10"&gt;
+                                        &lt;InputGroup&gt;
+                                          &lt;InputGroupAddon addonType="prepend"&gt;&lt;Button&gt;I'm a button&lt;/Button&gt;&lt;/InputGroupAddon&gt;
+                                          &lt;Input /&gt;
+                                        &lt;/InputGroup&gt;
+                                        &lt;br /&gt;
+                                        &lt;InputGroup&gt;
+                                          &lt;Input /&gt;
+                                          &lt;InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}&gt;
+                                            &lt;DropdownToggle caret&gt;
+                                              Button Dropdown
+                                            &lt;/DropdownToggle&gt;
+                                            &lt;DropdownMenu&gt;
+                                              &lt;DropdownItem header&gt;Header&lt;/DropdownItem&gt;
+                                              &lt;DropdownItem disabled&gt;Action&lt;/DropdownItem&gt;
+                                              &lt;DropdownItem&gt;Another Action&lt;/DropdownItem&gt;
+                                              &lt;DropdownItem divider /&gt;
+                                              &lt;DropdownItem&gt;Another Action&lt;/DropdownItem&gt;
+                                            &lt;/DropdownMenu&gt;
+                                          &lt;/InputGroupButtonDropdown&gt;
+                                        &lt;/InputGroup&gt;
+                                        &lt;br /&gt;
+                                        &lt;InputGroup&gt;
+                                          &lt;InputGroupButtonDropdown addonType="prepend" isOpen={this.state.splitButtonOpen} toggle={this.toggleSplit}&gt;
+                                            &lt;Button outline&gt;Split Button&lt;/Button&gt;
+                                            &lt;DropdownToggle split outline /&gt;
+                                            &lt;DropdownMenu&gt;
+                                              &lt;DropdownItem header&gt;Header&lt;/DropdownItem&gt;
+                                              &lt;DropdownItem disabled&gt;Action&lt;/DropdownItem&gt;
+                                              &lt;DropdownItem&gt;Another Action&lt;/DropdownItem&gt;
+                                              &lt;DropdownItem divider /&gt;
+                                              &lt;DropdownItem&gt;Another Action&lt;/DropdownItem&gt;
+                                            &lt;/DropdownMenu&gt;
+                                          &lt;/InputGroupButtonDropdown&gt;
+                                          &lt;Input placeholder="and..." /&gt;
+                                          &lt;InputGroupAddon addonType="append"&gt;&lt;Button color="secondary"&gt;I'm a button&lt;/Button&gt;&lt;/InputGroupAddon&gt;
+                                        &lt;/InputGroup&gt;                                    &lt;/div&gt;
+                                &lt;/FormGroup&gt;
+                            &lt;/fieldset&gt;
+                        &lt;/form&gt;
+                    &lt;/CardBody&gt;
+                &lt;/Card&gt;
+                {/* END card */}
+            &lt;/ContentWrapper&gt;
+            );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default FormStandard;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

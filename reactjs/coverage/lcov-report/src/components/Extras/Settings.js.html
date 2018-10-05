@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Extras/Settings.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Extras</a> Settings.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/12</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ></span></span>
+import ContentWrapper from '../Layout/ContentWrapper';
+import { Row, Col, TabContent, TabPane, ListGroup, ListGroupItem } from 'reactstrap';
+// Filestyle
+import 'boots<span class="cstat-no" title="statement not covered" >trap-filestyle';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span>
+&nbsp;
+class Settings extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    state = {
+        activeTab: 'profile'
+    }
+&nbsp;
+    toggleTab = tab <span class="fstat-no" title="function not covered" >=&gt;</span> {
+        if (<span class="cstat-no" title="statement not covered" >this.state.activeTab !== tab) {</span>
+            this<span class="cstat-no" title="statement not covered" >.setState({</span>
+                activeTab: tab
+            });
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="container-md"&gt;
+                    &lt;Row&gt;
+                        &lt;Col lg="3"&gt;
+                            &lt;div className="card b"&gt;
+                                &lt;div className="card-header bg-gray-lighter text-bold"&gt;Personal Settings&lt;/div&gt;
+                                &lt;ListGroup&gt;
+                                    &lt;ListGroupItem action
+                                        className={ this.state.activeTab === 'profile' ? 'active':'' }
+                                        onClick={() =<span class="fstat-no" title="function not covered" >&gt; </span>{ thi<span class="cstat-no" title="statement not covered" >s.toggleTab('profile'); }}&gt;</span>
+                                        Profile
+                                    &lt;/ListGroupItem&gt;
+                                    &lt;ListGroupItem action
+                                        className={ this.state.activeTab === 'account' ? 'active':'' }
+                                        onClick={() =<span class="fstat-no" title="function not covered" >&gt; </span>{ thi<span class="cstat-no" title="statement not covered" >s.toggleTab('account'); }}&gt;</span>
+                                        Account
+                                    &lt;/ListGroupItem&gt;
+                                    &lt;ListGroupItem action
+                                        className={ this.state.activeTab === 'emails' ? 'active':'' }
+                                        onClick={() =<span class="fstat-no" title="function not covered" >&gt; </span>{ thi<span class="cstat-no" title="statement not covered" >s.toggleTab('emails'); }}&gt;</span>
+                                        Emails
+                                    &lt;/ListGroupItem&gt;
+                                    &lt;ListGroupItem action
+                                        className={ this.state.activeTab === 'notifications' ? 'active':'' }
+                                        onClick={() =<span class="fstat-no" title="function not covered" >&gt; </span>{ thi<span class="cstat-no" title="statement not covered" >s.toggleTab('notifications'); }}&gt;</span>
+                                        Notifications
+                                    &lt;/ListGroupItem&gt;
+                                    &lt;ListGroupItem action
+                                        className={ this.state.activeTab === 'applications' ? 'active':'' }
+                                        onClick={() =<span class="fstat-no" title="function not covered" >&gt; </span>{ thi<span class="cstat-no" title="statement not covered" >s.toggleTab('applications'); }}&gt;</span>
+                                        Applications
+                                    &lt;/ListGroupItem&gt;
+                                &lt;/ListGroup&gt;
+                            &lt;/div&gt;
+                        &lt;/Col&gt;
+                        &lt;Col lg="9"&gt;
+                            &lt;TabContent activeTab={this.state.activeTab} className="p-0 b0"&gt;
+                                &lt;TabPane tabId="profile"&gt;
+                                    &lt;div className="card b"&gt;
+                                        &lt;div className="card-header bg-gray-lighter text-bold"&gt;Profile&lt;/div&gt;
+                                        &lt;div className="card-body"&gt;
+                                            &lt;form action=""&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Picture&lt;/label&gt;
+                                                    &lt;input className="form-control filestyle" type="file" data-input="false" data-classbutton="btn btn-secondary" data-classinput="form-control inline" data-text="Upload new picture" data-icon="&amp;lt;span class='fa fa-upload mr-2'&amp;gt;&amp;lt;/span&amp;gt;"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Name&lt;/label&gt;
+                                                    &lt;input className="form-control" type="text"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Bio&lt;/label&gt;
+                                                    &lt;textarea className="form-control" rows="3"&gt;&lt;/textarea&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;URL&lt;/label&gt;
+                                                    &lt;input className="form-control" type="text"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Company&lt;/label&gt;
+                                                    &lt;input className="form-control" type="text"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Location&lt;/label&gt;
+                                                    &lt;input className="form-control" type="text"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;button className="btn btn-info" type="button"&gt;Update settings&lt;/button&gt;
+                                                &lt;p&gt;
+                                                    &lt;small className="text-muted"&gt;* Integer fermentum accumsan metus, id sagittis ipsum molestie vitae&lt;/small&gt;
+                                                &lt;/p&gt;
+                                            &lt;/form&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/TabPane&gt;
+                                &lt;TabPane tabId="account"&gt;
+                                    &lt;div className="card b"&gt;
+                                        &lt;div className="card-header bg-gray-lighter text-bold"&gt;Account&lt;/div&gt;
+                                        &lt;div className="card-body"&gt;
+                                            &lt;form action=""&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Current password&lt;/label&gt;
+                                                    &lt;input className="form-control" type="password"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;New password&lt;/label&gt;
+                                                    &lt;input className="form-control" type="password"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-group"&gt;
+                                                    &lt;label&gt;Confirm new password&lt;/label&gt;
+                                                    &lt;input className="form-control" type="password"/&gt;
+                                                &lt;/div&gt;
+                                                &lt;button className="btn btn-info" type="button"&gt;Update password&lt;/button&gt;
+                                                &lt;p&gt;
+                                                    &lt;small className="text-muted"&gt;* Integer fermentum accumsan metus, id sagittis ipsum molestie vitae&lt;/small&gt;
+                                                &lt;/p&gt;
+                                            &lt;/form&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;div className="card b"&gt;
+                                        &lt;div className="card-header bg-danger text-bold"&gt;Delete account&lt;/div&gt;
+                                        &lt;div className="card-body bt"&gt;
+                                            &lt;p&gt;You will be asked for confirmation before delete account.&lt;/p&gt;
+                                            &lt;button className="btn btn-secondary" type="button"&gt;
+                                                &lt;span className="text-danger"&gt;Delete account&lt;/span&gt;
+                                            &lt;/button&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/TabPane&gt;
+                                &lt;TabPane tabId="emails"&gt;
+                                    &lt;div className="card b"&gt;
+                                        &lt;div className="card-header bg-gray-lighter text-bold"&gt;Emails&lt;/div&gt;
+                                        &lt;div className="card-body"&gt;
+                                            &lt;p&gt;Etiam eros nibh, condimentum in auctor et, aliquam quis elit. Donec id libero eros. Ut fringilla, justo id fringilla pretium, nibh nunc suscipit mauris, et suscipit nulla nisl ac dolor. Nam egestas, leo eu gravida tincidunt, sem ipsum pellentesque quam, vel iaculis est quam et eros.&lt;/p&gt;
+                                            &lt;p&gt;
+                                                &lt;strong&gt;Your email addresses&lt;/strong&gt;
+                                            &lt;/p&gt;
+                                            &lt;p&gt;
+                                                &lt;span className="mr-2"&gt;email@someaddress.com&lt;/span&gt;
+                                                &lt;span className="badge badge-success"&gt;primary&lt;/span&gt;
+                                            &lt;/p&gt;
+                                            &lt;p&gt;
+                                                &lt;span className="mr-2"&gt;another.email@someaddress.com&lt;/span&gt;
+                                                &lt;span className="badge bg-gray"&gt;private&lt;/span&gt;
+                                            &lt;/p&gt;
+                                        &lt;/div&gt;
+                                        &lt;div className="card-body bt"&gt;
+                                            &lt;p&gt;
+                                                &lt;strong&gt;Add email address&lt;/strong&gt;
+                                            &lt;/p&gt;
+                                            &lt;form action=""&gt;
+                                                &lt;Row className="mb-2"&gt;
+                                                    &lt;Col xl="6"&gt;
+                                                        &lt;div className="form-group"&gt;
+                                                            &lt;div className="input-group"&gt;
+                                                                &lt;input className="form-control" type="email" placeholder="email@server.com"/&gt;
+                                                                &lt;span className="input-group-btn"&gt;
+                                                                    &lt;button className="btn btn-secondary" type="button"&gt;Add&lt;/button&gt;
+                                                                &lt;/span&gt;
+                                                            &lt;/div&gt;
+                                                        &lt;/div&gt;
+                                                        &lt;div className="form-check"&gt;
+                                                            &lt;input className="form-check-input" id="defaultCheck1" type="checkbox" value=""/&gt;
+                                                            &lt;label className="form-check-label"&gt;Keep my email address private&lt;/label&gt;
+                                                        &lt;/div&gt;
+                                                    &lt;/Col&gt;
+                                                &lt;/Row&gt;
+                                                &lt;button className="btn btn-info" type="button"&gt;Update email&lt;/button&gt;
+                                                &lt;p&gt;
+                                                    &lt;small className="text-muted"&gt;* Integer fermentum accumsan metus, id sagittis ipsum molestie vitae&lt;/small&gt;
+                                                &lt;/p&gt;
+                                            &lt;/form&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/TabPane&gt;
+                                &lt;TabPane tabId="notifications"&gt;
+                                    &lt;form action=""&gt;
+                                        &lt;div className="card b"&gt;
+                                            &lt;div className="card-header bg-gray-lighter text-bold"&gt;Notifications&lt;/div&gt;
+                                            &lt;div className="card-body bb"&gt;
+                                                &lt;div className="form-check"&gt;
+                                                    &lt;input className="form-check-input" id="defaultCheck2" type="checkbox" value=""/&gt;
+                                                    &lt;label className="form-check-label"&gt;
+                                                        &lt;strong&gt;Disable email notifications&lt;/strong&gt;
+                                                    &lt;/label&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="card-body"&gt;
+                                                &lt;p&gt;
+                                                    &lt;strong&gt;Interaction&lt;/strong&gt;
+                                                &lt;/p&gt;
+                                                &lt;div className="form-check"&gt;
+                                                    &lt;input className="form-check-input" id="defaultCheck3" type="checkbox" value=""/&gt;
+                                                    &lt;label className="form-check-label"&gt;Alert me when someone start to follow me&lt;/label&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-check"&gt;
+                                                    &lt;input className="form-check-input" id="defaultCheck4" type="checkbox" value=""/&gt;
+                                                    &lt;label className="form-check-label"&gt;Alert me when someone star my work&lt;/label&gt;
+                                                &lt;/div&gt;
+                                                &lt;div className="form-check"&gt;
+                                                    &lt;input className="form-check-input" id="defaultCheck5" type="checkbox" value=""/&gt;
+                                                    &lt;label className="form-check-label"&gt;Alert me when post a new comment&lt;/label&gt;
+                                                &lt;/div&gt;
+                                                &lt;p className="my-2"&gt;
+                                                    &lt;strong&gt;Marketing&lt;/strong&gt;
+                                                &lt;/p&gt;
+                                                &lt;div className="form-check mb-2"&gt;
+                                                    &lt;input className="form-check-input" id="defaultCheck6" type="checkbox" value=""/&gt;
+                                                    &lt;label className="form-check-label"&gt;Send me news and interesting updates&lt;/label&gt;
+                                                &lt;/div&gt;
+                                                &lt;button className="mb-3 btn btn-info" type="button"&gt;Update notifications&lt;/button&gt;
+                                                &lt;p&gt;
+                                                    &lt;small className="text-muted"&gt;Mauris sodales accumsan erat, ut dapibus erat faucibus vitae.&lt;/small&gt;
+                                                &lt;/p&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/form&gt;
+                                &lt;/TabPane&gt;
+                                &lt;TabPane tabId="applications"&gt;
+                                    &lt;div className="card b"&gt;
+                                        &lt;div className="card-header bg-gray-lighter text-bold"&gt;Applications&lt;/div&gt;
+                                        &lt;div className="card-body"&gt;
+                                            &lt;p&gt;
+                                                &lt;span&gt;You have granted access for&lt;/span&gt;
+                                                &lt;strong&gt;3 applications&lt;/strong&gt;
+                                                &lt;span&gt;to your account.&lt;/span&gt;
+                                            &lt;/p&gt;
+                                            &lt;ListGroup&gt;
+                                                &lt;ListGroupItem className="d-flex align-items-center"&gt;
+                                                    &lt;img className="mr-2 img-fluid thumb48" src="img/dummy.png" alt="App"/&gt;
+                                                    &lt;div&gt;
+                                                        &lt;p className="text-bold mb-0"&gt;Application #1&lt;/p&gt;
+                                                        &lt;small&gt;Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.&lt;/small&gt;
+                                                    &lt;/div&gt;
+                                                    &lt;div className="ml-auto"&gt;
+                                                        &lt;button className="btn btn-secondary" type="button"&gt;
+                                                            &lt;strong&gt;Revoke&lt;/strong&gt;
+                                                        &lt;/button&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/ListGroupItem&gt;
+                                                &lt;ListGroupItem className="d-flex align-items-center"&gt;
+                                                    &lt;img className="mr-2 img-fluid thumb48" src="img/dummy.png" alt="App"/&gt;
+                                                    &lt;div&gt;
+                                                        &lt;p className="text-bold mb-0"&gt;Application #2&lt;/p&gt;
+                                                        &lt;small&gt;Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.&lt;/small&gt;
+                                                    &lt;/div&gt;
+                                                    &lt;div className="ml-auto"&gt;
+                                                        &lt;button className="btn btn-secondary" type="button"&gt;
+                                                            &lt;strong&gt;Revoke&lt;/strong&gt;
+                                                        &lt;/button&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/ListGroupItem&gt;
+                                                &lt;ListGroupItem className="d-flex align-items-center"&gt;
+                                                    &lt;img className="mr-2 img-fluid thumb48" src="img/dummy.png" alt="App"/&gt;
+                                                    &lt;div&gt;
+                                                        &lt;p className="text-bold mb-0"&gt;Application #3&lt;/p&gt;
+                                                        &lt;small&gt;Ut turpis urna, tristique sed adipiscing nec, luctus quis leo.&lt;/small&gt;
+                                                    &lt;/div&gt;
+                                                    &lt;div className="ml-auto"&gt;
+                                                        &lt;button className="btn btn-secondary" type="button"&gt;
+                                                            &lt;strong&gt;Revoke&lt;/strong&gt;
+                                                        &lt;/button&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/ListGroupItem&gt;
+                                            &lt;/ListGroup&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/TabPane&gt;
+                            &lt;/TabContent&gt;
+                        &lt;/Col&gt;
+                    &lt;/Row&gt;
+                &lt;/div&gt;
+            &lt;/ContentWrapper&gt;
+            );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default Settings;
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Forms/FormExtended.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Forms</a> FormExtended.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ></span></span>
+import ContentWrapper from '../Layout/ContentWrapper';
+import { Row, Col, Card, CardHeader, CardBody, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+// React Slider
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+// Color picker
+import { ChromePicker, SketchPicker, BlockPicker, TwitterPicker  } from 'react-color'
+// React Select
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+// Masked Input
+import MaskedInput from 'react-maskedinput'
+// DateTimePicker
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
+// Filestyle
+import 'bootstrap-filestyle';
+// React Draft Wysiwyg
+import { Edit<span class="cstat-no" title="statement not covered" >orState, ContentS</span>tate, convertF<span class="cstat-no" title="statement not covered" >romHTML, convertToRaw } from 'd</span>raft-js';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
+import { Editor } from 'r<span class="cstat-no" title="statement not covered" >eact-draft-wysiwyg';</span>
+<span class="cstat-no" title="statement not covered" >import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+&nbsp;
+// used for react slider
+const marks = <span class="cstat-no" title="statement not covered" >{</span>
+  '-10': '-10°C',
+  0: &lt;strong className="text-info"&gt;0°C&lt;/strong&gt;,
+  26: '26°C',
+  37: '37°C',
+  50: '50°C',
+  100: {
+    style: {
+      color: 'red',
+    },
+    label: &lt;strong&gt;100°C&lt;/strong&gt;,
+  },
+};
+&nbsp;
+// used for react select
+const STATES = <span class="cstat-no" title="statement not covered" >[</span>
+    { value: 'australian-capital-territory', label: 'Australian Capital Territory', className: 'State-ACT' },
+    { value: 'new-south-wales', label: 'New South Wales', className: 'State-NSW' },
+    { value: 'victoria', label: 'Victoria', className: 'State-Vic' },
+    { value: 'queensland', label: 'Queensland', className: 'State-Qld' },
+    { value: 'western-australia', label: 'Western Australia', className: 'State-WA' },
+    { value: 'south-australia', label: 'South Australia', className: 'State-SA' },
+    { value: 'tasmania', label: 'Tasmania', className: 'State-Tas' },
+    { value: 'northern-territory', label: 'Northern Territory', className: 'State-NT' },
+]
+// editor initial content
+const blocksFromHTML = <span class="cstat-no" title="statement not covered" >convertFromHTML('&lt;p&gt;Write something...&lt;/p&gt;');</span>
+const initialEditorContent = <span class="cstat-no" title="statement not covered" >ContentState.createFromBlockArray(</span>
+  blocksFromHTML.contentBlocks,
+  blocksFromHTML.entityMap
+);
+&nbsp;
+class FormExtended extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    state = {
+        displayColorPicker: false,
+        displayColorPickerInput: false,
+        colorSelected: '#00AABB',
+&nbsp;
+        selectedOption: '',
+        selectedOptionMulti: [],
+&nbsp;
+        card: '',
+        expiry: '',
+        ccv: '',
+&nbsp;
+        editorState: EditorState.createWithContent(initialEditorContent)
+    };
+&nbsp;
+    colorpickerHandleClick = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({ displayColorPicker: !this.state.displayColorPicker })</span>
+    };
+&nbsp;
+    colorpickerHandleClose = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({ displayColorPicker: false })</span>
+    };
+&nbsp;
+    colorpickerInputHandleClick = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({ displayColorPickerInput: !this.state.displayColorPickerInput })</span>
+    };
+&nbsp;
+    colorpickerInputHandleClose = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
+        this<span class="cstat-no" title="statement not covered" >.setState({ displayColorPickerInput: false })</span>
+    };
+&nbsp;
+    sliderLog(value) {
+        console.log(value)
+    }
+&nbsp;
+    handleChangeSelect = (sel<span class="fstat-no" title="function not covered" >ec</span>tedOption) =&gt; {
+        this<span class="cstat-no" title="statement not covered" >.setState({ selectedOption });</span>
+        cons<span class="cstat-no" title="statement not covered" >ole.log(`Selected: ${selectedOption.label}`);</span>
+    }
+    handleChangeSelectMulti = (sel<span class="fstat-no" title="function not covered" >ec</span>tedOptionMulti) =&gt; {
+        this<span class="cstat-no" title="statement not covered" >.setState({ selectedOptionMulti });</span>
+        cons<span class="cstat-no" title="statement not covered" >ole.log(`Selected Multi: ${selectedOptionMulti.label}`);</span>
+    }
+&nbsp;
+    onChangeMasked = (e) <span class="fstat-no" title="function not covered" >=&gt;</span> {
+        this<span class="cstat-no" title="statement not covered" >.setState({[e.target.name]: e.target.value})</span>
+    }
+&nbsp;
+    onEditorStateChange = edit<span class="fstat-no" title="function not covered" >or</span>State =&gt; {
+        this<span class="cstat-no" title="statement not covered" >.setState({ editorState })</span>
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+&nbsp;
+        // used for color picker
+        const popover = <span class="cstat-no" title="statement not covered" >{</span>
+            position: 'absolute',
+            zIndex: '302',
+        }
+        const cover = <span class="cstat-no" title="statement not covered" >{</span>
+            position: 'fixed',
+            top: '0px',
+            right: '0px',
+            bottom: '0px',
+            left: '0px',
+        }
+        // used for react select
+        const { selectedOption } <span class="cstat-no" title="statement not covered" >= this.state;</span>
+        const value = <span class="cstat-no" title="statement not covered" >selectedOption &amp;&amp; selectedOption.value;</span>
+        const { selectedOption<span class="cstat-no" title="statement not covered" >Multi } = this.state;</span>
+        // editor
+        const { editorState <span class="cstat-no" title="statement not covered" >} = this.state;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;
+                    &lt;div&gt;Form Extended
+                        &lt;small&gt;New elements to extend the classic functions&lt;/small&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                { /*  START card */ }
+                &lt;Card className="card-default"&gt;
+                    &lt;CardHeader&gt;Form elements&lt;/CardHeader&gt;
+                    &lt;CardBody&gt;
+                        &lt;form method="get" action="#" className="form-horizontal"&gt;
+                            &lt;fieldset&gt;
+                                &lt;legend&gt;New Components&lt;/legend&gt;
+                                &lt;div className="form-group row"&gt;
+                                   &lt;label className="col-md-2 col-form-label"&gt;Slider&lt;/label&gt;
+                                   &lt;div className="col-md-4"&gt;
+                                        &lt;p&gt;Basic Slider&lt;/p&gt;
+                                        &lt;Slider onChange={this.sliderLog} /&gt;
+                                        &lt;p className="mt-2"&gt;Basic Slider，`step=20`&lt;/p&gt;
+                                        &lt;Slider step={20} defaultValue={50} onBeforeChange={this.sliderLog} /&gt;
+                                        &lt;p className="mt-2"&gt;Basic Slider，`step=20, dots`&lt;/p&gt;
+                                        &lt;Slider dots step={20} defaultValue={100} onAfterChange={this.sliderLog} /&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div className="form-group row"&gt;
+                                   &lt;label className="col-md-2 col-form-label"&gt;Range&lt;/label&gt;
+                                   &lt;div className="col-md-4"&gt;
+                                        &lt;p className="mt-2"&gt;Basic Range，`allowCross=false`&lt;/p&gt;
+                                        &lt;Range allowCross={false} defaultValue={[0, 20]} onChange={this.sliderLog} /&gt;
+                                        &lt;p className="mt-2"&gt;Basic Range，`step=20` &lt;/p&gt;
+                                        &lt;Range step={20} defaultValue={[20, 40]} onBeforeChange={this.sliderLog} /&gt;
+                                        &lt;p className="mt-2"&gt;Basic Range，`step=20, dots` &lt;/p&gt;
+                                        &lt;Range dots step={20} defaultValue={[20, 40]} onAfterChange={this.sliderLog} /&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div className="form-group row"&gt;
+                                   &lt;label className="col-md-2 col-form-label"&gt;Slider Vertical&lt;/label&gt;
+                                   &lt;div className="col-md-4" style={{ overflow: 'hidden' }}&gt;
+                                        &lt;div className="row"&gt;
+                                            &lt;div className="col-md-4"&gt;
+                                                &lt;p className="mt-2"&gt;Slider with marks, `step=null`&lt;/p&gt;
+                                                &lt;div className="mb-3" style={{height: 400}}&gt;
+                                                    &lt;Slider vertical min={-10} marks={marks} step={null} onChange={this.sliderLog} defaultValue={20} /&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                            &lt;div className="col-md-4"&gt;
+                                                &lt;p className="mt-2"&gt;Slider with marks and steps&lt;/p&gt;
+                                                &lt;div className="mb-3" style={{height: 400}}&gt;
+                                                    &lt;Slider vertical dots min={-10} marks={marks} step={10} onChange={this.sliderLog} defaultValue={20} /&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row align-items-center"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Switch Small&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;label className="switch switch-sm"&gt;
+                                            &lt;input type="checkbox" defaultChecked /&gt;
+                                            &lt;span&gt;&lt;/span&gt;
+                                        &lt;/label&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                                &lt;div className="form-group row align-items-center"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Switch&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;label className="switch"&gt;
+                                            &lt;input type="checkbox" defaultChecked /&gt;
+                                            &lt;span&gt;&lt;/span&gt;
+                                        &lt;/label&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                                &lt;div className="form-group row align-items-center"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Switch Large&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;label className="switch switch-lg"&gt;
+                                            &lt;input type="checkbox" defaultChecked /&gt;
+                                            &lt;span&gt;&lt;/span&gt;
+                                        &lt;/label&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                                &lt;div className="form-group row align-items-center"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Switch Radio&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;div className="d-flex flex-row"&gt;
+                                            &lt;label className="switch switch-lg mr-2"&gt;
+                                                &lt;input type="radio" defaultChecked name="radioSwitch" /&gt;
+                                                &lt;span&gt;&lt;/span&gt;
+                                            &lt;/label&gt;
+                                            &lt;label className="switch switch-lg"&gt;
+                                                &lt;input type="radio" name="radioSwitch" /&gt;
+                                                &lt;span&gt;&lt;/span&gt;
+                                            &lt;/label&gt;
+                                        &lt;/div&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row mb"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Color picker&lt;/label&gt;
+                                    &lt;Col sm={ 8 }&gt;
+                                        &lt;Row&gt;
+                                            &lt;Col xs={ 12 }&gt;
+                                                &lt;p&gt;Chrome colorpicker on button popup&lt;/p&gt;
+                                                &lt;button type="button" className="btn btn-secondary" onClick={ this.colorpickerHandleClick }&gt;Pick Color&lt;/button&gt;
+                                                { this.state.displayColorPicker ? &lt;div style={ popover }&gt;
+                                                  &lt;div style={ cover } onClick={ this.colorpickerHandleClose }/&gt;
+                                                  &lt;ChromePicker /&gt;
+                                                &lt;/div&gt; : null }
+                                            &lt;/Col&gt;
+                                            &lt;Col xs={ 12 }&gt;
+                                                &lt;p className="mt-3"&gt;Using an input&lt;/p&gt;
+                                                &lt;InputGroup className="colorpicker-component demo-colorpicker"&gt;
+                                                    &lt;Input value={this.state.colorSelected} onChange={()=&gt;{}} onFocus={ this.colorpickerInputHandl<span class="fstat-no" title="function not covered" >eC</span>lick }/&gt;
+                                                    &lt;InputGroupAddon addonType="append"&gt;
+                                                        &lt;InputGroupText&gt;&lt;i className="icon-pin"&gt;&lt;/i&gt;&lt;/InputGroupText&gt;
+                                                    &lt;/InputGroupAddon&gt;
+                                                &lt;/InputGroup&gt;
+                                                { this.state.displayColorPickerInput ? &lt;div style={ popover }&gt;
+                                                  &lt;div style={ cover } onClick={ this.colorpickerInputHandleClose }/&gt;
+                                                  &lt;SketchPicker color={this.state.colorSelected} onChange={color =&gt; this.setState({colorSelected: color.h<span class="fstat-no" title="function not covered" >ex</span>})}/&gt;<span class="cstat-no" title="statement not covered" ></span>
+                                                &lt;/div&gt; : null }
+                                            &lt;/Col&gt;
+                                            &lt;Col xs={ 12 } className="mt-3"&gt;
+                                                &lt;Row&gt;
+                                                    &lt;Col xs={ 6 }&gt;
+                                                        &lt;p&gt;SketchPicker&lt;/p&gt;
+                                                        &lt;SketchPicker /&gt;
+                                                    &lt;/Col&gt;
+                                                    &lt;Col xs={ 6 }&gt;
+                                                        &lt;p&gt;Block&lt;/p&gt;
+                                                        &lt;BlockPicker/&gt;
+                                                        &lt;p className="mt-2"&gt;Twitter&lt;/p&gt;
+                                                        &lt;TwitterPicker/&gt;
+                                                    &lt;/Col&gt;
+                                                &lt;/Row&gt;
+                                            &lt;/Col&gt;
+                                        &lt;/Row&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row mb"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;React Select&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;p&gt;Basic Select&lt;/p&gt;
+                                        &lt;Select
+                                            name="select-name"
+                                            value={value}
+                                            onChange={this.handleChangeSelect}
+                                            options={STATES}
+                                        /&gt;
+                                        &lt;p className="mt-2"&gt;Multi Select&lt;/p&gt;
+                                        &lt;Select
+                                            name="multi-select-name"
+                                            multi
+                                            simpleValue
+                                            value={selectedOptionMulti}
+                                            onChange={this.handleChangeSelectMulti}
+                                            options={STATES}
+                                        /&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Masked input&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;p&gt;Card Number:{' '}&lt;/p&gt;
+                                        &lt;MaskedInput className="form-control" mask="1111 1111 1111 1111" name="card" size="20" onChange={this.onChangeMasked}/&gt;
+                                        &lt;p className="mt-2"&gt;Expiry Date:{' '}&lt;/p&gt;
+                                        &lt;MaskedInput className="form-control" mask="11/1111" name="expiry" placeholder="mm/yyyy" onChange={this.onChangeMasked}/&gt;
+                                        &lt;p className="mt-2"&gt;CCV:{' '}&lt;/p&gt;
+                                        &lt;MaskedInput className="form-control" mask="111" name="ccv" onChange={this.onChangeMasked}/&gt;
+                                        &lt;p className="mt-2"&gt;Escaped:&lt;/p&gt;
+                                        &lt;MaskedInput className="form-control" mask="11 \* 11" name="escaped" id="escaped" onChange={this.onChangeMasked}/&gt;
+                                        &lt;div className="text-sm text-muted"&gt;Mask placeholder characters can be escaped with a leading &lt;code&gt;\&lt;/code&gt; to use them as static contents&lt;/div&gt;
+                                        &lt;p className="mt-2"&gt;Leading:&lt;/p&gt;
+                                        &lt;MaskedInput className="form-control" mask="(0) 111 1111" name="leading" id="leading" onChange={this.onChangeMasked}/&gt;
+                                        &lt;div className="text-sm text-muted"&gt;Leading static characters&lt;/div&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row mb"&gt;
+                                    &lt;label className="col-md-2 col-form-label mb"&gt;DateTimePicker&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;p&gt;Basic&lt;/p&gt;
+                                        &lt;Datetime inputProps={{className: 'form-control'}}/&gt;
+                                        &lt;p className="mt-2"&gt;Date Format YYYY-MM&lt;/p&gt;
+                                        &lt;Datetime dateFormat="YYYY-MM" timeFormat={false} inputProps={{className: 'form-control'}}/&gt;
+                                        &lt;p className="mt-2"&gt;Time picker only&lt;/p&gt;
+                                        &lt;Datetime inputProps={{className: 'form-control'}} dateFormat={false} /&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;File input&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;input type="file" data-buttonname="btn-secondary m-0" data-classinput="form-control" className="filestyle" /&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Block Note Editor&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;Card body&gt;
+                                            &lt;textarea rows="10" className="form-control note-editor"&gt;&lt;/textarea&gt;
+                                        &lt;/Card&gt;
+                                        &lt;p&gt;With margin&lt;/p&gt;
+                                        &lt;Card body&gt;
+                                            &lt;textarea rows="10" className="form-control note-editor note-editor-margin"&gt;&lt;/textarea&gt;
+                                        &lt;/Card&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row"&gt;
+                                    &lt;label className="col-md-2 col-form-label"&gt;Simple wysiwyg&lt;/label&gt;
+                                    &lt;Col md={ 10 }&gt;
+                                        &lt;Editor
+                                            editorState={editorState}
+                                            wrapperClassName="wysiwig-editor-wrapper"
+                                            editorClassName="form-control"
+                                            editorStyle={{height: 300}}
+                                            onEditorStateChange={this.onEditorStateChange}
+                                        /&gt;
+                                        &lt;p className="mt-3"&gt;JSON OUTPUT&lt;/p&gt;
+                                        &lt;p dangerouslySetInnerHTML={{__html: JSON.stringify(convertToRaw(editorState.getCurrentContent()))}}&gt;&lt;/p&gt;
+                                    &lt;/Col&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                            &lt;fieldset&gt;
+                                &lt;div className="form-group row"&gt;
+                                    &lt;div className="col-sm-4 col-sm-offset-2"&gt;
+                                        &lt;button type="submit" className="btn btn-secondary"&gt;Cancel&lt;/button&gt;
+                                        &lt;button type="submit" className="btn btn-primary"&gt;Save changes&lt;/button&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/fieldset&gt;
+                        &lt;/form&gt;
+                    &lt;/CardBody&gt;
+                &lt;/Card&gt;
+                { /*  END card */ }
+            &lt;/ContentWrapper&gt;
+            );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default FormExtended;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,2771 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/Elements/Animation.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/Elements</a> Animation.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/10</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import ContentWrapper <span class="cstat-no" title="statement not covered" >from '../Layout/ContentWrapper';<span class="cstat-no" title="statement not covered" ></span></span>
+import { Row, Col,<span class="cstat-no" title="statement not covered" > Card, CardBody, CardH</span>eader } from 'reactstrap';
+&nbsp;
+import $ from <span class="cstat-no" title="statement not covered" >'jquery';<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >import 'animo/animo';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+&nbsp;
+class Animation extends Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >        super(props)<span class="cstat-no" title="statement not covered" ></span></span>
+        this.elements = [];
+    }
+&nbsp;
+    componentDidMount() {
+        $(this.elements).on('click', e =&gt; {
+            e.preventDefault();
+            const $data = $(e.currentTarget).data();
+            $($data.target).animo({ animation: $data.animation });
+        });
+    }
+&nbsp;
+    pushRef = node<span class="fstat-no" title="function not covered" > =</span>&gt; {
+        this<span class="cstat-no" title="statement not covered" >.elements.push(node)</span>
+    }<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentWrapper&gt;
+                &lt;div className="content-heading"&gt;
+                    &lt;div&gt;Animations
+                        &lt;small&gt;animo is a powerful little tool that makes managing CSS animations extremely easy.&lt;/small&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                { /* START row */ }
+                &lt;Row&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounce" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounce&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounce" data-animation="bounce"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-flash" className="card-default"&gt;
+                            &lt;CardHeader&gt;flash&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-flash" data-animation="flash"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-pulse" className="card-default"&gt;
+                            &lt;CardHeader&gt;pulse&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-pulse" data-animation="pulse"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rubberBand" className="card-default"&gt;
+                            &lt;CardHeader&gt;rubberBand&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rubberBand" data-animation="rubberBand"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-shake" className="card-default"&gt;
+                            &lt;CardHeader&gt;shake&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-shake" data-animation="shake"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-swing" className="card-default"&gt;
+                            &lt;CardHeader&gt;swing&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-swing" data-animation="swing"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-tada" className="card-default"&gt;
+                            &lt;CardHeader&gt;tada&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-tada" data-animation="tada"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-wobble" className="card-default"&gt;
+                            &lt;CardHeader&gt;wobble&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-wobble" data-animation="wobble"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceIn" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceIn&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceIn" data-animation="bounceIn"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceInDown" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceInDown&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceInDown" data-animation="bounceInDown"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceInLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceInLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceInLeft" data-animation="bounceInLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceInRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceInRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceInRight" data-animation="bounceInRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceInUp" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceInUp&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceInUp" data-animation="bounceInUp"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceOut" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceOut&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceOut" data-animation="bounceOut"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceOutDown" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceOutDown&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceOutDown" data-animation="bounceOutDown"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceOutLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceOutLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceOutLeft" data-animation="bounceOutLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceOutRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceOutRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceOutRight" data-animation="bounceOutRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-bounceOutUp" className="card-default"&gt;
+                            &lt;CardHeader&gt;bounceOutUp&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-bounceOutUp" data-animation="bounceOutUp"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeIn" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeIn&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeIn" data-animation="fadeIn"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInDown" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInDown&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInDown" data-animation="fadeInDown"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInDownBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInDownBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInDownBig" data-animation="fadeInDownBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInLeft" data-animation="fadeInLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInLeftBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInLeftBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInLeftBig" data-animation="fadeInLeftBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInRight" data-animation="fadeInRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInRightBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInRightBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInRightBig" data-animation="fadeInRightBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInUp" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInUp&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInUp" data-animation="fadeInUp"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeInUpBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeInUpBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeInUpBig" data-animation="fadeInUpBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOut" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOut&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOut" data-animation="fadeOut"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutDown" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutDown&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutDown" data-animation="fadeOutDown"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutDownBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutDownBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutDownBig" data-animation="fadeOutDownBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutLeft" data-animation="fadeOutLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutLeftBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutLeftBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutLeftBig" data-animation="fadeOutLeftBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutRight" data-animation="fadeOutRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutRightBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutRightBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutRightBig" data-animation="fadeOutRightBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutUp" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutUp&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutUp" data-animation="fadeOutUp"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-fadeOutUpBig" className="card-default"&gt;
+                            &lt;CardHeader&gt;fadeOutUpBig&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-fadeOutUpBig" data-animation="fadeOutUpBig"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-flip" className="card-default"&gt;
+                            &lt;CardHeader&gt;flip&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-flip" data-animation="flip"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-flipInX" className="card-default"&gt;
+                            &lt;CardHeader&gt;flipInX&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-flipInX" data-animation="flipInX"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-flipInY" className="card-default"&gt;
+                            &lt;CardHeader&gt;flipInY&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-flipInY" data-animation="flipInY"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-flipOutX" className="card-default"&gt;
+                            &lt;CardHeader&gt;flipOutX&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-flipOutX" data-animation="flipOutX"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-flipOutY" className="card-default"&gt;
+                            &lt;CardHeader&gt;flipOutY&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-flipOutY" data-animation="flipOutY"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-lightSpeedIn" className="card-default"&gt;
+                            &lt;CardHeader&gt;lightSpeedIn&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-lightSpeedIn" data-animation="lightSpeedIn"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-lightSpeedOut" className="card-default"&gt;
+                            &lt;CardHeader&gt;lightSpeedOut&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-lightSpeedOut" data-animation="lightSpeedOut"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateIn" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateIn&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateIn" data-animation="rotateIn"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateInDownLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateInDownLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateInDownLeft" data-animation="rotateInDownLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateInDownRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateInDownRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateInDownRight" data-animation="rotateInDownRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateInUpLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateInUpLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateInUpLeft" data-animation="rotateInUpLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateInUpRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateInUpRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateInUpRight" data-animation="rotateInUpRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateOut" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateOut&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateOut" data-animation="rotateOut"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateOutDownLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateOutDownLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateOutDownLeft" data-animation="rotateOutDownLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateOutDownRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateOutDownRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateOutDownRight" data-animation="rotateOutDownRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateOutUpLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateOutUpLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateOutUpLeft" data-animation="rotateOutUpLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rotateOutUpRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;rotateOutUpRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rotateOutUpRight" data-animation="rotateOutUpRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-hinge" className="card-default"&gt;
+                            &lt;CardHeader&gt;hinge&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-hinge" data-animation="hinge"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rollIn" className="card-default"&gt;
+                            &lt;CardHeader&gt;rollIn&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rollIn" data-animation="rollIn"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-rollOut" className="card-default"&gt;
+                            &lt;CardHeader&gt;rollOut&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-rollOut" data-animation="rollOut"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomIn" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomIn&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomIn" data-animation="zoomIn"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomInDown" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomInDown&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomInDown" data-animation="zoomInDown"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomInLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomInLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomInLeft" data-animation="zoomInLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomInRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomInRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomInRight" data-animation="zoomInRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomInUp" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomInUp&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomInUp" data-animation="zoomInUp"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomOut" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomOut&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomOut" data-animation="zoomOut"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomOutDown" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomOutDown&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomOutDown" data-animation="zoomOutDown"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomOutLeft" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomOutLeft&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomOutLeft" data-animation="zoomOutLeft"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomOutRight" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomOutRight&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomOutRight" data-animation="zoomOutRight"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                    &lt;Col sm="6" lg="3" xl="2"&gt;
+                        { /* START Card */ }
+                        &lt;Card id="card-anim-zoomOutUp" className="card-default"&gt;
+                            &lt;CardHeader&gt;zoomOutUp&lt;/CardHeader&gt;
+                            &lt;CardBody&gt;
+                                { /* Animation trigger */ }
+                                &lt;a href="" ref={this.pushRef} data-target="#card-anim-zoomOutUp" data-animation="zoomOutUp"&gt;
+                                    &lt;em className="fa fa-play fa-2x"&gt;&lt;/em&gt;
+                                &lt;/a&gt;
+                            &lt;/CardBody&gt;
+                        &lt;/Card&gt;
+                        { /* END Card */ }
+                    &lt;/Col&gt;
+                &lt;/Row&gt;
+                { /* END row */ }
+            &lt;/ContentWrapper&gt;
+            );
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+}
+&nbsp;
+export default Animation;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 11:01:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>
