@@ -233,6 +233,39 @@ const Menu = [
         ]
     },
     {
+        name: 'UserManager',
+        icon: 'icon-note',
+        translate: 'sidebar.nav.form.UserManager',
+        submenu: [{
+                name: 'Standard',
+                path: 'form-standard',
+                translate: 'sidebar.nav.form.STANDARD'
+            },
+            {
+                name: 'Extended',
+                path: 'form-extended',
+                translate: 'sidebar.nav.form.EXTENDED'
+            },
+            {
+                name: 'Validation',
+                path: 'form-validation',
+                translate: 'sidebar.nav.form.VALIDATION'
+            },
+            {
+                name: 'Wizard',
+                path: 'form-wizard',
+            },
+            {
+                name: 'Upload',
+                path: 'form-upload',
+            },
+            {
+                name: 'Cropper',
+                path: 'form-cropper',
+            }
+        ]
+    },
+    {
         name: 'Tables',
         icon: 'icon-grid',
         translate: 'sidebar.nav.table.TABLE',
