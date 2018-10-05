@@ -7,18 +7,6 @@ services:
         context: ./nginx
       ports:
         - '3050:80'
-    elasticsearch: # Elasticsearch Instance
-    container_name: gs-search
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
-    volumes: # Persist ES data in seperate "esdata" volume
-      - esdata:/usr/share/elasticsearch/data
-    environment:
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    ports: # Expose Elasticsearch ports
-      - "9300:9300"
-      - "9200:9200"
     hsse-server:
       restart: "no"
       build: 
@@ -61,6 +49,3 @@ services:
         - CHOKIDAR_USEPOLLING=true
         - BACKEND_SERVER=http://localhost:3050/api
       command: ["npm", "run", "test"]
-
-volumes: 
-  esdata:
