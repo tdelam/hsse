@@ -15,13 +15,6 @@ const Menu = [
         ]
     },
     {
-        name: 'Widgets',
-        icon: 'icon-grid',
-        path: 'widgets',
-        label: { value: 30, color: 'success' },
-        translate: 'sidebar.nav.WIDGETS'
-    },
-    {
         heading: 'Evidence Systems',
         translate: 'sidebar.heading.Evidence Systems'
     },
@@ -196,13 +189,13 @@ const Menu = [
         ]
     },
     {
-        heading: 'More Line',
-        translate: 'sidebar.heading.More Line'
+        heading: 'Managers',
+        translate: 'sidebar.heading.Managers'
     },
     {
-        name: 'Forms',
+        name: 'Search',
         icon: 'icon-note',
-        translate: 'sidebar.nav.form.FORM',
+        translate: 'sidebar.nav.form.SEARCH',
         submenu: [{
                 name: 'Standard',
                 path: 'form-standard',
@@ -233,9 +226,9 @@ const Menu = [
         ]
     },
     {
-        name: 'UserManager',
+        name: 'Export',
         icon: 'icon-note',
-        translate: 'sidebar.nav.form.UserManager',
+        translate: 'sidebar.nav.form.EXPORT',
         submenu: [{
                 name: 'Standard',
                 path: 'form-standard',
@@ -264,11 +257,34 @@ const Menu = [
                 path: 'form-cropper',
             }
         ]
-    },
-    {
-        name: 'Tables',
+    },{
+        name: 'Translation',
         icon: 'icon-grid',
-        translate: 'sidebar.nav.table.TABLE',
+        translate: 'sidebar.nav.table.TRANSLATION',
+        submenu: [{
+                name: 'Standard',
+                path: 'table-standard',
+                translate: 'sidebar.nav.table.STANDARD'
+            },
+            {
+                name: 'Extended',
+                path: 'table-extended',
+                translate: 'sidebar.nav.table.EXTENDED'
+            },
+            {
+                name: 'Datatable',
+                path: 'table-datatable',
+                translate: 'sidebar.nav.table.DATATABLE'
+            },
+            {
+                name: 'Datagrid',
+                path: 'table-datagrid',
+            }
+        ]
+    },{
+        name: 'Monthly Email',
+        icon: 'icon-grid',
+        translate: 'sidebar.nav.table. MONTHLY EMAIL',
         submenu: [{
                 name: 'Standard',
                 path: 'table-standard',
@@ -291,124 +307,30 @@ const Menu = [
         ]
     },
     {
-        heading: 'More',
-        translate: 'sidebar.heading.MORE'
-    },
-    {
-        name: 'Extras',
-        icon: 'icon-cup',
-        translate: 'sidebar.nav.extra.EXTRA',
+        heading: 'Settings',
+        translate: 'sidebar.heading.SETTINGS'
+    },{
+        name: 'Users',
+        icon: 'icon-people',
+        translate: 'sidebar.nav.table.USER',
         submenu: [{
-                name: 'Mailbox',
-                path: 'mailbox',
-                translate: 'sidebar.nav.extra.MAILBOX',
+                name: 'Standard',
+                path: 'table-standard',
+                translate: 'sidebar.nav.table.STANDARD'
             },
             {
-                name: 'Bug Tracker',
-                path: 'bug-tracker'
+                name: 'Extended',
+                path: 'table-extended',
+                translate: 'sidebar.nav.table.EXTENDED'
             },
             {
-                name: 'Contact Details',
-                path: 'contact-details'
+                name: 'Datatable',
+                path: 'table-datatable',
+                translate: 'sidebar.nav.table.DATATABLE'
             },
             {
-                name: 'Contacts',
-                path: 'contacts'
-            },
-            {
-                name: 'Faq',
-                path: 'faq'
-            },
-            {
-                name: 'File Manager',
-                path: 'file-manager'
-            },
-            {
-                name: 'Followers',
-                path: 'followers'
-            },
-            {
-                name: 'Help Center',
-                path: 'help-center'
-            },
-            {
-                name: 'Plans',
-                path: 'plans'
-            },
-            {
-                name: 'Project Details',
-                path: 'project-details'
-            },
-            {
-                name: 'Projects',
-                path: 'projects'
-            },
-            {
-                name: 'Settings',
-                path: 'settings'
-            },
-            {
-                name: 'Social Board',
-                path: 'social-board'
-            },
-            {
-                name: 'Team Viewer',
-                path: 'team-viewer'
-            },
-            {
-                name: 'Vote Links',
-                path: 'vote-links'
-            },
-            {
-                name: 'Timeline',
-                path: 'timeline',
-                translate: 'sidebar.nav.extra.TIMELINE'
-            },
-            {
-                name: 'Calendar',
-                path: 'calendar',
-                translate: 'sidebar.nav.extra.CALENDAR'
-            },
-            {
-                name: 'Invoice',
-                path: 'invoice',
-                translate: 'sidebar.nav.extra.INVOICE'
-            },
-            {
-                name: 'Search',
-                path: 'search',
-                translate: 'sidebar.nav.extra.SEARCH'
-            },
-            {
-                name: 'Todo',
-                path: 'todo',
-                translate: 'sidebar.nav.extra.TODO'
-            },
-            {
-                name: 'Profile',
-                path: 'profile',
-                translate: 'sidebar.nav.extra.PROFILE'
-            }
-        ]
-    },
-    {
-        name: 'Blog',
-        icon: 'icon-notebook',
-        submenu: [{
-                name: 'List',
-                path: 'blog-list'
-            },
-            {
-                name: 'Post',
-                path: 'blog-post'
-            },
-            {
-                name: 'Articles',
-                path: 'blog-articles'
-            },
-            {
-                name: 'Article View',
-                path: 'blog-article-view'
+                name: 'Datagrid',
+                path: 'table-datagrid',
             }
         ]
     }

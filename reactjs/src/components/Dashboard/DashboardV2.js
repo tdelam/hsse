@@ -289,6 +289,7 @@ class DashboardV2 extends Component {
                             </DropdownToggle>
                             <DropdownMenu className="dropdown-menu-right-forced animated fadeInUpShort">
                                 <DropdownItem onClick={() => this.changeLanguage('en')}>English</DropdownItem>
+                                <DropdownItem onClick={() => this.changeLanguage('fr')}>French</DropdownItem>
                                 <DropdownItem onClick={() => this.changeLanguage('es')}>Spanish</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
