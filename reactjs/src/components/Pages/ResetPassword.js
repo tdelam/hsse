@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Input, CustomInput } from 'reactstrap';
+import { Input } from 'reactstrap';
 
 import * as actions from '../../actions';
 
 import FormValidator from '../Forms/FormValidator.js';
 
-class Register extends Component {
+class ResetPassword extends Component {
 
     state = {
         formRegister: {
@@ -71,53 +70,54 @@ class Register extends Component {
                 this.state[formName].errors[inputName][method]
     }
 
-        gotoConfirmationPage = () => this.props.history.push('/confirmregistration');
+    logPasswordChanged = () => console.log("Password has been changed");
 
-        handleSubmit = (formProps) => {
-            this.props.signup(formProps, this.gotoConfirmationPage);
-            //this.props.history.push('/confirmregistration');
-        }
+    handleSubmit(formProps) {
+        const { match: { params } } = this.props;
+        this.props.resetPassword(formProps, params.token, this.logPasswordChanged);
+        this.props.history.push('/');
+    }
 
-        renderEmailField = ({ input }) => {
-            return <Input type="email"
-                name="email"
-                className="border-right-0"
-                placeholder="Enter email"
-                invalid={this.hasError('formRegister','email','required')||this.hasError('formRegister','email','email')}
-                onChange={this.validateOnChange}
-                ata-validate='["required", "email"]'
-                //value={this.state.formRegister.email}
-                {...input}
-            />
-        }
+    renderEmailField = ({ input }) => {
+        return <Input type="email"
+            name="email"
+            className="border-right-0"
+            placeholder="Enter email"
+            invalid={this.hasError('formRegister','email','required')||this.hasError('formRegister','email','email')}
+            onChange={this.validateOnChange}
+            ata-validate='["required", "email"]'
+            //value={this.state.formRegister.email}
+            {...input}
+        />
+    }
 
-        renderPasswordField = ({ input }) => {
-            return <Input type="password"
-                id="id-password"
-                name="password"
-                className="border-right-0"
-                placeholder="Password"
-                invalid={this.hasError('formRegister','password','required')}
-                onChange={this.validateOnChange}
-                data-validate='["required"]'
-                //value={this.state.formRegister.password}
-                {...input}
-            />
-        }
+    renderPasswordField = ({ input }) => {
+        return <Input type="password"
+            id="id-password"
+            name="password"
+            className="border-right-0"
+            placeholder="Password"
+            invalid={this.hasError('formRegister','password','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formRegister.password}
+            {...input}
+        />
+    }
 
-        renderPassword2Field = ({ input }) => {
-            return <Input type="password" 
-                name="password2"
-                className="border-right-0"
-                placeholder="Retype assword"
-                invalid={this.hasError('formRegister','password2','equalto')}
-                onChange={this.validateOnChange}
-                ata-validate='["equalto"]'
-                //value={this.state.formRegister.password2}
-                ata-param="id-password"
-                {...input}
-            />
-        }
+    renderPassword2Field = ({ input }) => {
+        return <Input type="password" 
+            name="password2"
+            className="border-right-0"
+            placeholder="Retype assword"
+            invalid={this.hasError('formRegister','password2','equalto')}
+            onChange={this.validateOnChange}
+            ata-validate='["equalto"]'
+            //value={this.state.formRegister.password2}
+            ata-param="id-password"
+            {...input}
+        />
+    }
 
     render() {
 
@@ -135,27 +135,8 @@ class Register extends Component {
                         </a>
                     </div>
                     <div className="card-body">
-                        <p className="text-center py-2">SIGNUP</p>
+                        <p className="text-center py-2">PASSWORD RESET</p>
                         <form className="mb-3" name="formRegister" onSubmit={ handleSubmit(this.handleSubmit)}>
-                            <div className="form-group">
-                                <label className="text-muted" htmlFor="signupInputEmail1">Email address</label>
-                                <div className="input-group with-focus">
-                                    <Field
-                                        name="email"
-                                        type="text"
-                                        component={this.renderEmailField}
-                                        autoComplete="none"
-                                        className="form-control"
-                                    />
-                                    <div className="input-group-append">
-                                        <span className="input-group-text text-muted bg-transparent border-left-0">
-                                            <em className="fa fa-envelope"></em>
-                                        </span>
-                                    </div>
-                                    { this.hasError('formRegister','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                    { this.hasError('formRegister','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
-                                </div>
-                            </div>
                             <div className="form-group">
                                 <label className="text-muted" htmlFor="signupInputPassword1">Password</label>
                                 <div className="input-group with-focus">
@@ -192,19 +173,8 @@ class Register extends Component {
                                     <span className="invalid-feedback">Field must be equal to previous</span>
                                 </div>
                             </div>
-                            <CustomInput type="checkbox" id="terms"
-                                name="terms"
-                                label="I agree with the terms"
-                                invalid={this.hasError('formRegister','terms','required')}
-                                onChange={this.validateOnChange}
-                                data-validate='["required"]'
-                                checked={this.state.formRegister.terms}>
-                                    <span className="invalid-feedback">Field is required</span>
-                                </CustomInput>
-                            <button className="btn btn-block btn-primary mt-3" type="submit">Create account</button>
+                            <button className="btn btn-block btn-primary mt-3" type="submit">Reset password</button>
                         </form>
-                        <p className="pt-3 text-center">Have an account?</p>
-                        <Link to="login" className="btn btn-block btn-secondary">Signin</Link>
                     </div>
                 </div>
                 {/* END card */}
@@ -228,4 +198,4 @@ export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'signin'
-    })) (Register);
+    })) (ResetPassword);

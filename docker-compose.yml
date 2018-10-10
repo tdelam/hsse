@@ -18,8 +18,8 @@ services:
       environment:
         - CHOKIDAR_USEPOLLING=true
         - BACKEND_SERVER=hsse_server
-        - HSSE_SES_ACCESS_KEY=
-        - HSSE_SES_SECRET_KEY=
+        - HSSE_SES_ACCESS_KEY=AKIAJWDGNZXJDZRLF2AQ
+        - HSSE_SES_SECRET_KEY=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
         - MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
         - NODE_ENV=development
         - JWT_SECRET=akfjlaksdjlasfjasdfljiasdfasfksldf

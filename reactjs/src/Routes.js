@@ -53,6 +53,10 @@ import FormCropper from './components/Forms/FormCropper';
 import Login from './components/Pages/Login';
 import Register from './components/Pages/Register';
 import Recover from './components/Pages/Recover';
+import ConfirmRegistration from './components/Pages/ConfirmRegistration';
+import ConfirmPasswordReset from './components/Pages/ConfirmPasswordReset';
+import SuccessfulPasswordReset from './components/Pages/SuccessfulPasswordReset';
+import ResetPassword from './components/Pages/ResetPassword';
 import Lock from './components/Pages/Lock';
 import NotFound from './components/Pages/NotFound';
 import Error500 from './components/Pages/Error500';
@@ -103,6 +107,10 @@ const listofPages = [
     '/login',
     '/register',
     '/recover',
+    '/confirmregistration',
+    '/confirmpasswordreset',
+    '/resetpassword/:token',
+    '/successfulpasswordreset',
     '/lock',
     '/notfound',
     '/error500',
@@ -134,6 +142,10 @@ const Routes = ({ location }) => {
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/recover" component={Recover}/>
+                    <Route path="/confirmregistration" component={ConfirmRegistration}/>
+                    <Route path="/confirmpasswordreset" component={ConfirmPasswordReset}/>
+                    <Route path="/resetpassword/:token" component={ResetPassword}/>
+                    <Route path="/successfulpasswordreset" component={SuccessfulPasswordReset}/>
                     <Route path="/lock" component={Lock}/>
                     <Route path="/notfound" component={NotFound}/>
                     <Route path="/error500" component={Error500}/>
