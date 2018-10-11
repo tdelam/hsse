@@ -249,7 +249,7 @@ const Routes = ({ location }) => {
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
 
-                            <Redirect to="/login" />
+                            <Redirect to="/notfound" />
 
                         </Switch>
                     </div>

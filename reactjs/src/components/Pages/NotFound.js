@@ -33,9 +33,8 @@ const NotFound = props => (
             <span className="mr-2">&copy;</span>
             <span>2018</span>
             <span className="mx-2">-</span>
-            <span>Angle</span>
+            <span>McMaster Health Forum</span>
             <br/>
-            <span>Bootstrap Admin Template</span>
         </div>
     </div>
 )

@@ -74,7 +74,7 @@ class ResetPassword extends Component {
 
     handleSubmit(formProps) {
         const { match: { params } } = this.props;
-        this.props.resetPassword(formProps, params.token, this.logPasswordChanged);
+        this.props.resetPassword(formProps, params.token, this.logPasswordChanged);console.log(params.token);
         this.props.history.push('/');
     }
 
