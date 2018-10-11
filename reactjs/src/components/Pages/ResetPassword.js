@@ -72,10 +72,9 @@ class ResetPassword extends Component {
 
     logPasswordChanged = () => console.log("Password has been changed");
 
-    handleSubmit(formProps) {
+    handleSubmit({ password, confirmPassword }) {
         const { match: { params } } = this.props;
-        this.props.resetPassword(formProps, params.token, this.logPasswordChanged);console.log(params.token);
-        this.props.history.push('/');
+        this.props.resetPassword({ password, confirmPassword }, params.token, this.logPasswordChanged);
     }
 
     renderEmailField = ({ input }) => {
@@ -105,15 +104,15 @@ class ResetPassword extends Component {
         />
     }
 
-    renderPassword2Field = ({ input }) => {
+    renderPasswordConfirmField = ({ input }) => {
         return <Input type="password" 
-            name="password2"
+            name="confirmPassword"
             className="border-right-0"
             placeholder="Retype assword"
-            invalid={this.hasError('formRegister','password2','equalto')}
+            invalid={this.hasError('formRegister','confirmPassword','equalto')}
             onChange={this.validateOnChange}
             ata-validate='["equalto"]'
-            //value={this.state.formRegister.password2}
+            //value={this.state.formRegister.confirmPassword}
             ata-param="id-password"
             {...input}
         />
@@ -136,7 +135,7 @@ class ResetPassword extends Component {
                     </div>
                     <div className="card-body">
                         <p className="text-center py-2">PASSWORD RESET</p>
-                        <form className="mb-3" name="formRegister" onSubmit={ handleSubmit(this.handleSubmit)}>
+                        <form className="mb-3" name="formRegister" onSubmit={ handleSubmit(this.handleSubmit.bind(this))}>
                             <div className="form-group">
                                 <label className="text-muted" htmlFor="signupInputPassword1">Password</label>
                                 <div className="input-group with-focus">
@@ -159,9 +158,9 @@ class ResetPassword extends Component {
                                 <label className="text-muted" htmlFor="signupInputRePassword1">Retype Password</label>
                                 <div className="input-group with-focus">
                                     <Field
-                                        name="password2"
+                                        name="confirmPassword"
                                         type="password"
-                                        component={this.renderPassword2Field}
+                                        component={this.renderPasswordConfirmField}
                                         autoComplete="none"
                                         className="form-control"
                                     />
@@ -197,5 +196,5 @@ function mapStateToProps(state) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'signin'
+        form: 'resetPassword'
     })) (ResetPassword);

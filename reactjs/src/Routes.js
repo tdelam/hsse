@@ -51,6 +51,7 @@ import FormUpload from './components/Forms/FormUpload';
 import FormCropper from './components/Forms/FormCropper';
 
 import Login from './components/Pages/Login';
+import Signout from './components/Pages/Signout';
 import Register from './components/Pages/Register';
 import Recover from './components/Pages/Recover';
 import ConfirmRegistration from './components/Pages/ConfirmRegistration';
@@ -107,6 +108,7 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 const listofPages = [
     '/',
     '/login',
+    '/signout',
     '/register',
     '/recover',
     '/confirmregistration',
@@ -118,10 +120,25 @@ const listofPages = [
     '/error500',
     '/maintenance'
 ];
-
+/*
+stringArrayContainers  = (array, str) => {
+    contains = (el) => {
+        return (el.indexOf(str) !== -1) ? true : false;
+    }
+    return array.some(contains);
+}
+*/
 const Routes = ({ location }) => {
     const currentKey = location.pathname.split('/')[1] || '/';
     const timeout = { enter: 500, exit: 500 };
+    console.log( listofPages.indexOf(location.pathname) );
+
+    const stringArrayContainers  = (array, str) => {
+        const contains = (el) => {
+            return (el.indexOf(str) !== -1) ? true : false;
+        }
+        return array.some(contains);
+    }
 
     // Animations supported
     //      'rag-fadeIn'
@@ -136,8 +153,8 @@ const Routes = ({ location }) => {
     //      'rag-zoomBackDown'
     const animationName = 'rag-fadeIn'
 
-    if(listofPages.indexOf(location.pathname) > -1) {
-    //if(listofPages.indexOf(currentKey) > -1) {
+    //if(listofPages.indexOf(location.pathname) > -1) {
+    if(stringArrayContainers(listofPages, currentKey)) {
         return (
             // Page Layout component wrapper
             <BasePage>
@@ -145,6 +162,7 @@ const Routes = ({ location }) => {
                     <Route path="/" exact component={Landing} />
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
+                    <Route path="/signout" component={Signout}/>
                     <Route path="/recover" component={Recover}/>
                     <Route path="/confirmregistration" component={ConfirmRegistration}/>
                     <Route path="/confirmpasswordreset" component={ConfirmPasswordReset}/>

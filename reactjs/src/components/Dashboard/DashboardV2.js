@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { translate, Trans } from 'react-i18next';
 import ContentWrapper from '../Layout/ContentWrapper';
+import requireAuth from '../Pages/requireAuth';
 import { Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Tooltip, Progress } from 'reactstrap';
 // EasyPieChart
 import EasyPieChart from 'easy-pie-chart';
@@ -618,4 +619,6 @@ class DashboardV2 extends Component {
 
 }
 
-export default translate('translations')(DashboardV2);
+//export default translate('translations')(DashboardV2);
+
+export default requireAuth(translate('translations')(DashboardV2));
