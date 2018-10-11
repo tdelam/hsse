@@ -57,6 +57,7 @@ import ConfirmRegistration from './components/Pages/ConfirmRegistration';
 import ConfirmPasswordReset from './components/Pages/ConfirmPasswordReset';
 import SuccessfulPasswordReset from './components/Pages/SuccessfulPasswordReset';
 import ResetPassword from './components/Pages/ResetPassword';
+import Landing from './components/Pages/Landing';
 import Lock from './components/Pages/Lock';
 import NotFound from './components/Pages/NotFound';
 import Error500 from './components/Pages/Error500';
@@ -104,6 +105,7 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 // listed here to Switch between layouts
 // depending on the current pathname
 const listofPages = [
+    '/',
     '/login',
     '/register',
     '/recover',
@@ -135,10 +137,12 @@ const Routes = ({ location }) => {
     const animationName = 'rag-fadeIn'
 
     if(listofPages.indexOf(location.pathname) > -1) {
+    //if(listofPages.indexOf(currentKey) > -1) {
         return (
             // Page Layout component wrapper
             <BasePage>
                 <Switch location={location}>
+                    <Route path="/" exact component={Landing} />
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/recover" component={Recover}/>

@@ -13,7 +13,6 @@ class ResetPassword extends Component {
     handleSubmit({ password, confirmPassword }) {
         const { match: { params } } = this.props;
         this.props.resetPassword({ password, confirmPassword }, params.token, this.logPasswordChanged);
-        this.props.history.push('/');
     }
     
     render() {
