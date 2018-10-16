@@ -23,83 +23,39 @@ const Menu = [
         icon: 'icon-layers',
         translate: 'sidebar.nav.element.Health',
         submenu: [{
-                name: 'Buttons',
+                name: 'Harvesting & Uploading',
                 path: 'buttons',
-                translate: 'sidebar.nav.element.BUTTON'
+                translate: 'sidebar.nav.element.HARVESTUPLOAD'
             },
             {
-                name: 'Notifications',
+                name: 'Elibigility & Filters',
                 path: 'notifications',
-                translate: 'sidebar.nav.element.NOTIFICATION'
+                translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
             {
-                name: 'Sweetalert',
-                path: 'sweetalert'
-            },
-            {
-                name: 'Carousel',
+                name: 'Quality Appraisal',
                 path: 'carousel',
-                translate: 'sidebar.nav.element.INTERACTION'
+                translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
             },
             {
-                name: 'Spinners',
+                name: 'Linking Studies',
                 path: 'spinners',
-                translate: 'sidebar.nav.element.SPINNER'
+                translate: 'sidebar.nav.element.LINKINGSTUDIES'
             },
             {
-                name: 'Animations',
+                name: 'Presentation Details',
                 path: 'animations',
-                translate: 'sidebar.nav.element.ANIMATION'
+                translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
             },
             {
-                name: 'Dropdown',
+                name: 'Translating Titles',
                 path: 'dropdown',
-                translate: 'sidebar.nav.element.DROPDOWN'
+                translate: 'sidebar.nav.element.TRANSLATINGTITLES'
             },
             {
-                name: 'Nestable',
-                path: 'nestable'
-            },
-            {
-                name: 'Sortable',
-                path: 'sortable'
-            },
-            {
-                name: 'Cards',
+                name: 'Tracking & Prioritizing',
                 path: 'cards',
-                translate: 'sidebar.nav.element.CARD'
-            },
-            {
-                name: 'Grid',
-                path: 'grid',
-                translate: 'sidebar.nav.element.GRID'
-            },
-            {
-                name: 'Grid Masonry',
-                path: 'grid-masonry',
-                translate: 'sidebar.nav.element.GRID_MASONRY'
-            },
-            {
-                name: 'Typography',
-                path: 'typography',
-                translate: 'sidebar.nav.element.TYPO'
-            },
-            {
-                name: 'IconsFont',
-                path: 'icons-font',
-                translate: 'sidebar.nav.element.FONT_ICON',
-                label: { value: '+400', color: 'success' }
-            },
-            {
-                name: 'IconsWeather',
-                path: 'icons-weather',
-                translate: 'sidebar.nav.element.WEATHER_ICON',
-                label: { value: '+100', color: 'success' }
-            },
-            {
-                name: 'Colors',
-                path: 'colors',
-                translate: 'sidebar.nav.element.COLOR'
+                translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
             }
         ]
     },
@@ -108,85 +64,41 @@ const Menu = [
         icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Social',
         submenu: [{
-                name: 'Buttons',
-                path: 'buttons',
-                translate: 'sidebar.nav.element.BUTTON'
-            },
-            {
-                name: 'Notifications',
-                path: 'notifications',
-                translate: 'sidebar.nav.element.NOTIFICATION'
-            },
-            {
-                name: 'Sweetalert',
-                path: 'sweetalert'
-            },
-            {
-                name: 'Carousel',
-                path: 'carousel',
-                translate: 'sidebar.nav.element.INTERACTION'
-            },
-            {
-                name: 'Spinners',
-                path: 'spinners',
-                translate: 'sidebar.nav.element.SPINNER'
-            },
-            {
-                name: 'Animations',
-                path: 'animations',
-                translate: 'sidebar.nav.element.ANIMATION'
-            },
-            {
-                name: 'Dropdown',
-                path: 'dropdown',
-                translate: 'sidebar.nav.element.DROPDOWN'
-            },
-            {
-                name: 'Nestable',
-                path: 'nestable'
-            },
-            {
-                name: 'Sortable',
-                path: 'sortable'
-            },
-            {
-                name: 'Cards',
-                path: 'cards',
-                translate: 'sidebar.nav.element.CARD'
-            },
-            {
-                name: 'Grid',
-                path: 'grid',
-                translate: 'sidebar.nav.element.GRID'
-            },
-            {
-                name: 'Grid Masonry',
-                path: 'grid-masonry',
-                translate: 'sidebar.nav.element.GRID_MASONRY'
-            },
-            {
-                name: 'Typography',
-                path: 'typography',
-                translate: 'sidebar.nav.element.TYPO'
-            },
-            {
-                name: 'IconsFont',
-                path: 'icons-font',
-                translate: 'sidebar.nav.element.FONT_ICON',
-                label: { value: '+400', color: 'success' }
-            },
-            {
-                name: 'IconsWeather',
-                path: 'icons-weather',
-                translate: 'sidebar.nav.element.WEATHER_ICON',
-                label: { value: '+100', color: 'success' }
-            },
-            {
-                name: 'Colors',
-                path: 'colors',
-                translate: 'sidebar.nav.element.COLOR'
-            }
-        ]
+            name: 'Harvesting & Uploading',
+            path: 'buttons',
+            translate: 'sidebar.nav.element.HARVESTUPLOAD'
+        },
+        {
+            name: 'Elibigility & Filters',
+            path: 'notifications',
+            translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+        },
+        {
+            name: 'Quality Appraisal',
+            path: 'carousel',
+            translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+        },
+        {
+            name: 'Linking Studies',
+            path: 'spinners',
+            translate: 'sidebar.nav.element.LINKINGSTUDIES'
+        },
+        {
+            name: 'Presentation Details',
+            path: 'animations',
+            translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
+        },
+        {
+            name: 'Translating Titles',
+            path: 'dropdown',
+            translate: 'sidebar.nav.element.TRANSLATINGTITLES'
+        },
+        {
+            name: 'Tracking & Prioritizing',
+            path: 'cards',
+            translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+        }
+    ]
     },
     {
         heading: 'Managers',
