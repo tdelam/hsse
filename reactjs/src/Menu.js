@@ -23,9 +23,13 @@ const Menu = [
         icon: 'icon-layers',
         translate: 'sidebar.nav.element.Health',
         submenu: [{
-                name: 'Harvesting & Uploading',
-                path: 'buttons',
-                translate: 'sidebar.nav.element.HARVESTUPLOAD'
+                name: 'Add Article',
+                path: 'addhsearticle',
+                translate: 'sidebar.nav.element.ADDHSEARTICLE'
+            },{
+                name: 'Batch Upload',
+                path: 'hsebatchupload',
+                translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
             },
             {
                 name: 'Elibigility & Filters',

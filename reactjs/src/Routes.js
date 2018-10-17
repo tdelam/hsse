@@ -101,6 +101,9 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
+import AddHSEArticle from './components/HSE/AddHSEArticle';
+import HSEBatchUpload from './components/HSE/HSEBatchUpload';
+
 
 // List of routes that uses the page layout
 // listed here to Switch between layouts
@@ -270,6 +273,10 @@ const Routes = ({ location }) => {
                             <Route path="/social-board" component={SocialBoard}/>
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
+
+                            {/* HSE Forms */}
+                            <Route path="/addhsearticle" component={AddHSEArticle} />
+                            <Route path="/hsebatchupload" component={HSEBatchUpload} />
 
                             <Redirect to="/notfound" />
 

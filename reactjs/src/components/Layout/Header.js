@@ -67,7 +67,7 @@ class Header extends Component {
                         { /* END User avatar toggle */ }
                         { /* START lock screen */ }
                         <li className="nav-item d-none d-md-block">
-                            <Link to="signout" title="Lock screen" className="nav-link">
+                            <Link to="signout" title="Sign out" className="nav-link">
                                 <em className="icon-lock"></em>
                             </Link>
                         </li>
