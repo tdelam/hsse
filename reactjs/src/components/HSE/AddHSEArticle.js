@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter, CustomInput } from 'reactstrap';
 
+import Datetime from 'react-datetime';
+
 import HSEFormValidator from './HSEFormValidator.js';
 
 /**
@@ -158,19 +160,12 @@ class AddHSEArticle extends Component {
                                             <Col md={ 4 }></Col>
                                         </div>
                                     </fieldset>
+    
                                     <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Published Date</label>
+                                        <div className="form-group row mb">
+                                            <label className="col-md-2 col-form-label mb">Published Date</label>
                                             <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="number"
-                                                    invalid={this.hasError('formDemo','number','number')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["number"]'
-                                                    value={this.state.formDemo.number}/>
-                                                <span className="invalid-feedback">Field must be valid number</span>
-                                            </Col>
-                                            <Col md={ 4 }>
+                                                <Datetime inputProps={{className: 'form-control'}}/>
                                             </Col>
                                         </div>
                                     </fieldset>
@@ -193,8 +188,8 @@ class AddHSEArticle extends Component {
                                             
                                 </CardBody>
                                 <CardFooter className="text-center">
-                                    <button type="submit" className="btn btn-info">Add Article</button>
-                                    <button type="submit" className="btn btn-info">Add Article</button>
+                                    <button type="submit" className="btn btn-danger">Cancel</button>
+                                    <button type="submit" className="btn btn-success">Next</button>
                                 </CardFooter>
                             </Card>
                             { /* END card */ }
