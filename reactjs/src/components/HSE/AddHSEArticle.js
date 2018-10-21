@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter, CustomInput } from 'reactstrap';
+import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 
 import Datetime from 'react-datetime';
 
