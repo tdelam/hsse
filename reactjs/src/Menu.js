@@ -15,6 +15,84 @@ const Menu = [
         ]
     },
     {
+        heading: 'Assigned List',
+        translate: 'sidebar.heading.Evidence Systems'
+    },
+    {
+        name: 'HSE Assgined Work',
+        icon: 'icon-layers',
+        translate: 'sidebar.nav.element.Health',
+        submenu: [
+            {
+                name: 'Elibigility & Filters',
+                path: 'hseeligibilityfiltersqueue',
+                translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+            },
+            {
+                name: 'Quality Appraisal',
+                path: 'hsequalityappraisalqueue',
+                translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+            },
+            {
+                name: 'Linking Studies',
+                path: 'hselinkingstudiesqueue',
+                translate: 'sidebar.nav.element.LINKINGSTUDIES'
+            },
+            {
+                name: 'Presentation Details',
+                path: 'hsepresentationdetailsqueue',
+                translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
+            },
+            {
+                name: 'Translating Titles',
+                path: 'hsetranslatingtitlesqueue',
+                translate: 'sidebar.nav.element.TRANSLATINGTITLES'
+            },
+            {
+                name: 'Tracking & Prioritizing',
+                path: 'hsetrackingprioritizingqueue',
+                translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+            }
+        ]
+    },
+    {
+        name: 'SSE Assgined Work',
+        icon: 'icon-layers',
+        translate: 'sidebar.nav.element.Health',
+        submenu: [
+            {
+                name: 'Elibigility & Filters',
+                path: 'hseeligibilityfiltersqueue',
+                translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+            },
+            {
+                name: 'Quality Appraisal',
+                path: 'hsequalityappraisalqueue',
+                translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+            },
+            {
+                name: 'Linking Studies',
+                path: 'hselinkingstudiesqueue',
+                translate: 'sidebar.nav.element.LINKINGSTUDIES'
+            },
+            {
+                name: 'Presentation Details',
+                path: 'hsepresentationdetailsqueue',
+                translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
+            },
+            {
+                name: 'Translating Titles',
+                path: 'hsetranslatingtitlesqueue',
+                translate: 'sidebar.nav.element.TRANSLATINGTITLES'
+            },
+            {
+                name: 'Tracking & Prioritizing',
+                path: 'hsetrackingprioritizingqueue',
+                translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+            }
+        ]
+    },
+    {
         heading: 'Evidence Systems Queues',
         translate: 'sidebar.heading.Evidence Systems'
     },
