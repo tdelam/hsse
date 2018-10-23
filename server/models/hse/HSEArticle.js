@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const HSEArticleSchema = new Schema({
+
+    _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch'},
+
     //articleName: { type: String },
 
     system: { type: String },

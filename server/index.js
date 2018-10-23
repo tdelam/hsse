@@ -32,6 +32,7 @@ require('./routes/authRoutes')(app);
 require('./routes/hse/HSEArticleRoutes')(app);
 require('./routes/sse/SSEArticleRoutes')(app);
 require('./routes/stageRoutes')(app);
+require('./routes/uploadRoutes')(app);
 
 app.get('/', (req, res) => {
     res.send({ message: 'Welcome McMaster Health Sciences!'});

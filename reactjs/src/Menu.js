@@ -15,7 +15,7 @@ const Menu = [
         ]
     },
     {
-        heading: 'Evidence Systems',
+        heading: 'Evidence Systems Queues',
         translate: 'sidebar.heading.Evidence Systems'
     },
     {
@@ -33,32 +33,32 @@ const Menu = [
             },
             {
                 name: 'Elibigility & Filters',
-                path: 'notifications',
+                path: 'hseeligibilityfiltersqueue',
                 translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
-                path: 'carousel',
+                path: 'hsequalityappraisalqueue',
                 translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'spinners',
+                path: 'hselinkingstudiesqueue',
                 translate: 'sidebar.nav.element.LINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'animations',
+                path: 'hsepresentationdetailsqueue',
                 translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'dropdown',
+                path: 'hsetranslatingtitlesqueue',
                 translate: 'sidebar.nav.element.TRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'cards',
+                path: 'hsetrackingprioritizingqueue',
                 translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
             }
         ]

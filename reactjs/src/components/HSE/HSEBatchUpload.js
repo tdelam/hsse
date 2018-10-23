@@ -21,15 +21,20 @@ class HSEBatchUpload extends Component {
         let allFiles = this.state.files;
         return (
             <ContentWrapper>
+                <div className="content-heading">
+                   <div>Batch File Upload
+                      <small>Health Systems Evidence</small>
+                   </div>
+                </div>
                 <Container className="container-md">
-                    <p className="text-center">Dropzone<br/><small>DropzoneJS is an open source library that provides drag&apos;n&apos;drop file uploads with image previews.</small><br/><small className="spr">It’s lightweight, doesn’t depend on any other library (like jQuery) and is</small><small><a href="http://www.dropzonejs.com/" rel="noopener noreferrer" target="_blank"> highly customizable</a></small></p>
+                    <p className="text-center">HSE Batch Upload Dropzone<br/><small>Drag&apos;n&apos;Drop a hse batch file to upload.</small><br/><small className="spr">Testing content</small><small><a href="http://www.dropzonejs.com/" rel="noopener noreferrer" target="_blank"> test link</a></small></p>
                     <Dropzone className="card p-3" ref="dropzone" onDrop={this.onDrop} >
-                        <div className="text-center box-placeholder m-0">Try dropping some files here, or click to select files to upload.</div>
+                        <div className="text-center box-placeholder m-0">Files can either be dropped here, or clicked to select to be uploaded.</div>
                         <div className="mt-3">
                             {this.state.files.length > 0 ?
                                 <Row>{allFiles.map(this.createImageItem)}</Row>
                                 :
-                                <div><small>This demo does not upload files to any server.</small></div>
+                                <div><small>Testing</small></div>
                             }
                         </div>
                     </Dropzone>

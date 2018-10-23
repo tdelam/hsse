@@ -107,8 +107,8 @@ class AddHSEArticle extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>ADD HSE Article
-                        <small>Add a single Health Systems Evidence article </small>
+                    <div>ADD Article
+                        <small>Health Systems Evidence</small>
                     </div>
                 </div>
                 { /* START row */ }

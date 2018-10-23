@@ -103,6 +103,12 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
+import HSEEligibilityFiltersQueue from './components/HSE/HSEEligibilityFiltersQueue';
+import HSEQualityAppraisalQueue from './components/HSE/HSEQualityAppraisalQueue';
+import HSELinkingStudiesQueue from './components/HSE/HSELinkingStudiesQueue';
+import HSEPresentationDetailsQueue from './components/HSE/HSEPresentationDetailsQueue';
+import HSETranslatingTitlesQueue from './components/HSE/HSETranslatingTitlesQueue';
+import HSETrackingPrioritizingQueue from './components/HSE/HSETrackingPrioritizingQueue';
 
 
 // List of routes that uses the page layout
@@ -277,6 +283,15 @@ const Routes = ({ location }) => {
                             {/* HSE Forms */}
                             <Route path="/addhsearticle" component={AddHSEArticle} />
                             <Route path="/hsebatchupload" component={HSEBatchUpload} />
+                            <Route path="/hseeligibilityfiltersqueue" component={HSEEligibilityFiltersQueue} />
+                            <Route path="/hsequalityappraisalqueue" component={HSEQualityAppraisalQueue} />
+                            <Route path="/hselinkingstudiesqueue" component={HSELinkingStudiesQueue} />
+                            <Route path="/hsepresentationdetailsqueue" component={HSEPresentationDetailsQueue} />
+                            <Route path="/hsetranslatingtitlesqueue" component={HSETranslatingTitlesQueue} />
+                            <Route path="/hsetrackingprioritizingqueue" component={HSETrackingPrioritizingQueue} />
+
+                            {/* HSE Forms */}
+                            
 
                             <Redirect to="/notfound" />
 
