@@ -19,7 +19,7 @@ const Menu = [
         translate: 'sidebar.heading.Evidence Systems'
     },
     {
-        name: 'HSE Assgined Work',
+        name: 'Health',
         icon: 'icon-layers',
         translate: 'sidebar.nav.element.Health',
         submenu: [

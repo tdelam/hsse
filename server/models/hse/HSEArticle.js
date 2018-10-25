@@ -4,6 +4,28 @@ const { Schema } = mongoose;
 
 const HSEArticleSchema = new Schema({
 
+    // Users for different stages
+    _uploadHarvestUser: { type: Schema.Types.ObjectId, ref: 'User'},
+    _assessEligibleUser1: { type: Schema.Types.ObjectId, ref: 'User'},
+    _assessEligibleUser2: { type: Schema.Types.ObjectId, ref: 'User'},
+    _qualityAppraisalUser1: { type: Schema.Types.ObjectId, ref: 'User'},
+    _qualityAppraisalUser2: { type: Schema.Types.ObjectId, ref: 'User'},
+    _linkStudiesUser1: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setPresentationDetailsUser1: { type: Schema.Types.ObjectId, ref: 'User'},
+
+    // Translators
+    _setTranslatorFrench: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setTranslatorSpanish: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setTranslatorPortugese: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setTranslatorRussian: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setTranslatorArabic: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setTranslatorChinese: { type: Schema.Types.ObjectId, ref: 'User'},
+    _setTranslatorEnglish: { type: Schema.Types.ObjectId, ref: 'User'},
+
+    // Complicated tag
+    complicated: { type: Boolean },
+
+
     _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch'},
 
     //articleName: { type: String },
