@@ -7,6 +7,17 @@ services:
         context: ./nginx
       ports:
         - '3050:80'
+    elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+      volumes: # Persist ES data in seperate "esdata" volume
+        - esdata:/usr/share/elasticsearch/data
+      environment:
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        - discovery.type=single-node
+      ports: # Expose Elasticsearch ports
+        - "9300:9300"
+        - "9200:9200"
     hsse-server:
       restart: "no"
       build: 
@@ -26,6 +37,8 @@ services:
         - FRONTEND_SERVER=http://localhost:3050
         - BACKEND_SERVER=http://localhost:3050/api
         - REGION=us-east-1
+        - ES_HOST=elasticsearch
+        - ES_PORT=9200
     hsse-admin-client:
       build:
         context: ./reactjs
@@ -48,4 +61,6 @@ services:
       environment:
         - CHOKIDAR_USEPOLLING=true
         - BACKEND_SERVER=http://localhost:3050/api
-      command: ["npm", "run", "test"]
+      # command: ["npm", "run", "test"]
+volumes: # Define separate volume for Elasticsearch data
+  esdata:
