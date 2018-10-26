@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosastic = require('mongoosastic');
 
 const { Schema } = mongoose;
 
@@ -23,7 +24,7 @@ const HSEArticleSchema = new Schema({
     _setTranslatorEnglish: { type: Schema.Types.ObjectId, ref: 'User'},
 
     // Complicated tag
-    complicated: { type: Boolean },
+    complicated: { type: Boolean, default: false },
 
 
     _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch'},
@@ -153,5 +154,7 @@ const HSEArticleSchema = new Schema({
 
 
 });
+
+HSEArticleSchema.plugin(mongoosastic);
 
 mongoose.model('HSEArticles', HSEArticleSchema);
