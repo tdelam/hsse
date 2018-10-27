@@ -9,7 +9,7 @@ class HSEBatchUpload extends Component {
         files: []
     }
 
-    onDrop = files => this.setState({ files })
+    onDrop = files => this.setState({ files: files[0] })
 
     createImageItem = (file, index) => (
         <Col md={3} key={index}>
@@ -38,6 +38,11 @@ class HSEBatchUpload extends Component {
                             }
                         </div>
                     </Dropzone>
+                    
+                    <div className="mb-3">
+                        <input className="form-control filestyle" type="file" data-input="false" data-btnclass="btn btn-info" data-text="UPLOAD" data-icon="&lt;span class='fa fa-upload mr-2'&gt;&lt;/span&gt;"/>
+                    </div>
+
                 </Container>
             </ContentWrapper>
             );
