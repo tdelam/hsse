@@ -19,7 +19,7 @@ const Menu = [
         translate: 'sidebar.heading.Evidence Systems'
     },
     {
-        name: 'Health',
+        name: 'HSE Assigned Work',
         icon: 'icon-layers',
         translate: 'sidebar.nav.element.Health',
         submenu: [
@@ -93,11 +93,11 @@ const Menu = [
         ]
     },
     {
-        heading: 'Evidence Systems Queues',
+        heading: 'Evidence Systems',
         translate: 'sidebar.heading.Evidence Systems'
     },
     {
-        name: 'Health',
+        name: 'Health Pending Queue',
         icon: 'icon-layers',
         translate: 'sidebar.nav.element.Health',
         submenu: [{
@@ -142,7 +142,7 @@ const Menu = [
         ]
     },
     {
-        name: 'Social',
+        name: 'Social Pending Queue',
         icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Social',
         submenu: [{

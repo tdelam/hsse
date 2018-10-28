@@ -6,7 +6,12 @@ import Dropzone from 'react-dropzone';
 class HSEBatchUpload extends Component {
 
     state = {
-        files: []
+        files: [],
+        file: null
+    }
+
+    onFileChange(event) {
+        this.setState({ file: event.target.files[0] })
     }
 
     onDrop = files => this.setState({ files: files[0] })
@@ -38,9 +43,19 @@ class HSEBatchUpload extends Component {
                             }
                         </div>
                     </Dropzone>
+
+                    <h5>Upload a batch file</h5>
                     
                     <div className="mb-3">
-                        <input className="form-control filestyle" type="file" data-input="false" data-btnclass="btn btn-info" data-text="UPLOAD" data-icon="&lt;span class='fa fa-upload mr-2'&gt;&lt;/span&gt;"/>
+                        <input 
+                        className="form-control filestyle" 
+                        type="file" data-input="false" 
+                        data-btnclass="btn btn-info" 
+                        data-text="UPLOAD" 
+                        data-icon="&lt;span class='fa fa-upload mr-2'&gt;&lt;/span&gt;"
+                        onChange={this.onFileChange.bind(this)}
+                        accept="text/plain"
+                        />
                     </div>
 
                 </Container>
