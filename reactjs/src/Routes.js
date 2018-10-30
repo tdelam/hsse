@@ -101,7 +101,12 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
-import HSEUserEligibilityFiltersQueue from './components/HSE/HSETrackingPrioritizingQueue';
+import HSEUserEligibilityFiltersQueue from './components/HSE/HSEUserEligibilityFiltersQueue';
+import HSEUserQualityAppraisalQueue from './components/HSE/HSEUserQualityAppraisalQueue';
+import HSEUserLinkingStudiesQueue from './components/HSE/HSEUserLinkingStudiesQueue';
+import HSEUserPresentationDetailsQueue from './components/HSE/HSEUserPresentationDetailsQueue';
+import HSEUserTranslatingTitlesQueue from './components/HSE/HSEUserTranslatingTitlesQueue';
+import HSEUserTrackingPrioritizingQueue from './components/HSE/HSEUserTrackingPrioritizingQueue';
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
@@ -284,6 +289,12 @@ const Routes = ({ location }) => {
 
                             {/* User Assigned Table */}
                             <Route path="/hseusereligibilityfiltersqueue" component={HSEUserEligibilityFiltersQueue} />
+                            <Route path="/hseuserqualityappraisalqueue" component={HSEUserQualityAppraisalQueue} />
+                            <Route path="/hseuserlinkingstudiesqueue" component={HSEUserLinkingStudiesQueue} />
+                            <Route path="/hseuserpresentationdetailsqueue" component={HSEUserPresentationDetailsQueue} />
+                            <Route path="/hseusertranslatingtitlesqueue" component={HSEUserTranslatingTitlesQueue} />
+                            <Route path="/hseusertrackingprioritizingqueue" component={HSEUserTrackingPrioritizingQueue} />
+
 
                             {/* HSE Forms */}
                             <Route path="/addhsearticle" component={AddHSEArticle} />

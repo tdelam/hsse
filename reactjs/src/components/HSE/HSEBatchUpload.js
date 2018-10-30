@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Container, Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
-import Dropzone from 'react-dropzone';
+import { Row, Col, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
+//import Dropzone from 'react-dropzone';
 
 import Datetime from 'react-datetime';
 
@@ -57,7 +57,7 @@ class HSEBatchUpload extends Component {
     )
 
     render() {
-        let allFiles = this.state.files;
+        //let allFiles = this.state.files;
         return (
             <ContentWrapper>
                 <div className="content-heading">
@@ -107,10 +107,10 @@ class HSEBatchUpload extends Component {
                                 </CardHeader>
                                 <CardBody>
                                     <legend className="mb-4">Select a Batch File</legend>
-                                
+        
                                     <fieldset>
                                         <div className="form-group row align-items-center">
-                                            {/*<label className="col-md-2 col-form-label">Journal</label> */}
+                                            <label className="col-md-2 col-form-label">File</label>
                                             <Col md={ 6 }>
                                                 <Field
                                                     name="batchfileupload" 
@@ -124,7 +124,16 @@ class HSEBatchUpload extends Component {
                                             </Col>
                                         </div>
                                     </fieldset>
-                                            
+
+                                     <fieldset>
+                                        <div className="form-group row mb">
+                                            <label className="col-md-2 col-form-label mb">Harvest Date</label>
+                                            <Col md={ 6 }>
+                                                <Datetime inputProps={{className: 'form-control'}}/>
+                                            </Col>
+                                        </div>
+                                    </fieldset>
+                                                                               
                                 </CardBody>
                                 <CardFooter className="text-center">
                                     <button type="submit" className="btn btn-primary">Submit</button>

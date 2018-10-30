@@ -29,7 +29,7 @@ const HSEQualityAppraisalQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
                    <div>Appraising Quality
-                      <small>Health Systems Evidence</small>
+                      <small>Health Systems Evidence - Main Queue</small>
                    </div>
                 </div>
         <Card className="card-default">

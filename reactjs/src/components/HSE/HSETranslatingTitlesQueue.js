@@ -29,7 +29,7 @@ const HSETranslatingTitlesQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
                    <div>Translating Titles
-                      <small>Health Systems Evidence</small>
+                      <small>Health Systems Evidence - Main Queue</small>
                    </div>
                 </div>
         <Card className="card-default">

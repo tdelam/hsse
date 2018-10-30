@@ -25,11 +25,11 @@ const dtOptions = {
     }
 }
 
-const HSETrackingPrioritizingQueue = () => (
+const HSEUserLinkingStudiesQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
-                   <div>Tracking and Prioritizing Workflow
-                      <small>Health Systems Evidence - Main Queue</small>
+                   <div>Linking to Included Studies
+                      <small>Health Systems Evidence - Assigned Queue</small>
                    </div>
                 </div>
         <Card className="card-default">
@@ -368,4 +368,4 @@ const HSETrackingPrioritizingQueue = () => (
     </ContentWrapper>
 );
 
-export default HSETrackingPrioritizingQueue;
+export default HSEUserLinkingStudiesQueue;

@@ -29,7 +29,7 @@ const HSEPresentationDetailsQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
                    <div>Setting up Presentation Details
-                      <small>Health Systems Evidence</small>
+                      <small>Health Systems Evidence - Main Queue</small>
                    </div>
                 </div>
         <Card className="card-default">

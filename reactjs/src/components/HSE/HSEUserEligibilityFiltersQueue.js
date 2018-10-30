@@ -29,7 +29,7 @@ const HSEUserEligibilityFiltersQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
                    <div>Assessing Eligibility and Assigning Filters
-                      <small>Health Systems Evidence</small>
+                      <small>Health Systems Evidence - Assigned Queue</small>
                    </div>
                 </div>
         <Card className="card-default">
@@ -39,14 +39,14 @@ const HSEUserEligibilityFiltersQueue = () => (
                     <table className="table table-striped my-4 w-100">
                         <thead>
                             <tr>
-                                <th data-priority="1">Id</th>
-                                <th>Title</th>
-                                <th>Priority</th>
-                                <th>Author</th>
-                                <th>Priority</th>
-                                <th>Other Filterer</th>
+                                <th data-priority="1">Priority</th>
                                 <th>Source</th>
-                                <th data-priority="2">Priority</th>
+                                <th>Date</th>
+                                <th>Other Filterer</th>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th data-priority="2">Language</th>
                             </tr>
                         </thead>
                         <tbody>

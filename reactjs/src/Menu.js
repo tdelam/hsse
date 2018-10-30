@@ -29,29 +29,29 @@ const Menu = [
                 translate: 'sidebar.nav.element.USERELIGIBILITYFILTERS'
             },
             {
-                name: 'Quality Appraisal',
-                path: 'hsequalityappraisalqueue',
-                translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+                name: 'User Quality Appraisal',
+                path: 'hseuserqualityappraisalqueue',
+                translate: 'sidebar.nav.element.USERQUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'hselinkingstudiesqueue',
-                translate: 'sidebar.nav.element.LINKINGSTUDIES'
+                path: 'hseuserlinkingstudiesqueue',
+                translate: 'sidebar.nav.element.USERLINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'hsepresentationdetailsqueue',
-                translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
+                path: 'hseuserpresentationdetailsqueue',
+                translate: 'sidebar.nav.element.USERPRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'hsetranslatingtitlesqueue',
-                translate: 'sidebar.nav.element.TRANSLATINGTITLES'
+                path: 'hseusertranslatingtitlesqueue',
+                translate: 'sidebar.nav.element.USERTRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'hsetrackingprioritizingqueue',
-                translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+                path: 'hseusertrackingprioritizingqueue',
+                translate: 'sidebar.nav.element.USERTRACKINGPRIORITIZING'
             }
         ]
     },
