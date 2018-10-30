@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Container, Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 import Dropzone from 'react-dropzone';
 
 import Datetime from 'react-datetime';
+
+import * as actions from '../../actions';
 
 class HSEBatchUpload extends Component {
 
@@ -17,8 +23,29 @@ class HSEBatchUpload extends Component {
         console.log(event.target.files);
     }
 
-    onSubmit = () => {
+    onSubmit = (event) => {
+        event.preventDetault();
 
+        const { submitHSEBatchFile, history, formValues } = this.props;
+
+        submitHSEBatchFile(formValues, this.state.file, history );
+        
+    }
+
+    renderUploadField = ({ input }) => {
+        return <input 
+            name="batchfileupload"
+            className="form-control"
+            value="" 
+            type="file" 
+            data-input="false" 
+            data-btnclass="btn btn-info" 
+            data-text="UPLOAD" 
+            data-icon="&lt;span class='fa fa-upload mr-2'&gt;&lt;/span&gt;"
+            //onChange={this.onFileChange.bind(this)}
+            accept="text/plain"
+            {...input}
+        />
     }
 
     onDrop = files => this.setState({ files: files[0] })
@@ -85,15 +112,12 @@ class HSEBatchUpload extends Component {
                                         <div className="form-group row align-items-center">
                                             {/*<label className="col-md-2 col-form-label">Journal</label> */}
                                             <Col md={ 6 }>
-                                            <input 
-                                                className="form-control " 
-                                                type="file" data-input="false" 
-                                                data-btnclass="btn btn-info" 
-                                                data-text="UPLOAD" 
-                                                data-icon="&lt;span class='fa fa-upload mr-2'&gt;&lt;/span&gt;"
-                                                onChange={this.onFileChange.bind(this)}
-                                                accept="text/plain"
-                                            />
+                                                <Field
+                                                    name="batchfileupload" 
+                                                    type="file"
+                                                    component={this.renderUploadField}
+                                                    className="form-control" 
+                                                />
                                                 <span className="invalid-feedback">Field must be an integer</span>
                                             </Col>
                                             <Col md={ 4 }>
@@ -116,4 +140,12 @@ class HSEBatchUpload extends Component {
 
 }
 
-export default HSEBatchUpload;
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.errorMessage };
+}
+
+export default compose(
+    connect(mapStateToProps, actions),
+    reduxForm({
+        form: 'hsebatchfileupload'
+    })) (HSEBatchUpload);

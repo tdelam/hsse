@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, CONFIRM_USER_EMAIL, FORGOT_PASSWORD_EMAIL, CREATE_HSE_ARTICLE, HSE_ARTICLE_ERROR } from './types';
+import { 
+  AUTH_USER, 
+  AUTH_ERROR, 
+  CONFIRM_USER_EMAIL, 
+  FORGOT_PASSWORD_EMAIL, 
+  CREATE_HSE_ARTICLE, 
+  HSE_ARTICLE_ERROR, 
+  CREATE_HSE_BATCHFILE
+} from './types';
 
 //const backendServer = "https://nameless-hollows-27940.herokuapp.com";
 //const backendServer = "http://localhost:5000";
@@ -106,4 +114,25 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
     dispatch({ type: HSE_ARTICLE_ERROR, payload: 'Error creating Article'});
 
   }
+}
+
+export const submitHSEBatchFile = (values, file, history) => async dispatch => {
+
+  const uploadConfig = await axios.get('/api/hse/batchfileupload');
+
+  await axios.put(uploadConfig.data.url, file, {
+    headers: {
+      'Content-Type': file.type,
+    }
+  });
+
+  const res = await axios.post('/api/hse/batchfileupload', {
+    ...values, 
+    batchfileUrl: uploadConfig.data.key
+  });
+
+  history.push('/hse/batchfiles');
+
+  dispatch({ type: CREATE_HSE_BATCHFILE, payload: res.data });
+
 }

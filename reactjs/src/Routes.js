@@ -101,6 +101,8 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
+import HSEUserEligibilityFiltersQueue from './components/HSE/HSETrackingPrioritizingQueue';
+
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
 import HSEEligibilityFiltersQueue from './components/HSE/HSEEligibilityFiltersQueue';
@@ -279,6 +281,9 @@ const Routes = ({ location }) => {
                             <Route path="/social-board" component={SocialBoard}/>
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
+
+                            {/* User Assigned Table */}
+                            <Route path="/hseusereligibilityfiltersqueue" component={HSEUserEligibilityFiltersQueue} />
 
                             {/* HSE Forms */}
                             <Route path="/addhsearticle" component={AddHSEArticle} />

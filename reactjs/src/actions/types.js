@@ -7,6 +7,7 @@ export const HSE_ARTICLE_ERROR = 'hse_article_error';
 
 export const FETCH_HSE_ARTICLE = 'fetch_hse_article';
 export const CREATE_HSE_ARTICLE = 'create_hse_article';
+export const CREATE_HSE_BATCHFILE = 'create_hse_batchfile';
 export const DELETE_HSE_ARTICLE = 'delete_hse_article';
 
 
@@ -14,4 +15,5 @@ export const SSE_ARTICLE_ERROR = 'sse_article_error';
 
 export const FETCH_SSE_ARTICLE = 'fetch_sse_article';
 export const CREATE_SSE_ARTICLE = 'delete_sse_article';
+export const CREATE_SSE_BATCHFILE = 'create_sse_batchfile';
 export const DELETE_SSE_ARTICLE = 'delete_sse_article';

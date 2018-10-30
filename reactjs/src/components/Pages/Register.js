@@ -85,7 +85,7 @@ class Register extends Component {
                 placeholder="Enter email"
                 invalid={this.hasError('formRegister','email','required')||this.hasError('formRegister','email','email')}
                 onChange={this.validateOnChange}
-                ata-validate='["required", "email"]'
+                data-validate='["required", "email"]'
                 //value={this.state.formRegister.email}
                 {...input}
             />
@@ -114,7 +114,7 @@ class Register extends Component {
                 onChange={this.validateOnChange}
                 ata-validate='["equalto"]'
                 //value={this.state.formRegister.password2}
-                ata-param="id-password"
+                data-param="id-password"
                 {...input}
             />
         }

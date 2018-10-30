@@ -24,9 +24,9 @@ const Menu = [
         translate: 'sidebar.nav.element.Health',
         submenu: [
             {
-                name: 'Elibigility & Filters',
-                path: 'hseeligibilityfiltersqueue',
-                translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+                name: ' User Elibigility & Filters',
+                path: 'hseusereligibilityfiltersqueue',
+                translate: 'sidebar.nav.element.USERELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
