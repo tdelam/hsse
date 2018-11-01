@@ -25,11 +25,11 @@ const dtOptions = {
     }
 }
 
-const HSEUserTranslatingTitlesQueue = () => (
+const HSEPendingTranslatingTitlesQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
                    <div>Translating Titles
-                      <small>Health Systems Evidence - Assigned Queue</small>
+                      <small>Health Systems Evidence - Main Queue</small>
                    </div>
                 </div>
         <Card className="card-default">
@@ -368,4 +368,4 @@ const HSEUserTranslatingTitlesQueue = () => (
     </ContentWrapper>
 );
 
-export default HSEUserTranslatingTitlesQueue;
+export default HSEPendingTranslatingTitlesQueue;

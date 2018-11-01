@@ -25,11 +25,11 @@ const dtOptions = {
     }
 }
 
-const HSEUserPresentationDetailsQueue = () => (
+const HSEPendingEligibilityFiltersQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
-                   <div>Setting up Presentation Details
-                      <small>Health Systems Evidence - Assigned Queue</small>
+                   <div>Assessing Eligibility and Assigning Filters
+                      <small>Health Systems Evidence - Main Queue</small>
                    </div>
                 </div>
         <Card className="card-default">
@@ -368,4 +368,4 @@ const HSEUserPresentationDetailsQueue = () => (
     </ContentWrapper>
 );
 
-export default HSEUserPresentationDetailsQueue;
+export default HSEPendingEligibilityFiltersQueue;

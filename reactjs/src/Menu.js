@@ -15,91 +15,91 @@ const Menu = [
         ]
     },
     {
-        heading: 'Assigned List',
+        heading: 'Assigned Queue',
         translate: 'sidebar.heading.Evidence Systems'
     },
     {
-        name: 'HSE Assigned Work',
+        name: 'Health Systems Assigned',
         icon: 'icon-layers',
-        translate: 'sidebar.nav.element.Health',
+        translate: 'sidebar.nav.element.AssignedHealth',
         submenu: [
             {
-                name: ' User Elibigility & Filters',
-                path: 'hseusereligibilityfiltersqueue',
-                translate: 'sidebar.nav.element.USERELIGIBILITYFILTERS'
+                name: ' Elibigility & Filters',
+                path: 'hseassignedeligibilityfiltersqueue',
+                translate: 'sidebar.nav.element.ASSIGNEDELIGIBILITYFILTERS'
             },
             {
-                name: 'User Quality Appraisal',
-                path: 'hseuserqualityappraisalqueue',
-                translate: 'sidebar.nav.element.USERQUALITYAPPRAISAL'
+                name: 'Quality Appraisal',
+                path: 'hseassignedqualityappraisalqueue',
+                translate: 'sidebar.nav.element.ASSIGNEDQUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'hseuserlinkingstudiesqueue',
-                translate: 'sidebar.nav.element.USERLINKINGSTUDIES'
+                path: 'hseassignedlinkingstudiesqueue',
+                translate: 'sidebar.nav.element.ASSIGNEDLINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'hseuserpresentationdetailsqueue',
-                translate: 'sidebar.nav.element.USERPRESENTATIONDETAILS'
+                path: 'hseassignedpresentationdetailsqueue',
+                translate: 'sidebar.nav.element.ASSIGNEDPRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'hseusertranslatingtitlesqueue',
-                translate: 'sidebar.nav.element.USERTRANSLATINGTITLES'
+                path: 'hseassignedtranslatingtitlesqueue',
+                translate: 'sidebar.nav.element.ASSIGNEDTRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'hseusertrackingprioritizingqueue',
-                translate: 'sidebar.nav.element.USERTRACKINGPRIORITIZING'
+                path: 'hseassignedtrackingprioritizingqueue',
+                translate: 'sidebar.nav.element.ASSIGNEDTRACKINGPRIORITIZING'
             }
         ]
     },
     {
-        name: 'SSE Assgined Work',
+        name: 'Social Systems Assigned',
         icon: 'icon-layers',
         translate: 'sidebar.nav.element.Health',
         submenu: [
             {
                 name: 'Elibigility & Filters',
-                path: 'hseeligibilityfiltersqueue',
+                path: 'sseassignedeligibilityfiltersqueue',
                 translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
-                path: 'hsequalityappraisalqueue',
+                path: 'sseassignedqualityappraisalqueue',
                 translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'hselinkingstudiesqueue',
+                path: 'sseassignedlinkingstudiesqueue',
                 translate: 'sidebar.nav.element.LINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'hsepresentationdetailsqueue',
+                path: 'sseassignedpresentationdetailsqueue',
                 translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'hsetranslatingtitlesqueue',
+                path: 'sseassignedtranslatingtitlesqueue',
                 translate: 'sidebar.nav.element.TRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'hsetrackingprioritizingqueue',
+                path: 'sseassignedtrackingprioritizingqueue',
                 translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
             }
         ]
     },
     {
-        heading: 'Evidence Systems',
+        heading: 'Pending Queue',
         translate: 'sidebar.heading.Evidence Systems'
     },
     {
-        name: 'Health Pending Queue',
+        name: 'Health Systems Pending',
         icon: 'icon-layers',
-        translate: 'sidebar.nav.element.Health',
+        translate: 'sidebar.nav.element.QueuedHealth',
         submenu: [{
                 name: 'Add Article',
                 path: 'addhsearticle',
@@ -111,38 +111,38 @@ const Menu = [
             },
             {
                 name: 'Elibigility & Filters',
-                path: 'hseeligibilityfiltersqueue',
-                translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+                path: 'hsependingeligibilityfiltersqueue',
+                translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
-                path: 'hsequalityappraisalqueue',
-                translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+                path: 'hsependingqualityappraisalqueue',
+                translate: 'sidebar.nav.element.PENDINGQUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'hselinkingstudiesqueue',
-                translate: 'sidebar.nav.element.LINKINGSTUDIES'
+                path: 'hsependinglinkingstudiesqueue',
+                translate: 'sidebar.nav.element.PENDINGLINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'hsepresentationdetailsqueue',
-                translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
+                path: 'hsependingpresentationdetailsqueue',
+                translate: 'sidebar.nav.element.PENDINGPRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'hsetranslatingtitlesqueue',
-                translate: 'sidebar.nav.element.TRANSLATINGTITLES'
+                path: 'hsependingtranslatingtitlesqueue',
+                translate: 'sidebar.nav.element.PENDINGTRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'hsetrackingprioritizingqueue',
-                translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+                path: 'hsependingtrackingprioritizingqueue',
+                translate: 'sidebar.nav.element.PENDINGTRACKINGPRIORITIZING'
             }
         ]
     },
     {
-        name: 'Social Pending Queue',
+        name: 'Social Systems Pending',
         icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Social',
         submenu: [{

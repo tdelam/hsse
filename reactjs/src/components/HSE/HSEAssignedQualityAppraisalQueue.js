@@ -25,11 +25,11 @@ const dtOptions = {
     }
 }
 
-const HSEEligibilityFiltersQueue = () => (
+const HSEUserQualityAppraisalQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
-                   <div>Assessing Eligibility and Assigning Filters
-                      <small>Health Systems Evidence - Main Queue</small>
+                   <div>Quality Appraisal
+                      <small>Health Systems - Assigned Queue</small>
                    </div>
                 </div>
         <Card className="card-default">
@@ -39,14 +39,14 @@ const HSEEligibilityFiltersQueue = () => (
                     <table className="table table-striped my-4 w-100">
                         <thead>
                             <tr>
-                                <th data-priority="1">Post title</th>
+                                <th data-priority="1">Priority</th>
+                                <th>Source</th>
+                                <th>Date</th>
+                                <th>Other Appraiser</th>
+                                <th>Article Id</th>
+                                <th>Title </th>
                                 <th>Author</th>
-                                <th>Categories</th>
-                                <th>Tags</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                                <th>Comments</th>
-                                <th data-priority="2">Status</th>
+                                <th data-priority="2">Language</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -368,4 +368,4 @@ const HSEEligibilityFiltersQueue = () => (
     </ContentWrapper>
 );
 
-export default HSEEligibilityFiltersQueue;
+export default HSEUserQualityAppraisalQueue;

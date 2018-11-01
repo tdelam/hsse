@@ -25,10 +25,10 @@ const dtOptions = {
     }
 }
 
-const HSETranslatingTitlesQueue = () => (
+const HSEPendingTrackingPrioritizingQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
-                   <div>Translating Titles
+                   <div>Tracking and Prioritizing Workflow
                       <small>Health Systems Evidence - Main Queue</small>
                    </div>
                 </div>
@@ -368,4 +368,4 @@ const HSETranslatingTitlesQueue = () => (
     </ContentWrapper>
 );
 
-export default HSETranslatingTitlesQueue;
+export default HSEPendingTrackingPrioritizingQueue;

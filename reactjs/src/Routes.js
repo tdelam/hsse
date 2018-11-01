@@ -101,21 +101,21 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
-import HSEUserEligibilityFiltersQueue from './components/HSE/HSEUserEligibilityFiltersQueue';
-import HSEUserQualityAppraisalQueue from './components/HSE/HSEUserQualityAppraisalQueue';
-import HSEUserLinkingStudiesQueue from './components/HSE/HSEUserLinkingStudiesQueue';
-import HSEUserPresentationDetailsQueue from './components/HSE/HSEUserPresentationDetailsQueue';
-import HSEUserTranslatingTitlesQueue from './components/HSE/HSEUserTranslatingTitlesQueue';
-import HSEUserTrackingPrioritizingQueue from './components/HSE/HSEUserTrackingPrioritizingQueue';
+import HSEAssignedEligibilityFiltersQueue from './components/HSE/HSEAssignedEligibilityFiltersQueue';
+import HSEAssignedQualityAppraisalQueue from './components/HSE/HSEAssignedQualityAppraisalQueue';
+import HSEAssignedLinkingStudiesQueue from './components/HSE/HSEAssignedLinkingStudiesQueue';
+import HSEAssignedPresentationDetailsQueue from './components/HSE/HSEAssignedPresentationDetailsQueue';
+import HSEAssignedTranslatingTitlesQueue from './components/HSE/HSEAssignedTranslatingTitlesQueue';
+import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTrackingPrioritizingQueue';
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
-import HSEEligibilityFiltersQueue from './components/HSE/HSEEligibilityFiltersQueue';
-import HSEQualityAppraisalQueue from './components/HSE/HSEQualityAppraisalQueue';
-import HSELinkingStudiesQueue from './components/HSE/HSELinkingStudiesQueue';
-import HSEPresentationDetailsQueue from './components/HSE/HSEPresentationDetailsQueue';
-import HSETranslatingTitlesQueue from './components/HSE/HSETranslatingTitlesQueue';
-import HSETrackingPrioritizingQueue from './components/HSE/HSETrackingPrioritizingQueue';
+import HSEPendingEligibilityFiltersQueue from './components/HSE/HSEPendingEligibilityFiltersQueue';
+import HSEPendingQualityAppraisalQueue from './components/HSE/HSEPendingQualityAppraisalQueue';
+import HSEPendingLinkingStudiesQueue from './components/HSE/HSEPendingLinkingStudiesQueue';
+import HSEPendingPresentationDetailsQueue from './components/HSE/HSEPendingPresentationDetailsQueue';
+import HSEPendingTranslatingTitlesQueue from './components/HSE/HSEPendingTranslatingTitlesQueue';
+import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrackingPrioritizingQueue';
 
 
 // List of routes that uses the page layout
@@ -288,23 +288,23 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             {/* User Assigned Table */}
-                            <Route path="/hseusereligibilityfiltersqueue" component={HSEUserEligibilityFiltersQueue} />
-                            <Route path="/hseuserqualityappraisalqueue" component={HSEUserQualityAppraisalQueue} />
-                            <Route path="/hseuserlinkingstudiesqueue" component={HSEUserLinkingStudiesQueue} />
-                            <Route path="/hseuserpresentationdetailsqueue" component={HSEUserPresentationDetailsQueue} />
-                            <Route path="/hseusertranslatingtitlesqueue" component={HSEUserTranslatingTitlesQueue} />
-                            <Route path="/hseusertrackingprioritizingqueue" component={HSEUserTrackingPrioritizingQueue} />
+                            <Route path="/hseassignedeligibilityfiltersqueue" component={HSEAssignedEligibilityFiltersQueue} />
+                            <Route path="/hseassignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
+                            <Route path="/hseassignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
+                            <Route path="/hseassignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
+                            <Route path="/hseassignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
+                            <Route path="/hseassignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
 
 
                             {/* HSE Forms */}
                             <Route path="/addhsearticle" component={AddHSEArticle} />
                             <Route path="/hsebatchupload" component={HSEBatchUpload} />
-                            <Route path="/hseeligibilityfiltersqueue" component={HSEEligibilityFiltersQueue} />
-                            <Route path="/hsequalityappraisalqueue" component={HSEQualityAppraisalQueue} />
-                            <Route path="/hselinkingstudiesqueue" component={HSELinkingStudiesQueue} />
-                            <Route path="/hsepresentationdetailsqueue" component={HSEPresentationDetailsQueue} />
-                            <Route path="/hsetranslatingtitlesqueue" component={HSETranslatingTitlesQueue} />
-                            <Route path="/hsetrackingprioritizingqueue" component={HSETrackingPrioritizingQueue} />
+                            <Route path="/hsependingeligibilityfiltersqueue" component={HSEPendingEligibilityFiltersQueue} />
+                            <Route path="/hsependingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
+                            <Route path="/hselinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
+                            <Route path="/hsependingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />
+                            <Route path="/hsependingtranslatingtitlesqueue" component={HSEPendingTranslatingTitlesQueue} />
+                            <Route path="/hsependingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
 
                             {/* HSE Forms */}
                             
