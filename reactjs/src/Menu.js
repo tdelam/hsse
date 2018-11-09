@@ -25,32 +25,32 @@ const Menu = [
         submenu: [
             {
                 name: ' Elibigility & Filters',
-                path: 'hseassignedeligibilityfiltersqueue',
+                path: '/hse/assignedeligibilityfiltersqueue',
                 translate: 'sidebar.nav.element.ASSIGNEDELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
-                path: 'hseassignedqualityappraisalqueue',
+                path: '/hse/assignedqualityappraisalqueue',
                 translate: 'sidebar.nav.element.ASSIGNEDQUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'hseassignedlinkingstudiesqueue',
+                path: '/hse/assignedlinkingstudiesqueue',
                 translate: 'sidebar.nav.element.ASSIGNEDLINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'hseassignedpresentationdetailsqueue',
+                path: '/hse/assignedpresentationdetailsqueue',
                 translate: 'sidebar.nav.element.ASSIGNEDPRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'hseassignedtranslatingtitlesqueue',
+                path: '/hse/assignedtranslatingtitlesqueue',
                 translate: 'sidebar.nav.element.ASSIGNEDTRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'hseassignedtrackingprioritizingqueue',
+                path: '/hse/assignedtrackingprioritizingqueue',
                 translate: 'sidebar.nav.element.ASSIGNEDTRACKINGPRIORITIZING'
             }
         ]
@@ -62,32 +62,32 @@ const Menu = [
         submenu: [
             {
                 name: 'Elibigility & Filters',
-                path: 'sseassignedeligibilityfiltersqueue',
+                path: '/sse/assignedeligibilityfiltersqueue',
                 translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
-                path: 'sseassignedqualityappraisalqueue',
+                path: '/sse/assignedqualityappraisalqueue',
                 translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'sseassignedlinkingstudiesqueue',
+                path: '/sse/assignedlinkingstudiesqueue',
                 translate: 'sidebar.nav.element.LINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'sseassignedpresentationdetailsqueue',
+                path: '/sse/assignedpresentationdetailsqueue',
                 translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'sseassignedtranslatingtitlesqueue',
+                path: '/sse/assignedtranslatingtitlesqueue',
                 translate: 'sidebar.nav.element.TRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'sseassignedtrackingprioritizingqueue',
+                path: '/sse/assignedtrackingprioritizingqueue',
                 translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
             }
         ]
@@ -102,41 +102,41 @@ const Menu = [
         translate: 'sidebar.nav.element.QueuedHealth',
         submenu: [{
                 name: 'Add Article',
-                path: 'addhsearticle',
+                path: '/hse/addarticle',
                 translate: 'sidebar.nav.element.ADDHSEARTICLE'
             },{
                 name: 'Batch Upload',
-                path: 'hsebatchupload',
+                path: '/hse/batchfileupload',
                 translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
             },
             {
                 name: 'Elibigility & Filters',
-                path: 'hsependingeligibilityfiltersqueue',
+                path: '/hse/pendingeligibilityfiltersqueue',
                 translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERS'
             },
             {
                 name: 'Quality Appraisal',
-                path: 'hsependingqualityappraisalqueue',
+                path: '/hse/pendingqualityappraisalqueue',
                 translate: 'sidebar.nav.element.PENDINGQUALITYAPPRAISAL'
             },
             {
                 name: 'Linking Studies',
-                path: 'hsependinglinkingstudiesqueue',
+                path: '/hse/pendinglinkingstudiesqueue',
                 translate: 'sidebar.nav.element.PENDINGLINKINGSTUDIES'
             },
             {
                 name: 'Presentation Details',
-                path: 'hsependingpresentationdetailsqueue',
+                path: '/hse/pendingpresentationdetailsqueue',
                 translate: 'sidebar.nav.element.PENDINGPRESENTATIONDETAILS'
             },
             {
                 name: 'Translating Titles',
-                path: 'hsependingtranslatingtitlesqueue',
+                path: '/hse/pendingtranslatingtitlesqueue',
                 translate: 'sidebar.nav.element.PENDINGTRANSLATINGTITLES'
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: 'hsependingtrackingprioritizingqueue',
+                path: '/hse/pendingtrackingprioritizingqueue',
                 translate: 'sidebar.nav.element.PENDINGTRACKINGPRIORITIZING'
             }
         ]

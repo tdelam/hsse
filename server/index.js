@@ -8,6 +8,7 @@ require('dotenv').config();
 
 require('./models/User')
 require('./models/hse/HSEArticle');
+require('./models/hse/HSEArticleBatchFile');
 require('./models/sse/SSEArticle');
 require('./models/Stage');
 
@@ -26,7 +27,9 @@ const app = express();
 
 app.use(morgan('combined'));
 app.use(cors());
-app.use(bodyParser.json({ type: '*/*' }));
+app.use(bodyParser.json({ type: '*/*', limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
 
 require('./routes/authRoutes')(app);
 require('./routes/hse/HSEArticleRoutes')(app);

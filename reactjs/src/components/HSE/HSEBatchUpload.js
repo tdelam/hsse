@@ -24,19 +24,19 @@ class HSEBatchUpload extends Component {
     }
 
     onSubmit = (event) => {
-        event.preventDetault();
+        event.preventDefault();
 
         const { submitHSEBatchFile, history, formValues } = this.props;
 
-        submitHSEBatchFile(formValues, this.state.file, history );
+        submitHSEBatchFile(formValues, history );
         
     }
 
-    renderUploadField = ({ input }) => {
+    renderUploadField = ({ input: { value, ...input } }) => {
         return <input 
             name="batchfileupload"
             className="form-control"
-            value="" 
+            value={value === '' && value} 
             type="file" 
             data-input="false" 
             data-btnclass="btn btn-info" 
@@ -47,6 +47,22 @@ class HSEBatchUpload extends Component {
             {...input}
         />
     }
+
+    adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
+
+    FileInput = ({ input: { value: omitValue, onChange, onBlur, ...inputProps }, meta: omitMeta, ...props }) => {
+        return (
+            <input
+                //onChange={adaptFileEventToValue(onChange)}
+                //onBlur={adaptFileEventToValue(onBlur)}
+                type="file"
+                {...props.input}
+                {...props}
+            />
+        );
+    };
+
+
 
     onDrop = files => this.setState({ files: files[0] })
 
@@ -99,7 +115,7 @@ class HSEBatchUpload extends Component {
 */}
                 <Row>
                     <div className="col-md-12">
-                        <form onSubmit={this.onSubmit} action="" name="formDemo">
+                        <form onSubmit={this.onSubmit.bind(this)} name="formDemo">
                             { /* START card */ }
                             <Card className="card-default">
                                 <CardHeader>
@@ -115,7 +131,7 @@ class HSEBatchUpload extends Component {
                                                 <Field
                                                     name="batchfileupload" 
                                                     type="file"
-                                                    component={this.renderUploadField}
+                                                    component={this.FileInput}
                                                     className="form-control" 
                                                 />
                                                 <span className="invalid-feedback">Field must be an integer</span>

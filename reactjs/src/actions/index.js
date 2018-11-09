@@ -83,7 +83,6 @@ export const forgotpassword = (formProps, callback) => async dispatch => {
   }
 };
 
-
 export const signout = () => {
   
   localStorage.removeItem('token');
@@ -96,7 +95,6 @@ export const signout = () => {
 };
 
 // HSE Article
-
 export const onHSEArticleSubmit = (values, history) => async dispatch => {
   
   try {
@@ -114,25 +112,27 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
     dispatch({ type: HSE_ARTICLE_ERROR, payload: 'Error creating Article'});
 
   }
-}
+};
 
 export const submitHSEBatchFile = (values, file, history) => async dispatch => {
 
-  const uploadConfig = await axios.get('/api/hse/batchfileupload');
+  const uploadConfig = await axios.get('/api/hse/gethses3url');
 
-  await axios.put(uploadConfig.data.url, file, {
+  const upload = await axios.put(uploadConfig.data.url, file, {
     headers: {
       'Content-Type': file.type,
     }
   });
-
+/*
   const res = await axios.post('/api/hse/batchfileupload', {
     ...values, 
     batchfileUrl: uploadConfig.data.key
   });
+*/
+  axios.post('/api/hse/batchfile', { file: file, url: uploadConfig.data.url });
 
-  history.push('/hse/batchfiles');
+  history.push('/hse/pendingeligibilityfiltersqueue');
 
-  dispatch({ type: CREATE_HSE_BATCHFILE, payload: res.data });
+  dispatch({ type: CREATE_HSE_BATCHFILE, payload: ' ' });
 
-}
+};

@@ -287,7 +287,7 @@ const Routes = ({ location }) => {
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
 
-                            {/* User Assigned Table */}
+                            {/* Assigned HSE Queue */}
                             <Route path="/hseassignedeligibilityfiltersqueue" component={HSEAssignedEligibilityFiltersQueue} />
                             <Route path="/hseassignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
                             <Route path="/hseassignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
@@ -296,15 +296,15 @@ const Routes = ({ location }) => {
                             <Route path="/hseassignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
 
 
-                            {/* HSE Forms */}
-                            <Route path="/addhsearticle" component={AddHSEArticle} />
-                            <Route path="/hsebatchupload" component={HSEBatchUpload} />
-                            <Route path="/hsependingeligibilityfiltersqueue" component={HSEPendingEligibilityFiltersQueue} />
-                            <Route path="/hsependingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
-                            <Route path="/hselinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
-                            <Route path="/hsependingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />
-                            <Route path="/hsependingtranslatingtitlesqueue" component={HSEPendingTranslatingTitlesQueue} />
-                            <Route path="/hsependingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
+                            {/* Pending HSE Queue */}
+                            <Route path="/hse/addarticle" component={AddHSEArticle} />
+                            <Route path="/hse/batchfileupload" component={HSEBatchUpload} />
+                            <Route path="/hse/pendingeligibilityfiltersqueue" component={HSEPendingEligibilityFiltersQueue} />
+                            <Route path="/hse/pendingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
+                            <Route path="/hse/pendinglinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
+                            <Route path="/hse/pendingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />
+                            <Route path="/hse/pendingtranslatingtitlesqueue" component={HSEPendingTranslatingTitlesQueue} />
+                            <Route path="/hse/pendingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
 
                             {/* HSE Forms */}
                             

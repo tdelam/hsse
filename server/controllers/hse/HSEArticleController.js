@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const config = require('../../config/baseConfig');
-
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 

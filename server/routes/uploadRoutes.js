@@ -3,6 +3,7 @@ const uuid = require('uuid/v1');
 const jwt = require('jwt-simple');
 const passport = require('passport');
 
+const HSEArticleBatchfileController = require('../controllers/hse/HSEArticleBatchfileController');
 
 const requireSignin = passport.authenticate('local', { session: false });
 
@@ -12,14 +13,17 @@ const s3 = new AWS.S3({
 });
 
 module.exports = app => {
-    app.get('/hse/batchfileupload', (req, res) => {
+    app.get('/api/hse/gethses3url', HSEArticleBatchfileController.getHSES3Url);
+    app.post('/api/hse/batchfile', HSEArticleBatchfileController.create);
+/*    
+    app.post('/hse/batchfileupload', (req, res) => {
 
         // const token = localStorage.setItem('token', response.data.token);
 
         // const decoded = jwt.decode(token, process.env.JWT_SECRET);
 
         // console.log(`************ User Id: ${decoded.sub} ********`);
-
+/*
         const user = req.user;
 
         console.log(user);
@@ -32,7 +36,12 @@ module.exports = app => {
             ContentType: 'txt',
             Key: key2
         }, (err, url) => res.send({ key, url }));
-    })
+    });
+
+    });
+*/
+    
+
 };
 
 /*

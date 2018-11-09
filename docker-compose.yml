@@ -37,8 +37,8 @@ services:
         - FRONTEND_SERVER=http://localhost:3050
         - BACKEND_SERVER=http://localhost:3050/api
         - REGION=us-east-1
-        - HSSE_S3_ACCESS_KEY
-        - HSSE_S3_SECRET_KEY
+        - HSSE_S3_ACCESS_KEY=
+        - HSSE_S3_SECRET_KEY=
         - ES_HOST=elasticsearch
         - ES_PORT=9200
     hsse-admin-client:
