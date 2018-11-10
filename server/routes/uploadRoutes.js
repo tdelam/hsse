@@ -13,8 +13,8 @@ const s3 = new AWS.S3({
 });
 
 module.exports = app => {
-    app.get('/api/hse/gethses3url', HSEArticleBatchfileController.getHSES3Url);
-    app.post('/api/hse/batchfile', HSEArticleBatchfileController.create);
+    app.get('/hse/getfileurl', HSEArticleBatchfileController.getFileUrl);
+    app.post('/hse/batchfile', HSEArticleBatchfileController.create);
 /*    
     app.post('/hse/batchfileupload', (req, res) => {
 

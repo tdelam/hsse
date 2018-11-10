@@ -116,7 +116,7 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
 
 export const submitHSEBatchFile = (values, file, history) => async dispatch => {
 
-  const uploadConfig = await axios.get('/api/hse/gethses3url');
+  const uploadConfig = await axios.get('/api/hse/getfileurl');
 
   const upload = await axios.put(uploadConfig.data.url, file, {
     headers: {
