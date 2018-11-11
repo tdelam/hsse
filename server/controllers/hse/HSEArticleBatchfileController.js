@@ -16,14 +16,14 @@ const s3 = new AWS.S3({
 
 exports.getFileUrl = (req, res) => {
 
-    const key2 = `${Date.now()}/${uuid()}.txt`;
+    const key = `${Date.now()}-${uuid()}.txt`;
 
     s3.getSignedUrl('putObject', {
         Bucket: 'hsse-staging',
-        ContentType: 'txt',
-        Key: key2
+        ContentType: 'text/plain',
+        Key: key
     }, (err, url) => {
-        res.send({ key2, url });
+        res.send({ key, url }); 
     });
 };
 
@@ -36,11 +36,13 @@ exports.create = (req, res) => {
 
     const { file, url } = req.body;
 
+    console.log(`*************${req.body.file.name}*********`);
+
     // Parse File here before storing to mongodb 
 
-    const articlesArray = parseBatchfile.parseHSEJournal(file);
+    const articlesArray = parseBatchfile.parseHSEJournalFile(file);
 
-    console.log(file);
+    
 
     articlesArray.map( (article, index) => {
         const newHSEArticle = new HSEArticleModelClass(article);
