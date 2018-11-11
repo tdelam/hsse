@@ -118,7 +118,7 @@ export const submitHSEBatchFile = (values, file, history) => async dispatch => {
 
   const uploadConfig = await axios.get('/api/hse/getfileurl');
 
-  const upload = await axios.put(uploadConfig.data.url, file, {
+  await axios.put(uploadConfig.data.url, file, {
     headers: {
       'Content-Type': file.type,
     }
@@ -129,7 +129,7 @@ export const submitHSEBatchFile = (values, file, history) => async dispatch => {
     batchfileUrl: uploadConfig.data.key
   });
 */
-  axios.post('/api/hse/batchfile', { file: file, url: uploadConfig.data.url });
+  axios.post('/api/hse/batchfile', { file: file, url: uploadConfig.data.url } );
 
   history.push('/hse/pendingeligibilityfiltersqueue');
 

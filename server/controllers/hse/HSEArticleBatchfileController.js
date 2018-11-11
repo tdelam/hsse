@@ -76,7 +76,7 @@ exports.create = (req, res) => {
             res.status(201).send(newHSEArticleBatchfile);
         }
     });
-}
+};
 
 saveArticlesFromArray = (article) => {
     return HSEArticleBatchfileModelClass(article);
