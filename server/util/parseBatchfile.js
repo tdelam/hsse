@@ -65,14 +65,14 @@ const journalFields = [
 ];
 
 
-exports.parseHSEJournalFile = (file) => {
-
+exports.parseHSEJournalFile = (data) => {
+/*
     fs.readFile(file, 'utf8', (err, data) => {
 
         if (err) {
             console.log(err);
         }
-
+*/
         // Split batchfile into lines (each line contain an article)
         const articles = data.split('\n');
 
@@ -83,7 +83,7 @@ exports.parseHSEJournalFile = (file) => {
             fields = line.split('\t');
             return Object.assign.apply({}, journalFields.map( (v, i) => ( {[v]: fields[i]} ) ) );
         });
-
+        console.log(finalResult);
         return finalResult;
 
     /*
@@ -95,9 +95,9 @@ exports.parseHSEJournalFile = (file) => {
             console.log("Successfully Written to File.");
         });
     */
-
+/*
     });
- 
+ */
 }
 
 parseJournalArray = (articleArray) => {

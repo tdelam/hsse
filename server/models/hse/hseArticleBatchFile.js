@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const HSEArticleBatchFileSchema = new Schema({ 
+
+    referenceType: { type: String },
     
     fileName: { type: String },
     batchfileUrl: String,

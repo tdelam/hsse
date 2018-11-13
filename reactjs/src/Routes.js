@@ -147,7 +147,8 @@ stringArrayContainers  = (array, str) => {
 const Routes = ({ location }) => {
     const currentKey = location.pathname.split('/')[1] || '/';
     const timeout = { enter: 500, exit: 500 };
-    console.log( listofPages.indexOf(location.pathname) );
+    
+    //console.log( listofPages.indexOf(location.pathname) );
 
     const stringArrayContainers  = (array, str) => {
         const contains = (el) => {

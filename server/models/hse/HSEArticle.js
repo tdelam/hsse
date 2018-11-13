@@ -5,6 +5,53 @@ const { Schema } = mongoose;
 
 const HSEArticleSchema = new Schema({
 
+    // Fields from EndNote
+    referenceType: { type: String },
+    rating: { type: String },
+    author: { type: String },
+    year: { type: String },
+    title: { type: String },
+    journal: { type: String },
+    volume: { type: String },
+    issue: { type: String },
+    pages: { type: String },
+    startPage: { type: String },
+    ePubDate: { type: String },
+    date: { type: String },
+    typeOfArticle: { type: String },
+    shortTitle: { type: String },
+    alternateJournal: { type: String },
+    ISSN: { type: String },
+    DOI: { type: String },
+    originalPublication: { type: String },
+    rePrintEdition: { type: String },
+    reviewedItem: { type: String },
+    legalNote: { type: String },
+    PMCID: { type: String },
+    NIHMSID: { type: String },
+    articleNumber: { type: String },
+    accessionNumber: { type: String },
+    callNumber: { type: String },
+    label: { type: String },
+    keywords: { type: String },
+    abstract: { type: String },
+    notes: { type: String },
+    researchNotes: { type: String },
+    URL: { type: String },
+    fileAttachments: { type: String },
+    authorAddress: { type: String },
+    figure: { type: String },
+    caption: { type: String },
+    accessDate: { type: String },
+    translatedAuthor: { type: String },
+    translatedTitle: { type: String },
+    nameOfDatabase: { type: String },
+    databaseProvider: { type: String },
+    language: { type: String },
+
+    // Complicated tag
+    complicated: { type: Boolean, default: false },
+
     // Users for different stages
     _uploadHarvestUser: { type: Schema.Types.ObjectId, ref: 'User'},
     _assessEligibleUser1: { type: Schema.Types.ObjectId, ref: 'User'},
@@ -22,15 +69,11 @@ const HSEArticleSchema = new Schema({
     _setTranslatorArabic: { type: Schema.Types.ObjectId, ref: 'User'},
     _setTranslatorChinese: { type: Schema.Types.ObjectId, ref: 'User'},
     _setTranslatorEnglish: { type: Schema.Types.ObjectId, ref: 'User'},
-
-    // Complicated tag
-    complicated: { type: Boolean, default: false },
-
-
+    
     _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch'},
 
     //articleName: { type: String },
-
+/*
     system: { type: String },
     eligible: { type: Boolean, default: false },
     harvestDate: { type: Date, default: Date.now },
@@ -71,7 +114,7 @@ const HSEArticleSchema = new Schema({
     epocReview: { type: Boolean, default: false },
     general: { type: Boolean, default: false },
     hotDocs: { type: Boolean, default: false },
-/*
+
     // PDF Text
     pdfFileSource: { type: String },
     pdfText: { type: String },

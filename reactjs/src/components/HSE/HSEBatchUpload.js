@@ -20,7 +20,6 @@ class HSEBatchUpload extends Component {
 
     onFileChange(event) {
         this.setState({ file: event.target.files[0] })
-        console.log(event.target.files);
     }
 
     onSubmit = (event) => {
@@ -28,7 +27,7 @@ class HSEBatchUpload extends Component {
 
         const { submitHSEBatchFile, history, formValues } = this.props;
 
-        submitHSEBatchFile(formValues, history );
+        submitHSEBatchFile(formValues, this.state.file, history);
         
     }
 
@@ -42,7 +41,7 @@ class HSEBatchUpload extends Component {
             data-btnclass="btn btn-info" 
             data-text="UPLOAD" 
             data-icon="&lt;span class='fa fa-upload mr-2'&gt;&lt;/span&gt;"
-            //onChange={this.onFileChange.bind(this)}
+            onChange={this.onFileChange.bind(this)}
             accept="text/plain"
             {...input}
         />
@@ -55,6 +54,7 @@ class HSEBatchUpload extends Component {
             <input
                 //onChange={adaptFileEventToValue(onChange)}
                 //onBlur={adaptFileEventToValue(onBlur)}
+                onChange={this.onFileChange.bind(this)}
                 type="file"
                 {...props.input}
                 {...props}

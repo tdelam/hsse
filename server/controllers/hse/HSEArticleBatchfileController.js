@@ -32,16 +32,25 @@ exports.create = (req, res) => {
     console.log(req.body);
 
     // const key = `${decoded.sub}/${uuid()}.txt`;
-    const key2 = `${Date.now()}.txt`;
+    // const key = `${Date.now()}.txt`;
 
-    const { file, url } = req.body;
+    const { url } = req.body;
 
-    console.log(`*************${req.body.file.name}*********`);
+    // console.log(`*************${req.body.url}*********`);
 
-    // Parse File here before storing to mongodb 
+    let articlesArray = [];
+    
+    console.log("&&&&&&&&&&& " + url + " &&&&&&&&&&&&&");
 
-    const articlesArray = parseBatchfile.parseHSEJournalFile(file);
-
+    axios.get(`https://s3.amazonaws.com/hsse-staging/${url}`).then(function (response) {
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        // console.log(response.data);
+        articlesArray = parseBatchfile.parseHSEJournalFile(response.data);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    
     
 
     articlesArray.map( (article, index) => {
@@ -60,13 +69,35 @@ exports.create = (req, res) => {
         batchfileUrl: url
     });
 
+    /*
     s3.getSignedUrl('putObject', {
         Bucket: 'hsse-staging',
         ContentType: 'txt',
-        Key: key2
-    }, (err, url) => {
-        newHSEArticleBatchfile.url = url;
+        Key: key
+    }, (err, key) => {
+        console.log("***** s3.getSignedUrl ********************* ")
     });
+
+*/
+
+    console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    console.log(req.body);
+
+    const newHSEArticle = new HSEArticleModelClass(req.body);
+
+    newHSEArticle.save( (err) => {
+        if(err) {
+            //console.log(err);
+            return res.status(422).send({
+                message: 'Unable to save new article'
+            });
+        } else {
+            res.status(201).send({ message: 'Successfully save new article'});
+        }
+
+    });
+
+    console.log("-----------------------------------------------------------");
 
     newHSEArticleBatchfile.save( (err) => {
         if(err) {
@@ -75,11 +106,10 @@ exports.create = (req, res) => {
                 message: 'Unable to save new batchfile'
             });
         } else {
-            res.status(201).send(newHSEArticleBatchfile);
+            //return res.status(201).send({ message: 'Successfully save batchfile to db'});
+            console.log('saved batchfile');
         }
     });
-};
 
-saveArticlesFromArray = (article) => {
-    return HSEArticleBatchfileModelClass(article);
-}
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+};
