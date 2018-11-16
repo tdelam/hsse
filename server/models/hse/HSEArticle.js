@@ -49,6 +49,8 @@ const HSEArticleSchema = new Schema({
     databaseProvider: { type: String },
     language: { type: String },
 
+    elibilityEligibility: { type: Boolean, default: false },
+
     // Complicated tag
     complicated: { type: Boolean, default: false },
 

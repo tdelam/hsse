@@ -23,7 +23,7 @@ module.exports = app => {
         // const decoded = jwt.decode(token, process.env.JWT_SECRET);
 
         // console.log(`************ User Id: ${decoded.sub} ********`);
-/*
+
         const user = req.user;
 
         console.log(user);
