@@ -6,7 +6,10 @@ import {
   FORGOT_PASSWORD_EMAIL, 
   CREATE_HSE_ARTICLE, 
   HSE_ARTICLE_ERROR, 
-  CREATE_HSE_BATCHFILE
+  CREATE_HSE_BATCHFILE,
+
+  HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE,
+  HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE_ERROR
 } from './types';
 
 //const backendServer = "https://nameless-hollows-27940.herokuapp.com";
@@ -118,27 +121,28 @@ export const submitHSEBatchFile = (values, file, history) => async dispatch => {
 
   const uploadConfig = await axios.get('/api/hse/getfileurl');
 
-  //console.log(file);
-  //console.log(uploadConfig.data);
-
   await axios.put(uploadConfig.data.url, file, {
     headers: {
       'Content-Type': file.type,
     }
   });
 
-  console.log("********* after PUT file ***********");
-/*
-  const res = await axios.post('/api/hse/batchfileupload', {
-    ...values, 
-    batchfileUrl: uploadConfig.data.key
-  });
-*/
-  
   axios.post('/api/hse/batchfile', { url: uploadConfig.data.key } );
+  
+  dispatch({ type: CREATE_HSE_BATCHFILE, payload: '' });
 
   history.push('/hse/pendingeligibilityfiltersqueue');
 
-  dispatch({ type: CREATE_HSE_BATCHFILE, payload: ' ' });
+};
 
+export const listHSEPendingEligibilityFiltersQueueArticles = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/pendingqualityappraisalqueue`);
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE_ERROR, payload: 'Error showing hse eligibility pending queue'});
+  }
 };

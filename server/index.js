@@ -30,12 +30,22 @@ app.use(cors());
 app.use(bodyParser.json({ type: '*/*', limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-
+// Auth Routes
 require('./routes/authRoutes')(app);
-require('./routes/hse/HSEArticleRoutes')(app);
-require('./routes/sse/SSEArticleRoutes')(app);
+
+// Common Routes
 require('./routes/stageRoutes')(app);
 require('./routes/uploadRoutes')(app);
+
+// SSE Routes
+require('./routes/sse/SSEArticleRoutes')(app);
+
+// HSE Routes
+require('./routes/hse/HSEArticleRoutes')(app);
+require('./routes/hse/HSEPendingEligibilityFiltersQueueRoutes')(app);
+require('./routes/hse/HSEPendingLinkingStudiesQueueRoutes')(app);
+require('./routes/hse/HSEPendingPresentationDetailsQueueRoutes')(app);
+require('./routes/hse/HSEPendingQualityAppraisalQueueRoutes')(app);
 
 app.get('/', (req, res) => {
     res.send({ message: 'Welcome McMaster Health Sciences!'});

@@ -23,6 +23,7 @@ class Login extends Component {
       * @param  {String} formName The name of the form in the state object
       * @return {Function} a function used for the event
       */
+     
     validateOnChange = event => {
         const input = event.target;
         const form = input.form

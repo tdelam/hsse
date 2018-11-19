@@ -48,31 +48,45 @@ const HSEArticleSchema = new Schema({
     nameOfDatabase: { type: String },
     databaseProvider: { type: String },
     language: { type: String },
+    priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
+    source: { type: String },
 
-    elibilityEligibility: { type: Boolean, default: false },
+    // Elibigility and Filter Completed
+    elibilityFilterCompletedJunior: { type: Boolean, default: false },
+    elibilityFilterCompletedSenior: { type: Boolean, default: false },
+
+    // Quality and Appraisal Completed
+    qualityAppraisalCompletedJunior: { type: Boolean, default: false },
+    qualityAppraisalCompletedSenior: { type: Boolean, default: false },
+
+    // Linking Studies Completed
+    linkingStudiesCompleted: { type: Boolean, default: false },
+
+    // Setting Presentation Details Completed
+    presentationDetailsCompleted: { type: Boolean, default: false },
 
     // Complicated tag
     complicated: { type: Boolean, default: false },
 
     // Users for different stages
-    _uploadHarvestUser: { type: Schema.Types.ObjectId, ref: 'User'},
-    _assessEligibleUser1: { type: Schema.Types.ObjectId, ref: 'User'},
-    _assessEligibleUser2: { type: Schema.Types.ObjectId, ref: 'User'},
-    _qualityAppraisalUser1: { type: Schema.Types.ObjectId, ref: 'User'},
-    _qualityAppraisalUser2: { type: Schema.Types.ObjectId, ref: 'User'},
-    _linkStudiesUser1: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setPresentationDetailsUser1: { type: Schema.Types.ObjectId, ref: 'User'},
+    _uploadHarvestUser: { type: Schema.Types.ObjectId, ref: 'User' },
+    _elibilityFilterJunior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _qualityAppraisalJunior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _qualityAppraisalSenior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _linkingStudiesUser: { type: Schema.Types.ObjectId, ref: 'User' },
+    _presentationDetailsUser: { type: Schema.Types.ObjectId, ref: 'User' },
 
     // Translators
-    _setTranslatorFrench: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setTranslatorSpanish: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setTranslatorPortugese: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setTranslatorRussian: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setTranslatorArabic: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setTranslatorChinese: { type: Schema.Types.ObjectId, ref: 'User'},
-    _setTranslatorEnglish: { type: Schema.Types.ObjectId, ref: 'User'},
+    _translatorFrench: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorSpanish: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorPortugese: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorRussian: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorArabic: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorChinese: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorEnglish: { type: Schema.Types.ObjectId, ref: 'User' },
     
-    _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch'},
+    _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch' },
 
     //articleName: { type: String },
 /*
