@@ -36,54 +36,83 @@ class HSEPendingEligibilityFiltersQueue extends Component {
         this.props.listHSEPendingEligibilityFiltersQueueArticles();
     }
 
+    renderPriority(priority) {
+        
+        switch (priority) {
+            case 'LOW':
+                return <td className="text-center"><span className="badge badge-success">{ priority }</span></td>
+            case 'MODERATE':
+                return <td className="text-center"><span className="badge badge-warning">{ priority }</span></td>
+            case 'HIGH':
+                return <td className="text-center"><span className="badge badge-danger">{ priority }</span></td>
+            default:
+                return <td className="text-center"><span className="badge badge-success">LOW</span></td>
+        }
+
+    }
+
     renderArticles() {
         
         if(this.props.pendingArticles != null ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>
+                        {/*
+                        <td className="text-center">
+                            <span className="badge badge-success">{ article[1].priority }</span>
+                        </td>
+                        */}
+                        { this.renderPriority(article[1].priority) }
                         <td>
-                            <a href="">{ article[1].priority }</a>
+                            { article[1].author }
                         </td>
                         <td>
-                            <a href="">{ article[1].author }</a>
+                            { article[1].DOI }
                         </td>
                         <td>
-                            <a className="mr-2" href="">{ article[1].DOI }</a>
+                            <a className="mr-1 badge badge-primary" href=""></a>
                         </td>
-                        <td>
-                            <a className="mr-1 badge badge-primary" href="">angularjs</a>
-                        </td>
-                        <td>{ article[1]._id }</td>
+                        <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
-                        <td>
-                            <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
+                        
+                            
+                        <td className="text-right">
+                            <button type="button" className="btn btn-sm btn-secondary">
+                                <em className="fas fa-pencil-alt"></em>
+                            </button>
+                            <button type="button" className="btn btn-sm btn-danger">
+                                <em className="fas fa-trash-alt"></em>
+                            </button>
+                            <button type="button" className="btn btn-sm btn-success">
+                                <em className="fa fa-check"></em>
+                            </button>
                         </td>
+                        
                     </tr>
                 )
             });
-        
+        // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
                 <Datatable options={dtOptions}>
-                                <table className="table table-striped my-4 w-100">
-                                    <thead>
-                                        <tr>
-                                            <th data-priority="1">Priority</th>
-                                            <th>Source</th>
-                                            <th>Date</th>
-                                            <th>Other Filterer</th>
-                                            <th>Article Id</th>
-                                            <th>Title</th>
-                                            <th>Author</th>
-                                            <th data-priority="2">Language</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        { rows }
-                                    </tbody>
-                                </table>
-                            </Datatable>
+                    <table className="table table-striped my-4 w-100">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Priority</th>
+                                <th>Source</th>
+                                <th>Date</th>
+                                <th>Other Filterer</th>
+                                <th>Article Id</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th style={{width:"130px"}} className="text-right" data-priority="2">Language</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { rows }
+                        </tbody>
+                    </table>
+                </Datatable>
             );
         }    
     };
