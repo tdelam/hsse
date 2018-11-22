@@ -70,7 +70,7 @@ class HSEPendingEligibilityFiltersQueue extends Component {
                             { article[1].DOI }
                         </td>
                         <td>
-                            <a className="mr-1 badge badge-primary" href=""></a>
+                            <a className="mr-1 badge badge-primary" href="">Something</a>
                         </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>

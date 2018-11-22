@@ -7,9 +7,34 @@ import ContentWrapper from '../Layout/ContentWrapper';
 import { Row, Col, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 //import Dropzone from 'react-dropzone';
 
+import Select from 'react-select';
+
 import Datetime from 'react-datetime';
 
 import * as actions from '../../actions';
+
+const ARTICLE_SOURCES = [
+    {value: 'referrals', label: 'Referrals'},
+    {value: 'handSearches', label: 'Hand Searches'},
+    {value: 'cochrane', label: 'Cochrane'},
+    {value: 'plusSR', label: 'PLUS SR'},
+    {value: 'pubMedSR', label: 'PubMed SR'},
+    {value: 'healthSystemHealthReformDescriptions', label: 'Health System and Health Reform Descriptions'},
+    {value: 'plusEE', label: 'PLUS EE'},
+    {value: 'pubMedEE', label: 'PubMed EE'},
+    {value: 'lilacs', label: 'LILACS'},
+    {value: 'other', label: 'Other'}
+]
+
+const LANGUAGES = [
+    {value: 'english', label: 'English'},
+    {value: 'french', label: 'French'},
+    {value: 'spanish', label: 'Spanish'},
+    {value: 'portugese', label: 'Portugese'},
+    {value: 'russian', label: 'Russian'},
+    {value: 'arabic', label: 'Arabic'},
+    {value: 'chinese', label: 'Chinese'}
+]
 
 class HSEBatchUpload extends Component {
 
@@ -17,6 +42,8 @@ class HSEBatchUpload extends Component {
         files: [],
         file: null
     }
+
+    
 
     onFileChange(event) {
         this.setState({ file: event.target.files[0] })
@@ -62,6 +89,11 @@ class HSEBatchUpload extends Component {
         );
     };
 
+    handleChangeSelect = (name, newVal) => {
+        this.setState({
+            [name]: newVal
+        });
+    }
 
 
     onDrop = files => this.setState({ files: files[0] })
@@ -143,6 +175,36 @@ class HSEBatchUpload extends Component {
 
                                      <fieldset>
                                         <div className="form-group row mb">
+                                            <label className="col-md-2 col-form-label mb">Languages</label>
+                                            <Col md={ 6 }>
+                                            <Select
+                                                name="tags"
+                                                simpleValue
+                                                value={this.state.tags}
+                                                onChange={this.handleChangeSelect.bind(this, 'tags')}
+                                                options={LANGUAGES}
+                                            />
+                                            </Col>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div className="form-group row mb">
+                                            <label className="col-md-2 col-form-label mb">Artilce Source</label>
+                                            <Col md={ 6 }>
+                                            <Select
+                                                name="tags"
+                                                simpleValue
+                                                value={this.state.tags}
+                                                onChange={this.handleChangeSelect.bind(this, 'tags')}
+                                                options={ARTICLE_SOURCES}
+                                            />
+                                            </Col>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Harvest Date</label>
                                             <Col md={ 6 }>
                                                 <Datetime inputProps={{className: 'form-control'}}/>
@@ -174,3 +236,6 @@ export default compose(
     reduxForm({
         form: 'hsebatchfileupload'
     })) (HSEBatchUpload);
+
+
+    
