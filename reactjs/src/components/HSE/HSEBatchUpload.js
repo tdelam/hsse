@@ -8,6 +8,7 @@ import { Row, Col, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 //import Dropzone from 'react-dropzone';
 
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import Datetime from 'react-datetime';
 
@@ -30,7 +31,7 @@ const LANGUAGES = [
     {value: 'english', label: 'English'},
     {value: 'french', label: 'French'},
     {value: 'spanish', label: 'Spanish'},
-    {value: 'portugese', label: 'Portugese'},
+    {value: 'portuguese', label: 'Portuguese'},
     {value: 'russian', label: 'Russian'},
     {value: 'arabic', label: 'Arabic'},
     {value: 'chinese', label: 'Chinese'}
@@ -39,6 +40,8 @@ const LANGUAGES = [
 class HSEBatchUpload extends Component {
 
     state = {
+        languages: [],
+        articleSources: [],
         files: [],
         file: null
     }
@@ -178,25 +181,25 @@ class HSEBatchUpload extends Component {
                                             <label className="col-md-2 col-form-label mb">Languages</label>
                                             <Col md={ 6 }>
                                             <Select
-                                                name="tags"
-                                                simpleValue
-                                                value={this.state.tags}
-                                                onChange={this.handleChangeSelect.bind(this, 'tags')}
+                                                name="languages"
+                                                //simpleValue
+                                                value={this.state.languages}
+                                                onChange={this.handleChangeSelect.bind(this, 'languages')}
                                                 options={LANGUAGES}
                                             />
                                             </Col>
                                         </div>
                                     </fieldset>
 
-                                    <fieldset>
+                                   <fieldset>
                                         <div className="form-group row mb">
-                                            <label className="col-md-2 col-form-label mb">Artilce Source</label>
+                                            <label className="col-md-2 col-form-label mb">Article Source</label>
                                             <Col md={ 6 }>
                                             <Select
-                                                name="tags"
-                                                simpleValue
-                                                value={this.state.tags}
-                                                onChange={this.handleChangeSelect.bind(this, 'tags')}
+                                                name="articleSources"
+                                                //simpleValue
+                                                value={this.state.articleSources}
+                                                onChange={this.handleChangeSelect.bind(this, 'articleSources')}
                                                 options={ARTICLE_SOURCES}
                                             />
                                             </Col>
@@ -205,9 +208,24 @@ class HSEBatchUpload extends Component {
 
                                     <fieldset>
                                         <div className="form-group row mb">
+                                            <label className="col-md-2 col-form-label mb">Article Source</label>
+                                            <Col md={ 6 }>
+                                            <Select
+                                            name="select-name"
+                                            placeholder="Please select..."
+                                            value={this.state.articleSources}
+                                            onChange={this.handleChangeSelect}
+                                            options={ARTICLE_SOURCES}
+                                        />
+                                            </Col>
+                                        </div>
+                                    </fieldset>                     
+                    
+                                    <fieldset>
+                                        <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Harvest Date</label>
                                             <Col md={ 6 }>
-                                                <Datetime inputProps={{className: 'form-control'}}/>
+                                                <Datetime dateFormat="YYYY-MM-DD" timeFormat={false} inputProps={{className: 'form-control'}}/>
                                             </Col>
                                         </div>
                                     </fieldset>
