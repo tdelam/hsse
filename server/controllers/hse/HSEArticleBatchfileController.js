@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 
 const parseBatchfile = require('../../util/parseBatchfile');
 
-const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
+const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.HSSE_S3_ACCESS_KEY,
