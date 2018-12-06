@@ -8,7 +8,7 @@ RUN npm install -g react-app-rewired
 
 WORKDIR '/app'
 
-COPY ./package.json ./package.json
+COPY ./package.json ./
 
 RUN npm install --unsafe-perm
 
