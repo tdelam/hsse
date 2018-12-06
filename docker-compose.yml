@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
     nginx:
       restart: always
@@ -12,9 +12,9 @@ services:
       environment: 
         - MONGO_DATA_DIR=/data/db
         - MONGO_LOG_DIR=/dev/null
-      volumes:
-        - db-data:/data/db
-        - mongo-config:/data/configdb
+      #volumes:
+        #- db-data:/data/db
+        #- mongo-config:/data/configdb
       ports: 
         - '27017:27017'
     #elasticsearch:
@@ -61,6 +61,7 @@ services:
       volumes:
         - ./reactjs:/app:rw
         - /app/node_modules
+      working_dir: /app
       environment:
         - CHOKIDAR_USEPOLLING=true
         - BACKEND_SERVER=http://localhost:3050/api

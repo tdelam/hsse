@@ -51,6 +51,9 @@ const HSEArticleSchema = new Schema({
     priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     source: { type: String },
 
+
+    // Stage completions
+
     // Elibigility and Filter Completed
     elibilityFilterCompletedJunior: { type: Boolean, default: false },
     elibilityFilterCompletedSenior: { type: Boolean, default: false },
@@ -64,6 +67,8 @@ const HSEArticleSchema = new Schema({
 
     // Setting Presentation Details Completed
     presentationDetailsCompleted: { type: Boolean, default: false },
+
+
 
     // Complicated tag
     complicated: { type: Boolean, default: false },
@@ -86,7 +91,8 @@ const HSEArticleSchema = new Schema({
     _translatorChinese: { type: Schema.Types.ObjectId, ref: 'User' },
     _translatorEnglish: { type: Schema.Types.ObjectId, ref: 'User' },
     
-    _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEBatch' },
+    // Article relation to Batchfile
+    _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEArticleBatchFiles' },
 
     //articleName: { type: String },
 /*
