@@ -1,82 +1,82 @@
-version: '3.5'
+version: '3'
 services:
-    nginx:
-      restart: always
-      build:
-        dockerfile: Dockerfile.dev
-        context: ./nginx
-      ports:
-        - '3050:80'
-    mongodb:
-      image: mongo:latest
-      environment: 
-        - MONGO_DATA_DIR=/data/db
-        - MONGO_LOG_DIR=/dev/null
-      #volumes:
-        #- db-data:/data/db
-        #- mongo-config:/data/configdb
-      ports: 
-        - '27017:27017'
-    #elasticsearch:
-     # image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
-      #volumes: # Persist ES data in seperate "esdata" volume
-       # - esdata:/usr/share/elasticsearch/data
-      #environment:
-       # - bootstrap.memory_lock=true
-        #- "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        #- discovery.type=single-node
-      #ports: # Expose Elasticsearch ports
-       # - "9300:9300"
-        #- "9200:9200"
-    hsse-server:
-      restart: "no"
-      build: 
-        context: ./server
-        dockerfile: Dockerfile.dev
-      volumes:
-        - ./server:/app:rw
-        - /app/node_modules
-      environment:
-        - CHOKIDAR_USEPOLLING=true
-        - BACKEND_SERVER=hsse_server
-        - HSSE_SES_ACCESS_KEY=
-        - HSSE_SES_SECRET_KEY=
-        #- MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
-        - MONGO_URI=mongodb://mongodb:27017/hsse-project
-        - NODE_ENV=development
-        - JWT_SECRET=akfjlaksdjlasfjasdfljiasdfasfksldf
-        - FRONTEND_SERVER=http://localhost:3050
-        - BACKEND_SERVER=http://localhost:3050/api
-        - REGION=us-east-1
-        - HSSE_S3_ACCESS_KEY=
-        - HSSE_S3_SECRET_KEY=
-        - ES_HOST=elasticsearch
-        - ES_PORT=9200
-      depends_on:
-        - mongodb
-    hsse-admin-client:
-      build:
-        context: ./reactjs
-        dockerfile: Dockerfile.dev
-      volumes:
-        - ./reactjs:/app:rw
-        - /app/node_modules
-      environment:
-        - CHOKIDAR_USEPOLLING=true
-        - BACKEND_SERVER=http://localhost:3050/api
-    #hsse-admin-client-test:
-     # build:
-      #  context: ./reactjs
-       # dockerfile: Dockerfile.dev
-      #depends_on:
-       # - "hsse-admin-client"
-      #volumes:
-       # - /app/node_modules
-        #- ./reactjs:/app:rw
-      #environment:
-       # - CHOKIDAR_USEPOLLING=true
-        #- BACKEND_SERVER=http://localhost:3050/api
-      # command: ["npm", "run", "test"]
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
+  mongodb:
+    image: mongo:latest
+    environment: 
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    #volumes:
+      #- db-data:/data/db
+      #- mongo-config:/data/configdb
+    ports: 
+      - '27017:27017'
+  #elasticsearch:
+    # image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    #volumes: # Persist ES data in seperate "esdata" volume
+      # - esdata:/usr/share/elasticsearch/data
+    #environment:
+      # - bootstrap.memory_lock=true
+      #- "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      #- discovery.type=single-node
+    #ports: # Expose Elasticsearch ports
+      # - "9300:9300"
+      #- "9200:9200"
+  hsse-server:
+    restart: "no"
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server:/app:rw
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - BACKEND_SERVER=hsse_server
+      - HSSE_SES_ACCESS_KEY=
+      - HSSE_SES_SECRET_KEY=
+      #- MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
+      - MONGO_URI=mongodb://mongodb:27017/hsse-project
+      - NODE_ENV=development
+      - JWT_SECRET=akfjlaksdjlasfjasdfljiasdfasfksldf
+      - FRONTEND_SERVER=http://localhost:3050
+      - BACKEND_SERVER=http://localhost:3050/api
+      - REGION=us-east-1
+      - HSSE_S3_ACCESS_KEY=
+      - HSSE_S3_SECRET_KEY=
+      - ES_HOST=elasticsearch
+      - ES_PORT=9200
+    depends_on:
+      - mongodb
+  hsse-admin-client:
+    build:
+      context: ./reactjs
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./reactjs:/app:rw
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - BACKEND_SERVER=http://localhost:3050/api
+  #hsse-admin-client-test:
+    # build:
+    #  context: ./reactjs
+      # dockerfile: Dockerfile.dev
+    #depends_on:
+      # - "hsse-admin-client"
+    #volumes:
+      # - /app/node_modules
+      #- ./reactjs:/app:rw
+    #environment:
+      # - CHOKIDAR_USEPOLLING=true
+      #- BACKEND_SERVER=http://localhost:3050/api
+    # command: ["npm", "run", "test"]
 volumes: # Define separate volume for Elasticsearch data
   esdata:
   db-data:
