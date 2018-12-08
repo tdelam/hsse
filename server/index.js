@@ -6,8 +6,8 @@ const cors = require('cors');
 
 require('dotenv').config();
 
-require('./models/User')
-require('./models/hse/hsearticlebatchfile');
+require('./models/User');
+require('./models/hse/HSEArticleBatchfile.js');
 require('./models/hse/HSEArticle');
 require('./models/sse/SSEArticle');
 require('./models/Stage');
