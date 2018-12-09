@@ -12,6 +12,7 @@ const HSEArticleBatchFileSchema = new Schema({
     language: {type: String, enum: ['English', 'French', 'Spanish', 'Portuguese', 'Russian', 'Arabic', 'Chinese'], default: 'English' },
     harvestDate: { type: Date, default: Date.now },
     // _articles: { type: [Schema.Types.ObjectId], ref: 'HSEArticles'}
+    // test
 
 })
 
