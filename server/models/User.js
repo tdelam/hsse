@@ -15,6 +15,8 @@ const userSchema = new Schema({
         default: ['uploader'],
         required: 'Please at least one role'
     },
+    eligibilityFilterArticles: [{ type: Schema.Types.ObjectId, ref: 'HSEArticles' }],
+    qualityAppraisalArticles: [{ type: [Schema.Types.ObjectId], ref: 'HSEArticles' }]
    
 });
 

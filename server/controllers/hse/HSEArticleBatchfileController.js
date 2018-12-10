@@ -59,3 +59,16 @@ exports.create = async (req, res) => {
         });
     } ); 
 };
+
+exports.list = (req, res) => {console.log(req);
+    HSEArticleBatchfileModelClass.find( (err, batchfiles) => {
+        if(err) {
+            return res.send(err);
+        } else if(!batchfiles) {
+            return res.status(404).send({
+                message: 'No batchfile with that identifier has been found'
+            });
+        }
+        return res.status(200).send(batchfiles);
+    });
+};
