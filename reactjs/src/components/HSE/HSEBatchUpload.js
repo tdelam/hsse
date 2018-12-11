@@ -205,7 +205,7 @@ class HSEBatchUpload extends Component {
                                             </Col>
                                         </div>
                                     </fieldset>
-
+                                {/*  
                                     <fieldset>
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Article Source</label>
@@ -220,7 +220,7 @@ class HSEBatchUpload extends Component {
                                             </Col>
                                         </div>
                                     </fieldset>                     
-                    
+                                */}
                                     <fieldset>
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Harvest Date</label>

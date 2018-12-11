@@ -8,8 +8,10 @@ import {
   HSE_ARTICLE_ERROR, 
   CREATE_HSE_BATCHFILE,
 
-  HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE,
-  HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE_ERROR
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
+  HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE,
+  HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR
 } from './types';
 
 //const backendServer = "https://nameless-hollows-27940.herokuapp.com";
@@ -135,14 +137,26 @@ export const submitHSEBatchFile = (values, file, history) => async dispatch => {
 
 };
 
-export const listHSEPendingEligibilityFiltersQueueArticles = (history) => async dispatch => {
+export const listHSEPendingEligibilityFiltersArticlesQueue = (history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/pendingqualityappraisalqueue`);
+    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue`);
 
     // history.push('/dashboard');
     // console.log(response.data);
-    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE, payload: response.data })
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
-    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE_ERROR, payload: 'Error showing hse eligibility pending queue'});
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility article pending queue'});
+  }
+};
+
+export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersbatchfilequeue`);
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse eligibility batchfile pending queue'});
   }
 };

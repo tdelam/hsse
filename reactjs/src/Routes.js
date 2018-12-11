@@ -10,6 +10,8 @@ import BasePage from './components/Layout/BasePage';
 import DashboardV2 from './components/Dashboard/DashboardV2';
 import DashboardV3 from './components/Dashboard/DashboardV3';
 
+import DashboardMain from './components/Dashboard/DashboardMain';
+
 import Widgets from './components/Widgets/Widgets';
 
 import Buttons from './components/Elements/Buttons';
@@ -110,7 +112,8 @@ import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTr
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
-import HSEPendingEligibilityFiltersQueue from './components/HSE/HSEPendingEligibilityFiltersQueue';
+import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
+import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
 import HSEPendingQualityAppraisalQueue from './components/HSE/HSEPendingQualityAppraisalQueue';
 import HSEPendingLinkingStudiesQueue from './components/HSE/HSEPendingLinkingStudiesQueue';
 import HSEPendingPresentationDetailsQueue from './components/HSE/HSEPendingPresentationDetailsQueue';
@@ -207,6 +210,8 @@ const Routes = ({ location }) => {
                             <Route path="/dashboardv2" component={DashboardV2}/>
                             <Route path="/dashboardv3" component={DashboardV3}/>
 
+                            <Route path="/dashboardmain" component={DashboardMain}/>
+
                             {/*Widgets*/}
                             <Route path="/widgets" component={Widgets}/>
 
@@ -300,7 +305,8 @@ const Routes = ({ location }) => {
                             {/* Pending HSE Queue */}
                             <Route path="/hse/addarticle" component={AddHSEArticle} />
                             <Route path="/hse/batchfileupload" component={HSEBatchUpload} />
-                            <Route path="/hse/pendingeligibilityfiltersqueue" component={HSEPendingEligibilityFiltersQueue} />
+                            <Route path="/hse/pendingeligibilityfiltersarticlequeue" component={HSEPendingEligibilityFiltersArticleQueue} />
+                            <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />
                             <Route path="/hse/pendingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
                             <Route path="/hse/pendinglinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
                             <Route path="/hse/pendingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />

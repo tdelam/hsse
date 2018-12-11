@@ -4,10 +4,12 @@ import { reducer as formReducer } from 'redux-form';
 import authReducer from './authReducer';
 
 import HSEArticleReducer from './HSEArticleReducer';
-import HSEPendingEligibilityFiltersQueueReducer from './HSEPendingEligibilityFiltersQueueReducer';
+import HSEPendingEligibilityFiltersArticleQueueReducer from './HSEPendingEligibilityFiltersArticleQueueReducer';
+import HSEPendingEligibilityFiltersBatchfileQueueReducer from './HSEPendingEligibilityFiltersBatchfileQueueReducer';
 
 export default combineReducers({
-    hsePendingEligibilityFiltersQueue: HSEPendingEligibilityFiltersQueueReducer,
+    hsePendingEligibilityFiltersArticleQueue: HSEPendingEligibilityFiltersArticleQueueReducer,
+    hsePendingEligibilityFiltersBatchfileQueue: HSEPendingEligibilityFiltersBatchfileQueueReducer,
     hse: HSEArticleReducer,
     form: formReducer,
     auth: authReducer

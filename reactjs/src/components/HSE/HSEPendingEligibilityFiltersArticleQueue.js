@@ -30,10 +30,10 @@ const dtOptions = {
     }
 }
 
-class HSEPendingEligibilityFiltersQueue extends Component {
+class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
     componentDidMount() {
-        this.props.listHSEPendingEligibilityFiltersQueueArticles();
+        this.props.listHSEPendingEligibilityFiltersArticleQueue();
     }
 
     renderPriority(priority) {
@@ -122,7 +122,7 @@ class HSEPendingEligibilityFiltersQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Assessing Eligibility and Assigning Filters
+                        <div>Assessing Eligibility and Assigning Filters Articles
                             <small>Health Systems Evidence - Main Queue</small>
                         </div>
                         </div>
@@ -137,13 +137,12 @@ class HSEPendingEligibilityFiltersQueue extends Component {
     }
 }
 
-function mapStateToProps({ hsePendingEligibilityFiltersQueue }) {
+function mapStateToProps({ hsePendingEligibilityFiltersArticleQueue }) {
     return { 
-        errorMessage: hsePendingEligibilityFiltersQueue.hsePendingEligibilityFiltersErrorMessage,
-        pendingArticles: hsePendingEligibilityFiltersQueue.hsePendingEligibilityFiltersArticles 
+        errorMessage: hsePendingEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
+        pendingArticles: hsePendingEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEPendingEligibilityFiltersQueue);
-
+export default connect(mapStateToProps, actions)(HSEPendingEligibilityFiltersArticleQueue);
 

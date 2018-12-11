@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
     let articlesArray = [];
     let articleIdArray = [];
 
-    const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/${url}`); 
+    const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/${url}`);
     
     articlesArray = parseBatchfile.parseHSEJournalFile(data1.data);
 
@@ -60,7 +60,7 @@ exports.create = async (req, res) => {
     } ); 
 };
 
-exports.list = (req, res) => {console.log(req);
+exports.list = (req, res) => {
     HSEArticleBatchfileModelClass.find( (err, batchfiles) => {
         if(err) {
             return res.send(err);
@@ -72,3 +72,26 @@ exports.list = (req, res) => {console.log(req);
         return res.status(200).send(batchfiles);
     });
 };
+
+exports.read = (req, res) => {
+
+    const { batchfileId } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(batchfileId)) {
+        return res.status(400).send({
+            message: 'Invalid batchfile Id'
+        });
+    }
+
+    HSEArticleModelClass.findById(batchfileId, (err, batchfile) => {
+        if(err) {
+            return res.send(err);
+        } else if(!batchfile) {
+            return res.status(404).send({
+                message: 'No batchfile with that identifier has been found'
+            });
+        }
+        return res.status(200).send(batchfile);
+    });
+
+}

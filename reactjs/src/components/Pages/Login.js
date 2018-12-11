@@ -66,7 +66,7 @@ class Login extends Component {
         e.preventDefault()
     }
 
-    gotoDashboard = () => this.props.history.push('/dashboardv2');
+    gotoDashboard = () => this.props.history.push('/dashboardmain');
 
     handleSubmit = (formProps) => {
         this.props.signin(formProps, this.gotoDashboard);

@@ -4,9 +4,9 @@ const HSEArticleBatchfileController = require('../../controllers/hse/HSEArticleB
 const requireSignin = passport.authenticate('local', { session: false });
 
 module.exports = (app) => {
-    // app.get('/api/hse/batchfile', requireSignin, HSEBatchfileController.list);
+    //app.get('/api/hse/batchfile', requireSignin, HSEBatchfileController.list);
     app.get('/hse/articlebatchfiles', HSEArticleBatchfileController.list);
     app.get('/hse/articlebatchfiles/:batchfileId', HSEArticleBatchfileController.read);
-    app.post('/hse/articlebatchfiles', HSEArticleBatchfileController.create);
-    app.delete('/hse/articlebatchfile/:batchfileId', HSEArticleBatchfileController.delete);
+    //app.post('/hse/articlebatchfiles', HSEArticleBatchfileController.create);
+    //app.delete('/hse/articlebatchfile/:batchfileId', HSEArticleBatchfileController.delete);
 };

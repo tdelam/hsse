@@ -18,8 +18,10 @@ export const CREATE_SSE_BATCHFILE = 'create_sse_batchfile';
 export const DELETE_SSE_ARTICLE = 'delete_sse_article';
 
 // HSE PENDING QUEUE
-export const HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE = 'hse_pending_eligibility_filters_queue';
-export const HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE_ERROR = 'hse_pending_eligibility_filters_queue_error';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE = 'hse_pending_eligibility_filters_article_queue';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE = 'hse_pending_eligibility_filters_batchfile_queue';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'hse_pending_eligibility_filters_article_queue_error';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR = 'hse_pending_eligibility_filters_batchfile_queue_error';
 
 export const HSE_PENDING_QUALITY_APPRAISAL_QUEUE = 'hse_pending_quality_appraisal_queue';
 export const HSE_PENDING_QUALITY_APPRAISAL_QUEUE_ERROR = 'hse_pending_quality_appraisal_queue_error';

@@ -43,7 +43,8 @@ require('./routes/sse/SSEArticleRoutes')(app);
 // HSE Routes
 require('./routes/hse/HSEArticleRoutes')(app);
 require('./routes/hse/HSEArticleBatchfileRoutes')(app);
-require('./routes/hse/HSEPendingEligibilityFiltersQueueRoutes')(app);
+require('./routes/hse/HSEPendingEligibilityFiltersArticleQueueRoutes')(app);
+require('./routes/hse/HSEPendingEligibilityFiltersBatchfileQueueRoutes')(app);
 require('./routes/hse/HSEPendingLinkingStudiesQueueRoutes')(app);
 require('./routes/hse/HSEPendingPresentationDetailsQueueRoutes')(app);
 require('./routes/hse/HSEPendingQualityAppraisalQueueRoutes')(app);
