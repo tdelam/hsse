@@ -103,7 +103,7 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
-import HSEAssignedEligibilityFiltersQueue from './components/HSE/HSEAssignedEligibilityFiltersQueue';
+import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalQueue from './components/HSE/HSEAssignedQualityAppraisalQueue';
 import HSEAssignedLinkingStudiesQueue from './components/HSE/HSEAssignedLinkingStudiesQueue';
 import HSEAssignedPresentationDetailsQueue from './components/HSE/HSEAssignedPresentationDetailsQueue';
@@ -294,12 +294,12 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             {/* Assigned HSE Queue */}
-                            <Route path="/hseassignedeligibilityfiltersqueue" component={HSEAssignedEligibilityFiltersQueue} />
-                            <Route path="/hseassignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
-                            <Route path="/hseassignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
-                            <Route path="/hseassignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
-                            <Route path="/hseassignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
-                            <Route path="/hseassignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
+                            <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
+                            <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
+                            <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
+                            <Route path="/hse/assignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
+                            <Route path="/hse/assignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
+                            <Route path="/hse/assignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
 
 
                             {/* Pending HSE Queue */}

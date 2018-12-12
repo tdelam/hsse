@@ -11,7 +11,10 @@ import {
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
   HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE,
-  HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR
+  HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
 } from './types';
 
 //const backendServer = "https://nameless-hollows-27940.herokuapp.com";
@@ -139,7 +142,9 @@ export const submitHSEBatchFile = (values, file, history) => async dispatch => {
 
 export const listHSEPendingEligibilityFiltersArticlesQueue = (history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue`);
+    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
 
     // history.push('/dashboard');
     // console.log(response.data);
@@ -158,5 +163,19 @@ export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => asyn
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse eligibility batchfile pending queue'});
+  }
+};
+
+export const listHSEAssignedEligibilityFiltersArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility article assigned queue'});
   }
 };

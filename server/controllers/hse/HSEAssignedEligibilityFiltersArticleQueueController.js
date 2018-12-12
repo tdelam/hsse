@@ -4,8 +4,7 @@ const UserModelClass = mongoose.model('users');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 exports.listArticles = async (req, res) => {
-     HSEArticleModelClass.find()
-        .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
+     HSEArticleModelClass.find({ _id: req.user._id })
         .exec(function(err, articles) {
             if(err) {
                 return res.send(err);

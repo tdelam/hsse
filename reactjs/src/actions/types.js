@@ -34,8 +34,8 @@ export const HSE_PENDING_PRESENTATION_DETAILS_QUEUE_ERROR = 'hse_pending_present
 
 
 // HSE ASSIGNED QUEUE
-export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_QUEUE = 'hse_assigned_eligibility_filters_queue';
-export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_QUEUE_ERROR = 'hse_assigned_eligibility_filters_queue_error';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE = 'hse_assigned_eligibility_filters_queue';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'hse_assigned_eligibility_filters_queue_error';
 
 export const HSE_ASSIGNED_QUALITY_APPRAISAL_QUEUE = 'hse_assigned_quality_appraisal_queue';
 export const HSE_ASSIGNED_QUALITY_APPRAISAL_QUEUE_ERROR = 'hse_assigned_quality_appraisal_queue_error';

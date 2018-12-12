@@ -30,10 +30,10 @@ const dtOptions = {
     }
 }
 
-class HSEPendingEligibilityFiltersArticleQueue extends Component {
+class HSEAssignedEligibilityFiltersArticleQueue extends Component {
 
     componentDidMount() {
-        this.props.listHSEPendingEligibilityFiltersArticlesQueue();
+        this.props.listHSEAssignedEligibilityFiltersArticlesQueue();
     }
 
     renderPriority(priority) {
@@ -131,7 +131,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                         <div>Assessing Eligibility and Assigning Filters Articles
-                            <small>Health Systems Evidence - Main Queue</small>
+                            <small>Health Systems Evidence - Assigned Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -145,12 +145,12 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hsePendingEligibilityFiltersArticleQueue }) {
+function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
     return { 
-        errorMessage: hsePendingEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
-        pendingArticles: hsePendingEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticles 
+        errorMessage: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleErrorMessage,
+        assignedArticles: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEPendingEligibilityFiltersArticleQueue);
+export default connect(mapStateToProps, actions)(HSEAssignedEligibilityFiltersArticleQueue);
 

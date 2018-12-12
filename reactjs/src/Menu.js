@@ -25,7 +25,7 @@ const Menu = [
         submenu: [
             {
                 name: ' Elibigility & Filters',
-                path: '/hse/assignedeligibilityfiltersqueue',
+                path: '/hse/assignedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.ASSIGNEDELIGIBILITYFILTERS'
             },
             {
