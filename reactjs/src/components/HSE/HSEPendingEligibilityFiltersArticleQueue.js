@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { 
+    Card, 
+    CardBody, 
+    CardHeader, 
+    Modal, 
+    ModalHeader, 
+    ModalBody,
+    ModalFooter,
+    Button
+} from 'reactstrap';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
@@ -32,8 +41,25 @@ const dtOptions = {
 
 class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            modal: false,
+            toasterPos: 'top-right',
+            toasterType: 'info'
+        };
+
+    }
+
     componentDidMount() {
         this.props.listHSEPendingEligibilityFiltersArticlesQueue();
+    }
+
+    toggleModal = () => {
+        this.setState({
+            modal: !this.state.modal
+        });
     }
 
     renderPriority(priority) {
@@ -78,7 +104,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                         <td>{ article[1].language }</td>
 
                         <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-success">
+                            <button type="button" onClick={this.toggleModal} className="btn btn-sm btn-success">
                                 <em className="fa fa-check"></em>
                             </button>
                         </td>
@@ -126,7 +152,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     };
 
     render() {
-        console.log(this.props.pendingArticles);
+        
         return (
             <ContentWrapper>
                 <div className="content-heading">
@@ -137,6 +163,16 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 <Card className="card-default">
                     <CardHeader>List of pending Articles</CardHeader>
                     <CardBody>
+                        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                            <ModalHeader toggle={this.toggleModal}>Article Assignment Confirmation</ModalHeader>
+                            <ModalBody>
+                                Are you you want to assign this article to yourself? 
+                            </ModalBody>
+                            <ModalFooter>
+                            <Button color="primary" onClick={this.toggleModal}>Yes</Button>{' '}
+                            <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
                         { this.renderArticles() }
                     </CardBody>
                 </Card>

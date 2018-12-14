@@ -55,6 +55,7 @@ import FormCropper from './components/Forms/FormCropper';
 import Login from './components/Pages/Login';
 import Signout from './components/Pages/Signout';
 import Register from './components/Pages/Register';
+import RegistrationConfirmed from './components/Pages/RegistrationConfirmed';
 import Recover from './components/Pages/Recover';
 import ConfirmRegistration from './components/Pages/ConfirmRegistration';
 import ConfirmPasswordReset from './components/Pages/ConfirmPasswordReset';
@@ -103,6 +104,7 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
+import HSEAssignedEligibilityFilterArticleInput from './components/HSE/HSEAssignedEligibilityFilterArticleInput';
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalQueue from './components/HSE/HSEAssignedQualityAppraisalQueue';
 import HSEAssignedLinkingStudiesQueue from './components/HSE/HSEAssignedLinkingStudiesQueue';
@@ -131,6 +133,7 @@ const listofPages = [
     '/register',
     '/recover',
     '/confirmregistration',
+    '/registrationconfirmed',
     '/confirmpasswordreset',
     '/resetpassword/:token',
     '/successfulpasswordreset',
@@ -181,6 +184,7 @@ const Routes = ({ location }) => {
                 <Switch location={location}>
                     <Route path="/" exact component={Landing} />
                     <Route path="/login" component={Login}/>
+                    <Route path="/registrationconfirmed" component={RegistrationConfirmed} />
                     <Route path="/register" component={Register}/>
                     <Route path="/signout" component={Signout}/>
                     <Route path="/recover" component={Recover}/>
@@ -294,6 +298,7 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             {/* Assigned HSE Queue */}
+                            <Route path="/hse/assignedeligibilityfiltersarticlinput" component={HSEAssignedEligibilityFilterArticleInput} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
                             <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
                             <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />

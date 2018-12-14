@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate, Trans } from 'react-i18next';
 import ContentWrapper from '../Layout/ContentWrapper';
 import requireAuth from '../Pages/requireAuth';
-import { Tooltip } from 'reactstrap';
+// import { Tooltip } from 'reactstrap';
 
 /**
  * Wrap an element and assign automatically an ID,
@@ -10,6 +10,7 @@ import { Tooltip } from 'reactstrap';
  * the hassle of creating new states and class methods.
  * Support only one child and simple text content.
  */
+/*
 class BSTooltip extends Component {
     // static propTypes { content: PropTypes.string }
     state = {
@@ -31,7 +32,7 @@ class BSTooltip extends Component {
         ]
     }
 }
-
+*/
 
 class DashboardMain extends Component {
 

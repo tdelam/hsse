@@ -51,43 +51,31 @@ class HSEPendingEligibilityFiltersBatchfileQueue extends Component {
 
     }
 
-    renderArticles() {
-        
-        if(this.props.pendingArticles != null ) {
-            const rows = Object.entries(this.props.pendingBatchfiles).map(batchfiles => {
+    renderBatchfiles() {
+        if(this.props.pendingBatchfiles != null ) {
+            const rows = Object.entries(this.props.pendingBatchfiles).map(batchfile => {
+                
                 return (
-                    <tr key='1'>
+                    <tr key={batchfile[1]._id}>
                         {/*
                         <td className="text-center">
                             <span className="badge badge-success">{ batchfiles[1].priority }</span>
                         </td>
                         */}
-                        one
+                        <td>Test</td>
+                        <td>{batchfile[1]._id}</td>
                         <td>
-                            two
-                        </td>
-                        <td>
-                            three
+                            {batchfile[1].harvestDate}
                         </td>
                         <td>
-                            <a className="mr-1 badge badge-primary" href="">Four</a>
+                            {batchfile[1].uploadDate}
                         </td>
-                        <td><a className="mr-1 badge badge-primary" href="">Five</a></td>
-                        <td>Six</td>
-                        <td>Seven</td>
-                        
-                            
-                        <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-danger">
-                                <em className="fas fa-trash-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
+                        <td>
+                            <a className="mr-1 badge badge-primary" href="">{batchfile[1].articleSource}</a>
                         </td>
+                        <td><a className="mr-1 badge badge-primary" href="">{batchfile[1].fileName}</a></td>
+                        <td>https://s3.amazonaws.com/hsse-staging/{batchfile[1].batchfileUrl}</td>
+                        <td>{batchfile[1].language}</td>
                         
                     </tr>
                 )
@@ -99,12 +87,12 @@ class HSEPendingEligibilityFiltersBatchfileQueue extends Component {
                         <thead>
                             <tr>
                                 <th data-priority="1">Priority</th>
-                                <th>Source</th>
-                                <th>Date</th>
-                                <th>Other Filterer</th>
                                 <th>Batchfile Id</th>
-                                <th>Title</th>
-                                <th>Author</th>
+                                <th>Harvest Date</th>
+                                <th>Upload Date</th>
+                                <th>Article Source</th>
+                                <th>Filename</th>
+                                <th>Link</th>
                                 <th style={{width:"130px"}} className="text-right" data-priority="2">Language</th>
                             </tr>
                         </thead>
@@ -118,7 +106,7 @@ class HSEPendingEligibilityFiltersBatchfileQueue extends Component {
     };
 
     render() {
-        console.log(this.props.pendingArticles);
+        
         return (
             <ContentWrapper>
                 <div className="content-heading">
@@ -129,7 +117,7 @@ class HSEPendingEligibilityFiltersBatchfileQueue extends Component {
                 <Card className="card-default">
                     <CardHeader>List of pending Batchfiles</CardHeader>
                     <CardBody>
-                        { this.renderArticles() }
+                        { this.renderBatchfiles() }
                     </CardBody>
                 </Card>
             </ContentWrapper>

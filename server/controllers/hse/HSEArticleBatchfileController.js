@@ -29,12 +29,16 @@ exports.getFileUrl = (req, res) => {
 
 exports.create = async (req, res) => {
 
-    const { url } = req.body; 
+    const { url, harvestDate, articleSource, language, fileName } = req.body; 
 
     const newHSEArticleBatchfile = new HSEArticleBatchfileModelClass({
-        batchfileUrl: url
+        batchfileUrl: url,
+        harvestDate,
+        articleSource,
+        language,
+        fileName
     });
-    const savedBatchfile = await newHSEArticleBatchfile.save();
+    await newHSEArticleBatchfile.save();
 
     let articlesArray = [];
     let articleIdArray = [];
@@ -43,11 +47,18 @@ exports.create = async (req, res) => {
     
     articlesArray = parseBatchfile.parseHSEJournalFile(data1.data);
 
-    articlesArray.map( (article) => {
+    articlesArray.map( async (article) => {
 
-        article["_batchfile"] = savedBatchfile._id;
+        await HSEArticleBatchfileModelClass.find({ batchfileUrl: url }, (err, batchfile) => {
+            article._batchFile = batchfile[0]._id;
+            article.language = batchfile[0].language;
+            article.articleSource = batchfile[0].articleSource;
+            article.harvestDate = batchfile[0].harvestDate;
+        });
+
 
         const newHSEArticle = new HSEArticleModelClass(article);
+
         newHSEArticle.save( (err, savedArticle) => {
             if(err) {
                 console.log(err);
@@ -57,6 +68,9 @@ exports.create = async (req, res) => {
             }
     
         });
+
+        return res.status(200).send(newHSEArticleBatchfile);
+
     } ); 
 };
 
@@ -66,7 +80,7 @@ exports.list = (req, res) => {
             return res.send(err);
         } else if(!batchfiles) {
             return res.status(404).send({
-                message: 'No batchfile with that identifier has been found'
+                message: 'No batchfile has been found'
             });
         }
         return res.status(200).send(batchfiles);

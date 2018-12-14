@@ -1,4 +1,4 @@
-import { FETCH_HSE_ARTICLE, CREATE_HSE_ARTICLE, DELETE_HSE_ARTICLE } from '../actions/types';
+import { HSE_FETCH_ARTICLE, HSE_CREATE_ARTICLE, HSE_DELETE_ARTICLE } from '../actions/types';
 
 const INITIAL_STATE = { };
 
@@ -6,11 +6,11 @@ export default function(state = INITIAL_STATE, action) {
 
     switch(action.type) {
 
-        case FETCH_HSE_ARTICLE:
+        case HSE_FETCH_ARTICLE:
             return { ...state, errorMessage: action.payload };
-        case CREATE_HSE_ARTICLE:
+        case HSE_CREATE_ARTICLE:
             return { ...state };
-        case DELETE_HSE_ARTICLE:
+        case HSE_DELETE_ARTICLE:
             return { ...state, errorMessage: action.payload };
         default:
             return state;

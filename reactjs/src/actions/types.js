@@ -5,10 +5,14 @@ export const FORGOT_PASSWORD_EMAIL = 'forgot_password_email';
 
 export const HSE_ARTICLE_ERROR = 'hse_article_error';
 
-export const FETCH_HSE_ARTICLE = 'fetch_hse_article';
-export const CREATE_HSE_ARTICLE = 'create_hse_article';
-export const CREATE_HSE_BATCHFILE = 'create_hse_batchfile';
-export const DELETE_HSE_ARTICLE = 'delete_hse_article';
+export const HSE_FETCH_ARTICLE = 'hse_fetch_article';
+export const HSE_FETCH_ARTICLE_ERROR = 'hse_fetch_article_error';
+export const HSE_CREATE_ARTICLE = 'hse_create_article';
+export const HSE_CREATE_ARTICLE_ERROR = 'hse_create_article_error';
+export const HSE_CREATE_BATCHFILE = 'hse_create_batchfile';
+export const HSE_CREATE_BATCHFILE_ERROR = 'hse_create_batchfile_error';
+
+export const HSE_DELETE_ARTICLE = 'delete_hse_article';
 
 export const SSE_ARTICLE_ERROR = 'sse_article_error';
 

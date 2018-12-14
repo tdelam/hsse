@@ -137,7 +137,7 @@ exports.confirmUser = (req, res, next) => {
     });
 
 
-    return res.redirect(config.frontendServer + "/signin" );
+    return res.redirect(config.frontendServer + "/registrationconfirmed" );
 
 }
 

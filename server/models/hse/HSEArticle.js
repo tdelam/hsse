@@ -51,6 +51,9 @@ const HSEArticleSchema = new Schema({
     priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     source: { type: String },
 
+    articleSource: { type: String },
+    harvestDate: { type: Date, default: Date.now },
+
 
     // Stage completions
 
@@ -102,7 +105,7 @@ const HSEArticleSchema = new Schema({
 /*
     system: { type: String },
     eligible: { type: Boolean, default: false },
-    harvestDate: { type: Date, default: Date.now },
+    
 
 
     // General Article Information

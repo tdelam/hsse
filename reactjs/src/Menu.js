@@ -57,7 +57,7 @@ const Menu = [
     },
     {
         name: 'Social Systems Assigned',
-        icon: 'icon-layers',
+        icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Health',
         submenu: [
             {

@@ -4,9 +4,10 @@ import {
   AUTH_ERROR, 
   CONFIRM_USER_EMAIL, 
   FORGOT_PASSWORD_EMAIL, 
-  CREATE_HSE_ARTICLE, 
-  HSE_ARTICLE_ERROR, 
-  CREATE_HSE_BATCHFILE,
+  HSE_CREATE_ARTICLE,
+  HSE_CREATE_ARTICLE_ERROR,
+  HSE_CREATE_BATCHFILE,
+  HSE_CREATE_BATCHFILE_ERROR,
 
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
@@ -113,30 +114,46 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
 
     history.push('/dashboard');
 
-    dispatch({ type: CREATE_HSE_ARTICLE, payload: response.data })
+    dispatch({ type: HSE_CREATE_ARTICLE, payload: response.data })
 
   } catch(e) {
 
-    dispatch({ type: HSE_ARTICLE_ERROR, payload: 'Error creating Article'});
+    dispatch({ type: HSE_CREATE_ARTICLE_ERROR, payload: 'Error creating Article'});
 
   }
 };
 
-export const submitHSEBatchFile = (values, file, history) => async dispatch => {
+export const submitHSEBatchFile = (state, history) => async dispatch => {console.log(state);
 
   const uploadConfig = await axios.get('/api/hse/getfileurl');
 
-  await axios.put(uploadConfig.data.url, file, {
+  await axios.put(uploadConfig.data.url, state.file, {
     headers: {
-      'Content-Type': file.type,
+      'Content-Type': state.file.type,
     }
   });
 
-  axios.post('/api/hse/batchfile', { url: uploadConfig.data.key } );
-  
-  dispatch({ type: CREATE_HSE_BATCHFILE, payload: '' });
+  const articleBatch = await axios.post('/api/hse/batchfile', { 
+    url: uploadConfig.data.key, 
+    language: state.selectedLanguageOption.label, 
+    articleSource: state.selectedSourceOption.label, 
+    harvestDate: state.harvestDate,
+    fileName: state.file.name
+  });
+  console.log(state.file.name);
+  if(articleBatch) {
+    
+    dispatch({ type: HSE_CREATE_BATCHFILE, payload: 'Batchfile succesfully uploaded' });
 
-  history.push('/hse/pendingeligibilityfiltersqueue');
+    // Successful upload
+    history.push('/hse/pendingeligibilityfiltersarticlequeue');
+
+  }
+
+  // Unsuccesful upload
+  dispatch({ type: HSE_CREATE_BATCHFILE_ERROR, payload: 'Batchfile succesfully uploaded' });
+  history.push('/hse/pendingeligibilityfiltersarticlequeue');
+  console.log("Batchfile upload failed")
 
 };
 
@@ -156,7 +173,7 @@ export const listHSEPendingEligibilityFiltersArticlesQueue = (history) => async 
 
 export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersbatchfilequeue`);
+    const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
 
     // history.push('/dashboard');
     // console.log(response.data);
