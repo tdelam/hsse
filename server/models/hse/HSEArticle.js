@@ -54,6 +54,10 @@ const HSEArticleSchema = new Schema({
     articleSource: { type: String },
     harvestDate: { type: Date, default: Date.now },
 
+    questionType: { type: String },
+    documentType: { type: String },
+    
+
 
     // Stage completions
 

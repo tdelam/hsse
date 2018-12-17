@@ -13,6 +13,8 @@ import {
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
+import Swal from '../Elements/Swal';
+
 
 import * as actions from '../../actions';
 
@@ -47,7 +49,17 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         this.state = {
             modal: false,
             toasterPos: 'top-right',
-            toasterType: 'info'
+            toasterType: 'info',
+            selectedArticleForAssignment: '',
+            swalOption: {
+                title: "Are you sure?",
+                text: "This article will to added to your assigned eligibility & filter list!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, assign it!",
+                closeOnConfirm: false
+            }
         };
 
     }
@@ -56,10 +68,24 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         this.props.listHSEPendingEligibilityFiltersArticlesQueue();
     }
 
-    toggleModal = () => {
+    toggleModal = (articleId) => {
+        console.log(articleId);
         this.setState({
             modal: !this.state.modal
         });
+    }
+
+    toggleModal1 = function(articleId) {
+        console.log(articleId);
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    selectArticleForAssignment = () =>  {
+        this.setState({
+            selectedArticleForAssignment: ''
+        })
     }
 
     renderPriority(priority) {
@@ -77,6 +103,10 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
     }
 
+    swalCallback(isConfirm, swal) {
+        swal("Assigned!", "The article has been assigned to your pending Eligibility & Filter list.", "success");
+    }
+
     renderArticles() {
         
         if(this.props.pendingArticles != null ) {
@@ -90,13 +120,16 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                         */}
                         { this.renderPriority(article[1].priority) }
                         <td>
-                            { article[1].author }
+                            { article[1].articleSource }
                         </td>
                         <td>
-                            { article[1].DOI }
+                            { article[1].harvestDate }
                         </td>
                         <td>
-                            <a className="mr-1 badge badge-primary" href="">Something</a>
+                            <a className="mr-1 badge badge-primary" href="">{article[1]._elibilityFilterInputJunior}</a>
+                        </td>
+                        <td>
+                            {article[1]._elibilityFilterInputSenior}
                         </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
@@ -104,9 +137,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                         <td>{ article[1].language }</td>
 
                         <td className="text-right">
-                            <button type="button" onClick={this.toggleModal} className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
+                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">Assign</Swal>
                         </td>
                     {/*         
                         <td className="text-right">
@@ -132,8 +163,9 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             <tr>
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
-                                <th>Date</th>
-                                <th>Other Filterer</th>
+                                <th>Harvest Date</th>
+                                <th>Junior Filterer</th>
+                                <th>Senior Filterer</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>

@@ -16,7 +16,7 @@ class RegistrationConfirmed extends Component {
                     </div>
                     <div className="card-body">
                         <p className="text-center py-2">REGISTRATION CONFIRMED</p>
-                        <p className="text-center">Your email has been confirm, your acount is not active.</p>
+                        <p className="text-center">Your email has been confirm, your acount is now active.</p>
                         <p className="text-center"><Link to="login">Click here to login</Link></p>
                     </div>
                 </div>

@@ -59,7 +59,7 @@ exports.create = async (req, res) => {
 
         const newHSEArticle = new HSEArticleModelClass(article);
 
-        newHSEArticle.save( (err, savedArticle) => {
+        await newHSEArticle.save( (err, savedArticle) => {
             if(err) {
                 console.log(err);
             } else {
