@@ -10,7 +10,7 @@ const requireSignin = passport.authenticate('local', { session: false });
 
 module.exports = (app) => {
     app.get('/', (req, res, next) => {
-        res.send({ message: "Welcome to McMaster Health Sciences"});
+        res.send({ message: "HSSE API"});
     });
 
     app.get('/auth', requireAuth, (req, res, next) => {

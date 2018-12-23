@@ -64,7 +64,7 @@ exports.create = async (req, res) => {
                 console.log(err);
             } else {
                 articleIdArray = [...articleIdArray, savedArticle._id];
-                console.log(`Successfully save article: [${article["title"]}]`);
+                //console.log(`Successfully save article: [${article["title"]}]`);
             }
     
         });

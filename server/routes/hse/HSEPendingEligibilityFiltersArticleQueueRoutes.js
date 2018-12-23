@@ -1,3 +1,6 @@
+const passport = require('passport');
+const requireAuth = passport.authenticate('jwt', { session: false});
+
 const HSEEligibilityFilterArticleQueueController = require('../../controllers/hse/HSEPendingEligibilityFiltersArticleQueueController');
 
 module.exports = app => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ConfirmRegistration extends Component {
 
@@ -16,6 +17,7 @@ class ConfirmRegistration extends Component {
                     <div className="card-body">
                         <p className="text-center py-2">CONFIRM REGISTRATION</p>
                         <p className="text-center">Please check your email to confirm registration.</p>
+                        <p className="text-center"><Link to="login">Click here to login</Link></p>
                     </div>
                 </div>
                 {/* END card */}

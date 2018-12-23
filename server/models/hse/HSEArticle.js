@@ -62,8 +62,8 @@ const HSEArticleSchema = new Schema({
     // Stage completions
 
     // Eligibility and Filter Input
-    _elibilityFilterInputJunior: { type: Schema.Types.ObjectId, ref: 'HSEUserArticleEligibilityFilters' },
-    _elibilityFilterInputSenior: { type: Schema.Types.ObjectId, ref: 'HSEUserArticleEligibilityFilters' },
+    _elibilityFilterInputJunior: { type: Schema.Types.ObjectId, ref: 'HSEUserArticleEligibilityFilters', default: null },
+    _elibilityFilterInputSenior: { type: Schema.Types.ObjectId, ref: 'HSEUserArticleEligibilityFilters', default: null },
 
     // Elibigility and Filter Completed
     elibilityFilterCompletedJunior: { type: Boolean, default: false },

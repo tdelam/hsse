@@ -32,7 +32,7 @@ exports.create = (req, res) => {
 exports.addArticleToJuniorEligibilityFilterUser = (req, res) => {
 
     const { articleId } = req.params;
-    const authenticatedUser = req.user;
+    const authenticatedUser = req.user; console.log(req);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
         return res.status(400).send({

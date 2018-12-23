@@ -16,6 +16,12 @@ import {
 
   HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
+
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER,
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR,
+
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER,
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR
 } from './types';
 
 //const backendServer = "https://nameless-hollows-27940.herokuapp.com";
@@ -148,12 +154,12 @@ export const submitHSEBatchFile = (state, history) => async dispatch => {console
     // Successful upload
     history.push('/hse/pendingeligibilityfiltersarticlequeue');
 
+  } else {
+    // Unsuccesful upload
+    dispatch({ type: HSE_CREATE_BATCHFILE_ERROR, payload: 'Batchfile succesfully uploaded' });
+    history.push('/hse/pendingeligibilityfiltersarticlequeue');
+    console.log("Batchfile upload failed")
   }
-
-  // Unsuccesful upload
-  dispatch({ type: HSE_CREATE_BATCHFILE_ERROR, payload: 'Batchfile succesfully uploaded' });
-  history.push('/hse/pendingeligibilityfiltersarticlequeue');
-  console.log("Batchfile upload failed")
 
 };
 
@@ -194,5 +200,42 @@ export const listHSEAssignedEligibilityFiltersArticlesQueue = (history) => async
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility article assigned queue'});
+  }
+};
+
+export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
+
+  var headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  }
+
+  try {
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticleaddjuniorfilter/${articleId}`, 
+    {
+      articleId
+    },
+    {
+      headers 
+    });
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR, payload: 'Error assigning junior filter role for article'});
+  }
+};
+
+export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersarticleaddseniorfilter/${articleId}`, {
+      headers: { Authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR, payload: 'Error assigning senior filter role for article'});
   }
 };

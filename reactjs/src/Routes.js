@@ -114,6 +114,7 @@ import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTr
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
+import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
 import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
 import HSEPendingQualityAppraisalQueue from './components/HSE/HSEPendingQualityAppraisalQueue';
@@ -298,7 +299,8 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             {/* Assigned HSE Queue */}
-                            <Route path="/hse/assignedeligibilityfiltersarticlinput" component={HSEAssignedEligibilityFilterArticleInput} />
+                            <Route path="/hse/assignedeligibilityfiltersarticleinput" component={HSEAssignedEligibilityFilterArticleInput} />
+                            <Route path="/hse/assignedeligibilityfiltersarticleresolution" component={HSEAssignedEligibilityFilterResolution} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
                             <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
                             <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />

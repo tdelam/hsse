@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import * as actions from '../../actions';
 
 class Signout extends Component {
@@ -22,6 +24,7 @@ class Signout extends Component {
                     <div className="card-body">
                         <p className="text-center py-2">SIGNOUT</p>
                         <p className="text-center">Your have successfully signed out.</p>
+                        <p className="text-center"><Link to="login">Click here to login</Link></p>
                     </div>
                 </div>
                 {/* END card */}

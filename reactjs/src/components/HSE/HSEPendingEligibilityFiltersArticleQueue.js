@@ -51,7 +51,16 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             toasterPos: 'top-right',
             toasterType: 'info',
             selectedArticleForAssignment: '',
-            swalOption: {
+            swalOptionJunior: {
+                title: "Assign Article",
+                text: "Are you sure you want to assign this article to your assigned eligibility & filter list!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, assign it!",
+                closeOnConfirm: true
+            },
+            swalOptionSenior: {
                 title: "Are you sure?",
                 text: "This article will to added to your assigned eligibility & filter list!",
                 type: "warning",
@@ -107,6 +116,11 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         swal("Assigned!", "The article has been assigned to your pending Eligibility & Filter list.", "success");
     }
 
+    swalCallbackTest(isConfirm, articleId) {
+        if(isConfirm)
+            this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId);
+    }
+
     renderArticles() {
         
         if(this.props.pendingArticles != null ) {
@@ -126,19 +140,21 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            <a className="mr-1 badge badge-primary" href="">{article[1]._elibilityFilterInputJunior}</a>
+                            {article[1]._elibilityFilterInputJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackTest(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
+                            {/*article[1]._elibilityFilterInputJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
                         </td>
                         <td>
-                            {article[1]._elibilityFilterInputSenior}
+                            {article[1]._elibilityFilterInputSenior || <a href=""><Swal options={this.state.swalOptionSenior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>}
                         </td>
-                        <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
+                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
+                        <td>{ article[1]._id }</td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
-
+                        {/*}
                         <td className="text-right">
-                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">Assign</Swal>
-                        </td>
+                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
+                        </td> */}
                     {/*         
                         <td className="text-right">
                             <button type="button" className="btn btn-sm btn-secondary">
@@ -170,7 +186,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>Language</th>
-                                <th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>
+                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
                                 {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
                             </tr>
                         </thead>

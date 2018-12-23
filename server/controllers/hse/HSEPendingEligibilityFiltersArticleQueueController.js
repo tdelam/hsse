@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const UserModelClass = mongoose.model('users');
+
+const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
@@ -30,10 +31,11 @@ exports.create = (req, res) => {
     
 }
 
-exports.addArticleToJuniorEligibilityFilterUser = (req, res) => {
+exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
 
     const { articleId } = req.params;
-    const authenticatedUser = req.user;
+    
+     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
         return res.status(400).send({
@@ -41,7 +43,7 @@ exports.addArticleToJuniorEligibilityFilterUser = (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, (err, article) => {
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -49,14 +51,15 @@ exports.addArticleToJuniorEligibilityFilterUser = (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterJunior !== null) {
+        if(article._elibilityFilterInputJunior !== null) {
             return res.status(404).send({
                 message: 'A junior filter has already been added for this article'
             });
         } else {
 
-            if(hasRole('juniorfilter', req.user) || hasRole('seniorfilter', req.user)) {
-                article._elibilityFilterJunior = req.user._id;
+            if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {console.log(`${article}-----------------------`);
+                article._elibilityFilterInputJunior = user._id;
+                await article.save();
                 return res.status(200).send({
                     message: 'Junior eligibility and filter user added'
                 });
@@ -73,7 +76,10 @@ exports.addArticleToJuniorEligibilityFilterUser = (req, res) => {
 
 exports.addArticleToSeniorEligibilityFilterUser = (req, res) => {
 
-    const { articleId } = req.params;
+    const { articleId } = req.params; 
+    //const userId = Authentication.getUserIdFromToken(req.headers)
+
+    console.log(req.headers);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
         return res.status(400).send({
@@ -89,14 +95,14 @@ exports.addArticleToSeniorEligibilityFilterUser = (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterSenior !== null) {
+        if(article._elibilityFilterInputSenior !== null) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
         } else {
 
             if(hasRole('seniorfilter', req.user)) {
-                article._elibilityFilterSenior = req.user._id;
+                article._elibilityFilterInputSenior = req.user._id;
                 return res.status(200).send({
                     message: 'Junior eligibility and filter user added'
                 });
@@ -113,6 +119,3 @@ exports.addArticleToSeniorEligibilityFilterUser = (req, res) => {
 const hasRole = (role, user) => {
     return user.roles.includes(role);
 }
-
-
-

@@ -20,10 +20,10 @@ const ARTICLE_SOURCES = [
     {value: 'cochrane', label: 'Cochrane'},
     {value: 'plusSR', label: 'PLUS SR'},
     {value: 'pubMedSR', label: 'PubMed SR'},
-    {value: 'healthSystemHealthReformDescriptions', label: 'Health System and Health Reform Descriptions'},
+    {value: 'lilacsSREE', label: 'LILACS SR & EE'},
     {value: 'plusEE', label: 'PLUS EE'},
     {value: 'pubMedEE', label: 'PubMed EE'},
-    {value: 'lilacs', label: 'LILACS'},
+    {value: 'healthSystemHealthReformDescriptions', label: 'Health System and Health Reform Descriptions'},
     {value: 'other', label: 'Other'}
 ]
 
