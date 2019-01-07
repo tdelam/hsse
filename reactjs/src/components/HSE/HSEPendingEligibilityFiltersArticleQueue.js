@@ -61,13 +61,13 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 closeOnConfirm: true
             },
             swalOptionSenior: {
-                title: "Are you sure?",
-                text: "This article will to added to your assigned eligibility & filter list!",
+                title: "Assign Article",
+                text: "Are you sure you want to assign this article to your assigned eligibility & filter list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, assign it!",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }
         };
 
@@ -116,9 +116,14 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         swal("Assigned!", "The article has been assigned to your pending Eligibility & Filter list.", "success");
     }
 
-    swalCallbackTest(isConfirm, articleId) {
+    swalCallbackAssignJunior(isConfirm, articleId) {
         if(isConfirm)
             this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId);
+    }
+
+    swalCallbackAssignSenior(isConfirm, articleId) {
+        if(isConfirm)
+            this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId);
     }
 
     renderArticles() {
@@ -140,11 +145,11 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._elibilityFilterInputJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackTest(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
-                            {/*article[1]._elibilityFilterInputJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
+                            {article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
+                            {/*article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
                         </td>
                         <td>
-                            {article[1]._elibilityFilterInputSenior || <a href=""><Swal options={this.state.swalOptionSenior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>}
+                            {article[1]._elibilityFilterSenior || <a href=""><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></a>}
                         </td>
                         {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
                         <td>{ article[1]._id }</td>

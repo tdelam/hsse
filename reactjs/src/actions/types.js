@@ -47,6 +47,16 @@ export const HSE_PENDING_PRESENTATION_DETAILS_QUEUE_ERROR = 'hse_pending_present
 export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE = 'hse_assigned_eligibility_filters_queue';
 export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'hse_assigned_eligibility_filters_queue_error';
 
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT = 'hse_assigned_eligibility_filters_edit';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR = 'hse_assigned_eligibility_filters_edit_error';
+
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE = 'hse_assigned_eligibility_filters_edit_complete';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR = 'hse_assigned_eligibility_filters_edit_complete_error';
+
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH = 'hse_assigned_eligibility_filters_article_fetch';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR = 'hse_assigned_eligibility_filters_article_fetch_error';
+
+
 export const HSE_ASSIGNED_QUALITY_APPRAISAL_QUEUE = 'hse_assigned_quality_appraisal_queue';
 export const HSE_ASSIGNED_QUALITY_APPRAISAL_QUEUE_ERROR = 'hse_assigned_quality_appraisal_queue_error';
 

@@ -62,16 +62,28 @@ const HSEArticleSchema = new Schema({
     // Stage completions
 
     // Eligibility and Filter Input
-    _elibilityFilterInputJunior: { type: Schema.Types.ObjectId, ref: 'HSEUserArticleEligibilityFilters', default: null },
-    _elibilityFilterInputSenior: { type: Schema.Types.ObjectId, ref: 'HSEUserArticleEligibilityFilters', default: null },
+    _elibilityFilterJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
 
-    // Elibigility and Filter Completed
-    elibilityFilterCompletedJunior: { type: Boolean, default: false },
-    elibilityFilterCompletedSenior: { type: Boolean, default: false },
+    elibilityFilterJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    elibilityFilterSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+
+    // Final inputs for article's elibibility adn filter
+    elibilityFilterFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+
+    // Elibigility and Filter Junior and Senior Input Completed
+    elibilityFilterJuniorCompleted: { type: Boolean, default: false },
+    elibilityFilterSeniorCompleted: { type: Boolean, default: false },
+
+    // Set to true if an article needs to be resolved
+    eligibilityFilterResolve: { type: Boolean, default: false },
+
+    // Set to true if Eligibility and Filter state is complete
+    eligibilityFilterFullCompletion: { type: Boolean, default: false },
 
     // Quality and Appraisal Completed
-    qualityAppraisalCompletedJunior: { type: Boolean, default: false },
-    qualityAppraisalCompletedSenior: { type: Boolean, default: false },
+    qualityAppraisalJuniorCompleted: { type: Boolean, default: false },
+    qualityAppraisalSeniorCompleted: { type: Boolean, default: false },
 
     // Linking Studies Completed
     linkingStudiesCompleted: { type: Boolean, default: false },

@@ -124,7 +124,7 @@ class Login extends Component {
                     </div>
                     <div className="card-body">
                         <p className="text-center py-2">SIGN IN</p>
-                        <form className="mb-3" name="formLogin" onSubmit={ handleSubmit(this.handleSubmit)}>
+                        <form className="mb-3" name="formLogin" onSubmit={ handleSubmit(this.handleSubmit) }>
                             <div className="form-group">
                                 <div className="input-group with-focus">
                                     <Field

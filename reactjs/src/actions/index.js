@@ -11,11 +11,21 @@ import {
 
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT,
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR,
+
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE,
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR,
+
   HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE,
   HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR,
 
   HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH,
+  HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR,
 
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR,
@@ -24,9 +34,12 @@ import {
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR
 } from './types';
 
-//const backendServer = "https://nameless-hollows-27940.herokuapp.com";
-//const backendServer = "http://localhost:5000";
 const backendServer = "/api";
+
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': localStorage.getItem('token') 
+};
 
 export const signup = (formProps, callback) => async dispatch => {
   
@@ -173,7 +186,7 @@ export const listHSEPendingEligibilityFiltersArticlesQueue = (history) => async 
     // console.log(response.data);
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
-    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility article pending queue'});
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility filter article pending queue'});
   }
 };
 
@@ -185,7 +198,7 @@ export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => asyn
     // console.log(response.data);
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
-    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse eligibility batchfile pending queue'});
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse eligibility filter batchfile pending queue'});
   }
 };
 
@@ -199,28 +212,37 @@ export const listHSEAssignedEligibilityFiltersArticlesQueue = (history) => async
     // console.log(response.data);
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
-    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility article assigned queue'});
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility filter article assigned queue'});
   }
 };
 
+export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/assignedeligibilityfiltersarticle/fetcharticle/${articleId}`, { headers });
+  
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse eligibility filter assigned article'});
+  }
+};
+
+
 export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
 
-  var headers = {
-    'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token') 
-  }
-
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticleaddjuniorfilter/${articleId}`, 
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticle/addjuniorfilter/${articleId}`, 
     {
       articleId
     },
     {
       headers 
     });
-    // history.push('/dashboard');
-    // console.log(response.data);
-    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER, payload: response.data })
+    
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER, payload: response.data });
+    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR, payload: 'Error assigning junior filter role for article'});
   }
@@ -228,14 +250,55 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
 
 export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/pendingeligibilityfiltersarticleaddseniorfilter/${articleId}`, {
-      headers: { Authorization: localStorage.getItem('token') }
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticle/addseniorfilter/${articleId}`,
+    {
+      articleId
+    },
+    {
+      headers
     });
 
-    // history.push('/dashboard');
-    // console.log(response.data);
-    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER, payload: response.data })
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER, payload: response.data });
+    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR, payload: 'Error assigning senior filter role for article'});
   }
 };
+
+export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticle/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT, payload: response.data });
+    //history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
+export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
+

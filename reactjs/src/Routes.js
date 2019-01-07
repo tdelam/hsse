@@ -299,8 +299,8 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             {/* Assigned HSE Queue */}
-                            <Route path="/hse/assignedeligibilityfiltersarticleinput" component={HSEAssignedEligibilityFilterArticleInput} />
-                            <Route path="/hse/assignedeligibilityfiltersarticleresolution" component={HSEAssignedEligibilityFilterResolution} />
+                            <Route path="/hse/assignedeligibilityfiltersarticleinput/:articleId" component={HSEAssignedEligibilityFilterArticleInput} />
+                            <Route path="/hse/assignedeligibilityfiltersarticleresolution/:articleId" component={HSEAssignedEligibilityFilterResolution} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
                             <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
                             <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />

@@ -1,8 +1,9 @@
-const HSEPendingEligibilityFilterArticleQueueController = require('../../controllers/hse/HSEPendingEligibilityFiltersArticleQueueController');
+const HSEAssignedEligibilityFiltersArticleQueueController = require('../../controllers/hse/HSEAssignedEligibilityFiltersArticleQueueController');
 
 module.exports = app => {
-    app.get('/hse/assignedeligibilityfiltersarticlequeue', HSEPendingEligibilityFilterArticleQueueController.listArticles);
-    app.get('/hse/assignedeligibilityfiltersarticlequeue/:id', HSEPendingEligibilityFilterArticleQueueController.listArticle);
-    app.post('/hse/assignedeligibilityfiltersarticleaddjuniorfilter/:articleId', HSEPendingEligibilityFilterArticleQueueController.addArticleToJuniorEligibilityFilterUser);
-    app.post('/hse/assignedeligibilityfiltersarticleaddseniorfilter/:articleId', HSEPendingEligibilityFilterArticleQueueController.addArticleToSeniorEligibilityFilterUser);
+    app.get('/hse/assignedeligibilityfiltersarticlequeue', HSEAssignedEligibilityFiltersArticleQueueController.listArticles);
+    app.get('/hse/assignedeligibilityfiltersarticle/fetcharticle/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.fetchArticle);
+
+    app.post('/hse/assignedeligibilityfiltersarticle/savevalues/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterValues);
+    app.post('/hse/assignedeligibilityfiltersarticle/setcompleted/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterComplete);
 }

@@ -9,6 +9,7 @@ require('dotenv').config();
 require('./models/User');
 require('./models/hse/HSEArticleBatchFile');
 require('./models/hse/HSEArticle');
+require('./models/hse/HSEArticleEligibilityFilter');
 require('./models/sse/SSEArticle');
 require('./models/Stage');
 

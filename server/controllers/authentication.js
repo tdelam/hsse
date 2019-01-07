@@ -13,7 +13,7 @@ aws.config.update({
     region: 'us-east-1',
 });
 */
-const UserModelClass = mongoose.model('users');
+const UserModelClass = mongoose.model('Users');
 
 const userToken = (user) => {
     const timestamp = new Date().getTime();

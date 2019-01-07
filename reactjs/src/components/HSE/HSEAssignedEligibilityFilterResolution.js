@@ -1,30 +1,45 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
+import { connect } from 'react-redux';
 import {
     Row,
     Col,
     Card,
     CardHeader,
+    CardFooter,
     CardBody,
     FormGroup,
     FormFeedback,
     FormText,
     Label,
-    InputGroup,
-    InputGroupAddon,
-    InputGroupButtonDropdown,
-    InputGroupText,
+    //InputGroup,
+    //InputGroupAddon,
+    //InputGroupButtonDropdown,
+    //InputGroupText,
     Input,
-    Button,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    //Button,
+    //DropdownToggle,
+    //DropdownMenu,
+    //DropdownItem 
+} from 'reactstrap';
+
+
+import * as actions from '../../actions';
 
 class HSEAssignedEligibilityFilterResolution extends Component {
 
     state = {
         dropdownOpen: false,
         splitButtonOpen: false
+    }
+
+    componentDidMount() {
+        
+        const { history } = this.props;
+        const { articleId } = this.props.match.params;
+
+        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+
     }
 
     toggleDropDown = () => {
@@ -40,17 +55,20 @@ class HSEAssignedEligibilityFilterResolution extends Component {
     }
 
     onSubmit = e => {
-        console.log('Form submitted..');
+
         e.preventDefault();
+        console.log('Form submitted..');
+    
     }
 
     render() {
+        console.log(this.props.currentArticle);
 
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>Form Elements
-                        <small>Standard and custom elements for any form</small>
+                    <div>Eligibility & Filter Article Resolution
+                        <small>Article resolution page</small>
                     </div>
                 </div>
                 {/* START card */}
@@ -62,7 +80,7 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                 <Card className="card-default">
                     <CardHeader>Form elements</CardHeader>
                     <CardBody>
-                        <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
+                        <form className="form-horizontal" method="get" onSubmit={this.onSubmit}>
                             
                             <fieldset>
                                 <legend>Input variants</legend>
@@ -226,7 +244,9 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                                     </div>
                                 </FormGroup>
                             </fieldset>
-                            
+                            <CardFooter className="text-center">
+                                <button type="submit" className="btn btn-info">Resolve</button>
+                            </CardFooter>
                         </form>
                     </CardBody>
                 </Card>
@@ -237,4 +257,14 @@ class HSEAssignedEligibilityFilterResolution extends Component {
 
 }
 
-export default HSEAssignedEligibilityFilterResolution;
+// export default HSEAssignedEligibilityFilterResolution;
+
+function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
+    return {
+        errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
+        currentArticle: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleFetch
+    }
+}
+
+export default connect(mapStateToProps, actions)(HSEAssignedEligibilityFilterResolution);
+

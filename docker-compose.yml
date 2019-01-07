@@ -44,7 +44,7 @@ services:
       #- MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
       - MONGO_URI=mongodb://mongodb:27017/hsse-project
       - NODE_ENV=development
-      - JWT_SECRET=
+      - JWT_SECRET=akfjlaksdjlasfjasdfljiasdfasfksldf
       - FRONTEND_SERVER=http://localhost:3050
       - BACKEND_SERVER=http://localhost:3050/api
       - REGION=us-east-1

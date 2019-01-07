@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-
+/*
 exports.listArticles = async (req, res) => {
      HSEArticleModelClass.find()
         .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
@@ -17,6 +17,21 @@ exports.listArticles = async (req, res) => {
             }
             return res.status(200).send(articles);
         });
+};
+*/
+exports.listArticles = async (req, res) => {
+    HSEArticleModelClass.find()
+       .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
+       .exec(function(err, articles) {
+           if(err) {
+               return res.send(err);
+           } else if(!articles) {
+               return res.status(404).send({
+                   message: 'No article in the Eligibility Filters Article Pending Queue'
+               });
+           }
+           return res.status(200).send(articles);
+       });
 };
 
 exports.listArticle = async (req, res) => {
@@ -51,14 +66,14 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterInputJunior !== null) {
+        if(article._elibilityFilterJunior !== null) {
             return res.status(404).send({
                 message: 'A junior filter has already been added for this article'
             });
         } else {
 
-            if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {console.log(`${article}-----------------------`);
-                article._elibilityFilterInputJunior = user._id;
+            if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
+                article._elibilityFilterJunior = user._id;
                 await article.save();
                 return res.status(200).send({
                     message: 'Junior eligibility and filter user added'
@@ -74,12 +89,11 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
 
 };
 
-exports.addArticleToSeniorEligibilityFilterUser = (req, res) => {
+exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
 
-    const { articleId } = req.params; 
-    //const userId = Authentication.getUserIdFromToken(req.headers)
-
-    console.log(req.headers);
+    const { articleId } = req.params;
+    
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
         return res.status(400).send({
@@ -87,7 +101,7 @@ exports.addArticleToSeniorEligibilityFilterUser = (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, (err, article) => {
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -95,16 +109,17 @@ exports.addArticleToSeniorEligibilityFilterUser = (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterInputSenior !== null) {
+        if(article._elibilityFilterSenior !== null) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
         } else {
 
-            if(hasRole('seniorfilter', req.user)) {
-                article._elibilityFilterInputSenior = req.user._id;
+            if(hasRole('seniorfilter', user)) {
+                article._elibilityFilterSenior = user._id;
+                await article.save();
                 return res.status(200).send({
-                    message: 'Junior eligibility and filter user added'
+                    message: 'Senior eligibility and filter user added'
                 });
             } else {
                 return res.status(400).send({

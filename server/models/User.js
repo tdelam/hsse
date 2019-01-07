@@ -12,7 +12,7 @@ const userSchema = new Schema({
             type: String,
             enum: ['uploader', 'detailer', 'linker', 'appraiser', 'juniorfilter', 'seniorfilter', 'prioritizer', 'administrator']
         }],
-        default: ['uploader'],
+        default: ['uploader', 'juniorfilter', 'seniorfilter'],
         required: 'Please at least one role'
     },
     eligibilityFilterArticles: [{ type: Schema.Types.ObjectId, ref: 'HSEArticles' }],
@@ -46,4 +46,4 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
     });
 }
 
-mongoose.model('users', userSchema);
+mongoose.model('Users', userSchema);

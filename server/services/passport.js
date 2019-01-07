@@ -4,7 +4,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
 
-const UserModelClass = mongoose.model('users');
+const UserModelClass = mongoose.model('Users');
 
 const localOptions = { usernameField: 'email' }
 

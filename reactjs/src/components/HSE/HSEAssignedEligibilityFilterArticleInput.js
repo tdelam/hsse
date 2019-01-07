@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Card, CardHeader, CardBody, Input } from 'reactstrap';
+import { Card, CardHeader, CardBody, Input, FormGroup } from 'reactstrap';
+import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
+
+import * as actions from '../../actions';
+
 import $ from 'jquery';
 // Wizard (jquery.steps)
 import 'jquery-validation/dist/jquery.validate.js';
@@ -17,10 +22,14 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         surname: '',
         email: '',
         address: '',
-        terms: false
+        terms: false,
+        elibigilityFilter: null
     }
 
     componentDidMount() {
+
+        const { history } = this.props;
+        const { articleId } = this.props.match.params;
 
         // VALIDATION
         // -----------------------------------
@@ -42,6 +51,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             transitionEffect: 'slideLeft',
             onStepChanging: (event, currentIndex, newIndex) => {
                 form.validate().settings.ignore = ':disabled,:hidden';
+                console.log('Step changed');
                 return form.valid();
             },
             onFinishing: (event, currentIndex) => {
@@ -51,20 +61,45 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             onFinished: (event, currentIndex) => {
                 // Submit form
                 console.log('Submitted!');
-                console.log(JSON.stringify(this.state));
+                // console.log(JSON.stringify(this.state));
                 // form.submit();
             }
         });
 
         // VERTICAL
         // -----------------------------------
-        $(this.refs.examplevertical).steps({
+        const verticalForm = $(this.refs.examplevertical);
+        
+        verticalForm.steps({
             headerTag: 'h4',
             bodyTag: 'section',
             transitionEffect: 'slideLeft',
-            stepsOrientation: 'vertical'
-        });
+            stepsOrientation: 'vertical',
 
+            onStepChanging: (event, currentIndex, newIndex) => {
+                this.saveValues(articleId, this.state.elibigilityFilter, history);
+                //verticalForm.validate().settings.ignore = ':disabled,:hidden';
+                return true;
+
+            },
+            onFinished: (event, currentIndex) => {
+                // Submit form
+                this.saveAndFinish(articleId, this.state.elibigilityFilter, history);
+                //console.log(JSON.stringify(this.state));
+                // form.submit();
+            }
+        });
+        
+        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+
+    }
+
+    saveValues(articleId, inputValues, history) {
+        this.props.assignHSEPendingEligibilityFiltersArticleEdit(articleId, inputValues, history);
+    }
+
+    saveAndFinish(articleId, inputValues, history) {
+        this.props.assignHSEPendingEligibilityFiltersArticleEditComplete(articleId, inputValues, history);
     }
 
     handleInputChange = event => {
@@ -77,78 +112,135 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
       }
 
     render() {
+        console.log(this.props.currentArticle);
         return (
             <ContentWrapper>
-                <div className="content-heading">Eligibility & Filter </div>
-                <Card className="card-default">
-                    <CardHeader>Basic Form (jquery.validate)</CardHeader>
-                    <CardBody>
-                        <form ref='wizardform' action='#'>
-                            <div>
-                                <h4>Account
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <label htmlFor='userName'>User name *</label>
-                                    <Input id='userName' onChange={this.handleInputChange} value={this.state.userName} name='userName' type='text' className='required' />
-                                    <label htmlFor='password'>Password *</label>
-                                    <Input id='password' onChange={this.handleInputChange} value={this.state.password} name='password' type='text' className='required' />
-                                    <label htmlFor='confirm'>Confirm Password *</label>
-                                    <Input id='confirm' onChange={this.handleInputChange} value={this.state.confirm} name='confirm' type='text' className='required' />
-                                    <p>(*) Mandatory</p>
-                                </fieldset>
-                                <h4>Profile
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <label htmlFor='name'>First name *</label>
-                                    <Input id='name' onChange={this.handleInputChange} value={this.state.name} name='name' type='text' className='required' />
-                                    <label htmlFor='surname'>Last name *</label>
-                                    <Input id='surname' onChange={this.handleInputChange} value={this.state.surname} name='surname' type='text' className='required' />
-                                    <label htmlFor='email'>Email *</label>
-                                    <Input id='email' onChange={this.handleInputChange} value={this.state.email} name='email' type='text' className='required email' />
-                                    <label htmlFor='address'>Address</label>
-                                    <Input id='address' onChange={this.handleInputChange} value={this.state.address} name='address' type='text' />
-                                    <p>(*) Mandatory</p>
-                                </fieldset>
-                                <h4>Hints
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <p className='lead text-center'>Almost there!</p>
-                                </fieldset>
-                                <h4>Finish
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <p className='lead'>One last check</p>
-                                    <div className="checkbox c-checkbox">
-                                        <label>
-                                            <input type="checkbox" required onChange={this.handleInputChange} checked={this.state.terms} name='terms'/>
-                                            <span className="fa fa-check"></span>
-                                            I agree with the Terms and Conditions.
-                                        </label>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </form>
-                    </CardBody>
-                </Card>
+                <div className="content-heading">
+                    <div>Assessing Eligibility and Assigning Filters Articles
+                        <small>Article resolution page</small>
+                    </div>
+                </div>
                 <Card className="card-default">
                     <CardHeader>Basic Vertical Example</CardHeader>
                     <CardBody>
                         <div ref='examplevertical'>
-                            <h4>Keyboard</h4>
+                            <h4>Eligibility</h4>
                             <section>
-                                <p>Try the keyboard navigation by clicking arrow left or right!</p>
+                                {/*<p>Try the keyboard navigation by clicking arrow left or right!</p>*/}
+                                <fieldset>
+                                <legend>Input variants</legend>
+                                <FormGroup row>
+                                    {/*<label className="col-md-2 col-form-label">Custom Checkboxes &amp; radios</label>*/}
+                                    <div className="col-md-6">
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option one</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option two defaultChecke</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option four disabled</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option one</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option two defaultChecke</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option four disabled</label>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option one</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option two defaultChecke</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option four disabled</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option one</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option two defaultChecke</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
+                                        </div>
+                                        <div className="checkbox c-checkbox">
+                                            <label>
+                                                <Input type="checkbox" disabled="" defaultValue=""/>
+                                                <span className="fa fa-check"></span>Option four disabled</label>
+                                        </div>
+                                    </div>
+                                </FormGroup>
+                            </fieldset>
                             </section>
                             <h4>Effects</h4>
                             <section>
                                 <p>Wonderful transition effects.</p>
+                            </section>
+                            <h4>Pager</h4>
+                            <section>
+                                <p>The next and previous buttons help you to navigate through your content.</p>
+                            </section>
+                            <h4>Pager</h4>
+                            <section>
+                                <p>The next and previous buttons help you to navigate through your content.</p>
+                            </section>
+                            <h4>Pager</h4>
+                            <section>
+                                <p>The next and previous buttons help you to navigate through your content.</p>
+                            </section>
+                            <h4>Pager</h4>
+                            <section>
+                                <p>The next and previous buttons help you to navigate through your content.</p>
+                            </section>
+                            <h4>Pager</h4>
+                            <section>
+                                <p>The next and previous buttons help you to navigate through your content.</p>
                             </section>
                             <h4>Pager</h4>
                             <section>
@@ -163,4 +255,11 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
 }
 
-export default HSEAssignedEligibilityFilterArticleInput;
+function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
+    return {
+        errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
+        currentArticle: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleFetch
+    }
+}
+
+export default connect(mapStateToProps, actions)(HSEAssignedEligibilityFilterArticleInput);
