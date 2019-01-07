@@ -312,8 +312,8 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     oldAdults: { type: Boolean, default: false },
 
     // Information for evidence briefs
-    focusOfDocuments: { type: String },
-    keyFindings: { type: String },
+    focusOfDocuments: { type: String, default: '' },
+    keyFindings: { type: String, default: '' },
 
     // Target
 /*
@@ -346,7 +346,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
 
 HSEArticleEligibilityFilterSchema.methods.isEqualTo = function (otherInput) {
 
-    //console.log(this);
+    currentModel = this;
 
     var unEqualFields = 0;
 
@@ -356,13 +356,14 @@ HSEArticleEligibilityFilterSchema.methods.isEqualTo = function (otherInput) {
 
     HSEArticleEligibilityFilterSchema.eachPath(function(path) {
         
-        if( this[path] !== otherInput[path] ) {
+        if( currentModel[path] !== otherInput[path] && path != '_article' && path != '_id') {
+            console.log(`${path}: ${currentModel[path]}, ${path}: ${otherInput[path]}`);
             unEqualFields++;
             console.log(path);
         }
-
+        //console.log(unEqualFields);
+       // console.log(`${path}: ${currentModel[path]}, ${path}: ${otherInput[path]}`);
     });
-    console.log(unEqualFields);
 
     return unEqualFields === 0;
 
@@ -375,4 +376,4 @@ HSEArticleEligibilityFilterSchema.eachPath(function(path) {
 });
 
 var props = Object.keys(HSEArticleEligibilityFilterSchema.paths);
-console.log(props.length);
+//console.log(props.length);

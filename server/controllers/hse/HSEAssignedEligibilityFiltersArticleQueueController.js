@@ -9,7 +9,7 @@ exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find()
+    HSEArticleModelClass.find({ eligibilityFilterFullCompletion: false })
     .or([ { _elibilityFilterJunior: user._id }, { _elibilityFilterSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
@@ -80,6 +80,7 @@ exports.setEligibilityFilterValues = async (req, res) => {
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            newEligibilityFilter._article = articleId;
             newEligibilityFilter.save( (err) => {
 
                 if(err) {
@@ -173,6 +174,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            newEligibilityFilter._article = articleId;
             newEligibilityFilter.save( (err) => {
 
                 if(err) {
@@ -431,6 +433,8 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
             if( newEligibilityFilterJuniorInput.isEqualTo(newEligibilityFilterSeniorInput) ) {
 
                 article.eligibilityFilterFullCompletion = true;
+                await article.save();
+                console.log(`Full completion set`);
                 /*
                 return res.status(201).send({
                     message: 'Eligibility and Filter stage passed for this article'
@@ -439,6 +443,9 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
             } else {
 
                 article.eligibilityFilterResolve = true;
+                article.elibilityFilterFinalInput = newEligibilityFilterSeniorInput;
+                await article.save();
+                console.log(`resolve completion set`);
                 /*
                 return res.status(201).send({
                     message: 'Resolve Eligibility and Filter values for this article'
