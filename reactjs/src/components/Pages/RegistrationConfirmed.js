@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class ConfirmRegistration extends Component {
+class RegistrationConfirmed extends Component {
 
     render() {
         return (
@@ -15,8 +15,8 @@ class ConfirmRegistration extends Component {
                         </a>
                     </div>
                     <div className="card-body">
-                        <p className="text-center py-2">CONFIRM REGISTRATION</p>
-                        <p className="text-center">Please check your email to confirm registration.</p>
+                        <p className="text-center py-2">REGISTRATION CONFIRMED</p>
+                        <p className="text-center">Your email has been confirm, your acount is now active.</p>
                         <p className="text-center"><Link to="login">Click here to login</Link></p>
                     </div>
                 </div>
@@ -33,4 +33,4 @@ class ConfirmRegistration extends Component {
     }
 }
 
-export default ConfirmRegistration;
+export default RegistrationConfirmed;

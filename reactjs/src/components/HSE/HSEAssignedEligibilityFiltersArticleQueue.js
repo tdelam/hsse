@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 import * as actions from '../../actions';
 
@@ -30,10 +29,10 @@ const dtOptions = {
     }
 }
 
-class HSEPendingEligibilityFiltersQueue extends Component {
+class HSEAssignedEligibilityFiltersArticleQueue extends Component {
 
     componentDidMount() {
-        this.props.listHSEPendingEligibilityFiltersQueueArticles();
+        this.props.listHSEAssignedEligibilityFiltersArticlesQueue();
     }
 
     renderPriority(priority) {
@@ -53,8 +52,8 @@ class HSEPendingEligibilityFiltersQueue extends Component {
 
     renderArticles() {
         
-        if(this.props.pendingArticles != null ) {
-            const rows = Object.entries(this.props.pendingArticles).map(article => {
+        if(this.props.assignedArticles != null ) {
+            const rows = Object.entries(this.props.assignedArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>
                         {/*
@@ -67,7 +66,7 @@ class HSEPendingEligibilityFiltersQueue extends Component {
                             { article[1].author }
                         </td>
                         <td>
-                            { article[1].DOI }
+                            { article[1].harvestDate }
                         </td>
                         <td>
                             <a className="mr-1 badge badge-primary" href="">Something</a>
@@ -75,8 +74,17 @@ class HSEPendingEligibilityFiltersQueue extends Component {
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
-                        
+                        <td>{ article[1].language }</td>
+                        {/*<td>{ article[1].eligibilityFilterResolve ? <a className="mr-1 badge badge-danger" href="">Resolve</a> : "Incomplete" }</td> */}
+                        <td>{ article[1].eligibilityFilterResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedeligibilityfiltersarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
+                        <td className="text-right">
                             
+                            <Link to={{ pathname: "/hse/assignedeligibilityfiltersarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>
+                            {/*<button type="button" className="btn btn-sm btn-secondary">
+                                <em className="fas fa-pencil-alt"></em>
+                            </button>*/}
+                        </td>
+                    {/*         
                         <td className="text-right">
                             <button type="button" className="btn btn-sm btn-secondary">
                                 <em className="fas fa-pencil-alt"></em>
@@ -88,7 +96,7 @@ class HSEPendingEligibilityFiltersQueue extends Component {
                                 <em className="fa fa-check"></em>
                             </button>
                         </td>
-                        
+                    */}    
                     </tr>
                 )
             });
@@ -100,12 +108,15 @@ class HSEPendingEligibilityFiltersQueue extends Component {
                             <tr>
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
-                                <th>Date</th>
+                                <th>Harvest Date</th>
                                 <th>Other Filterer</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
-                                <th style={{width:"130px"}} className="text-right" data-priority="2">Language</th>
+                                <th>Language</th>
+                                <th>Status</th>
+                                <th style={{width:"10px"}} className="text-right" data-priority="2">Edit</th>
+                                {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -118,12 +129,12 @@ class HSEPendingEligibilityFiltersQueue extends Component {
     };
 
     render() {
-        console.log(this.props.pendingArticles);
+        
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Assessing Eligibility and Assigning Filters
-                            <small>Health Systems Evidence - Main Queue</small>
+                        <div>Assessing Eligibility and Assigning Filters Articles
+                            <small>Health Systems Evidence - Assigned Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -137,13 +148,12 @@ class HSEPendingEligibilityFiltersQueue extends Component {
     }
 }
 
-function mapStateToProps({ hsePendingEligibilityFiltersQueue }) {
-    return { 
-        errorMessage: hsePendingEligibilityFiltersQueue.hsePendingEligibilityFiltersErrorMessage,
-        pendingArticles: hsePendingEligibilityFiltersQueue.hsePendingEligibilityFiltersArticles 
+function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
+    return {
+        errorMessage: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleErrorMessage,
+        assignedArticles: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEPendingEligibilityFiltersQueue);
-
+export default connect(mapStateToProps, actions)(HSEAssignedEligibilityFiltersArticleQueue);
 

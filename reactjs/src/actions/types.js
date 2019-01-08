@@ -5,10 +5,14 @@ export const FORGOT_PASSWORD_EMAIL = 'forgot_password_email';
 
 export const HSE_ARTICLE_ERROR = 'hse_article_error';
 
-export const FETCH_HSE_ARTICLE = 'fetch_hse_article';
-export const CREATE_HSE_ARTICLE = 'create_hse_article';
-export const CREATE_HSE_BATCHFILE = 'create_hse_batchfile';
-export const DELETE_HSE_ARTICLE = 'delete_hse_article';
+export const HSE_FETCH_ARTICLE = 'hse_fetch_article';
+export const HSE_FETCH_ARTICLE_ERROR = 'hse_fetch_article_error';
+export const HSE_CREATE_ARTICLE = 'hse_create_article';
+export const HSE_CREATE_ARTICLE_ERROR = 'hse_create_article_error';
+export const HSE_CREATE_BATCHFILE = 'hse_create_batchfile';
+export const HSE_CREATE_BATCHFILE_ERROR = 'hse_create_batchfile_error';
+
+export const HSE_DELETE_ARTICLE = 'delete_hse_article';
 
 export const SSE_ARTICLE_ERROR = 'sse_article_error';
 
@@ -18,8 +22,16 @@ export const CREATE_SSE_BATCHFILE = 'create_sse_batchfile';
 export const DELETE_SSE_ARTICLE = 'delete_sse_article';
 
 // HSE PENDING QUEUE
-export const HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE = 'hse_pending_eligibility_filters_queue';
-export const HSE_PENDING_ELIGIBILITY_FILTERS_QUEUE_ERROR = 'hse_pending_eligibility_filters_queue_error';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER = 'hse_pending_eligibility_filters_article_assign_juniorfilter';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR = 'hse_pending_eligibility_filters_article_assign_juniorfilter_error';
+
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER = 'hse_pending_eligibility_filters_article_assign_seniorfilter';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR = 'hse_pending_eligibility_filters_article_assign_seniorfilter_error';
+
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE = 'hse_pending_eligibility_filters_article_queue';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE = 'hse_pending_eligibility_filters_batchfile_queue';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'hse_pending_eligibility_filters_article_queue_error';
+export const HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR = 'hse_pending_eligibility_filters_batchfile_queue_error';
 
 export const HSE_PENDING_QUALITY_APPRAISAL_QUEUE = 'hse_pending_quality_appraisal_queue';
 export const HSE_PENDING_QUALITY_APPRAISAL_QUEUE_ERROR = 'hse_pending_quality_appraisal_queue_error';
@@ -32,8 +44,18 @@ export const HSE_PENDING_PRESENTATION_DETAILS_QUEUE_ERROR = 'hse_pending_present
 
 
 // HSE ASSIGNED QUEUE
-export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_QUEUE = 'hse_assigned_eligibility_filters_queue';
-export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_QUEUE_ERROR = 'hse_assigned_eligibility_filters_queue_error';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE = 'hse_assigned_eligibility_filters_queue';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'hse_assigned_eligibility_filters_queue_error';
+
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT = 'hse_assigned_eligibility_filters_edit';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR = 'hse_assigned_eligibility_filters_edit_error';
+
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE = 'hse_assigned_eligibility_filters_edit_complete';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR = 'hse_assigned_eligibility_filters_edit_complete_error';
+
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH = 'hse_assigned_eligibility_filters_article_fetch';
+export const HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR = 'hse_assigned_eligibility_filters_article_fetch_error';
+
 
 export const HSE_ASSIGNED_QUALITY_APPRAISAL_QUEUE = 'hse_assigned_quality_appraisal_queue';
 export const HSE_ASSIGNED_QUALITY_APPRAISAL_QUEUE_ERROR = 'hse_assigned_quality_appraisal_queue_error';

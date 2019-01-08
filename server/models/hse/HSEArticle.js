@@ -51,16 +51,39 @@ const HSEArticleSchema = new Schema({
     priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     source: { type: String },
 
+    articleSource: { type: String },
+    harvestDate: { type: Date, default: Date.now },
+
+    questionType: { type: String },
+    documentType: { type: String },
+    
+
 
     // Stage completions
 
-    // Elibigility and Filter Completed
-    elibilityFilterCompletedJunior: { type: Boolean, default: false },
-    elibilityFilterCompletedSenior: { type: Boolean, default: false },
+    // Eligibility and Filter Input
+    _elibilityFilterJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+
+    elibilityFilterJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    elibilityFilterSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+
+    // Final inputs for article's elibibility adn filter
+    elibilityFilterFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+
+    // Elibigility and Filter Junior and Senior Input Completed
+    elibilityFilterJuniorCompleted: { type: Boolean, default: false },
+    elibilityFilterSeniorCompleted: { type: Boolean, default: false },
+
+    // Set to true if an article needs to be resolved
+    eligibilityFilterResolve: { type: Boolean, default: false },
+
+    // Set to true if Eligibility and Filter state is complete
+    eligibilityFilterFullCompletion: { type: Boolean, default: false },
 
     // Quality and Appraisal Completed
-    qualityAppraisalCompletedJunior: { type: Boolean, default: false },
-    qualityAppraisalCompletedSenior: { type: Boolean, default: false },
+    qualityAppraisalJuniorCompleted: { type: Boolean, default: false },
+    qualityAppraisalSeniorCompleted: { type: Boolean, default: false },
 
     // Linking Studies Completed
     linkingStudiesCompleted: { type: Boolean, default: false },
@@ -98,7 +121,7 @@ const HSEArticleSchema = new Schema({
 /*
     system: { type: String },
     eligible: { type: Boolean, default: false },
-    harvestDate: { type: Date, default: Date.now },
+    
 
 
     // General Article Information

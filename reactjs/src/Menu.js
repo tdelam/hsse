@@ -4,13 +4,13 @@ const Menu = [
         translate: 'sidebar.heading.HEADER'
     },
     {
-        name: 'Dashboard',
+        name: 'Dashboards',
         icon: 'icon-speedometer',
         translate: 'sidebar.nav.DASHBOARD',
-        label: { value: 3, color: 'success' },
+        /*label: { value: 3, color: 'success' },*/
         submenu: [{
-                name: 'Dashboard v3',
-                path: 'dashboardv3'
+                name: 'Main Dashboard',
+                path: '/dashboardmain'
             }
         ]
     },
@@ -25,7 +25,7 @@ const Menu = [
         submenu: [
             {
                 name: ' Elibigility & Filters',
-                path: '/hse/assignedeligibilityfiltersqueue',
+                path: '/hse/assignedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.ASSIGNEDELIGIBILITYFILTERS'
             },
             {
@@ -57,7 +57,7 @@ const Menu = [
     },
     {
         name: 'Social Systems Assigned',
-        icon: 'icon-layers',
+        icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Health',
         submenu: [
             {
@@ -110,9 +110,14 @@ const Menu = [
                 translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
             },
             {
-                name: 'Elibigility & Filters',
-                path: '/hse/pendingeligibilityfiltersqueue',
-                translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERS'
+                name: 'Elibigility & Filters Article',
+                path: '/hse/pendingeligibilityfiltersarticlequeue',
+                translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
+            },
+            {
+                name: 'Elibigility & Filters Batch',
+                path: '/hse/pendingeligibilityfiltersbatchfilequeue',
+                translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
             },
             {
                 name: 'Quality Appraisal',

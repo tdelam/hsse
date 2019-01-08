@@ -13,7 +13,7 @@ aws.config.update({
     region: 'us-east-1',
 });
 */
-const UserModelClass = mongoose.model('users');
+const UserModelClass = mongoose.model('Users');
 
 const userToken = (user) => {
     const timestamp = new Date().getTime();
@@ -137,7 +137,7 @@ exports.confirmUser = (req, res, next) => {
     });
 
 
-    return res.redirect(config.frontendServer + "/signin" );
+    return res.redirect(config.frontendServer + "/registrationconfirmed" );
 
 }
 
@@ -220,4 +220,31 @@ exports.sendPasswordResetEmail = (req, res, next) => {
         }
 
     });
+}
+
+const getUserIdFromToken = (token) => {
+    return jwt.decode(token, process.env.JWT_SECRET).sub;
+}
+/*
+exports.getUserFromToken = (token) => {
+
+    const userId = getUserIdFromToken(token);
+
+    UserModelClass.findOne({ _id: userId }, (err, existingUser) => {
+        
+        if (err) { 
+            return null; 
+        }
+        
+        return existingUser;
+
+    });
+}
+*/
+
+exports.getUserFromToken = (token) => {
+
+    const userId = getUserIdFromToken(token);
+
+    return UserModelClass.findOne({ _id: userId }).exec();
 }

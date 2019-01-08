@@ -29,33 +29,83 @@ exports.getFileUrl = (req, res) => {
 
 exports.create = async (req, res) => {
 
-    const { url } = req.body; 
+    const { url, harvestDate, articleSource, language, fileName } = req.body; 
 
     const newHSEArticleBatchfile = new HSEArticleBatchfileModelClass({
-        batchfileUrl: url
+        batchfileUrl: url,
+        harvestDate,
+        articleSource,
+        language,
+        fileName
     });
-    const savedBatchfile = await newHSEArticleBatchfile.save();
+    await newHSEArticleBatchfile.save();
 
     let articlesArray = [];
     let articleIdArray = [];
 
-    const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/${url}`); 
+    const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/${url}`);
     
     articlesArray = parseBatchfile.parseHSEJournalFile(data1.data);
 
-    articlesArray.map( (article) => {
+    articlesArray.map( async (article) => {
 
-        article["_batchfile"] = savedBatchfile._id;
+        await HSEArticleBatchfileModelClass.find({ batchfileUrl: url }, (err, batchfile) => {
+            article._batchFile = batchfile[0]._id;
+            article.language = batchfile[0].language;
+            article.articleSource = batchfile[0].articleSource;
+            article.harvestDate = batchfile[0].harvestDate;
+        });
+
 
         const newHSEArticle = new HSEArticleModelClass(article);
-        newHSEArticle.save( (err, savedArticle) => {
+
+        await newHSEArticle.save( (err, savedArticle) => {
             if(err) {
                 console.log(err);
             } else {
                 articleIdArray = [...articleIdArray, savedArticle._id];
-                console.log(`Successfully save article: [${article["title"]}]`);
+                //console.log(`Successfully save article: [${article["title"]}]`);
             }
     
         });
+
+        return res.status(200).send(newHSEArticleBatchfile);
+
     } ); 
 };
+
+exports.list = (req, res) => {
+    HSEArticleBatchfileModelClass.find( (err, batchfiles) => {
+        if(err) {
+            return res.send(err);
+        } else if(!batchfiles) {
+            return res.status(404).send({
+                message: 'No batchfile has been found'
+            });
+        }
+        return res.status(200).send(batchfiles);
+    });
+};
+
+exports.read = (req, res) => {
+
+    const { batchfileId } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(batchfileId)) {
+        return res.status(400).send({
+            message: 'Invalid batchfile Id'
+        });
+    }
+
+    HSEArticleModelClass.findById(batchfileId, (err, batchfile) => {
+        if(err) {
+            return res.send(err);
+        } else if(!batchfile) {
+            return res.status(404).send({
+                message: 'No batchfile with that identifier has been found'
+            });
+        }
+        return res.status(200).send(batchfile);
+    });
+
+}

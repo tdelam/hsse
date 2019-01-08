@@ -10,6 +10,8 @@ import BasePage from './components/Layout/BasePage';
 import DashboardV2 from './components/Dashboard/DashboardV2';
 import DashboardV3 from './components/Dashboard/DashboardV3';
 
+import DashboardMain from './components/Dashboard/DashboardMain';
+
 import Widgets from './components/Widgets/Widgets';
 
 import Buttons from './components/Elements/Buttons';
@@ -53,6 +55,7 @@ import FormCropper from './components/Forms/FormCropper';
 import Login from './components/Pages/Login';
 import Signout from './components/Pages/Signout';
 import Register from './components/Pages/Register';
+import RegistrationConfirmed from './components/Pages/RegistrationConfirmed';
 import Recover from './components/Pages/Recover';
 import ConfirmRegistration from './components/Pages/ConfirmRegistration';
 import ConfirmPasswordReset from './components/Pages/ConfirmPasswordReset';
@@ -101,7 +104,8 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
-import HSEAssignedEligibilityFiltersQueue from './components/HSE/HSEAssignedEligibilityFiltersQueue';
+import HSEAssignedEligibilityFilterArticleInput from './components/HSE/HSEAssignedEligibilityFilterArticleInput';
+import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalQueue from './components/HSE/HSEAssignedQualityAppraisalQueue';
 import HSEAssignedLinkingStudiesQueue from './components/HSE/HSEAssignedLinkingStudiesQueue';
 import HSEAssignedPresentationDetailsQueue from './components/HSE/HSEAssignedPresentationDetailsQueue';
@@ -110,7 +114,9 @@ import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTr
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
-import HSEPendingEligibilityFiltersQueue from './components/HSE/HSEPendingEligibilityFiltersQueue';
+import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
+import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
+import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
 import HSEPendingQualityAppraisalQueue from './components/HSE/HSEPendingQualityAppraisalQueue';
 import HSEPendingLinkingStudiesQueue from './components/HSE/HSEPendingLinkingStudiesQueue';
 import HSEPendingPresentationDetailsQueue from './components/HSE/HSEPendingPresentationDetailsQueue';
@@ -128,6 +134,7 @@ const listofPages = [
     '/register',
     '/recover',
     '/confirmregistration',
+    '/registrationconfirmed',
     '/confirmpasswordreset',
     '/resetpassword/:token',
     '/successfulpasswordreset',
@@ -178,6 +185,7 @@ const Routes = ({ location }) => {
                 <Switch location={location}>
                     <Route path="/" exact component={Landing} />
                     <Route path="/login" component={Login}/>
+                    <Route path="/registrationconfirmed" component={RegistrationConfirmed} />
                     <Route path="/register" component={Register}/>
                     <Route path="/signout" component={Signout}/>
                     <Route path="/recover" component={Recover}/>
@@ -206,6 +214,8 @@ const Routes = ({ location }) => {
                             
                             <Route path="/dashboardv2" component={DashboardV2}/>
                             <Route path="/dashboardv3" component={DashboardV3}/>
+
+                            <Route path="/dashboardmain" component={DashboardMain}/>
 
                             {/*Widgets*/}
                             <Route path="/widgets" component={Widgets}/>
@@ -289,18 +299,21 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             {/* Assigned HSE Queue */}
-                            <Route path="/hseassignedeligibilityfiltersqueue" component={HSEAssignedEligibilityFiltersQueue} />
-                            <Route path="/hseassignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
-                            <Route path="/hseassignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
-                            <Route path="/hseassignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
-                            <Route path="/hseassignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
-                            <Route path="/hseassignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
+                            <Route path="/hse/assignedeligibilityfiltersarticleinput/:articleId" component={HSEAssignedEligibilityFilterArticleInput} />
+                            <Route path="/hse/assignedeligibilityfiltersarticleresolution/:articleId" component={HSEAssignedEligibilityFilterResolution} />
+                            <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
+                            <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
+                            <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
+                            <Route path="/hse/assignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
+                            <Route path="/hse/assignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
+                            <Route path="/hse/assignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
 
 
                             {/* Pending HSE Queue */}
                             <Route path="/hse/addarticle" component={AddHSEArticle} />
                             <Route path="/hse/batchfileupload" component={HSEBatchUpload} />
-                            <Route path="/hse/pendingeligibilityfiltersqueue" component={HSEPendingEligibilityFiltersQueue} />
+                            <Route path="/hse/pendingeligibilityfiltersarticlequeue" component={HSEPendingEligibilityFiltersArticleQueue} />
+                            <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />
                             <Route path="/hse/pendingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
                             <Route path="/hse/pendinglinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
                             <Route path="/hse/pendingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />

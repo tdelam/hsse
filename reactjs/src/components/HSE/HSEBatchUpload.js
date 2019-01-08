@@ -20,10 +20,10 @@ const ARTICLE_SOURCES = [
     {value: 'cochrane', label: 'Cochrane'},
     {value: 'plusSR', label: 'PLUS SR'},
     {value: 'pubMedSR', label: 'PubMed SR'},
-    {value: 'healthSystemHealthReformDescriptions', label: 'Health System and Health Reform Descriptions'},
+    {value: 'lilacsSREE', label: 'LILACS SR & EE'},
     {value: 'plusEE', label: 'PLUS EE'},
     {value: 'pubMedEE', label: 'PubMed EE'},
-    {value: 'lilacs', label: 'LILACS'},
+    {value: 'healthSystemHealthReformDescriptions', label: 'Health System and Health Reform Descriptions'},
     {value: 'other', label: 'Other'}
 ]
 
@@ -40,24 +40,57 @@ const LANGUAGES = [
 class HSEBatchUpload extends Component {
 
     state = {
+
+        selectedSourceOption: '',
+        selectedLanguageOption: '',
+
         languages: [],
         articleSources: [],
         files: [],
-        file: null
+        file: null,
+
+        harvestDate: new Date()
     }
 
-    
-
     onFileChange(event) {
+        this.setState({ file: event.target.files[0] });
+    }
+
+    onDateChange(event) {
+        this.setState({ harvestDate: event._d })
+    }
+
+/*
+    onLanguageChange(event) {
         this.setState({ file: event.target.files[0] })
+    }
+
+    onArticleSourceChange(event) {
+        this.setState({ file: event.target.files[0] })
+    }
+
+    onHarvestDateChange(event) {
+        this.setState({ file: event.target.files[0] })
+    }
+*/
+    handleChangeSourceSelect = (selectedSourceOption) => {
+        this.setState({ selectedSourceOption });
+        //console.log(`Selected: ${selectedSourceOption.label}`);
+    }
+
+    handleChangeLanguageSelect = (selectedLanguageOption) => {
+        this.setState({ selectedLanguageOption });
+        //console.log(`Selected: ${selectedLanguageOption.label}`);
     }
 
     onSubmit = (event) => {
         event.preventDefault();
 
-        const { submitHSEBatchFile, history, formValues } = this.props;
+        const { submitHSEBatchFile, history } = this.props;
 
-        submitHSEBatchFile(formValues, this.state.file, history);
+        submitHSEBatchFile(this.state, history);
+
+        //console.log(this.state);
         
     }
 
@@ -92,12 +125,10 @@ class HSEBatchUpload extends Component {
         );
     };
 
-    handleChangeSelect = (name, newVal) => {
-        this.setState({
-            [name]: newVal
-        });
+    handleChangeSelect = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`Selected: ${selectedOption.label}`);
     }
-
 
     onDrop = files => this.setState({ files: files[0] })
 
@@ -108,7 +139,13 @@ class HSEBatchUpload extends Component {
     )
 
     render() {
-        //let allFiles = this.state.files;
+
+        const { selectedLanguageOption } = this.state;
+        const languageValue = selectedLanguageOption && selectedLanguageOption.value;
+
+        const { selectedSourceOption } = this.state;
+        const SourceValue = selectedSourceOption && selectedSourceOption.value;
+
         return (
             <ContentWrapper>
                 <div className="content-heading">
@@ -157,7 +194,7 @@ class HSEBatchUpload extends Component {
                                     <div className="card-title">HSE Article Upload</div>
                                 </CardHeader>
                                 <CardBody>
-                                    <legend className="mb-4">Select a Batch File</legend>
+                                    <legend className="mb-4">Batchfile Options</legend>
         
                                     <fieldset>
                                         <div className="form-group row align-items-center">
@@ -180,13 +217,12 @@ class HSEBatchUpload extends Component {
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Languages</label>
                                             <Col md={ 6 }>
-                                            <Select
-                                                name="languages"
-                                                //simpleValue
-                                                value={this.state.languages}
-                                                onChange={this.handleChangeSelect.bind(this, 'languages')}
-                                                options={LANGUAGES}
-                                            />
+                                                <Select
+                                                    name="languages"
+                                                    value={languageValue}
+                                                    onChange={this.handleChangeLanguageSelect}
+                                                    options={LANGUAGES}
+                                                />
                                             </Col>
                                         </div>
                                     </fieldset>
@@ -197,35 +233,24 @@ class HSEBatchUpload extends Component {
                                             <Col md={ 6 }>
                                             <Select
                                                 name="articleSources"
-                                                //simpleValue
-                                                value={this.state.articleSources}
-                                                onChange={this.handleChangeSelect.bind(this, 'articleSources')}
+                                                value={SourceValue}
+                                                onChange={this.handleChangeSourceSelect}
                                                 options={ARTICLE_SOURCES}
                                             />
                                             </Col>
                                         </div>
                                     </fieldset>
-
-                                    <fieldset>
-                                        <div className="form-group row mb">
-                                            <label className="col-md-2 col-form-label mb">Article Source</label>
-                                            <Col md={ 6 }>
-                                            <Select
-                                            name="select-name"
-                                            placeholder="Please select..."
-                                            value={this.state.articleSources}
-                                            onChange={this.handleChangeSelect}
-                                            options={ARTICLE_SOURCES}
-                                        />
-                                            </Col>
-                                        </div>
-                                    </fieldset>                     
-                    
                                     <fieldset>
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Harvest Date</label>
                                             <Col md={ 6 }>
-                                                <Datetime dateFormat="YYYY-MM-DD" timeFormat={false} inputProps={{className: 'form-control'}}/>
+                                                <Datetime 
+                                                    dateFormat="YYYY-MM-DD" 
+                                                    timeFormat={false} 
+                                                    inputProps={{className: 'form-control'}}
+                                                    onChange={this.onDateChange.bind(this)}
+                                                    defaultValue=""
+                                                    />
                                             </Col>
                                         </div>
                                     </fieldset>
