@@ -66,11 +66,12 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
+        /*
         if(article._elibilityFilterJunior !== null) {
             return res.status(404).send({
                 message: 'A junior filter has already been added for this article'
             });
-        } else {
+        } */else {
 
             if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
                 article._elibilityFilterJunior = user._id;
@@ -108,12 +109,12 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        }
-        if(article._elibilityFilterSenior !== null) {
+        } /*
+        if(/*article._elibilityFilterSenior !== null) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
-        } else {
+        } else */{
 
             if(hasRole('seniorfilter', user)) {
                 article._elibilityFilterSenior = user._id;

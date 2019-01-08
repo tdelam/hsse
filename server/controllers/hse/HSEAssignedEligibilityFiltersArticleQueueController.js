@@ -9,7 +9,7 @@ exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ eligibilityFilterFullCompletion: false })
+    HSEArticleModelClass.find()
     .or([ { _elibilityFilterJunior: user._id }, { _elibilityFilterSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
