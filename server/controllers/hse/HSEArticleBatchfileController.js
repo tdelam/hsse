@@ -69,9 +69,11 @@ exports.create = async (req, res) => {
     
         });
 
-        return res.status(200).send(newHSEArticleBatchfile);
+        // return res.status(200).send(newHSEArticleBatchfile);
 
-    } ); 
+    });
+
+    return res.status(200).send(newHSEArticleBatchfile);
 };
 
 exports.list = (req, res) => {

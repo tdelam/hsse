@@ -74,7 +74,10 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
         } */else {
 
             if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
+
                 article._elibilityFilterJunior = user._id;
+                article._elibilityFilterJuniorEmail = user.email;
+
                 await article.save();
                 return res.status(200).send({
                     message: 'Junior eligibility and filter user added'
@@ -117,7 +120,10 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
         } else */{
 
             if(hasRole('seniorfilter', user)) {
+
                 article._elibilityFilterSenior = user._id;
+                article._elibilityFilterSeniorEmail = user.email;
+
                 await article.save();
                 return res.status(200).send({
                     message: 'Senior eligibility and filter user added'

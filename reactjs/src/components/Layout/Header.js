@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import pubsub from 'pubsub-js';
 import { Link } from 'react-router-dom';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, ListGroup, ListGroupItem } from 'reactstrap';
@@ -8,11 +9,15 @@ import TriggerResize from '../Common/TriggerResize';
 import ToggleFullscreen from '../Common/ToggleFullscreen';
 import HeaderRun from './Header.run'
 
+import * as actions from '../../actions';
+
 class Header extends Component {
 
     componentDidMount() {
 
         HeaderRun();
+
+        this.props.currentUser();
 
     }
 
@@ -172,4 +177,13 @@ class Header extends Component {
 
 }
 
-export default Header;
+// export default Header;
+
+function mapStateToProps({ auth }) {
+    return {
+        errorMessage: auth.errorMessage,
+        user: auth.currentUser
+    }
+}
+
+export default connect(mapStateToProps, actions)(Header);

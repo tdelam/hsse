@@ -63,7 +63,10 @@ const HSEArticleSchema = new Schema({
 
     // Eligibility and Filter Input
     _elibilityFilterJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFilterJuniorEmail: { type: String, default: null },
+
     _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFilterSeniorEmail: { type: String, default: null },
 
     elibilityFilterJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
     elibilityFilterSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },

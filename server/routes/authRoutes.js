@@ -23,4 +23,6 @@ module.exports = (app) => {
     app.get('/confirmuser/:token', Authentication.confirmUser);
     app.post('/forgotpassword', Authentication.sendPasswordResetEmail);
     app.post('/resetpassword/:token', Authentication.resetPassword);
+
+    app.get('/currentuser', Authentication.currentUser);
 };

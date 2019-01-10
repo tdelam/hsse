@@ -141,6 +141,16 @@ exports.confirmUser = (req, res, next) => {
 
 }
 
+exports.currentUser = async (req, res, next) => {
+
+    const userId = getUserIdFromToken(req.headers.authorization);
+
+    const user = await UserModelClass.findOne({ _id: userId }).exec();
+
+    return res.status(200).send({ user });
+
+}
+
 exports.resetPassword = (req, res, next) => {
 
     console.log("**************** INSIDE RESET PASSWORD *******************");
@@ -242,9 +252,9 @@ exports.getUserFromToken = (token) => {
 }
 */
 
-exports.getUserFromToken = (token) => {
+exports.getUserFromToken = async (token) => {
 
     const userId = getUserIdFromToken(token);
 
-    return UserModelClass.findOne({ _id: userId }).exec();
+    return await UserModelClass.findOne({ _id: userId }).exec();
 }
