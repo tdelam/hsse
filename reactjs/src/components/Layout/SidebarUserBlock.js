@@ -9,8 +9,6 @@ class SidebarUserBlock extends Component {
     }
 
     componentDidMount() {
-        
-        this.props.currentUser();
 
         this.pubsub_token = pubsub.subscribe('toggleUserblock', () => {
             this.setState({
@@ -23,7 +21,7 @@ class SidebarUserBlock extends Component {
         pubsub.unsubscribe(this.pubsub_token);
     }
 
-    render() {console.log(this.props.user);
+    render() {
         return (
             <Collapse id="user-block" isOpen={ this.state.userBlockCollapse }>
                 <div>

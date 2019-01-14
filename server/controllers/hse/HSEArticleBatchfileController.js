@@ -8,6 +8,7 @@ const parseBatchfile = require('../../util/parseBatchfile');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
+const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters'); 
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.HSSE_S3_ACCESS_KEY,
@@ -23,6 +24,9 @@ exports.getFileUrl = (req, res) => {
         ContentType: 'text/plain',
         Key: key
     }, (err, url) => {
+        if(err) {
+            console.log(err);
+        }
         res.send({ key, url }); 
     });
 };
@@ -59,12 +63,35 @@ exports.create = async (req, res) => {
 
         const newHSEArticle = new HSEArticleModelClass(article);
 
+        const newEligibilityFilterJunior = new HSEArticleEligibilityFilterModelClass();
+        const newEligibilityFilterSenior = new HSEArticleEligibilityFilterModelClass();
+
+        newEligibilityFilterJunior.save( (err, savedEligibilityFilter) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log(`New eligibility filter input created: ${savedEligibilityFilter._id}`);
+            }
+        });
+
+        newEligibilityFilterSenior.save( (err, savedEligibilityFilter) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log(`New eligibility filter input created: ${savedEligibilityFilter._id}`);
+            }
+        });
+    
+        newHSEArticle.elibilityFilterJuniorInput = newEligibilityFilterJunior;
+        newHSEArticle.elibilityFilterSeniorInput = newEligibilityFilterSenior;
+
         await newHSEArticle.save( (err, savedArticle) => {
             if(err) {
                 console.log(err);
             } else {
                 articleIdArray = [...articleIdArray, savedArticle._id];
                 //console.log(`Successfully save article: [${article["title"]}]`);
+                console.log(savedArticle.elibilityFilterJuniorInput);
             }
     
         });

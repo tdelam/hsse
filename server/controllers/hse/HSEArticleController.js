@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-
+const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters'); 
 
 exports.create = (req, res) => {
 
     const newHSEArticle = new HSEArticleModelClass(req.body);
+    const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass();
+    
+    newHSEArticle.elibilityFilterJuniorInput = newEligibilityFilter;
+    newHSEArticle.elibilityFilterSeniorInput = newEligibilityFilter;
 
     newHSEArticle.save( (err) => {
         if(err) {
@@ -14,6 +18,7 @@ exports.create = (req, res) => {
                 message: 'Unable to save new article'
             });
         } else {
+            console.log(newHSEArticle.newEligibilityFilter);
             res.status(201).send(newHSEArticle);
         }
 
