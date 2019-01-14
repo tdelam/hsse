@@ -3,6 +3,9 @@ export const AUTH_ERROR = 'auth_error';
 export const CONFIRM_USER_EMAIL = 'confirm_user_email';
 export const FORGOT_PASSWORD_EMAIL = 'forgot_password_email';
 
+export const CURRENT_USER = 'current_user';
+export const CURRENT_USER_ERROR = 'current_user_error';
+
 export const HSE_ARTICLE_ERROR = 'hse_article_error';
 
 export const HSE_FETCH_ARTICLE = 'hse_fetch_article';

@@ -3,7 +3,11 @@ import {
   AUTH_USER, 
   AUTH_ERROR, 
   CONFIRM_USER_EMAIL, 
-  FORGOT_PASSWORD_EMAIL, 
+  FORGOT_PASSWORD_EMAIL,
+
+  CURRENT_USER,
+  CURRENT_USER_ERROR,
+
   HSE_CREATE_ARTICLE,
   HSE_CREATE_ARTICLE_ERROR,
   HSE_CREATE_BATCHFILE,
@@ -108,6 +112,22 @@ export const forgotpassword = (formProps, callback) => async dispatch => {
     callback();
   } catch (e) {
     dispatch({ type: AUTH_ERROR, payload: 'Invalid login credentials or Unconfirmed email' });
+  }
+};
+
+export const currentUser = ( ) => async dispatch => {
+  
+  try {
+      const response = await axios.get(`${backendServer}/currentuser`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+    
+    dispatch({ type: CURRENT_USER, payload: response.data });
+
+  } catch (e) {
+    
+    dispatch({ type: CURRENT_USER_ERROR, payload: e });
+
   }
 };
 
@@ -242,7 +262,6 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
     
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER, payload: response.data });
     history.push('/hse/assignedeligibilityfiltersarticlequeue');
-
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR, payload: 'Error assigning junior filter role for article'});
   }

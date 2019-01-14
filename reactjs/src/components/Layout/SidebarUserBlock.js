@@ -9,6 +9,7 @@ class SidebarUserBlock extends Component {
     }
 
     componentDidMount() {
+
         this.pubsub_token = pubsub.subscribe('toggleUserblock', () => {
             this.setState({
                 userBlockCollapse: !this.state.userBlockCollapse
@@ -34,7 +35,7 @@ class SidebarUserBlock extends Component {
                        </div>
                        {/* Name and Job */}
                        <div className="user-block-info">
-                          <span className="user-block-name">Hello, Mike</span>
+                          <span className="user-block-name">Hello, { this.state.currentUser }</span>
                           <span className="user-block-role">Designer</span>
                        </div>
                     </div>
