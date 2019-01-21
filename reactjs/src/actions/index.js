@@ -115,7 +115,7 @@ export const forgotpassword = (formProps, callback) => async dispatch => {
   }
 };
 
-export const currentUser = ( ) => async dispatch => {
+export const getCurrentUser = ( ) => async dispatch => {
   
   try {
       const response = await axios.get(`${backendServer}/currentuser`, {

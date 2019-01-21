@@ -25,7 +25,7 @@ export default function(state = INITIAL_STATE, action) {
         case CURRENT_USER: 
             return { ...state, currentUser: action.payload };
         case CURRENT_USER_ERROR: 
-            return { ...state, errorMessage: action.payload };
+            return { ...state, currentUserErrorMessage: action.payload };
         case FORGOT_PASSWORD_EMAIL: 
             return { ...state, forgotPasswordMessage: action.payload };
         default:
