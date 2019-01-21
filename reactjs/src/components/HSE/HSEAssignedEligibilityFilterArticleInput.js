@@ -468,6 +468,31 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                 <br />
                             </fieldset>
                             <fieldset>
+                                <legend>Health Systems Topics</legend>
+                                <br />
+
+                                <FormGroup row>
+                                    <label className="col-md-1 col-form-label"></label>
+                                    <div className="col-md-11">
+                                        <Tree
+                                            showLine
+                                            checkable
+                                            //defaultExpandAll={ true }
+                                            onExpand={this.onExpand}
+                                            autoExpandParent={true}
+                                            onCheck={this.onCheck}
+                                            // checkedKeys={true}
+                                            onSelect={this.onSelect}
+                                            // selectedKeys={this.state.selectedKeys}
+                                        >
+                                            {this.renderTreeNodes(treeData)}
+                                        </Tree>
+                                    </div>
+                                </FormGroup>
+                                <br />
+                                <br />
+                            </fieldset>
+                            <fieldset>
                                 <legend>Canadian Priority Areas</legend>
                                 <br />
                                 <FormGroup row>
