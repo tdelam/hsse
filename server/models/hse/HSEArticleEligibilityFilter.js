@@ -109,20 +109,23 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     capsOnCoverageReimbursementForOrganizationsProvidersServicesProducts: { type: Boolean, default: false },
     priorApprovalRequirementsForOrganizationsProvidersServicesProducts: { type: Boolean, default: false },
     listsOfSubstitutableServicesAndProducts: { type: Boolean, default: false },
-    IncentivizingConsumers: { type: Boolean, default: false },
+    
+    incentivizingConsumers: { type: Boolean, default: false },
     premiumLevelAndFeatures: { type: Boolean, default: false },
     costSharing: { type: Boolean, default: false },
     healthSavingsAccountsThirdPartyContributions: { type: Boolean, default: false },
     targetedPaymentsPenaltiesIncentivizingConsumers: { type: Boolean, default: false },
-    DeliveryArrangements: { type: Boolean, default: false },
-    HowCareIsDesignedToMeetConsumersNeeds: { type: Boolean, default: false },
+    
+    deliveryArrangements: { type: Boolean, default: false },
+    howCareIsDesignedToMeetConsumersNeeds: { type: Boolean, default: false },
     availabilityOfCare: { type: Boolean, default: false },
     timelyAccessToCare: { type: Boolean, default: false },
     culturallyAppropriateCare: { type: Boolean, default: false },
     caseManagement: { type: Boolean, default: false },
     packageOfCareCarePathwaysDiseaseManagement: { type: Boolean, default: false },
     groupCare: { type: Boolean, default: false },
-    ByWhomCareIsProvided: { type: Boolean, default: false },
+    
+    byWhomCareIsProvided: { type: Boolean, default: false },
     systemNeedDemandSupply: { type: Boolean, default: false },
     systemRecruitmentRetentionTransitions: { type: Boolean, default: false },
     systemPerformanceManagement: { type: Boolean, default: false },
@@ -140,6 +143,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     staffContinuityOfCare: { type: Boolean, default: false },
     staffSelfSharedDecisionMaking: { type: Boolean, default: false },
     selfManagement: { type: Boolean, default: false },
+    
     whereCareIsProvided: { type: Boolean, default: false },
     siteOfServiceDelivery: { type: Boolean, default: false },
     physicalstructureFacilitiesEquipment: { type: Boolean, default: false },
@@ -147,6 +151,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     integrationOfServices: { type: Boolean, default: false },
     continuityOfCare: { type: Boolean, default: false },
     outreach: { type: Boolean, default: false },
+    
     withwhatSupportsIsCareProvided: { type: Boolean, default: false },
     healthRecordSystems: { type: Boolean, default: false },
     electronicHealthRecord: { type: Boolean, default: false },
@@ -154,7 +159,8 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     iCTThatSupportIndividualsWhoReceiveCare: { type: Boolean, default: false },
     qualityMonitoringAndImprovementSystems: { type: Boolean, default: false },
     safetyMonitoringAndImprovementSystems: { type: Boolean, default: false },
-    ImplementationStrategies: { type: Boolean, default: false },
+    
+    implementationStrategies: { type: Boolean, default: false },
     consumerTargetedStrategy: { type: Boolean, default: false },
     informationOrEducationProvision: { type: Boolean, default: false },
     behaviourChangeSupport: { type: Boolean, default: false },
@@ -162,7 +168,8 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     personalSupport: { type: Boolean, default: false },
     communicationAndDecisionMakingFacilitation: { type: Boolean, default: false },
     systemParticipation: { type: Boolean, default: false },
-    ProviderTargetedStrategy: { type: Boolean, default: false },
+    
+    providerTargetedStrategy: { type: Boolean, default: false },
     educationalMaterial: { type: Boolean, default: false },
     educationalMeeting: { type: Boolean, default: false },
     educationalOutreachVisit: { type: Boolean, default: false },
@@ -174,6 +181,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     tailoredIntervention: { type: Boolean, default: false },
     patientMediatedIntervention: { type: Boolean, default: false },
     multiFacetedIntervention: { type: Boolean, default: false },
+    
     organizationTargetedStrategy: { type: Boolean, default: false },
 
     // Province focus
@@ -236,6 +244,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     agingEmergent: { type: Boolean, default: false },
 
     // Domains
+    conditions: { type: Boolean, default: true },
     infectiousDiseases: { type: Boolean, default: false },
     HIVAIDS: { type: Boolean, default: false },
     tuberculosis: { type: Boolean, default: false },

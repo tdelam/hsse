@@ -17,7 +17,7 @@ class Header extends Component {
 
         HeaderRun();
 
-        this.props.currentUser();
+        this.props.getCurrentUser();
 
     }
 
@@ -182,7 +182,7 @@ class Header extends Component {
 function mapStateToProps({ auth }) {
     return {
         errorMessage: auth.errorMessage,
-        user: auth.currentUser
+        currentUser: auth.currentUser
     }
 }
 
