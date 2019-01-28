@@ -261,95 +261,160 @@ export const canadianAreasExpandedKeys=[
     
 ];
 
-domainsTreeData = [{
+export const domainsTreeData = [{
     title: 'Conditions',
-    key: 'governmentArrangement',
+    key: 'conditions',
     children: [{
         title: 'Infectious diseases',
-        key: 'policyAuthority',
+        key: 'infectiousDiseases',
         children: [
-            { title: 'HIV/AIDS', key: 'centralizationDecentralizationOfPolicyAuthority' },
-            { title: 'Tuberculosis', key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
-            { title: 'Malaria', key: 'stewardshipOfTheNonStateSectorsRoleInFinancingDelivery' },
-            { title: 'Diarrhoeal disease', key: 'decisionMakingAuthorityAboutWhoIsCoveredAndWhatCanOrMustBeProvidedToThem' },
-            { title: 'Lower respiratory infections', key: 'corruptionProtections' }
+            { title: 'HIV/AIDS', key: 'HIVAIDS' },
+            { title: 'Tuberculosis', key: 'tuberculosis' },
+            { title: 'Malaria', key: 'malaria' },
+            { title: 'Diarrhoeal disease', key: 'diarrhoealDisease' },
+            { title: 'Lower respiratory infections', key: 'lowerRespiratoryInfections' }
         ],
     }, {
         title: 'Non-communicable diseases',
-        key: 'policyAuthority',
+        key: 'nonCommunicableDiseases',
         children: [
-            { title: 'Cancer', key: 'centralizationDecentralizationOfPolicyAuthority' },
-            { title: 'Cardiovascular disease', key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
-            { title: 'Diabetes', key: 'stewardshipOfTheNonStateSectorsRoleInFinancingDelivery' },
-            { title: 'Alzheimer and other dementias', key: 'decisionMakingAuthorityAboutWhoIsCoveredAndWhatCanOrMustBeProvidedToThem' },
-            { title: 'Chronic obstructive pulmonary disease', key: 'corruptionProtections' }
+            { title: 'Cancer', key: 'cancer' },
+            { title: 'Cardiovascular disease', key: 'cardiovascularDisease' },
+            { title: 'Diabetes', key: 'diabetes' },
+            { title: 'Alzheimer and other dementias', key: 'alzheimerAndOtherDementias' },
+            { title: 'Chronic obstructive pulmonary disease', key: 'chronicObstructivePulmonaryDisease' }
         ],
     },  {
         title: 'Other',
-        key: 'policyAuthority',
+        key: 'domainsOther',
         children: [
-            { title: 'Maternal and child health', key: 'centralizationDecentralizationOfPolicyAuthority' },
-            { title: 'Accidents', key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
-            { title: 'Mental health and addictions', key: 'stewardshipOfTheNonStateSectorsRoleInFinancingDelivery' },
+            { title: 'Maternal and child health', key: 'maternalAndChildHealth' },
+            { title: 'Accidents', key: 'accidents' },
+            { title: 'Mental health and addictions', key: 'mentalHealthAndAddictions' },
         ],
     }]
     }, {
         title: 'Technologies',
-        key: 'governmentArrangement',
-        children: [{
-            title: 'Policy authority',
-            key: 'policyAuthority',
-            children: [
-                { title: 'Drugs', key: 'centralizationDecentralizationOfPolicyAuthority' },
-                { title: 'Devices', key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
-                { title: 'Diagnotics', key: 'stewardshipOfTheNonStateSectorsRoleInFinancingDelivery' },
-                { title: 'Surgery', key: '' }
-            ]
-        }]
+        key: 'technologies',
+        children: [
+            { title: 'Drugs', key: 'drugs' },
+            { title: 'Devices', key: 'devices' },
+            { title: 'Diagnotics', key: 'diagnostics' },
+            { title: 'Surgery', key: 'surgery' }
+        ]
     }, {
         title: 'Sectors',
-        key: 'governmentArrangement',
-        children: [{
-            title: 'Policy authority',
-            key: 'policyAuthority',
-            children: [
-                { title: 'Home and community care', key: 'centralizationDecentralizationOfPolicyAuthority' },
-                { title: 'Primary care', key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
-                { title: 'Specialty (hospital) care', key: 'decisionMakingAuthorityAboutWhoIsCoveredAndWhatCanOrMustBeProvidedToThem' },
-                { title: 'Rehabilitation care', key: 'corruptionProtections' },
-                { title: 'Long-term care', key: '' },
-                { title: 'Public health', key: 'Public health' }
-            ]
-        }]
+        key: 'sectors',
+        children: [
+            { title: 'Home and community care', key: 'homeAndCommunityCare' },
+            { title: 'Primary care', key: 'primaryCare' },
+            { title: 'Specialty (hospital) care', key: 'specialHospitalCare' },
+            { title: 'Rehabilitation care', key: 'rehabilitationCare' },
+            { title: 'Long-term care', key: 'longTermCare' },
+            { title: 'Public health', key: 'publicHealth' }
+        ]
     }, {
         title: 'Providers',
-        key: 'governmentArrangement',
+        key: 'providers',
         children: [{
             title: 'Physician',
-            key: 'policyAuthority',
+            key: 'physician',
             children: [
-                { title: 'Generalist', key: 'centralizationDecentralizationOfPolicyAuthority' },
-                { title: 'Specialist', key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
+                { title: 'Generalist', key: 'generalist' },
+                { title: 'Specialist', key: 'specialist' },
             ]
         }, {
-            title: 'Nurse', key: 'policyAuthority',
+            title: 'Nurse', key: 'nurse',
         }, {
             title: 'Pharmacist',
-            key: 'policyAuthority',
+            key: 'Pharmacist',
         }, {
             title: 'Allied health professional',
-            key: 'policyAuthority',
+            key: 'alliedHealthProfessional',
         }, {
             title: 'Lay/community health worker',
-            key: ''
+            key: 'layCommunityCealthWorker'
         }, {
             title: 'Informal/family caregivers',
-            key: ''
+            key: 'informalFamilyCaregivers'
         }]
     },
 ];
 
 export const domainsExpandedKeys = [
     'conditions',
-    ''
+    'infectiousDiseases',
+    'nonCommunicableDiseases',
+    'domainsOther',
+    'technologies',
+    'sectors',
+    'providers',
+    'physician'
+];
+
+export const lmicFocusTreeData = [
+    { title: 'Target of document', key: 'generalist' },
+    { title: 'At least one LMIC author', key: 'specialist' },
+    { title: 'At least one LMIC study included', key: 'specialist' }
+];
+
+export const lmicFocusExpandedKeys = [
+
+];
+
+export const themeTreeDAta = [
+    { title: 'Optimal aging', key: 'optimalAging' },
+    { title: 'Health promotion/primary prevention', key: 'healthPromotionPrimaryPrevention' }
+];
+
+export const themeExpandedKeys = [
+    
+];
+
+export const populationTreeData = [
+    { title: 'Children and youth', key: 'childrenAndYouth' },
+    { title: 'Indigenous peoples', key: 'indigenousPeoples' },
+    { title: 'Old Adults', key: 'oldAdults' }
+];
+
+export const populationExpandedKeys = [
+
+];
+
+export const ontarioPriorityAreasTreeData = [
+    { title: 'Community-based care', key: 'communityBasedCare' },
+    { title: 'Health system performance and sustainability' , key: 'healthSystemPerformanceAndSustainability' },
+    { title: 'Healthy living, with a focus on tobacco control' , key: 'healthyLivingWithAFocusOnTobaccoControl' },
+    { title: 'Mental health and addictions' , key: 'mentalHealthAndAddictions' },
+    { title: 'Nursing research' , key: 'nursingResearch' },
+    { title: 'Primary care reform' , key: 'primaryCareReform' },
+    { title: 'Quality improvement and safety', key: 'qualityImprovementSndSafety' },
+    { title: "Seniors’ care" , key: 'seniorsCare' },
+    { title: 'Vulnerable and special health needs populations' , key: 'vulnerableAndSpecialHealthNeedsPopulations' },
+    { title: "Women’s health", key: 'womensHealth' },
+];
+
+export const ontarioPriorityAreasExpandedKeys = [
+
+];
+
+export const provinceFocusTreeData = [
+    { title: 'Federal/national', key: 'federalNational' },
+    { title: 'Alberta', key: 'alberta' },
+    { title: 'British Columbia', key: '' },
+    { title: 'Manitoba', key: '' },
+    { title: 'New Brunswick', key: '' },
+    { title: 'Newfoundland and Labrador', key: '' },
+    { title: 'Northwest Territories', key: '' },
+    { title: 'Nova Scotia', key: '' },
+    { title: 'Nunavut', key: '' },
+    { title: 'Ontario', key: '' },
+    { title: 'Prince Edward Island', key: 'princeEdwardIsland' },
+    { title: 'Quebec', key: 'quebec' },
+    { title: 'Saskatchewan', key: 'saskatchewan' },
+    { title: 'Yukon', key: 'yukon' }
+];
+
+export const provinceFocusExpandedKeys = [
+
 ];

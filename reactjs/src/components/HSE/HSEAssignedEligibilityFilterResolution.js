@@ -9,18 +9,8 @@ import {
     CardFooter,
     CardBody,
     FormGroup,
-    //FormFeedback,
-   // FormText,
-    //Label,
-    //InputGroup,
-    //InputGroupAddon,
-    //InputGroupButtonDropdown,
-    //InputGroupText,
     Input,
-    //Button,
-    //DropdownToggle,
-    //DropdownMenu,
-    //DropdownItem 
+
 } from 'reactstrap';
 
 // React Select
