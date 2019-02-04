@@ -418,3 +418,65 @@ export const provinceFocusTreeData = [
 export const provinceFocusExpandedKeys = [
 
 ];
+
+export const canadaHealthSystemDocumentType = [
+    { title: 'Health and health system data', key: 'healthAndHealthSystemData' },
+    { title: 'Health expenditure review', key: 'healthExpenditureReview' },
+    { title: 'National health account', key: 'nationalHealthAccount' },
+    { title: 'Health system research priorities', key: 'healthSystemResearchPriorities' },
+    { title: 'Situation analysis', key: 'situationAnalysis' },
+    { title: 'Jurisdictional review', key: 'jurisdictionalReview' },
+    { title: 'Performance review', key: 'performanceReview' },
+    { title: 'External evaluation', key: 'externalEvaluation' },
+    { title: 'Literature review', key: 'literatureReview' },
+    { title: 'Framework', key: 'framework' },
+    { title: 'Toolkit', key: 'toolkit' },
+    { title: 'Options framing', key: 'optionsFraming' },
+    { title: 'Guidance', key: 'guidance' },
+    { title: 'Citizen/patient input', key: 'citizenPatientInput' },
+    { title: 'Stakeholder input', key: 'stakeholderInput' },
+    { title: 'Stakeholder position paper', key: 'stakeholderPositionPaper' },
+    { title: 'Political party platform ', key: 'politicalPartyPlatform' },
+    { title: 'Government discussion paper', key: 'governmentDiscussionPaper' },
+    { title: 'Government position paper', key: 'governmentPositionPaper' },
+    { title: 'Government strategic plan for the health sector', key: 'governmentStrategicPlanForTheHealthSector' },
+    { title: 'Government policy', key: 'governmentPolicy' },
+    { title: 'Government legislation', key: 'governmentLegislation' },
+    { title: 'Intergovernmental communiqué', key: 'intergovernmentalCommunique' },
+    { title: 'Intergovernmental accord', key: 'intergovernmentalAccord' },
+    { title: 'Government/third party accord', key: 'governmentThirdPartyAccord' },
+    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'canadianHealthSystemDocumentTypeNoEligible' },
+];
+
+export const canadaHealthSystemDocumentTypeExpandedKeys = [
+
+];
+
+export const ontarioHealthDocumentType = [{ title: '', key: '' },
+    { title: 'Health and health system data', key: '' },
+    { title: 'Health expenditure review', key: '' },
+    { title: 'Provincial health account', key: '' },
+    { title: 'Health system research priorities', key: '' },
+    { title: 'Situation analysis', key: '' },
+    { title: 'Jurisdictional review', key: '' },
+    { title: 'Performance review', key: '' },
+    { title: 'External evaluation', key: '' },
+    { title: 'Literature review', key: '' },
+    { title: 'Framework', key: '' },
+    { title: 'Toolkit', key: '' },
+    { title: 'Options framing', key: '' },
+    { title: 'Guidance', key: '' },
+    { title: 'Citizen/patient input', key: '' },
+    { title: 'Stakeholder input', key: '' },
+    { title: 'Stakeholder position paper', key: '' },
+    { title: 'Political party platform', key: '' },
+    { title: 'Government discussion paper', key: '' },
+    { title: 'Government position paper', key: '' },
+    { title: 'Government strategic plan for the health sector', key: '' },
+    { title: 'Government policy', key: '' },
+    { title: 'Government legislation', key: '' },
+    { title: 'Intergovernmental communiqué', key: '' },
+    { title: 'Intergovernmental accord', key: '' },
+    { title: 'Government/third party accord', key: '' },
+    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'ontarioHealthSystemDocumentTypeNoEligible' }
+];

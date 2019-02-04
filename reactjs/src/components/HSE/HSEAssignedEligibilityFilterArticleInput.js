@@ -59,8 +59,9 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         eligibilityFilterModel: {},
 
         showTitle: true,
-        showRelevance: false,
-        showEligibility: false,
+        showRelevance: true,
+        showGeneralArticleInformation: true,
+        showEligibility: true,
         showHealthSystemsTopics: true,
         showCanadianAreas: true,
         showDomains: true,
@@ -147,84 +148,183 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
           expandedKeys,
           autoExpandParent: false,
         });
-      }
+    }
     
-      onCheck = (checkedKeys) => {
+    onCheck = (checkedKeys) => {
         console.log('onCheck', checkedKeys);
         this.setState({ checkedKeys });
-      }
+    }
     
-      onSelect = (selectedKeys, info) => {
+    onSelect = (selectedKeys, info) => {
         console.log('onSelect', info);
         this.setState({ selectedKeys });
-      }
+    }
 
-      toggleSection = (section) => {
-          this.setState({
+    toggleSection = (section) => {
+        this.setState({
             section: !this.state[section]
-          })
-      }
+        })
+    }
 
-      renderRelevance = (relevance) => {
-          if(relevance)
+    showSection = (selection) => {
+        this.setState({
+            selection: true
+        })
+    }    
+
+    renderRelevance = (relevance) => {
+        if(relevance)
+        return (
+            <fieldset>
+                <legend className="offset-md-1">Relevance</legend>
+                <FormGroup row>
+                    <label className="col-md-2 col-form-label"></label>
+                    <div className="col-md-10">
+                        <div>
+                            <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
+                        </div>
+                        <div className="c-radio">
+                            <label>
+                                <Input type="radio" name="a" defaultValue="option1"/>
+                                <span className="fa fa-circle"></span>{" "}Yes</label>
+                        </div>
+                        <div className="c-radio">
+                            <label>
+                                <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                <span className="fa fa-circle"></span>{" "}No</label>
+                        </div>
+                    </div>
+                </FormGroup>
+            </fieldset>
+        );
+    }
+
+    renderGeneralArticleInformation = (generalInfo) => {
+        if(generalInfo)
             return (
                 <fieldset>
-                    <legend>Relevance</legend>
+                    <legend className="offset-md-1">General article information</legend>
+                    <br />
                     <FormGroup row>
-                        <label className="col-md-2 col-form-label">Custom Checkboxes &amp; radios</label>
+                        <label className="col-md-2 col-form-label"></label>
                         <div className="col-md-10">
-                            <div className="checkbox c-checkbox">
-                                <label>
+                            <div>
+                                <h4>Ref ID: </h4>
+                            </div>
+                            <div>
+                                <h4>Live date: </h4>
+                            </div>
+                            <div>
+                                <h4>Document type: </h4>
+                            </div>
+                            <div>
+                                <h4>Question type: </h4>
+                            </div>
+                            <div>
+                                
+                                <div className="checkbox c-checkbox">
+                                    <h4>General focus?</h4>
+                                    <p>{" "}</p>
+                                    <label>
                                     <Input type="checkbox" defaultValue=""/>
-                                    <span className="fa fa-check"></span>Option one</label>
-                            </div>
-                            <div className="checkbox c-checkbox">
-                                <label>
-                                    <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                    <span className="fa fa-check"></span>Option two defaultChecke</label>
-                            </div>
-                            <div className="checkbox c-checkbox">
-                                <label>
-                                    <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                    <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
-                            </div>
-                            <div className="checkbox c-checkbox">
-                                <label>
-                                    <Input type="checkbox" disabled="" defaultValue=""/>
-                                    <span className="fa fa-check"></span>Option four disabled</label>
-                            </div>
-                            <div className="c-radio">
-                                <label>
-                                    <Input type="radio" name="a" defaultValue="option1"/>
-                                    <span className="fa fa-circle"></span>Option one</label>
-                            </div>
-                            <div className="c-radio">
-                                <label>
-                                    <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
-                                    <span className="fa fa-circle"></span>Option two defaultChecke</label>
-                            </div>
-                            <div className="c-radio">
-                                <label>
-                                    <Input type="radio" defaultValue="option2" defaultChecked="" disabled=""/>
-                                    <span className="fa fa-circle"></span>Option three defaultChecke and disabled</label>
-                            </div>
-                            <div className="c-radio">
-                                <label>
-                                    <Input type="radio" name="a" disabled=""/>
-                                    <span className="fa fa-circle"></span>Option four disabled</label>
+                                        
+                                        <span className="fa fa-check"></span>{" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </FormGroup>
-                </fieldset>
+                    {/** <hr className="my-4"/> **/}
+              </fieldset>
             );
-      }
+    }
+
+    renderEligibility = (eligibility) => {
+        if(eligibility)
+          return (
+              <fieldset>
+                  <legend className="offset-md-1">Eligibility</legend>
+                    <br />
+                  <FormGroup row>
+                      <label className="col-md-2 col-form-label"></label>
+                      <div className="col-md-10">
+                          <div>
+                              <p>Does the document meet the eligibility creteria for one of the HSE document types listed below (review eligibility criteria and choose one)?</p>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option1"/>
+                                  <span className="fa fa-circle"></span>{" "}Evidence briefs for policy</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Overviews of systematic reviews</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Systematic reviews addressing other questions</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Systematic reviews in progress</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Systematic reviews being planned</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Economic evaluations and costing studies</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Health reform descriptions</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Health system descriptions</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Intergovernmental organizations' health systems documents</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Canada's health systems documents</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}Ontario's health system cocuments</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <span className="fa fa-circle"></span>{" "}NO. After reviewing the couement types and eligibility criteria, this record is not eligible for inclutions in HSE.</label>
+                          </div>
+                         
+                      </div>
+                  </FormGroup>
+              </fieldset>
+          );
+    }
 
       renderDocumentType = () => {
           return (
             <fieldset>
-                <legend>Document Type</legend>
+                <legend className="offset-md-1">Document Type</legend>
+                    <br />
                 <FormGroup row>
-                    <label className="col-md-2 col-form-label">Custom Checkboxes &amp; radios</label>
+                    <label className="col-md-2 col-form-label"></label>
                     <div className="col-md-10">
                         <div className="checkbox c-checkbox">
                             <label>
@@ -360,15 +460,20 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 </div>
                 {/* START card */}
                 <Card className="card-default">
-                    <CardHeader><div style={{ marginTop: '40px', marginBottom: '10px', marginLeft: '10px' }} >
-                            <div><h3>Filter Inputs</h3></div>
+                    <CardHeader><div style={{ marginTop: '40px', marginBottom: '10px' }} >
+                            <div><h3>Filterer Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } {  } Title:  </div>
                         </div>
                     </CardHeader>
+                    <hr className="my-4"/>
                     <CardBody>
                         <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
 
+                            { this.renderGeneralArticleInformation(this.state.showGeneralArticleInformation) }
+
                             { this.renderRelevance(this.state.showRelevance) }
+
+                            { this.renderEligibility(this.state.showEligibility) }
 
                             { this.renderDocumentType(this.state.documentType) }
                                                    
