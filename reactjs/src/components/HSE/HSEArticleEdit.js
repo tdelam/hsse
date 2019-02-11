@@ -45,7 +45,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class HSEAssignedEligibilityFilterResolution extends Component {
+class HSEArticleEdit extends Component {
 
     state = {
 
@@ -587,9 +587,7 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                         <small>Article Input Page</small>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-xl-6">
-                {/* START Current User's */}
+                {/* START card */}
                 <Card className="card-default">
                     <CardHeader><div  >
                             <div><h3>Filterer Inputs</h3></div>
@@ -649,69 +647,6 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                         </div>
                     </CardFooter>
                 </Card>
-                </div>
-                <div className="col-xl-6">
-                <Card className="card-default">
-                    <CardHeader><div  >
-                            <div><h3>Filterer Inputs</h3></div>
-                            <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: {  } </div>
-                        </div>
-                    </CardHeader>
-                    <hr className="my-4"/>
-                    <CardBody>
-                        <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
-
-                            { this.renderGeneralArticleInformation(this.state.showGeneralArticleInformation) }
-
-                            { this.renderRelevance(this.state.showRelevance) }
-
-                            { this.renderEligibility(this.state.showEligibility) }
-
-                            { this.renderDocumentType(this.state.documentType) }
-                                                   
-                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false) }
-
-                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false) }
-
-                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true) }
-
-                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false) }
-
-                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false) }
-
-                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false) }
-
-                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false) }
-
-                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea)}
-
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
-
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
-
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
-
-                            { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
-
-
-                            
-                        </form>
-                    </CardBody>
-                    <CardFooter>
-                        <div className="d-flex align-items-center">
-                            <div className="ml-auto">
-                                <button type="submit" className="btn btn-warning">Cancel</button>{' '}
-                                <button type="submit" className="btn btn-info">Save</button>
-                            </div>
-                            <div className="ml-auto">
-                                <button type="submit" className="btn btn-success">Finish</button>
-                            </div>
-                        </div>
-                    </CardFooter>
-                </Card>
-                </div>
-                </div>
                 {/* END card */}
             </ContentWrapper>
             );
@@ -733,4 +668,4 @@ export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'elibigibilityFilterInput'
-    })) (HSEAssignedEligibilityFilterResolution);
+    })) (HSEArticleEdit);

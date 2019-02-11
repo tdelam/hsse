@@ -354,15 +354,15 @@ export const domainsExpandedKeys = [
 
 export const lmicFocusTreeData = [
     { title: 'Target of document', key: 'generalist' },
-    { title: 'At least one LMIC author', key: 'specialist' },
-    { title: 'At least one LMIC study included', key: 'specialist' }
+    { title: 'At least one LMIC author', key: 'atLeastOneLMICAuthor' },
+    { title: 'At least one LMIC study included', key: 'atLeastOneLMICStudyIncluded' }
 ];
 
 export const lmicFocusExpandedKeys = [
 
 ];
 
-export const themeTreeDAta = [
+export const themeTreeData = [
     { title: 'Optimal aging', key: 'optimalAging' },
     { title: 'Health promotion/primary prevention', key: 'healthPromotionPrimaryPrevention' }
 ];
@@ -419,7 +419,7 @@ export const provinceFocusExpandedKeys = [
 
 ];
 
-export const canadaHealthSystemDocumentType = [
+export const canadaHealthSystemDocumentTypeData = [
     { title: 'Health and health system data', key: 'healthAndHealthSystemData' },
     { title: 'Health expenditure review', key: 'healthExpenditureReview' },
     { title: 'National health account', key: 'nationalHealthAccount' },
@@ -452,7 +452,7 @@ export const canadaHealthSystemDocumentTypeExpandedKeys = [
 
 ];
 
-export const ontarioHealthDocumentType = [{ title: '', key: '' },
+export const ontarioHealthDocumentTypeData = [
     { title: 'Health and health system data', key: '' },
     { title: 'Health expenditure review', key: '' },
     { title: 'Provincial health account', key: '' },
@@ -479,4 +479,29 @@ export const ontarioHealthDocumentType = [{ title: '', key: '' },
     { title: 'Intergovernmental accord', key: '' },
     { title: 'Government/third party accord', key: '' },
     { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'ontarioHealthSystemDocumentTypeNoEligible' }
+];
+
+export const intergovernmentalOrganizationHealthSystemDocumentTypeData = [
+    { title: 'Health and health system data', key: '' },
+    { title: 'Health expenditure review', key: '' },
+    { title: 'Health system research priorities', key: '' },
+    { title: 'Situation analysis', key: '' },
+    { title: 'Jurisdictional review', key: '' },
+    { title: 'Performance review', key: '' },
+    { title: 'External evaluation', key: '' },
+    { title: 'Literature review', key: '' },
+    { title: 'Framework', key: '' },
+    { title: 'Toolkit', key: '' },
+    { title: 'Options framing', key: '' },
+    { title: 'Guidance', key: '' },
+    { title: 'Citizen/patient input', key: '' },
+    { title: 'Stakeholder input', key: '' },
+    { title: 'WHO discussion paper', key: '' },
+    { title: 'WHO strategic plan', key: '' },
+    { title: 'WHO policy', key: '' },
+    { title: 'World Health Assembly resolution', key: '' },
+    { title: 'Inter-agency communiqué', key: '' },
+    { title: 'Inter-agency accord', key: '' },
+    { title: 'WHO/third party accord', key: '' },
+    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: '' },
 ];

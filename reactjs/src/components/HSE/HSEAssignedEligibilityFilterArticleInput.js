@@ -27,19 +27,22 @@ import {
     domainsTreeData,
     lmicFocusTreeData,
     provinceFocusTreeData,
-
+    themeTreeData,
+    populationTreeData,
+    ontarioPriorityAreasTreeData,
+    canadaHealthSystemDocumentTypeData,
+    ontarioHealthDocumentTypeData,
+    intergovernmentalOrganizationHealthSystemDocumentTypeData
 
 } from './HSEEligibilityFilterTrees';
 
 const { TreeNode } = Tree;
 
-
-    // used for react select
 const STATES = [
-    { value: 'australian-capital-territory', label: 'Australian Capital Territory', className: 'State-ACT' },
-    { value: 'new-south-wales', label: 'New South Wales', className: 'State-NSW' },
-    { value: 'victoria', label: 'Victoria', className: 'State-Vic' },
-    { value: 'queensland', label: 'Queensland', className: 'State-Qld' }
+    { value: 'new-article', label: 'New Article', className: 'State-ACT' },
+    { value: 'data-entry-complete', label: 'Data Entry Complete', className: 'State-NSW' },
+    { value: 'live', label: 'Live', className: 'State-Vic' },
+    { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
 class HSEAssignedEligibilityFilterArticleInput extends Component {
@@ -60,18 +63,28 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
         showTitle: true,
         showRelevance: true,
-        showGeneralArticleInformation: true,
-        showEligibility: true,
-        showHealthSystemsTopics: true,
-        showCanadianAreas: true,
-        showDomains: true,
-        showLMICFocus: true,
-        showProvinceFocus: true,
+        documentType: false,
+        showGeneralArticleInformation: false,
+        showEligibility: false,
+        showHealthSystemsTopics: false,
+        showCanadianAreas: false,
+        showDomains: false,
+        showLMICFocus: false,
+        showProvinceFocus: false,
         showTheme: false,
         showPopulation: false,
+        showOntarioPriorityArea: false,
         showTarget: false,
         showOntarioFocus: false,
-        showArticle: false
+        showArticle: false,
+        showIntergovernmentalOrganizationHealthSystemDocument: false,
+        showOntarianHealthSystemDocument: false,
+        showCanadianHealthSystemDocument: false,
+        showCanadaHealthSystemDocument: false,
+        showArticleAssessment: false,
+
+
+        relevanceValue: ''
     };
 
     componentDidMount() {
@@ -166,11 +179,84 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         })
     }
 
-    showSection = (selection) => {
+    showSection = (section) => {
         this.setState({
-            selection: true
+            section
         })
-    }    
+    }
+    
+    handleRelevanceChange = (event) => {
+        if(event.target.value === 'Yes') {
+            this.setState({
+                relevanceValue: event.target.value,
+                showEligibility: true
+            });/*
+            this.setState({
+                showEligibility: true
+            });*/
+        }
+        
+    }
+
+    
+/*
+
+    { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+
+    { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+
+    { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+
+*/
+
+    handleGeneralEligibility = (event) => {
+        switch(event.target.value) {
+            case 'evidenceBriefsForPolicy': case 'overviewsOfSystematicReviews': 
+            case 'systematicReviewsAddressingOtherQuestions': case 'systematicReviewsInProgress':
+            case 'systematicReviewsBeingPlanned': case 'economicEvaluationsAndCostingStudies':
+            case 'healthReformDescriptions': case 'healthSystemDescriptions':
+                this.setState({
+                    showHealthSystemsTopics: true,
+                    showCanadianAreas: true,
+                    showDomains: true,
+                    showLMICFocus: true,
+                    showProvinceFocus: true,
+                    showTheme: true,
+                    showPopulation: true,
+                    showOntarioPriorityArea: true,
+                    showArticleAssessment: true,
+
+
+                    showRelevance: false,
+                    showEligibility: false
+                    //show
+                });
+                break;
+            case "intergovernmentalOrganizationsHealthSystemsDocuments":
+                this.setState({
+
+                });
+                break;
+            case  "CanadasHealthSystemsDocuments":
+                this.setState({
+
+                });
+                break;
+            case "ontariosHealthSystemDocuments":
+                this.setState({
+
+                });
+                break;
+            default:
+                this.setState({
+
+                });
+                break;
+            /*    
+                "NO. After reviewing the document types and eligibility criteria, this record is not eligible for inclutions in HSE.":
+            */
+        }
+    }
 
     renderRelevance = (relevance) => {
         if(relevance)
@@ -185,12 +271,12 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                         </div>
                         <div className="c-radio">
                             <label>
-                                <Input type="radio" name="a" defaultValue="option1"/>
+                                <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
                                 <span className="fa fa-circle"></span>{" "}Yes</label>
                         </div>
                         <div className="c-radio">
                             <label>
-                                <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
                                 <span className="fa fa-circle"></span>{" "}No</label>
                         </div>
                     </div>
@@ -253,63 +339,63 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option1"/>
+                                  <Input type="radio" name="a" value="evidenceBriefsForPolicy" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Evidence briefs for policy</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="overviewsOfSystematicReviews" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Overviews of systematic reviews</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="systematicReviewsAddressingOtherQuestions" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews addressing other questions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="systematicReviewsInProgress" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews in progress</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="systematicReviewsBeingPlanned" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews being planned</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="economicEvaluationsAndCostingStudies" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Economic evaluations and costing studies</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="healthReformDescriptions" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Health reform descriptions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="healthSystemDescriptions" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Health system descriptions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="option2" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Intergovernmental organizations' health systems documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                  <Input type="radio" name="a" value="option2" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Canada's health systems documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
-                                  <span className="fa fa-circle"></span>{" "}Ontario's health system cocuments</label>
+                                  <Input type="radio" name="a" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Ontario's health system documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
-                                  <span className="fa fa-circle"></span>{" "}NO. After reviewing the couement types and eligibility criteria, this record is not eligible for inclutions in HSE.</label>
+                                  <Input type="radio" name="a" value="option2" />
+                                  <span className="fa fa-circle"></span>{" "}NO. After reviewing the docuement types and eligibility criteria, this record is not eligible for inclutions in HSE.</label>
                           </div>
                          
                       </div>
@@ -318,58 +404,59 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
           );
     }
 
-      renderDocumentType = () => {
-          return (
-            <fieldset>
-                <legend className="offset-md-1">Document Type</legend>
-                    <br />
-                <FormGroup row>
-                    <label className="col-md-2 col-form-label"></label>
-                    <div className="col-md-10">
-                        <div className="checkbox c-checkbox">
-                            <label>
-                                <Input type="checkbox" defaultValue=""/>
-                                <span className="fa fa-check"></span>Option one</label>
+      renderDocumentType = (showSection) => {
+          if(showSection)
+            return (
+                <fieldset>
+                    <legend className="offset-md-1">Document Type</legend>
+                        <br />
+                    <FormGroup row>
+                        <label className="col-md-2 col-form-label"></label>
+                        <div className="col-md-10">
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option one</label>
+                            </div>
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" defaultChecked="" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option two defaultChecke</label>
+                            </div>
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
+                            </div>
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" disabled="" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option four disabled</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" defaultValue="option1"/>
+                                    <span className="fa fa-circle"></span>Option one</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                    <span className="fa fa-circle"></span>Option two defaultChecke</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" defaultValue="option2" defaultChecked="" disabled=""/>
+                                    <span className="fa fa-circle"></span>Option three defaultChecke and disabled</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" disabled=""/>
+                                    <span className="fa fa-circle"></span>Option four disabled</label>
+                            </div>
                         </div>
-                        <div className="checkbox c-checkbox">
-                            <label>
-                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                <span className="fa fa-check"></span>Option two defaultChecke</label>
-                        </div>
-                        <div className="checkbox c-checkbox">
-                            <label>
-                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
-                        </div>
-                        <div className="checkbox c-checkbox">
-                            <label>
-                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                <span className="fa fa-check"></span>Option four disabled</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" defaultValue="option1"/>
-                                <span className="fa fa-circle"></span>Option one</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
-                                <span className="fa fa-circle"></span>Option two defaultChecke</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" defaultValue="option2" defaultChecked="" disabled=""/>
-                                <span className="fa fa-circle"></span>Option three defaultChecke and disabled</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" disabled=""/>
-                                <span className="fa fa-circle"></span>Option four disabled</label>
-                        </div>
-                    </div>
-                </FormGroup>
-            </fieldset>
-          );
+                    </FormGroup>
+                </fieldset>
+            );
       }
     
       renderTreeNodes = data => data.map((item) => {
@@ -415,8 +502,49 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         } else {
             return (<div></div>);
         }
-        
+    }
 
+    renderArticleAssessmentSection = (value, show) => {
+        if(show)
+            return(
+                <fieldset className="col-md-10 offset-md-1">
+                    <legend>Assessment and Assignment Status</legend>
+                    <br />
+                    <div className="form-group row mb">
+                    <label className="col-md-6 col-form-label">
+                    <Col md={ 12 } style={{ paddingLeft: 0 }}>
+                            <Select
+                                name="select-name"
+                                value={value}
+                                onChange={this.handleChangeSelect}
+                                options={STATES}
+                            />
+                            <br />
+                        </Col>
+                    <p>New article = New, still having content added, not visible in searches</p>
+
+                    <p>Data entry complete = All required content has been added, still not visible in searches</p>
+
+                    <p>Live = Available for searching/alerting</p>
+
+                    <p>Deleted = Removed from the system, not visible in searches</p>
+
+                    </label>
+                        <Col md={ 6 }>
+                                <label className="col-md-12 col-form-label">
+                                    <p>
+                                    If an article is deleted, please enter the reason for removal (in case its removal is questioned later):
+                                    </p>
+                                </label>
+                                <div className="col-md-12">
+                                    <Input type="textarea"  disabled=""/>
+                                </div>
+                        </Col>
+                    </div>
+                    <br />
+                    <br />
+                </fieldset>
+            );
     }
 
     setStateDocumentType = (documentType) => {
@@ -438,7 +566,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         }
     }
 
-    render() {// console.log(this.props.currentArticle);
+    render() {
+        console.log(`currentArticle: ${this.props.currentArticle}`);
         console.log(this.props.currentUser);
 
         this.getInputValues();
@@ -460,9 +589,10 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 </div>
                 {/* START card */}
                 <Card className="card-default">
-                    <CardHeader><div style={{ marginTop: '40px', marginBottom: '10px' }} >
+                    <CardHeader><div  >
                             <div><h3>Filterer Inputs</h3></div>
-                            <div>Article Id: { this.props.match.params.articleId } {  } Title:  </div>
+                            <div>Article Id: { this.props.match.params.articleId } </div>
+                            <div>Title: {  } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>
@@ -486,7 +616,22 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                             { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false) }
 
                             { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false) }
-    
+
+                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false) }
+
+                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false) }
+
+                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea)}
+
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+
+                            { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
+
+
                             
                         </form>
                     </CardBody>
