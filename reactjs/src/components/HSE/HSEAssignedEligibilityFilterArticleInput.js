@@ -225,7 +225,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     showPopulation: true,
                     showOntarioPriorityArea: true,
                     showArticleAssessment: true,
-
+                    showGeneralArticleInformation: true,
 
                     showRelevance: false,
                     showEligibility: false
@@ -295,7 +295,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                         <label className="col-md-2 col-form-label"></label>
                         <div className="col-md-10">
                             <div>
-                                <h4>Ref ID: </h4>
+                                <h4>Ref ID: { this.props.match.params.articleId }</h4>
                             </div>
                             <div>
                                 <h4>Live date: </h4>

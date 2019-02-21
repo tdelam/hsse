@@ -242,7 +242,14 @@ const HSEArticleSchema = new Schema({
     
 */
 
-
+    // Steps for Eligibility Filter Stage
+    showGeneralArticleInformation: { type: Boolean, default: false },
+    stepRelevance: { type: Boolean, default: true },
+    stepElibiligy: { type: Boolean, default: false },
+    stepDocumentType: { type: Boolean, default: false },
+    stepIntergovermentalDocument: { type: Boolean, default: false },
+    stepOntarioDocument: { type: Boolean, default: false },
+    stepCanadianDocument: { type: Boolean, default: false },
 
 });
 

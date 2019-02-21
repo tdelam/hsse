@@ -62,20 +62,20 @@ class HSEAssignedEligibilityFilterResolution extends Component {
         eligibilityFilterModel: {},
 
         showTitle: true,
-        showRelevance: true,
+        showRelevance: false,
         documentType: false,
         showGeneralArticleInformation: false,
         showEligibility: false,
-        showHealthSystemsTopics: false,
-        showCanadianAreas: false,
-        showDomains: false,
-        showLMICFocus: false,
-        showProvinceFocus: false,
-        showTheme: false,
-        showPopulation: false,
-        showOntarioPriorityArea: false,
-        showTarget: false,
-        showOntarioFocus: false,
+        showHealthSystemsTopics: true,
+        showCanadianAreas: true,
+        showDomains: true,
+        showLMICFocus: true,
+        showProvinceFocus: true,
+        showTheme: true,
+        showPopulation: true,
+        showOntarioPriorityArea: true,
+        showTarget: true,
+        showOntarioFocus: true,
         showArticle: false,
         showIntergovernmentalOrganizationHealthSystemDocument: false,
         showOntarianHealthSystemDocument: false,
@@ -483,7 +483,7 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                             <Tree
                                 showLine={showLine}
                                 checkable
-                                //defaultExpandAll={ true }
+                                defaultExpandAll={ true }
                                 onExpand={this.onExpand}
                                 autoExpandParent={true}
                                 onCheck={this.onCheck}
@@ -638,13 +638,10 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                         </form>
                     </CardBody>
                     <CardFooter>
-                        <div className="d-flex align-items-center">
+                        <div className="d-flex d-flex align-items-center">
                             <div className="ml-auto">
                                 <button type="submit" className="btn btn-warning">Cancel</button>{' '}
                                 <button type="submit" className="btn btn-info">Save</button>
-                            </div>
-                            <div className="ml-auto">
-                                <button type="submit" className="btn btn-success">Finish</button>
                             </div>
                         </div>
                     </CardFooter>
@@ -653,7 +650,7 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                 <div className="col-xl-6">
                 <Card className="card-default">
                     <CardHeader><div  >
-                            <div><h3>Filterer Inputs</h3></div>
+                            <div><h3>Other Filterer Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
                             <div>Title: {  } </div>
                         </div>
@@ -700,13 +697,11 @@ class HSEAssignedEligibilityFilterResolution extends Component {
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex align-items-center">
-                            <div className="ml-auto">
+                        {/*    <div className="ml-auto">
                                 <button type="submit" className="btn btn-warning">Cancel</button>{' '}
                                 <button type="submit" className="btn btn-info">Save</button>
-                            </div>
-                            <div className="ml-auto">
-                                <button type="submit" className="btn btn-success">Finish</button>
-                            </div>
+                            </div> 
+                        */}
                         </div>
                     </CardFooter>
                 </Card>
