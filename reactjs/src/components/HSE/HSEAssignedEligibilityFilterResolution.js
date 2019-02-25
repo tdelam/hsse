@@ -1,56 +1,49 @@
 import React, { Component } from 'react';
-import ContentWrapper from '../Layout/ContentWrapper';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+import ContentWrapper from '../Layout/ContentWrapper';
+import { Tree } from 'antd';
 import {
-    Row,
     Col,
     Card,
     CardHeader,
-    CardFooter,
     CardBody,
+    CardFooter,
     FormGroup,
-    //FormFeedback,
-   // FormText,
-    //Label,
-    //InputGroup,
-    //InputGroupAddon,
-    //InputGroupButtonDropdown,
-    //InputGroupText,
-    Input,
-    //Button,
-    //DropdownToggle,
-    //DropdownMenu,
-    //DropdownItem 
-} from 'reactstrap';
+    Input,} from 'reactstrap';
 
 // React Select
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
 
+import {
+    healthSystemTopicsTreeData,
+    canadianAreasTreeData,
+    domainsTreeData,
+    lmicFocusTreeData,
+    provinceFocusTreeData,
+    themeTreeData,
+    populationTreeData,
+    ontarioPriorityAreasTreeData,
+    canadaHealthSystemDocumentTypeData,
+    ontarioHealthDocumentTypeData,
+    intergovernmentalOrganizationHealthSystemDocumentTypeData
 
-// used for react select
+} from './HSEEligibilityFilterTrees';
+
+const { TreeNode } = Tree;
+
 const STATES = [
     { value: 'new-article', label: 'New Article', className: 'State-ACT' },
     { value: 'data-entry-complete', label: 'Data Entry Complete', className: 'State-NSW' },
     { value: 'live', label: 'Live', className: 'State-Vic' },
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
-
-/* 
-
-New article = New, still having content added, not visible in searches
-
-Data entry complete = All required content has been added, still not visible in searches
-
-Live = Available for searching/alerting
-
-Deleted = Removed from the system, not visible in searches
-
-
-*/
 
 class HSEAssignedEligibilityFilterResolution extends Component {
 
@@ -66,13 +59,40 @@ class HSEAssignedEligibilityFilterResolution extends Component {
 
         selectedOption: '',
 
+        eligibilityFilterModel: {},
+
+        showTitle: true,
+        showRelevance: false,
+        documentType: false,
+        showGeneralArticleInformation: false,
+        showEligibility: false,
+        showHealthSystemsTopics: true,
+        showCanadianAreas: true,
+        showDomains: true,
+        showLMICFocus: true,
+        showProvinceFocus: true,
+        showTheme: true,
+        showPopulation: true,
+        showOntarioPriorityArea: true,
+        showTarget: true,
+        showOntarioFocus: true,
+        showArticle: false,
+        showIntergovernmentalOrganizationHealthSystemDocument: false,
+        showOntarianHealthSystemDocument: false,
+        showCanadianHealthSystemDocument: false,
+        showCanadaHealthSystemDocument: false,
+        showArticleAssessment: false,
+
+
+        relevanceValue: ''
     };
 
     componentDidMount() {
-        
+
         const { history } = this.props;
         const { articleId } = this.props.match.params;
 
+        this.props.getCurrentUser();
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
 
     }
@@ -90,10 +110,8 @@ class HSEAssignedEligibilityFilterResolution extends Component {
     }
 
     onSubmit = e => {
-
-        e.preventDefault();
         console.log('Form submitted..');
-    
+        e.preventDefault();
     }
 
     handleChangeSelect = (selectedOption) => {
@@ -101,2643 +119,613 @@ class HSEAssignedEligibilityFilterResolution extends Component {
         console.log(`Selected: ${selectedOption.label}`);
     }
 
-    render() {
+    isJuniorFilter() {
         
+        if(this.props.currentArticle && this.props.currentUser) {
+            console.log(`inside isJuniorFilter`);
+            console.log(`currentUser: ${this.props.currentUser._id}, _elibilityFilterJunior: ${this.props.currentArticle._elibilityFilterJunior}`);
+            return this.props.currentUser === this.props.currentArticle._elibilityFilterJunior;
+        }
+            
+    }
+
+    isSeniorFilter() {
+        if(this.props.currentArticle && this.props.currentUser) {
+            console.log(`inside isSeniorFilter`);
+            console.log(`currentUser: ${this.props.currentUser}, _elibilityFilterSenior: ${this.props.currentArticle._elibilityFilterSenior}`);
+            return this.props.currentUser === this.props.currentArticle._elibilityFilterSenior;
+        }
+            
+    }
+
+    getInputValues() {
+
+        if(this.isJuniorFilter()) {
+            console.log(`isJuniorFilter`);
+            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+
+        } else if(this.isSeniorFilter()) {
+
+            console.log(`isSeniorFilter`);
+            this.setState({ eligibilityFilterModel: this.props.currentArticle.elibilityFilterSeniorInput });
+
+        }
+    }
+
+    // Functions
+    onExpand = (expandedKeys) => {
+        console.log('onExpand', expandedKeys);
+        // if not set autoExpandParent to false, if children expanded, parent can not collapse.
+        // or, you can remove all expanded children keys.
+        this.setState({
+          expandedKeys,
+          autoExpandParent: false,
+        });
+    }
+    
+    onCheck = (checkedKeys) => {
+        console.log('onCheck', checkedKeys);
+        this.setState({ checkedKeys });
+    }
+    
+    onSelect = (selectedKeys, info) => {
+        console.log('onSelect', info);
+        this.setState({ selectedKeys });
+    }
+
+    toggleSection = (section) => {
+        this.setState({
+            section: !this.state[section]
+        })
+    }
+
+    showSection = (section) => {
+        this.setState({
+            section
+        })
+    }
+    
+    handleRelevanceChange = (event) => {
+        if(event.target.value === 'Yes') {
+            this.setState({
+                relevanceValue: event.target.value,
+                showEligibility: true
+            });/*
+            this.setState({
+                showEligibility: true
+            });*/
+        }
+        
+    }
+
+    
+/*
+
+    { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+
+    { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+
+    { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+
+*/
+
+    handleGeneralEligibility = (event) => {
+        switch(event.target.value) {
+            case 'evidenceBriefsForPolicy': case 'overviewsOfSystematicReviews': 
+            case 'systematicReviewsAddressingOtherQuestions': case 'systematicReviewsInProgress':
+            case 'systematicReviewsBeingPlanned': case 'economicEvaluationsAndCostingStudies':
+            case 'healthReformDescriptions': case 'healthSystemDescriptions':
+                this.setState({
+                    showHealthSystemsTopics: true,
+                    showCanadianAreas: true,
+                    showDomains: true,
+                    showLMICFocus: true,
+                    showProvinceFocus: true,
+                    showTheme: true,
+                    showPopulation: true,
+                    showOntarioPriorityArea: true,
+                    showArticleAssessment: true,
+
+
+                    showRelevance: false,
+                    showEligibility: false
+                    //show
+                });
+                break;
+            case "intergovernmentalOrganizationsHealthSystemsDocuments":
+                this.setState({
+
+                });
+                break;
+            case  "CanadasHealthSystemsDocuments":
+                this.setState({
+
+                });
+                break;
+            case "ontariosHealthSystemDocuments":
+                this.setState({
+
+                });
+                break;
+            default:
+                this.setState({
+
+                });
+                break;
+            /*    
+                "NO. After reviewing the document types and eligibility criteria, this record is not eligible for inclutions in HSE.":
+            */
+        }
+    }
+
+    renderRelevance = (relevance) => {
+        if(relevance)
+        return (
+            <fieldset>
+                <legend className="offset-md-1">Relevance</legend>
+                <FormGroup row>
+                    <label className="col-md-2 col-form-label"></label>
+                    <div className="col-md-10">
+                        <div>
+                            <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
+                        </div>
+                        <div className="c-radio">
+                            <label>
+                                <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
+                                <span className="fa fa-circle"></span>{" "}Yes</label>
+                        </div>
+                        <div className="c-radio">
+                            <label>
+                                <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
+                                <span className="fa fa-circle"></span>{" "}No</label>
+                        </div>
+                    </div>
+                </FormGroup>
+            </fieldset>
+        );
+    }
+
+    renderGeneralArticleInformation = (generalInfo) => {
+        if(generalInfo)
+            return (
+                <fieldset>
+                    <legend className="offset-md-1">General article information</legend>
+                    <br />
+                    <FormGroup row>
+                        <label className="col-md-2 col-form-label"></label>
+                        <div className="col-md-10">
+                            <div>
+                                <h4>Ref ID: </h4>
+                            </div>
+                            <div>
+                                <h4>Live date: </h4>
+                            </div>
+                            <div>
+                                <h4>Document type: </h4>
+                            </div>
+                            <div>
+                                <h4>Question type: </h4>
+                            </div>
+                            <div>
+                                
+                                <div className="checkbox c-checkbox">
+                                    <h4>General focus?</h4>
+                                    <p>{" "}</p>
+                                    <label>
+                                    <Input type="checkbox" defaultValue=""/>
+                                        
+                                        <span className="fa fa-check"></span>{" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </FormGroup>
+                    {/** <hr className="my-4"/> **/}
+              </fieldset>
+            );
+    }
+
+    renderEligibility = (eligibility) => {
+        if(eligibility)
+          return (
+              <fieldset>
+                  <legend className="offset-md-1">Eligibility</legend>
+                    <br />
+                  <FormGroup row>
+                      <label className="col-md-2 col-form-label"></label>
+                      <div className="col-md-10">
+                          <div>
+                              <p>Does the document meet the eligibility creteria for one of the HSE document types listed below (review eligibility criteria and choose one)?</p>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="evidenceBriefsForPolicy" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Evidence briefs for policy</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="overviewsOfSystematicReviews" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Overviews of systematic reviews</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="systematicReviewsAddressingOtherQuestions" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Systematic reviews addressing other questions</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="systematicReviewsInProgress" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Systematic reviews in progress</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="systematicReviewsBeingPlanned" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Systematic reviews being planned</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="economicEvaluationsAndCostingStudies" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Economic evaluations and costing studies</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="healthReformDescriptions" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Health reform descriptions</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="healthSystemDescriptions" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Health system descriptions</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Intergovernmental organizations' health systems documents</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Canada's health systems documents</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <span className="fa fa-circle"></span>{" "}Ontario's health system documents</label>
+                          </div>
+                          <div className="c-radio">
+                              <label>
+                                  <Input type="radio" name="a" value="option2" />
+                                  <span className="fa fa-circle"></span>{" "}NO. After reviewing the docuement types and eligibility criteria, this record is not eligible for inclutions in HSE.</label>
+                          </div>
+                         
+                      </div>
+                  </FormGroup>
+              </fieldset>
+          );
+    }
+
+      renderDocumentType = (showSection) => {
+          if(showSection)
+            return (
+                <fieldset>
+                    <legend className="offset-md-1">Document Type</legend>
+                        <br />
+                    <FormGroup row>
+                        <label className="col-md-2 col-form-label"></label>
+                        <div className="col-md-10">
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option one</label>
+                            </div>
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" defaultChecked="" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option two defaultChecke</label>
+                            </div>
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option three defaultChecke and disabled</label>
+                            </div>
+                            <div className="checkbox c-checkbox">
+                                <label>
+                                    <Input type="checkbox" disabled="" defaultValue=""/>
+                                    <span className="fa fa-check"></span>Option four disabled</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" defaultValue="option1"/>
+                                    <span className="fa fa-circle"></span>Option one</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                    <span className="fa fa-circle"></span>Option two defaultChecke</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" defaultValue="option2" defaultChecked="" disabled=""/>
+                                    <span className="fa fa-circle"></span>Option three defaultChecke and disabled</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" disabled=""/>
+                                    <span className="fa fa-circle"></span>Option four disabled</label>
+                            </div>
+                        </div>
+                    </FormGroup>
+                </fieldset>
+            );
+      }
+    
+      renderTreeNodes = data => data.map((item) => {
+        if (item.children) {
+          return (
+            <TreeNode title={item.title} key={item.key} dataRef={item}>
+              {this.renderTreeNodes(item.children)}
+            </TreeNode>
+          );
+        }
+        return <TreeNode {...item} />;
+      })
+    
+    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine) => {
+        if(sectionStatus) {
+            return (
+                <fieldset>
+                    <legend className="offset-md-1">{ sectionTitle }</legend>
+                    <br />
+    
+                    <FormGroup row>
+                        <label className="col-md-1 offset-md-1 col-form-label"></label>
+                        <div className="col-md-10">
+                            <Tree
+                                showLine={showLine}
+                                checkable
+                                defaultExpandAll={ true }
+                                onExpand={this.onExpand}
+                                autoExpandParent={true}
+                                onCheck={this.onCheck}
+                                // checkedKeys={true}
+                                onSelect={this.onSelect}
+                                // selectedKeys={this.state.selectedKeys}
+                            >
+                                {this.renderTreeNodes(sectionTreeData)}
+                            </Tree>
+                        </div>
+                    </FormGroup>
+                    <br />
+                    <br />
+                </fieldset>
+            );
+        } else {
+            return (<div></div>);
+        }
+    }
+
+    renderArticleAssessmentSection = (value, show) => {
+        if(show)
+            return(
+                <fieldset className="col-md-10 offset-md-1">
+                    <legend>Assessment and Assignment Status</legend>
+                    <br />
+                    <div className="form-group row mb">
+                    <label className="col-md-6 col-form-label">
+                    <Col md={ 12 } style={{ paddingLeft: 0 }}>
+                            <Select
+                                name="select-name"
+                                value={value}
+                                onChange={this.handleChangeSelect}
+                                options={STATES}
+                            />
+                            <br />
+                        </Col>
+                    <p>New article = New, still having content added, not visible in searches</p>
+
+                    <p>Data entry complete = All required content has been added, still not visible in searches</p>
+
+                    <p>Live = Available for searching/alerting</p>
+
+                    <p>Deleted = Removed from the system, not visible in searches</p>
+
+                    </label>
+                        <Col md={ 6 }>
+                                <label className="col-md-12 col-form-label">
+                                    <p>
+                                    If an article is deleted, please enter the reason for removal (in case its removal is questioned later):
+                                    </p>
+                                </label>
+                                <div className="col-md-12">
+                                    <Input type="textarea"  disabled=""/>
+                                </div>
+                        </Col>
+                    </div>
+                    <br />
+                    <br />
+                </fieldset>
+            );
+    }
+
+    setStateDocumentType = (documentType) => {
+        
+        switch(documentType) {
+
+            case 'som': 
+                this.setState({ documentType: '' });
+                break;
+            case 'ontario': 
+                this.setState({ documentType: '' })
+                break;
+            case 'government':
+                this.setState({ documentType: '' });
+                break;
+            default: 
+                this.setState({ documentType: 'general' });
+                break;
+        }
+    }
+
+    render() {
+        console.log(`currentArticle: ${this.props.currentArticle}`);
+        console.log(this.props.currentUser);
+
+        this.getInputValues();
+
         // used for react select
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
 
+        // this.setState({ eligibilityFilterModel: this.getInputValues() });
+
+        console.log(this.state.eligibilityFilterModel);
+
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>Eligibility & Filter Article Resolution
-                        <small>Article resolution page</small>
+                    <div>Assessing Eligibility and Assigning Filters Articles
+                        <small>Article Input Page</small>
                     </div>
                 </div>
-                { /* START row */ }
-                <Row>
-                    <Col lg={ 6 }>
-                    <Card className="card-default">
-                    <CardHeader>Form elements</CardHeader>
+                <div className="row">
+                    <div className="col-xl-6">
+                {/* START Current User's */}
+                <Card className="card-default">
+                    <CardHeader><div  >
+                            <div><h3>Filterer Inputs</h3></div>
+                            <div>Article Id: { this.props.match.params.articleId } </div>
+                            <div>Title: {  } </div>
+                        </div>
+                    </CardHeader>
+                    <hr className="my-4"/>
                     <CardBody>
                         <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
-                       
-                            <fieldset>
-                            </fieldset>
-                            <fieldset>
-                                
-                            </fieldset>
-                                                        
-                            <fieldset>
-                                <legend>Health Systems Topics</legend>
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-7">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Governance arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Policy authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Centralization/decentralization of policy authority</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Accountability of the state sector's role in financing & delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Stewardship of the non-state sector's role in financing & delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Decision-making authority about who is covered and what can or must be provided to them</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Corruption protections</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Commercial authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Licensure & registration requirements</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Patents & profits</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Pricing & purchasing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Marketing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Sales & dispensing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Commercial liability</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer & stakeholder involvement</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer participation in policy & organizational decisions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer participation in system monitoring</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer participation in service delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer complaints management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Stakeholder participation in policy & organizational decisions (or monitoring)</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Organizational authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Ownership</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Management approaches</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Accreditation</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Networks/multi-institutional arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Professional authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Training & licensure requirements</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Scope of practice</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Setting of practice</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Continuing competence</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality & safety</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Professional liability</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Strike/job action</label>
-                                        </div>
-                                    </div>
-                                    
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Financial arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Financing systems</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Taxation</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Social health insurance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community-based health insurance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community loan funds</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Private insurance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health savings accounts (Individually financed)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}User fees</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Donor contributions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fundraising</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Funding organizations</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fee-for-service (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Capitation (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Global budget</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prospective payment (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Indicative budgets (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Targeted payments/penalties (Funding)</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Incentivizing consumers</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Premium (level & features)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Cost-sharing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health savings accounts (Third party contributions)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Targeted payments/penalties (Incentivizing consumers)</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Remunerating providers</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fee-for-service (Remuneration)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Capitation (Remuneration)</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Salary</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prospective payment (Remuneration)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fundholding</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Indicative budgets (Remuneration)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Targeted payments/penalties (Remuneration)</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Purchasing products & services</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Scope & nature of insurance plans</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lists of covered/reimbursed organizations, providers, services & products</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Restrictions in coverage/reimbursement rates for organizations, providers, services & products</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Caps on coverage/reimbursement for organizations, providers, services & products</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prior approval requirements for organizations, providers, services & products</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lists of substitutable services & products</label>
-                                        </div>
-                                    </div>
-                                    
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Delivery arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}How care is designed to meet consumers' needs</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Availability of care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Timely access to care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Culturally appropriate care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community loan funds</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Case management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Package of care/care pathways/disease management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Group care</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}By whom care is provided</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System - Need, demand & supply</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System - Recruitment, retention & transitions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System - Performance management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Workplace conditions - Provider satisfaction</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Workplace conditions - Health & safety</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Role performance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Role expansion or extension</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Task shifting / substitution</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Multidisciplinary teams</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Volunteers or informal/family caregivers</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Communication & case discussion between distant health professionals</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Training</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Support</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Workload/workflow/intensity</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Continuity of care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff/self - Shared decision-making</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Self-management</label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Where care is provided</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Site of service delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Physical structure, facilities & equipment</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Organizational scale</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Integration of services</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Continuity of care</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Outreach</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}With what supports is care provided</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health record systems</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Electronic health record</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Other ICT that support individuals who provide care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}ICT that support individuals who receive care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality monitoring and improvement systems</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Safety monitoring and improvement systems</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Delivery Implementation strategies</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Information or education provision</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Behaviour change support</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skills and competencies development</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}(Personal) Support</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Communication and decision-making facilitation</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System participation</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Organization-targeted strategy</label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Provider-targeted strategy</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Educational material</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Educational meeting</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Educational outreach visit</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Local opinion leader</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Local consensus process</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Peer review</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Audit and feedback</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Reminders and prompts</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Tailored intervention</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Patient-mediated intervention</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Multi-faceted intervention</label>
-                                        </div>
-                                        
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Canadian Priority Areas</legend>
-                                <br />
-                                <FormGroup row>
-                                    <div className="col-md-11">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Home and community care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Mental health addiction services</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Indigenous health (Federal)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Aging (emergent)</label>
-                                        </div>
-                                        
-                                    </div>
-                                </FormGroup>
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Domains</legend>
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Conditions</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Infectious diseases</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}HIV/AIDS</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Tuberculosis</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Malaria</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Diarrhoeal disease</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lower respiratory infections</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Non-communicable diseases</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Cancer</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Cardiovascular disease</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Diabetes</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Alzheimer and other dementias</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Chronic obstructive pulmonary disease</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Other</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Maternal and child health</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Accidents</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Mental health and addictions</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Technologies</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Drugs</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Devices</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Diagnostics</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Surgery</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Sectors</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Home and community care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Primary care</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Specialty (hospital) care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Rehabilitation care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality & safety</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Long-term care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Public health</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Providers</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Physician</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Generalist</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Specialist</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nurse</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Pharmacist</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Allied health professional</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lay/community health worker</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Informal/family caregivers</label>
-                                        </div>
-                                    </div>
-                                    
-                                </FormGroup>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Population</legend>
-                                <FormGroup row>
-                                <div className="col-md-12">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Children and youth (which will include anything that was previously coded as ‘neonates’, ‘pediatrics’ and ‘adolescents’ under the ‘Age’ category)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Indigenous peoples (which will include anything that was previously coded as ‘Aboriginal health’ under the ‘Priority areas’)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Older adults (which will include anything that was previously coded as ‘geriatrics’ under the ‘Age’ category AND/OR optimal aging)</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>LMIC Focus</legend>
-                                <FormGroup row>
-                                <div className="col-md-12">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Target of document</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}At least one LMIC author</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}At least one LMIC study included</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Theme</legend>
-                                <FormGroup row>
-                                <div className="col-md-12">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Optimal aging</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health promotion/primary prevention</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Province Focus</legend>
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Federal/National</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Alberta</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}British Columbia</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Manitoba</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}New Brunswick</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Newfoundland and Labrador</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Northwest Territories</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nova Scotia</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nunavut</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Ontario</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prince Edward Island</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quebec</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Saskatchewan</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Yukon</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Ontario priority areas</legend>
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community-based care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health system performance and sustainability</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Healthy living, with a focus on tobacco control</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Mental health and addictions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nursing research</label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Primary care reform</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality improvement and safety</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Seniors’ care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Vulnerable and special health needs populations</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Women’s health</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Information for evidence briefs</legend>
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                    <label className="col-md-3 col-form-label">Focus of document</label>
-                                    <div className="col-md-9">
-                                        <Input type="textarea" placeholder="Focus of document..." disabled=""/>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <FormGroup row>
-                                    <label className="col-md-3 col-form-label">Key findings</label>
-                                    <div className="col-md-9">
-                                        <Input type="textarea" placeholder="Key findings..." disabled=""/>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Assessment and Assignment Status</legend>
-                                <br />
-                                <div className="form-group row mb">
-                                <label className="col-md-6 col-form-label">
-                                <Col md={ 12 } style={{ paddingLeft: 0 }}>
-                                        <Select
-                                            name="select-name"
-                                            value={value}
-                                            onChange={this.handleChangeSelect}
-                                            options={STATES}
-                                        />
-                                        <br />
-                                    </Col>
-                                <p>New article = New, still having content added, not visible in searches</p>
 
-                                <p>Data entry complete = All required content has been added, still not visible in searches</p>
+                            { this.renderGeneralArticleInformation(this.state.showGeneralArticleInformation) }
 
-                                <p>Live = Available for searching/alerting</p>
+                            { this.renderRelevance(this.state.showRelevance) }
 
-                                <p>Deleted = Removed from the system, not visible in searches</p>
+                            { this.renderEligibility(this.state.showEligibility) }
 
-                                </label>
-                                    <Col md={ 6 }>
-                                            <label className="col-md-12 col-form-label">
-                                                <p>
-                                                If an article is deleted, please enter the reason for removal (in case its removal is questioned later):
-                                                </p>
-                                            </label>
-                                            <div className="col-md-12">
-                                                <Input type="textarea"  disabled=""/>
-                                            </div>
-                                    </Col>
-                                </div>
-                                <br />
-                                <br />
-                            </fieldset>
+                            { this.renderDocumentType(this.state.documentType) }
+                                                   
+                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false) }
+
+                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false) }
+
+                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true) }
+
+                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false) }
+
+                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false) }
+
+                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false) }
+
+                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false) }
+
+                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea)}
+
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+
+                            { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
+
+
+                            
                         </form>
                     </CardBody>
                     <CardFooter>
-                        <div className="d-flex align-items-center">
-                            
+                        <div className="d-flex d-flex align-items-center">
                             <div className="ml-auto">
                                 <button type="submit" className="btn btn-warning">Cancel</button>{' '}
                                 <button type="submit" className="btn btn-info">Save</button>
                             </div>
-                            
                         </div>
                     </CardFooter>
                 </Card>
-                    </Col>
-
-                    {/* START card */}
-                    
-                    {/* END card */}
-
-                
-                    {/* END row */}
-                    {/* START card */}
-                    <Col lg={ 6 }>
-                    <Card className="card-default">
-                    <CardHeader>Form elements</CardHeader>
+                </div>
+                <div className="col-xl-6">
+                <Card className="card-default">
+                    <CardHeader><div  >
+                            <div><h3>Other Filterer Inputs</h3></div>
+                            <div>Article Id: { this.props.match.params.articleId } </div>
+                            <div>Title: {  } </div>
+                        </div>
+                    </CardHeader>
+                    <hr className="my-4"/>
                     <CardBody>
                         <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
-                       
-                            <fieldset>
-                            </fieldset>
-                            <fieldset>
-                                
-                            </fieldset>
-                                                        
-                            <fieldset>
-                                <legend>Health Systems Topics</legend>
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-7">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Governance arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Policy authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Centralization/decentralization of policy authority</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Accountability of the state sector's role in financing & delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Stewardship of the non-state sector's role in financing & delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Decision-making authority about who is covered and what can or must be provided to them</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Corruption protections</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Commercial authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Licensure & registration requirements</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Patents & profits</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Pricing & purchasing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Marketing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Sales & dispensing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Commercial liability</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer & stakeholder involvement</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer participation in policy & organizational decisions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer participation in system monitoring</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer participation in service delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Consumer complaints management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Stakeholder participation in policy & organizational decisions (or monitoring)</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Organizational authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Ownership</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Management approaches</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Accreditation</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Networks/multi-institutional arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Professional authority</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Training & licensure requirements</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Scope of practice</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Setting of practice</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Continuing competence</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality & safety</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Professional liability</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Strike/job action</label>
-                                        </div>
-                                    </div>
-                                    
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Financial arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Financing systems</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Taxation</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Social health insurance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community-based health insurance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community loan funds</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Private insurance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health savings accounts (Individually financed)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}User fees</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Donor contributions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fundraising</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Funding organizations</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fee-for-service (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Capitation (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Global budget</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prospective payment (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Indicative budgets (Funding)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Targeted payments/penalties (Funding)</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Incentivizing consumers</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Premium (level & features)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Cost-sharing</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health savings accounts (Third party contributions)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Targeted payments/penalties (Incentivizing consumers)</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Remunerating providers</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fee-for-service (Remuneration)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Capitation (Remuneration)</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Salary</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prospective payment (Remuneration)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Fundholding</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Indicative budgets (Remuneration)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Targeted payments/penalties (Remuneration)</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Purchasing products & services</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Scope & nature of insurance plans</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lists of covered/reimbursed organizations, providers, services & products</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Restrictions in coverage/reimbursement rates for organizations, providers, services & products</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Caps on coverage/reimbursement for organizations, providers, services & products</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prior approval requirements for organizations, providers, services & products</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lists of substitutable services & products</label>
-                                        </div>
-                                    </div>
-                                    
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Delivery arrangements</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}How care is designed to meet consumers' needs</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Availability of care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Timely access to care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Culturally appropriate care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community loan funds</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Case management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Package of care/care pathways/disease management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Group care</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}By whom care is provided</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System - Need, demand & supply</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System - Recruitment, retention & transitions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System - Performance management</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Workplace conditions - Provider satisfaction</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Workplace conditions - Health & safety</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Role performance</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Role expansion or extension</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Task shifting / substitution</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Multidisciplinary teams</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Volunteers or informal/family caregivers</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skill mix - Communication & case discussion between distant health professionals</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Training</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Support</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Workload/workflow/intensity</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff - Continuity of care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Staff/self - Shared decision-making</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Self-management</label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Where care is provided</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Site of service delivery</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Physical structure, facilities & equipment</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Organizational scale</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Integration of services</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Continuity of care</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Outreach</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}With what supports is care provided</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health record systems</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Electronic health record</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Other ICT that support individuals who provide care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}ICT that support individuals who receive care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality monitoring and improvement systems</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Safety monitoring and improvement systems</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Delivery Implementation strategies</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Information or education provision</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Behaviour change support</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Skills and competencies development</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}(Personal) Support</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Communication and decision-making facilitation</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}System participation</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Organization-targeted strategy</label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Provider-targeted strategy</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Educational material</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Educational meeting</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Educational outreach visit</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Local opinion leader</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Local consensus process</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Peer review</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Audit and feedback</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Reminders and prompts</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Tailored intervention</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Patient-mediated intervention</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Multi-faceted intervention</label>
-                                        </div>
-                                        
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Canadian Priority Areas</legend>
-                                <br />
-                                <FormGroup row>
-                                    <div className="col-md-11">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Home and community care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Mental health addiction services</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Indigenous health (Federal)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>Aging (emergent)</label>
-                                        </div>
-                                        
-                                    </div>
-                                </FormGroup>
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Domains</legend>
-                                <br />
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Conditions</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Infectious diseases</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}HIV/AIDS</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Tuberculosis</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Malaria</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Diarrhoeal disease</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lower respiratory infections</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Non-communicable diseases</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Cancer</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Cardiovascular disease</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Diabetes</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Alzheimer and other dementias</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Chronic obstructive pulmonary disease</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Other</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Maternal and child health</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Accidents</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Mental health and addictions</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Technologies</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Drugs</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Devices</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Diagnostics</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Surgery</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Sectors</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Home and community care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Primary care</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Specialty (hospital) care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Rehabilitation care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality & safety</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Long-term care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Public health</label>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Providers</label>
-                                        </div>
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Physician</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Generalist</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Specialist</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nurse</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Pharmacist</label>
-                                        </div><div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Allied health professional</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Lay/community health worker</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Informal/family caregivers</label>
-                                        </div>
-                                    </div>
-                                    
-                                </FormGroup>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Population</legend>
-                                <FormGroup row>
-                                <div className="col-md-12">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Children and youth (which will include anything that was previously coded as ‘neonates’, ‘pediatrics’ and ‘adolescents’ under the ‘Age’ category)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Indigenous peoples (which will include anything that was previously coded as ‘Aboriginal health’ under the ‘Priority areas’)</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Older adults (which will include anything that was previously coded as ‘geriatrics’ under the ‘Age’ category AND/OR optimal aging)</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>LMIC Focus</legend>
-                                <FormGroup row>
-                                <div className="col-md-12">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Target of document</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}At least one LMIC author</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}At least one LMIC study included</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Theme</legend>
-                                <FormGroup row>
-                                <div className="col-md-12">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Optimal aging</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health promotion/primary prevention</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Province Focus</legend>
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Federal/National</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Alberta</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}British Columbia</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Manitoba</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}New Brunswick</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Newfoundland and Labrador</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Northwest Territories</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nova Scotia</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nunavut</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Ontario</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Prince Edward Island</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quebec</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Saskatchewan</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Yukon</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Ontario priority areas</legend>
-                                <FormGroup row>
-                                <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Community-based care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Health system performance and sustainability</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Healthy living, with a focus on tobacco control</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Mental health and addictions</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Nursing research</label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div className="col-md-6">
-                                        <br />
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Primary care reform</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Quality improvement and safety</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Seniors’ care</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Vulnerable and special health needs populations</label>
-                                        </div>
-                                        <div className="checkbox c-checkbox">
-                                            <label>
-                                                <Input type="checkbox" defaultChecked="" disabled="" defaultValue=""/>
-                                                <span className="fa fa-check"></span>{' '}Women’s health</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Information for evidence briefs</legend>
-                                <br />
-                                <br />
-                                <FormGroup row>
-                                    <label className="col-md-3 col-form-label">Focus of document</label>
-                                    <div className="col-md-9">
-                                        <Input type="textarea" placeholder="Focus of document..." disabled=""/>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <FormGroup row>
-                                    <label className="col-md-3 col-form-label">Key findings</label>
-                                    <div className="col-md-9">
-                                        <Input type="textarea" placeholder="Key findings..." disabled=""/>
-                                    </div>
-                                </FormGroup>
-                                <br />
-                                <br />
-                            </fieldset>
-                            <fieldset>
-                                <legend>Assessment and Assignment Status</legend>
-                                <br />
-                                <div className="form-group row mb">
-                                <label className="col-md-6 col-form-label">
-                                <Col md={ 12 } style={{ paddingLeft: 0 }}>
-                                        <Select
-                                            name="select-name"
-                                            value={value}
-                                            onChange={this.handleChangeSelect}
-                                            options={STATES}
-                                        />
-                                        <br />
-                                    </Col>
-                                <p>New article = New, still having content added, not visible in searches</p>
 
-                                <p>Data entry complete = All required content has been added, still not visible in searches</p>
+                            { this.renderGeneralArticleInformation(this.state.showGeneralArticleInformation) }
 
-                                <p>Live = Available for searching/alerting</p>
+                            { this.renderRelevance(this.state.showRelevance) }
 
-                                <p>Deleted = Removed from the system, not visible in searches</p>
+                            { this.renderEligibility(this.state.showEligibility) }
 
-                                </label>
-                                    <Col md={ 6 }>
-                                            <label className="col-md-12 col-form-label">
-                                                <p>
-                                                If an article is deleted, please enter the reason for removal (in case its removal is questioned later):
-                                                </p>
-                                            </label>
-                                            <div className="col-md-12">
-                                                <Input type="textarea"  disabled=""/>
-                                            </div>
-                                    </Col>
-                                </div>
-                                <br />
-                                <br />
-                            </fieldset>
+                            { this.renderDocumentType(this.state.documentType) }
+                                                   
+                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false) }
+
+                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false) }
+
+                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true) }
+
+                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false) }
+
+                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false) }
+
+                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false) }
+
+                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false) }
+
+                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea)}
+
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+
+                            { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
+
+
+                            
                         </form>
                     </CardBody>
+                    <CardFooter>
+                        <div className="d-flex align-items-center">
+                        {/*    <div className="ml-auto">
+                                <button type="submit" className="btn btn-warning">Cancel</button>{' '}
+                                <button type="submit" className="btn btn-info">Save</button>
+                            </div> 
+                        */}
+                        </div>
+                    </CardFooter>
                 </Card>
+                </div>
+                </div>
                 {/* END card */}
-                </Col>
-                </Row>
             </ContentWrapper>
             );
     }
 
 }
 
-// export default HSEAssignedEligibilityFilterResolution;
+// export default HSEAssignedEligibilityFilterArticleInput;
 
-function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
+function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
     return {
+        currentUser: auth.currentUser,
         errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
         currentArticle: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleFetch
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEAssignedEligibilityFilterResolution);
-
+export default compose(
+    connect(mapStateToProps, actions),
+    reduxForm({
+        form: 'elibigibilityFilterInput'
+    })) (HSEAssignedEligibilityFilterResolution);

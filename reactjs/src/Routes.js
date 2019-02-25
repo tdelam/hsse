@@ -113,6 +113,7 @@ import HSEAssignedTranslatingTitlesQueue from './components/HSE/HSEAssignedTrans
 import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTrackingPrioritizingQueue';
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
+import HSEArticleEdit from './components/HSE/HSEArticleEdit';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
 import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
@@ -297,6 +298,9 @@ const Routes = ({ location }) => {
                             <Route path="/social-board" component={SocialBoard}/>
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
+
+                            {/* */}
+                            <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />
 
                             {/* Assigned HSE Queue */}
                             <Route path="/hse/assignedeligibilityfiltersarticleinput/:articleId" component={HSEAssignedEligibilityFilterArticleInput} />

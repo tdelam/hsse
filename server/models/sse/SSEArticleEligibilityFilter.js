@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const HSEArticleEligibilityFilterSchema = new Schema({ 
+const SSEArticleEligibilityFilterSchema = new Schema({ 
     
     _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
 
@@ -351,20 +351,20 @@ const HSEArticleEligibilityFilterSchema = new Schema({
 
 });
 
-// mongoose.model('HSEArticleEligibilityFilters', HSEArticleEligibilityFilterSchema);
+// mongoose.model('SSEArticleEligibilityFilters', SSEArticleEligibilityFilterSchema);
 
 
-HSEArticleEligibilityFilterSchema.methods.isEqualTo = function (otherInput) {
+SSEArticleEligibilityFilterSchema.methods.isEqualTo = function (otherInput) {
 
     currentModel = this;
 
     var unEqualFields = 0;
 
-    const props = Object.keys(HSEArticleEligibilityFilterSchema.paths);
+    const props = Object.keys(SSEArticleEligibilityFilterSchema.paths);
 
     console.log(props.length);
 
-    HSEArticleEligibilityFilterSchema.eachPath(function(path) {
+    SSEArticleEligibilityFilterSchema.eachPath(function(path) {
         
         if( currentModel[path] !== otherInput[path] && path != '_article' && path != '_id') {
             console.log(`${path}: ${currentModel[path]}, ${path}: ${otherInput[path]}`);
@@ -379,11 +379,11 @@ HSEArticleEligibilityFilterSchema.methods.isEqualTo = function (otherInput) {
 
 };
 
-mongoose.model('HSEArticleEligibilityFilters', HSEArticleEligibilityFilterSchema);
+mongoose.model('SSEArticleEligibilityFilters', SSEArticleEligibilityFilterSchema);
 
-HSEArticleEligibilityFilterSchema.eachPath(function(path) {
+SSEArticleEligibilityFilterSchema.eachPath(function(path) {
     //console.log(path);
 });
 
-var props = Object.keys(HSEArticleEligibilityFilterSchema.paths);
+var props = Object.keys(SSEArticleEligibilityFilterSchema.paths);
 //console.log(props.length);

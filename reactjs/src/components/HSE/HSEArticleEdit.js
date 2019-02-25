@@ -45,7 +45,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class HSEAssignedEligibilityFilterArticleInput extends Component {
+class HSEArticleEdit extends Component {
 
     state = {
 
@@ -225,7 +225,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     showPopulation: true,
                     showOntarioPriorityArea: true,
                     showArticleAssessment: true,
-                    showGeneralArticleInformation: true,
+
 
                     showRelevance: false,
                     showEligibility: false
@@ -295,7 +295,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                         <label className="col-md-2 col-form-label"></label>
                         <div className="col-md-10">
                             <div>
-                                <h4>Ref ID: { this.props.match.params.articleId }</h4>
+                                <h4>Ref ID: </h4>
                             </div>
                             <div>
                                 <h4>Live date: </h4>
@@ -621,13 +621,13 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
                             { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false) }
 
-                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea)}
+                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea) }
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false ) }
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false) }
 
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false) }
 
                             { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
 
@@ -668,4 +668,4 @@ export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'elibigibilityFilterInput'
-    })) (HSEAssignedEligibilityFilterArticleInput);
+    })) (HSEArticleEdit);
