@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters');
+const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals');
 const Authentication = require('../authentication');
 
 exports.listArticles = async (req, res) => {
@@ -16,7 +16,7 @@ exports.listArticles = async (req, res) => {
             return res.send(err);
         } else if(!articles) {
             return res.status(404).send({
-                message: 'No article in your Eligibility Filters Queue'
+                message: 'No article in your Quality Appraisal Queue'
             });
         }
         return res.status(200).send(articles);
@@ -45,12 +45,12 @@ exports.fetchArticle = async (req, res) => {
         }
         return res.status(200).send(article);
     })
-    .populate('elibilityFilterJuniorInput')
-    .populate('elibilityFilterSeniorInput');
+    .populate('qualityAppraisalJuniorInput')
+    .populate('qualityAppraisalSeniorInput');
 
 };
 
-exports.setEligibilityFilterValues = async (req, res) => {
+exports.setQualityAppraisalValues = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -80,33 +80,33 @@ exports.setEligibilityFilterValues = async (req, res) => {
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter._article = articleId;
-            newEligibilityFilter.save( (err) => {
+            newQualityAppraisal._article = articleId;
+            newQualityAppraisal.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
-            article.elibilityFilterSeniorInput = newEligibilityFilter;
+            article.qualityAppraisalJuniorInput = newEligibilityFilter;
+            article.qualityAppraisalSeniorInput = newEligibilityFilter;
 
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior and Senior filter added for article'
+                message: 'Inputs for Junior and Senior appraiser added for article'
             });
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
                     });
                 }
         
@@ -121,11 +121,11 @@ exports.setEligibilityFilterValues = async (req, res) => {
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
                     });
                 }
         
@@ -144,7 +144,7 @@ exports.setEligibilityFilterValues = async (req, res) => {
 
 };
 
-exports.setEligibilityFilterComplete = async (req, res) => {
+exports.setnewQualityAppraisalComplete = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -179,7 +179,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
                     });
                 }
         
@@ -205,7 +205,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
                     });
                 }
         
@@ -218,7 +218,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
             setFullEligibilityFilterCompleteOrResolve(articleId);
             
             return res.status(201).send({
-                message: 'Inputs for Junior filter added for article'
+                message: 'Inputs for Junior appraiser added for article'
             });
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
@@ -227,7 +227,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
                     });
                 }
         
@@ -240,7 +240,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
             setFullEligibilityFilterCompleteOrResolve(articleId);
             
             return res.status(201).send({
-                message: 'Inputs for Senior filter added for article'
+                message: 'Inputs for Senior appraiser added for article'
             });
             
         } 
@@ -326,14 +326,14 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
         }
         if(article._elibilityFilterJunior !== user._id) {
             return res.status(404).send({
-                message: 'You are not the junior filter for this article'
+                message: 'You are not the junior appraiser for this article'
             });
         } else {
 
             article.elibilityFilterJuniorCompleted = true;
             await article.save();
             return res.status(200).send({
-                message: 'Junior eligibility and filter completed for article'
+                message: 'Junior quality appraiser completed for article'
             });
         
         }
@@ -365,14 +365,14 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
         }
         if(article._elibilityFilterSenior !== user._id) {
             return res.status(404).send({
-                message: 'You are not the senior filter for this article'
+                message: 'You are not the senior appraiser for this article'
             });
         } else {
 
             article.elibilityFilterSeniorCompleted = true;
             await article.save();
             return res.status(200).send({
-                message: 'Senior eligibility and filter completed for article'
+                message: 'Senior quality appraiser completed for article'
             });
         
         }
@@ -407,7 +407,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
                 //console.log(err);
                 throw new Error(err);
             } else if(!eligibilityFilterJuniorInput) {
-                throw new Error('Eligibility Filter for Junior Filter does not exist');
+                throw new Error('Quality Appraisal for Junior Appraiser does not exist');
             } else {
                 newEligibilityFilterJuniorInput = eligibilityFilterJuniorInput;
             }
@@ -420,17 +420,17 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
                 //console.log(err);
                 throw new Error(err);
             } else if(!eligibilityFilterSeniorInput) {
-                throw new Error('Eligibility Filter for Senior Filter does not exist');
+                throw new Error('Quality Appraisal for Senior Filter does not exist');
             } else {
                 newEligibilityFilterSeniorInput = eligibilityFilterSeniorInput;
             }
 
         });
 
-        if(article.elibilityFilterJuniorCompleted && article.elibilityFilterSeniorCompleted) {
+        if(article.qualityAppraisalJuniorCompleted && article.qualityAppraisalSeniorCompleted) {
             
             // Call instance method to check if all fields on article's eligibilityFilter are equal
-            if( newEligibilityFilterJuniorInput.isEqualTo(newEligibilityFilterSeniorInput) ) {
+            if( newQualityAppraisalJuniorInput.isEqualTo(newEligibilityFilterSeniorInput) ) {
 
                 article.eligibilityFilterFullCompletion = true;
                 await article.save();
@@ -459,7 +459,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
                 message: 'Senior and Junior Eligibility and filter are not completed for article'
             });
             */
-           console.log('Senior and Junior Eligibility and filter are not completed for article');
+           console.log('Senior and Junior Quality Appraisal are not completed for article');
         }
     });
 
@@ -509,26 +509,26 @@ const isElibigilityFilterJuniorSeniorInputEqual = (articleId) => {
     
 };
 
-exports.setEligibilityFilterInputs = async (req, res) => {
+exports.setQualityAppraisalInputs = async (req, res) => {
 
     const { articleId } = req.params;
 
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     HSEArticleModelClass.findById(articleId)
-       .and([ { elibilityFilterJuniorCompleted: true }, { elibilityFilterSeniorCompleted: true } ])
+       .and([ { qualityAppraisalJuniorCompleted: true }, { qualityAppraisalSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {
                return res.send(err);
            } else if(!article) {
                return res.status(404).send({
-                   message: 'Could not set Full Completion for Article Eligibility Filters'
+                   message: 'Could not set Full Completion for Article Quality Appraisal'
                });
            }
 
            // Check to make sure all fields are the same
-           if(isElibigilityFilterJuniorSeniorInputEqual(articleId)) {
-               article.eligibilityFilterFullCompletion = true;
+           if(isQualityAppraisalJuniorSeniorInputEqual(articleId)) {
+               article.qualityAppraisalFullCompletion = true;
            } 
            
        });

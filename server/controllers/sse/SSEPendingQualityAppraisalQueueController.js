@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const HSEArticleModelClass = mongoose.model('HSEArticles');
+const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 exports.listArticles = async (req, res) => {
-     HSEArticleModelClass.find()
+     SSEArticleModelClass.find()
         .or([ { qualityAppraisalCompletedJunior: false }, { qualityAppraisalCompletedSenior: false } ])
         .exec(function(err, articles) {
             if(err) {
@@ -22,7 +22,7 @@ exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
 
-    return await HSEArticleModelClass.findById(id);
+    return await SSEArticleModelClass.findById(id);
 
 };
 

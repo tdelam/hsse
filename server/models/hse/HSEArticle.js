@@ -101,7 +101,6 @@ const HSEArticleSchema = new Schema({
 
     // Users for different stages
     _uploadHarvestUser: { type: Schema.Types.ObjectId, ref: 'User' },
-    _elibilityFilterJunior: { type: Schema.Types.ObjectId, ref: 'User' },
     _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'User' },
     _qualityAppraisalJunior: { type: Schema.Types.ObjectId, ref: 'User' },
     _qualityAppraisalSenior: { type: Schema.Types.ObjectId, ref: 'User' },
