@@ -38,7 +38,7 @@ SSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {
 
 mongoose.model('SSEArticleQualityAppraisals', SSEArticleQualityAppraisalSchema);
 
-SSEArticleEligibilityFilterSchema.eachPath(function(path) {
+SSEArticleQualityAppraisalSchema.eachPath(function(path) {
     //console.log(path);
 });
 

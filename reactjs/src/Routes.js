@@ -125,6 +125,15 @@ import HSEPendingTranslatingTitlesQueue from './components/HSE/HSEPendingTransla
 import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrackingPrioritizingQueue';
 
 
+import AddSSEArticle from './components/SSE/AddSSEArticle';
+import SSEArticleEdit from './components/SSE/SSEArticleEdit';
+import SSEBatchUpload from './components/SSE/SSEBatchUpload';
+import SSEAssignedEligibilityFilterResolution from './components/SSE/SSEAssignedEligibilityFilterResolution';
+import SSEPendingEligibilityFiltersArticleQueue from './components/SSE/SSEPendingEligibilityFiltersArticleQueue';
+import SSEPendingEligibilityFiltersBatchfileQueue from './components/SSE/SSEPendingEligibilityFiltersBatchfileQueue';
+import SSEPendingQualityAppraisalQueue from './components/SSE/SSEPendingQualityAppraisalQueue';
+
+
 // List of routes that uses the page layout
 // listed here to Switch between layouts
 // depending on the current pathname
@@ -325,6 +334,24 @@ const Routes = ({ location }) => {
                             <Route path="/hse/pendingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
 
                             {/* HSE Forms */}
+
+
+
+                            <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />
+
+                            {/* Assigned SSE Queue */}
+                            <Route path="/sse/assignedeligibilityfiltersarticleinput/:articleId" component={SSEAssignedEligibilityFilterArticleInput} />
+                            <Route path="/sse/assignedeligibilityfiltersarticleresolution/:articleId" component={SSEAssignedEligibilityFilterResolution} />
+                            <Route path="/sse/assignedeligibilityfiltersarticlequeue" component={SSEAssignedEligibilityFiltersArticleQueue} />
+                            <Route path="/sse/assignedqualityappraisalqueue" component={SSEAssignedQualityAppraisalQueue} />
+
+
+                            {/* Pending SSE Queue */}
+                            <Route path="/sse/addarticle" component={AddSSEArticle} />
+                            <Route path="/sse/batchfileupload" component={SSEBatchUpload} />
+                            <Route path="/sse/pendingeligibilityfiltersarticlequeue" component={SSEPendingEligibilityFiltersArticleQueue} />
+                            <Route path="/sse/pendingeligibilityfiltersbatchfilequeue" component={SSEPendingEligibilityFiltersBatchfileQueue} />
+                            <Route path="/sse/pendingqualityappraisalqueue" component={SSEPendingQualityAppraisalQueue} />
                             
 
                             <Redirect to="/notfound" />
