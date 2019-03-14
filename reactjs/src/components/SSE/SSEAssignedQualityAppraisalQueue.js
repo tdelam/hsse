@@ -25,11 +25,11 @@ const dtOptions = {
     }
 }
 
-const SSEAssignedEligibilityFiltersBatchfileQueue = () => (
+const SSEUserQualityAppraisalQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
-                   <div>Eligibility and Filters
-                      <small>Social Systems - Assigned Queue</small>
+                   <div>Quality Appraisal
+                      <small>Health Systems - Assigned Queue</small>
                    </div>
                 </div>
         <Card className="card-default">
@@ -42,9 +42,9 @@ const SSEAssignedEligibilityFiltersBatchfileQueue = () => (
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Date</th>
-                                <th>Other Filterer</th>
+                                <th>Other Appraiser</th>
                                 <th>Article Id</th>
-                                <th>Title</th>
+                                <th>Title </th>
                                 <th>Author</th>
                                 <th data-priority="2">Language</th>
                             </tr>
@@ -368,4 +368,4 @@ const SSEAssignedEligibilityFiltersBatchfileQueue = () => (
     </ContentWrapper>
 );
 
-export default SSEAssignedEligibilityFiltersBatchfileQueue;
+export default SSEUserQualityAppraisalQueue;

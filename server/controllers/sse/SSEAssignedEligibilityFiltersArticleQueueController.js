@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
-const HSEArticleModelClass = mongoose.model('HSEArticles');
-const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters');
+const SSEArticleModelClass = mongoose.model('SSEArticles');
+const SSEArticleEligibilityFilterModelClass = mongoose.model('SSEArticleEligibilityFilters');
 const Authentication = require('../authentication');
 
 exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find()
+    SSEArticleModelClass.find()
     .or([ { _elibilityFilterJunior: user._id }, { _elibilityFilterSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
@@ -35,7 +35,7 @@ exports.fetchArticle = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -58,7 +58,7 @@ exports.setEligibilityFilterValues = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -79,7 +79,7 @@ exports.setEligibilityFilterValues = async (req, res) => {
 
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter._article = articleId;
             newEligibilityFilter.save( (err) => {
 
@@ -102,7 +102,7 @@ exports.setEligibilityFilterValues = async (req, res) => {
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -121,7 +121,7 @@ exports.setEligibilityFilterValues = async (req, res) => {
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -152,7 +152,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -173,7 +173,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter._article = articleId;
             newEligibilityFilter.save( (err) => {
 
@@ -201,7 +201,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -223,7 +223,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -243,7 +243,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
                 message: 'Inputs for Senior filter added for article'
             });
             
-        } 
+        }
         
     });
 
@@ -258,7 +258,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -316,7 +316,7 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -355,7 +355,7 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
     }
 */
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -382,7 +382,7 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 
 const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
 
         if(err) {
 
@@ -401,7 +401,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
         let newEligibilityFilterJuniorInput = null;
         let newEligibilityFilterSeniorInput = null;
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
+        await SSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
             
             if(err) {
                 //console.log(err);
@@ -414,7 +414,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
         });
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
+        await SSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
 
             if(err) {
                 //console.log(err);
@@ -471,7 +471,7 @@ exports.setFullCompletion = async (req, res) => {
 
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId)
+    SSEArticleModelClass.findById(articleId)
        .and([ { elibilityFilterJuniorCompleted: true }, { elibilityFilterSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {
@@ -494,7 +494,7 @@ const isElibigilityFilterJuniorSeniorInputEqual = (articleId) => {
 
     const isEqual = false;
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -502,8 +502,6 @@ const isElibigilityFilterJuniorSeniorInputEqual = (articleId) => {
                 message: 'No article with that identifier has been found'
             });
         }
-
-        HSEA
 
     });
 

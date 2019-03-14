@@ -352,3 +352,182 @@ export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId,
   }
 };
 
+export const onSSEArticleSubmit = (values, history) => async dispatch => {
+  
+  try {
+    const response = await axios.post(
+      `${backendServer}/ssearticles`,
+      values
+    );
+
+    history.push('/dashboard');
+
+    dispatch({ type: SSE_CREATE_ARTICLE, payload: response.data })
+
+  } catch(e) {
+
+    dispatch({ type: SSE_CREATE_ARTICLE_ERROR, payload: 'Error creating Article'});
+
+  }
+};
+
+export const submitSSEBatchFile = (state, history) => async dispatch => {console.log(state);
+
+  const uploadConfig = await axios.get('/api/sse/getfileurl');
+
+  await axios.put(uploadConfig.data.url, state.file, {
+    headers: {
+      'Content-Type': state.file.type,
+    }
+  });
+
+  const articleBatch = await axios.post('/api/sse/batchfile', { 
+    url: uploadConfig.data.key, 
+    language: state.selectedLanguageOption.label, 
+    articleSource: state.selectedSourceOption.label, 
+    harvestDate: state.harvestDate,
+    fileName: state.file.name
+  });
+  console.log(state.file.name);
+  if(articleBatch) {
+    
+    dispatch({ type: SSE_CREATE_BATCHFILE, payload: 'Batchfile succesfully uploaded' });
+
+    // Successful upload
+    history.push('/sse/pendingeligibilityfiltersarticlequeue');
+
+  } else {
+    // Unsuccesful upload
+    dispatch({ type: SSE_CREATE_BATCHFILE_ERROR, payload: 'Batchfile succesfully uploaded' });
+    history.push('/sse/pendingeligibilityfiltersarticlequeue');
+    console.log("Batchfile upload failed")
+  }
+
+};
+
+export const listSSEPendingEligibilityFiltersArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse eligibility filter article pending queue'});
+  }
+};
+
+export const listSSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/articlebatchfiles`);
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing sse eligibility filter batchfile pending queue'});
+  }
+};
+
+export const listSSEAssignedEligibilityFiltersArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/assignedeligibilityfiltersarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse eligibility filter article assigned queue'});
+  }
+};
+
+export const fetchSSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/assignedeligibilityfiltersarticle/fetcharticle/${articleId}`, { headers });
+  
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR, payload: 'Error fetching sse eligibility filter assigned article'});
+  }
+};
+
+
+export const assignSSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
+
+  try {
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticle/addjuniorfilter/${articleId}`, 
+    {
+      articleId
+    },
+    {
+      headers 
+    });
+    
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER, payload: response.data });
+    history.push('/sse/assignedeligibilityfiltersarticlequeue');
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR, payload: 'Error assigning junior filter role for article'});
+  }
+};
+
+export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticle/addseniorfilter/${articleId}`,
+    {
+      articleId
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER, payload: response.data });
+    history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR, payload: 'Error assigning senior filter role for article'});
+  }
+};
+
+export const assignSSEPendingEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticle/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT, payload: response.data });
+    //history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
+export const assignSSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
+
+

@@ -108,7 +108,7 @@ class AddSSEArticle extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                     <div>ADD Article
-                        <small>Health Systems Evidence</small>
+                        <small>Social Systems Evidence</small>
                     </div>
                 </div>
                 { /* START row */ }
@@ -189,6 +189,7 @@ class AddSSEArticle extends Component {
                                 </CardBody>
                                 <CardFooter className="text-center">
                                     <button type="submit" className="btn btn-danger">Cancel</button>
+                                    {" "}
                                     <button type="submit" className="btn btn-success">Next</button>
                                 </CardFooter>
                             </Card>

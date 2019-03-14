@@ -62,7 +62,7 @@ const Menu = [
         submenu: [
             {
                 name: 'Elibigility & Filters',
-                path: '/sse/assignedeligibilityfiltersqueue',
+                path: '/sse/assignedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
             {
@@ -151,14 +151,23 @@ const Menu = [
         icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Social',
         submenu: [{
-            name: 'Harvesting & Uploading',
-            path: 'buttons',
-            translate: 'sidebar.nav.element.HARVESTUPLOAD'
+            name: 'Add Article',
+            path: '/sse/addarticle',
+            translate: 'sidebar.nav.element.ADDHSEARTICLE'
+        },{
+            name: 'Batch Upload',
+            path: '/sse/batchfileupload',
+            translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
         },
         {
-            name: 'Elibigility & Filters',
-            path: 'notifications',
-            translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+            name: 'Elibigility & Filters Article',
+            path: '/sse/pendingeligibilityfiltersarticlequeue',
+            translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
+        },
+        {
+            name: 'Elibigility & Filters Batch',
+            path: '/sse/pendingeligibilityfiltersbatchfilequeue',
+            translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
         },
         {
             name: 'Quality Appraisal',

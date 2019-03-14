@@ -107,10 +107,13 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 import HSEAssignedEligibilityFilterArticleInput from './components/HSE/HSEAssignedEligibilityFilterArticleInput';
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalQueue from './components/HSE/HSEAssignedQualityAppraisalQueue';
+
+/*
 import HSEAssignedLinkingStudiesQueue from './components/HSE/HSEAssignedLinkingStudiesQueue';
 import HSEAssignedPresentationDetailsQueue from './components/HSE/HSEAssignedPresentationDetailsQueue';
 import HSEAssignedTranslatingTitlesQueue from './components/HSE/HSEAssignedTranslatingTitlesQueue';
 import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTrackingPrioritizingQueue';
+*/
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
 import HSEArticleEdit from './components/HSE/HSEArticleEdit';
@@ -119,12 +122,24 @@ import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssigned
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
 import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
 import HSEPendingQualityAppraisalQueue from './components/HSE/HSEPendingQualityAppraisalQueue';
+
+/*
 import HSEPendingLinkingStudiesQueue from './components/HSE/HSEPendingLinkingStudiesQueue';
 import HSEPendingPresentationDetailsQueue from './components/HSE/HSEPendingPresentationDetailsQueue';
 import HSEPendingTranslatingTitlesQueue from './components/HSE/HSEPendingTranslatingTitlesQueue';
 import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrackingPrioritizingQueue';
+*/
 
+import SSEAssignedEligibilityFilterArticleInput from './components/SSE/SSEAssignedEligibilityFilterArticleInput';
+import SSEAssignedEligibilityFiltersArticleQueue from './components/SSE/SSEAssignedEligibilityFiltersArticleQueue';
+import SSEAssignedQualityAppraisalQueue from './components/SSE/SSEAssignedQualityAppraisalQueue';
 
+/*
+import SSEAssignedLinkingStudiesQueue from './components/SSE/SSEAssignedLinkingStudiesQueue';
+import SSEAssignedPresentationDetailsQueue from './components/SSE/SSEAssignedPresentationDetailsQueue';
+import SSEAssignedTranslatingTitlesQueue from './components/SSE/SSEAssignedTranslatingTitlesQueue';
+import SSEAssignedTrackingPrioritizingQueue from './components/SSE/SSEAssignedTrackingPrioritizingQueue';
+*/
 import AddSSEArticle from './components/SSE/AddSSEArticle';
 import SSEArticleEdit from './components/SSE/SSEArticleEdit';
 import SSEBatchUpload from './components/SSE/SSEBatchUpload';
@@ -132,7 +147,12 @@ import SSEAssignedEligibilityFilterResolution from './components/SSE/SSEAssigned
 import SSEPendingEligibilityFiltersArticleQueue from './components/SSE/SSEPendingEligibilityFiltersArticleQueue';
 import SSEPendingEligibilityFiltersBatchfileQueue from './components/SSE/SSEPendingEligibilityFiltersBatchfileQueue';
 import SSEPendingQualityAppraisalQueue from './components/SSE/SSEPendingQualityAppraisalQueue';
-
+/*
+import SSEPendingLinkingStudiesQueue from './components/SSE/SSEPendingLinkingStudiesQueue';
+import SSEPendingPresentationDetailsQueue from './components/SSE/SSEPendingPresentationDetailsQueue';
+import SSEPendingTranslatingTitlesQueue from './components/SSE/SSEPendingTranslatingTitlesQueue';
+import SSEPendingTrackingPrioritizingQueue from './components/SSE/SSEPendingTrackingPrioritizingQueue';
+*/
 
 // List of routes that uses the page layout
 // listed here to Switch between layouts
@@ -316,11 +336,12 @@ const Routes = ({ location }) => {
                             <Route path="/hse/assignedeligibilityfiltersarticleresolution/:articleId" component={HSEAssignedEligibilityFilterResolution} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
                             <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
+                            {/*
                             <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
                             <Route path="/hse/assignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
                             <Route path="/hse/assignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
                             <Route path="/hse/assignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
-
+                            */}
 
                             {/* Pending HSE Queue */}
                             <Route path="/hse/addarticle" component={AddHSEArticle} />
@@ -328,23 +349,28 @@ const Routes = ({ location }) => {
                             <Route path="/hse/pendingeligibilityfiltersarticlequeue" component={HSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />
                             <Route path="/hse/pendingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
+                            {/*
                             <Route path="/hse/pendinglinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
                             <Route path="/hse/pendingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />
                             <Route path="/hse/pendingtranslatingtitlesqueue" component={HSEPendingTranslatingTitlesQueue} />
                             <Route path="/hse/pendingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
-
+                            */}
                             {/* HSE Forms */}
 
-
-
-                            <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />
+                            <Route path="/sse/editarticle/:articleId" component={SSEArticleEdit} />
 
                             {/* Assigned SSE Queue */}
                             <Route path="/sse/assignedeligibilityfiltersarticleinput/:articleId" component={SSEAssignedEligibilityFilterArticleInput} />
                             <Route path="/sse/assignedeligibilityfiltersarticleresolution/:articleId" component={SSEAssignedEligibilityFilterResolution} />
                             <Route path="/sse/assignedeligibilityfiltersarticlequeue" component={SSEAssignedEligibilityFiltersArticleQueue} />
                             <Route path="/sse/assignedqualityappraisalqueue" component={SSEAssignedQualityAppraisalQueue} />
-
+                            
+                            {/*
+                            <Route path="/sse/assignedlinkingstudiesqueue" component={SSEAssignedLinkingStudiesQueue} />
+                            <Route path="/sse/assignedpresentationdetailsqueue" component={SSEAssignedPresentationDetailsQueue} />
+                            <Route path="/sse/assignedtranslatingtitlesqueue" component={SSEAssignedTranslatingTitlesQueue} />
+                            <Route path="/sse/assignedtrackingprioritizingqueue" component={SSEAssignedTrackingPrioritizingQueue} />
+                            */}
 
                             {/* Pending SSE Queue */}
                             <Route path="/sse/addarticle" component={AddSSEArticle} />
@@ -352,7 +378,12 @@ const Routes = ({ location }) => {
                             <Route path="/sse/pendingeligibilityfiltersarticlequeue" component={SSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/sse/pendingeligibilityfiltersbatchfilequeue" component={SSEPendingEligibilityFiltersBatchfileQueue} />
                             <Route path="/sse/pendingqualityappraisalqueue" component={SSEPendingQualityAppraisalQueue} />
-                            
+                            {/*
+                            <Route path="/sse/pendinglinkingstudiesqueue" component={SSEPendingLinkingStudiesQueue} />
+                            <Route path="/sse/pendingpresentationdetailsqueue" component={SSEPendingPresentationDetailsQueue} />
+                            <Route path="/sse/pendingtranslatingtitlesqueue" component={SSEPendingTranslatingTitlesQueue} />
+                            <Route path="/sse/pendingtrackingprioritizingqueue" component={SSEPendingTrackingPrioritizingQueue} />
+                            */}
 
                             <Redirect to="/notfound" />
 

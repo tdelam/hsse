@@ -150,7 +150,7 @@ class SSEBatchUpload extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                    <div>Batch File Upload
-                      <small>Health Systems Evidence</small>
+                      <small>Social Systems Evidence</small>
                    </div>
                 </div>
 {/*                

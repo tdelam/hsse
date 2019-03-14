@@ -135,7 +135,7 @@ class SSEAssignedEligibilityFiltersArticleQueue extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                         <div>Assessing Eligibility and Assigning Filters Articles
-                            <small>Health Systems Evidence - Assigned Queue</small>
+                            <small>Social Systems Evidence - Assigned Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
