@@ -71,22 +71,37 @@ const HSEArticleSchema = new Schema({
     elibilityFilterJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
     elibilityFilterSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
 
-    // Final inputs for article's elibibility adn filter
-    elibilityFilterFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
 
-    // Elibigility and Filter Junior and Senior Input Completed
+    // Quality Appraisal Input
+    _qualityAppraiserJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _qualityAppraiserJuniorEmail: { type: String, default: null },
+
+    _qualityAppraiserSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _qualityAppraiserSeniorEmail: { type: String, default: null },
+
+    qualityAppraiserJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
+    qualityAppraiserSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
+
+    // Final inputs for articles
+    elibilityFilterFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    qualityAppraisalFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+
+    // Junior and Senior Input Completed
     elibilityFilterJuniorCompleted: { type: Boolean, default: false },
     elibilityFilterSeniorCompleted: { type: Boolean, default: false },
 
+    qualityAppraiserJuniorCompleted: { type: Boolean, default: false },
+    qualityAppraiserSeniorCompleted: { type: Boolean, default: false },
+
     // Set to true if an article needs to be resolved
     eligibilityFilterResolve: { type: Boolean, default: false },
+    qualityAppraisalResolve: { type: Boolean, default: false },
 
     // Set to true if Eligibility and Filter state is complete
     eligibilityFilterFullCompletion: { type: Boolean, default: false },
 
-    // Quality and Appraisal Completed
-    qualityAppraisalJuniorCompleted: { type: Boolean, default: false },
-    qualityAppraisalSeniorCompleted: { type: Boolean, default: false },
+    // Set to true if Quality Appraisal state is complete
+    qualityAppraisalFullCompletion: { type: Boolean, default: false },
 
     // Linking Studies Completed
     linkingStudiesCompleted: { type: Boolean, default: false },

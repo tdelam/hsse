@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { 
+    Card, 
+    CardBody, 
+    CardHeader, 
+    Modal, 
+    ModalHeader, 
+    ModalBody,
+    ModalFooter,
+    Button
+} from 'reactstrap';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import Swal from '../Elements/Swal';
+
+
+import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
 
@@ -25,347 +41,205 @@ const dtOptions = {
     }
 }
 
-const HSEPendingQualityAppraisalQueue = () => (
-    <ContentWrapper>
-        <div className="content-heading">
-                   <div>Appraising Quality
-                      <small>Health Systems - Main Queue</small>
-                   </div>
-                </div>
-        <Card className="card-default">
-            <CardHeader>List of pending Articles</CardHeader>
-            <CardBody>
+class HSEPendingQualityAppraisalArticleQueue extends Component {
+
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            modal: false,
+            toasterPos: 'top-right',
+            toasterType: 'info',
+            selectedArticleForAssignment: '',
+            swalOptionJunior: {
+                title: "Assign Article",
+                text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, assign it!",
+                closeOnConfirm: true
+            },
+            swalOptionSenior: {
+                title: "Assign Article",
+                text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, assign it!",
+                closeOnConfirm: true
+            }
+        };
+
+    }
+
+    componentDidMount() {
+        this.props.listHSEPendingQualityAppraisalArticlesQueue();
+    }
+
+    toggleModal = (articleId) => {
+        console.log(articleId);
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    toggleModal1 = function(articleId) {
+        console.log(articleId);
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    selectArticleForAssignment = () =>  {
+        this.setState({
+            selectedArticleForAssignment: ''
+        })
+    }
+
+    renderPriority(priority) {
+        
+        switch (priority) {
+            case 'LOW':
+                return <td className="text-center"><span className="badge badge-success">{ priority }</span></td>
+            case 'MODERATE':
+                return <td className="text-center"><span className="badge badge-warning">{ priority }</span></td>
+            case 'HIGH':
+                return <td className="text-center"><span className="badge badge-danger">{ priority }</span></td>
+            default:
+                return <td className="text-center"><span className="badge badge-success">LOW</span></td>
+        }
+
+    }
+
+    swalCallback(isConfirm, swal) {
+        swal("Assigned!", "The article has been assigned to your pending Quality Appraisal list.", "success");
+    }
+
+    swalCallbackAssignJunior(isConfirm, articleId) {
+        if(isConfirm)
+            this.props.assignHSEPendingQualityAppraisalArticlesJuniorFilter(articleId);
+    }
+
+    swalCallbackAssignSenior(isConfirm, articleId) {
+        if(isConfirm)
+            this.props.assignHSEPendingQualityAppraisalArticlesSeniorFilter(articleId);
+    }
+
+    renderArticles() {
+        
+        if(this.props.pendingArticles != null ) {
+            const rows = Object.entries(this.props.pendingArticles).map(article => {
+                return (
+                    <tr key={article[1]._id}>
+                        {/*
+                        <td className="text-center">
+                            <span className="badge badge-success">{ article[1].priority }</span>
+                        </td>
+                        */}
+                        { this.renderPriority(article[1].priority) }
+                        <td>
+                            { article[1].articleSource }
+                        </td>
+                        <td>
+                            { article[1].harvestDate }
+                        </td>
+                        <td>
+                            {article[1]._elibilityFilterJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {/*article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
+                        </td>
+                        <td>
+                            {article[1]._elibilityFilterSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                        </td>
+                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
+                        <td>{ article[1]._id }</td>
+                        <td>{ article[1].title }</td>
+                        <td>{ article[1].author }</td>
+                        <td>{ article[1].language }</td>
+                        {/*}
+                        <td className="text-right">
+                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
+                        </td> */}
+                    {/*         
+                        <td className="text-right">
+                            <button type="button" className="btn btn-sm btn-secondary">
+                                <em className="fas fa-pencil-alt"></em>
+                            </button>
+                            <button type="button" className="btn btn-sm btn-danger">
+                                <em className="fas fa-trash-alt"></em>
+                            </button>
+                            <button type="button" className="btn btn-sm btn-success">
+                                <em className="fa fa-check"></em>
+                            </button>
+                        </td>
+                    */}    
+                    </tr>
+                )
+            });
+        // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
+            return (
                 <Datatable options={dtOptions}>
                     <table className="table table-striped my-4 w-100">
                         <thead>
                             <tr>
-                                <th data-priority="1">Post title</th>
+                                <th data-priority="1">Priority</th>
+                                <th>Source</th>
+                                <th>Harvest Date</th>
+                                <th>Junior Filterer</th>
+                                <th>Senior Filterer</th>
+                                <th>Article Id</th>
+                                <th>Title</th>
                                 <th>Author</th>
-                                <th>Categories</th>
-                                <th>Tags</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                                <th>Comments</th>
-                                <th data-priority="2">Status</th>
+                                <th>Language</th>
+                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
+                                {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a href="">AngularJS</a>
-                                </td>
-                                <td>
-                                    <a href="">Keith Gutierrez</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">HTML5</a>
-                                    <a href="">JAVASCRIPT</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">angularjs</a>
-                                    <a className="mr-1 badge badge-primary" href="">mvc</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>1251</td>
-                                <td>
-                                    <a className="mr-1 badge badge-success" href="">Public</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">MeteorJs and Angularjs</a>
-                                </td>
-                                <td>
-                                    <a href="">Carlos Wilson</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">WEB</a>
-                                    <a href="">JAVASCRIPT</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">angularjs</a>
-                                    <a className="mr-1 badge badge-primary" href="">node</a>
-                                    <a className="mr-1 badge badge-primary" href="">meteor</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>1361</td>
-                                <td>
-                                    <a className="mr-1 badge badge-warning" href="">Pending</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Working with ExpressJS</a>
-                                </td>
-                                <td>
-                                    <a href="">Carlos Wilson</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">SERVER</a>
-                                    <a href="">JAVASCRIPT</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">expressJS</a>
-                                    <a className="mr-1 badge badge-primary" href="">node</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-success" href="">Public</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Abstract object styles</a>
-                                </td>
-                                <td>
-                                    <a href="">Carlos Wilson</a>
-                                </td>
-                                <td>
-                                    <a href="">JAVASCRIPT</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">node</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-success" href="">Public</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Animating progress bars</a>
-                                </td>
-                                <td>
-                                    <a href="">Clyde Bailey</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">BOOTSTRAP</a>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">css</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-danger" href="">Deleted</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Contextual alternatives</a>
-                                </td>
-                                <td>
-                                    <a href="">Tracy Black</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">BOOTSTRAP</a>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">less</a>
-                                    <a className="mr-1 badge badge-primary" href="">sass</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-warning" href="">Pending</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Responsive embed</a>
-                                </td>
-                                <td>
-                                    <a href="">Brittany Harrison</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">FOUNDATION</a>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">techniques</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge" href="">Draft</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Digging into AngularJS</a>
-                                </td>
-                                <td>
-                                    <a href="">Keith Gutierrez</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">HTML5</a>
-                                    <a href="">JAVASCRIPT</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">angularjs</a>
-                                    <a className="mr-1 badge badge-primary" href="">mvc</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-success" href="">Public</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Application with MeteorJs and Angularjs</a>
-                                </td>
-                                <td>
-                                    <a href="">Nevaeh Hunter</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">WEB</a>
-                                    <a href="">SERVER</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">angularjs</a>
-                                    <a className="mr-1 badge badge-primary" href="">node</a>
-                                    <a className="mr-1 badge badge-primary" href="">meteor</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-warning" href="">Pending</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Introduction to ExpressJS</a>
-                                </td>
-                                <td>
-                                    <a href="">Carlos Wilson</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">SERVER</a>
-                                    <a href="">JAVASCRIPT</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">expressJS</a>
-                                    <a className="mr-1 badge badge-primary" href="">node</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-success" href="">Public</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Optional classes</a>
-                                </td>
-                                <td>
-                                    <a href="">Peter Lucas</a>
-                                </td>
-                                <td>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">node</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>125</td>
-                                <td>
-                                    <a className="mr-1 badge badge-success" href="">Public</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Typical user actions</a>
-                                </td>
-                                <td>
-                                    <a href="">Clyde Bailey</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">BOOTSTRAP</a>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">css</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>1471</td>
-                                <td>
-                                    <a className="mr-1 badge badge-danger" href="">Deleted</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">A lightweight, flexible component</a>
-                                </td>
-                                <td>
-                                    <a href="">Brittany Harrison</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">BOOTSTRAP</a>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">less</a>
-                                    <a className="mr-1 badge badge-primary" href="">sass</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>1581</td>
-                                <td>
-                                    <a className="mr-1 badge badge-warning" href="">Pending</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="">Highlight new or unread items</a>
-                                </td>
-                                <td>
-                                    <a href="">Abigail Phillips</a>
-                                </td>
-                                <td>
-                                    <a className="mr-2" href="">FOUNDATION</a>
-                                    <a href="">WEB</a>
-                                </td>
-                                <td>
-                                    <a className="mr-1 badge badge-primary" href="">coding</a>
-                                    <a className="mr-1 badge badge-primary" href="">techniques</a>
-                                </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
-                                <td>1691</td>
-                                <td>
-                                    <a className="mr-1 badge" href="">Draft</a>
-                                </td>
-                            </tr>
+                            { rows }
                         </tbody>
                     </table>
                 </Datatable>
-            </CardBody>
-        </Card>
-    </ContentWrapper>
-);
+            );
+        }    
+    };
 
-export default HSEPendingQualityAppraisalQueue;
+    render() {
+        
+        return (
+            <ContentWrapper>
+                <div className="content-heading">
+                        <div>Quality Appraisal Articles
+                            <small>Health Systems Evidence - Main Queue</small>
+                        </div>
+                        </div>
+                <Card className="card-default">
+                    <CardHeader>List of pending Articles</CardHeader>
+                    <CardBody>
+                        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                            <ModalHeader toggle={this.toggleModal}>Article Assignment Confirmation</ModalHeader>
+                            <ModalBody>
+                                Are you you want to assign this article to yourself? 
+                            </ModalBody>
+                            <ModalFooter>
+                            <Button color="primary" onClick={this.toggleModal}>Yes</Button>{' '}
+                            <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
+                        { this.renderArticles() }
+                    </CardBody>
+                </Card>
+            </ContentWrapper>
+        );
+    }
+}
+
+function mapStateToProps({ hsePendingQualityAppraisalArticleQueue }) {
+    return { 
+        errorMessage: hsePendingQualityAppraisalArticleQueue.hsePendingQualityAppraisalArticleErrorMessage,
+        pendingArticles: hsePendingQualityAppraisalArticleQueue.hsePendingQualityAppraisalArticles 
+    }
+}
+
+export default connect(mapStateToProps, actions)(HSEPendingQualityAppraisalArticleQueue);
+
