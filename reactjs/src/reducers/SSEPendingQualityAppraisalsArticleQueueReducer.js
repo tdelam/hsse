@@ -2,11 +2,11 @@ import {
     SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE,
     SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR,
 
-    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIORFILTER,
-    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR,
+    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER,
+    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR,
 
-    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIORFILTER,
-    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIORFILTER_ERROR
+    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER,
+    SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -20,19 +20,19 @@ export default function(state = INITIAL_STATE, action) {
             return { ...state, hsePendingQualityAppraisalsArticles: action.payload };
 
         case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR: 
-            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending quality appraisal articles' };
+            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending quality appraisals articles' };
 
-        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIORFILTER: 
+        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER: 
             return { ...state, hsePendingQualityAppraisalsArticles: action.payload };
         
-        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR: 
-            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending quality appraisal articles' };
+        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR: 
+            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending quality appraisals articles' };
         
-        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIORFILTER: 
+        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER: 
             return { ...state, hsePendingQualityAppraisalsArticles: action.payload };
         
-        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIORFILTER_ERROR: 
-            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending quality appraisal articles' };
+        case SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR: 
+            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending quality appraisals articles' };
         default:
             return state;
             
