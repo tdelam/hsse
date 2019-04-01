@@ -51,7 +51,7 @@ class SSEPendingEligibilityFiltersBatchfileQueue extends Component {
 
     }
 
-    renderBatchfiles() {
+    renderBatchfiles() {console.log(this.props.pendingArticles);
         if(this.props.pendingBatchfiles != null ) {
             const rows = Object.entries(this.props.pendingBatchfiles).map(batchfile => {
                 

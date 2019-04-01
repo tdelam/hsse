@@ -62,46 +62,46 @@ const HSEArticleSchema = new Schema({
     // Stage completions
 
     // Eligibility and Filter Input
-    _elibilityFilterJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFilterJuniorEmail: { type: String, default: null },
+    _elibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFiltersJuniorEmail: { type: String, default: null },
 
-    _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFilterSeniorEmail: { type: String, default: null },
+    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFiltersSeniorEmail: { type: String, default: null },
 
-    elibilityFilterJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
-    elibilityFilterSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    elibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    elibilityFiltersSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
 
 
-    // Quality Appraisal Input
-    _qualityAppraiserJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _qualityAppraiserJuniorEmail: { type: String, default: null },
+    // Quality Appraisals Input
+    _qualityAppraisalsJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _qualityAppraisalsJuniorEmail: { type: String, default: null },
 
-    _qualityAppraiserSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _qualityAppraiserSeniorEmail: { type: String, default: null },
+    _qualityAppraisalsSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _qualityAppraisalsSeniorEmail: { type: String, default: null },
 
-    qualityAppraiserJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
-    qualityAppraiserSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
+    qualityAppraisalsJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
+    qualityAppraisalsSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
 
     // Final inputs for articles
-    elibilityFilterFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
-    qualityAppraisalFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
 
     // Junior and Senior Input Completed
-    elibilityFilterJuniorCompleted: { type: Boolean, default: false },
-    elibilityFilterSeniorCompleted: { type: Boolean, default: false },
+    elibilityFiltersJuniorCompleted: { type: Boolean, default: false },
+    elibilityFiltersSeniorCompleted: { type: Boolean, default: false },
 
-    qualityAppraiserJuniorCompleted: { type: Boolean, default: false },
-    qualityAppraiserSeniorCompleted: { type: Boolean, default: false },
+    qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
+    qualityAppraisalsSeniorCompleted: { type: Boolean, default: false },
 
     // Set to true if an article needs to be resolved
-    eligibilityFilterResolve: { type: Boolean, default: false },
-    qualityAppraisalResolve: { type: Boolean, default: false },
+    eligibilityFiltersResolve: { type: Boolean, default: false },
+    qualityAppraisalsResolve: { type: Boolean, default: false },
 
     // Set to true if Eligibility and Filter state is complete
-    eligibilityFilterFullCompletion: { type: Boolean, default: false },
+    eligibilityFiltersFullCompletion: { type: Boolean, default: false },
 
-    // Set to true if Quality Appraisal state is complete
-    qualityAppraisalFullCompletion: { type: Boolean, default: false },
+    // Set to true if Quality Appraisals state is complete
+    qualityAppraisalsFullCompletion: { type: Boolean, default: false },
 
     // Linking Studies Completed
     linkingStudiesCompleted: { type: Boolean, default: false },
@@ -115,21 +115,21 @@ const HSEArticleSchema = new Schema({
     complicated: { type: Boolean, default: false },
 
     // Users for different stages
-    _uploadHarvestUser: { type: Schema.Types.ObjectId, ref: 'User' },
-    _elibilityFilterSenior: { type: Schema.Types.ObjectId, ref: 'User' },
-    _qualityAppraisalJunior: { type: Schema.Types.ObjectId, ref: 'User' },
-    _qualityAppraisalSenior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _uploadHarvestsUser: { type: Schema.Types.ObjectId, ref: 'User' },
+    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _qualityAppraisalsJunior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _qualityAppraisalsSenior: { type: Schema.Types.ObjectId, ref: 'User' },
     _linkingStudiesUser: { type: Schema.Types.ObjectId, ref: 'User' },
     _presentationDetailsUser: { type: Schema.Types.ObjectId, ref: 'User' },
 
     // Translators
-    _translatorFrench: { type: Schema.Types.ObjectId, ref: 'User' },
-    _translatorSpanish: { type: Schema.Types.ObjectId, ref: 'User' },
-    _translatorPortugese: { type: Schema.Types.ObjectId, ref: 'User' },
-    _translatorRussian: { type: Schema.Types.ObjectId, ref: 'User' },
-    _translatorArabic: { type: Schema.Types.ObjectId, ref: 'User' },
-    _translatorChinese: { type: Schema.Types.ObjectId, ref: 'User' },
-    _translatorEnglish: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsFrench: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsSpanish: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsPortugese: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsRussian: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsArabic: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsChinese: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsEnglish: { type: Schema.Types.ObjectId, ref: 'User' },
     
     // Article relation to Batchfile
     _batchFile: { type: Schema.Types.ObjectId, ref: 'HSEArticleBatchFiles' },

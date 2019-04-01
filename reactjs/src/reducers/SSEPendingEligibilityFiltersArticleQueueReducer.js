@@ -17,22 +17,22 @@ export default function(state = INITIAL_STATE, action) {
 
     switch(action.type) {
         case SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE: 
-            return { ...state, hsePendingEligibilityFiltersArticles: action.payload };
+            return { ...state, ssePendingEligibilityFiltersArticles: action.payload };
 
         case SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR: 
-            return { ...state, hsePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
+            return { ...state, ssePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
 
         case SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER: 
-            return { ...state, hsePendingEligibilityFiltersArticles: action.payload };
+            return { ...state, ssePendingEligibilityFiltersArticles: action.payload };
         
         case SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR: 
-            return { ...state, hsePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
+            return { ...state, ssePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
         
         case SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER: 
-            return { ...state, hsePendingEligibilityFiltersArticles: action.payload };
+            return { ...state, ssePendingEligibilityFiltersArticles: action.payload };
         
         case SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR: 
-            return { ...state, hsePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
+            return { ...state, ssePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
         default:
             return state;
             

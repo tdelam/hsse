@@ -7,6 +7,6 @@ module.exports = (app) => {
     //app.get('/api/hse/batchfile', requireSignin, HSEBatchfileController.list);
     app.get('/sse/articlebatchfiles', SSEArticleBatchfileController.list);
     app.get('/sse/articlebatchfiles/:batchfileId', SSEArticleBatchfileController.read);
-    //app.post('/hse/articlebatchfiles', HSEArticleBatchfileController.create);
-    //app.delete('/hse/articlebatchfile/:batchfileId', HSEArticleBatchfileController.delete);
+    app.post('/sse/articlebatchfiles', SSEArticleBatchfileController.create);
+    // app.delete('/sse/articlebatchfile/:batchfileId', SSEArticleBatchfileController.delete);
 };

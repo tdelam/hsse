@@ -145,11 +145,11 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._elibilityFilterJuniorEmail || <Link to="/sse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {article[1]._elibilityFiltersJuniorEmail || <Link to="/sse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
                             {/*article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
                         </td>
                         <td>
-                            {article[1]._elibilityFilterSeniorEmail || <Link to="/sse/assignedeligibilityfiltersarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {article[1]._elibilityFiltersSeniorEmail || <Link to="/sse/assignedeligibilityfiltersarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
                         </td>
                         {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
                         <td>{ article[1]._id }</td>
@@ -210,7 +210,7 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                         <div>Assessing Eligibility and Assigning Filters Articles
-                            <small>Health Systems Evidence - Main Queue</small>
+                            <small>Social Systems Evidence - Main Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">

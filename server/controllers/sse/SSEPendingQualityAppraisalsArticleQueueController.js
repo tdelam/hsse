@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
-const HSEArticleModelClass = mongoose.model('HSEArticles');
+const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 exports.listArticles = async (req, res) => {
-    HSEArticleModelClass.find()
-       .or([ { _qualityAppraiserJunior: null }, { _qualityAppraiserSenior: null } ])
+    SSEArticleModelClass.find()
+       .or([ { _qualityAppraisalsJunior: null }, { _qualityAppraisalsSenior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -23,7 +23,7 @@ exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
 
-    return await HSEArticleModelClass.findById(id);
+    return await SSEArticleModelClass.findById(id);
 
 };
 
@@ -43,7 +43,7 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -54,8 +54,8 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
 
             if(hasRole('juniorappraiser', user) || hasRole('seniorappraiser', user)) {
 
-                article._qualityAppraiserJunior = user._id;
-                article._qualityAppraiserJuniorEmail = user.email;
+                article._qualityAppraisalsJunior = user._id;
+                article._qualityAppraisalsJuniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
@@ -84,7 +84,7 @@ exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -100,8 +100,8 @@ exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
 
             if(hasRole('seniorappraiser', user)) {
 
-                article._qualityAppraiserSenior = user._id;
-                article._qualityAppraiserSeniorEmail = user.email;
+                article._qualityAppraisalsSenior = user._id;
+                article._qualityAppraisalsSeniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({

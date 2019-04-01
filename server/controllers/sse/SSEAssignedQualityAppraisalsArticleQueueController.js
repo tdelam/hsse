@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
-const HSEArticleModelClass = mongoose.model('HSEArticles');
-const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals');
+const SSEArticleModelClass = mongoose.model('SSEArticles');
+const SSEArticleQualityAppraisalModelClass = mongoose.model('SSEArticleQualityAppraisals');
 const Authentication = require('../authentication');
 
 exports.listArticles = async (req, res) => {console.log("**********************");
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find()
+    SSEArticleModelClass.find()
     .or([ { _qualityAppraisalsJunior: user._id }, { _qualityAppraisalsSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
@@ -35,7 +35,7 @@ exports.fetchArticle = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -58,7 +58,7 @@ exports.setQualityAppraisalValues = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -74,12 +74,12 @@ exports.setQualityAppraisalValues = async (req, res) => {
         if( !(article._qualityAppraisalsJunior.equals(user._id) || article._qualityAppraisalsSenior.equals(user._id)) ) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for quality appraisals for article'
             });
 
         } else if ( article._qualityAppraisalsJunior.equals(user._id) && article._qualityAppraisalsSenior.equals(user._id) ) {
 
-            const newQualityAppraisals = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newQualityAppraisals = new SSEArticleQualityAppraisalModelClass(inputValues);
             newQualityAppraisals._article = articleId;
             newQualityAppraisals.save( (err) => {
 
@@ -102,8 +102,8 @@ exports.setQualityAppraisalValues = async (req, res) => {
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const newQualityAppraisals = new HSEArticleQualityAppraisalModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            const newQualityAppraisal = new SSEArticleQualityAppraisalModelClass(inputValues);
+            newQualityAppraisal.save( (err) => {
                 if(err) {
                     return res.status(422).send({
                         message: `Unable to save values for Quality Appraisal for article, err: ${err}`
@@ -112,7 +112,7 @@ exports.setQualityAppraisalValues = async (req, res) => {
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
+            article.QualityAppraisalsJuniorInput = newQualityAppraisals;
             await article.save();
             
             return res.status(201).send({
@@ -121,7 +121,7 @@ exports.setQualityAppraisalValues = async (req, res) => {
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
+            const newQualityAppraisal = new SSEArticleQualityAppraisalModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -152,7 +152,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -173,7 +173,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter._article = articleId;
             newEligibilityFilter.save( (err) => {
 
@@ -201,7 +201,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -223,7 +223,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
+            const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
@@ -249,66 +249,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
 };
 
-/*
-exports.setEligibilityFilterComplete = async (req, res) => {
 
-    const { articleId } = req.params;
-
-    const inputValues = req.body;
-    
-    const user = await Authentication.getUserFromToken(req.headers.authorization);
-
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
-        if(err) {
-
-            return res.send(err);
-
-        } else if(!article) {
-
-            return res.status(404).send({
-                message: 'No article with that identifier has been found'
-            });
-
-        }
-
-        if(article._elibilityFilterJunior === user._id) {
-
-            article.elibilityFilterJuniorInput = inputValues;
-            article.elibilityFilterJuniorCompleted = true;
-
-            await article.save();
-            return res.status(200).send({
-                message: 'Junior eligibility and filter completed for article'
-            });
-
-        }
-
-        if(article._elibilityFilterSenior === user._id) {
-
-            article.elibilityFilterSeniorInput = inputValues;
-            article.elibilityFilterSeniorCompleted = true;
-            await article.save();
-            return res.status(200).send({
-                message: 'Senior eligibility and filter completed for article'
-            });
-
-        }
-        
-        if( (article._elibilityFilterJunior !== user._id) && (article._elibilityFilterSenior !== user._id) ) {
-
-            return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
-            });
-
-        }
-
-        setFullEligibilityFilterCompleteOrResolve(articleId);
-
-    });
-
-};
-
-*/
 
 exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
@@ -316,7 +257,7 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -347,15 +288,9 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
     
      const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-/*
-    if(!mongoose.Types.ObjectId.isValid(articleId)) {
-        return res.status(400).send({
-            message: 'Article is invalid'
-        });
-    }
-*/
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -382,7 +317,7 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 
 const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
 
         if(err) {
 
@@ -401,7 +336,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
         let newEligibilityFilterJuniorInput = null;
         let newEligibilityFilterSeniorInput = null;
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
+        await SSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
             
             if(err) {
                 //console.log(err);
@@ -414,7 +349,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
         });
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
+        await SSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
 
             if(err) {
                 //console.log(err);
@@ -471,7 +406,7 @@ exports.setFullCompletion = async (req, res) => {
 
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId)
+    SSEArticleModelClass.findById(articleId)
        .and([ { elibilityFilterJuniorCompleted: true }, { elibilityFilterSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {
@@ -494,7 +429,7 @@ const isElibigilityFilterJuniorSeniorInputEqual = (articleId) => {
 
     const isEqual = false;
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -515,7 +450,7 @@ exports.setQualityAppraisalInputs = async (req, res) => {
 
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId)
+    SSEArticleModelClass.findById(articleId)
        .and([ { qualityAppraisalJuniorCompleted: true }, { qualityAppraisalSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {

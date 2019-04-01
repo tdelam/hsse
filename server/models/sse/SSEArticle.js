@@ -45,6 +45,57 @@ const SSEArticleSchema = new Schema({
     epocReview: { type: Boolean, default: false },
     general: { type: Boolean, default: false },
     hotDocs: { type: Boolean, default: false },
+
+    // Temporary
+    priority: { type: String },
+    articleSource: { type: String },
+    language: { type: String },
+    _elibilityFiltersJuniorEmail: { type: String, default: null },
+    _elibilityFiltersSeniorEmail: { type: String, default: null },
+
+    // Eligibility and Filter Input
+    _elibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFiltersJuniorEmail: { type: String, default: null },
+
+    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _elibilityFiltersSeniorEmail: { type: String, default: null },
+
+    elibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
+    elibilityFiltersSeniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
+
+
+    // Quality Appraisals Input
+    _qualityAppraisalsJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _qualityAppraisalsJuniorEmail: { type: String, default: null },
+
+    _qualityAppraisalsSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _qualityAppraisalsSeniorEmail: { type: String, default: null },
+
+    qualityAppraisalsJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
+    qualityAppraisalsSeniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
+
+    // Final inputs for articles
+    elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
+    qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
+
+    // Junior and Senior Input Completed
+    elibilityFiltersJuniorCompleted: { type: Boolean, default: false },
+    elibilityFiltersSeniorCompleted: { type: Boolean, default: false },
+
+    qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
+    qualityAppraisalsSeniorCompleted: { type: Boolean, default: false },
+
+    // Set to true if an article needs to be resolved
+    eligibilityFiltersResolve: { type: Boolean, default: false },
+    qualityAppraisalsResolve: { type: Boolean, default: false },
+
+    // Set to true if Eligibility and Filter state is complete
+    eligibilityFiltersFullCompletion: { type: Boolean, default: false },
+
+    // Set to true if Quality Appraisals state is complete
+    qualityAppraisalsFullCompletion: { type: Boolean, default: false },
+
+
 });
 
 mongoose.model('SSEArticles', SSEArticleSchema);

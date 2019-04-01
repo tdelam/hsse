@@ -51,10 +51,13 @@ require('./routes/sse/SSEArticleBatchfileRoutes')(app);
 require('./routes/sse/SSEPendingEligibilityFiltersArticleQueueRoutes')(app);
 require('./routes/sse/SSEPendingEligibilityFiltersBatchfileQueueRoutes')(app);
 require('./routes/sse/SSEAssignedEligibilityFiltersArticleQueueRoutes')(app);
+
+require('./routes/sse/SSEPendingQualityAppraisalsArticleQueueRoutes')(app);
+require('./routes/sse/SSEAssignedQualityAppraisalsArticleQueueRoutes')(app);
 /*
 require('./routes/sse/SSEPendingLinkingStudiesQueueRoutes')(app);
 require('./routes/sse/SSEPendingPresentationDetailsQueueRoutes')(app);
-require('./routes/sse/SSEPendingQualityAppraisalQueueRoutes')(app);
+
 */
 
 // HSE Routes
@@ -63,10 +66,14 @@ require('./routes/hse/HSEArticleBatchfileRoutes')(app);
 require('./routes/hse/HSEPendingEligibilityFiltersArticleQueueRoutes')(app);
 require('./routes/hse/HSEPendingEligibilityFiltersBatchfileQueueRoutes')(app);
 require('./routes/hse/HSEAssignedEligibilityFiltersArticleQueueRoutes')(app);
+
+require('./routes/hse/HSEPendingQualityAppraisalsArticleQueueRoutes')(app);
+require('./routes/hse/HSEAssignedQualityAppraisalsArticleQueueRoutes')(app);
+
 /*
 require('./routes/hse/HSEPendingLinkingStudiesQueueRoutes')(app);
 require('./routes/hse/HSEPendingPresentationDetailsQueueRoutes')(app);
-require('./routes/hse/HSEPendingQualityAppraisalQueueRoutes')(app);
+
 */
 app.get('/', (req, res) => {
     res.send({ message: 'Welcome McMaster HSSE API!'});

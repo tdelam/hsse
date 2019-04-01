@@ -56,11 +56,11 @@ import {
   HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH,
   HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR,
 
-  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER,
-  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR,
+  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER,
+  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR,
 
-  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER,
-  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR,
+  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER,
+  HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR,
 
 /* SSE */
   SSE_CREATE_ARTICLE,
@@ -111,11 +111,11 @@ import {
   SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH,
   SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR,
 
-  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER,
-  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR,
+  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER,
+  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR,
 
-  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER,
-  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR
+  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER,
+  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR
 
 } from './types';
 
@@ -298,7 +298,6 @@ export const listHSEPendingQualityAppraisalsArticlesQueue = (history) => async d
     });
 
     // history.push('/dashboard');
-    // console.log(response.data);
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse quality appraisals article pending queue'});
@@ -310,7 +309,6 @@ export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => asyn
     const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
 
     // history.push('/dashboard');
-    // console.log(response.data);
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse eligibility filter batchfile pending queue'});
@@ -322,7 +320,6 @@ export const listHSEPendingQualityAppraisalsBatchfilesQueue = (history) => async
     const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
 
     // history.push('/dashboard');
-    // console.log(response.data);
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse quality appraisals batchfile pending queue'});
@@ -402,7 +399,7 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
 export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticle/addjuniorfilter/${articleId}`, 
+    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticle/addjuniorappraiser/${articleId}`, 
     {
       articleId
     },
@@ -410,10 +407,10 @@ export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
       headers 
     });
     
-    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER, payload: response.data });
+    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER, payload: response.data });
     history.push('/hse/assignedeligibilityfiltersarticlequeue');
   } catch(e) {
-    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR, payload: 'Error assigning junior appraiser role for article'});
+    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR, payload: 'Error assigning junior appraiser role for article'});
   }
 };
 
@@ -437,7 +434,7 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
 
 export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisersarticle/addseniorfilter/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticle/addseniorappraiser/${articleId}`,
     {
       articleId
     },
@@ -445,11 +442,11 @@ export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (article
       headers
     });
 
-    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER, payload: response.data });
+    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER, payload: response.data });
     history.push('/hse/assignedeligibilityfiltersarticlequeue');
     
   } catch(e) {
-    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR, payload: 'Error assigning senior appraiser role for article'});
+    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR, payload: 'Error assigning senior appraiser role for article'});
   }
 };
 
@@ -561,7 +558,7 @@ export const submitSSEBatchFile = (state, history) => async dispatch => {
     harvestDate: state.harvestDate,
     fileName: state.file.name
   });
-  console.log(state.file.name);
+  // console.log(state.file.name);
   if(articleBatch) {
     
     dispatch({ type: SSE_CREATE_BATCHFILE, payload: 'Batchfile succesfully uploaded' });
@@ -649,7 +646,6 @@ export const listSSEAssignedQualityAppraisalsArticlesQueue = (history) => async 
     const response = await axios.get(`${backendServer}/sse/assignedqualityappraisalsarticlequeue`, {
       headers: { authorization: localStorage.getItem('token') }
     });
-
     // history.push('/dashboard');
     // console.log(response.data);
     dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_QUEUE, payload: response.data })
@@ -700,7 +696,7 @@ export const assignSSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
   }
 };
 
-export const assignSSEPendingQualityAppraisalsArticlesJuniorFilter = (articleId , history) => async dispatch => {
+export const assignSSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
 
   try {
     const response = await axios.post(`${backendServer}/sse/pendingqualityappraisalsarticle/addjuniorappraiser/${articleId}`, 
@@ -711,16 +707,16 @@ export const assignSSEPendingQualityAppraisalsArticlesJuniorFilter = (articleId 
       headers 
     });
     
-    dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER, payload: response.data });
+    dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER, payload: response.data });
     history.push('/sse/assignedqualityappraisalsarticlequeue');
   } catch(e) {
-    dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR, payload: 'Error assigning junior appraiser role for article'});
+    dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR, payload: 'Error assigning junior appraiser role for article'});
   }
 };
 
 export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticle/addseniorfilter/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticle/addseniorapraiser/${articleId}`,
     {
       articleId
     },
@@ -733,6 +729,24 @@ export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
     
   } catch(e) {
     dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR, payload: 'Error assigning senior filter role for article'});
+  }
+};
+
+export const assignSSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/pendingqualityappraisalsarticle/addseniorappraiser/${articleId}`,
+    {
+      articleId
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER, payload: response.data });
+    history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR, payload: 'Error assigning senior appraiser role for article'});
   }
 };
 
@@ -754,6 +768,24 @@ export const assignSSEPendingEligibilityFiltersArticleEdit = (articleId, inputVa
   }
 };
 
+export const assignSSEPendingQualityAppraisalsArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedqualityappraisalsarticle/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT, payload: response.data });
+    //history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
 export const assignSSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
@@ -769,6 +801,24 @@ export const assignSSEPendingEligibilityFiltersArticleEditComplete = (articleId,
     
   } catch(e) {
     dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
+
+export const assignSSEPendingQualityAppraisalsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedqualityappraisalsarticle/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/sse/assignedqualityappraisalsarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
   }
 };
 

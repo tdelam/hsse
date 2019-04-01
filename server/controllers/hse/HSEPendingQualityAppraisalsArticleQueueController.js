@@ -2,32 +2,17 @@ const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
-const SSEArticleModelClass = mongoose.model('SSEArticles');
-/*
+const HSEArticleModelClass = mongoose.model('HSEArticles');
+
 exports.listArticles = async (req, res) => {
-     SSEArticleModelClass.find()
-        .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
-        .exec(function(err, articles) {
-            if(err) {
-                return res.send(err);
-            } else if(!articles) {
-                return res.status(404).send({
-                    message: 'No article in the Eligibility Filters Article Pending Queue'
-                });
-            }
-            return res.status(200).send(articles);
-        });
-};
-*/
-exports.listArticles = async (req, res) => {
-    SSEArticleModelClass.find()
-       .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
+    HSEArticleModelClass.find()
+       .or([ { _qualityAppraiserJunior: null }, { _qualityAppraiserSenior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
            } else if(!articles) {
                return res.status(404).send({
-                   message: 'No article in the Eligibility Filters Article Pending Queue'
+                   message: 'No article in the Quality Appraisal Article Pending Queue'
                });
            }
            return res.status(200).send(articles);
@@ -38,7 +23,7 @@ exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
 
-    return await SSEArticleModelClass.findById(id);
+    return await HSEArticleModelClass.findById(id);
 
 };
 
@@ -46,7 +31,7 @@ exports.create = (req, res) => {
     
 }
 
-exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
+exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -58,29 +43,23 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
         });
     }
 
-    SSEArticleModelClass.findById(articleId, async (err, article) => {
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        }
-        /*
-        if(article._elibilityFilterJunior !== null) {
-            return res.status(404).send({
-                message: 'A junior filter has already been added for this article'
-            });
-        } */else {
+        } else {
 
-            if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
+            if(hasRole('juniorappraiser', user) || hasRole('seniorappraiser', user)) {
 
-                article._elibilityFilterJunior = user._id;
-                article._elibilityFilterJuniorEmail = user.email;
+                article._qualityAppraisalsJunior = user._id;
+                article._qualityAppraisalsJuniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
-                    message: 'Junior eligibility and filter user added'
+                    message: 'Junior quality appraiser added'
                 });
             } else {
                 return res.status(400).send({
@@ -93,7 +72,7 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
 
 };
 
-exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
+exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -105,7 +84,7 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
         });
     }
 
-    SSEArticleModelClass.findById(articleId, async (err, article) => {
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -119,14 +98,14 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
             });
         } else */{
 
-            if(hasRole('seniorfilter', user)) {
+            if(hasRole('seniorappraiser', user)) {
 
-                article._elibilityFilterSenior = user._id;
-                article._elibilityFilterSeniorEmail = user.email;
+                article._qualityAppraiserSenior = user._id;
+                article._qualityAppraiserSeniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
-                    message: 'Senior eligibility and filter user added'
+                    message: 'Senior quality appraiser user added'
                 });
             } else {
                 return res.status(400).send({

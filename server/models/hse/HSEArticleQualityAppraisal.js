@@ -7,9 +7,18 @@ const HSEArticleQualityAppraisalSchema = new Schema({
 _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
 
     // Quality
-    questionOne: { type: String, default: '' },
-    questionTwo: { type: String, default: '' }
-
+    questionOne: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"] },
+    questionTwo: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"]},
+    questionThree: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"]},
+    questionFour: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"]},
+    questionFive: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"] },
+    questionSix: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"]},
+    questionSeven: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
+    questionEight: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
+    questionNine: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
+    questionTen: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
+    questionEleven: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
+    amstarStatus: { type: String, enum: ['In progress', 'Completed'], default: 'In progress'}
 });
 
 HSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {

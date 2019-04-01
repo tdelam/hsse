@@ -40,8 +40,8 @@ const dtOptions = {
         }
     }
 }
-
-class HSEPendingQualityAppraisalArticleQueue extends Component {
+    
+class SSEPendingQualityAppraisalsArticleQueue extends Component {
 
 
     constructor(props, context) {
@@ -53,7 +53,7 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
             selectedArticleForAssignment: '',
             swalOptionJunior: {
                 title: "Assign Article",
-                text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
+                text: "Are you sure you want to assign this article to your assigned quality appraisals list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -62,7 +62,7 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
             },
             swalOptionSenior: {
                 title: "Assign Article",
-                text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
+                text: "Are you sure you want to assign this article to your assigned quality appraisals list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -74,7 +74,7 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
     }
 
     componentDidMount() {
-        this.props.listHSEPendingQualityAppraisalArticlesQueue();
+        this.props.listSSEPendingQualityAppraisalsArticlesQueue();
     }
 
     toggleModal = (articleId) => {
@@ -113,17 +113,17 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
     }
 
     swalCallback(isConfirm, swal) {
-        swal("Assigned!", "The article has been assigned to your pending Quality Appraisal list.", "success");
+        swal("Assigned!", "The article has been assigned to your pending Quality Appraisals list.", "success");
     }
 
     swalCallbackAssignJunior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignHSEPendingQualityAppraisalArticlesJuniorFilter(articleId);
+            this.props.assignSSEPendingQualityAppraisalsArticlesJuniorAppraiser(articleId);
     }
 
     swalCallbackAssignSenior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignHSEPendingQualityAppraisalArticlesSeniorFilter(articleId);
+            this.props.assignSSEPendingQualityAppraisalsArticlesSeniorAppraiser(articleId);
     }
 
     renderArticles() {
@@ -145,11 +145,11 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._elibilityFilterJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
-                            {/*article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
+                            {article[1]._qualityAppraisalsJuniorEmail || <Link to="/sse/assignedqualityappraisalsarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            
                         </td>
                         <td>
-                            {article[1]._elibilityFilterSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {article[1]._qualityAppraisalsSeniorEmail || <Link to="/sse/assignedqualityappraisalsarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
                         </td>
                         {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
                         <td>{ article[1]._id }</td>
@@ -185,8 +185,8 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Junior Filterer</th>
-                                <th>Senior Filterer</th>
+                                <th>Junior Appraiser</th>
+                                <th>Senior Appraiser</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
@@ -209,8 +209,8 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Quality Appraisal Articles
-                            <small>Health Systems Evidence - Main Queue</small>
+                        <div>Quality Apprasials Articles
+                            <small>Social Systems Evidence - Main Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -234,12 +234,12 @@ class HSEPendingQualityAppraisalArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hsePendingQualityAppraisalArticleQueue }) {
+function mapStateToProps({ ssePendingQualityAppraisalsArticleQueue }) {
     return { 
-        errorMessage: hsePendingQualityAppraisalArticleQueue.hsePendingQualityAppraisalArticleErrorMessage,
-        pendingArticles: hsePendingQualityAppraisalArticleQueue.hsePendingQualityAppraisalArticles 
+        errorMessage: ssePendingQualityAppraisalsArticleQueue.ssePendingQualityAppraisalsArticleErrorMessage,
+        pendingArticles: ssePendingQualityAppraisalsArticleQueue.ssePendingQualityAppraisalsArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEPendingQualityAppraisalArticleQueue);
+export default connect(mapStateToProps, actions)(SSEPendingQualityAppraisalsArticleQueue);
 

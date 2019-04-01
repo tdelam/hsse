@@ -106,7 +106,8 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 
 import HSEAssignedEligibilityFilterArticleInput from './components/HSE/HSEAssignedEligibilityFilterArticleInput';
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
-import HSEAssignedQualityAppraisalQueue from './components/HSE/HSEAssignedQualityAppraisalQueue';
+import HSEAssignedQualityAppraisalsArticleQueue from './components/HSE/HSEAssignedQualityAppraisalsArticleQueue';
+import HSEAssignedQualityAppraisalsArticleInput from './components/HSE/HSEAssignedQualityAppraisalsArticleInput';
 
 /*
 import HSEAssignedLinkingStudiesQueue from './components/HSE/HSEAssignedLinkingStudiesQueue';
@@ -121,7 +122,7 @@ import HSEBatchUpload from './components/HSE/HSEBatchUpload';
 import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
 import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
-import HSEPendingQualityAppraisalQueue from './components/HSE/HSEPendingQualityAppraisalQueue';
+import HSEPendingQualityAppraisalsArticleQueue from './components/HSE/HSEPendingQualityAppraisalsArticleQueue';
 
 /*
 import HSEPendingLinkingStudiesQueue from './components/HSE/HSEPendingLinkingStudiesQueue';
@@ -132,7 +133,8 @@ import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrac
 
 import SSEAssignedEligibilityFilterArticleInput from './components/SSE/SSEAssignedEligibilityFilterArticleInput';
 import SSEAssignedEligibilityFiltersArticleQueue from './components/SSE/SSEAssignedEligibilityFiltersArticleQueue';
-import SSEAssignedQualityAppraisalQueue from './components/SSE/SSEAssignedQualityAppraisalQueue';
+import SSEAssignedQualityAppraisalsArticleQueue from './components/SSE/SSEAssignedQualityAppraisalsArticleQueue';
+import SSEAssignedQualityAppraisalsArticleInput from './components/SSE/SSEAssignedQualityAppraisalsArticleInput';
 
 /*
 import SSEAssignedLinkingStudiesQueue from './components/SSE/SSEAssignedLinkingStudiesQueue';
@@ -146,7 +148,7 @@ import SSEBatchUpload from './components/SSE/SSEBatchUpload';
 import SSEAssignedEligibilityFilterResolution from './components/SSE/SSEAssignedEligibilityFilterResolution';
 import SSEPendingEligibilityFiltersArticleQueue from './components/SSE/SSEPendingEligibilityFiltersArticleQueue';
 import SSEPendingEligibilityFiltersBatchfileQueue from './components/SSE/SSEPendingEligibilityFiltersBatchfileQueue';
-import SSEPendingQualityAppraisalQueue from './components/SSE/SSEPendingQualityAppraisalQueue';
+import SSEPendingQualityAppraisalsArticleQueue from './components/SSE/SSEPendingQualityAppraisalsArticleQueue';
 /*
 import SSEPendingLinkingStudiesQueue from './components/SSE/SSEPendingLinkingStudiesQueue';
 import SSEPendingPresentationDetailsQueue from './components/SSE/SSEPendingPresentationDetailsQueue';
@@ -335,7 +337,8 @@ const Routes = ({ location }) => {
                             <Route path="/hse/assignedeligibilityfiltersarticleinput/:articleId" component={HSEAssignedEligibilityFilterArticleInput} />
                             <Route path="/hse/assignedeligibilityfiltersarticleresolution/:articleId" component={HSEAssignedEligibilityFilterResolution} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
-                            <Route path="/hse/assignedqualityappraisalqueue" component={HSEAssignedQualityAppraisalQueue} />
+                            <Route path="/hse/assignedqualityappraisalsarticlequeue" component={HSEAssignedQualityAppraisalsArticleQueue} />
+                            <Route path="/hse/assignedqualityappraisalsarticleinput/:articleId" component={HSEAssignedQualityAppraisalsArticleInput} />
                             {/*
                             <Route path="/hse/assignedlinkingstudiesqueue" component={HSEAssignedLinkingStudiesQueue} />
                             <Route path="/hse/assignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
@@ -348,7 +351,7 @@ const Routes = ({ location }) => {
                             <Route path="/hse/batchfileupload" component={HSEBatchUpload} />
                             <Route path="/hse/pendingeligibilityfiltersarticlequeue" component={HSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />
-                            <Route path="/hse/pendingqualityappraisalqueue" component={HSEPendingQualityAppraisalQueue} />
+                            <Route path="/hse/pendingqualityappraisalsarticlequeue" component={HSEPendingQualityAppraisalsArticleQueue} />
                             {/*
                             <Route path="/hse/pendinglinkingstudiesqueue" component={HSEPendingLinkingStudiesQueue} />
                             <Route path="/hse/pendingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />
@@ -363,7 +366,8 @@ const Routes = ({ location }) => {
                             <Route path="/sse/assignedeligibilityfiltersarticleinput/:articleId" component={SSEAssignedEligibilityFilterArticleInput} />
                             <Route path="/sse/assignedeligibilityfiltersarticleresolution/:articleId" component={SSEAssignedEligibilityFilterResolution} />
                             <Route path="/sse/assignedeligibilityfiltersarticlequeue" component={SSEAssignedEligibilityFiltersArticleQueue} />
-                            <Route path="/sse/assignedqualityappraisalqueue" component={SSEAssignedQualityAppraisalQueue} />
+                            <Route path="/sse/assignedqualityappraisalsarticlequeue" component={SSEAssignedQualityAppraisalsArticleQueue} />
+                            <Route path="/sse/assignedqualityappraisalsarticleinput/:articleId" component={SSEAssignedQualityAppraisalsArticleInput} />
                             
                             {/*
                             <Route path="/sse/assignedlinkingstudiesqueue" component={SSEAssignedLinkingStudiesQueue} />
@@ -377,7 +381,7 @@ const Routes = ({ location }) => {
                             <Route path="/sse/batchfileupload" component={SSEBatchUpload} />
                             <Route path="/sse/pendingeligibilityfiltersarticlequeue" component={SSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/sse/pendingeligibilityfiltersbatchfilequeue" component={SSEPendingEligibilityFiltersBatchfileQueue} />
-                            <Route path="/sse/pendingqualityappraisalqueue" component={SSEPendingQualityAppraisalQueue} />
+                            <Route path="/sse/pendingqualityappraisalsarticlequeue" component={SSEPendingQualityAppraisalsArticleQueue} />
                             {/*
                             <Route path="/sse/pendinglinkingstudiesqueue" component={SSEPendingLinkingStudiesQueue} />
                             <Route path="/sse/pendingpresentationdetailsqueue" component={SSEPendingPresentationDetailsQueue} />

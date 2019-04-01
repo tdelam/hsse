@@ -41,7 +41,7 @@ const dtOptions = {
     }
 }
 
-class HSEPendingEligibilityFiltersArticleQueue extends Component {
+class HSEPendingQualityAppraisalsArticleQueue extends Component {
 
 
     constructor(props, context) {
@@ -53,7 +53,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             selectedArticleForAssignment: '',
             swalOptionJunior: {
                 title: "Assign Article",
-                text: "Are you sure you want to assign this article to your assigned eligibility & filter list!",
+                text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -62,7 +62,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             },
             swalOptionSenior: {
                 title: "Assign Article",
-                text: "Are you sure you want to assign this article to your assigned eligibility & filter list!",
+                text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -74,7 +74,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 
     componentDidMount() {
-        this.props.listHSEPendingEligibilityFiltersArticlesQueue();
+        this.props.listHSEPendingQualityAppraisalsArticlesQueue();
     }
 
     toggleModal = (articleId) => {
@@ -113,17 +113,17 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 
     swalCallback(isConfirm, swal) {
-        swal("Assigned!", "The article has been assigned to your pending Eligibility & Filter list.", "success");
+        swal("Assigned!", "The article has been assigned to your pending Quality Appraisal list.", "success");
     }
 
     swalCallbackAssignJunior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId);
+            this.props.assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser(articleId);
     }
 
     swalCallbackAssignSenior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId);
+            this.props.assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser(articleId);
     }
 
     renderArticles() {
@@ -145,11 +145,11 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._elibilityFiltersJuniorEmail || <Link to="/hse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
-                            {/*article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
+                            {article[1]._qualityAppraisalsJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            
                         </td>
                         <td>
-                            {article[1]._elibilityFilterSeniorEmail || <Link to="/hse/assignedeligibilityfiltersarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {article[1]._qualityAppraisalsSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
                         </td>
                         {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
                         <td>{ article[1]._id }</td>
@@ -209,7 +209,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Assessing Eligibility and Assigning Filters Articles
+                        <div>Quality Appraisal Articles
                             <small>Health Systems Evidence - Main Queue</small>
                         </div>
                         </div>
@@ -234,12 +234,12 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hsePendingEligibilityFiltersArticleQueue }) {
+function mapStateToProps({ hsePendingQualityAppraisalsArticleQueue }) {
     return { 
-        errorMessage: hsePendingEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
-        pendingArticles: hsePendingEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticles 
+        errorMessage: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticleErrorMessage,
+        pendingArticles: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEPendingEligibilityFiltersArticleQueue);
+export default connect(mapStateToProps, actions)(HSEPendingQualityAppraisalsArticleQueue);
 

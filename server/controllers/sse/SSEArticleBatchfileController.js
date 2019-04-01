@@ -20,7 +20,7 @@ exports.getFileUrl = (req, res) => {
     const key = `${Date.now()}-${uuid()}.txt`;
 
     s3.getSignedUrl('putObject', {
-        Bucket: 'hsse-staging',
+        Bucket: 'hsse-staging/sse',
         ContentType: 'text/plain',
         Key: key
     }, (err, url) => {
