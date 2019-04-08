@@ -25,8 +25,6 @@ import * as actions from '../../actions';
 
 import questionList from '../Common/QualityAppraisalsQuestions';
 
-
-
 const { TreeNode } = Tree;
 
 const STATES = [
@@ -36,7 +34,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class SSEAssignedQualityAppraisalsArticleInput extends Component {
+class SSEAssignedLinkingStudiesArticleInput extends Component {
 
     state = {
 
@@ -50,6 +48,30 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
         selectedOption: '',
 
+        eligibilityFilterModel: {},
+
+        showTitle: true,
+        showRelevance: true,
+        documentType: false,
+        showGeneralArticleInformation: false,
+        showEligibility: false,
+        showHealthSystemsTopics: false,
+        showCanadianAreas: false,
+        showDomains: false,
+        showLMICFocus: false,
+        showProvinceFocus: false,
+        showTheme: false,
+        showPopulation: false,
+        showOntarioPriorityArea: false,
+        showTarget: false,
+        showOntarioFocus: false,
+        showArticle: false,
+        showIntergovernmentalOrganizationHealthSystemDocument: false,
+        showOntarianHealthSystemDocument: false,
+        showCanadianHealthSystemDocument: false,
+        showCanadaHealthSystemDocument: false,
+        showArticleAssessment: false,
+
 
         relevanceValue: ''
     };
@@ -60,7 +82,7 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
-        this.props.fetchSSEAssignedQualityAppraisalsArticle(articleId, history);
+        this.props.fetchSSEAssignedEligibilityFiltersArticle(articleId, history);
 
     }
 
@@ -109,12 +131,12 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
         if(this.isJuniorFilter()) {
             console.log(`isJuniorFilter`);
-            this.setState({ qualityAppraisalsModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
 
         } else if(this.isSeniorFilter()) {
 
             console.log(`isSeniorFilter`);
-            this.setState({ qualityAppraisalsModel: this.props.currentArticle.elibilityFilterSeniorInput });
+            this.setState({ eligibilityFilterModel: this.props.currentArticle.elibilityFilterSeniorInput });
 
         }
     }
@@ -152,7 +174,18 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         })
     }
     
-    
+    handleRelevanceChange = (event) => {
+        if(event.target.value === 'Yes') {
+            this.setState({
+                relevanceValue: event.target.value,
+                showEligibility: true
+            });/*
+            this.setState({
+                showEligibility: true
+            });*/
+        }
+        
+    }
 
     renderQuestions = () => {
         return (
@@ -253,9 +286,9 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
 
-        // this.setState({ qualityAppraisalsModel: this.getInputValues() });
+        // this.setState({ eligibilityFilterModel: this.getInputValues() });
 
-        console.log(this.state.qualityAppraisalsModel);
+        console.log(this.state.eligibilityFilterModel);
 
         return (
             <ContentWrapper>
@@ -293,6 +326,8 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <br />
                                 <br />
                                 <Link to="">Save as Complicated review</Link>
+
+                               
                             </div>
                         </FormGroup>
                         </form>
@@ -351,16 +386,18 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
 }
 
-function mapStateToProps({ sseAssignedQualityAppraisalsArticleQueue, auth }) {
+// export default SSEAssignedEligibilityFilterArticleInput;
+
+function mapStateToProps({ sseAssignedEligibilityFiltersArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: sseAssignedQualityAppraisalsArticleQueue.ssePendingQualityAppraisalsArticleErrorMessage,
-        currentArticle: sseAssignedQualityAppraisalsArticleQueue.sseAssignedQualityAppraisalsArticleFetch
+        errorMessage: sseAssignedEligibilityFiltersArticleQueue.ssePendingEligibilityFiltersArticleErrorMessage,
+        currentArticle: sseAssignedEligibilityFiltersArticleQueue.sseAssignedEligibilityFiltersArticleFetch
     }
 }
 
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'qualityAppraisalsInput'
-    })) (SSEAssignedQualityAppraisalsArticleInput);
+        form: 'elibigibilityFilterInput'
+    })) (SSEAssignedLinkingStudiesArticleInput);

@@ -77,7 +77,7 @@ export default [
         answer1: 'Yes', 
         answer2: 'No',
         answer3: "Can't answer",
-        answer3: 'Not applicable'
+        answer4: 'Not applicable'
     },
     {
         question: "Was the conflict of interest included? Potential sources of support should be clearly acknowledged in both the systematic review and the included studies.",

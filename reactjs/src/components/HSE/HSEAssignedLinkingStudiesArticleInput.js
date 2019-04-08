@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Tree } from 'antd';
 import {
@@ -23,9 +22,6 @@ import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
 
-import questionList from '../Common/QualityAppraisalsQuestions';
-
-
 
 const { TreeNode } = Tree;
 
@@ -36,7 +32,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class SSEAssignedQualityAppraisalsArticleInput extends Component {
+class HSEAssignedLinkingStudiesArticleInput extends Component {
 
     state = {
 
@@ -50,6 +46,10 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
         selectedOption: '',
 
+        eligibilityFilterModel: {},
+
+        
+
 
         relevanceValue: ''
     };
@@ -60,7 +60,7 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
-        this.props.fetchSSEAssignedQualityAppraisalsArticle(articleId, history);
+        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
 
     }
 
@@ -109,12 +109,12 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
         if(this.isJuniorFilter()) {
             console.log(`isJuniorFilter`);
-            this.setState({ qualityAppraisalsModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
 
         } else if(this.isSeniorFilter()) {
 
             console.log(`isSeniorFilter`);
-            this.setState({ qualityAppraisalsModel: this.props.currentArticle.elibilityFilterSeniorInput });
+            this.setState({ eligibilityFilterModel: this.props.currentArticle.elibilityFilterSeniorInput });
 
         }
     }
@@ -153,28 +153,32 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
     }
     
     
-
-    renderQuestions = () => {
+    renderRelevance = (relevance) => {
+        if(relevance)
         return (
-            questionList.forEach(question => (
-                <div>
-                <h5></h5>
-                                <FormGroup check inline>
-                                    <Label check>
-                                    <Input type="checkbox" /> Not in English
-                                    </Label>
-                                </FormGroup>
-                                <br />
-                                <FormGroup check inline>
-                                    <Label check>
-                                        <Input type="checkbox" /> No free full-text
-                                    </Label>
-                                </FormGroup>
-                </div>
-            )
-        ));
+            <fieldset>
+                <legend className="offset-md-1">Relevance</legend>
+                <FormGroup row>
+                    <label className="col-md-2 col-form-label"></label>
+                    <div className="col-md-10">
+                        <div>
+                            <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
+                        </div>
+                        <div className="c-radio">
+                            <label>
+                                <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
+                                <span className="fa fa-circle"></span>{" "}Yes</label>
+                        </div>
+                        <div className="c-radio">
+                            <label>
+                                <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
+                                <span className="fa fa-circle"></span>{" "}No</label>
+                        </div>
+                    </div>
+                </FormGroup>
+            </fieldset>
+        );
     }
-
 
     renderGeneralArticleInformation = (generalInfo) => {
         if(generalInfo)
@@ -216,33 +220,6 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
             );
     }
 
-    
-
-      
-    
-      
-
-    
-
-    setStateDocumentType = (documentType) => {
-        
-        switch(documentType) {
-
-            case 'som': 
-                this.setState({ documentType: '' });
-                break;
-            case 'ontario': 
-                this.setState({ documentType: '' })
-                break;
-            case 'government':
-                this.setState({ documentType: '' });
-                break;
-            default: 
-                this.setState({ documentType: 'general' });
-                break;
-        }
-    }
-
     render() {
         console.log(`currentArticle: ${this.props.currentArticle}`);
         console.log(this.props.currentUser);
@@ -253,84 +230,60 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
 
-        // this.setState({ qualityAppraisalsModel: this.getInputValues() });
+        // this.setState({ eligibilityFilterModel: this.getInputValues() });
 
-        console.log(this.state.qualityAppraisalsModel);
+        console.log(this.state.eligibilityFilterModel);
 
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>Quality Appraisals Articles
+                    <div>Linking Studies Articles
                         <small>Article Input Page</small>
                     </div>
                 </div>
                 {/* START card */}
                 <Card className="card-default">
                     <CardHeader><div  >
-                            <div><h3>Filterer Inputs</h3></div>
+                            <div><h3>Linker Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
                             <div>Title: {  } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>
                     <CardBody>
-                    <fieldset>
-                        <form onSubmit={this.onSubmit}>
-                        <FormGroup row>
-                            <label className="col-md-2 col-form-label"><h4>Complicated Reviews</h4></label>
-                            <div className="col-md-10">
-                                <FormGroup check inline>
-                                    <Label check>
-                                    <Input type="checkbox" /> Not in English
-                                    </Label>
+                        <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
+                        <fieldset>
+                                <FormGroup row>
+                                    <label className="col-md-2 col-form-label">Inline checkboxes and Radios</label>
+                                    <div className="col-md-10">
+                                        <FormGroup check inline>
+                                          <Label check>
+                                            <Input type="checkbox" /> Some input
+                                          </Label>
+                                        </FormGroup>
+                                        <FormGroup check inline>
+                                          <Label check>
+                                             <Input type="checkbox" /> Some other input
+                                          </Label>
+                                        </FormGroup>
+                                        <FormGroup check inline>
+                                          <Label check>
+                                            <Input type="radio" name="inlineradio" /> Some input
+                                          </Label>
+                                        </FormGroup>
+                                        <FormGroup check inline>
+                                          <Label check>
+                                             <Input type="radio" name="inlineradio" /> Some other input
+                                          </Label>
+                                        </FormGroup>
+                                    </div>
                                 </FormGroup>
-                                <br />
-                                <FormGroup check inline>
-                                    <Label check>
-                                        <Input type="checkbox" /> No free full-text
-                                    </Label>
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <Link to="">Save as Complicated review</Link>
-                            </div>
-                        </FormGroup>
-                        </form>
-                    </fieldset>
-                    <fieldset>
-                        <form onSubmit={this.onSubmit}>
-                        <FormGroup row>
-                            <label className="col-md-2 col-form-label"><h4>Questions</h4></label>
-                            <div className="col-md-10">
-                                <h5></h5>
-                                <FormGroup check inline>
-                                    <Label check>
-                                    <Input type="checkbox" /> Not in English
-                                    </Label>
-                                </FormGroup>
-                                <br />
-                                <FormGroup check inline>
-                                    <Label check>
-                                        <Input type="checkbox" /> No free full-text
-                                    </Label>
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <Link to="">Save as Complicated review</Link>
+                            </fieldset>
+                            
 
-                            </div>
-                        </FormGroup>
+
+                            
                         </form>
-                    </fieldset>
-                    <fieldset>
-                        <FormGroup row>
-                            <label className="col-md-2 col-form-label"></label>
-                            <div className="col-md-10">
-                                <p>Testing</p>
-                                { this.renderQuestions() }
-                            </div>
-                        </FormGroup>
-                    </fieldset>
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex align-items-center">
@@ -351,16 +304,16 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
 }
 
-function mapStateToProps({ sseAssignedQualityAppraisalsArticleQueue, auth }) {
+function mapStateToProps({ hseAssignedLinkingStudiesArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: sseAssignedQualityAppraisalsArticleQueue.ssePendingQualityAppraisalsArticleErrorMessage,
-        currentArticle: sseAssignedQualityAppraisalsArticleQueue.sseAssignedQualityAppraisalsArticleFetch
+        errorMessage: hseAssignedLinkingStudiesArticleQueue.hsePendingLinkingStudiesArticleErrorMessage,
+        currentArticle: hseAssignedLinkingStudiesArticleQueue.hseAssignedLinkingStudiesArticleFetch
     }
 }
 
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'qualityAppraisalsInput'
-    })) (SSEAssignedQualityAppraisalsArticleInput);
+        form: 'linkingStudiesInput'
+    })) (HSEAssignedLinkingStudiesArticleInput);

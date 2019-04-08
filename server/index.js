@@ -12,11 +12,13 @@ require('./models/hse/HSEArticleBatchFile');
 require('./models/hse/HSEArticle');
 require('./models/hse/HSEArticleEligibilityFilter');
 require('./models/hse/HSEArticleQualityAppraisal');
+require('./models/hse/HSELinkingStudies');
 
 require('./models/sse/SSEArticleBatchFile');
 require('./models/sse/SSEArticle');
 require('./models/sse/SSEArticleEligibilityFilter');
 require('./models/sse/SSEArticleQualityAppraisal');
+require('./models/sse/SSELinkingStudies');
 
 require('./models/Stage');
 

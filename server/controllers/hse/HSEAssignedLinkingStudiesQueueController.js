@@ -69,47 +69,47 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
         }
         
-        if( !(article._qualityAppraisalsJunior.equals(user._id) || article._qualityAppraisalsSenior.equals(user._id)) ) {
+        if( !(article._linkingStudiesJunior.equals(user._id) ) ) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for Linking Studies for article'
             });
 
-        } else if ( article._qualityAppraisalsJunior.equals(user._id) && article._qualityAppraisalsSenior.equals(user._id) ) {
+        } else if ( article._linkingStudiesJunior.equals(user._id) ) {
 
-            const newQualityAppraisals = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newQualityAppraisals._article = articleId;
-            newQualityAppraisals.save( (err) => {
+            const newlinkingStudies = new HSEArticleLinkingStudiesModelClass(inputValues);
+            linkingStudies._article = articleId;
+            linkingStudies.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
+            article.linkingStudiesJuniorInput = newlinkingStudies;
 
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior and Senior appraisals added for article'
+                message: 'Inputs for Junior Linking Studies added for article'
             });
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const LinkingStudies = new HSEArticleQualityAppraisalModelClass(inputValues);
+            const newLinkingStudies = new HSEArticleLinkingStudiesModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
+            article.linkingStudiesJuniorInput = newLinkingStudies;
             await article.save();
             
             return res.status(201).send({
@@ -141,7 +141,7 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
 };
 
-exports.setnewQualityAppraisalComplete = async (req, res) => {
+exports.setQualityAppraisalComplete = async (req, res) => {
 
     const { articleId } = req.params;
 

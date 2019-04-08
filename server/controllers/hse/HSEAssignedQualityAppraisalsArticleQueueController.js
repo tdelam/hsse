@@ -100,10 +100,10 @@ exports.setQualityAppraisalValues = async (req, res) => {
                 message: 'Inputs for Junior and Senior appraisals added for article'
             });
 
-        } else if( article._elibilityFilterJunior.equals(user._id) ) {
+        } else if( article._qualityAppraisalsJunior.equals(user._id) ) {
 
             const newQualityAppraisals = new HSEArticleQualityAppraisalModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            newQualityAppraisals.save( (err) => {
                 if(err) {
                     return res.status(422).send({
                         message: `Unable to save values for Quality Appraisal for article, err: ${err}`
@@ -112,17 +112,17 @@ exports.setQualityAppraisalValues = async (req, res) => {
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
+            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior filter added for article'
+                message: 'Inputs for Junior appraiser added for article'
             });
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
             const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            newQualityAppraisal.save( (err) => {
                 if(err) {
                     return res.status(422).send({
                         message: `Unable to save values for Quality Appraisal for article, err: ${err}`
@@ -131,11 +131,11 @@ exports.setQualityAppraisalValues = async (req, res) => {
         
             });
 
-            article.elibilityFilterSeniorInput = inputValues;
+            article.qualityAppraisalsSeniorInput = inputValues;
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Senior filter added for article'
+                message: 'Inputs for Senior appraiser added for article'
             });
             
         } 
@@ -144,7 +144,7 @@ exports.setQualityAppraisalValues = async (req, res) => {
 
 };
 
-exports.setnewQualityAppraisalComplete = async (req, res) => {
+exports.setQualityAppraisalComplete = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -165,7 +165,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
         }
         
-        if( !(article._elibilityFilterJunior.equals(user._id) || article._elibilityFilterSenior.equals(user._id)) ) {
+        if( !(article._qualityAppraisalsJunior.equals(user._id) || article._qualityAppraiasalsSenior.equals(user._id)) ) {
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
@@ -173,9 +173,9 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
         } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter._article = articleId;
-            newEligibilityFilter.save( (err) => {
+            const newQualityAppraisals = new HSEArticleEligibilityFilterModelClass(inputValues);
+            newQualityAppraisals._article = articleId;
+            newQualityAppraisals.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
@@ -185,11 +185,11 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
-            article.elibilityFilterSeniorInput = newEligibilityFilter;
+            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
+            article.qualityAppraisalsSeniorInput = newQualityAppraisals;
             
-            article.elibilityFilterJuniorCompleted = true;
-            article.elibilityFilterSeniorCompleted = true;
+            article.qualityAppraisalsJuniorCompleted = true;
+            article.qualityAppraisalsSeniorCompleted = true;
 
             await article.save();
 

@@ -35,7 +35,7 @@ const Menu = [
             },
             {
                 name: 'Linking Studies',
-                path: '/hse/assignedlinkingstudiesqueue',
+                path: '/hse/assignedlinkingstudiesarticlequeue',
                 translate: 'sidebar.nav.element.ASSIGNEDLINKINGSTUDIES'
             },
             {
@@ -72,7 +72,7 @@ const Menu = [
             },
             {
                 name: 'Linking Studies',
-                path: '/sse/assignedlinkingstudiesqueue',
+                path: '/sse/assignedlinkingstudiesarticlequeue',
                 translate: 'sidebar.nav.element.LINKINGSTUDIES'
             },
             {
@@ -126,7 +126,7 @@ const Menu = [
             },
             {
                 name: 'Linking Studies',
-                path: '/hse/pendinglinkingstudiesqueue',
+                path: '/hse/pendinglinkingstudiesarticlequeue',
                 translate: 'sidebar.nav.element.PENDINGLINKINGSTUDIES'
             },
             {
@@ -176,7 +176,7 @@ const Menu = [
         },
         {
             name: 'Linking Studies',
-            path: 'spinners',
+            path: '/sse/pendinglinkingstudiesarticlequeue',
             translate: 'sidebar.nav.element.LINKINGSTUDIES'
         },
         {
