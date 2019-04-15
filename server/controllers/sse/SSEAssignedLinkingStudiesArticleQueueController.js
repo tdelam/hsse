@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
-const HSEArticleModelClass = mongoose.model('HSEArticles');
-const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStudies');
+const SSEArticleModelClass = mongoose.model('SSEArticles');
+const SSEArticleLinkingStudiesModelClass = mongoose.model('SSEArticleLinkingStudies');
 const Authentication = require('../authentication');
 
 exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ _linkingStudiesJunior: user._id })
+    SSEArticleModelClass.find({ _linkingStudiesJunior: user._id })
     .exec(function(err, articles) {
         if(err) {
             return res.send(err);
@@ -34,7 +34,7 @@ exports.fetchArticle = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -56,7 +56,7 @@ exports.setLinkingStudiesValues = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -69,60 +69,60 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
         }
         
-        if( !(article._qualityAppraisalsJunior.equals(user._id) || article._qualityAppraisalsSenior.equals(user._id)) ) {
+        if( !(article._linkingStudiesJunior.equals(user._id) ) ) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for Linking Studies for article'
             });
 
-        } else if ( article._qualityAppraisalsJunior.equals(user._id) && article._qualityAppraisalsSenior.equals(user._id) ) {
+        } else if ( article._linkingStudiesJunior.equals(user._id) ) {
 
-            const newQualityAppraisals = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newQualityAppraisals._article = articleId;
-            newQualityAppraisals.save( (err) => {
+            const newlinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
+            linkingStudies._article = articleId;
+            linkingStudies.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
+            article.linkingStudiesJuniorInput = newlinkingStudies;
 
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior and Senior appraisals added for article'
+                message: 'Inputs for Junior Linking Studies added for article'
             });
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const LinkingStudies = new HSEArticleQualityAppraisalModelClass(inputValues);
+            const newLinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
+            article.linkingStudiesJuniorInput = newLinkingStudies;
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior filter added for article'
+                message: 'Inputs for Junior linker added for article'
             });
             
         } else if( article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            const newLinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
+            newLinkingStudies.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
@@ -141,7 +141,7 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
 };
 
-exports.setnewQualityAppraisalComplete = async (req, res) => {
+exports.setQualityAppraisalComplete = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -149,7 +149,7 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -162,17 +162,17 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
         }
         
-        if( !(article._elibilityFilterJunior.equals(user._id) || article._elibilityFilterSenior.equals(user._id)) ) {
+        if( !(article._elibilityFilterJunior.equals(user._id) ) ) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for linking studies for article'
             });
 
-        } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
+        } else if ( article._linkingStudiesJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter._article = articleId;
-            newEligibilityFilter.save( (err) => {
+            const newLinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
+            newLinkingStudies._article = articleId;
+            newLinkingStudies.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
@@ -183,64 +183,40 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
             });
             
             article.elibilityFilterJuniorInput = newEligibilityFilter;
-            article.elibilityFilterSeniorInput = newEligibilityFilter;
             
             article.elibilityFilterJuniorCompleted = true;
-            article.elibilityFilterSeniorCompleted = true;
 
             await article.save();
 
             setFullEligibilityFilterCompleteOrResolve(articleId);
             
             return res.status(201).send({
-                message: 'Inputs for Junior and Senior filter added for article'
+                message: 'Inputs for Junior linker added for article'
             });
 
         } else if( article._elibilityFilterJunior.equals(user._id) ) {
 
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            const newLinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
+            newLinkingStudies.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
-            article.elibilityFilterJuniorCompleted = true;
+            article.linkingStudiesJuniorInput = newLinkingStudies;
+            article.linkingStudiesJuniorCompleted = true;
             await article.save();
 
-            setFullEligibilityFilterCompleteOrResolve(articleId);
+            setFullLinkingStudiesCompleteOrResolve(articleId);
             
             return res.status(201).send({
-                message: 'Inputs for Junior appraisal added for article'
+                message: 'Inputs for Junior linker added for article'
             });
             
-        } else if( article._elibilityFilterSenior.equals(user._id) ) {
-
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
-                    });
-                }
-        
-            });
-
-            article.elibilityFilterSeniorInput = inputValues;
-            article.elibilityFilterSeniorCompleted = true;
-            await article.save();
-
-            setFullEligibilityFilterCompleteOrResolve(articleId);
-            
-            return res.status(201).send({
-                message: 'Inputs for Senior appraisals added for article'
-            });
-            
-        } 
+        }
         
     });
 
@@ -255,7 +231,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
             return res.send(err);
@@ -279,17 +255,6 @@ exports.setEligibilityFilterComplete = async (req, res) => {
             });
 
         }
-
-        if(article._elibilityFilterSenior === user._id) {
-
-            article.elibilityFilterSeniorInput = inputValues;
-            article.elibilityFilterSeniorCompleted = true;
-            await article.save();
-            return res.status(200).send({
-                message: 'Senior eligibility and filter completed for article'
-            });
-
-        }
         
         if( (article._elibilityFilterJunior !== user._id) && (article._elibilityFilterSenior !== user._id) ) {
 
@@ -307,13 +272,13 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
-exports.setJuniorEligibilityFilterComplete = async (req, res) => {
+exports.setJuniorLinkingStudiesComplete = async (req, res) => {
 
     const { articleId } = req.params;
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -323,14 +288,14 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
         }
         if(article._elibilityFilterJunior !== user._id) {
             return res.status(404).send({
-                message: 'You are not the junior appraisal for this article'
+                message: 'You are not the junior linker for this article'
             });
         } else {
 
             article.elibilityFilterJuniorCompleted = true;
             await article.save();
             return res.status(200).send({
-                message: 'Junior quality appraisal completed for article'
+                message: 'Junior linking studies completed for article'
             });
         
         }
@@ -338,48 +303,10 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
 };
 
-exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 
-    const { articleId } = req.params;
-    
-     const user = await Authentication.getUserFromToken(req.headers.authorization);
+const setFullEligibilityFilterComplete = async (articleId) => {
 
-/*
-    if(!mongoose.Types.ObjectId.isValid(articleId)) {
-        return res.status(400).send({
-            message: 'Article is invalid'
-        });
-    }
-*/
-
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
-        if(err) {
-            return res.send(err);
-        } else if(!article) {
-            return res.status(404).send({
-                message: 'No article with that identifier has been found'
-            });
-        }
-        if(article._elibilityFilterSenior !== user._id) {
-            return res.status(404).send({
-                message: 'You are not the senior appraisal for this article'
-            });
-        } else {
-
-            article.elibilityFilterSeniorCompleted = true;
-            await article.save();
-            return res.status(200).send({
-                message: 'Senior quality appraisal completed for article'
-            });
-        
-        }
-    });
-
-};
-
-const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
-
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
 
         if(err) {
 
@@ -395,57 +322,42 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
            console.log('No article with that identifier has been found');
         }
 
-        let newEligibilityFilterJuniorInput = null;
-        let newEligibilityFilterSeniorInput = null;
+        let newLinkingStudiesJuniorInput = null;
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
+        await SSEArticleLinkingStudiesModelClass.findById(article.linkingStudiesJuniorInput, (err, linkingStudiesJuniorInput) => {
             
             if(err) {
                 //console.log(err);
                 throw new Error(err);
-            } else if(!eligibilityFilterJuniorInput) {
-                throw new Error('Quality Appraisal for Junior Appraisal does not exist');
+            } else if(!linkingStudiesJuniorInput) {
+                throw new Error('Linking Studies for Junior Linker does not exist');
             } else {
-                newEligibilityFilterJuniorInput = eligibilityFilterJuniorInput;
+                newLinkingStudiesJuniorInput = linkingStudiesJuniorInput;
             }
 
         });
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
-
-            if(err) {
-                //console.log(err);
-                throw new Error(err);
-            } else if(!eligibilityFilterSeniorInput) {
-                throw new Error('Quality Appraisal for Senior Filter does not exist');
-            } else {
-                newEligibilityFilterSeniorInput = eligibilityFilterSeniorInput;
-            }
-
-        });
-
-        if(article.qualityAppraisalJuniorCompleted && article.qualityAppraisalSeniorCompleted) {
+        if(article.linkingStudiesJuniorCompleted ) {
             
-            // Call instance method to check if all fields on article's eligibilityFilter are equal
-            if( newQualityAppraisalJuniorInput.isEqualTo(newEligibilityFilterSeniorInput) ) {
+            // Call instance method to check if all fields on article's linkingStudies are equal
+            if( newLinkingStudiesJuniorInput.isEqualTo(newLinkingStudiesSeniorInput) ) {
 
-                article.eligibilityFilterFullCompletion = true;
+                article.linkingStudiesFullCompletion = true;
                 await article.save();
                 console.log(`Full completion set`);
                 /*
                 return res.status(201).send({
-                    message: 'Eligibility and Filter stage passed for this article'
+                    message: 'Linking Studies stage passed for this article'
                 });
                 */
             } else {
 
-                article.eligibilityFilterResolve = true;
-                article.elibilityFilterFinalInput = newEligibilityFilterSeniorInput;
+                article.linkingStudiesFinalInput = newLinkingStudiesSeniorInput;
                 await article.save();
                 console.log(`resolve completion set`);
                 /*
                 return res.status(201).send({
-                    message: 'Resolve Eligibility and Filter values for this article'
+                    message: 'Resolve Linking Studies values for this article'
                 });
                 */
             }
@@ -456,7 +368,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
                 message: 'Senior and Junior Eligibility and filter are not completed for article'
             });
             */
-           console.log('Senior and Junior Quality Appraisal are not completed for article');
+           console.log('Junior Quality Appraisal are not completed for article');
         }
     });
 
@@ -468,7 +380,7 @@ exports.setFullCompletion = async (req, res) => {
 
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId)
+    SSEArticleModelClass.findById(articleId)
        .and([ { elibilityFilterJuniorCompleted: true }, { elibilityFilterSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {
@@ -512,7 +424,7 @@ exports.setQualityAppraisalInputs = async (req, res) => {
 
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.findById(articleId)
+    SSEArticleModelClass.findById(articleId)
        .and([ { qualityAppraisalJuniorCompleted: true }, { qualityAppraisalSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {

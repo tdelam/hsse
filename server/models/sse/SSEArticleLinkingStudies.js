@@ -6,7 +6,7 @@ const SSELinkingStudiesSchema = new Schema({
     
 _article: { type: Schema.Types.ObjectId, ref: 'SSEArticles'},
 
-    
+questionOne: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"] }, 
   });
 
 

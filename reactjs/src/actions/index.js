@@ -62,6 +62,30 @@ import {
   HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER,
   HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR,
 
+
+  // Linking Studies
+  HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE,
+  HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT,
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR,
+
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE,
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR,
+
+  HSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE,
+  HSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE,
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH,
+  HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH_ERROR,
+
+  HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER,
+  HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR,
+
+
 /* SSE */
   SSE_CREATE_ARTICLE,
   SSE_CREATE_ARTICLE_ERROR,
@@ -115,7 +139,29 @@ import {
   SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR,
 
   SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER,
-  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR
+  SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR,
+
+  // Linking Studies
+  SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE,
+  SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR,
+
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT,
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR,
+
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE,
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR,
+
+  SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE,
+  SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR,
+
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE,
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR,
+
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH,
+  SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH_ERROR,
+
+  SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER,
+  SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR
 
 } from './types';
 
@@ -304,6 +350,19 @@ export const listHSEPendingQualityAppraisalsArticlesQueue = (history) => async d
   }
 };
 
+export const listHSEPendingLinkingStudiesArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/pendinglinkingstudiesarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse linking studies article pending queue'});
+  }
+};
+
 export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
@@ -323,6 +382,17 @@ export const listHSEPendingQualityAppraisalsBatchfilesQueue = (history) => async
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse quality appraisals batchfile pending queue'});
+  }
+};
+
+export const listHSEPendingLinkingStudiesBatchfilesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
+
+    // history.push('/dashboard');
+    dispatch({ type: HSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse linking studies batchfile pending queue'});
   }
 };
 
@@ -354,6 +424,20 @@ export const listHSEAssignedQualityAppraisalsArticlesQueue = (history) => async 
   }
 };
 
+export const listHSEAssignedLinkingStudiesArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/assignedlinkingstudiesarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse linking article assigned queue'});
+  }
+};
+
 export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/hse/assignedeligibilityfiltersarticle/fetcharticle/${articleId}`, { headers });
@@ -375,6 +459,18 @@ export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => 
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse quality appraisals assigned article'});
+  }
+};
+
+export const fetchHSEAssignedLinkingStudiesArticle = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/assignedlinkingstudiesarticle/fetcharticle/${articleId}`, { headers });
+  
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse linking studies assigned article'});
   }
 };
 
@@ -411,6 +507,24 @@ export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
     history.push('/hse/assignedeligibilityfiltersarticlequeue');
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR, payload: 'Error assigning junior appraiser role for article'});
+  }
+};
+
+export const assignHSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , history) => async dispatch => {
+
+  try {
+    const response = await axios.post(`${backendServer}/hse/pendinglinkingstudiesarticle/addjuniorlinker/${articleId}`, 
+    {
+      articleId
+    },
+    {
+      headers 
+    });
+    
+    dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER, payload: response.data });
+    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR, payload: 'Error assigning junior linker role for article'});
   }
 };
 
@@ -486,6 +600,24 @@ export const assignHSEPendingQualityAppraisalsArticleEdit = (articleId, inputVal
   }
 };
 
+export const assignHSEPendingLinkingStudiesArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticle/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT, payload: response.data });
+    //history.push('/hse/assignedqualityappraisalsarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
 export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
@@ -519,6 +651,24 @@ export const assignHSEPendingQualityAppraisalsArticleEditComplete = (articleId, 
     
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
+
+export const assignHSEPendingLinkingStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticle/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/hse/assignedlinkingstudiesarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
   }
 };
 
@@ -603,6 +753,20 @@ export const listSSEPendingQualityAppraisalsArticlesQueue = (history) => async d
   }
 };
 
+export const listSSEPendingLinkingStudiesArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/pendinglinkingstudiesarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse linking studies article pending queue'});
+  }
+};
+
 export const listSSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/sse/articlebatchfiles`);
@@ -624,6 +788,18 @@ export const listSSEPendingQualityAppraisalsBatchfilesQueue = (history) => async
     dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing sse quality appraisals batchfile pending queue'});
+  }
+};
+
+export const listSSEPendingLinkingStudiesBatchfilesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/articlebatchfiles`);
+
+    // history.push('/dashboard');
+    // console.log(response.data);
+    dispatch({ type: SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR, payload: 'Error showing sse linking studies batchfile pending queue'});
   }
 };
 
@@ -654,6 +830,17 @@ export const listSSEAssignedQualityAppraisalsArticlesQueue = (history) => async 
   }
 };
 
+export const listSSEAssignedLinkingStudiesArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/assignedlinkingstudiesarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse linking studies article assigned queue'});
+  }
+};
+
 export const fetchSSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/sse/assignedeligibilityfiltersarticle/fetcharticle/${articleId}`, { headers });
@@ -675,6 +862,16 @@ export const fetchSSEAssignedQualityAppraisalsArticle = (articleId, history) => 
     dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH, payload: response.data })
   } catch(e) {
     dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: 'Error fetching sse quality appraisals assigned article'});
+  }
+};
+
+export const fetchSSEAssignedLinkingStudiesArticle = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/assignedlinkingstudiesarticle/fetcharticle/${articleId}`, { headers });
+
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH_ERROR, payload: 'Error fetching sse linking studies assigned article'});
   }
 };
 
@@ -711,6 +908,24 @@ export const assignSSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
     history.push('/sse/assignedqualityappraisalsarticlequeue');
   } catch(e) {
     dispatch({ type: SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR, payload: 'Error assigning junior appraiser role for article'});
+  }
+};
+
+export const assignSSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , history) => async dispatch => {
+
+  try {
+    const response = await axios.post(`${backendServer}/sse/pendinglinkingstudiesarticle/addjuniorlinker/${articleId}`, 
+    {
+      articleId
+    },
+    {
+      headers 
+    });
+    
+    dispatch({ type: SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER, payload: response.data });
+    history.push('/sse/assignedlinkingstudiesarticlequeue');
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR, payload: 'Error assigning junior linker role for article'});
   }
 };
 
@@ -786,6 +1001,24 @@ export const assignSSEPendingQualityAppraisalsArticleEdit = (articleId, inputVal
   }
 };
 
+export const assignSSEPendingLinkingStudiesArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedlinkingstudiesarticle/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT, payload: response.data });
+    //history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
 export const assignSSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
@@ -822,4 +1055,21 @@ export const assignSSEPendingQualityAppraisalsArticleEditComplete = (articleId, 
   }
 };
 
+export const assignSSEPendingLiningStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedlinkingstudiesarticle/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/sse/assignedlinkingstudiesarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
 
