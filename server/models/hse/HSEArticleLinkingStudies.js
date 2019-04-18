@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const HSELinkingStudiesSchema = new Schema({ 
+const HSEArticleLinkingStudiesSchema = new Schema({ 
     
 _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
 
@@ -11,10 +11,10 @@ _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
 
 
 
-mongoose.model('HSELinkingStudies', HSELinkingStudiesSchema);
+mongoose.model('HSEArticleLinkingStudies', HSEArticleLinkingStudiesSchema);
 
-HSELinkingStudiesSchema.eachPath(function(path) {
+HSEArticleLinkingStudiesSchema.eachPath(function(path) {
     //console.log(path);
 });
 
-var props = Object.keys(HSELinkingStudiesSchema.paths);
+var props = Object.keys(HSEArticleLinkingStudiesSchema.paths);
