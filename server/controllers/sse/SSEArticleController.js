@@ -1,20 +1,24 @@
 const mongoose = require('mongoose');
 
-const config = require('../../config/baseConfig');
-
 const SSEArticleModelClass = mongoose.model('SSEArticles');
-
+const SSEArticleEligibilityFilterModelClass = mongoose.model('SSEArticleEligibilityFilters'); 
 
 exports.create = (req, res) => {
 
     const newSSEArticle = new SSEArticleModelClass(req.body);
+    const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass();
+    
+    newSSEArticle.elibilityFilterJuniorInput = newEligibilityFilter;
+    newSSEArticle.elibilityFilterSeniorInput = newEligibilityFilter;
 
     newSSEArticle.save( (err) => {
         if(err) {
+            console.log(err);
             return res.status(422).send({
                 message: 'Unable to save new article'
             });
         } else {
+            console.log(newSSEArticle.newEligibilityFilter);
             res.status(201).send(newSSEArticle);
         }
 
@@ -59,4 +63,17 @@ exports.delete = (req, res) => {
             res.json({ message: 'Article has been removed!'});
         }
     })
+}
+
+exports.list = (req, res) => {
+    SSEArticleModelClass.find( (err, articles) => {
+        if(err) {
+            return res.send(err);
+        } else if(!articles) {
+            return res.status(404).send({
+                message: 'No article has been found'
+            });
+        }
+        return res.status(200).send(articles);
+    });
 }

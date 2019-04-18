@@ -503,12 +503,35 @@ const isElibigilityFilterJuniorSeniorInputEqual = (articleId) => {
             });
         }
 
-        HSEA
-
     });
 
     return isEqual;
     
+};
+
+exports.setEligibilityFilterInputs = async (req, res) => {
+
+    const { articleId } = req.params;
+
+    //const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    HSEArticleModelClass.findById(articleId)
+       .and([ { elibilityFilterJuniorCompleted: true }, { elibilityFilterSeniorCompleted: true } ])
+       .exec(function(err, article) {
+           if(err) {
+               return res.send(err);
+           } else if(!article) {
+               return res.status(404).send({
+                   message: 'Could not set Full Completion for Article Eligibility Filters'
+               });
+           }
+
+           // Check to make sure all fields are the same
+           if(isElibigilityFilterJuniorSeniorInputEqual(articleId)) {
+               article.eligibilityFilterFullCompletion = true;
+           } 
+           
+       });
 };
 
 

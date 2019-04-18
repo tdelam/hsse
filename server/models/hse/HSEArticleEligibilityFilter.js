@@ -32,7 +32,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     },
 
     // Health System Topics
-    governanceArrangements: { type: Boolean, default: false },
+    governanceArrangement: { type: Boolean, default: false },
 
     policyAuthority: { type: Boolean, default: false },
     centralizationDecentralizationOfPolicyAuthority: { type: Boolean, default: false },

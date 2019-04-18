@@ -4,6 +4,7 @@ const jwt = require('jwt-simple');
 const passport = require('passport');
 
 const HSEArticleBatchfileController = require('../controllers/hse/HSEArticleBatchfileController');
+const SSEArticleBatchfileController = require('../controllers/sse/SSEArticleBatchfileController');
 
 const requireSignin = passport.authenticate('local', { session: false });
 
@@ -15,4 +16,7 @@ const s3 = new AWS.S3({
 module.exports = app => {
     app.get('/hse/getfileurl', HSEArticleBatchfileController.getFileUrl);
     app.post('/hse/batchfile', HSEArticleBatchfileController.create);
+
+    app.get('/sse/getfileurl', SSEArticleBatchfileController.getFileUrl);
+    app.post('/sse/batchfile', SSEArticleBatchfileController.create);
 };

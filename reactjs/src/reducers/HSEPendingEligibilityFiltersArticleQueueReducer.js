@@ -2,11 +2,11 @@ import {
     HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
     HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
 
-    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER,
-    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR,
+    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER,
+    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR,
 
-    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER,
-    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR
+    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER,
+    HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -22,16 +22,16 @@ export default function(state = INITIAL_STATE, action) {
         case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR: 
             return { ...state, hsePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
 
-        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER: 
+        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER: 
             return { ...state, hsePendingEligibilityFiltersArticles: action.payload };
         
-        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIORFILTER_ERROR: 
+        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR: 
             return { ...state, hsePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
         
-        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER: 
+        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER: 
             return { ...state, hsePendingEligibilityFiltersArticles: action.payload };
         
-        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIORFILTER_ERROR: 
+        case HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR: 
             return { ...state, hsePendingEligibilityFiltersErrorMessage: 'Error listing pending eligibility and filters articles' };
         default:
             return state;

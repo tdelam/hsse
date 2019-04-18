@@ -10,9 +10,9 @@ const userSchema = new Schema({
     roles: {
         type: [{
             type: String,
-            enum: ['uploader', 'detailer', 'linker', 'appraiser', 'juniorfilter', 'seniorfilter', 'prioritizer', 'administrator']
+            enum: ['uploader', 'detailer', 'linker', 'appraiser', 'juniorfilter', 'seniorfilter', 'prioritizer', 'administrator', 'juniorappraiser', 'seniorappraiser']
         }],
-        default: ['uploader', 'juniorfilter', 'seniorfilter'],
+        default: ['uploader', 'juniorfilter', 'seniorfilter', 'juniorappraiser', 'seniorappraiser'],
         required: 'Please at least one role'
     },
     eligibilityFilterArticles: [{ type: Schema.Types.ObjectId, ref: 'HSEArticles' }],

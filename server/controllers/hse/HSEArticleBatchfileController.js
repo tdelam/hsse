@@ -20,7 +20,7 @@ exports.getFileUrl = (req, res) => {
     const key = `${Date.now()}-${uuid()}.txt`;
 
     s3.getSignedUrl('putObject', {
-        Bucket: 'hsse-staging',
+        Bucket: 'hsse-staging/hse',
         ContentType: 'text/plain',
         Key: key
     }, (err, url) => {
@@ -47,7 +47,7 @@ exports.create = async (req, res) => {
     let articlesArray = [];
     let articleIdArray = [];
 
-    const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/${url}`);
+    const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/hse/${url}`);
     
     articlesArray = parseBatchfile.parseHSEJournalFile(data1.data);
 

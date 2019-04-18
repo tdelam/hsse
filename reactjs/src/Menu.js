@@ -29,13 +29,13 @@ const Menu = [
                 translate: 'sidebar.nav.element.ASSIGNEDELIGIBILITYFILTERS'
             },
             {
-                name: 'Quality Appraisal',
-                path: '/hse/assignedqualityappraisalqueue',
-                translate: 'sidebar.nav.element.ASSIGNEDQUALITYAPPRAISAL'
+                name: 'Quality Appraisals',
+                path: '/hse/assignedqualityappraisalsarticlequeue',
+                translate: 'sidebar.nav.element.ASSIGNEDQUALITYAPPRAISALS'
             },
             {
                 name: 'Linking Studies',
-                path: '/hse/assignedlinkingstudiesqueue',
+                path: '/hse/assignedlinkingstudiesarticlequeue',
                 translate: 'sidebar.nav.element.ASSIGNEDLINKINGSTUDIES'
             },
             {
@@ -62,17 +62,17 @@ const Menu = [
         submenu: [
             {
                 name: 'Elibigility & Filters',
-                path: '/sse/assignedeligibilityfiltersqueue',
+                path: '/sse/assignedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
             {
-                name: 'Quality Appraisal',
-                path: '/sse/assignedqualityappraisalqueue',
-                translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+                name: 'Quality Appraisals',
+                path: '/sse/assignedqualityappraisalsarticlequeue',
+                translate: 'sidebar.nav.element.QUALITYAPPRAISALS'
             },
             {
                 name: 'Linking Studies',
-                path: '/sse/assignedlinkingstudiesqueue',
+                path: '/sse/assignedlinkingstudiesarticlequeue',
                 translate: 'sidebar.nav.element.LINKINGSTUDIES'
             },
             {
@@ -120,13 +120,13 @@ const Menu = [
                 translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
             },
             {
-                name: 'Quality Appraisal',
-                path: '/hse/pendingqualityappraisalqueue',
-                translate: 'sidebar.nav.element.PENDINGQUALITYAPPRAISAL'
+                name: 'Quality Appraisals',
+                path: '/hse/pendingqualityappraisalsarticlequeue',
+                translate: 'sidebar.nav.element.PENDINGQUALITYAPPRAISALS'
             },
             {
                 name: 'Linking Studies',
-                path: '/hse/pendinglinkingstudiesqueue',
+                path: '/hse/pendinglinkingstudiesarticlequeue',
                 translate: 'sidebar.nav.element.PENDINGLINKINGSTUDIES'
             },
             {
@@ -151,23 +151,32 @@ const Menu = [
         icon: 'icon-chemistry',
         translate: 'sidebar.nav.element.Social',
         submenu: [{
-            name: 'Harvesting & Uploading',
-            path: 'buttons',
-            translate: 'sidebar.nav.element.HARVESTUPLOAD'
+            name: 'Add Article',
+            path: '/sse/addarticle',
+            translate: 'sidebar.nav.element.ADDHSEARTICLE'
+        },{
+            name: 'Batch Upload',
+            path: '/sse/batchfileupload',
+            translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
         },
         {
-            name: 'Elibigility & Filters',
-            path: 'notifications',
-            translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
+            name: 'Elibigility & Filters Article',
+            path: '/sse/pendingeligibilityfiltersarticlequeue',
+            translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
         },
         {
-            name: 'Quality Appraisal',
-            path: 'carousel',
-            translate: 'sidebar.nav.element.QUALITYAPPRAISAL'
+            name: 'Elibigility & Filters Batch',
+            path: '/sse/pendingeligibilityfiltersbatchfilequeue',
+            translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
+        },
+        {
+            name: 'Quality Appraisals',
+            path: '/sse/pendingqualityappraisalsarticlequeue',
+            translate: 'sidebar.nav.element.QUALITYAPPRAISALS'
         },
         {
             name: 'Linking Studies',
-            path: 'spinners',
+            path: '/sse/pendinglinkingstudiesarticlequeue',
             translate: 'sidebar.nav.element.LINKINGSTUDIES'
         },
         {
@@ -184,6 +193,84 @@ const Menu = [
             name: 'Tracking & Prioritizing',
             path: 'cards',
             translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+        }
+    ]
+    },
+    {
+        heading: 'Complicated Queue',
+        translate: 'sidebar.heading.Evidence Systems'
+    },
+    {
+        name: 'Health Systems Compl...',
+        icon: 'icon-layers',
+        translate: 'sidebar.nav.element.QueuedHealth',
+        submenu: [
+            {
+                name: 'Elibigility & Filters Article',
+                path: '/hse/complicatedeligibilityfiltersarticlequeue',
+                translate: 'sidebar.nav.element.COMPLICATEDELIGIBILITYFILTERARTICLES'
+            },
+            {
+                name: 'Quality Appraisals',
+                path: '/hse/complicatedqualityappraisalsqueue',
+                translate: 'sidebar.nav.element.COMPLICATEDQUALITYAPPRAISALS'
+            },
+            {
+                name: 'Linking Studies',
+                path: '/hse/complicatedlinkingstudiesqueue',
+                translate: 'sidebar.nav.element.COMPLICATEDLINKINGSTUDIES'
+            },
+            {
+                name: 'Presentation Details',
+                path: '/hse/complicatedpresentationdetailsqueue',
+                translate: 'sidebar.nav.element.COMPLICATEDPRESENTATIONDETAILS'
+            },
+            {
+                name: 'Translating Titles',
+                path: '/hse/complicatedtranslatingtitlesqueue',
+                translate: 'sidebar.nav.element.COMPLICATEDTRANSLATINGTITLES'
+            },
+            {
+                name: 'Tracking & Prioritizing',
+                path: '/hse/complicatedtrackingprioritizingqueue',
+                translate: 'sidebar.nav.element.COMPLICATEDTRACKINGPRIORITIZING'
+            }
+        ]
+    },
+    {
+        name: 'Social Systems Compli...',
+        icon: 'icon-chemistry',
+        translate: 'sidebar.nav.element.Social',
+        submenu: [
+        {
+            name: 'Elibigility & Filters Article',
+            path: '/sse/complicatedeligibilityfiltersarticlequeue',
+            translate: 'sidebar.nav.element.COMPLICATEDELIGIBILITYFILTERARTICLES'
+        },
+        {
+            name: 'Quality Appraisals',
+            path: '/sse/complicatedqualityappraisalsarticlequeue',
+            translate: 'sidebar.nav.element.COMPLICATEDQUALITYAPPRAISALS'
+        },
+        {
+            name: 'Linking Studies',
+            path: '/sse/complicatedlinkingstudies',
+            translate: 'sidebar.nav.element.COMPLICATEDLINKINGSTUDIES'
+        },
+        {
+            name: 'Presentation Details',
+            path: '/sse/complicatedpresentationdetails',
+            translate: 'sidebar.nav.element.COMPLICATEDPRESENTATIONDETAILS'
+        },
+        {
+            name: 'Translating Titles',
+            path: '/sse/complicated/translatingtitles',
+            translate: 'sidebar.nav.element.COMPLICATEDTRANSLATINGTITLES'
+        },
+        {
+            name: 'Tracking & Prioritizing',
+            path: '/sse/complicatedtrackingprioritizing',
+            translate: 'sidebar.nav.element.COMPLICATEDTRACKINGPRIORITIZING'
         }
     ]
     },

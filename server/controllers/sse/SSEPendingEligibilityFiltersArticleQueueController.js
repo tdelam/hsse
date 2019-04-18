@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
-const HSEArticleModelClass = mongoose.model('HSEArticles');
+const SSEArticleModelClass = mongoose.model('SSEArticles');
 /*
 exports.listArticles = async (req, res) => {
-     HSEArticleModelClass.find()
+     SSEArticleModelClass.find()
         .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
         .exec(function(err, articles) {
             if(err) {
@@ -20,7 +20,7 @@ exports.listArticles = async (req, res) => {
 };
 */
 exports.listArticles = async (req, res) => {
-    HSEArticleModelClass.find()
+    SSEArticleModelClass.find()
        .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
@@ -38,7 +38,7 @@ exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
 
-    return await HSEArticleModelClass.findById(id);
+    return await SSEArticleModelClass.findById(id);
 
 };
 
@@ -58,7 +58,7 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {
@@ -105,7 +105,7 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
         });
     }
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    SSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
             return res.send(err);
         } else if(!article) {

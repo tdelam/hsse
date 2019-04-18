@@ -4,7 +4,7 @@ import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactst
 
 import Datetime from 'react-datetime';
 
-import SSEFormValidator from './HSEFormValidator.js';
+import SSEFormValidator from './SSEFormValidator.js';
 
 /**
  * Validation flow using controlled components
@@ -62,7 +62,7 @@ class AddSSEArticle extends Component {
         const form = input.form
         const value = input.type === 'checkbox' ? input.checked : input.value;
 
-        const result = HSEFormValidator.validate(input);
+        const result = SSEFormValidator.validate(input);
 
         this.setState({
             [form.name]: {
@@ -81,7 +81,7 @@ class AddSSEArticle extends Component {
         const form = e.target;
         const inputs = [...form.elements].filter(i => ['INPUT', 'SELECT'].includes(i.nodeName))
 
-        const { errors, hasError } = HSEFormValidator.bulkValidate(inputs)
+        const { errors, hasError } = SSEFormValidator.bulkValidate(inputs)
 
         this.setState({
             [form.name]: {
@@ -108,7 +108,7 @@ class AddSSEArticle extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                     <div>ADD Article
-                        <small>Health Systems Evidence</small>
+                        <small>Social Systems Evidence</small>
                     </div>
                 </div>
                 { /* START row */ }
@@ -189,6 +189,7 @@ class AddSSEArticle extends Component {
                                 </CardBody>
                                 <CardFooter className="text-center">
                                     <button type="submit" className="btn btn-danger">Cancel</button>
+                                    {" "}
                                     <button type="submit" className="btn btn-success">Next</button>
                                 </CardFooter>
                             </Card>
@@ -203,5 +204,5 @@ class AddSSEArticle extends Component {
 
 }
 
-export default AddHSEArticle;
+export default AddSSEArticle;
 

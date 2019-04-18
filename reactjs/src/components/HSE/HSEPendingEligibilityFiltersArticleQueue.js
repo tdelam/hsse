@@ -145,7 +145,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._elibilityFilterJuniorEmail || <Link to="/hse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {article[1]._elibilityFiltersJuniorEmail || <Link to="/hse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
                             {/*article[1]._elibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
                         </td>
                         <td>

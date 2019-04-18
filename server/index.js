@@ -7,10 +7,19 @@ const cors = require('cors');
 require('dotenv').config();
 
 require('./models/User');
+
 require('./models/hse/HSEArticleBatchFile');
 require('./models/hse/HSEArticle');
 require('./models/hse/HSEArticleEligibilityFilter');
+require('./models/hse/HSEArticleQualityAppraisal');
+require('./models/hse/HSEArticleLinkingStudies');
+                      
+require('./models/sse/SSEArticleBatchFile');
 require('./models/sse/SSEArticle');
+require('./models/sse/SSEArticleEligibilityFilter');
+require('./models/sse/SSEArticleQualityAppraisal');
+require('./models/sse/SSEArticleLinkingStudies');
+
 require('./models/Stage');
 
 mongoose.connect(
@@ -40,6 +49,20 @@ require('./routes/uploadRoutes')(app);
 
 // SSE Routes
 require('./routes/sse/SSEArticleRoutes')(app);
+require('./routes/sse/SSEArticleBatchfileRoutes')(app);
+require('./routes/sse/SSEPendingEligibilityFiltersArticleQueueRoutes')(app);
+require('./routes/sse/SSEPendingEligibilityFiltersBatchfileQueueRoutes')(app);
+require('./routes/sse/SSEAssignedEligibilityFiltersArticleQueueRoutes')(app);
+
+require('./routes/sse/SSEPendingQualityAppraisalsArticleQueueRoutes')(app);
+require('./routes/sse/SSEAssignedQualityAppraisalsArticleQueueRoutes')(app);
+
+require('./routes/sse/SSEAssignedLinkingStudiesArticleQueueRoutes')(app);
+require('./routes/sse/SSEPendingLinkingStudiesArticleQueueRoutes')(app);
+
+/*
+require('./routes/sse/SSEPendingPresentationDetailsQueueRoutes')(app);
+*/
 
 // HSE Routes
 require('./routes/hse/HSEArticleRoutes')(app);
@@ -47,12 +70,19 @@ require('./routes/hse/HSEArticleBatchfileRoutes')(app);
 require('./routes/hse/HSEPendingEligibilityFiltersArticleQueueRoutes')(app);
 require('./routes/hse/HSEPendingEligibilityFiltersBatchfileQueueRoutes')(app);
 require('./routes/hse/HSEAssignedEligibilityFiltersArticleQueueRoutes')(app);
-require('./routes/hse/HSEPendingLinkingStudiesQueueRoutes')(app);
+
+require('./routes/hse/HSEPendingQualityAppraisalsArticleQueueRoutes')(app);
+require('./routes/hse/HSEAssignedQualityAppraisalsArticleQueueRoutes')(app);
+
+require('./routes/hse/HSEAssignedLinkingStudiesArticleQueueRoutes')(app);
+require('./routes/hse/HSEPendingLinkingStudiesArticleQueueRoutes')(app);
+
+/*
 require('./routes/hse/HSEPendingPresentationDetailsQueueRoutes')(app);
-require('./routes/hse/HSEPendingQualityAppraisalQueueRoutes')(app);
+*/
 
 app.get('/', (req, res) => {
-    res.send({ message: 'Welcome McMaster Health Sciences!'});
+    res.send({ message: 'Welcome McMaster HSSE API!'});
 }); 
 
 const PORT = process.env.PORT || 5000;
