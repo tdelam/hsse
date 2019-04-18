@@ -82,6 +82,15 @@ const HSEArticleSchema = new Schema({
     qualityAppraisalsJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
     qualityAppraisalsSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
 
+    // Linking Studies Input
+    _linkingStudiesJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _linkingStudiesJuniorEmail: { type: String, default: null },
+
+    elibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleLinkingStudies', default: null },
+    
+
+
+
     // Final inputs for articles
     elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
     qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
