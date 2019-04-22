@@ -29,10 +29,10 @@ const dtOptions = {
     }
 }
 
-class HSEAssignedLinkingStudiesArticleQueue extends Component {
+class HSEAssignedPresentationDetailsArticleQueue extends Component {
 
     componentDidMount() {
-        this.props.listHSEAssignedLinkingStudiesArticlesQueue();
+        this.props.listHSEAssignedPresentationDetailsArticlesQueue();
     }
 
     renderPriority(priority) {
@@ -70,7 +70,7 @@ class HSEAssignedLinkingStudiesArticleQueue extends Component {
                         </td>
                         <td>
                             {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._presentationDetailsJuniorEmail }</Link>
+                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._elibilityFilterJuniorEmail }</Link>
                         </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
@@ -110,7 +110,7 @@ class HSEAssignedLinkingStudiesArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Other Filterer</th>
+                                <th>Presenter</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
@@ -149,12 +149,12 @@ class HSEAssignedLinkingStudiesArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedLinkingStudiesArticleQueue }) {
+function mapStateToProps({ hseAssignedPresentationDetailsArticleQueue }) {
     return {
-        errorMessage: hseAssignedLinkingStudiesArticleQueue.hseAssignedLinkingStudiesErrorMessage,
-        assignedArticles: hseAssignedLinkingStudiesArticleQueue.hseAssignedLinkingStudiesArticles 
+        errorMessage: hseAssignedPresentationDetailsArticleQueue.hseAssignedPresentationDetailsErrorMessage,
+        assignedArticles: hseAssignedPresentationDetailsArticleQueue.hseAssignedPresentationDetailsArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEAssignedLinkingStudiesArticleQueue);
+export default connect(mapStateToProps, actions)(HSEAssignedPresentationDetailsArticleQueue);
 

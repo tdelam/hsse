@@ -2,8 +2,8 @@ const HSEAssignedEligibilityFiltersArticleQueueController = require('../../contr
 
 module.exports = app => {
     app.get('/hse/assignedeligibilityfiltersarticlequeue', HSEAssignedEligibilityFiltersArticleQueueController.listArticles);
-    app.get('/hse/assignedeligibilityfiltersarticle/fetcharticle/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.fetchArticle);
+    app.get('/hse/assignedeligibilityfiltersarticlequeue/fetcharticle/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.fetchArticle);
 
-    app.post('/hse/assignedeligibilityfiltersarticle/savevalues/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterValues);
-    app.post('/hse/assignedeligibilityfiltersarticle/setcompleted/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterComplete);
+    app.post('/hse/assignedeligibilityfiltersarticlequeue/savevalues/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterValues);
+    app.post('/hse/assignedeligibilityfiltersarticlequeue/setcompleted/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterComplete);
 }

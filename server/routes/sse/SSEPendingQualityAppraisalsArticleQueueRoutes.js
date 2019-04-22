@@ -6,6 +6,6 @@ const SSEPendingQualityAppraisalsArticleQueueController = require('../../control
 module.exports = app => {
     app.get('/sse/pendingqualityappraisalsarticlequeue', SSEPendingQualityAppraisalsArticleQueueController.listArticles);
     app.get('/sse/pendingqualityappraisalsarticlequeue/fetcharticle/:id', SSEPendingQualityAppraisalsArticleQueueController.listArticle);
-    app.post('/sse/pendingqualityappraisalsarticle/addjuniorappraiser/:articleId', SSEPendingQualityAppraisalsArticleQueueController.addArticleToJuniorQualityAppraiser);
-    app.post('/sse/pendingqualityappraisalsarticle/addseniorappraiser/:articleId', SSEPendingQualityAppraisalsArticleQueueController.addArticleToSeniorQualityAppraiser);
+    app.post('/sse/pendingqualityappraisalsarticlequeue/addjuniorappraiser/:articleId', SSEPendingQualityAppraisalsArticleQueueController.addArticleToJuniorQualityAppraiser);
+    app.post('/sse/pendingqualityappraisalsarticlequeue/addseniorappraiser/:articleId', SSEPendingQualityAppraisalsArticleQueueController.addArticleToSeniorQualityAppraiser);
 }

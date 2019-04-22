@@ -2,8 +2,8 @@ const HSEAssignedLinkingStudiesArticleQueueController = require('../../controlle
 
 module.exports = app => {
     app.get('/hse/assignedlinkingstudiesarticlequeue', HSEAssignedLinkingStudiesArticleQueueController.listArticles);
-    app.get('/hse/assignedlinkingstudiesarticle/fetcharticle/:articleId', HSEAssignedLinkingStudiesArticleQueueController.fetchArticle);
+    app.get('/hse/assignedlinkingstudiesarticlequeue/fetcharticle/:articleId', HSEAssignedLinkingStudiesArticleQueueController.fetchArticle);
 
-    // app.post('/hse/assignedlinkingstudiesarticle/savevalues/:articleId', HSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesValues);
-    // app.post('/hse/assignedlinkingstudiesarticle/setcompleted/:articleId', HSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesComplete);
+    // app.post('/hse/assignedlinkingstudiesarticlequeue/savevalues/:articleId', HSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesValues);
+    // app.post('/hse/assignedlinkingstudiesarticlequeue/setcompleted/:articleId', HSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesComplete);
 }

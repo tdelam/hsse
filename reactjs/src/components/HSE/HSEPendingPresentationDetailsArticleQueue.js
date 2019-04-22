@@ -40,8 +40,8 @@ const dtOptions = {
         }
     }
 }
-    
-class SSEPendingLinkingStudiesArticleQueue extends Component {
+
+class HSEPendingPresentationDetailsArticleQueue extends Component {
 
 
     constructor(props, context) {
@@ -53,7 +53,7 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
             selectedArticleForAssignment: '',
             swalOptionJunior: {
                 title: "Assign Article",
-                text: "Are you sure you want to assign this article to your assigned linking studies list!",
+                text: "Are you sure you want to assign this article to your assigned presentation details list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -62,7 +62,7 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
             },
             swalOptionSenior: {
                 title: "Assign Article",
-                text: "Are you sure you want to assign this article to your assigned linking studies list!",
+                text: "Are you sure you want to assign this article to your assigned presentation details list!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -74,7 +74,7 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
     }
 
     componentDidMount() {
-        this.props.listSSEPendingLinkingStudiesArticlesQueue();
+        this.props.listHSEPendingPresentationDetailsArticlesQueue();
     }
 
     toggleModal = (articleId) => {
@@ -113,30 +113,20 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
     }
 
     swalCallback(isConfirm, swal) {
-        swal("Assigned!", "The article has been assigned to your pending Linking Studies list.", "success");
+        swal("Assigned!", "The article has been assigned to your pending Presentation Details list.", "success");
     }
 
     swalCallbackAssignJunior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignSSEPendingLinkingStudiesArticlesJuniorLinker(articleId);
-    }
-
-    swalCallbackAssignSenior(isConfirm, articleId) {
-        if(isConfirm)
-            this.props.assignSSEPendingQLinkingStudiesArticlesSeniorLinker(articleId);
+            this.props.assignHSEPendingPresentationDetailsArticlesJuniorPresenter(articleId);
     }
 
     renderArticles() {
-        console.log(this.props);
+        
         if(this.props.pendingArticles != null ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>
-                        {/*
-                        <td className="text-center">
-                            <span className="badge badge-success">{ article[1].priority }</span>
-                        </td>
-                        */}
                         { this.renderPriority(article[1].priority) }
                         <td>
                             { article[1].articleSource }
@@ -145,40 +135,17 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._linkingStudiesJuniorEmail || <Link to="/sse/assignedlinkingstudiesarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {article[1]._presentationDetailsJuniorEmail || <Link to="/hse/assignedpresentationdetailsarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
                             
                         </td>
-                        {/*
-                        <td>
-                            {article[1]._linkingStudiesJuniorEmail || <Link to="/sse/assignedlinkingstudiesarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
-                        </td>
-                        */}
-                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
                         <td>{ article[1]._id }</td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
-                        {/*}
-                        <td className="text-right">
-                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
-                        </td> */}
-                    {/*         
-                        <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-danger">
-                                <em className="fas fa-trash-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
-                        </td>
-                    */}    
+                           
                     </tr>
                 )
             });
-        // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
                 <Datatable options={dtOptions}>
                     <table className="table table-striped my-4 w-100">
@@ -187,13 +154,11 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Junior Linker</th>
+                                <th>Presenter</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>Language</th>
-                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
-                                {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -206,12 +171,12 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
     };
 
     render() {
-        
+        console.log(this.props);
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Linking Studies Articles
-                            <small>Social Systems Evidence - Main Queue</small>
+                        <div>Presentation Details Articles
+                            <small>Health Systems Evidence - Main Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -235,12 +200,12 @@ class SSEPendingLinkingStudiesArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ ssePendingLinkingStudiesArticleQueue }) {
+function mapStateToProps({ hsePendingPresentationDetailsArticleQueue }) {
     return { 
-        errorMessage: ssePendingLinkingStudiesArticleQueue.ssePendingLinkingStudiesArticleErrorMessage,
-        pendingArticles: ssePendingLinkingStudiesArticleQueue.ssePendingLinkingStudiesArticles 
+        errorMessage: hsePendingPresentationDetailsArticleQueue.hsePendingPresentationDetailsArticleErrorMessage,
+        pendingArticles: hsePendingPresentationDetailsArticleQueue.hsePendingPresentationDetailsArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(SSEPendingLinkingStudiesArticleQueue);
+export default connect(mapStateToProps, actions)(HSEPendingPresentationDetailsArticleQueue);
 
