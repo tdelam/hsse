@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Tree } from 'antd';
 import {
@@ -22,7 +23,7 @@ import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
 
-import QUESTIONS from '../Common/QualityAppraisalsQuestions';
+import questionList from '../Common/QualityAppraisalsQuestions';
 
 const { TreeNode } = Tree;
 
@@ -33,7 +34,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class HSEAssignedQualityAppraisalsArticleInput extends Component {
+class SSEAssignedPresentationDetailsArticleInput extends Component {
 
     state = {
 
@@ -47,9 +48,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
         selectedOption: '',
 
-        eligibilityFilterModel: {},
-
-        
+        presentationDetailerModel: {},
 
 
         relevanceValue: ''
@@ -61,7 +60,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
-        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+        this.props.fetchSSEAssignedPresentationDetailsArticle(articleId, history);
 
     }
 
@@ -87,35 +86,21 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         console.log(`Selected: ${selectedOption.label}`);
     }
 
-    isJuniorFilter() {
+    isJuniorDetailer() {
         
         if(this.props.currentArticle && this.props.currentUser) {
-            console.log(`inside isJuniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser._id}, _elibilityFilterJunior: ${this.props.currentArticle._elibilityFilterJunior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterJunior;
-        }
-            
-    }
-
-    isSeniorFilter() {
-        if(this.props.currentArticle && this.props.currentUser) {
-            console.log(`inside isSeniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser}, _elibilityFilterSenior: ${this.props.currentArticle._elibilityFilterSenior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterSenior;
+            console.log(`inside isJuniorDetailer`);
+            console.log(`currentUser: ${this.props.currentUser._id}, _presentationDetailsJunior: ${this.props.currentArticle._presentationDetailsJunior}`);
+            return this.props.currentUser === this.props.currentArticle._presentationDetailsJunior;
         }
             
     }
 
     getInputValues() {
 
-        if(this.isJuniorFilter()) {
-            console.log(`isJuniorFilter`);
-            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
-
-        } else if(this.isSeniorFilter()) {
-
-            console.log(`isSeniorFilter`);
-            this.setState({ eligibilityFilterModel: this.props.currentArticle.elibilityFilterSeniorInput });
+        if(this.isJuniorDetailer()) {
+            console.log(`isJuniorDetailer`);
+            this.setState({ presentationDetailsModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
 
         }
     }
@@ -152,34 +137,28 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
             section
         })
     }
-    
-    
-    renderRelevance = (relevance) => {
-        if(relevance)
+
+    renderQuestions = () => {
         return (
-            <fieldset>
-                <legend className="offset-md-1">Relevance</legend>
-                <FormGroup row>
-                    <label className="col-md-2 col-form-label"></label>
-                    <div className="col-md-10">
-                        <div>
-                            <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
-                                <span className="fa fa-circle"></span>{" "}Yes</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
-                                <span className="fa fa-circle"></span>{" "}No</label>
-                        </div>
-                    </div>
-                </FormGroup>
-            </fieldset>
-        );
+            questionList.forEach(question => (
+                <div>
+                <h5></h5>
+                                <FormGroup check inline>
+                                    <Label check>
+                                    <Input type="checkbox" /> Not in English
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <FormGroup check inline>
+                                    <Label check>
+                                        <Input type="checkbox" /> No free full-text
+                                    </Label>
+                                </FormGroup>
+                </div>
+            )
+        ));
     }
+
 
     renderGeneralArticleInformation = (generalInfo) => {
         if(generalInfo)
@@ -221,6 +200,33 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
             );
     }
 
+    
+
+      
+    
+      
+
+    
+
+    setStateDocumentType = (documentType) => {
+        
+        switch(documentType) {
+
+            case 'som': 
+                this.setState({ documentType: '' });
+                break;
+            case 'ontario': 
+                this.setState({ documentType: '' })
+                break;
+            case 'government':
+                this.setState({ documentType: '' });
+                break;
+            default: 
+                this.setState({ documentType: 'general' });
+                break;
+        }
+    }
+
     render() {
         console.log(`currentArticle: ${this.props.currentArticle}`);
         console.log(this.props.currentUser);
@@ -231,60 +237,86 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
 
-        // this.setState({ eligibilityFilterModel: this.getInputValues() });
+        // this.setState({ presentationDetailerModel: this.getInputValues() });
 
-        console.log(this.state.eligibilityFilterModel);
+        console.log(this.state.presentationDetailerModel);
 
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>Quality Appraisals Articles
+                    <div>Presentation Details Articles
                         <small>Article Input Page</small>
                     </div>
                 </div>
                 {/* START card */}
                 <Card className="card-default">
                     <CardHeader><div  >
-                            <div><h3>Appraiser Inputs</h3></div>
+                            <div><h3>Filterer Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
                             <div>Title: {  } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>
                     <CardBody>
-                        <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
-                        <fieldset>
-                                <FormGroup row>
-                                    <label className="col-md-2 col-form-label">Inline checkboxes and Radios</label>
-                                    <div className="col-md-10">
-                                        <FormGroup check inline>
-                                          <Label check>
-                                            <Input type="checkbox" /> Some input
-                                          </Label>
-                                        </FormGroup>
-                                        <FormGroup check inline>
-                                          <Label check>
-                                             <Input type="checkbox" /> Some other input
-                                          </Label>
-                                        </FormGroup>
-                                        <FormGroup check inline>
-                                          <Label check>
-                                            <Input type="radio" name="inlineradio" /> Some input
-                                          </Label>
-                                        </FormGroup>
-                                        <FormGroup check inline>
-                                          <Label check>
-                                             <Input type="radio" name="inlineradio" /> Some other input
-                                          </Label>
-                                        </FormGroup>
-                                    </div>
+                    <fieldset>
+                        <form onSubmit={this.onSubmit}>
+                        <FormGroup row>
+                            <label className="col-md-2 col-form-label"><h4>Complicated Reviews</h4></label>
+                            <div className="col-md-10">
+                                <FormGroup check inline>
+                                    <Label check>
+                                    <Input type="checkbox" /> Not in English
+                                    </Label>
                                 </FormGroup>
-                            </fieldset>
-                            
+                                <br />
+                                <FormGroup check inline>
+                                    <Label check>
+                                        <Input type="checkbox" /> No free full-text
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <br />
+                                <Link to="">Save as Complicated review</Link>
 
-
-                            
+                               
+                            </div>
+                        </FormGroup>
                         </form>
+                    </fieldset>
+                    <fieldset>
+                        <form onSubmit={this.onSubmit}>
+                        <FormGroup row>
+                            <label className="col-md-2 col-form-label"><h4>Questions</h4></label>
+                            <div className="col-md-10">
+                                <h5></h5>
+                                <FormGroup check inline>
+                                    <Label check>
+                                    <Input type="checkbox" /> Not in English
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <FormGroup check inline>
+                                    <Label check>
+                                        <Input type="checkbox" /> No free full-text
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <br />
+                                <Link to="">Save as Complicated review</Link>
+
+                            </div>
+                        </FormGroup>
+                        </form>
+                    </fieldset>
+                    <fieldset>
+                        <FormGroup row>
+                            <label className="col-md-2 col-form-label"></label>
+                            <div className="col-md-10">
+                                <p>Testing</p>
+                                { this.renderQuestions() }
+                            </div>
+                        </FormGroup>
+                    </fieldset>
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex align-items-center">
@@ -305,18 +337,16 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
 }
 
-// export default HSEAssignedQualityAppraisalsArticleInput;
-
-function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
+function mapStateToProps({ sseAssignedPresentationDetailsArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: hseAssignedQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticleErrorMessage,
-        currentArticle: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticleFetch
+        errorMessage: sseAssignedPresentationDetailsArticleQueue.ssePendingPresentationDetailsArticleErrorMessage,
+        currentArticle: sseAssignedPresentationDetailsArticleQueue.sseAssignedPresentationDetailsArticleFetch
     }
 }
 
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'qualityAppraisalsInput'
-    })) (HSEAssignedQualityAppraisalsArticleInput);
+        form: 'presentationDetailsInput'
+    })) (SSEAssignedPresentationDetailsArticleInput);

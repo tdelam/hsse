@@ -172,27 +172,27 @@ const Menu = [
         {
             name: 'Quality Appraisals',
             path: '/sse/pendingqualityappraisalsarticlequeue',
-            translate: 'sidebar.nav.element.QUALITYAPPRAISALS'
+            translate: 'sidebar.nav.element.PENDINGQUALITYAPPRAISALSARTICLES'
         },
         {
             name: 'Linking Studies',
             path: '/sse/pendinglinkingstudiesarticlequeue',
-            translate: 'sidebar.nav.element.LINKINGSTUDIES'
+            translate: 'sidebar.nav.element.PENDINGLINKINGSTUDIESARTICLES'
         },
         {
             name: 'Presentation Details',
-            path: 'animations',
-            translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
+            path: '/sse/pendingpresentationdetailsarticlequeue',
+            translate: 'sidebar.nav.element.PENDINGPRESENTATIONDETAILSARTICLES'
         },
         {
             name: 'Translating Titles',
             path: 'dropdown',
-            translate: 'sidebar.nav.element.TRANSLATINGTITLES'
+            translate: 'sidebar.nav.element.PENDINGTRANSLATINGTITLESARTICLES'
         },
         {
             name: 'Tracking & Prioritizing',
             path: 'cards',
-            translate: 'sidebar.nav.element.TRACKINGPRIORITIZING'
+            translate: 'sidebar.nav.element.PENDIGTRACKINGPRIORITIZINGARTICLES'
         }
     ]
     },
@@ -213,27 +213,27 @@ const Menu = [
             {
                 name: 'Quality Appraisals',
                 path: '/hse/complicatedqualityappraisalsqueue',
-                translate: 'sidebar.nav.element.COMPLICATEDQUALITYAPPRAISALS'
+                translate: 'sidebar.nav.element.COMPLICATEDQUALITYAPPRAISALSARTICLES'
             },
             {
                 name: 'Linking Studies',
                 path: '/hse/complicatedlinkingstudiesqueue',
-                translate: 'sidebar.nav.element.COMPLICATEDLINKINGSTUDIES'
+                translate: 'sidebar.nav.element.COMPLICATEDLINKINGSTUDIESARTICLES'
             },
             {
                 name: 'Presentation Details',
                 path: '/hse/complicatedpresentationdetailsqueue',
-                translate: 'sidebar.nav.element.COMPLICATEDPRESENTATIONDETAILS'
+                translate: 'sidebar.nav.element.COMPLICATEDPRESENTATIONDETAILSARTICLES'
             },
             {
                 name: 'Translating Titles',
                 path: '/hse/complicatedtranslatingtitlesqueue',
-                translate: 'sidebar.nav.element.COMPLICATEDTRANSLATINGTITLES'
+                translate: 'sidebar.nav.element.COMPLICATEDTRANSLATINGTITLESARTICLES'
             },
             {
                 name: 'Tracking & Prioritizing',
                 path: '/hse/complicatedtrackingprioritizingqueue',
-                translate: 'sidebar.nav.element.COMPLICATEDTRACKINGPRIORITIZING'
+                translate: 'sidebar.nav.element.COMPLICATEDTRACKINGPRIORITIZINGARTICLES'
             }
         ]
     },
@@ -250,27 +250,27 @@ const Menu = [
         {
             name: 'Quality Appraisals',
             path: '/sse/complicatedqualityappraisalsarticlequeue',
-            translate: 'sidebar.nav.element.COMPLICATEDQUALITYAPPRAISALS'
+            translate: 'sidebar.nav.element.COMPLICATEDQUALITYAPPRAISALSARTICLES'
         },
         {
             name: 'Linking Studies',
             path: '/sse/complicatedlinkingstudies',
-            translate: 'sidebar.nav.element.COMPLICATEDLINKINGSTUDIES'
+            translate: 'sidebar.nav.element.COMPLICATEDLINKINGSTUDIESARTICLES'
         },
         {
             name: 'Presentation Details',
             path: '/sse/complicatedpresentationdetails',
-            translate: 'sidebar.nav.element.COMPLICATEDPRESENTATIONDETAILS'
+            translate: 'sidebar.nav.element.COMPLICATEDPRESENTATIONDETAILSARTICLES'
         },
         {
             name: 'Translating Titles',
             path: '/sse/complicated/translatingtitles',
-            translate: 'sidebar.nav.element.COMPLICATEDTRANSLATINGTITLES'
+            translate: 'sidebar.nav.element.COMPLICATEDTRANSLATINGTITLESARTICLES'
         },
         {
             name: 'Tracking & Prioritizing',
             path: '/sse/complicatedtrackingprioritizing',
-            translate: 'sidebar.nav.element.COMPLICATEDTRACKINGPRIORITIZING'
+            translate: 'sidebar.nav.element.COMPLICATEDTRACKINGPRIORITIZINGARTICLES'
         }
     ]
     },

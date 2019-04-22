@@ -86,6 +86,29 @@ import {
   HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR,
 
 
+  // Presentation Details
+  HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE,
+  HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT,
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_ERROR,
+
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE,
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE_ERROR,
+
+  HSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE,
+  HSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE,
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR,
+
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH,
+  HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH_ERROR,
+
+  HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER,
+  HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR,
+
+
 /* SSE */
   SSE_CREATE_ARTICLE,
   SSE_CREATE_ARTICLE_ERROR,
@@ -161,7 +184,29 @@ import {
   SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH_ERROR,
 
   SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER,
-  SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR
+  SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR,
+
+  // Presentation Details
+  SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE,
+  SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR,
+
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT,
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_ERROR,
+
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE,
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE_ERROR,
+
+  SSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE,
+  SSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE_ERROR,
+
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE,
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR,
+
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH,
+  SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH_ERROR,
+
+  SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER,
+  SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR
 
 } from './types';
 
@@ -289,7 +334,7 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
   }
 };
 
-export const submitHSEBatchFile = (state, history) => async dispatch => {console.log(state);
+export const submitHSEBatchFile = (state, history) => async dispatch => {
 
   const uploadConfig = await axios.get('/api/hse/getfileurl');
 
@@ -306,7 +351,7 @@ export const submitHSEBatchFile = (state, history) => async dispatch => {console
     harvestDate: state.harvestDate,
     fileName: state.file.name
   });
-  console.log(state.file.name);
+  
   if(articleBatch) {
     
     dispatch({ type: HSE_CREATE_BATCHFILE, payload: 'Batchfile succesfully uploaded' });
@@ -318,7 +363,6 @@ export const submitHSEBatchFile = (state, history) => async dispatch => {console
     // Unsuccesful upload
     dispatch({ type: HSE_CREATE_BATCHFILE_ERROR, payload: 'Batchfile succesfully uploaded' });
     history.push('/hse/pendingeligibilityfiltersarticlequeue');
-    console.log("Batchfile upload failed")
   }
 
 };
@@ -363,6 +407,19 @@ export const listHSEPendingLinkingStudiesArticlesQueue = (history) => async disp
   }
 };
 
+export const listHSEPendingPresentationDetailsArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/pendingpresentationdetailsarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse presentation details article pending queue'});
+  }
+};
+
 export const listHSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
@@ -393,6 +450,17 @@ export const listHSEPendingLinkingStudiesBatchfilesQueue = (history) => async di
     dispatch({ type: HSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse linking studies batchfile pending queue'});
+  }
+};
+
+export const listHSEPendingPresentationDetailsBatchfilesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/articlebatchfiles`);
+
+    // history.push('/dashboard');
+    dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing hse presentation details batchfile pending queue'});
   }
 };
 
@@ -434,13 +502,26 @@ export const listHSEAssignedLinkingStudiesArticlesQueue = (history) => async dis
     // console.log(response.data);
     dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
-    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse linking article assigned queue'});
+    dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse linking studies article assigned queue'});
+  }
+};
+
+export const listHSEAssignedPresentationDetailsArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/assignedpresentationdetailsarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse presentation details article assigned queue'});
   }
 };
 
 export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/assignedeligibilityfiltersarticle/fetcharticle/${articleId}`, { headers });
+    const response = await axios.get(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/fetcharticle/${articleId}`, { headers });
   
     // history.push('/dashboard');
     // console.log(response.data);
@@ -452,7 +533,7 @@ export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) =>
 
 export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/assignedqualityappraisalsarticle/fetcharticle/${articleId}`, { headers });
+    const response = await axios.get(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/fetcharticle/${articleId}`, { headers });
   
     // history.push('/dashboard');
     // console.log(response.data);
@@ -464,7 +545,7 @@ export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => 
 
 export const fetchHSEAssignedLinkingStudiesArticle = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/hse/assignedlinkingstudiesarticle/fetcharticle/${articleId}`, { headers });
+    const response = await axios.get(`${backendServer}/hse/assignedlinkingstudiesarticlequeue/fetcharticle/${articleId}`, { headers });
   
     // history.push('/dashboard');
     // console.log(response.data);
@@ -474,10 +555,21 @@ export const fetchHSEAssignedLinkingStudiesArticle = (articleId, history) => asy
   }
 };
 
+export const fetchHSEAssignedPresentationDetailsArticle = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/hse/assignedpresentationdetailsarticlequeue/fetcharticle/${articleId}`, { headers });
+  
+    // history.push('/dashboard');
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse presentation details assigned article'});
+  }
+};
+
 export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticle/addjuniorfilter/${articleId}`, 
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 
     {
       articleId
     },
@@ -495,7 +587,7 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
 export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticle/addjuniorappraiser/${articleId}`, 
+    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticlequeue/addjuniorappraiser/${articleId}`, 
     {
       articleId
     },
@@ -504,7 +596,7 @@ export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
     });
     
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER, payload: response.data });
-    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    history.push('/hse/assignedqualityappraisalsarticlequeue');
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR, payload: 'Error assigning junior appraiser role for article'});
   }
@@ -513,7 +605,7 @@ export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
 export const assignHSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/hse/pendinglinkingstudiesarticle/addjuniorlinker/${articleId}`, 
+    const response = await axios.post(`${backendServer}/hse/pendinglinkingstudiesarticlequeue/addjuniorlinker/${articleId}`, 
     {
       articleId
     },
@@ -522,15 +614,33 @@ export const assignHSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , h
     });
     
     dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER, payload: response.data });
-    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    history.push('/hse/assignedlinkingstudiesarticlequeue');
   } catch(e) {
     dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR, payload: 'Error assigning junior linker role for article'});
   }
 };
 
+export const assignHSEPendingPresentationDetailsArticlesJuniorLinker = (articleId , history) => async dispatch => {
+
+  try {
+    const response = await axios.post(`${backendServer}/hse/pendingpresentationdetailsarticlequeue/addjuniordetailer/${articleId}`, 
+    {
+      articleId
+    },
+    {
+      headers 
+    });
+    
+    dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER, payload: response.data });
+    history.push('/hse/assignedpresentationdetailsarticlequeue');
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR, payload: 'Error assigning junior detailer role for article'});
+  }
+};
+
 export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticle/addseniorfilter/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addseniorfilter/${articleId}`,
     {
       articleId
     },
@@ -548,7 +658,7 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
 
 export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticle/addseniorappraiser/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticlequeue/addseniorappraiser/${articleId}`,
     {
       articleId
     },
@@ -566,7 +676,7 @@ export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (article
 
 export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticle/savevalues/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/savevalues/${articleId}`,
     {
       inputValues
     },
@@ -584,7 +694,7 @@ export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputVa
 
 export const assignHSEPendingQualityAppraisalsArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticle/savevalues/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/savevalues/${articleId}`,
     {
       inputValues
     },
@@ -602,7 +712,7 @@ export const assignHSEPendingQualityAppraisalsArticleEdit = (articleId, inputVal
 
 export const assignHSEPendingLinkingStudiesArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticle/savevalues/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticlequeue/savevalues/${articleId}`,
     {
       inputValues
     },
@@ -618,9 +728,27 @@ export const assignHSEPendingLinkingStudiesArticleEdit = (articleId, inputValues
   }
 };
 
+export const assignHSEPendingPresentationDetailsArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/assignedpresentationdetailsarticlequeue/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT, payload: response.data });
+    //history.push('/hse/assignedpresentationdetailsarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
 export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/setcompleted/${articleId}`,
     {
       inputValues
     },
@@ -638,7 +766,7 @@ export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId,
 
 export const assignHSEPendingQualityAppraisalsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticle/setcompleted/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/setcompleted/${articleId}`,
     {
       inputValues
     },
@@ -656,7 +784,7 @@ export const assignHSEPendingQualityAppraisalsArticleEditComplete = (articleId, 
 
 export const assignHSEPendingLinkingStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticle/setcompleted/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticlequeue/setcompleted/${articleId}`,
     {
       inputValues
     },
@@ -669,6 +797,24 @@ export const assignHSEPendingLinkingStudiesArticleEditComplete = (articleId, inp
     
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
+
+export const assignHSEPendingPresentationDetailsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/assignedpresentationdetailsarticlequeue/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/hse/assignedlinkingstudiesarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
   }
 };
 
@@ -767,6 +913,19 @@ export const listSSEPendingLinkingStudiesArticlesQueue = (history) => async disp
   }
 };
 
+export const listSSEPendingPresentationDetailsArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/pendingpresentationdetailsarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+
+    // history.push('/dashboard');
+    dispatch({ type: SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse presentation details article pending queue'});
+  }
+};
+
 export const listSSEPendingEligibilityFiltersBatchfilesQueue = (history) => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/sse/articlebatchfiles`);
@@ -793,13 +952,24 @@ export const listSSEPendingQualityAppraisalsBatchfilesQueue = (history) => async
 
 export const listSSEPendingLinkingStudiesBatchfilesQueue = (history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/sse/articlebatchfiles`);
+    const response = await axios.get(`${backendServer}/sse/articlebatchfilesqueue`);
 
     // history.push('/dashboard');
     // console.log(response.data);
     dispatch({ type: SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR, payload: 'Error showing sse linking studies batchfile pending queue'});
+  }
+};
+
+export const listSSEPendingPresentationDetailsBatchfilesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/articlebatchfilesqueue`);
+
+    // history.push('/dashboard');
+    dispatch({ type: SSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE_ERROR, payload: 'Error showing sse presentation details batchfile pending queue'});
   }
 };
 
@@ -841,12 +1011,22 @@ export const listSSEAssignedLinkingStudiesArticlesQueue = (history) => async dis
   }
 };
 
+export const listSSEAssignedPresentationDetailsArticlesQueue = (history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/assignedpresentationdetailsarticlequeue`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse presentation details article assigned queue'});
+  }
+};
+
 export const fetchSSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/sse/assignedeligibilityfiltersarticle/fetcharticle/${articleId}`, { headers });
+    const response = await axios.get(`${backendServer}/sse/assignedeligibilityfiltersarticlequeue/fetcharticle/${articleId}`, { headers });
   
     // history.push('/dashboard');
-    // console.log(response.data);
     dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH, payload: response.data })
   } catch(e) {
     dispatch({ type: SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR, payload: 'Error fetching sse eligibility filter assigned article'});
@@ -855,7 +1035,7 @@ export const fetchSSEAssignedEligibilityFiltersArticle = (articleId, history) =>
 
 export const fetchSSEAssignedQualityAppraisalsArticle = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/sse/assignedqualityappraisalsarticle/fetcharticle/${articleId}`, { headers });
+    const response = await axios.get(`${backendServer}/sse/assignedqualityappraisalsarticlequeue/fetcharticle/${articleId}`, { headers });
   
     // history.push('/dashboard');
     // console.log(response.data);
@@ -867,7 +1047,7 @@ export const fetchSSEAssignedQualityAppraisalsArticle = (articleId, history) => 
 
 export const fetchSSEAssignedLinkingStudiesArticle = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.get(`${backendServer}/sse/assignedlinkingstudiesarticle/fetcharticle/${articleId}`, { headers });
+    const response = await axios.get(`${backendServer}/sse/assignedlinkingstudiesarticlequeue/fetcharticle/${articleId}`, { headers });
 
     dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH, payload: response.data })
   } catch(e) {
@@ -875,10 +1055,20 @@ export const fetchSSEAssignedLinkingStudiesArticle = (articleId, history) => asy
   }
 };
 
+export const fetchSSEAssignedPresentationDetailsArticle = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.get(`${backendServer}/sse/assignedpresentationdetailsarticlequeue/fetcharticle/${articleId}`, { headers });
+
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH, payload: response.data })
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH_ERROR, payload: 'Error fetching sse presentation details assigned article'});
+  }
+};
+
 export const assignSSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticle/addjuniorfilter/${articleId}`, 
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 
     {
       articleId
     },
@@ -896,7 +1086,7 @@ export const assignSSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
 export const assignSSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingqualityappraisalsarticle/addjuniorappraiser/${articleId}`, 
+    const response = await axios.post(`${backendServer}/sse/pendingqualityappraisalsarticlequeue/addjuniorappraiser/${articleId}`, 
     {
       articleId
     },
@@ -914,7 +1104,7 @@ export const assignSSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
 export const assignSSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/sse/pendinglinkingstudiesarticle/addjuniorlinker/${articleId}`, 
+    const response = await axios.post(`${backendServer}/sse/pendinglinkingstudiesarticlequeue/addjuniorlinker/${articleId}`, 
     {
       articleId
     },
@@ -929,9 +1119,27 @@ export const assignSSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , h
   }
 };
 
+export const assignSSEPendingPresentationDetailsArticlesJuniorDetailer = (articleId , history) => async dispatch => {
+
+  try {
+    const response = await axios.post(`${backendServer}/sse/pendingpresentationdetailsarticlequeue/addjuniordetailer/${articleId}`, 
+    {
+      articleId
+    },
+    {
+      headers 
+    });
+    
+    dispatch({ type: SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER, payload: response.data });
+    history.push('/sse/assignedpresentationdetailsarticlequeue');
+  } catch(e) {
+    dispatch({ type: SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR, payload: 'Error assigning junior detailer role for article'});
+  }
+};
+
 export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticle/addseniorapraiser/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue/addseniorapraiser/${articleId}`,
     {
       articleId
     },
@@ -949,7 +1157,7 @@ export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
 
 export const assignSSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingqualityappraisalsarticle/addseniorappraiser/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/pendingqualityappraisalsarticlequeue/addseniorappraiser/${articleId}`,
     {
       articleId
     },
@@ -967,7 +1175,7 @@ export const assignSSEPendingQualityAppraisalsArticlesSeniorAppraiser = (article
 
 export const assignSSEPendingEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticle/savevalues/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticlequeue/savevalues/${articleId}`,
     {
       inputValues
     },
@@ -985,7 +1193,7 @@ export const assignSSEPendingEligibilityFiltersArticleEdit = (articleId, inputVa
 
 export const assignSSEPendingQualityAppraisalsArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/assignedqualityappraisalsarticle/savevalues/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/assignedqualityappraisalsarticlequeue/savevalues/${articleId}`,
     {
       inputValues
     },
@@ -994,7 +1202,7 @@ export const assignSSEPendingQualityAppraisalsArticleEdit = (articleId, inputVal
     });
 
     dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT, payload: response.data });
-    //history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    //history.push('/sse/assignedqualityappraisalsarticlequeue');
     
   } catch(e) {
     dispatch({ type: SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
@@ -1003,7 +1211,7 @@ export const assignSSEPendingQualityAppraisalsArticleEdit = (articleId, inputVal
 
 export const assignSSEPendingLinkingStudiesArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/assignedlinkingstudiesarticle/savevalues/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/assignedlinkingstudiesarticlequeue/savevalues/${articleId}`,
     {
       inputValues
     },
@@ -1012,16 +1220,34 @@ export const assignSSEPendingLinkingStudiesArticleEdit = (articleId, inputValues
     });
 
     dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT, payload: response.data });
-    //history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    //history.push('/sse/assignedlinkingstudiesarticlequeue');
     
   } catch(e) {
     dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
   }
 };
 
+export const assignSSEPendingPresentationDetailsArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedpresentationdetailsarticlequeue/savevalues/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT, payload: response.data });
+    //history.push('/sse/assignedpresentationdetailsarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
+  }
+};
+
 export const assignSSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticle/setcompleted/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/assignedeligibilityfiltersarticlequeue/setcompleted/${articleId}`,
     {
       inputValues
     },
@@ -1039,7 +1265,7 @@ export const assignSSEPendingEligibilityFiltersArticleEditComplete = (articleId,
 
 export const assignSSEPendingQualityAppraisalsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/assignedqualityappraisalsarticle/setcompleted/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/assignedqualityappraisalsarticlequeue/setcompleted/${articleId}`,
     {
       inputValues
     },
@@ -1055,9 +1281,9 @@ export const assignSSEPendingQualityAppraisalsArticleEditComplete = (articleId, 
   }
 };
 
-export const assignSSEPendingLiningStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+export const assignSSEPendingLinkingStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/assignedlinkingstudiesarticle/setcompleted/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/assignedlinkingstudiesarticlequeue/setcompleted/${articleId}`,
     {
       inputValues
     },
@@ -1070,6 +1296,24 @@ export const assignSSEPendingLiningStudiesArticleEditComplete = (articleId, inpu
     
   } catch(e) {
     dispatch({ type: SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
+  }
+};
+
+export const assignSSEPendingPresentationDetailsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/sse/assignedpresentationdetailsarticlequeue/setcompleted/${articleId}`,
+    {
+      inputValues
+    },
+    {
+      headers
+    });
+
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE, payload: response.data });
+    history.push('/sse/assignedpresentationdetailsarticlequeue');
+    
+  } catch(e) {
+    dispatch({ type: SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE_ERROR, payload: 'Error completing values for article'});
   }
 };
 

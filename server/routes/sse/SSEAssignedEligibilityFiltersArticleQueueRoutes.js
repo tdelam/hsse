@@ -2,8 +2,8 @@ const SSEAssignedEligibilityFiltersArticleQueueController = require('../../contr
 
 module.exports = app => {
     app.get('/sse/assignedeligibilityfiltersarticlequeue', SSEAssignedEligibilityFiltersArticleQueueController.listArticles);
-    app.get('/sse/assignedeligibilityfiltersarticle/fetcharticle/:articleId', SSEAssignedEligibilityFiltersArticleQueueController.fetchArticle);
+    app.get('/sse/assignedeligibilityfiltersarticlequeue/fetcharticle/:articleId', SSEAssignedEligibilityFiltersArticleQueueController.fetchArticle);
 
-    app.post('/sse/assignedeligibilityfiltersarticle/savevalues/:articleId', SSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterValues);
-    app.post('/sse/assignedeligibilityfiltersarticle/setcompleted/:articleId', SSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterComplete);
+    app.post('/sse/assignedeligibilityfiltersarticlequeue/savevalues/:articleId', SSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterValues);
+    app.post('/sse/assignedeligibilityfiltersarticlequeue/setcompleted/:articleId', SSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFilterComplete);
 }

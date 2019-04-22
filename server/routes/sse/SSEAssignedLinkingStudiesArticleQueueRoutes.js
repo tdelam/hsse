@@ -2,8 +2,8 @@ const SSEAssignedLinkingStudiesArticleQueueController = require('../../controlle
 
 module.exports = app => {
     app.get('/sse/assignedlinkingstudiesarticlequeue', SSEAssignedLinkingStudiesArticleQueueController.listArticles);
-    app.get('/sse/assignedlinkingstudiesarticle/fetcharticle/:articleId', SSEAssignedLinkingStudiesArticleQueueController.fetchArticle);
+    app.get('/sse/assignedlinkingstudiesarticlequeue/fetcharticle/:articleId', SSEAssignedLinkingStudiesArticleQueueController.fetchArticle);
 
-    app.post('/sse/assignedlinkingstudiesarticle/savevalues/:articleId', SSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesValues);
-    // app.post('/sse/assignedlinkingstudiesarticle/setcompleted/:articleId', SSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesComplete);
+    app.post('/sse/assignedlinkingstudiesarticlequeue/savevalues/:articleId', SSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesValues);
+    // app.post('/sse/assignedlinkingstudiesarticlequeue/setcompleted/:articleId', SSEAssignedLinkingStudiesArticleQueueController.setLinkingStudiesComplete);
 }

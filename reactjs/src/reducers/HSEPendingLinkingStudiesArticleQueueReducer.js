@@ -8,23 +8,23 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    pendingQualityAppraisalsErrorMessage: ''
+    pendingLinkingStudiesErrorMessage: ''
 };
 
 export default function(state = INITIAL_STATE, action) {
 
     switch(action.type) {
         case HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE: 
-            return { ...state, hsePendingQualityAppraisalsArticles: action.payload };
+            return { ...state, hsePendingLinkingStudiesArticles: action.payload };
 
         case HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR: 
-            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error listing pending linking studies articles' };
+            return { ...state, hsePendingLinkingStudiesErrorMessage: 'Error listing pending linking studies articles' };
 
         case HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER: 
-            return { ...state, hsePendingQualityAppraisalsArticles: action.payload };
+            return { ...state, hsePendingLinkingStudiesArticles: action.payload };
         
         case HSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR: 
-            return { ...state, hsePendingQualityAppraisalsErrorMessage: 'Error assigning junior linker to article(s)' };
+            return { ...state, hsePendingLinkingStudiesErrorMessage: 'Error assigning junior linker to article(s)' };
         default:
             return state;
             

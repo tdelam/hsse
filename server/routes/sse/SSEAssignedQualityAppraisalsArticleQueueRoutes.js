@@ -4,6 +4,6 @@ module.exports = app => {
     app.get('/sse/assignedqualityappraisalsarticlequeue', SSEAssignedQualityAppraisalsArticleQueueController.listArticles);
     app.get('/sse/assignedqualityappraisalsarticle/fetcharticle/:articleId', SSEAssignedQualityAppraisalsArticleQueueController.fetchArticle);
 
-    app.post('/sse/assignedqualityappraisalsarticle/savevalues/:articleId', SSEAssignedQualityAppraisalsArticleQueueController.setQualityAppraisalValues);
-    // app.post('/sse/assignedqualityappraisalarticle/setcompleted/:articleId', SSEAssignedQualityAppraisalsArticleQueueController.setQualityAppraisalComplete);
+    app.post('/sse/assignedqualityappraisalsarticlequeue/savevalues/:articleId', SSEAssignedQualityAppraisalsArticleQueueController.setQualityAppraisalValues);
+    // app.post('/sse/assignedqualityappraisalarticlequeue/setcompleted/:articleId', SSEAssignedQualityAppraisalsArticleQueueController.setQualityAppraisalComplete);
 }

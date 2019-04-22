@@ -6,7 +6,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    sseAssignedQualityAppraisalsErrorMessage: ''
+    sseAssignedLinkingStudiesErrorMessage: ''
 };
 
 export default function(state = INITIAL_STATE, action) {

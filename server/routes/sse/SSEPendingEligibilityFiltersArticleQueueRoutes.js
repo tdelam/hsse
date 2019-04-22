@@ -6,6 +6,6 @@ const SSEEligibilityFilterArticleQueueController = require('../../controllers/ss
 module.exports = app => {
     app.get('/sse/pendingeligibilityfiltersarticlequeue', SSEEligibilityFilterArticleQueueController.listArticles);
     app.get('/sse/pendingeligibilityfiltersarticlequeue/fetcharticle/:id', SSEEligibilityFilterArticleQueueController.listArticle);
-    app.post('/sse/pendingeligibilityfiltersarticle/addjuniorfilter/:articleId', SSEEligibilityFilterArticleQueueController.addArticleToJuniorEligibilityFilterUser);
-    app.post('/sse/pendingeligibilityfiltersarticle/addseniorfilter/:articleId', SSEEligibilityFilterArticleQueueController.addArticleToSeniorEligibilityFilterUser);
+    app.post('/sse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/:articleId', SSEEligibilityFilterArticleQueueController.addArticleToJuniorEligibilityFilterUser);
+    app.post('/sse/pendingeligibilityfiltersarticlequeue/addseniorfilter/:articleId', SSEEligibilityFilterArticleQueueController.addArticleToSeniorEligibilityFilterUser);
 }

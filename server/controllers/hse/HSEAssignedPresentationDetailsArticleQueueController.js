@@ -2,20 +2,20 @@ const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStudies');
+const HSEArticlePresentationDetailsModelClass = mongoose.model('HSEArticlePresentationDetails');
 const Authentication = require('../authentication');
 
 exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ _linkingStudiesJunior: user._id })
+    HSEArticleModelClass.find({ _presentationDetailsJunior: user._id })
     .exec(function(err, articles) {
         if(err) {
             return res.send(err);
         } else if(!articles) {
             return res.status(404).send({
-                message: 'No article in your Assigned Linking Studies Queue'
+                message: 'No article in your Assigned Presentation Details Queue'
             });
         }
         return res.status(200).send(articles);
@@ -44,11 +44,11 @@ exports.fetchArticle = async (req, res) => {
         }
         return res.status(200).send(article);
     })
-    .populate('linkingStudiesJuniorInput')
+    .populate('presentationDetailsJuniorInput')
 
 };
 
-exports.setLinkingStudiesValues = async (req, res) => {
+exports.setPresentationDetailsValues = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -69,51 +69,51 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
         }
         
-        if( !(article._linkingStudiesJunior.equals(user._id) ) ) {
+        if( !(article._presentationDetailsJunior.equals(user._id) ) ) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for Linking Studies for article'
+                message: 'Not authorized to add inputs for Presentation Details for article'
             });
 
-        } else if ( article._linkingStudiesJunior.equals(user._id) ) {
+        } else if ( article._presentationDetailsJunior.equals(user._id) ) {
 
-            const newlinkingStudies = new HSEArticleLinkingStudiesModelClass(inputValues);
-            newLinkingStudies._article = articleId;
-            newLinkingStudies.save( (err) => {
+            const newPresentationDetails = new HSEArticlePresentationDetailsModelClass(inputValues);
+            newPresentationDetails._article = articleId;
+            newPresentationDetails.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Linking Studies for article, err: ${err}`
+                        message: `Unable to save values for Presentation Details for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.linkingStudiesJuniorInput = newlinkingStudies;
+            article.presentationDetailsJuniorInput = newPresentationDetails;
 
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior Linking Studies added for article'
+                message: 'Inputs for Junior Presentation Details added for article'
             });
 
-        } else if( article._linkingStudiesJunior.equals(user._id) ) {
+        } else if( article._presentationDetailsJunior.equals(user._id) ) {
 
-            const newLinkingStudies = new HSEArticleLinkingStudiesModelClass(inputValues);
-            newLinkingStudies.save( (err) => {
+            const newPresentationDetails = new HSEArticlePresentationDetailsModelClass(inputValues);
+            newPresentationDetails.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Linking Studies for article, err: ${err}`
+                        message: `Unable to save values for Presentation Details for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.linkingStudiesJuniorInput = newLinkingStudies;
+            article.presentationDetailsJuniorInput = newPresentationDetails;
             await article.save();
             
             return res.status(201).send({
-                message: 'Inputs for Junior linker added for article'
+                message: 'Inputs for Presentation Details added for article'
             });
             
         }
@@ -122,7 +122,7 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
 };
 
-exports.setLinkingStudiesComplete = async (req, res) => {
+exports.setPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -143,32 +143,32 @@ exports.setLinkingStudiesComplete = async (req, res) => {
 
         }
         
-        if( !(article._linkingStudiesJunior.equals(user._id) )) {
+        if( !(article._presentationDetailsJunior.equals(user._id) )) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for linking studies for article'
+                message: 'Not authorized to add inputs for presentation details for article'
             });
 
-        } else if( article._linkingStudiesJunior.equals(user._id) ) {
+        } else if( article._presentationDetailsJunior.equals(user._id) ) {
 
-            const newlinkingStudies = new HSEArticleLinkingStudiesModelClass(inputValues);
-            newlinkingStudies.save( (err) => {
+            const newPresentationDetails = new HSEArticlePresentationDetailsModelClass(inputValues);
+            newPresentationDetails.save( (err) => {
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Linking Studies for article, err: ${err}`
+                        message: `Unable to save values for Presentation Details for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.linkingStudiesJuniorInput = newlinkingStudies;
-            article.linkingStudiesJuniorCompleted = true;
+            article.presentationDetailsJuniorInput = newPresentationDetails;
+            article.presentationDetailsJuniorCompleted = true;
             await article.save();
 
-            setFullLinkingStudiesCompleteOrResolve(articleId);
+            setFullPresentationDetailsCompleteOrResolve(articleId);
             
             return res.status(201).send({
-                message: 'Inputs for Junior appraisal added for article'
+                message: 'Inputs for Junior presenter added for article'
             });
             
         }
@@ -238,7 +238,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
-exports.setJuniorLinkingStudiesComplete = async (req, res) => {
+exports.setJuniorPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -269,7 +269,7 @@ exports.setJuniorLinkingStudiesComplete = async (req, res) => {
 
 };
 
-exports.setSeniorLinkingStudiesComplete = async (req, res) => {
+exports.setSeniorPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -308,7 +308,7 @@ exports.setSeniorLinkingStudiesComplete = async (req, res) => {
 
 };
 
-const setFullLinkingStudiesComplete = async (articleId) => {
+const setFullPresentationDetailsComplete = async (articleId) => {
 
     HSEArticleModelClass.findById(articleId, async (err, article) => {
 
@@ -326,7 +326,7 @@ const setFullLinkingStudiesComplete = async (articleId) => {
            console.log('No article with that identifier has been found');
         }
 
-        let newLinkingStudiesJuniorInput = null;
+        let newPresentationDetailsJuniorInput = null;
 
         await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
             
@@ -336,7 +336,7 @@ const setFullLinkingStudiesComplete = async (articleId) => {
             } else if(!eligibilityFilterJuniorInput) {
                 throw new Error('Quality Appraisal for Junior Appraisal does not exist');
             } else {
-                newEligibilityFilterJuniorInput = eligibilityFilterJuniorInput;
+                newPresentationDetailsJuniorInput = presentationDetailsJuniorInput;
             }
 
         });

@@ -78,8 +78,8 @@ exports.setLinkingStudiesValues = async (req, res) => {
         } else if ( article._linkingStudiesJunior.equals(user._id) ) {
 
             const newlinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
-            linkingStudies._article = articleId;
-            linkingStudies.save( (err) => {
+            newlinkingStudies._article = articleId;
+            newlinkingStudies.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
@@ -97,10 +97,10 @@ exports.setLinkingStudiesValues = async (req, res) => {
                 message: 'Inputs for Junior Linking Studies added for article'
             });
 
-        } else if( article._elibilityFilterJunior.equals(user._id) ) {
+        } else if( article._linkingStudiesJunior.equals(user._id) ) {
 
             const newLinkingStudies = new SSEArticleLinkingStudiesModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            newLinkingStudies.save( (err) => {
                 if(err) {
                     return res.status(422).send({
                         message: `Unable to save values for Linking Studies for article, err: ${err}`
@@ -141,7 +141,7 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
 };
 
-exports.setQualityAppraisalComplete = async (req, res) => {
+exports.setQualityAppraisalsComplete = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -162,7 +162,7 @@ exports.setQualityAppraisalComplete = async (req, res) => {
 
         }
         
-        if( !(article._elibilityFilterJunior.equals(user._id) ) ) {
+        if( !(article._linkingStudiesJunior.equals(user._id) ) ) {
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for linking studies for article'
@@ -176,19 +176,19 @@ exports.setQualityAppraisalComplete = async (req, res) => {
 
                 if(err) {
                     return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+                        message: `Unable to save values for Linking Studies for article, err: ${err}`
                     });
                 }
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
+            article.elibilityFilterJuniorInput = newLinkingStudies;
             
             article.elibilityFilterJuniorCompleted = true;
 
             await article.save();
 
-            setFullEligibilityFilterCompleteOrResolve(articleId);
+            setFullLinkingStudiesCompleteOrResolve(articleId);
             
             return res.status(201).send({
                 message: 'Inputs for Junior linker added for article'
@@ -304,7 +304,7 @@ exports.setJuniorLinkingStudiesComplete = async (req, res) => {
 };
 
 
-const setFullEligibilityFilterComplete = async (articleId) => {
+const setFullLinkingStudiesComplete = async (articleId) => {
 
     SSEArticleModelClass.findById(articleId, async (err, article) => {
 
@@ -387,13 +387,13 @@ exports.setFullCompletion = async (req, res) => {
                return res.send(err);
            } else if(!article) {
                return res.status(404).send({
-                   message: 'Could not set Full Completion for Article Eligibility Filters'
+                   message: 'Could not set Full Completion for Article Linking Studies'
                });
            }
 
            // Check to make sure all fields are the same
            if(isElibigilityFilterJuniorSeniorInputEqual(articleId)) {
-               article.eligibilityFilterFullCompletion = true;
+               article.linkingStudiesFullCompletion = true;
            } 
            
        });
