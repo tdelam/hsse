@@ -32,7 +32,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class HSEAssignedLinkingStudiesArticleInput extends Component {
+class HSEAssignedPresentationDetailsArticleInput extends Component {
 
     state = {
 
@@ -46,7 +46,7 @@ class HSEAssignedLinkingStudiesArticleInput extends Component {
 
         selectedOption: '',
 
-        linkingStudiesModel: {},       
+        presentationDetailsModel: {},       
 
     };
 
@@ -56,7 +56,7 @@ class HSEAssignedLinkingStudiesArticleInput extends Component {
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
-        this.props.fetchHSEAssignedLinkingStudiesArticle(articleId, history);
+        this.props.fetchHSEAssignedPresentationDetailsArticle(articleId, history);
 
     }
 
@@ -82,20 +82,20 @@ class HSEAssignedLinkingStudiesArticleInput extends Component {
         console.log(`Selected: ${selectedOption.label}`);
     }
 
-    isJuniorLinker() {
+    isJuniorDetailer() {
         
         if(this.props.currentArticle && this.props.currentUser) {
-            console.log(`inside isJuniorLinker`);
-            console.log(`currentUser: ${this.props.currentUser._id}, _linkingStudiesJunior: ${this.props.currentArticle._linkingStudiesJunior}`);
-            return this.props.currentUser === this.props.currentArticle._linkingStudiesJunior;
+            console.log(`inside isJuniorDetailer`);
+            console.log(`currentUser: ${this.props.currentUser._id}, _presentationDetailsJunior: ${this.props.currentArticle._presentationDetailsJunior}`);
+            return this.props.currentUser === this.props.currentArticle._lpresentationDetailsinkingStudiesJunior;
         }
             
     }
 
     getInputValues() {
 
-        if(this.isJuniorLinker()) {
-            this.setState({ linkingStudiesModel: { test: '' }/*this.props.currentArticle.linkingStudiesJuniorInput*/ });
+        if(this.isJuniorDetailer()) {
+            this.setState({ presentationDetailsModel: { test: '' }/*this.props.currentArticle.presentationDetailsJuniorInput*/ });
 
         }
     }
@@ -211,21 +211,21 @@ class HSEAssignedLinkingStudiesArticleInput extends Component {
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
 
-        // this.setState({ linkingStudiesModel: this.getInputValues() });
+        // this.setState({ presentationDetailsModel: this.getInputValues() });
 
-        console.log(this.state.linkingStudiesModel);
+        console.log(this.state.presentationDetailsModel);
 
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>Linking Studies Articles
+                    <div>Presentation Details Articles
                         <small>Article Input Page</small>
                     </div>
                 </div>
                 {/* START card */}
                 <Card className="card-default">
                     <CardHeader><div  >
-                            <div><h3>Linker Inputs</h3></div>
+                            <div><h3>Detailer Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
                             <div>Title: {  } </div>
                         </div>
@@ -285,16 +285,16 @@ class HSEAssignedLinkingStudiesArticleInput extends Component {
 
 }
 
-function mapStateToProps({ hseAssignedLinkingStudiesArticleQueue, auth }) {
+function mapStateToProps({ hseAssignedPresentationDetailsArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: hseAssignedLinkingStudiesArticleQueue.hsePendingLinkingStudiesArticleErrorMessage,
-        currentArticle: hseAssignedLinkingStudiesArticleQueue.hseAssignedLinkingStudiesArticleFetch
+        errorMessage: hseAssignedPresentationDetailsArticleQueue.hsePendingPresentationDetailsArticleErrorMessage,
+        currentArticle: hseAssignedPresentationDetailsArticleQueue.hseAssignedPresentationDetailsArticleFetch
     }
 }
 
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'linkingStudiesInput'
-    })) (HSEAssignedLinkingStudiesArticleInput);
+        form: 'presentationDetailsInput'
+    })) (HSEAssignedPresentationDetailsArticleInput);

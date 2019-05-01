@@ -6,6 +6,5 @@ const SSEPendingPresentationDetailsArticleQueueController = require('../../contr
 module.exports = app => {
     app.get('/sse/pendingpresentationdetailsarticlequeue', SSEPendingPresentationDetailsArticleQueueController.listArticles);
     app.get('/sse/pendingpresentationdetailsarticlequeue/fetcharticle/:id', SSEPendingPresentationDetailsArticleQueueController.listArticle);
-    app.post('/sse/pendingpresentationdetailsarticlequeue/addjuniorappraiser/:articleId', SSEPendingPresentationDetailsArticleQueueController.addArticleToJuniorPresenter
-    );
+    app.post('/sse/pendingpresentationdetailsarticlequeue/addjuniordetailer/:articleId', SSEPendingPresentationDetailsArticleQueueController.addArticleToJuniorPresentationDetailer);
 }

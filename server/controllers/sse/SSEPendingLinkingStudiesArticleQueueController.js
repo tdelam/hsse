@@ -6,8 +6,8 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 exports.listArticles = async (req, res) => {
     SSEArticleModelClass.find()
-       .or([ { _linkingStudiesJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
-       .exec(function(err, articles) {
+        .and([ { _linkingStudiesJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
+        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
            } else if(!articles) {
@@ -49,6 +49,11 @@ exports.addArticleToJuniorLinker = async (req, res) => {
         } else if(!article) {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
+            });
+
+        } else if(article._linkingStudiesJunior !== undefined) {
+            return res.status(404).send({
+                message: 'Junior linker has already been added for this article'
             });
         } else {
 

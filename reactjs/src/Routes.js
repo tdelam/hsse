@@ -111,9 +111,10 @@ import HSEAssignedQualityAppraisalsArticleQueue from './components/HSE/HSEAssign
 import HSEAssignedQualityAppraisalsArticleInput from './components/HSE/HSEAssignedQualityAppraisalsArticleInput';
 import HSEAssignedLinkingStudiesArticleInput from './components/HSE/HSEAssignedLinkingStudiesArticleInput';
 import HSEAssignedLinkingStudiesArticleQueue from './components/HSE/HSEAssignedLinkingStudiesArticleQueue';
+import HSEAssignedPresentationDetailsArticleInput from './components/HSE/HSEAssignedPresentationDetailsArticleInput';
+import HSEAssignedPresentationDetailsArticleQueue from './components/HSE/HSEAssignedPresentationDetailsArticleQueue';
 
 /*
-import HSEAssignedPresentationDetailsQueue from './components/HSE/HSEAssignedPresentationDetailsQueue';
 import HSEAssignedTranslatingTitlesQueue from './components/HSE/HSEAssignedTranslatingTitlesQueue';
 import HSEAssignedTrackingPrioritizingQueue from './components/HSE/HSEAssignedTrackingPrioritizingQueue';
 */
@@ -125,9 +126,9 @@ import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendin
 import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
 import HSEPendingQualityAppraisalsArticleQueue from './components/HSE/HSEPendingQualityAppraisalsArticleQueue';
 import HSEPendingLinkingStudiesArticleQueue from './components/HSE/HSEPendingLinkingStudiesArticleQueue';
+import HSEPendingPresentationDetailsArticleQueue from './components/HSE/HSEPendingPresentationDetailsArticleQueue';
 
 /*
-import HSEPendingPresentationDetailsQueue from './components/HSE/HSEPendingPresentationDetailsQueue';
 import HSEPendingTranslatingTitlesQueue from './components/HSE/HSEPendingTranslatingTitlesQueue';
 import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrackingPrioritizingQueue';
 */
@@ -142,8 +143,10 @@ import SSEAssignedQualityAppraisalsArticleInput from './components/SSE/SSEAssign
 import SSEAssignedLinkingStudiesArticleInput from './components/SSE/SSEAssignedLinkingStudiesArticleInput';
 import SSEAssignedLinkingStudiesArticleQueue from './components/SSE/SSEAssignedLinkingStudiesArticleQueue';
 
+import SSEAssignedPresentationDetailsArticleInput from './components/SSE/SSEAssignedPresentationDetailsArticleInput';
+import SSEAssignedPresentationDetailsArticleQueue from './components/SSE/SSEAssignedPresentationDetailsArticleQueue';
+
 /*
-import SSEAssignedPresentationDetailsQueue from './components/SSE/SSEAssignedPresentationDetailsQueue';
 import SSEAssignedTranslatingTitlesQueue from './components/SSE/SSEAssignedTranslatingTitlesQueue';
 import SSEAssignedTrackingPrioritizingQueue from './components/SSE/SSEAssignedTrackingPrioritizingQueue';
 */
@@ -154,9 +157,9 @@ import SSEPendingEligibilityFiltersArticleQueue from './components/SSE/SSEPendin
 import SSEPendingEligibilityFiltersBatchfileQueue from './components/SSE/SSEPendingEligibilityFiltersBatchfileQueue';
 import SSEPendingQualityAppraisalsArticleQueue from './components/SSE/SSEPendingQualityAppraisalsArticleQueue';
 import SSEPendingLinkingStudiesArticleQueue from './components/SSE/SSEPendingLinkingStudiesArticleQueue';
+import SSEPendingPresentationDetailsArticleQueue from './components/SSE/SSEPendingPresentationDetailsArticleQueue';
 
 /*
-import SSEPendingPresentationDetailsQueue from './components/SSE/SSEPendingPresentationDetailsQueue';
 import SSEPendingTranslatingTitlesQueue from './components/SSE/SSEPendingTranslatingTitlesQueue';
 import SSEPendingTrackingPrioritizingQueue from './components/SSE/SSEPendingTrackingPrioritizingQueue';
 */
@@ -348,9 +351,11 @@ const Routes = ({ location }) => {
 
                             <Route path="/hse/assignedlinkingstudiesarticlequeue" component={HSEAssignedLinkingStudiesArticleQueue} />
                             <Route path="/hse/assignedlinkingstudiesarticleinput/:articleId" component={HSEAssignedLinkingStudiesArticleInput} />
+
+                            <Route path="/hse/assignedpresentationdetailsarticlequeue" component={HSEAssignedPresentationDetailsArticleQueue} />
+                            <Route path="/hse/assignedpresentationdetailsarticleinput/:articleId" component={HSEAssignedPresentationDetailsArticleInput} />
                             
                             {/*
-                            <Route path="/hse/assignedpresentationdetailsqueue" component={HSEAssignedPresentationDetailsQueue} />
                             <Route path="/hse/assignedtranslatingtitlesqueue" component={HSEAssignedTranslatingTitlesQueue} />
                             <Route path="/hse/assignedtrackingprioritizingqueue" component={HSEAssignedTrackingPrioritizingQueue} />
                             */}
@@ -362,9 +367,10 @@ const Routes = ({ location }) => {
                             <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />
                             <Route path="/hse/pendingqualityappraisalsarticlequeue" component={HSEPendingQualityAppraisalsArticleQueue} />
                             <Route path="/hse/pendinglinkingstudiesarticlequeue" component={HSEPendingLinkingStudiesArticleQueue} />
+                            <Route path="/hse/pendingpresentationdetailsarticlequeue" component={HSEPendingPresentationDetailsArticleQueue} />
 
                             {/*
-                            <Route path="/hse/pendingpresentationdetailsqueue" component={HSEPendingPresentationDetailsQueue} />
+                            
                             <Route path="/hse/pendingtranslatingtitlesqueue" component={HSEPendingTranslatingTitlesQueue} />
                             <Route path="/hse/pendingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
                             */}
@@ -382,9 +388,11 @@ const Routes = ({ location }) => {
                             
                             <Route path="/sse/assignedlinkingstudiesarticleinput/:articleId" component={SSEAssignedLinkingStudiesArticleInput} />
                             <Route path="/sse/assignedlinkingstudiesarticlequeue" component={SSEAssignedLinkingStudiesArticleQueue} />
+
+                            <Route path="/sse/assignedpresentationdetailsarticleinput/:articleId" component={SSEAssignedPresentationDetailsArticleInput} />
+                            <Route path="/sse/assignedpresentationdetailsarticlequeue" component={SSEAssignedPresentationDetailsArticleQueue} />
                             
                             {/*
-                            <Route path="/sse/assignedpresentationdetailsqueue" component={SSEAssignedPresentationDetailsQueue} />
                             <Route path="/sse/assignedtranslatingtitlesqueue" component={SSEAssignedTranslatingTitlesQueue} />
                             <Route path="/sse/assignedtrackingprioritizingqueue" component={SSEAssignedTrackingPrioritizingQueue} />
                             */}
@@ -396,9 +404,9 @@ const Routes = ({ location }) => {
                             <Route path="/sse/pendingeligibilityfiltersbatchfilequeue" component={SSEPendingEligibilityFiltersBatchfileQueue} />
                             <Route path="/sse/pendingqualityappraisalsarticlequeue" component={SSEPendingQualityAppraisalsArticleQueue} />
                             <Route path="/sse/pendinglinkingstudiesarticlequeue" component={SSEPendingLinkingStudiesArticleQueue} />
+                            <Route path="/sse/pendingpresentationdetailsarticlequeue" component={SSEPendingPresentationDetailsArticleQueue} />
 
                             {/*
-                            <Route path="/sse/pendingpresentationdetailsqueue" component={SSEPendingPresentationDetailsQueue} />
                             <Route path="/sse/pendingtranslatingtitlesqueue" component={SSEPendingTranslatingTitlesQueue} />
                             <Route path="/sse/pendingtrackingprioritizingqueue" component={SSEPendingTrackingPrioritizingQueue} />
                             */}

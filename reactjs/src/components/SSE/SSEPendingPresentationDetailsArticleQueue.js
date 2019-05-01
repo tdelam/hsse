@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { 
+    Card, 
+    CardBody, 
+    CardHeader, 
+    Modal, 
+    ModalHeader, 
+    ModalBody,
+    ModalFooter,
+    Button
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import Swal from '../Elements/Swal';
+
 
 import * as actions from '../../actions';
 
@@ -28,12 +40,52 @@ const dtOptions = {
         }
     }
 }
+    
+class SSEPendingPresentationDetailsArticleQueue extends Component {
 
-class HSEAssignedQualityAppraisalsArticleQueue extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            modal: false,
+            toasterPos: 'top-right',
+            toasterType: 'info',
+            selectedArticleForAssignment: '',
+            swalOptionJunior: {
+                title: "Assign Article",
+                text: "Are you sure you want to assign this article to your assigned presentation details list!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, assign it!",
+                closeOnConfirm: true
+            }
+        };
+
+    }
 
     componentDidMount() {
-        this.props.getCurrentUser();
-        this.props.listHSEAssignedQualityAppraisalsArticlesQueue();
+        this.props.listSSEPendingPresentationDetailsArticlesQueue();
+    }
+
+    toggleModal = (articleId) => {
+        console.log(articleId);
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    toggleModal1 = function(articleId) {
+        console.log(articleId);
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    selectArticleForAssignment = () =>  {
+        this.setState({
+            selectedArticleForAssignment: ''
+        })
     }
 
     renderPriority(priority) {
@@ -51,10 +103,19 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
 
     }
 
+    swalCallback(isConfirm, swal) {
+        swal("Assigned!", "The article has been assigned to your pending Presentation Details list.", "success");
+    }
+
+    swalCallbackAssignJunior(isConfirm, articleId) {
+        if(isConfirm)
+            this.props.assignSSEPresentationDetailsArticlesJuniorDetailer(articleId);
+    }
+
     renderArticles() {
-        console.log(this.props);
-        if(this.props.assignedArticles != null ) {
-            const rows = Object.entries(this.props.assignedArticles).map(article => {
+        
+        if(this.props.pendingArticles != null ) {
+            const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>
                         {/*
@@ -64,28 +125,24 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                         */}
                         { this.renderPriority(article[1].priority) }
                         <td>
-                            { article[1].author }
+                            { article[1].articleSource }
                         </td>
                         <td>
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._qualityAppraisalsJuniorEmail+ ", " + article[1]._qualityAppraisalsSeniorEmail }</Link>
+                            {article[1]._presentationDetailsJuniorEmail || <Link to="/sse/assignedpresentationdetailsarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            
                         </td>
-                        <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
+                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
+                        <td>{ article[1]._id }</td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
-                        
-                        <td>{ article[1].qualityAppraisalsResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedqualityappraisalsarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
+                        {/*}
                         <td className="text-right">
-                            
-                            <Link to={{ pathname: "/hse/assignedqualityappraisalsarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>
-                            {/*<button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>*/}
-                        </td>
+                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
+                        </td> */}
                     {/*         
                         <td className="text-right">
                             <button type="button" className="btn btn-sm btn-secondary">
@@ -111,13 +168,12 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Other Filterer</th>
+                                <th>Junior Detailer</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>Language</th>
-                                <th>Status</th>
-                                <th style={{width:"10px"}} className="text-right" data-priority="2">Edit</th>
+                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
                                 {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
                             </tr>
                         </thead>
@@ -135,13 +191,23 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Appraisaing Quality Articles
-                            <small>Health Systems Evidence - Assigned Queue</small>
+                        <div>Presentation Details Articles
+                            <small>Social Systems Evidence - Main Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
                     <CardHeader>List of pending Articles</CardHeader>
                     <CardBody>
+                        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                            <ModalHeader toggle={this.toggleModal}>Article Assignment Confirmation</ModalHeader>
+                            <ModalBody>
+                                Are you you want to assign this article to yourself? 
+                            </ModalBody>
+                            <ModalFooter>
+                            <Button color="primary" onClick={this.toggleModal}>Yes</Button>{' '}
+                            <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
                         { this.renderArticles() }
                     </CardBody>
                 </Card>
@@ -150,12 +216,12 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue }) {
-    return {
-        errorMessage: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticleErrorMessage,
-        assignedArticles: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticles 
+function mapStateToProps({ ssePendingPresentationDetailsArticleQueue }) {
+    return { 
+        errorMessage: ssePendingPresentationDetailsArticleQueue.ssePendingPresentationDetailsArticleErrorMessage,
+        pendingArticles: ssePendingPresentationDetailsArticleQueue.ssePendingPresentationDetailsArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEAssignedQualityAppraisalsArticleQueue);
+export default connect(mapStateToProps, actions)(SSEPendingPresentationDetailsArticleQueue);
 

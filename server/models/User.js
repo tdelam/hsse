@@ -16,7 +16,9 @@ const userSchema = new Schema({
         required: 'Please at least one role'
     },
     eligibilityFilterArticles: [{ type: Schema.Types.ObjectId, ref: 'HSEArticles' }],
-    qualityAppraisalArticles: [{ type: [Schema.Types.ObjectId], ref: 'HSEArticles' }]
+    qualityAppraisalArticles: [{ type: [Schema.Types.ObjectId], ref: 'HSEArticles' }],
+    linkingStudiesArticles: [{ type: [Schema.Types.ObjectId], ref: 'HSEArticles' }],
+    presentationDetailsArticles: [{ type: [Schema.Types.ObjectId], ref: 'HSEArticles' }]
    
 });
 

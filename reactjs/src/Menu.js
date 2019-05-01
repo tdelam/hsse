@@ -40,7 +40,7 @@ const Menu = [
             },
             {
                 name: 'Presentation Details',
-                path: '/hse/assignedpresentationdetailsqueue',
+                path: '/hse/assignedpresentationdetailsarticlequeue',
                 translate: 'sidebar.nav.element.ASSIGNEDPRESENTATIONDETAILS'
             },
             {
@@ -77,7 +77,7 @@ const Menu = [
             },
             {
                 name: 'Presentation Details',
-                path: '/sse/assignedpresentationdetailsqueue',
+                path: '/sse/assignedpresentationdetailsarticlequeue',
                 translate: 'sidebar.nav.element.PRESENTATIONDETAILS'
             },
             {
@@ -131,7 +131,7 @@ const Menu = [
             },
             {
                 name: 'Presentation Details',
-                path: '/hse/pendingpresentationdetailsqueue',
+                path: '/hse/pendingpresentationdetailsarticlequeue',
                 translate: 'sidebar.nav.element.PENDINGPRESENTATIONDETAILS'
             },
             {

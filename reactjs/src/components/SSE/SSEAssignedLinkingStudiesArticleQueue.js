@@ -119,7 +119,7 @@ class HSEAssignedLinkingStudiesArticleQueue extends Component {
             <ContentWrapper>
                 <div className="content-heading">
                         <div>Linking Studies Articles
-                            <small>Health Systems Evidence - Assigned Queue</small>
+                            <small>Social Systems Evidence - Assigned Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">

@@ -20,6 +20,11 @@ import HSEPendingLinkingStudiesBatchfileQueueReducer from './HSEPendingLinkingSt
 
 import HSEAssignedLinkingStudiesArticleQueueReducer from './HSEAssignedLinkingStudiesArticleReducer';
 
+import HSEPendingPresentationDetailsArticleQueueReducer from './HSEPendingPresentationDetailsArticleQueueReducer';
+import HSEPendingPresentationDetailsBatchfileQueueReducer from './HSEPendingPresentationDetailsBatchfileQueueReducer';
+
+import HSEAssignedPresentationDetailsArticleQueueReducer from './HSEAssignedPresentationDetailsArticleReducer';
+
 import SSEArticleReducer from './SSEArticleReducer';
 import SSEPendingEligibilityFiltersArticleQueueReducer from './SSEPendingEligibilityFiltersArticleQueueReducer';
 import SSEPendingEligibilityFiltersBatchfileQueueReducer from './SSEPendingEligibilityFiltersBatchfileQueueReducer';
@@ -36,6 +41,11 @@ import SSEPendingLinkingStudiesBatchfileQueueReducer from './SSEPendingLinkingSt
 
 import SSEAssignedLinkingStudiesArticleQueueReducer from './SSEAssignedLinkingStudiesArticleReducer';
 
+import SSEPendingPresentationDetailsArticleQueueReducer from './SSEPendingPresentationDetailsArticleQueueReducer';
+import SSEPendingPresentationDetailsBatchfileQueueReducer from './SSEPendingPresentationDetailsBatchfileQueueReducer';
+
+import SSEAssignedPresentationDetailsArticleQueueReducer from './SSEAssignedPresentationDetailsArticleReducer';
+
 
 export default combineReducers({
     hsePendingEligibilityFiltersArticleQueue: HSEPendingEligibilityFiltersArticleQueueReducer,
@@ -46,10 +56,14 @@ export default combineReducers({
     
     hsePendingLinkingStudiesArticleQueue: HSEPendingLinkingStudiesArticleQueueReducer,
     hsePendingLinkingStudiesBatchfileQueue: HSEPendingLinkingStudiesBatchfileQueueReducer,
+
+    hsePendingPresentationDetailsArticleQueue: HSEPendingPresentationDetailsArticleQueueReducer,
+    hsePendingPresentationDetailsBatchfileQueue: HSEPendingPresentationDetailsBatchfileQueueReducer,
     
     hseAssignedEligibilityFiltersArticleQueue: HSEAssignedEligibilityFiltersArticleQueueReducer,
     hseAssignedQualityAppraisalsArticleQueue: HSEAssignedQualityAppraisalsArticleQueueReducer,
     hseAssignedLinkingStudiesArticleQueue: HSEAssignedLinkingStudiesArticleQueueReducer,
+    hseAssignedPresentationDetailsArticleQueue: HSEAssignedPresentationDetailsArticleQueueReducer,
 
     hse: HSEArticleReducer,
 
@@ -67,6 +81,11 @@ export default combineReducers({
     ssePendingLinkingStudiesBatchfileQueue: SSEPendingLinkingStudiesBatchfileQueueReducer,
   
     sseAssignedLinkingStudiesArticleQueue: SSEAssignedLinkingStudiesArticleQueueReducer,
+
+    ssePendingPresentationDetailsArticleQueue: SSEPendingPresentationDetailsArticleQueueReducer,
+    ssePendingPresentationDetailsBatchfileQueue: SSEPendingPresentationDetailsBatchfileQueueReducer,
+  
+    sseAssignedPresentationDetailsArticleQueue: SSEAssignedPresentationDetailsArticleQueueReducer,
 
     sse: SSEArticleReducer,
     form: formReducer,

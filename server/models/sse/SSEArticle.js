@@ -53,7 +53,7 @@ const SSEArticleSchema = new Schema({
     _elibilityFiltersJuniorEmail: { type: String, default: null },
     _elibilityFiltersSeniorEmail: { type: String, default: null },
 
-    // Eligibility and Filter Input
+    /// Eligibility and Filter Input
     _elibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
     _elibilityFiltersJuniorEmail: { type: String, default: null },
 
@@ -74,9 +74,25 @@ const SSEArticleSchema = new Schema({
     qualityAppraisalsJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
     qualityAppraisalsSeniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
 
+    // Linking Studies Input
+    _linkingStudiesJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _linkingStudiesJuniorEmail: { type: String, default: null },
+
+    linkingStudiesJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleLinkingStudies', default: null },
+    
+    // Presentation Details Input
+    _presentationDetailsJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _presentationDetailsJuniorEmail: { type: String, default: null },
+
+    presentationDetailsJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleLinkingStudies', default: null },
+
+
     // Final inputs for articles
     elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
     qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
+    linkingStudiesFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleLinkingStudies', default: null },
+    presentationDetailsFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticlePresentationDetails', default: null },
+    
 
     // Junior and Senior Input Completed
     elibilityFiltersJuniorCompleted: { type: Boolean, default: false },
@@ -84,6 +100,10 @@ const SSEArticleSchema = new Schema({
 
     qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
     qualityAppraisalsSeniorCompleted: { type: Boolean, default: false },
+
+    linkingStudiesJuniorCompleted: { type: Boolean, default: false },
+
+    qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
 
     // Set to true if an article needs to be resolved
     eligibilityFiltersResolve: { type: Boolean, default: false },
@@ -94,6 +114,15 @@ const SSEArticleSchema = new Schema({
 
     // Set to true if Quality Appraisals state is complete
     qualityAppraisalsFullCompletion: { type: Boolean, default: false },
+
+    // Set to true if Linking Studies state is complete
+    linkingStudiesFullCompletion: { type: Boolean, default: false },
+
+    // Set to true if Quality Appraisals state is complete
+    presentationDetailsFullCompletion: { type: Boolean, default: false },
+
+    // Complicated tag
+    complicated: { type: Boolean, default: false },
 
 
 });

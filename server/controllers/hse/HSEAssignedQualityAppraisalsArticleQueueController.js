@@ -5,7 +5,7 @@ const HSEArticleModelClass = mongoose.model('HSEArticles');
 const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {console.log("**********************");
+exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 

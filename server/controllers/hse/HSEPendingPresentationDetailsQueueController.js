@@ -3,25 +3,10 @@ const mongoose = require('mongoose');
 const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-/*
-exports.listArticles = async (req, res) => {
-     HSEArticleModelClass.find()
-        .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
-        .exec(function(err, articles) {
-            if(err) {
-                return res.send(err);
-            } else if(!articles) {
-                return res.status(404).send({
-                    message: 'No article in the Presentation Details Article Pending Queue'
-                });
-            }
-            return res.status(200).send(articles);
-        });
-};
-*/
+
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find()
-       .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
+       .and([ { _presentationDetailsJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -46,11 +31,11 @@ exports.create = (req, res) => {
     
 }
 
-exports.addArticleToJuniorPresenter = async (req, res) => {
+exports.addArticleToJuniorPresentationDetailer = async (req, res) => {
 
     const { articleId } = req.params;
     
-     const user = await Authentication.getUserFromToken(req.headers.authorization);
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
         return res.status(400).send({
@@ -65,29 +50,29 @@ exports.addArticleToJuniorPresenter = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        }
-        /*
-        if(article._elibilityFilterJunior !== null) {
+        } else if(article._presentationDetailsJunior !== undefined){
             return res.status(404).send({
-                message: 'A junior filter has already been added for this article'
+                message: 'Junior presentation detailer has already been added'
             });
-        } */else {
+        } else {
 
-            if(hasRole('juniorpresenter', user) ) {
+            if( hasRole('juniordetailer', user) ) {
 
+                article._presentationDetailsJunior = user._id;
                 article._presentationDetailsJuniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
-                    message: 'Junior Presenter added'
+                    message: 'Junior presentation detailer added'
                 });
             } else {
                 return res.status(400).send({
                     message: 'User does not have persmission'
                 })
             }
-            
+
         }
+
     });
 
 };

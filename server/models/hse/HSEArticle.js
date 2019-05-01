@@ -86,14 +86,22 @@ const HSEArticleSchema = new Schema({
     _linkingStudiesJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
     _linkingStudiesJuniorEmail: { type: String, default: null },
 
-    elibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleLinkingStudies', default: null },
+    linkingStudiesJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleLinkingStudies', default: null },
     
+    // Linking Studies Input
+    _presentationDetailsJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _presentationDetailsJuniorEmail: { type: String, default: null },
+
+    presentationDetailsJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleLinkingStudies', default: null },
 
 
 
     // Final inputs for articles
     elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
     qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
+    linkingStudiesFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleLinkingStudies', default: null },
+    presentationDetailsFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticlePresentationDetails', default: null },
+    
 
     // Junior and Senior Input Completed
     elibilityFiltersJuniorCompleted: { type: Boolean, default: false },
@@ -101,6 +109,10 @@ const HSEArticleSchema = new Schema({
 
     qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
     qualityAppraisalsSeniorCompleted: { type: Boolean, default: false },
+
+    linkingStudiesJuniorCompleted: { type: Boolean, default: false },
+
+    qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
 
     // Set to true if an article needs to be resolved
     eligibilityFiltersResolve: { type: Boolean, default: false },
@@ -112,11 +124,11 @@ const HSEArticleSchema = new Schema({
     // Set to true if Quality Appraisals state is complete
     qualityAppraisalsFullCompletion: { type: Boolean, default: false },
 
-    // Linking Studies Completed
-    linkingStudiesCompleted: { type: Boolean, default: false },
+    // Set to true if Linking Studies state is complete
+    linkingStudiesFullCompletion: { type: Boolean, default: false },
 
-    // Setting Presentation Details Completed
-    presentationDetailsCompleted: { type: Boolean, default: false },
+    // Set to true if Quality Appraisals state is complete
+    presentationDetailsFullCompletion: { type: Boolean, default: false },
 
 
 

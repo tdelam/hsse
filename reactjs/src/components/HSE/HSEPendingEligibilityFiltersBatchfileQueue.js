@@ -73,8 +73,8 @@ class HSEPendingEligibilityFiltersBatchfileQueue extends Component {
                         <td>
                             <a className="mr-1 badge badge-primary" href="">{batchfile[1].articleSource}</a>
                         </td>
-                        <td><a className="mr-1 badge badge-primary" href="">{batchfile[1].fileName}</a></td>
-                        <td>https://s3.amazonaws.com/hsse-staging/{batchfile[1].batchfileUrl}</td>
+                        <td>{batchfile[1].fileName}</td>
+                        <td><a className="mr-1 badge badge-primary" href="https://s3.amazonaws.com/hsse-staging/{batchfile[1].batchfileUrl}">https://s3.amazonaws.com/hsse-staging/{batchfile[1].batchfileUrl}</a></td>
                         <td>{batchfile[1].language}</td>
                         
                     </tr>

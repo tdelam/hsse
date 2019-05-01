@@ -185,8 +185,8 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Junior Filterer</th>
-                                <th>Senior Filterer</th>
+                                <th>Junior Appraiser</th>
+                                <th>Senior Appraiser</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
