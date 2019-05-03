@@ -50,7 +50,7 @@ exports.addArticleToJuniorLinker = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else if(article._linkingStudiesJunior !== undefined) {
+        } else if(article._linkingStudiesJunior !== null) {
             return res.status(404).send({
                 message: 'Junior linker has already been added for this article'
             });

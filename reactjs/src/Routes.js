@@ -109,6 +109,7 @@ import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssigned
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalsArticleQueue from './components/HSE/HSEAssignedQualityAppraisalsArticleQueue';
 import HSEAssignedQualityAppraisalsArticleInput from './components/HSE/HSEAssignedQualityAppraisalsArticleInput';
+import HSEAssignedQualityAppraisalsResolution from './components/HSE/HSEAssignedQualityAppraisalsResolution';
 import HSEAssignedLinkingStudiesArticleInput from './components/HSE/HSEAssignedLinkingStudiesArticleInput';
 import HSEAssignedLinkingStudiesArticleQueue from './components/HSE/HSEAssignedLinkingStudiesArticleQueue';
 import HSEAssignedPresentationDetailsArticleInput from './components/HSE/HSEAssignedPresentationDetailsArticleInput';
@@ -133,12 +134,13 @@ import HSEPendingTranslatingTitlesQueue from './components/HSE/HSEPendingTransla
 import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrackingPrioritizingQueue';
 */
 
-import SSEAssignedEligibilityFilterResolution from './components/SSE/SSEAssignedEligibilityFilterResolution'
+import SSEAssignedEligibilityFilterResolution from './components/SSE/SSEAssignedEligibilityFilterResolution';
 import SSEAssignedEligibilityFilterArticleInput from './components/SSE/SSEAssignedEligibilityFilterArticleInput';
 import SSEAssignedEligibilityFiltersArticleQueue from './components/SSE/SSEAssignedEligibilityFiltersArticleQueue';
 
 import SSEAssignedQualityAppraisalsArticleQueue from './components/SSE/SSEAssignedQualityAppraisalsArticleQueue';
 import SSEAssignedQualityAppraisalsArticleInput from './components/SSE/SSEAssignedQualityAppraisalsArticleInput';
+import SSEAssignedQualityAppraisalsResolution from './components/SSE/SSEAssignedQualityAppraisalsResolution'
 
 import SSEAssignedLinkingStudiesArticleInput from './components/SSE/SSEAssignedLinkingStudiesArticleInput';
 import SSEAssignedLinkingStudiesArticleQueue from './components/SSE/SSEAssignedLinkingStudiesArticleQueue';
@@ -348,6 +350,7 @@ const Routes = ({ location }) => {
 
                             <Route path="/hse/assignedqualityappraisalsarticlequeue" component={HSEAssignedQualityAppraisalsArticleQueue} />
                             <Route path="/hse/assignedqualityappraisalsarticleinput/:articleId" component={HSEAssignedQualityAppraisalsArticleInput} />
+                            <Route path="/hse/assignedqualityappraisalsarticleresolution/:articleId" component={HSEAssignedQualityAppraisalsResolution} />
 
                             <Route path="/hse/assignedlinkingstudiesarticlequeue" component={HSEAssignedLinkingStudiesArticleQueue} />
                             <Route path="/hse/assignedlinkingstudiesarticleinput/:articleId" component={HSEAssignedLinkingStudiesArticleInput} />
@@ -385,6 +388,7 @@ const Routes = ({ location }) => {
                             
                             <Route path="/sse/assignedqualityappraisalsarticlequeue" component={SSEAssignedQualityAppraisalsArticleQueue} />
                             <Route path="/sse/assignedqualityappraisalsarticleinput/:articleId" component={SSEAssignedQualityAppraisalsArticleInput} />
+                            <Route path="/sse/assignedqualityappraisalsarticleresolution/:articleId" component={SSEAssignedQualityAppraisalsResolution} />
                             
                             <Route path="/sse/assignedlinkingstudiesarticleinput/:articleId" component={SSEAssignedLinkingStudiesArticleInput} />
                             <Route path="/sse/assignedlinkingstudiesarticlequeue" component={SSEAssignedLinkingStudiesArticleQueue} />

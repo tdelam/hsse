@@ -50,7 +50,7 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else if(article._qualityAppraisalsJunior !== undefined) {
+        } else if(article._qualityAppraisalsJunior !== null) {
 
         } else {  
             

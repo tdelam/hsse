@@ -5,8 +5,7 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 const SSEArticleQualityAppraisalModelClass = mongoose.model('SSEArticleQualityAppraisals');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {console.log("**********************");
-
+exports.listArticles = async (req, res) => {
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     SSEArticleModelClass.find()

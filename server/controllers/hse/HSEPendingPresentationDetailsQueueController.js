@@ -50,7 +50,7 @@ exports.addArticleToJuniorPresentationDetailer = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else if(article._presentationDetailsJunior !== undefined){
+        } else if(article._presentationDetailsJunior !== null){
             return res.status(404).send({
                 message: 'Junior presentation detailer has already been added'
             });

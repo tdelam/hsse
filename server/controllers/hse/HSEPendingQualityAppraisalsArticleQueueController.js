@@ -50,7 +50,7 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else if(article._qualityAppraisalsJunior !== undefined){
+        } else if(article._qualityAppraisalsJunior !== null){
             return res.status(404).send({
                 message: 'Junior quality appraiser has already been added'
             });
@@ -96,7 +96,7 @@ exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else if(article._qualityAppraisalsSenior !== undefined)  {
+        } else if(article._qualityAppraisalsSenior !== null)  {
             console.log(article._qualityAppraisalsSenior);
             return res.status(404).send({
                 message: 'A senior appraiser has already been added for this article'
