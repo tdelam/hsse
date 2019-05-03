@@ -567,7 +567,7 @@ export const fetchHSEAssignedPresentationDetailsArticle = (articleId, history) =
 };
 
 export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
-
+  
   try {
     const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 
     {

@@ -5,8 +5,8 @@ const Authentication = require('../authentication');
 const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 exports.listArticles = async (req, res) => {
-    SSEArticleModelClass.find()
-       .or([ { _qualityAppraisalsJunior: null }, { _qualityAppraisalsSenior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
+    SSEArticleModelClass.find(/*, { eligibilityFiltersFullCompletion: true }*/)
+       .or([ { _qualityAppraisalsJunior: null }, { _qualityAppraisalsSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -50,8 +50,10 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else {
+        } else if(article._qualityAppraisalsJunior !== null) {
 
+        } else {  
+            
             if(hasRole('juniorappraiser', user) || hasRole('seniorappraiser', user)) {
 
                 article._qualityAppraisalsJunior = user._id;
@@ -91,12 +93,11 @@ exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } /*
-        if(/*article._elibilityFilterSenior !== null) {
+        } else if(article._qualityAppraisalsSenior !== undefined) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
-        } else */{
+        } else {
 
             if(hasRole('seniorappraiser', user)) {
 

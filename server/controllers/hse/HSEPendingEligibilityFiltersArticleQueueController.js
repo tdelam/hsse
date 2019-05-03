@@ -3,25 +3,10 @@ const mongoose = require('mongoose');
 const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-/*
-exports.listArticles = async (req, res) => {
-     HSEArticleModelClass.find()
-        .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
-        .exec(function(err, articles) {
-            if(err) {
-                return res.send(err);
-            } else if(!articles) {
-                return res.status(404).send({
-                    message: 'No article in the Eligibility Filters Article Pending Queue'
-                });
-            }
-            return res.status(200).send(articles);
-        });
-};
-*/
+
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find()
-       .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
+       .or([ { _elibilityFiltersJunior: null }, { _elibilityFiltersSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -50,7 +35,7 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
 
     const { articleId } = req.params;
     
-     const user = await Authentication.getUserFromToken(req.headers.authorization);
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
         return res.status(400).send({

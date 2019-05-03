@@ -86,35 +86,32 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         console.log(`Selected: ${selectedOption.label}`);
     }
 
-    isJuniorFilter() {
+    isJuniorAppraiser() {
         
         if(this.props.currentArticle && this.props.currentUser) {
-            console.log(`inside isJuniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser._id}, _elibilityFilterJunior: ${this.props.currentArticle._elibilityFilterJunior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterJunior;
+            console.log(`currentUser: ${this.props.currentUser._id}, _qualityAppraisalsJunior: ${this.props.currentArticle._qualityAppraisalsJunior}`);
+            return this.props.currentUser === this.props.currentArticle._qualityAppraisalsJunior;
         }
             
     }
 
-    isSeniorFilter() {
+    isSeniorAppraiser() {
         if(this.props.currentArticle && this.props.currentUser) {
-            console.log(`inside isSeniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser}, _elibilityFilterSenior: ${this.props.currentArticle._elibilityFilterSenior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterSenior;
+            console.log(`currentUser: ${this.props.currentUser}, _qualityAppraisalsSenior: ${this.props.currentArticle._qualityAppraisalsSenior}`);
+            return this.props.currentUser === this.props.currentArticle._qualityAppraisalsSenior;
         }
             
     }
 
     getInputValues() {
 
-        if(this.isJuniorFilter()) {
-            console.log(`isJuniorFilter`);
-            this.setState({ qualityAppraisalsModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+        if(this.isJuniorAppraiser()) {
+            this.setState({ qualityAppraisalsModel: this.props.currentArticle.qualityAppraisalsJuniorInput });
 
-        } else if(this.isSeniorFilter()) {
+        } else if(this.isSeniorAppraiser()) {
 
-            console.log(`isSeniorFilter`);
-            this.setState({ qualityAppraisalsModel: this.props.currentArticle.elibilityFilterSeniorInput });
+            console.log(`isSeniorAppraiser`);
+            this.setState({ qualityAppraisalsModel: this.props.currentArticle.qualityAppraisalsSeniorInput });
 
         }
     }
@@ -267,7 +264,7 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
                 {/* START card */}
                 <Card className="card-default">
                     <CardHeader><div  >
-                            <div><h3>Filterer Inputs</h3></div>
+                            <div><h3>Appraiser Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
                             <div>Title: {  } </div>
                         </div>
@@ -511,15 +508,7 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
                         </FormGroup>
                         </form>
                     </fieldset>
-                    <fieldset>
-                        <FormGroup row>
-                            <label className="col-md-2 col-form-label"></label>
-                            <div className="col-md-10">
-                                <p>Testing</p>
-                                { this.renderQuestions() }
-                            </div>
-                        </FormGroup>
-                    </fieldset>
+                    
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex align-items-center">
@@ -551,5 +540,5 @@ function mapStateToProps({ sseAssignedQualityAppraisalsArticleQueue, auth }) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'qualityAppraisalsInput'
+        form: 'sseQualityAppraisalsInput'
     })) (SSEAssignedQualityAppraisalsArticleInput);

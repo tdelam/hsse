@@ -3,22 +3,7 @@ const mongoose = require('mongoose');
 const Authentication = require('../authentication');
 
 const SSEArticleModelClass = mongoose.model('SSEArticles');
-/*
-exports.listArticles = async (req, res) => {
-     SSEArticleModelClass.find()
-        .or([ { elibilityFilterCompletedJunior: false }, { elibilityFilterCompletedSenior: false } ])
-        .exec(function(err, articles) {
-            if(err) {
-                return res.send(err);
-            } else if(!articles) {
-                return res.status(404).send({
-                    message: 'No article in the Eligibility Filters Article Pending Queue'
-                });
-            }
-            return res.status(200).send(articles);
-        });
-};
-*/
+
 exports.listArticles = async (req, res) => {
     SSEArticleModelClass.find()
        .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])

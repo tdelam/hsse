@@ -66,6 +66,25 @@ exports.parseHSEJournalFile = (data) => {
 
 }
 
+exports.parseSSEJournalFile = (data) => {
+
+    const emptyObj = [];
+
+    // Split batchfile into lines (each line contain an article)
+    const articles = data.split('\n');
+
+    // Last Array is always empty (removing here)
+    const trimmedArticles = articles.slice(0, articles.length - 1);
+
+    const finalResult = trimmedArticles.map(line => {
+        fields = line.split('\t');
+        return Object.assign.apply({}, journalFields.map( (v, i) => ( {[v]: fields[i]} ) ) );
+    });
+    
+    return finalResult;
+
+}
+
 parseJournalArray = (articleArray) => {
     
     const fieldsArray = articleArray.split('\t');

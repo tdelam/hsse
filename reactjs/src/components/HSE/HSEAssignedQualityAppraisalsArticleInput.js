@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Tree } from 'antd';
 import {
@@ -47,10 +48,8 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
         selectedOption: '',
 
-        eligibilityFilterModel: {},
-
         
-
+        qualityAppraisalsModel: null,
 
         relevanceValue: ''
     };
@@ -61,7 +60,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
-        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+        this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history);
 
     }
 
@@ -87,35 +86,35 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         console.log(`Selected: ${selectedOption.label}`);
     }
 
-    isJuniorFilter() {
+    isJuniorAppraiser() {
         
         if(this.props.currentArticle && this.props.currentUser) {
             console.log(`inside isJuniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser._id}, _elibilityFilterJunior: ${this.props.currentArticle._elibilityFilterJunior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterJunior;
+            console.log(`currentUser: ${this.props.currentUser._id}, _qualityAppraisalsJunior: ${this.props.currentArticle._qualityAppraisalsJunior}`);
+            return this.props.currentUser === this.props.currentArticle._qualityAppraisalsJunior;
         }
             
     }
 
-    isSeniorFilter() {
+    isSeniorAppraiser() {
         if(this.props.currentArticle && this.props.currentUser) {
-            console.log(`inside isSeniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser}, _elibilityFilterSenior: ${this.props.currentArticle._elibilityFilterSenior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterSenior;
+            console.log(`inside isSeniorAppraiser`);
+            console.log(`currentUser: ${this.props.currentUser}, _qualityAppraisalsSenior: ${this.props.currentArticle._qualityAppraisalsSenior}`);
+            return this.props.currentUser === this.props.currentArticle._qualityAppraisalsSenior;
         }
             
     }
 
     getInputValues() {
 
-        if(this.isJuniorFilter()) {
-            console.log(`isJuniorFilter`);
-            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+        if(this.isJuniorAppraiser()) {
+            console.log(`isJuniorAppraiser`);
+            this.setState({ qualityAppraisalsModel: this.props.currentArticle.qualityAppraisalsJuniorInput });
 
-        } else if(this.isSeniorFilter()) {
+        } else if(this.isSeniorAppraiser()) {
 
-            console.log(`isSeniorFilter`);
-            this.setState({ eligibilityFilterModel: this.props.currentArticle.elibilityFilterSeniorInput });
+            console.log(`isSeniorAppraiser`);
+            this.setState({ qualityAppraisalsModel: this.props.currentArticle.qualityAppraisalsSeniorInput });
 
         }
     }
@@ -231,9 +230,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
 
-        // this.setState({ eligibilityFilterModel: this.getInputValues() });
+        // this.setState({ qualityAppraisalModel: this.getInputValues() });
 
-        console.log(this.state.eligibilityFilterModel);
+        console.log(this.state.qualityAppraisalsModel);
 
         return (
             <ContentWrapper>
@@ -252,39 +251,243 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                     </CardHeader>
                     <hr className="my-4"/>
                     <CardBody>
-                        <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
-                        <fieldset>
-                                <FormGroup row>
-                                    <label className="col-md-2 col-form-label">Inline checkboxes and Radios</label>
-                                    <div className="col-md-10">
-                                        <FormGroup check inline>
-                                          <Label check>
-                                            <Input type="checkbox" /> Some input
-                                          </Label>
-                                        </FormGroup>
-                                        <FormGroup check inline>
-                                          <Label check>
-                                             <Input type="checkbox" /> Some other input
-                                          </Label>
-                                        </FormGroup>
-                                        <FormGroup check inline>
-                                          <Label check>
-                                            <Input type="radio" name="inlineradio" /> Some input
-                                          </Label>
-                                        </FormGroup>
-                                        <FormGroup check inline>
-                                          <Label check>
-                                             <Input type="radio" name="inlineradio" /> Some other input
-                                          </Label>
-                                        </FormGroup>
-                                    </div>
+                    <fieldset>
+                        <form onSubmit={this.onSubmit}>
+                        <FormGroup row>
+                            <label className="col-md-2 col-form-label"><h4>Complicated Reviews</h4></label>
+                            <div className="col-md-10">
+                                <FormGroup check inline>
+                                    <Label check>
+                                    <Input type="checkbox" /> Not in English
+                                    </Label>
                                 </FormGroup>
-                            </fieldset>
-                            
-
-
-                            
+                                <br />
+                                <FormGroup check inline>
+                                    <Label check>
+                                        <Input type="checkbox" /> No free full-text
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <br />
+                                <Link to="">Save as Complicated review</Link>
+                            </div>
+                        </FormGroup>
                         </form>
+                    </fieldset>
+                    <fieldset>
+                        <form onSubmit={this.onSubmit}>
+                        <FormGroup row>
+                            <label className="col-md-2 col-form-label"><h4>Questions</h4></label>
+                            <div className="col-md-10">
+                                <h4>1. Was an 'a priori' design provided? The research question and inclusion criteria should be established before the conduct of the review.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>2. Was there duplicate study selection and data extraction? There should be at least two independent data extractors and a consensus procedure for disagreements should be in place.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>3. Was a comprehensive literature search performed? At least two electronic sources should be searched. The report must include years and databases used (e.g., Central, EMBASE, and MEDLINE). Key words and/or MESH terms must be stated and where feasible the search strategy should be provided. All searches should be supplemented by consulting current contents, reviews, textbooks, specialized registers, or experts in the particular field of study, and by reviewing the references in the studies found.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>4. Was the status of publication (i.e. grey literature) not used as an inclusion criterion? The authors should state that they searched for reports regardless of their publication type. The authors should state whether or not they excluded any reports (from the systematic review), based on their publication status, language etc.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>5. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>6. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>7.Was the scientific quality of the included studies assessed and documented? 'A priori' methods of assessment should be provided (e.g., for effectiveness studies if the author(s) chose to include only randomized, double-blind, placebo controlled studies, or allocation concealment as inclusion criteria); for other types of studies alternative items will be relevant.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>8. Was the scientific quality of the included studies used appropriately in formulating conclusions? The results of the methodological rigor and scientific quality should be considered in the analysis and the conclusions of the review, and explicitly stated in formulating recommendations.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>9. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <h4>10. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</h4>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" /> Not applicable
+                                    </Label>
+                                </FormGroup>
+
+                                <br />
+                                <br />
+                                <br />
+                                <Link to="">Save as Complicated review</Link>
+
+                            </div>
+                        </FormGroup>
+                        </form>
+                    </fieldset>
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex align-items-center">
@@ -318,5 +521,5 @@ function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'qualityAppraisalsInput'
+        form: 'hseQualityAppraisalsInput'
     })) (HSEAssignedQualityAppraisalsArticleInput);

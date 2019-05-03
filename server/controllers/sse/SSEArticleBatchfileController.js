@@ -49,7 +49,7 @@ exports.create = async (req, res) => {
 
     const data1 = await axios.get(`https://s3.amazonaws.com/hsse-staging/sse/${url}`);
     
-    articlesArray = parseBatchfile.parseHSEJournalFile(data1.data);
+    articlesArray = parseBatchfile.parseSSEJournalFile(data1.data);
 
     articlesArray.map( async (article) => {
 
@@ -90,13 +90,11 @@ exports.create = async (req, res) => {
                 console.log(err);
             } else {
                 articleIdArray = [...articleIdArray, savedArticle._id];
-                //console.log(`Successfully save article: [${article["title"]}]`);
+                
                 console.log(savedArticle.elibilityFilterJuniorInput);
             }
     
         });
-
-        // return res.status(200).send(newHSEArticleBatchfile);
 
     });
 

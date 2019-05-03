@@ -53,7 +53,7 @@ exports.create = async (req, res) => {
 
     articlesArray.map( async (article) => {
 
-        await HSEArticleBatchfileModelClass.find({ batchfileUrl: url }, (err, batchfile) => {
+        await HSEArticleBatchfileModelClass.find({ batchfileUrl: url }, (err, batchfile) => {console.log(batchfile);
             article._batchFile = batchfile[0]._id;
             article.language = batchfile[0].language;
             article.articleSource = batchfile[0].articleSource;

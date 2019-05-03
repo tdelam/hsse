@@ -29,11 +29,10 @@ const dtOptions = {
     }
 }
 
-class HSEAssignedQualityAppraisalsArticleQueue extends Component {
+class HSEAssignedPresentationDetailsArticleQueue extends Component {
 
     componentDidMount() {
-        this.props.getCurrentUser();
-        this.props.listHSEAssignedQualityAppraisalsArticlesQueue();
+        this.props.listHSEAssignedPresentationDetailsArticlesQueue();
     }
 
     renderPriority(priority) {
@@ -52,7 +51,7 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
     }
 
     renderArticles() {
-        console.log(this.props);
+        
         if(this.props.assignedArticles != null ) {
             const rows = Object.entries(this.props.assignedArticles).map(article => {
                 return (
@@ -69,36 +68,21 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                         <td>
                             { article[1].harvestDate }
                         </td>
-                        <td>
-                            {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._qualityAppraisalsJuniorEmail+ ", " + article[1]._qualityAppraisalsSeniorEmail }</Link>
-                        </td>
+                        
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
                         
-                        <td>{ article[1].qualityAppraisalsResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedqualityappraisalsarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
+                        <td>{ article[1].linkingStudiesResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedlinkingstudiesarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
                         <td className="text-right">
                             
-                            <Link to={{ pathname: "/hse/assignedqualityappraisalsarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>
+                            <Link to={{ pathname: "/hse/assignedlinkingstudiesarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>
                             {/*<button type="button" className="btn btn-sm btn-secondary">
                                 <em className="fas fa-pencil-alt"></em>
                             </button>*/}
                         </td>
-                    {/*         
-                        <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-danger">
-                                <em className="fas fa-trash-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
-                        </td>
-                    */}    
+                      
                     </tr>
                 )
             });
@@ -111,7 +95,6 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Other Filterer</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
@@ -135,8 +118,8 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Appraisaing Quality Articles
-                            <small>Health Systems Evidence - Assigned Queue</small>
+                        <div>Presentation Details Articles
+                            <small>Social Systems Evidence - Assigned Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -150,12 +133,12 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue }) {
+function mapStateToProps({ hseAssignedPresentationDetailsArticleQueue }) {
     return {
-        errorMessage: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticleErrorMessage,
-        assignedArticles: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticles 
+        errorMessage: hseAssignedPresentationDetailsArticleQueue.hseAssignedPresentationDetailsArticleErrorMessage,
+        assignedArticles: hseAssignedPresentationDetailsArticleQueue.hseAssignedPresentationDetailsArticles 
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEAssignedQualityAppraisalsArticleQueue);
+export default connect(mapStateToProps, actions)(HSEAssignedPresentationDetailsArticleQueue);
 
