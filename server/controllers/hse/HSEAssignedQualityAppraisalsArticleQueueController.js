@@ -50,7 +50,7 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
-exports.setQualityAppraisalValues = async (req, res) => {
+exports.setQualityAppraisalsValues = async (req, res) => {
 
     const { articleId } = req.params;
 
@@ -144,7 +144,7 @@ exports.setQualityAppraisalValues = async (req, res) => {
 
 };
 
-exports.setQualityAppraisalComplete = async (req, res) => {
+exports.setQualityAppraisalsComplete = async (req, res) => {
 
     const { articleId } = req.params;
 
