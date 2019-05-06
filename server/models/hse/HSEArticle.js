@@ -62,14 +62,14 @@ const HSEArticleSchema = new Schema({
     // Stage completions
 
     // Eligibility and Filter Input
-    _elibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFiltersJuniorEmail: { type: String, default: null },
+    _eligibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _eligibilityFiltersJuniorEmail: { type: String, default: null },
 
-    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFiltersSeniorEmail: { type: String, default: null },
+    _eligibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
-    elibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
-    elibilityFiltersSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    eligibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    eligibilityFiltersSeniorInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
 
 
     // Quality Appraisals Input
@@ -97,15 +97,15 @@ const HSEArticleSchema = new Schema({
 
 
     // Final inputs for articles
-    elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
+    eligibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleEligibilityFilters', default: null },
     qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleQualityAppraisals', default: null },
     linkingStudiesFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticleLinkingStudies', default: null },
     presentationDetailsFinalInput: { type: Schema.Types.ObjectId, ref: 'HSEArticlePresentationDetails', default: null },
     
 
     // Junior and Senior Input Completed
-    elibilityFiltersJuniorCompleted: { type: Boolean, default: false },
-    elibilityFiltersSeniorCompleted: { type: Boolean, default: false },
+    eligibilityFiltersJuniorCompleted: { type: Boolean, default: false },
+    eligibilityFiltersSeniorCompleted: { type: Boolean, default: false },
 
     qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
     qualityAppraisalsSeniorCompleted: { type: Boolean, default: false },
@@ -137,7 +137,7 @@ const HSEArticleSchema = new Schema({
 
     // Users for different stages
     _uploadHarvestsUser: { type: Schema.Types.ObjectId, ref: 'User' },
-    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'User' },
+    _eligibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'User' },
     _qualityAppraisalsJunior: { type: Schema.Types.ObjectId, ref: 'User' },
     _qualityAppraisalsSenior: { type: Schema.Types.ObjectId, ref: 'User' },
     _linkingStudiesUser: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -280,7 +280,7 @@ const HSEArticleSchema = new Schema({
     // Steps for Eligibility Filter Stage
     showGeneralArticleInformation: { type: Boolean, default: false },
     stepRelevance: { type: Boolean, default: true },
-    stepElibiligy: { type: Boolean, default: false },
+    stepEligibility: { type: Boolean, default: false },
     stepDocumentType: { type: Boolean, default: false },
     stepIntergovermentalDocument: { type: Boolean, default: false },
     stepOntarioDocument: { type: Boolean, default: false },

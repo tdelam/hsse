@@ -70,7 +70,7 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
                         </td>
                         <td>
                             {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._elibilityFilterJuniorEmail + ", " + article[1]._elibilityFilterSeniorEmail }</Link>
+                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._eligibilityFilterJuniorEmail + ", " + article[1]._eligibilityFilterSeniorEmail }</Link>
                         </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>

@@ -24,7 +24,7 @@ const Menu = [
         translate: 'sidebar.nav.element.AssignedHealth',
         submenu: [
             {
-                name: ' Elibigility & Filters',
+                name: ' Eligibility & Filters',
                 path: '/hse/assignedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.ASSIGNEDELIGIBILITYFILTERS'
             },
@@ -61,7 +61,7 @@ const Menu = [
         translate: 'sidebar.nav.element.Health',
         submenu: [
             {
-                name: 'Elibigility & Filters',
+                name: 'Eligibility & Filters',
                 path: '/sse/assignedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.ELIGIBILITYFILTERS'
             },
@@ -110,12 +110,12 @@ const Menu = [
                 translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
             },
             {
-                name: 'Elibigility & Filters Article',
+                name: 'Eligibility & Filters Article',
                 path: '/hse/pendingeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
             },
             {
-                name: 'Elibigility & Filters Batch',
+                name: 'Eligibility & Filters Batch',
                 path: '/hse/pendingeligibilityfiltersbatchfilequeue',
                 translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
             },
@@ -160,12 +160,12 @@ const Menu = [
             translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
         },
         {
-            name: 'Elibigility & Filters Article',
+            name: 'Eligibility & Filters Article',
             path: '/sse/pendingeligibilityfiltersarticlequeue',
             translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
         },
         {
-            name: 'Elibigility & Filters Batch',
+            name: 'Eligibility & Filters Batch',
             path: '/sse/pendingeligibilityfiltersbatchfilequeue',
             translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
         },
@@ -206,7 +206,7 @@ const Menu = [
         translate: 'sidebar.nav.element.QueuedHealth',
         submenu: [
             {
-                name: 'Elibigility & Filters Article',
+                name: 'Eligibility & Filters Article',
                 path: '/hse/complicatedeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.COMPLICATEDELIGIBILITYFILTERARTICLES'
             },
@@ -243,7 +243,7 @@ const Menu = [
         translate: 'sidebar.nav.element.Social',
         submenu: [
         {
-            name: 'Elibigility & Filters Article',
+            name: 'Eligibility & Filters Article',
             path: '/sse/complicatedeligibilityfiltersarticlequeue',
             translate: 'sidebar.nav.element.COMPLICATEDELIGIBILITYFILTERARTICLES'
         },

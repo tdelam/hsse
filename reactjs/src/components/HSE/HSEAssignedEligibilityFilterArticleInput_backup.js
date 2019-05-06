@@ -25,7 +25,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         email: '',
         address: '',
         terms: false,
-        elibigilityFilter: null,
+        eligibilityFilter: null,
         articleTitle: ''
     }
 
@@ -82,14 +82,14 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             stepsOrientation: 'vertical',
 
             onStepChanging: (event, currentIndex, newIndex) => {
-                this.saveValues(articleId, this.state.elibigilityFilter, history);
+                this.saveValues(articleId, this.state.eligibilityFilter, history);
                 //verticalForm.validate().settings.ignore = ':disabled,:hidden';
                 return true;
 
             },
             onFinished: (event, currentIndex) => {
                 // Submit form
-                this.saveAndFinish(articleId, this.state.elibigilityFilter, history);
+                this.saveAndFinish(articleId, this.state.eligibilityFilter, history);
                 //console.log(JSON.stringify(this.state));
                 // form.submit();
             }
@@ -655,5 +655,5 @@ function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'elibigibilityFilterInput'
+        form: 'eligibilityFilterInput'
     })) (HSEAssignedEligibilityFilterArticleInput);

@@ -112,8 +112,8 @@ class SSEAssignedLinkingStudiesArticleInput extends Component {
         
         if(this.props.currentArticle && this.props.currentUser) {
             console.log(`inside isJuniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser._id}, _elibilityFilterJunior: ${this.props.currentArticle._elibilityFilterJunior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterJunior;
+            console.log(`currentUser: ${this.props.currentUser._id}, _eligibilityFilterJunior: ${this.props.currentArticle._eligibilityFilterJunior}`);
+            return this.props.currentUser === this.props.currentArticle._eligibilityFilterJunior;
         }
             
     }
@@ -121,8 +121,8 @@ class SSEAssignedLinkingStudiesArticleInput extends Component {
     isSeniorFilter() {
         if(this.props.currentArticle && this.props.currentUser) {
             console.log(`inside isSeniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser}, _elibilityFilterSenior: ${this.props.currentArticle._elibilityFilterSenior}`);
-            return this.props.currentUser === this.props.currentArticle._elibilityFilterSenior;
+            console.log(`currentUser: ${this.props.currentUser}, _eligibilityFilterSenior: ${this.props.currentArticle._eligibilityFilterSenior}`);
+            return this.props.currentUser === this.props.currentArticle._eligibilityFilterSenior;
         }
             
     }
@@ -131,12 +131,12 @@ class SSEAssignedLinkingStudiesArticleInput extends Component {
 
         if(this.isJuniorFilter()) {
             console.log(`isJuniorFilter`);
-            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.eligibilityFilterJuniorInput*/ });
 
         } else if(this.isSeniorFilter()) {
 
             console.log(`isSeniorFilter`);
-            this.setState({ eligibilityFilterModel: this.props.currentArticle.elibilityFilterSeniorInput });
+            this.setState({ eligibilityFilterModel: this.props.currentArticle.eligibilityFilterSeniorInput });
 
         }
     }
@@ -399,5 +399,5 @@ function mapStateToProps({ sseAssignedEligibilityFiltersArticleQueue, auth }) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'elibigibilityFilterInput'
+        form: 'eligibilityFilterInput'
     })) (SSEAssignedLinkingStudiesArticleInput);

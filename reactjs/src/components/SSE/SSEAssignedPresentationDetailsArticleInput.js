@@ -100,7 +100,7 @@ class SSEAssignedPresentationDetailsArticleInput extends Component {
 
         if(this.isJuniorDetailer()) {
             console.log(`isJuniorDetailer`);
-            this.setState({ presentationDetailsModel: { test: '' }/*this.props.currentArticle.elibilityFilterJuniorInput*/ });
+            this.setState({ presentationDetailsModel: { test: '' }/*this.props.currentArticle.eligibilityFilterJuniorInput*/ });
 
         }
     }

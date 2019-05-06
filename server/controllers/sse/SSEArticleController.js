@@ -8,8 +8,8 @@ exports.create = (req, res) => {
     const newSSEArticle = new SSEArticleModelClass(req.body);
     const newEligibilityFilter = new SSEArticleEligibilityFilterModelClass();
     
-    newSSEArticle.elibilityFilterJuniorInput = newEligibilityFilter;
-    newSSEArticle.elibilityFilterSeniorInput = newEligibilityFilter;
+    newSSEArticle.eligibilityFilterJuniorInput = newEligibilityFilter;
+    newSSEArticle.eligibilityFilterSeniorInput = newEligibilityFilter;
 
     newSSEArticle.save( (err) => {
         if(err) {
