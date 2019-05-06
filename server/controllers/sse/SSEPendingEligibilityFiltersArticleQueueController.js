@@ -6,7 +6,7 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 exports.listArticles = async (req, res) => {
     SSEArticleModelClass.find()
-       .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
+       .or([ { _eligibilityFilterJunior: null }, { _eligibilityFilterSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -52,7 +52,7 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
             });
         }
         /*
-        if(article._elibilityFilterJunior !== null) {
+        if(article._eligibilityFilterJunior !== null) {
             return res.status(404).send({
                 message: 'A junior filter has already been added for this article'
             });
@@ -60,8 +60,8 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
 
             if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
 
-                article._elibilityFilterJunior = user._id;
-                article._elibilityFilterJuniorEmail = user.email;
+                article._eligibilityFilterJunior = user._id;
+                article._eligibilityFilterJuniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
@@ -98,7 +98,7 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         } /*
-        if(/*article._elibilityFilterSenior !== null) {
+        if(/*article._eligibilityFilterSenior !== null) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
@@ -106,8 +106,8 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
 
             if(hasRole('seniorfilter', user)) {
 
-                article._elibilityFilterSenior = user._id;
-                article._elibilityFilterSeniorEmail = user.email;
+                article._eligibilityFilterSenior = user._id;
+                article._eligibilityFilterSeniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({

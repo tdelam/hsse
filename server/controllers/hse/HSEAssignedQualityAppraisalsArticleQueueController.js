@@ -119,7 +119,7 @@ exports.setQualityAppraisalsValues = async (req, res) => {
                 message: 'Inputs for Junior appraiser added for article'
             });
             
-        } else if( article._elibilityFilterSenior.equals(user._id) ) {
+        } else if( article._eligibilityFilterSenior.equals(user._id) ) {
 
             const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
             newQualityAppraisal.save( (err) => {
@@ -171,7 +171,7 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
                 message: 'Not authorized to add inputs for eligibility and filter for article'
             });
 
-        } else if ( article._elibilityFilterJunior.equals(user._id) && article._elibilityFilterSenior.equals(user._id) ) {
+        } else if ( article._eligibilityFilterJunior.equals(user._id) && article._eligibilityFilterSenior.equals(user._id) ) {
 
             const newQualityAppraisals = new HSEArticleEligibilityFilterModelClass(inputValues);
             newQualityAppraisals._article = articleId;
@@ -199,7 +199,7 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
                 message: 'Inputs for Junior and Senior filter added for article'
             });
 
-        } else if( article._elibilityFilterJunior.equals(user._id) ) {
+        } else if( article._eligibilityFilterJunior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
@@ -211,8 +211,8 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
         
             });
             
-            article.elibilityFilterJuniorInput = newEligibilityFilter;
-            article.elibilityFilterJuniorCompleted = true;
+            article.eligibilityFilterJuniorInput = newEligibilityFilter;
+            article.eligibilityFilterJuniorCompleted = true;
             await article.save();
 
             setFullEligibilityFilterCompleteOrResolve(articleId);
@@ -221,7 +221,7 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
                 message: 'Inputs for Junior appraisal added for article'
             });
             
-        } else if( article._elibilityFilterSenior.equals(user._id) ) {
+        } else if( article._eligibilityFilterSenior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilter.save( (err) => {
@@ -233,8 +233,8 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
         
             });
 
-            article.elibilityFilterSeniorInput = inputValues;
-            article.elibilityFilterSeniorCompleted = true;
+            article.eligibilityFilterSeniorInput = inputValues;
+            article.eligibilityFilterSeniorCompleted = true;
             await article.save();
 
             setFullEligibilityFilterCompleteOrResolve(articleId);
@@ -271,10 +271,10 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         }
 
-        if(article._elibilityFilterJunior === user._id) {
+        if(article._eligibilityFilterJunior === user._id) {
 
-            article.elibilityFilterJuniorInput = inputValues;
-            article.elibilityFilterJuniorCompleted = true;
+            article.eligibilityFilterJuniorInput = inputValues;
+            article.eligibilityFilterJuniorCompleted = true;
 
             await article.save();
             return res.status(200).send({
@@ -283,10 +283,10 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         }
 
-        if(article._elibilityFilterSenior === user._id) {
+        if(article._eligibilityFilterSenior === user._id) {
 
-            article.elibilityFilterSeniorInput = inputValues;
-            article.elibilityFilterSeniorCompleted = true;
+            article.eligibilityFilterSeniorInput = inputValues;
+            article.eligibilityFilterSeniorCompleted = true;
             await article.save();
             return res.status(200).send({
                 message: 'Senior eligibility and filter completed for article'
@@ -294,7 +294,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         }
         
-        if( (article._elibilityFilterJunior !== user._id) && (article._elibilityFilterSenior !== user._id) ) {
+        if( (article._eligibilityFilterJunior !== user._id) && (article._eligibilityFilterSenior !== user._id) ) {
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
@@ -324,13 +324,13 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterJunior !== user._id) {
+        if(article._eligibilityFilterJunior !== user._id) {
             return res.status(404).send({
                 message: 'You are not the junior appraisal for this article'
             });
         } else {
 
-            article.elibilityFilterJuniorCompleted = true;
+            article.eligibilityFilterJuniorCompleted = true;
             await article.save();
             return res.status(200).send({
                 message: 'Junior quality appraisal completed for article'
@@ -363,13 +363,13 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterSenior !== user._id) {
+        if(article._eligibilityFilterSenior !== user._id) {
             return res.status(404).send({
                 message: 'You are not the senior appraisal for this article'
             });
         } else {
 
-            article.elibilityFilterSeniorCompleted = true;
+            article.eligibilityFilterSeniorCompleted = true;
             await article.save();
             return res.status(200).send({
                 message: 'Senior quality appraisal completed for article'
@@ -401,7 +401,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
         let newEligibilityFilterJuniorInput = null;
         let newEligibilityFilterSeniorInput = null;
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
+        await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
             
             if(err) {
                 //console.log(err);
@@ -414,7 +414,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
         });
 
-        await HSEArticleEligibilityFilterModelClass.findById(article.elibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
+        await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
 
             if(err) {
                 //console.log(err);
@@ -443,7 +443,7 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
             } else {
 
                 article.eligibilityFilterResolve = true;
-                article.elibilityFilterFinalInput = newEligibilityFilterSeniorInput;
+                article.eligibilityFilterFinalInput = newEligibilityFilterSeniorInput;
                 await article.save();
                 console.log(`resolve completion set`);
                 /*
@@ -472,7 +472,7 @@ exports.setFullCompletion = async (req, res) => {
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     HSEArticleModelClass.findById(articleId)
-       .and([ { elibilityFilterJuniorCompleted: true }, { elibilityFilterSeniorCompleted: true } ])
+       .and([ { eligibilityFilterJuniorCompleted: true }, { eligibilityFilterSeniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {
                return res.send(err);
@@ -483,14 +483,14 @@ exports.setFullCompletion = async (req, res) => {
            }
 
            // Check to make sure all fields are the same
-           if(isElibigilityFilterJuniorSeniorInputEqual(articleId)) {
+           if(isEligibilityFilterJuniorSeniorInputEqual(articleId)) {
                article.eligibilityFilterFullCompletion = true;
            } 
            
        });
 };
 
-const isElibigilityFilterJuniorSeniorInputEqual = (articleId) => {
+const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
 
     const isEqual = false;
 

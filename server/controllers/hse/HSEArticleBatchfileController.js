@@ -82,8 +82,8 @@ exports.create = async (req, res) => {
             }
         });
     
-        newHSEArticle.elibilityFilterJuniorInput = newEligibilityFilterJunior;
-        newHSEArticle.elibilityFilterSeniorInput = newEligibilityFilterSenior;
+        newHSEArticle.eligibilityFilterJuniorInput = newEligibilityFilterJunior;
+        newHSEArticle.eligibilityFilterSeniorInput = newEligibilityFilterSenior;
 
         await newHSEArticle.save( (err, savedArticle) => {
             if(err) {
@@ -91,7 +91,7 @@ exports.create = async (req, res) => {
             } else {
                 articleIdArray = [...articleIdArray, savedArticle._id];
                 //console.log(`Successfully save article: [${article["title"]}]`);
-                console.log(savedArticle.elibilityFilterJuniorInput);
+                console.log(savedArticle.eligibilityFilterJuniorInput);
             }
     
         });

@@ -50,18 +50,18 @@ const SSEArticleSchema = new Schema({
     priority: { type: String },
     articleSource: { type: String },
     language: { type: String },
-    _elibilityFiltersJuniorEmail: { type: String, default: null },
-    _elibilityFiltersSeniorEmail: { type: String, default: null },
+    _eligibilityFiltersJuniorEmail: { type: String, default: null },
+    _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
     /// Eligibility and Filter Input
-    _elibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFiltersJuniorEmail: { type: String, default: null },
+    _eligibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _eligibilityFiltersJuniorEmail: { type: String, default: null },
 
-    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFiltersSeniorEmail: { type: String, default: null },
+    _eligibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
-    elibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
-    elibilityFiltersSeniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
+    eligibilityFiltersJuniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
+    eligibilityFiltersSeniorInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
 
 
     // Quality Appraisals Input
@@ -88,15 +88,15 @@ const SSEArticleSchema = new Schema({
 
 
     // Final inputs for articles
-    elibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
+    eligibilityFiltersFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleEligibilityFilters', default: null },
     qualityAppraisalsFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleQualityAppraisals', default: null },
     linkingStudiesFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticleLinkingStudies', default: null },
     presentationDetailsFinalInput: { type: Schema.Types.ObjectId, ref: 'SSEArticlePresentationDetails', default: null },
     
 
     // Junior and Senior Input Completed
-    elibilityFiltersJuniorCompleted: { type: Boolean, default: false },
-    elibilityFiltersSeniorCompleted: { type: Boolean, default: false },
+    eligibilityFiltersJuniorCompleted: { type: Boolean, default: false },
+    eligibilityFiltersSeniorCompleted: { type: Boolean, default: false },
 
     qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
     qualityAppraisalsSeniorCompleted: { type: Boolean, default: false },

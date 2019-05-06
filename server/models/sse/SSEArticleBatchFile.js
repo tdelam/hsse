@@ -16,11 +16,11 @@ const SSEArticleBatchFileSchema = new Schema({
     // _articles: [{ type: Schema.Types.ObjectId], ref: 'HSEArticles'}]
     // test
 
-    _elibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFiltersJuniorEmail: { type: String, default: null },
+    _eligibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _eligibilityFiltersJuniorEmail: { type: String, default: null },
 
-    _elibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _elibilityFiltersSeniorEmail: { type: String, default: null },
+    _eligibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
+    _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
 
 })

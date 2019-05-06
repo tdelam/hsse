@@ -4,7 +4,7 @@ const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 
 exports.listBatchfiles = async (req, res) => {
     HSEArticleBatchfileModelClass.find()
-        .or([ { _elibilityFilterJunior: null }, { _elibilityFilterSenior: null } ])
+        .or([ { _eligibilityFilterJunior: null }, { _eligibilityFilterSenior: null } ])
         .exec(function(err, batchfiles) {
             if(err) {
                 return res.send(err);

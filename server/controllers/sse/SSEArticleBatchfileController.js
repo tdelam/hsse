@@ -82,8 +82,8 @@ exports.create = async (req, res) => {
             }
         });
     
-        newSSEArticle.elibilityFilterJuniorInput = newEligibilityFilterJunior;
-        newSSEArticle.elibilityFilterSeniorInput = newEligibilityFilterSenior;
+        newSSEArticle.eligibilityFilterJuniorInput = newEligibilityFilterJunior;
+        newSSEArticle.eligibilityFilterSeniorInput = newEligibilityFilterSenior;
 
         await newSSEArticle.save( (err, savedArticle) => {
             if(err) {
@@ -91,7 +91,7 @@ exports.create = async (req, res) => {
             } else {
                 articleIdArray = [...articleIdArray, savedArticle._id];
                 
-                console.log(savedArticle.elibilityFilterJuniorInput);
+                console.log(savedArticle.eligibilityFilterJuniorInput);
             }
     
         });

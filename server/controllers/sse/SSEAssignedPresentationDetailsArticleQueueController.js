@@ -197,10 +197,10 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         }
 
-        if(article._elibilityFilterJunior === user._id) {
+        if(article._eligibilityFilterJunior === user._id) {
 
-            article.elibilityFilterJuniorInput = inputValues;
-            article.elibilityFilterJuniorCompleted = true;
+            article.eligibilityFilterJuniorInput = inputValues;
+            article.eligibilityFilterJuniorCompleted = true;
 
             await article.save();
             return res.status(200).send({
@@ -209,7 +209,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
         }
         
-        if( (article._elibilityFilterJunior !== user._id) && (article._elibilityFilterSenior !== user._id) ) {
+        if( (article._eligibilityFilterJunior !== user._id) && (article._eligibilityFilterSenior !== user._id) ) {
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
@@ -239,13 +239,13 @@ exports.setJuniorPresentationDetailsComplete = async (req, res) => {
                 message: 'No article with that identifier has been found'
             });
         }
-        if(article._elibilityFilterJunior !== user._id) {
+        if(article._eligibilityFilterJunior !== user._id) {
             return res.status(404).send({
                 message: 'You are not the junior presenter for this article'
             });
         } else {
 
-            article.elibilityFilterJuniorCompleted = true;
+            article.eligibilityFilterJuniorCompleted = true;
             await article.save();
             return res.status(200).send({
                 message: 'Junior newPresentation Details completed for article'
@@ -334,7 +334,7 @@ exports.setFullCompletion = async (req, res) => {
     //const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     SSEArticleModelClass.findById(articleId)
-       .and([ { elibilityFilterJuniorCompleted: true } ])
+       .and([ { eligibilityFilterJuniorCompleted: true } ])
        .exec(function(err, article) {
            if(err) {
                return res.send(err);
