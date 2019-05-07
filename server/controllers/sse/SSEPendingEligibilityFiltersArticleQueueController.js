@@ -31,7 +31,7 @@ exports.create = (req, res) => {
     
 }
 
-exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
+exports.addArticleToJuniorEligibilityFilter = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -50,18 +50,16 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        }
-        /*
-        if(article._eligibilityFilterJunior !== null) {
+        } else if(article._eligibilityFiltersJunior !== null) {
             return res.status(404).send({
                 message: 'A junior filter has already been added for this article'
             });
-        } */else {
+        } else {
 
             if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
 
-                article._eligibilityFilterJunior = user._id;
-                article._eligibilityFilterJuniorEmail = user.email;
+                article._eligibilityFiltersJunior = user._id;
+                article._eligibilityFiltersJuniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
@@ -78,7 +76,7 @@ exports.addArticleToJuniorEligibilityFilterUser = async (req, res) => {
 
 };
 
-exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
+exports.addArticleToSeniorEligibilityFilter = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -97,17 +95,16 @@ exports.addArticleToSeniorEligibilityFilterUser = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } /*
-        if(/*article._eligibilityFilterSenior !== null) {
+        } else if(article._eligibilityFiltersSenior !== null) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
-        } else */{
+        } else {
 
             if(hasRole('seniorfilter', user)) {
 
-                article._eligibilityFilterSenior = user._id;
-                article._eligibilityFilterSeniorEmail = user.email;
+                article._eligibilityFiltersSenior = user._id;
+                article._eligibilityFiltersSeniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({

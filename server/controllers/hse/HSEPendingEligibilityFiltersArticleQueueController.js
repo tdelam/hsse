@@ -6,7 +6,7 @@ const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find()
-       .or([ { _eligilityFiltersJunior: null }, { _eligilityFiltersSenior: null } ])
+       .or([ { _eligibilityFiltersJunior: null }, { _eligibilityFiltersSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -95,7 +95,7 @@ exports.addArticleToSeniorEligibilityFilter = async (req, res) => {
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-        } else if(article._eligilityFiltersSenior !== null) {
+        } else if(article._eligibilityFiltersSenior !== null) {
             return res.status(404).send({
                 message: 'A senior filter has already been added for this article'
             });
@@ -103,8 +103,8 @@ exports.addArticleToSeniorEligibilityFilter = async (req, res) => {
 
             if(hasRole('seniorfilter', user)) {
 
-                article._eligilityFiltersSenior = user._id;
-                article._eligilityFiltersSeniorEmail = user.email;
+                article._eligibilityFiltersSenior = user._id;
+                article._eligibilityFiltersSeniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({

@@ -8,8 +8,8 @@ exports.create = (req, res) => {
     const newHSEArticle = new HSEArticleModelClass(req.body);
     const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass();
     
-    newHSEArticle.eligibilityFilterJuniorInput = newEligibilityFilter;
-    newHSEArticle.eligibilityFilterSeniorInput = newEligibilityFilter;
+    newHSEArticle.eligibilityFiltersJuniorInput = newEligibilityFilter;
+    newHSEArticle.eligibilityFiltersSeniorInput = newEligibilityFilter;
 
     newHSEArticle.save( (err) => {
         if(err) {
