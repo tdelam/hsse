@@ -118,12 +118,12 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
 
     swalCallbackAssignJunior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignSSEPendingEligibilityFiltersArticlesJuniorFilter(articleId);
+            this.props.assignSSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, this.props.history);
     }
 
     swalCallbackAssignSenior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignSSEPendingEligibilityFiltersArticlesSeniorFilter(articleId);
+            this.props.assignSSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, this.props.history);
     }
 
     renderArticles() {

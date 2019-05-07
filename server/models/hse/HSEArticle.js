@@ -135,14 +135,6 @@ const HSEArticleSchema = new Schema({
     // Complicated tag
     complicated: { type: Boolean, default: false },
 
-    // Users for different stages
-    _uploadHarvestsUser: { type: Schema.Types.ObjectId, ref: 'User' },
-    _eligibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'User' },
-    _qualityAppraisalsJunior: { type: Schema.Types.ObjectId, ref: 'User' },
-    _qualityAppraisalsSenior: { type: Schema.Types.ObjectId, ref: 'User' },
-    _linkingStudiesUser: { type: Schema.Types.ObjectId, ref: 'User' },
-    _presentationDetailsUser: { type: Schema.Types.ObjectId, ref: 'User' },
-
     // Translators
     _translatorsFrench: { type: Schema.Types.ObjectId, ref: 'User' },
     _translatorsSpanish: { type: Schema.Types.ObjectId, ref: 'User' },
