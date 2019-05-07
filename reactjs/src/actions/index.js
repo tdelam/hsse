@@ -578,10 +578,11 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
     });
     
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER, payload: response.data });
-    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR, payload: 'Error assigning junior filter role for article'});
   }
+  history.push('/hse/assignedeligibilityfiltersarticlequeue');
 };
 
 export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
@@ -632,10 +633,11 @@ export const assignHSEPendingPresentationDetailsArticlesJuniorLinker = (articleI
     });
     
     dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER, payload: response.data });
-    history.push('/hse/assignedpresentationdetailsarticlequeue');
+    
   } catch(e) {
     dispatch({ type: HSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR, payload: 'Error assigning junior detailer role for article'});
   }
+  history.push('/hse/assignedpresentationdetailsarticlequeue');
 };
 
 export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
@@ -647,13 +649,14 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
     {
       headers
     });
-
+    
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER, payload: response.data });
-    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    
     
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR, payload: 'Error assigning senior filter role for article'});
   }
+  history.push('/hse/assignedeligibilityfiltersarticlequeue');
 };
 
 export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
@@ -1148,11 +1151,12 @@ export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
     });
 
     dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER, payload: response.data });
-    history.push('/sse/assignedeligibilityfiltersarticlequeue');
+    
     
   } catch(e) {
     dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR, payload: 'Error assigning senior filter role for article'});
   }
+  history.push('/sse/assignedeligibilityfiltersarticlequeue');
 };
 
 export const assignSSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
