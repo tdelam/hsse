@@ -50,6 +50,7 @@ const SSEArticleSchema = new Schema({
     priority: { type: String },
     articleSource: { type: String },
     language: { type: String },
+    
     _eligibilityFiltersJuniorEmail: { type: String, default: null },
     _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
