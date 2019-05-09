@@ -112,6 +112,7 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
 
     }
 
+
     swalCallback(isConfirm, swal) {
         swal("Assigned!", "The article has been assigned to your pending Eligibility & Filter list.", "success");
     }
@@ -127,7 +128,7 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 
     renderArticles() {
-        
+        console.log("Testing ");
         if(this.props.pendingArticles != null ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
