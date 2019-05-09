@@ -82,7 +82,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         showCanadianHealthSystemDocument: false,
         showCanadaHealthSystemDocument: false,
         showArticleAssessment: false,
-
+        treevalues: {},
 
         relevanceValue: ''
     };
@@ -196,6 +196,18 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             });*/
         }
         
+    }
+
+    save = () => {
+        this.props.assignHSEPendingEligibilityFiltersArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
+    }
+
+    cancel = () => {
+        this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue')
+    }
+
+    finish = () => {
+        this.props.assignHSEPendingEligibilityFiltersArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
     }
 
     
@@ -567,10 +579,10 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     }
 
     render() {
-        console.log(`currentArticle: ${this.props.currentArticle}`);
-        console.log(this.props.currentUser);
+        //console.log(`currentArticle: ${this.props.currentArticle}`);
+        //console.log(this.props.currentUser);
 
-        this.getInputValues();
+        //this.getInputValues();
 
         // used for react select
         const { selectedOption } = this.state;
@@ -578,7 +590,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
         // this.setState({ eligibilityFilterModel: this.getInputValues() });
 
-        console.log(this.state.eligibilityFilterModel);
+        // console.log(this.state.eligibilityFilterModel);
 
         return (
             <ContentWrapper>
@@ -638,11 +650,11 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     <CardFooter>
                         <div className="d-flex align-items-center">
                             <div className="ml-auto">
-                                <button type="submit" className="btn btn-warning">Cancel</button>{' '}
-                                <button type="submit" className="btn btn-info">Save</button>
+                                <button type="submit" className="btn btn-warning" onClick={this.cancel} >Cancel</button>{' '}
+                                <button type="submit" className="btn btn-info" onClick={this.save}>Save</button>
                             </div>
                             <div className="ml-auto">
-                                <button type="submit" className="btn btn-success">Finish</button>
+                                <button type="submit" className="btn btn-success" onClick={this.finish}>Finish</button>
                             </div>
                         </div>
                     </CardFooter>

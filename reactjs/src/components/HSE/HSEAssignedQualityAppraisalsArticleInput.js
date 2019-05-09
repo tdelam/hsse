@@ -283,19 +283,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="one"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="one"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="one"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="one"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -303,19 +303,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="two"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="two"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="two"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="two"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -323,19 +323,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="three"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="three"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="three"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="three"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -343,19 +343,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="four"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="four"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="four"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="four"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -363,19 +363,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="five"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="five"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="five"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="five"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -383,19 +383,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="six"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="six"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="six"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="six"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -403,19 +403,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="seven"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="seven"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="seven"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="seven"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -423,19 +423,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="eight"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="eight"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="eight"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="eight"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -443,19 +443,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="nine"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="nine"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="nine"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="nine"/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -463,19 +463,19 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" /> Yes
+                                        <Input type="radio" name="ten"/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> No
+                                        <Input type="radio" name="ten"/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Can't answer
+                                        <Input type="radio" name="ten"/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" /> Not applicable
+                                        <Input type="radio" name="ten"/> Not applicable
                                     </Label>
                                 </FormGroup>
 
@@ -486,6 +486,34 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
                             </div>
                         </FormGroup>
+                        <fieldset>
+                                <legend>Legend</legend>
+                                <FormGroup row>
+                                    <label className="col-md-2 col-form-label">Label under the legend</label>
+                                    <div className="col-md-10">
+                                        <div className="c-radio">
+                                            <label>
+                                                <Input type="radio" name="a" defaultValue="option1"/>
+                                                <span className="fa fa-circle"></span>Option one</label>
+                                        </div>
+                                        <div className="c-radio">
+                                            <label>
+                                            <legend>This is a paragraph</legend>
+                                                <span className="fa fa-circle"></span>Option one</label>
+                                        </div>
+                                        <div className="c-radio">
+                                            <label>
+                                                <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
+                                                <span className="fa fa-circle"></span>Option two defaultChecke</label>
+                                        </div>
+                                        <div className="c-radio">
+                                            <label>
+                                                <Input type="radio" name="a" disabled=""/>
+                                                <span className="fa fa-circle"></span>Option four disabled</label>
+                                        </div>
+                                    </div>
+                                </FormGroup>
+                            </fieldset>
                         </form>
                     </fieldset>
                     </CardBody>
