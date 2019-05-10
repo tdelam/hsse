@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
+
+import * as actions from '../../actions';
 
 import Datetime from 'react-datetime';
 
@@ -22,33 +27,11 @@ import SSEFormValidator from './SSEFormValidator.js';
 class AddSSEArticle extends Component {
 
     state = {
-        /* Group each form state in an object.
-           Property name MUST match the form name */
-        formRegister: {
-            email: '',
-            password: '',
-            password2: '',
-            terms: false
-        },
-        formLogin: {
-            email: '',
-            password: ''
-        },
-        formDemo: {
-            text: '',
-            email: '',
-            number: '',
-            integer: '',
-            alphanum: '',
-            url: '',
-            password: '',
-            password2: '',
-            minlength: '',
-            maxlength: '',
-            length: '',
-            minval: '',
-            maxval: '',
-            list: ''
+        sseSingleArticle: {
+            title: '',
+            authors: '',
+            journal: '',
+            harvestDate: new Date()
         }
     }
 
@@ -95,6 +78,10 @@ class AddSSEArticle extends Component {
         e.preventDefault()
     }
 
+    handleSubmit = (formProps) => {
+        this.props.signin(formProps, this.gotoDashboard);
+    }
+
     /* Simplify error check */
     hasError = (formName, inputName, method) => {
         return  this.state[formName] &&
@@ -103,11 +90,18 @@ class AddSSEArticle extends Component {
                 this.state[formName].errors[inputName][method]
     }
 
+    onDateChange(event) {
+        this.setState({ harvestDate: event._d })
+    }
+
     render() {
+
+        const { handleSubmit } = this.props;
+
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>ADD Article
+                    <div>Add Article
                         <small>Social Systems Evidence</small>
                     </div>
                 </div>
@@ -119,7 +113,7 @@ class AddSSEArticle extends Component {
                 { /* START row */ }
                 <Row>
                     <div className="col-md-12">
-                        <form onSubmit={this.onSubmit} action="" name="formDemo">
+                        <form onSubmit={ handleSubmit(this.onSubmit) } action="" name="sseSingleArticle">
                             { /* START card */ }
                             <Card className="card-default">
                                 <CardHeader>
@@ -132,11 +126,11 @@ class AddSSEArticle extends Component {
                                             <label className="col-md-2 col-form-label">Title</label>
                                             <Col md={ 6 }>
                                                 <Input type="text"
-                                                    name="text"
-                                                    invalid={this.hasError('formDemo','text','required')}
+                                                    name="title"
+                                                    invalid={this.hasError('sseSingleArticle','text','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
-                                                    value={this.state.formDemo.text}
+                                                    value={this.state.sseSingleArticle.text}
                                                 />
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
@@ -148,14 +142,13 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Authors</label>
                                             <Col md={ 6 }>
-                                                <Input type="email"
-                                                    name="email"
-                                                    invalid={this.hasError('formDemo','email','required')||this.hasError('formDemo','email','email')}
+                                                <Input type="text"
+                                                    name="authors"
+                                                    invalid={this.hasError('sseSingleArticle','text','required')||this.hasError('formDemo','email','email')}
                                                     onChange={this.validateOnChange}
-                                                    data-validate='["required", "email"]'
-                                                    value={this.state.formDemo.email}/>
-                                                { this.hasError('formDemo','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                                { this.hasError('formDemo','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
+                                                    data-validate='["required"]'
+                                                    value={this.state.sseSingleArticle.authors}/>
+                                                { this.hasError('sseSingleArticle','text','required') && <span className="invalid-feedback">Field is required</span> }
                                             </Col>
                                             <Col md={ 4 }></Col>
                                         </div>
@@ -165,7 +158,13 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Published Date</label>
                                             <Col md={ 6 }>
-                                                <Datetime inputProps={{className: 'form-control'}}/>
+                                                <Datetime
+                                                    dateFormat="YYYY-MM-DD"
+                                                    inputProps={{className: 'form-control'}}
+                                                    timeFormat={false}
+                                                    onChange={this.onDateChange.bind(this)}
+                                                    defaultValue=""
+                                                    />
                                             </Col>
                                         </div>
                                     </fieldset>
@@ -175,11 +174,11 @@ class AddSSEArticle extends Component {
                                             <Col md={ 6 }>
                                                 <Input type="text"
                                                     name="integer"
-                                                    invalid={this.hasError('formDemo','integer','integer')}
+                                                    invalid={this.hasError('sseSingleArticle','integer','integer')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
-                                                    value={this.state.formDemo.integer}/>
-                                                <span className="invalid-feedback">Field must be an integer</span>
+                                                    value={this.state.sseSingleArticle.journal}/>
+                                                <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>
                                             </Col>
@@ -204,5 +203,14 @@ class AddSSEArticle extends Component {
 
 }
 
-export default AddSSEArticle;
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.errorMessage };
+}
+
+export default compose(
+    connect(mapStateToProps, actions),
+    reduxForm({
+        form: 'addssearticleform'
+    })
+) (AddSSEArticle);
 

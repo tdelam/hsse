@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
+
+import * as actions from '../../actions';
 
 import Datetime from 'react-datetime';
 
@@ -22,34 +27,13 @@ import HSEFormValidator from './HSEFormValidator.js';
 class AddHSEArticle extends Component {
 
     state = {
-        /* Group each form state in an object.
-           Property name MUST match the form name */
-        formRegister: {
-            email: '',
-            password: '',
-            password2: '',
-            terms: false
-        },
-        formLogin: {
-            email: '',
-            password: ''
-        },
-        formDemo: {
-            text: '',
-            email: '',
-            number: '',
-            integer: '',
-            alphanum: '',
-            url: '',
-            password: '',
-            password2: '',
-            minlength: '',
-            maxlength: '',
-            length: '',
-            minval: '',
-            maxval: '',
-            list: ''
+        hseSingleArticle: {
+            title: '',
+            authors: '',
+            journal: '',
+            harvestDate: new Date()
         }
+        
     }
 
      /**
@@ -95,6 +79,13 @@ class AddHSEArticle extends Component {
         e.preventDefault()
     }
 
+
+    handleSubmit = (formProps) => {
+        console.log(formProps);
+        this.props.onHSEArticleSubmit(formProps, this.props.history);
+    }
+
+
     /* Simplify error check */
     hasError = (formName, inputName, method) => {
         return  this.state[formName] &&
@@ -103,11 +94,67 @@ class AddHSEArticle extends Component {
                 this.state[formName].errors[inputName][method]
     }
 
+    onDateChange(event) {
+        this.setState({ harvestDate: event._d })
+    }
+
+    renderTitleField = ({input}) => {
+        return <Input type="text"
+            name="title"
+            className="border-right-0"
+            placeholder="Enter title"
+            invalid={this.hasError('hseSingleArticle','title','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        />
+    }
+
+    renderAuthorsField = ({input}) => {
+        return <Input type="text"
+            name="authors"
+            className="border-right-0"
+            placeholder="Enter author(s)"
+            invalid={this.hasError('hseSingleArticle','authors','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        />
+    }
+
+    renderJournalField = ({input}) => {
+        return <Input type="text"
+            name="journal"
+            className="border-right-0"
+            placeholder="Enter Journal"
+            invalid={this.hasError('hseSingleArticle','journal','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        />
+    }
+
+    renderPublishedDateField = ({input}) => {
+        return <Datetime
+            dateFormat="YYYY-MM-DD"
+            inputProps={{className: 'form-control'}}
+            timeFormat={false}
+            onChange={this.onDateChange.bind(this)}
+            defaultValue=""
+        />
+    }
+
     render() {
+
+        const { handleSubmit } = this.props;
+
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>ADD Article
+                    <div>Add Article
                         <small>Health Systems Evidence</small>
                     </div>
                 </div>
@@ -119,7 +166,7 @@ class AddHSEArticle extends Component {
                 { /* START row */ }
                 <Row>
                     <div className="col-md-12">
-                        <form onSubmit={this.onSubmit} action="" name="formDemo">
+                        <form onSubmit={ handleSubmit(this.handleSubmit) } name="hseSingleArticle">
                             { /* START card */ }
                             <Card className="card-default">
                                 <CardHeader>
@@ -131,12 +178,16 @@ class AddHSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Title</label>
                                             <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="text"
-                                                    invalid={this.hasError('formDemo','text','required')}
+                                                <Field 
+                                                    type="text"
+                                                    name="title"
+                                                    component={this.renderTitleField}
+                                                    autoComplete="none"
+                                                    className="form-control"
+                                                    invalid={this.hasError('hseSingleArticle','title','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
-                                                    value={this.state.formDemo.text}
+                                                    value={this.state.hseSingleArticle.title}
                                                 />
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
@@ -148,14 +199,17 @@ class AddHSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Authors</label>
                                             <Col md={ 6 }>
-                                                <Input type="email"
-                                                    name="email"
-                                                    invalid={this.hasError('formDemo','email','required')||this.hasError('formDemo','email','email')}
+                                                <Field 
+                                                    type="text"
+                                                    name="authors"
+                                                    component={this.renderAuthorsField}
+                                                    autoComplete="none"
+                                                    className="form-control"
+                                                    invalid={this.hasError('hseSingleArticle', 'text', 'required')||this.hasError('hseSingleArticle','email','email')}
                                                     onChange={this.validateOnChange}
-                                                    data-validate='["required", "email"]'
-                                                    value={this.state.formDemo.email}/>
-                                                { this.hasError('formDemo','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                                { this.hasError('formDemo','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
+                                                    data-validate='["required"]'
+                                                    value={this.state.hseSingleArticle.authors}/>
+                                                { this.hasError('hseSingleArticle', 'authors', 'required') && <span className="invalid-feedback">Field is required</span> }
                                             </Col>
                                             <Col md={ 4 }></Col>
                                         </div>
@@ -165,7 +219,10 @@ class AddHSEArticle extends Component {
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Published Date</label>
                                             <Col md={ 6 }>
-                                                <Datetime inputProps={{className: 'form-control'}}/>
+                                                <Field
+                                                    name="publishedDate"
+                                                    component={this.renderPublishedDateField}
+                                                    />
                                             </Col>
                                         </div>
                                     </fieldset>
@@ -173,13 +230,15 @@ class AddHSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Journal</label>
                                             <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="integer"
-                                                    invalid={this.hasError('formDemo','integer','integer')}
+                                                <Field 
+                                                    type="text"
+                                                    name="journal"
+                                                    component={this.renderJournalField}
+                                                    invalid={this.hasError('hseSingleArticle','text','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
-                                                    value={this.state.formDemo.integer}/>
-                                                <span className="invalid-feedback">Field must be an integer</span>
+                                                    value={this.state.hseSingleArticle.journal}/>
+                                                <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>
                                             </Col>
@@ -189,7 +248,8 @@ class AddHSEArticle extends Component {
                                 </CardBody>
                                 <CardFooter className="text-center">
                                     <button type="submit" className="btn btn-danger">Cancel</button>
-                                    <button type="submit" className="btn btn-success">Next</button>
+                                    {'  '}
+                                    <button type="submit" className="btn btn-success">Save</button>
                                 </CardFooter>
                             </Card>
                             { /* END card */ }
@@ -203,5 +263,14 @@ class AddHSEArticle extends Component {
 
 }
 
-export default AddHSEArticle;
+function mapStateToProps(state) {
+    return { errorMessage: state.auth.errorMessage };
+}
+
+export default compose(
+    connect(mapStateToProps, actions),
+    reduxForm({
+        form: 'addhsearticleform'
+    })
+) (AddHSEArticle);
 

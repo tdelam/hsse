@@ -319,11 +319,11 @@ export const onHSEArticleSubmit = (values, history) => async dispatch => {
   
   try {
     const response = await axios.post(
-      `${backendServer}/hsearticles`,
+      `${backendServer}/hse/articles`,
       values
     );
 
-    history.push('/dashboard');
+    history.push('/hse/pendingeligibilityfiltersarticlequeue');
 
     dispatch({ type: HSE_CREATE_ARTICLE, payload: response.data })
 
@@ -825,11 +825,11 @@ export const onSSEArticleSubmit = (values, history) => async dispatch => {
   
   try {
     const response = await axios.post(
-      `${backendServer}/ssearticles`,
+      `${backendServer}/sse/articles`,
       values
     );
 
-    history.push('/dashboard');
+    history.push('/sse/pendingeligibilityfiltersarticlequeue');
 
     dispatch({ type: SSE_CREATE_ARTICLE, payload: response.data })
 
