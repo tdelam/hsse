@@ -79,7 +79,7 @@ exports.addArticleToJuniorEligibilityFilter= async (req, res) => {
 exports.addArticleToSeniorEligibilityFilter = async (req, res) => {
 
     const { articleId } = req.params;
-    
+    console.log(req.headers);
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {

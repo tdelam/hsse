@@ -6,10 +6,14 @@ const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibil
 exports.create = (req, res) => {
 
     const newHSEArticle = new HSEArticleModelClass(req.body);
-    const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass();
-    
-    newHSEArticle.eligibilityFiltersJuniorInput = newEligibilityFilter;
-    newHSEArticle.eligibilityFiltersSeniorInput = newEligibilityFilter;
+    const newEligibilityFilterJunior = new HSEArticleEligibilityFilterModelClass();
+    const newEligibilityFilterSenior = new HSEArticleEligibilityFilterModelClass();
+
+    newEligibilityFilterJunior.save();
+    newEligibilityFilterSenior.save();
+
+    newHSEArticle.eligibilityFiltersJuniorInput = newEligibilityFilterJunior;
+    newHSEArticle.eligibilityFiltersSeniorInput = newEligibilityFilterSenior;
 
     newHSEArticle.save( (err) => {
         if(err) {

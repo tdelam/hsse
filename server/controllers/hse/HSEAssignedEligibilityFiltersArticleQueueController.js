@@ -54,10 +54,10 @@ exports.setEligibilityFiltersValues = async (req, res) => {
 
     const { articleId } = req.params;
 
-    const inputValues = req.body;
-    
-    const user = await Authentication.getUserFromToken(req.headers.authorization);
+    const { inputValues }  = req.body;
 
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+    //console.log(inputValues);
     HSEArticleModelClass.findById(articleId, async (err, article) => {
         if(err) {
 
@@ -71,74 +71,67 @@ exports.setEligibilityFiltersValues = async (req, res) => {
 
         }
         
-        if( !(article._eligibilityFiltersJunior.equals(user._id) || article._eligibilityFiltersSenior.equals(user._id)) ) {
+        if( !(user._id.equals(article._eligibilityFiltersJunior) || user._id.equals(article._eligibilityFiltersSenior) ) ) {
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
             });
 
-        } else if ( article._eligibilityFiltersJunior.equals(user._id) && article._eligibilityFiltersSenior.equals(user._id) ) {
+        } else if ( user._id.equals(article._eligibilityFiltersJunior) && user._id.equals(article._eligibilityFiltersSenior) ) {
 
-            const newEligibilityFilters = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilters._article = articleId;
-            newEligibilityFilters.save( (err) => {
-
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
-                    });
-                }
-        
-            });
+            //newEligibilityFilters._article = articleId;
             
-            article.eligibilityFiltersJuniorInput = newEligibilityFilters;
-            article.eligibilityFiltersSeniorInput = newEligibilityFilters;
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate({_id: article.eligibilityFiltersJuniorInput}, inputValues );
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate({_id: article.eligibilityFiltersSeniorInput}, inputValues );
 
-            await article.save();
+            //console.log(await HSEArticleEligibilityFilterModelClass.findById({_id: article.eligibilityFiltersSeniorInput}) );
+
+            //article.eligibilityFiltersJuniorInput.update();// = newEligibilityFilters;
+            //article.eligibilityFiltersSeniorInput.update();// = newEligibilityFilters;
+
             
             return res.status(201).send({
                 message: 'Inputs for Junior and Senior filter added for article'
             });
 
-        } else if( article._eligibilityFiltersJunior.equals(user._id) ) {
-
-            const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
-                    });
-                }
-        
-            });
+        } else if( user._id.equals(article._eligibilityFiltersJunior) ) {            
             
-            article.eligibilityFiltersJuniorInput = newEligibilityFilters;
-            await article.save();
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate({_id: article.eligibilityFiltersJuniorInput}, inputValues );
             
+            //console.log(await HSEArticleEligibilityFilterModelClass.findById({_id: article.eligibilityFiltersJuniorInput}) );
             return res.status(201).send({
                 message: 'Inputs for Junior filter added for article'
             });
             
-        } else if( article._eligibilityFiltersSenior.equals(user._id) ) {
-
-            const newEligibilityFilters = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilters.save( (err) => {
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
+        } else if( article._eligibilityFiltersSenior.equals(user._id) ) {  
+            
+            await HSEArticleEligibilityFilterModelClass.findByIdAndUpdate(
+                article.eligibilityFiltersSeniorInput,
+                
+                {hseState: inputValues},
+                
+                {new: true},
+                
+                // the callback function
+                (err, todo) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    //console.log(todo);
+                    console.log(todo);
+                    return res.send({
+                        message: 'Inputs for Senior filter added for article'
                     });
                 }
-        
-            });
-
-            article.eligibilityFiltersSeniorInput = inputValues;
-            await article.save();
+            );
             
+            //await HSEArticleEligibilityFilterModelClass.findOneAndUpdate({_id: article.eligibilityFiltersSeniorInput}, inputValues );
+            //console.log(await HSEArticleEligibilityFilterModelClass.find({_id: article.eligibilityFiltersSeniorInput}) );
+        /*    
             return res.status(201).send({
                 message: 'Inputs for Senior filter added for article'
-            });
+            });*/
             
-        } 
+        }
         
     });
 
@@ -175,7 +168,7 @@ exports.setEligibilityFiltersComplete = async (req, res) => {
 
             const newEligibilityFilters = new HSEArticleEligibilityFilterModelClass(inputValues);
             newEligibilityFilters._article = articleId;
-            newEligibilityFilters.save( (err) => {
+            /*newEligibilityFilters.save( (err) => {
 
                 if(err) {
                     return res.status(422).send({
@@ -183,7 +176,7 @@ exports.setEligibilityFiltersComplete = async (req, res) => {
                     });
                 }
         
-            });
+            });*/
             
             article.eligibilityFiltersJuniorInput = newEligibilityFilters;
             article.eligibilityFiltersSeniorInput = newEligibilityFilters;
@@ -202,14 +195,14 @@ exports.setEligibilityFiltersComplete = async (req, res) => {
         } else if( article._eligibilityFilterJunior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            /*newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
                         message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
                     });
                 }
         
-            });
+            });*/
             
             article.eligibilityFilterJuniorInput = newEligibilityFilter;
             article.eligibilityFilterJuniorCompleted = true;
@@ -224,14 +217,14 @@ exports.setEligibilityFiltersComplete = async (req, res) => {
         } else if( article._eligibilityFilterSenior.equals(user._id) ) {
 
             const newEligibilityFilter = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilter.save( (err) => {
+            /*newEligibilityFilter.save( (err) => {
                 if(err) {
                     return res.status(422).send({
                         message: `Unable to save values for Eligibility and Filter for article, err: ${err}`
                     });
                 }
         
-            });
+            });*/
 
             article.eligibilityFilterSeniorInput = inputValues;
             article.eligibilityFilterSeniorCompleted = true;
