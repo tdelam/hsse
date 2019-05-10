@@ -68,7 +68,7 @@ class Login extends Component {
 
     gotoDashboard = () => this.props.history.push('/dashboardmain');
 
-    handleSubmit = (formProps) => {
+    handleSubmit = (formProps) => {console.log(formProps);
         this.props.signin(formProps, this.gotoDashboard);
     }
 
