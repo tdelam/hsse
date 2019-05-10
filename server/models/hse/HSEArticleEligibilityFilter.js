@@ -349,6 +349,53 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     vulnerableAndSpecialHealthNeedsPopulations: { type: Boolean, default: false },
     womensHealth: { type: Boolean, default: false },
 
+    hseState: { type: Schema.Types.Mixed, default: null },
+
+/*
+    hseState: {type: Schema.Types.Mixed, default: {
+
+        selectedOption: '',
+
+        eligibilityFilterModel: {},
+
+        showTitle: true,
+        showRelevance: true,
+        documentType: false,
+        showGeneralArticleInformation: false,
+        showEligibility: false,
+        showHealthSystemsTopics: false,
+        showCanadianAreas: false,
+        showDomains: false,
+        showLMICFocus: false,
+        showProvinceFocus: false,
+        showTheme: false,
+        showPopulation: false,
+        showOntarioPriorityArea: false,
+        showTarget: false,
+        showOntarioFocus: false,
+        showArticle: false,
+        showIntergovernmentalOrganizationHealthSystemDocument: false,
+        showOntarianHealthSystemDocument: false,
+        showCanadianHealthSystemDocument: false,
+        showCanadaHealthSystemDocument: false,
+        showArticleAssessment: false,
+
+        relevanceValue: '', 
+
+        checkedKeysHST: [],
+        checkedKeysCA: [],
+        checkedDomain: [],
+        checkedLMIC: [],
+        checkedProvince: [],
+        checkedTheme: [], 
+        checkedPopulation: [],
+        checkedOPA: [],
+        checkedCHSDT: [],
+        checkedOHSDT: [],
+        checkedIOHSDT: []
+    }
+    }
+*/
 });
 
 // mongoose.model('HSEArticleEligibilityFilters', HSEArticleEligibilityFilterSchema);

@@ -49,14 +49,6 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
     state = {
 
-        dropdownOpen: false,
-        splitButtonOpen: false,
-
-
-        displayColorPicker: false,
-        displayColorPickerInput: false,
-        colorSelected: '#00AABB',
-
         selectedOption: '',
 
         eligibilityFilterModel: {},
@@ -82,32 +74,47 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         showCanadianHealthSystemDocument: false,
         showCanadaHealthSystemDocument: false,
         showArticleAssessment: false,
-        treevalues: {},
 
-        relevanceValue: ''
+        relevanceValue: '', 
+
+        checkedKeysHST: [],
+        checkedKeysCA: [],
+        checkedDomain: [],
+        checkedLMIC: [],
+        checkedProvince: [],
+        checkedTheme: [], 
+        checkedPopulation: [],
+        checkedOPA: [],
+        checkedCHSDT: [],
+        checkedOHSDT: [],
+        checkedIOHSDT: []
     };
 
-    componentDidMount() {
+    constructor(props) {
+        super(props);
+        
+        if(this.props.currentArticle !== undefined)
+            this.state = this.props.currentArticle.eligibilityFiltersSeniorInput.hseState
+    }
+
+    componentWillMount() {
 
         const { history } = this.props;
         const { articleId } = this.props.match.params;
-
+        
         this.props.getCurrentUser();
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
 
+        // set initial state
+        //console.log(this.props.currentArticle.eligibilityFilterJuniorInput.state);
+        //this.setState(this.props.currentArticle.eligibilityFiltersSeniorInput.hseState);
+        //if(this.props.currentArticle !== undefined)
+            //this.setState(this.props.currentArticle.eligibilityFiltersSeniorInput.hseState)
+
     }
 
-    toggleDropDown = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    }
 
-    toggleSplit = () => {
-        this.setState({
-            splitButtonOpen: !this.state.splitButtonOpen
-        });
-    }
+    componentWillMount
 
     onSubmit = e => {
         console.log('Form submitted..');
@@ -163,9 +170,64 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         });
     }
     
-    onCheck = (checkedKeys) => {
-        console.log('onCheck', checkedKeys);
+    onCheck = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
         this.setState({ checkedKeys });
+    }
+
+    onCheckHST = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedKeysHST: checkedKeys });
+    }
+
+    onCheckCA = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedKeysCA: checkedKeys });
+    }
+
+    onCheckDomain = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedDomain: checkedKeys });
+    }
+
+    onCheckLMIC = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedLMIC: checkedKeys });
+    }
+
+    onCheckProvince = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedProvince: checkedKeys });
+    }
+
+    onCheckTheme = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedTheme: checkedKeys });
+    }
+
+    onCheckPopulation = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedPopulation: checkedKeys });
+    }
+
+    onCheckOPA = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedOPA: checkedKeys });
+    }
+
+    onCheckCHSDT = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedCHSDT: checkedKeys });
+    }
+
+    onCheckOHSDT = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedOHSDT: checkedKeys });
+    }
+
+    onCheckIOHSDT = (checkedKeys, event) => {
+        console.log('onCheck', checkedKeys, event);
+        this.setState({ checkedIOHSDT: checkedKeys });
     }
     
     onSelect = (selectedKeys, info) => {
@@ -194,13 +256,18 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             this.setState({
                 showEligibility: true
             });*/
+        } else if(event.target.value === 'No') {
+            this.setState({
+                relevanceValue: event.target.value,
+                showEligibility: false
+            });
         }
         
     }
 
     save = () => {
-        this.props.assignHSEPendingEligibilityFiltersArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
-    }
+        this.props.assignHSEPendingEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
+    }                                                                    
 
     cancel = () => {
         this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue')
@@ -482,7 +549,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         return <TreeNode {...item} />;
       })
     
-    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine) => {
+    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine, checkedEvent, checkedKeyState) => {
         if(sectionStatus) {
             return (
                 <fieldset>
@@ -498,8 +565,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                 //defaultExpandAll={ true }
                                 onExpand={this.onExpand}
                                 autoExpandParent={true}
-                                onCheck={this.onCheck}
-                                // checkedKeys={true}
+                                onCheck={checkedEvent}
+                                checkedKeys={checkedKeyState}
                                 onSelect={this.onSelect}
                                 // selectedKeys={this.state.selectedKeys}
                             >
@@ -581,6 +648,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     render() {
         //console.log(`currentArticle: ${this.props.currentArticle}`);
         //console.log(this.props.currentUser);
+        
 
         //this.getInputValues();
 
@@ -616,30 +684,30 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                             { this.renderRelevance(this.state.showRelevance) }
 
                             { this.renderEligibility(this.state.showEligibility) }
-
+                            
                             { this.renderDocumentType(this.state.documentType) }
                                                    
-                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false) }
+                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false, this.onCheckHST, this.state.checkedKeysHST) }
 
-                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false) }
+                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false, this.onCheckCA, this.state.checkedKeysCA) }
 
-                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true) }
+                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true, this.onCheckDomain, this.state.checkedDomain) }
 
-                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false) }
+                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false, this.onCheckLMIC, this.state.checkedLMIC) }
 
-                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false) }
+                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false, this.onCheckProvince, this.state.checkedProvince) }
 
-                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false) }
+                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false, this.onCheckTheme, this.state.checkedTheme) }
 
-                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false) }
+                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false, this.onCheckPopulation, this.state.checkedPopulation) }
 
-                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea)}
+                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea, false, this.onCheckOPA, this.state.checkedOPA)}
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false )}
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.checkedCHSDT)}
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.checkedOHSDT)}
 
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.checkedIOHSDT)}
 
                             { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
 
@@ -669,6 +737,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 // export default HSEAssignedEligibilityFilterArticleInput;
 
 function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
+    console.log(hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleFetch);
     return {
         currentUser: auth.currentUser,
         errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
@@ -679,5 +748,5 @@ function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'eligibilityFilterInput'
+        form: 'hseEligibilityFilterInput'
     })) (HSEAssignedEligibilityFilterArticleInput);

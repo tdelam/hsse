@@ -538,6 +538,7 @@ export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => 
     // history.push('/dashboard');
     // console.log(response.data);
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH, payload: response.data })
+    
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse quality appraisals assigned article'});
   }
@@ -567,7 +568,7 @@ export const fetchHSEAssignedPresentationDetailsArticle = (articleId, history) =
 };
 
 export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
-  
+  console.log(headers);
   try {
     const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 
     {
@@ -679,6 +680,7 @@ export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (article
 
 export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
+    
     const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/savevalues/${articleId}`,
     {
       inputValues
@@ -688,7 +690,7 @@ export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputVa
     });
 
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT, payload: response.data });
-    //history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    history.push('/hse/assignedeligibilityfiltersarticlequeue');
     
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
