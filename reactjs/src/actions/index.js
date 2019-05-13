@@ -678,7 +678,7 @@ export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (article
   }
 };
 
-export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedEligibilityFiltersArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
     
     const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/savevalues/${articleId}`,
@@ -697,7 +697,7 @@ export const assignHSEPendingEligibilityFiltersArticleEdit = (articleId, inputVa
   }
 };
 
-export const assignHSEPendingQualityAppraisalsArticleEdit = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedQualityAppraisalsArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/savevalues/${articleId}`,
     {
@@ -715,7 +715,7 @@ export const assignHSEPendingQualityAppraisalsArticleEdit = (articleId, inputVal
   }
 };
 
-export const assignHSEPendingLinkingStudiesArticleEdit = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedLinkingStudiesArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticlequeue/savevalues/${articleId}`,
     {
@@ -733,7 +733,7 @@ export const assignHSEPendingLinkingStudiesArticleEdit = (articleId, inputValues
   }
 };
 
-export const assignHSEPendingPresentationDetailsArticleEdit = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedPresentationDetailsArticleEdit = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedpresentationdetailsarticlequeue/savevalues/${articleId}`,
     {
@@ -751,7 +751,7 @@ export const assignHSEPendingPresentationDetailsArticleEdit = (articleId, inputV
   }
 };
 
-export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/setcompleted/${articleId}`,
     {
@@ -769,7 +769,7 @@ export const assignHSEPendingEligibilityFiltersArticleEditComplete = (articleId,
   }
 };
 
-export const assignHSEPendingQualityAppraisalsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedQualityAppraisalsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/setcompleted/${articleId}`,
     {
@@ -787,7 +787,7 @@ export const assignHSEPendingQualityAppraisalsArticleEditComplete = (articleId, 
   }
 };
 
-export const assignHSEPendingLinkingStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedLinkingStudiesArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedlinkingstudiesarticlequeue/setcompleted/${articleId}`,
     {
@@ -805,7 +805,7 @@ export const assignHSEPendingLinkingStudiesArticleEditComplete = (articleId, inp
   }
 };
 
-export const assignHSEPendingPresentationDetailsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedPresentationDetailsArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
   try {
     const response = await axios.post(`${backendServer}/hse/assignedpresentationdetailsarticlequeue/setcompleted/${articleId}`,
     {

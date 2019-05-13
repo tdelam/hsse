@@ -18,7 +18,10 @@ _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
     questionNine: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
     questionTen: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
     questionEleven: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"],},
-    amstarStatus: { type: String, enum: ['In progress', 'Completed'], default: 'In progress'}
+    amstarStatus: { type: String, enum: ['In progress', 'Completed'], default: 'In progress'}, 
+
+    hseState: { type: Schema.Types.Mixed, default: null },
+
 });
 
 HSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
-const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters'); 
+const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters');
+const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals'); 
 
 exports.create = (req, res) => {
 
