@@ -39,17 +39,17 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - BACKEND_SERVER=hsse_server
-      - HSSE_SES_ACCESS_KEY=
-      - HSSE_SES_SECRET_KEY=
-      #- MONGO_URI=mongodb://sakksoftware:sakk11software@ds121282.mlab.com:21282/machealthsci-dev
+      - HSSE_SES_ACCESS_KEY=AKIAIKHN3EFNA5PBKEDA
+      - HSSE_SES_SECRET_KEY=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
+      #- MONGO_URI=mongodb://sakksoftware:sakk11software@ds129966.mlab.com:29966/macforum
       - MONGO_URI=mongodb://mongodb:27017/hsse-project
       - NODE_ENV=development
       - JWT_SECRET=akfjlaksdjlasfjasdfljiasdfasfksldf
       - FRONTEND_SERVER=http://localhost:3050
       - BACKEND_SERVER=http://localhost:3050/api
       - REGION=us-east-1
-      - HSSE_S3_ACCESS_KEY=
-      - HSSE_S3_SECRET_KEY=
+      - HSSE_S3_ACCESS_KEY=AKIAJOQ5WKK6B2GIEJTQ
+      - HSSE_S3_SECRET_KEY=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
       - ES_HOST=elasticsearch
       - ES_PORT=9200
     depends_on:
