@@ -71,72 +71,51 @@ exports.setQualityAppraisalsValues = async (req, res) => {
 
         }
         
-        if( !(article._qualityAppraisalsJunior.equals(user._id) || article._qualityAppraisalsSenior.equals(user._id)) ) {
+        if( !(user._id.equals(article._qualityAppraisalsJunior.equals) || user.id.equals(article._qualityAppraisalsSenior) ) ){
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
             });
 
-        } else if ( article._qualityAppraisalsJunior.equals(user._id) && article._qualityAppraisalsSenior.equals(user._id) ) {
+        } else if( user._id.equals(article._qualityAppraisalsJunior) ) {
 
-            const newQualityAppraisals = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newQualityAppraisals._article = articleId;
-            newQualityAppraisals.save( (err) => {
-
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+            await HSEArticleQualityAppraisalModelClass.findByIdAndUpdate(
+                article.qualityAppraisalsJuniorInput,
+                
+                {hseState: inputValues},
+                
+                {new: true},
+                
+                // the callback function
+                (err, todo) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    
+                    return res.send({
+                        message: 'Inputs for Junior appraiser added for article'
                     });
                 }
-        
-            });
+            );
             
-            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
-            article.qualityAppraisalsSeniorInput = newQualityAppraisals;
+        } else if( article._qualityAppraisalsSenior.equals(user._id) ) {
 
-            await article.save();
-            
-            return res.status(201).send({
-                message: 'Inputs for Junior and Senior appraisals added for article'
-            });
-
-        } else if( article._qualityAppraisalsJunior.equals(user._id) ) {
-
-            const newQualityAppraisals = new HSEArticleQualityAppraisalModelClass(inputValues);
-            newQualityAppraisals.save( (err) => {
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
+            await HSEArticleQualityAppraisalModelClass.findByIdAndUpdate(
+                article.qualityAppraisalsSeniorInput,
+                
+                {hseState: inputValues},
+                
+                {new: true},
+                
+                // the callback function
+                (err, todo) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    
+                    return res.send({
+                        message: 'Inputs for Senior appraiser added for article'
                     });
                 }
-        
-            });
-            
-            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
-            await article.save();
-            
-            return res.status(201).send({
-                message: 'Inputs for Junior appraiser added for article'
-            });
-            
-        } else if( article._eligibilityFilterSenior.equals(user._id) ) {
-
-            const newQualityAppraisal = new HSEArticleQualityAppraisalModelClass(inputValues);
-            newQualityAppraisal.save( (err) => {
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Quality Appraisal for article, err: ${err}`
-                    });
-                }
-        
-            });
-
-            article.qualityAppraisalsSeniorInput = inputValues;
-            await article.save();
-            
-            return res.status(201).send({
-                message: 'Inputs for Senior appraiser added for article'
-            });
+            );
             
         } 
         

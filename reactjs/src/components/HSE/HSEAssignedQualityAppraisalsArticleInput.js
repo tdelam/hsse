@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Tree } from 'antd';
+
 import {
-    Col,
+
     Label,
     Card,
     CardHeader,
@@ -16,42 +16,33 @@ import {
     Input,} from 'reactstrap';
 
 // React Select
-import Select from 'react-select';
+//import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
 
-import QUESTIONS from '../Common/QualityAppraisalsQuestions';
-
-const { TreeNode } = Tree;
-
-const STATES = [
-    { value: 'new-article', label: 'New Article', className: 'State-ACT' },
-    { value: 'data-entry-complete', label: 'Data Entry Complete', className: 'State-NSW' },
-    { value: 'live', label: 'Live', className: 'State-Vic' },
-    { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
-]
+//import QUESTIONS from '../Common/QualityAppraisalsQuestions';
 
 class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
     state = {
 
-        dropdownOpen: false,
-        splitButtonOpen: false,
+        notInEnglish: false,
+        notFreeFullText: false,
 
+        questionOne: '', 
+        questionTwo: '',
+        questionThree: '',
+        questionFour: '',
+        questionFive: '',
+        questionSix: '',
+        questionSeven: '',
+        questionEight: '',
+        questionNine: '',
+        questionTen: '',
 
-        displayColorPicker: false,
-        displayColorPickerInput: false,
-        colorSelected: '#00AABB',
-
-        selectedOption: '',
-
-        
-        qualityAppraisalsModel: null,
-
-        relevanceValue: ''
     };
 
     componentDidMount() {
@@ -64,26 +55,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
     }
 
-    toggleDropDown = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    }
-
-    toggleSplit = () => {
-        this.setState({
-            splitButtonOpen: !this.state.splitButtonOpen
-        });
-    }
-
     onSubmit = e => {
         console.log('Form submitted..');
         e.preventDefault();
-    }
-
-    handleChangeSelect = (selectedOption) => {
-        this.setState({ selectedOption });
-        console.log(`Selected: ${selectedOption.label}`);
     }
 
     isJuniorAppraiser() {
@@ -119,120 +93,29 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         }
     }
 
-    // Functions
-    onExpand = (expandedKeys) => {
-        console.log('onExpand', expandedKeys);
-        // if not set autoExpandParent to false, if children expanded, parent can not collapse.
-        // or, you can remove all expanded children keys.
+    onChange = (e) => {
         this.setState({
-          expandedKeys,
-          autoExpandParent: false,
+          [e.target.name]: e.target.value,
         });
-    }
-    
-    onCheck = (checkedKeys) => {
-        console.log('onCheck', checkedKeys);
-        this.setState({ checkedKeys });
-    }
-    
-    onSelect = (selectedKeys, info) => {
-        console.log('onSelect', info);
-        this.setState({ selectedKeys });
+        // this.props.form.setFieldsValue({radio:e.target.value})
+        console.log(`${e.target.name}:${e.target.value}`)
     }
 
-    toggleSection = (section) => {
-        this.setState({
-            section: !this.state[section]
-        })
+    save = () => {
+        this.props.assignHSEAssignedQualityAppraisalsArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
+    }                                                                    
+
+    cancel = () => {
+        this.props.history.push('/hse/assignedqualityappraisalsarticlequeue')
     }
 
-    showSection = (section) => {
-        this.setState({
-            section
-        })
-    }
-    
-    
-    renderRelevance = (relevance) => {
-        if(relevance)
-        return (
-            <fieldset>
-                <legend className="offset-md-1">Relevance</legend>
-                <FormGroup row>
-                    <label className="col-md-2 col-form-label"></label>
-                    <div className="col-md-10">
-                        <div>
-                            <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
-                                <span className="fa fa-circle"></span>{" "}Yes</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
-                                <span className="fa fa-circle"></span>{" "}No</label>
-                        </div>
-                    </div>
-                </FormGroup>
-            </fieldset>
-        );
-    }
-
-    renderGeneralArticleInformation = (generalInfo) => {
-        if(generalInfo)
-            return (
-                <fieldset>
-                    <legend className="offset-md-1">General article information</legend>
-                    <br />
-                    <FormGroup row>
-                        <label className="col-md-2 col-form-label"></label>
-                        <div className="col-md-10">
-                            <div>
-                                <h4>Ref ID: { this.props.match.params.articleId }</h4>
-                            </div>
-                            <div>
-                                <h4>Live date: </h4>
-                            </div>
-                            <div>
-                                <h4>Document type: </h4>
-                            </div>
-                            <div>
-                                <h4>Question type: </h4>
-                            </div>
-                            <div>
-                                
-                                <div className="checkbox c-checkbox">
-                                    <h4>General focus?</h4>
-                                    <p>{" "}</p>
-                                    <label>
-                                    <Input type="checkbox" defaultValue=""/>
-                                        
-                                        <span className="fa fa-check"></span>{" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </FormGroup>
-                    {/** <hr className="my-4"/> **/}
-              </fieldset>
-            );
+    finish = () => {
+        this.props.assignHSEAssignedQualityAppraisalsArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
     }
 
     render() {
         console.log(`currentArticle: ${this.props.currentArticle}`);
         console.log(this.props.currentUser);
-
-        this.getInputValues();
-
-        // used for react select
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
-
-        // this.setState({ qualityAppraisalModel: this.getInputValues() });
-
-        console.log(this.state.qualityAppraisalsModel);
 
         return (
             <ContentWrapper>
@@ -253,278 +136,254 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                     <CardBody>
                     <fieldset>
                         <form onSubmit={this.onSubmit}>
-                        <FormGroup row>
-                            <label className="col-md-2 col-form-label"><h4>Complicated Reviews</h4></label>
                             <div className="col-md-10">
-                                <FormGroup check inline>
-                                    <Label check>
-                                    <Input type="checkbox" /> Not in English
-                                    </Label>
+                                <legend>Complicated Reviews</legend>
+                                <fieldset></fieldset>
+                                <FormGroup >
+                                    
+                                        <br />
+                                        <FormGroup check inline>
+                                            <Label check>
+                                            <Input type="checkbox" /> Not in English
+                                            </Label>
+                                        </FormGroup>
+                                        <br />
+                                        <FormGroup check inline>
+                                            <Label check>
+                                                <Input type="checkbox" /> No free full-text
+                                            </Label>
+                                        </FormGroup>
+                                        <br />
+                                        <br />
+                                        <Link to="">Save as Complicated review</Link>
+                                    
                                 </FormGroup>
-                                <br />
-                                <FormGroup check inline>
-                                    <Label check>
-                                        <Input type="checkbox" /> No free full-text
-                                    </Label>
-                                </FormGroup>
-                                <br />
-                                <br />
-                                <Link to="">Save as Complicated review</Link>
                             </div>
-                        </FormGroup>
                         </form>
                     </fieldset>
                     <fieldset>
                         <form onSubmit={this.onSubmit}>
-                        <FormGroup row>
-                            <label className="col-md-2 col-form-label"><h4>Questions</h4></label>
+                        
                             <div className="col-md-10">
-                                <h4>1. Was an 'a priori' design provided? The research question and inclusion criteria should be established before the conduct of the review.</h4>
+                                <legend>Questions</legend>
+                                <fieldset></fieldset>
+                                <p>1. Was an 'a priori' design provided? The research question and inclusion criteria should be established before the conduct of the review.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="one"/> Yes
+                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.questionOne === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="one"/> No
+                                        <Input type="radio" name="questionOne" value="no" checked={this.state.questionOne === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="one"/> Can't answer
+                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.questionOne === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="one"/> Not applicable
+                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.questionOne === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>2. Was there duplicate study selection and data extraction? There should be at least two independent data extractors and a consensus procedure for disagreements should be in place.</h4>
+                                <p>2. Was there duplicate study selection and data extraction? There should be at least two independent data extractors and a consensus procedure for disagreements should be in place.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="two"/> Yes
+                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.questionTwo === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="two"/> No
+                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.questionTwo === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="two"/> Can't answer
+                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.questionTwo === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="two"/> Not applicable
+                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.questionTwo === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>3. Was a comprehensive literature search performed? At least two electronic sources should be searched. The report must include years and databases used (e.g., Central, EMBASE, and MEDLINE). Key words and/or MESH terms must be stated and where feasible the search strategy should be provided. All searches should be supplemented by consulting current contents, reviews, textbooks, specialized registers, or experts in the particular field of study, and by reviewing the references in the studies found.</h4>
+                                <p>3. Was a comprehensive literature search performed? At least two electronic sources should be searched. The report must include years and databases used (e.g., Central, EMBASE, and MEDLINE). Key words and/or MESH terms must be stated and where feasible the search strategy should be provided. All searches should be supplemented by consulting current contents, reviews, textbooks, specialized registers, or experts in the particular field of study, and by reviewing the references in the studies found.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="three"/> Yes
+                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.questionThree === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="three"/> No
+                                        <Input type="radio" name="questionThree" value="no" checked={this.state.questionThree === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="three"/> Can't answer
+                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.questionThree === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="three"/> Not applicable
+                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.questionThree === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>4. Was the status of publication (i.e. grey literature) not used as an inclusion criterion? The authors should state that they searched for reports regardless of their publication type. The authors should state whether or not they excluded any reports (from the systematic review), based on their publication status, language etc.</h4>
+                                <p>4. Was the status of publication (i.e. grey literature) not used as an inclusion criterion? The authors should state that they searched for reports regardless of their publication type. The authors should state whether or not they excluded any reports (from the systematic review), based on their publication status, language etc.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="four"/> Yes
+                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.questionFour === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="four"/> No
+                                        <Input type="radio" name="questionFour" value="no" checked={this.state.questionFour === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="four"/> Can't answer
+                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.questionFour === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="four"/> Not applicable
+                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.questionFour === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>5. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</h4>
+                                <p>5. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="five"/> Yes
+                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.questionFive === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="five"/> No
+                                        <Input type="radio" name="questionFive" value="no" checked={this.state.questionFive === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="five"/> Can't answer
+                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.questionFive === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="five"/> Not applicable
+                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.questionFive === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>6. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</h4>
+                                <p>6. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="six"/> Yes
+                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.questionSix === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="six"/> No
+                                        <Input type="radio" name="questionSix" value="no" checked={this.state.questionSix === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="six"/> Can't answer
+                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.questionSix === "can't answer"} onChange={this.onChange}/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="six"/> Not applicable
+                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.questionSix === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>7.Was the scientific quality of the included studies assessed and documented? 'A priori' methods of assessment should be provided (e.g., for effectiveness studies if the author(s) chose to include only randomized, double-blind, placebo controlled studies, or allocation concealment as inclusion criteria); for other types of studies alternative items will be relevant.</h4>
+                                <p>7.Was the scientific quality of the included studies assessed and documented? 'A priori' methods of assessment should be provided (e.g., for effectiveness studies if the author(s) chose to include only randomized, double-blind, placebo controlled studies, or allocation concealment as inclusion criteria); for other types of studies alternative items will be relevant.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="seven"/> Yes
+                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.questionSeven === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="seven"/> No
+                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.questionSeven === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="seven"/> Can't answer
+                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.questionSeven === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="seven"/> Not applicable
+                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.questionSeven === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>8. Was the scientific quality of the included studies used appropriately in formulating conclusions? The results of the methodological rigor and scientific quality should be considered in the analysis and the conclusions of the review, and explicitly stated in formulating recommendations.</h4>
+                                <p>8. Was the scientific quality of the included studies used appropriately in formulating conclusions? The results of the methodological rigor and scientific quality should be considered in the analysis and the conclusions of the review, and explicitly stated in formulating recommendations.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="eight"/> Yes
+                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.questionEight === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="eight"/> No
+                                        <Input type="radio" name="questionEight" value="no" checked={this.state.questionEight === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="eight"/> Can't answer
+                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.questionEight === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="eight"/> Not applicable
+                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.questionEight === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>9. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</h4>
+                                <p>9. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="nine"/> Yes
+                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.questionNine === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="nine"/> No
+                                        <Input type="radio" name="questionNine" value="no" checked={this.state.questionNine === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="nine"/> Can't answer
+                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.questionNine === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="nine"/> Not applicable
+                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.questionNine === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <h4>10. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</h4>
+                                <p>10. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</p>
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="ten"/> Yes
+                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.questionTen === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="ten"/> No
+                                        <Input type="radio" name="questionTen" value="no" checked={this.state.questionTen === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="ten"/> Can't answer
+                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.questionTen === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="ten"/> Not applicable
+                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
 
-                                <br />
                                 <br />
                                 <br />
                                 <Link to="">Save as Complicated review</Link>
 
                             </div>
-                        </FormGroup>
-                        <fieldset>
-                                <legend>Legend</legend>
-                                <FormGroup row>
-                                    <label className="col-md-2 col-form-label">Label under the legend</label>
-                                    <div className="col-md-10">
-                                        <div className="c-radio">
-                                            <label>
-                                                <Input type="radio" name="a" defaultValue="option1"/>
-                                                <span className="fa fa-circle"></span>Option one</label>
-                                        </div>
-                                        <div className="c-radio">
-                                            <label>
-                                            <legend>This is a paragraph</legend>
-                                                <span className="fa fa-circle"></span>Option one</label>
-                                        </div>
-                                        <div className="c-radio">
-                                            <label>
-                                                <Input type="radio" name="a" defaultValue="option2" defaultChecked=""/>
-                                                <span className="fa fa-circle"></span>Option two defaultChecke</label>
-                                        </div>
-                                        <div className="c-radio">
-                                            <label>
-                                                <Input type="radio" name="a" disabled=""/>
-                                                <span className="fa fa-circle"></span>Option four disabled</label>
-                                        </div>
-                                    </div>
-                                </FormGroup>
-                            </fieldset>
+                        
                         </form>
                     </fieldset>
                     </CardBody>
                     <CardFooter>
                         <div className="d-flex align-items-center">
                             <div className="ml-auto">
-                                <button type="submit" className="btn btn-warning">Cancel</button>{' '}
-                                <button type="submit" className="btn btn-info">Save</button>
+                                <button type="submit" className="btn btn-warning" onClick={this.cancel}>Cancel</button>{' '}
+                                <button type="submit" className="btn btn-info" onClick={this.save}>Save</button>
                             </div>
                             <div className="ml-auto">
-                                <button type="submit" className="btn btn-success">Finish</button>
+                                <button type="submit" className="btn btn-success" onClick={this.finish}>Finish</button>
                             </div>
                         </div>
                     </CardFooter>
@@ -535,8 +394,6 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
     }
 
 }
-
-// export default HSEAssignedQualityAppraisalsArticleInput;
 
 function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
     return {
