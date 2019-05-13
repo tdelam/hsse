@@ -266,7 +266,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     }
 
     save = () => {
-        this.props.assignHSEPendingEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
+        this.props.assignHSEAssignedEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
 
     cancel = () => {
@@ -274,7 +274,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     }
 
     finish = () => {
-        this.props.assignHSEPendingEligibilityFiltersArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
+        this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
     }
 
     
