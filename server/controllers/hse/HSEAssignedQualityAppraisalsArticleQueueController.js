@@ -9,7 +9,7 @@ exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find()
+    HSEArticleModelClass.find({ complicated: false })
     .or([ { _qualityAppraisalsJunior: user._id }, { _qualityAppraisalsSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {

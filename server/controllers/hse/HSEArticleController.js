@@ -82,3 +82,33 @@ exports.list = (req, res) => {
         return res.status(200).send(articles);
     });
 }
+
+exports.addToComplicatedQueue = async (req, res) => {
+
+    const { articleId } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(articleId)) {
+        return res.status(400).send({
+            message: 'Article is invalid'
+        });
+    }
+
+    await HSEArticleModelClass.findByIdAndUpdate(
+        articleId,
+        
+        {complicated: true},
+        
+        {new: true},
+        
+        // the callback function
+        (err, article) => {
+        // Handle any possible database errors
+            if (err) return res.status(500).send(err);
+            
+            return res.send({
+                message: `Article: ${article._id} has been added to the complicated queue`
+            });
+        }
+    );
+
+};
