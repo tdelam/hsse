@@ -351,6 +351,8 @@ const HSEArticleEligibilityFilterSchema = new Schema({
 
     hseState: { type: Schema.Types.Mixed, default: {} },
 
+    complicated: { type: Boolean, default: false },
+
 /*
     hseState: {type: Schema.Types.Mixed, default: {
 
