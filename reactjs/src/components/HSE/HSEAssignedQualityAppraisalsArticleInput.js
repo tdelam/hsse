@@ -27,23 +27,28 @@ import * as actions from '../../actions';
 
 class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
-    state = {
+    constructor(props, context) {
+        super(props, context);
+        
+        this.state = {
 
-        notInEnglish: false,
-        notFreeFullText: false,
-
-        questionOne: '', 
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
-        questionSix: '',
-        questionSeven: '',
-        questionEight: '',
-        questionNine: '',
-        questionTen: '',
-
-    };
+            notInEnglish: false,
+            notFreeFullText: false,
+    
+            questionOne: '', 
+            questionTwo: '',
+            questionThree: '',
+            questionFour: '',
+            questionFive: '',
+            questionSix: '',
+            questionSeven: '',
+            questionEight: '',
+            questionNine: '',
+            questionTen: '',
+    
+        };
+        
+    }
 
     componentDidMount() {
 
@@ -53,6 +58,15 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         this.props.getCurrentUser();
         this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history);
 
+        console.log(this.props);
+    
+        if( (this.props.currentUser) && (this.props.currentArticle) && (this.props.currentUser.user_id === this.props.currentArticle.qualityAppraisalsJunior) ) {
+            this.setState(this.props.currentArticle);
+            this.state = {...this.currentArticle.hseState}
+        } else if( (this.props.currentUser) && (this.props.currentArticle) && this.props.currentUser.user_id === this.props.currentArticle.qualityAppraisalsSenior) {
+            this.setState(this.props.currentArticle.hseState);
+        }
+    
     }
 
     onSubmit = e => {
@@ -114,7 +128,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
     }
 
     render() {
-        console.log(`currentArticle: ${this.props.currentArticle}`);
+        console.log(this.props.currentArticle);
         console.log(this.props.currentUser);
 
         return (
@@ -129,7 +143,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                     <CardHeader><div  >
                             <div><h3>Appraiser Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: {  } </div>
+                            <div>Title: { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>

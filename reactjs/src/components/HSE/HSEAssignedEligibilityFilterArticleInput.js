@@ -105,7 +105,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         this.props.getCurrentUser();
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
 
-        this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
+        //this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
 
         // set initial state
         //console.log(this.props.currentArticle.eligibilityFilterJuniorInput.state);

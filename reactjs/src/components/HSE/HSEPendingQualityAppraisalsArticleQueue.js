@@ -48,9 +48,6 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
         super(props, context);
         this.state = {
             modal: false,
-            toasterPos: 'top-right',
-            toasterType: 'info',
-            selectedArticleForAssignment: '',
             swalOptionJunior: {
                 title: "Assign Article",
                 text: "Are you sure you want to assign this article to your assigned quality appraisal list!",
@@ -91,11 +88,6 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
         });
     }
 
-    selectArticleForAssignment = () =>  {
-        this.setState({
-            selectedArticleForAssignment: ''
-        })
-    }
 
     renderPriority(priority) {
         
@@ -118,7 +110,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
 
     swalCallbackAssignJunior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser(articleId);
+            this.props.assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser(articleId, this.props.history);
     }
 
     swalCallbackAssignSenior(isConfirm, articleId) {
@@ -131,31 +123,31 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
         if(this.props.pendingArticles != null ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
-                    <tr key={article[1]._id}>
+                    <tr key={Math.random()}>
                         {/*
                         <td className="text-center">
                             <span className="badge badge-success">{ article[1].priority }</span>
                         </td>
                         */}
                         { this.renderPriority(article[1].priority) }
-                        <td>
+                        <td key={Math.random()}>
                             { article[1].articleSource }
                         </td>
-                        <td>
+                        <td key={Math.random()}>
                             { article[1].harvestDate }
                         </td>
                         <td>
                             {article[1]._qualityAppraisalsJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
                             
                         </td>
-                        <td>
+                        <td key={Math.random()}>
                             {article[1]._qualityAppraisalsSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
                         </td>
                         {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
-                        <td>{ article[1]._id }</td>
-                        <td>{ article[1].title }</td>
-                        <td>{ article[1].author }</td>
-                        <td>{ article[1].language }</td>
+                        <td key={Math.random()}>{ article[1]._id }</td>
+                        <td key={Math.random()}>{ article[1].title }</td>
+                        <td key={Math.random()}>{ article[1].author }</td>
+                        <td key={Math.random()}>{ article[1].language }</td>
                         {/*}
                         <td className="text-right">
                             <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>

@@ -9,6 +9,8 @@ const parseBatchfile = require('../../util/parseBatchfile');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters'); 
+const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals');
+const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStudies');
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.HSSE_S3_ACCESS_KEY,
@@ -66,6 +68,9 @@ exports.create = async (req, res) => {
         const newEligibilityFilterJunior = new HSEArticleEligibilityFilterModelClass();
         const newEligibilityFilterSenior = new HSEArticleEligibilityFilterModelClass();
 
+        const newQualityAppraiserJunior = new HSEArticleQualityAppraisalModelClass();
+        const newQualityAppraiserSenior = new HSEArticleQualityAppraisalModelClass();
+
         newEligibilityFilterJunior.save( (err, savedEligibilityFilter) => {
             if(err){
                 console.log(err)
@@ -81,9 +86,28 @@ exports.create = async (req, res) => {
                 console.log(`New eligibility filter input created: ${savedEligibilityFilter._id}`);
             }
         });
+
+        newQualityAppraiserJunior.save( (err, savedQualityAppraiser) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log(`New quality appraiser input created: ${savedQualityAppraiser._id}`);
+            }
+        });
+
+        newQualityAppraiserSenior.save( (err, savedQualityAppraiser) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log(`New quality appraiser input created: ${savedQualityAppraiser._id}`);
+            }
+        });
     
         newHSEArticle.eligibilityFilterJuniorInput = newEligibilityFilterJunior;
         newHSEArticle.eligibilityFilterSeniorInput = newEligibilityFilterSenior;
+
+        newHSEArticle.qualityAppraiserJuniorInput = newQualityAppraiserJunior;
+        newHSEArticle.qualityAppraiserSeniorInput = newQualityAppraiserSenior;
 
         await newHSEArticle.save( (err, savedArticle) => {
             if(err) {
