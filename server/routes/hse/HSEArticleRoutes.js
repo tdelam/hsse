@@ -8,5 +8,6 @@ module.exports = (app) => {
     app.get('/hse/articles', HSEArticleController.list);
     app.get('/hse/article/:articleId', HSEArticleController.read);
     app.post('/hse/articles', HSEArticleController.create);
+    app.post('/hse/articles/addtocomplicatedqueue/:articleId', HSEArticleController.addToComplicatedQueue);
     app.delete('/hse/articles/:articleId', HSEArticleController.delete);
 };

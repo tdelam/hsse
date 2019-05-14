@@ -57,18 +57,14 @@ class Login extends Component {
             }
         });
 
-        //const { email, password } = form.values;
-
         console.log(hasError ? 'Form has errors. Check!' : 'Form Submitted!')
-        //this.props.signin({ email, password }, this.gotoDashboard);
-        //console.log(`email: ${email}, password: ${password}`);
 
         e.preventDefault()
     }
 
     gotoDashboard = () => this.props.history.push('/dashboardmain');
 
-    handleSubmit = (formProps) => {console.log(formProps);
+    handleSubmit = (formProps) => {
         this.props.signin(formProps, this.gotoDashboard);
     }
 

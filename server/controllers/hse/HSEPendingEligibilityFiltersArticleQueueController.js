@@ -5,7 +5,7 @@ const Authentication = require('../authentication');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 exports.listArticles = async (req, res) => {
-    HSEArticleModelClass.find()
+    HSEArticleModelClass.find({ complicated: false })
        .or([ { _eligibilityFiltersJunior: null }, { _eligibilityFiltersSenior: null } ])
        .exec(function(err, articles) {
            if(err) {

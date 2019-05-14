@@ -93,8 +93,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     constructor(props) {
         super(props);
         
-        if(this.props.currentArticle !== undefined)
-            this.state = this.props.currentArticle.eligibilityFiltersSeniorInput.hseState
+        // this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
+        this.state = {}
     }
 
     componentWillMount() {
@@ -104,6 +104,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         
         this.props.getCurrentUser();
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+
+        this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
 
         // set initial state
         //console.log(this.props.currentArticle.eligibilityFilterJuniorInput.state);
@@ -261,6 +263,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 relevanceValue: event.target.value,
                 showEligibility: false
             });
+            this.props.addArticleToComplicatedQueue(this.props.match.params.articleId, this.props.history);
+            this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue');
         }
         
     }
@@ -737,7 +741,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 // export default HSEAssignedEligibilityFilterArticleInput;
 
 function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
-    console.log(hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleFetch);
+    console.log(hseAssignedEligibilityFiltersArticleQueue);
     return {
         currentUser: auth.currentUser,
         errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,

@@ -13,6 +13,9 @@ import {
   HSE_CREATE_BATCHFILE,
   HSE_CREATE_BATCHFILE_ERROR,
 
+  HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE,
+  HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR,
+
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
 
@@ -212,7 +215,7 @@ import {
 
 const backendServer = "/api";
 
-const headers = {
+let headers = {
   'Content-Type': 'application/json',
   'Authorization': localStorage.getItem('token') 
 };
@@ -516,6 +519,17 @@ export const listHSEAssignedPresentationDetailsArticlesQueue = (history) => asyn
     dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse presentation details article assigned queue'});
+  }
+};
+
+export const addArticleToComplicatedQueue = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/articles/addtocomplicatedqueue/${articleId}`, {}, { headers });
+  
+    // history.push('/dashboard');
+    dispatch({ type: HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR, payload: e.message });
   }
 };
 

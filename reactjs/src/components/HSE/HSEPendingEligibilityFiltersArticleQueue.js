@@ -130,7 +130,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         
         if(this.props.pendingArticles != null ) {
             const rows = Object.entries(this.props.pendingArticles).map((article, index) => {
-                console.log(index);
+                
                 return (
                     <tr key={Math.random()}>
                         {/*
