@@ -79,18 +79,18 @@ exports.setQualityAppraisalsValues = async (req, res) => {
 
         } else if( user._id.equals(article._qualityAppraisalsJunior) ) {
 
-            await HSEArticleQualityAppraisalModelClass.findByIdAndUpdate(
-                article.qualityAppraisalsJuniorInput,
+            await HSEArticleQualityAppraisalModelClass.findOneAndUpdate(
+                { _id: article.qualityAppraisalsJuniorInput },
                 
-                {hseState: inputValues},
-                
-                {new: true},
+                { hseState: inputValues },
+
+                {new: true, useFindAndModify: false},
                 
                 // the callback function
                 (err, todo) => {
                 // Handle any possible database errors
                     if (err) return res.status(500).send(err);
-                    
+                    console.log(todo)
                     return res.send({
                         message: 'Inputs for Junior appraiser added for article'
                     });
@@ -99,18 +99,18 @@ exports.setQualityAppraisalsValues = async (req, res) => {
             
         } else if( user._id.equals(article._qualityAppraisalsSenior) ) {
 
-            await HSEArticleQualityAppraisalModelClass.findByIdAndUpdate(
-                article.qualityAppraisalsSeniorInput,
-                
-                {hseState: inputValues},
-                
-                {new: true},
+            await HSEArticleQualityAppraisalModelClass.findOneAndUpdate(
+                { _id: article.qualityAppraisalsSeniorInput },
+                   
+                { hseState: inputValues },
+
+                { new: true, useFindAndModify: false},
                 
                 // the callback function
                 (err, todo) => {
                 // Handle any possible database errors
                     if (err) return res.status(500).send(err);
-                    
+                    console.log(todo);
                     return res.send({
                         message: 'Inputs for Senior appraiser added for article'
                     });

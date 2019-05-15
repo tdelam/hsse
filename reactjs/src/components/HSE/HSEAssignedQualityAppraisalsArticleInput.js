@@ -29,7 +29,16 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
     constructor(props, context) {
         super(props, context);
-        
+
+        //this.state = { ...props.currentArticle.hseState.inputValues };
+
+/*
+        if((props.currentUser) && (props.currentArticle) && props.currentUser.user_id === props.currentArticle._qualityAppraisalsJunior) {
+            this.state = {...props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues}
+        } else if ((props.currentUser) && props.currentUser.user_id === props.currentArticle._qualityAppraisalsSenior) {
+            this.state = {...props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues}
+        }
+*/       
         this.state = {
 
             notInEnglish: false,
@@ -56,19 +65,54 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
-        this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history);
 
-        console.log(this.props);
-    
-        if( (this.props.currentUser) && (this.props.currentArticle) && (this.props.currentUser.user_id === this.props.currentArticle.qualityAppraisalsJunior) ) {
-            this.setState(this.props.currentArticle);
-            this.state = {...this.currentArticle.hseState}
-        } else if( (this.props.currentUser) && (this.props.currentArticle) && this.props.currentUser.user_id === this.props.currentArticle.qualityAppraisalsSenior) {
-            this.setState(this.props.currentArticle.hseState);
+        this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history).then(res => { 
+            this.setState(res.qualityAppraisalsJuniorInput.hseState.inputValues);
+        });
+
+        
+/*
+        if(this.props.currentArticle)
+            console.log(this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues);
+            
+        if( (this.props.currentUser) && (this.props.currentArticle) && (this.this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues.currentUser.user_id === this.props.currentArticle._qualityAppraisalsJunior) ) {
+            this.setState({...this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues});
+            console.log(this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues);
+        } else if( (this.props.currentUser) && (this.props.currentArticle) && this.props.currentUser.user_id === this.props.currentArticle._qualityAppraisalsSenior) {
+            this.setState({...this.props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues});
+            console.log(this.props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues);
         }
+*/    
     
     }
+/*
+    static getDerivedStateFromProps(props, state) {
+        if(props.currentArticle) {
+            if (props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues !== state) {
+                return {
+                    ...props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues,
+                };
+            }
+        
+            // Return null if the state hasn't changed
+            //return null;
+        }
 
+        return null;
+        
+      }
+*/
+
+/*
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.currentArticle) {
+            return nextProps === prevState
+            ? {}
+            : {...nextProps.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues}
+        return {...prevState};
+        }
+      }
+*/
     onSubmit = e => {
         console.log('Form submitted..');
         e.preventDefault();
@@ -128,8 +172,10 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
     }
 
     render() {
-        console.log(this.props.currentArticle);
-        console.log(this.props.currentUser);
+
+        if(!this.props.currentArticle) {
+            return <div>Loading...</div>
+        }
 
         return (
             <ContentWrapper>

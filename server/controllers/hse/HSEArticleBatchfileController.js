@@ -11,6 +11,7 @@ const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters'); 
 const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals');
 const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStudies');
+const HSEArticlePresentationDetailsModelClass = mongoose.model('HSEArticlePresentationDetails');
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.HSSE_S3_ACCESS_KEY,
@@ -71,6 +72,10 @@ exports.create = async (req, res) => {
         const newQualityAppraiserJunior = new HSEArticleQualityAppraisalModelClass();
         const newQualityAppraiserSenior = new HSEArticleQualityAppraisalModelClass();
 
+        const newLinkingStudiesJunior = new HSEArticleLinkingStudiesModelClass();
+
+        const newPresentationDetailsJunior = new HSEArticlePresentationDetailsModelClass();
+
         newEligibilityFilterJunior.save( (err, savedEligibilityFilter) => {
             if(err){
                 console.log(err)
@@ -102,12 +107,32 @@ exports.create = async (req, res) => {
                 console.log(`New quality appraiser input created: ${savedQualityAppraiser._id}`);
             }
         });
-    
-        newHSEArticle.eligibilityFilterJuniorInput = newEligibilityFilterJunior;
-        newHSEArticle.eligibilityFilterSeniorInput = newEligibilityFilterSenior;
 
-        newHSEArticle.qualityAppraiserJuniorInput = newQualityAppraiserJunior;
-        newHSEArticle.qualityAppraiserSeniorInput = newQualityAppraiserSenior;
+        newLinkingStudiesJunior.save( (err, savedLinkingStudies) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log(`New linking studies input created: ${savedLinkingStudies._id}`);
+            }
+        });
+
+        newPresentationDetailsJunior.save( (err, savedPresentationDetails) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log(`New presentation details input created: ${savedPresentationDetails._id}`);
+            }
+        });
+    
+        newHSEArticle.eligibilityFiltersJuniorInput = newEligibilityFilterJunior._id;
+        newHSEArticle.eligibilityFiltersSeniorInput = newEligibilityFilterSenior._id;
+
+        newHSEArticle.qualityAppraisalsJuniorInput = newQualityAppraiserJunior._id;
+        newHSEArticle.qualityAppraisalsSeniorInput = newQualityAppraiserSenior._id;
+
+        newHSEArticle.linkingStudiesJuniorInput = newLinkingStudiesJunior._id;
+
+        newHSEArticle.presentationDetailsJuniorInput = newPresentationDetailsJunior._id;
 
         await newHSEArticle.save( (err, savedArticle) => {
             if(err) {

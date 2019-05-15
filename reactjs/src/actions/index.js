@@ -551,7 +551,9 @@ export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => 
   
     // history.push('/dashboard');
     // console.log(response.data);
-    dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH, payload: response.data })
+    dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH, payload: response.data });
+
+    return response.data;
     
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse quality appraisals assigned article'});
@@ -722,7 +724,7 @@ export const assignHSEAssignedQualityAppraisalsArticleEdit = (articleId, inputVa
     });
 
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT, payload: response.data });
-    //history.push('/hse/assignedqualityappraisalsarticlequeue');
+    history.push('/hse/assignedqualityappraisalsarticlequeue');
     
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_ERROR, payload: 'Error saving values for article'});
