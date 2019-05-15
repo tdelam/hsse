@@ -66,8 +66,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
 
         this.props.getCurrentUser();
 
-        this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history).then(res => { 
-            this.setState(res.qualityAppraisalsJuniorInput.hseState.inputValues);
+        this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history).then(res => {
+            if(res.qualityAppraisalsJuniorInput.hseState !== null)
+                this.setState(res.qualityAppraisalsJuniorInput.hseState.inputValues);
         });
 
         
