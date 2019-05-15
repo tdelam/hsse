@@ -52,7 +52,7 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
     }
 
     renderArticles() {
-        console.log(this.props);
+        
         if(this.props.assignedArticles != null ) {
             const rows = Object.entries(this.props.assignedArticles).map(article => {
                 return (

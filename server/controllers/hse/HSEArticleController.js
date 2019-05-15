@@ -3,18 +3,42 @@ const mongoose = require('mongoose');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters');
 const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAppraisals'); 
+const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStudies');
+const HSEArticlePresentationDetailsModelClass = mongoose.model('HSEArticlePresentationDetails');
 
 exports.create = (req, res) => {
 
     const newHSEArticle = new HSEArticleModelClass(req.body);
+
     const newEligibilityFilterJunior = new HSEArticleEligibilityFilterModelClass();
     const newEligibilityFilterSenior = new HSEArticleEligibilityFilterModelClass();
+
+    const newQualityAppraiserJunior = new HSEArticleQualityAppraisalModelClass();
+    const newQualityAppraiserSenior = new HSEArticleQualityAppraisalModelClass();
+
+    const newLinkingStudiesJunior = new HSEArticleLinkingStudiesModelClass();
+
+    const newPresentationDetailsJunior = new HSEArticlePresentationDetailsModelClass();
 
     newEligibilityFilterJunior.save();
     newEligibilityFilterSenior.save();
 
-    newHSEArticle.eligibilityFiltersJuniorInput = newEligibilityFilterJunior;
-    newHSEArticle.eligibilityFiltersSeniorInput = newEligibilityFilterSenior;
+    newQualityAppraiserJunior.save();
+    newQualityAppraiserSenior.save();
+
+    newLinkingStudiesJunior.save();
+
+    newPresentationDetailsJunior.save();
+
+    newHSEArticle.eligibilityFiltersJuniorInput = newEligibilityFilterJunior._id;
+    newHSEArticle.eligibilityFiltersSeniorInput = newEligibilityFilterSenior._id;
+
+    newHSEArticle.qualityAppraisalsJuniorInput = newQualityAppraiserJunior._id;
+    newHSEArticle.qualityAppraisalsSeniorInput = newQualityAppraiserSenior._id;
+
+    newHSEArticle.linkingStudiesJuniorInput = newLinkingStudiesJunior._id;
+
+    newHSEArticle.presentationDetailsJuniorInput = newPresentationDetailsJunior._id;
 
     newHSEArticle.save( (err) => {
         if(err) {
@@ -23,13 +47,12 @@ exports.create = (req, res) => {
                 message: 'Unable to save new article'
             });
         } else {
-            console.log(newHSEArticle.newEligibilityFilter);
             res.status(201).send(newHSEArticle);
         }
 
     });
     
-}
+};
 
 exports.read = (req, res) => {
 
