@@ -97,7 +97,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         this.state = {}
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         const { history } = this.props;
         const { articleId } = this.props.match.params;
