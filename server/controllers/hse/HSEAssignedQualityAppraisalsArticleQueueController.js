@@ -71,7 +71,7 @@ exports.setQualityAppraisalsValues = async (req, res) => {
 
         }
         
-        if( !(user._id.equals(article._qualityAppraisalsJunior) || user.id.equals(article._qualityAppraisalsSenior) ) ){
+        if( !(user._id.equals(article._qualityAppraisalsJunior) || user._id.equals(article._qualityAppraisalsSenior) ) ){
 
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
