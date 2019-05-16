@@ -54,6 +54,80 @@ exports.setEligibilityFiltersValues = async (req, res) => {
 
     const { articleId } = req.params;
 
+    const inputValues = req.body;
+    
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
+        if(err) {
+
+            return res.send(err);
+
+        } else if(!article) {
+
+            return res.status(404).send({
+                message: 'No article with that identifier has been found'
+            });
+
+        }
+        
+        if( !(user._id.equals(article._eligibilityFiltersJunior) || user.id.equals(article._eligibilityFiltersSenior) ) ){
+
+            return res.status(404).send({
+                message: 'Not authorized to add inputs for eligibility and filter for article'
+            });
+
+        } else if( user._id.equals(article._eligibilityFiltersJunior) ) {
+
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate(
+                { _id: article.eligibilityFiltersJuniorInput },
+                
+                { hseState: inputValues },
+
+                {new: true, useFindAndModify: false},
+                
+                // the callback function
+                (err, todo) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    console.log(todo)
+                    return res.send({
+                        message: 'Inputs for Junior filter added for article'
+                    });
+                }
+            );
+            
+        } else if( user._id.equals(article._eligibilityFiltersSenior) ) {
+
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate(
+                { _id: article.eligibilityFiltersSeniorInput },
+                   
+                { hseState: inputValues },
+
+                { new: true, useFindAndModify: false},
+                
+                // the callback function
+                (err, todo) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    console.log(todo);
+                    return res.send({
+                        message: 'Inputs for Senior filter added for article'
+                    });
+                }
+            );
+            
+        } 
+        
+    });
+
+};
+
+/*
+exports.setEligibilityFiltersValues = async (req, res) => {
+
+    const { articleId } = req.params;
+
     const { inputValues }  = req.body;
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
@@ -77,7 +151,7 @@ exports.setEligibilityFiltersValues = async (req, res) => {
                 message: 'Not authorized to add inputs for eligibility and filter for article'
             });
 
-        }/* else if ( user._id.equals(article._eligibilityFiltersJunior) && user._id.equals(article._eligibilityFiltersSenior) ) {
+        } else if ( user._id.equals(article._eligibilityFiltersJunior) && user._id.equals(article._eligibilityFiltersSenior) ) {
 
             await HSEArticleEligibilityFilterModelClass.findByIdAndUpdate(
                 article.eligibilityFiltersJuniorInput,
@@ -113,7 +187,7 @@ exports.setEligibilityFiltersValues = async (req, res) => {
             );
 
 
-        } */ else if( user._id.equals(article._eligibilityFiltersJunior) ) {            
+        } else if( user._id.equals(article._eligibilityFiltersJunior) ) {            
             
             await HSEArticleEligibilityFilterModelClass.findByIdAndUpdate(
                 article.eligibilityFiltersJuniorInput,
@@ -158,6 +232,7 @@ exports.setEligibilityFiltersValues = async (req, res) => {
     });
 
 };
+*/
 
 exports.setEligibilityFiltersComplete = async (req, res) => {
 

@@ -540,6 +540,9 @@ export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) =>
     // history.push('/dashboard');
     // console.log(response.data);
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH, payload: response.data })
+
+    return response.data;
+
   } catch(e) {
     dispatch({ type: HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse eligibility filter assigned article'});
   }
@@ -584,6 +587,10 @@ export const fetchHSEAssignedPresentationDetailsArticle = (articleId, history) =
 };
 
 export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   console.log(headers);
   try {
     const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 

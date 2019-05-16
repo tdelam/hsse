@@ -90,20 +90,24 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         checkedIOHSDT: []
     };
 
-    constructor(props) {
-        super(props);
-        
-        // this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
-        this.state = {}
-    }
-
     componentDidMount() {
 
         const { history } = this.props;
         const { articleId } = this.props.match.params;
         
-        this.props.getCurrentUser();
-        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history).then(res => {
+
+            console.log(res._eligibilityFiltersJunior);
+            console.log(this.props.currentUser.user._id);
+            
+            if(res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
+                this.setState(res.eligibilityFiltersJuniorInput.hseState.inputValues)
+                
+            } else if (res.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersSenior) ) {
+                this.setState(res.eligibilityFiltersSeniorInput.hseState.inputValues)
+            }
+            
+        });
 
         //this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
 
@@ -341,31 +345,32 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         }
     }
 
-    renderRelevance = (relevance) => {
-        if(relevance)
-        return (
-            <fieldset>
-                <legend className="offset-md-1">Relevance</legend>
-                <FormGroup row>
-                    <label className="col-md-2 col-form-label"></label>
-                    <div className="col-md-10">
-                        <div>
-                            <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
+    renderRelevance = (relevance) => {console.log(this.state);
+        if(relevance) {
+            return (
+                <fieldset>
+                    <legend className="offset-md-1">Relevance</legend>
+                    <FormGroup row>
+                        <label className="col-md-2 col-form-label"></label>
+                        <div className="col-md-10">
+                            <div>
+                                <p>Is this title relevant to health systems governance, financial or delivery arrangements (or implementation strategies)?</p>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
+                                    <span className="fa fa-circle"></span>{" "}Yes</label>
+                            </div>
+                            <div className="c-radio">
+                                <label>
+                                    <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
+                                    <span className="fa fa-circle"></span>{" "}No</label>
+                            </div>
                         </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
-                                <span className="fa fa-circle"></span>{" "}Yes</label>
-                        </div>
-                        <div className="c-radio">
-                            <label>
-                                <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
-                                <span className="fa fa-circle"></span>{" "}No</label>
-                        </div>
-                    </div>
-                </FormGroup>
-            </fieldset>
-        );
+                    </FormGroup>
+                </fieldset>
+            );
+        }
     }
 
     renderGeneralArticleInformation = (generalInfo) => {
@@ -676,7 +681,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     <CardHeader><div  >
                             <div><h3>Filterer Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: {  } </div>
+                            <div>Title: { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>
@@ -741,7 +746,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 // export default HSEAssignedEligibilityFilterArticleInput;
 
 function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
-    console.log(hseAssignedEligibilityFiltersArticleQueue);
+    //console.log(hseAssignedEligibilityFiltersArticleQueue);
     return {
         currentUser: auth.currentUser,
         errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
