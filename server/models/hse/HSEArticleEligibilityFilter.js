@@ -349,7 +349,7 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     vulnerableAndSpecialHealthNeedsPopulations: { type: Boolean, default: false },
     womensHealth: { type: Boolean, default: false },
 
-    hseState: { type: Schema.Types.Mixed, default: {} },
+    hseState: { type: Schema.Types.Mixed, default: null },
 
     complicated: { type: Boolean, default: false },
 
