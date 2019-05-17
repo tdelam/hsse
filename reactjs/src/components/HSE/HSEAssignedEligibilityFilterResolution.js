@@ -49,6 +49,9 @@ class HSEAssignedEligibilityFilterResolution extends Component {
 
     state = {
 
+        eligibilityFiltersJuniorInput: {},
+        eligibilityFiltersSeniorInput: {},
+
         dropdownOpen: false,
         splitButtonOpen: false,
 
@@ -88,13 +91,26 @@ class HSEAssignedEligibilityFilterResolution extends Component {
     };
 
     componentDidMount() {
-
+/*
         const { history } = this.props;
         const { articleId } = this.props.match.params;
 
         this.props.getCurrentUser();
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history);
+*/
+        const { history } = this.props;
+        const { articleId } = this.props.match.params;
 
+        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history).then(res => {
+            
+            if(res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
+                this.setState({ eligibilityFiltersJuniorInput: res.eligibilityFiltersJuniorInput.hseState.inputValues } );
+                
+            } else if (res.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersSenior) ) {
+                this.setState({ eligibilityFiltersJuniorInput: res.eligibilityFiltersSeniorInput.hseState.inputValues } );
+            }
+            
+        });
     }
 
     toggleDropDown = () => {

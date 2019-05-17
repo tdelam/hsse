@@ -96,9 +96,6 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         const { articleId } = this.props.match.params;
         
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history).then(res => {
-
-            console.log(res._eligibilityFiltersJunior);
-            console.log(this.props.currentUser.user._id);
             
             if(res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
                 this.setState(res.eligibilityFiltersJuniorInput.hseState.inputValues)
@@ -108,14 +105,6 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             }
             
         });
-
-        //this.state = this.props.currentArticle.eligibilityFiltersJuniorInput.hseState
-
-        // set initial state
-        //console.log(this.props.currentArticle.eligibilityFilterJuniorInput.state);
-        //this.setState(this.props.currentArticle.eligibilityFiltersSeniorInput.hseState);
-        //if(this.props.currentArticle !== undefined)
-            //this.setState(this.props.currentArticle.eligibilityFiltersSeniorInput.hseState)
 
     }
 
