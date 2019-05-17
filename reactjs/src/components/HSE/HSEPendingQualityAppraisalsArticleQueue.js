@@ -11,7 +11,7 @@ import {
     Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 import Swal from '../Elements/Swal';
 
@@ -119,8 +119,8 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
     }
 
     renderArticles() {
-        
-        if(this.props.pendingArticles != null ) {
+        console.log(this.props);
+        if(this.props.pendingArticles !== undefined ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={Math.random()}>
@@ -171,32 +171,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                 )
             });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
-            return (
-                <div>
-                    <Datatable options={dtOptions}>
-                        <table className="table table-striped my-4 w-100">
-                            <thead>
-                                <tr>
-                                    <th data-priority="1">Priority</th>
-                                    <th>Source</th>
-                                    <th>Harvest Date</th>
-                                    <th>Junior Appraiser</th>
-                                    <th>Senior Appraiser</th>
-                                    <th>Article Id</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Language</th>
-                                    {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
-                                    {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { rows }
-                            </tbody>
-                        </table>
-                    </Datatable>
-                </div>
-            );
+            return ( rows );
         }    
     };
 
@@ -222,7 +197,30 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                            { this.renderArticles() }
+                        <div>
+                    <Datatable options={dtOptions}>
+                        <table className="table table-striped my-4 w-100">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Priority</th>
+                                    <th>Source</th>
+                                    <th>Harvest Date</th>
+                                    <th>Junior Appraiser</th>
+                                    <th>Senior Appraiser</th>
+                                    <th>Article Id</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Language</th>
+                                    {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
+                                    {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { this.renderArticles() }
+                            </tbody>
+                        </table>
+                    </Datatable>
+                </div>
                     </CardBody>
                 </Card>
             </ContentWrapper>

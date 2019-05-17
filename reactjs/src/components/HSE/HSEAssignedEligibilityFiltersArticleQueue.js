@@ -52,7 +52,7 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
 
     renderArticles() {
         
-        if(this.props.assignedArticles != null ) {
+        if(this.props.assignedArticles  !== undefined ) {
             const rows = Object.entries(this.props.assignedArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>

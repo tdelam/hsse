@@ -3,32 +3,34 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Tree } from 'antd';
+//import { Tree } from 'antd';
 import {
-    Col,
+    //Col,
     Card,
     CardHeader,
     CardBody,
     CardFooter,
-    FormGroup,
-    Input,} from 'reactstrap';
+    //FormGroup,
+    //Input,
+} from 'reactstrap';
 
 // React Select
-import Select from 'react-select';
+//import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
 
-const { TreeNode } = Tree;
-
+//const { TreeNode } = Tree;
+/*
 const STATES = [
     { value: 'new-article', label: 'New Article', className: 'State-ACT' },
     { value: 'data-entry-complete', label: 'Data Entry Complete', className: 'State-NSW' },
     { value: 'live', label: 'Live', className: 'State-Vic' },
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
+*/
 
 class HSEAssignedQualityAppraisalsResolution extends Component {
 
@@ -175,8 +177,8 @@ class HSEAssignedQualityAppraisalsResolution extends Component {
         this.getInputValues();
 
         // used for react select
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
+        //const { selectedOption } = this.state;
+        //const value = selectedOption && selectedOption.value;
 
         // this.setState({ qualityAppraisalsModel: this.getInputValues() });
 

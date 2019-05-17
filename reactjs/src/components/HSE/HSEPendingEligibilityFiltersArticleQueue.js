@@ -11,7 +11,7 @@ import {
     Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 import Swal from '../Elements/Swal';
 
@@ -128,7 +128,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
     renderArticles() {
         
-        if(this.props.pendingArticles != null ) {
+        if(this.props.pendingArticles !== undefined ) {
             const rows = Object.entries(this.props.pendingArticles).map((article, index) => {
                 
                 return (

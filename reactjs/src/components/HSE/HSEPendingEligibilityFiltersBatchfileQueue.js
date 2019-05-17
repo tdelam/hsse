@@ -52,7 +52,7 @@ class HSEPendingEligibilityFiltersBatchfileQueue extends Component {
     }
 
     renderBatchfiles() {
-        if(this.props.pendingBatchfiles != null ) {
+        if(this.props.pendingBatchfiles !== undefined ) {
             const rows = Object.entries(this.props.pendingBatchfiles).map(batchfile => {
                 
                 return (

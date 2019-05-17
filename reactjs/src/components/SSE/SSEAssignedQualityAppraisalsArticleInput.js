@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Tree } from 'antd';
+//import { Tree } from 'antd';
 import {
-    Col,
+    //Col,
     Label,
     Card,
     CardHeader,
@@ -16,7 +16,7 @@ import {
     Input,} from 'reactstrap';
 
 // React Select
-import Select from 'react-select';
+//import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
@@ -27,15 +27,15 @@ import questionList from '../Common/QualityAppraisalsQuestions';
 
 
 
-const { TreeNode } = Tree;
-
+//const { TreeNode } = Tree;
+/*
 const STATES = [
     { value: 'new-article', label: 'New Article', className: 'State-ACT' },
     { value: 'data-entry-complete', label: 'Data Entry Complete', className: 'State-NSW' },
     { value: 'live', label: 'Live', className: 'State-Vic' },
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
-
+*/
 class SSEAssignedQualityAppraisalsArticleInput extends Component {
 
     state = {
@@ -155,7 +155,7 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         return (
             questionList.forEach(question => (
                 <div>
-                <h5></h5>
+                <h5>.</h5>
                                 <FormGroup check inline>
                                     <Label check>
                                     <Input type="checkbox" /> Not in English
@@ -247,8 +247,8 @@ class SSEAssignedQualityAppraisalsArticleInput extends Component {
         this.getInputValues();
 
         // used for react select
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
+        //const { selectedOption } = this.state;
+        //const value = selectedOption && selectedOption.value;
 
         // this.setState({ qualityAppraisalsModel: this.getInputValues() });
 
