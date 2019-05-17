@@ -120,7 +120,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
 
     renderArticles() {
         console.log(this.props);
-        if(this.props.pendingArticles !== undefined ) {
+        if(this.props.pendingArticles) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={Math.random()}>
