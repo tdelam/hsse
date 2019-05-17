@@ -115,7 +115,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
 
     swalCallbackAssignSenior(isConfirm, articleId) {
         if(isConfirm)
-            this.props.assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser(articleId);
+            this.props.assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser(articleId, this.props.history);
     }
 
     renderArticles() {
@@ -137,11 +137,13 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                             { article[1].harvestDate }
                         </td>
                         <td>
-                            {article[1]._qualityAppraisalsJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {/* {article[1]._qualityAppraisalsJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>} */}
+                            {article[1]._qualityAppraisalsJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
                             
                         </td>
                         <td key={Math.random()}>
-                            {article[1]._qualityAppraisalsSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
+                            {/*{article[1]._qualityAppraisalsSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>} */}
+                            {article[1]._qualityAppraisalsSeniorEmail || <a><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></a>}
                         </td>
                         {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
                         <td key={Math.random()}>{ article[1]._id }</td>
