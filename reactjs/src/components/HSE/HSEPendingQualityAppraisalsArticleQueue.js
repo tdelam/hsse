@@ -172,28 +172,30 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
             });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
-                <Datatable options={dtOptions}>
-                    <table className="table table-striped my-4 w-100">
-                        <thead>
-                            <tr>
-                                <th data-priority="1">Priority</th>
-                                <th>Source</th>
-                                <th>Harvest Date</th>
-                                <th>Junior Appraiser</th>
-                                <th>Senior Appraiser</th>
-                                <th>Article Id</th>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Language</th>
-                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
-                                {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { rows }
-                        </tbody>
-                    </table>
-                </Datatable>
+                <div>
+                    <Datatable options={dtOptions}>
+                        <table className="table table-striped my-4 w-100">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Priority</th>
+                                    <th>Source</th>
+                                    <th>Harvest Date</th>
+                                    <th>Junior Appraiser</th>
+                                    <th>Senior Appraiser</th>
+                                    <th>Article Id</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Language</th>
+                                    {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
+                                    {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { rows }
+                            </tbody>
+                        </table>
+                    </Datatable>
+                </div>
             );
         }    
     };
@@ -220,9 +222,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        <div>
                             { this.renderArticles() }
-                        </div>
                     </CardBody>
                 </Card>
             </ContentWrapper>
