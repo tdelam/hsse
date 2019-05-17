@@ -228,7 +228,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        { this.renderArticles() }
+                        {/* this.renderArticles() */}
                     </CardBody>
                 </Card>
             </ContentWrapper>
