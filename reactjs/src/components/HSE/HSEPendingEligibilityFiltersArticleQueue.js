@@ -128,7 +128,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
     renderArticles() {
         
-        if(this.props.pendingArticles !== undefined ) {
+        if(this.props.pendingArticles) {
             const rows = Object.entries(this.props.pendingArticles).map((article, index) => {
                 
                 return (
