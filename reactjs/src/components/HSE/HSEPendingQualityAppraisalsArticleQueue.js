@@ -11,7 +11,7 @@ import {
     Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 import Swal from '../Elements/Swal';
 
@@ -119,8 +119,8 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
     }
 
     renderArticles() {
-        
-        if(this.props.pendingArticles != null ) {
+        console.log(this.props);
+        if(this.props.pendingArticles !== undefined ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={Math.random()}>

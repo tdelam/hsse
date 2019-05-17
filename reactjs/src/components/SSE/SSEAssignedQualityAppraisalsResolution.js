@@ -3,9 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Tree } from 'antd';
+//import { Tree } from 'antd';
 import {
-    Col,
+    //Col,
     Card,
     CardHeader,
     CardBody,
@@ -14,7 +14,7 @@ import {
     Input,} from 'reactstrap';
 
 // React Select
-import Select from 'react-select';
+//import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
@@ -171,8 +171,8 @@ class SSEAssignedQualityAppraisalsResolution extends Component {
         this.getInputValues();
 
         // used for react select
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
+//        const { selectedOption } = this.state;
+//        const value = selectedOption && selectedOption.value;
 
         console.log(this.state.qualityAppraisalsModel);
 
