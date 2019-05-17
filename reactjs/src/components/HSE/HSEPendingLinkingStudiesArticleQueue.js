@@ -123,7 +123,7 @@ class HSEPendingLinkingStudiesArticleQueue extends Component {
 
     renderArticles() {
         
-        if(this.props.pendingArticles != null ) {
+        if(this.props.pendingArticles  !== undefined ) {
             const rows = Object.entries(this.props.pendingArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>
