@@ -220,7 +220,9 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        { this.renderArticles() }
+                        <div>
+                            { this.renderArticles() }
+                        </div>
                     </CardBody>
                 </Card>
             </ContentWrapper>
