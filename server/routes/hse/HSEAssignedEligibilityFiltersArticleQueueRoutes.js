@@ -5,5 +5,5 @@ module.exports = app => {
     app.get('/hse/assignedeligibilityfiltersarticlequeue/fetcharticle/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.fetchArticle);
 
     app.post('/hse/assignedeligibilityfiltersarticlequeue/savevalues/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFiltersValues);
-    app.post('/hse/assignedeligibilityfiltersarticlequeue/setcompleted/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setEligibilityFiltersComplete);
+    app.post('/hse/assignedeligibilityfiltersarticlequeue/setcompleted/:articleId', HSEAssignedEligibilityFiltersArticleQueueController.setFullEligibilityFiltersCompleteOrResolve);
 }

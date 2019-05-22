@@ -96,11 +96,11 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         const { articleId } = this.props.match.params;
         
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history).then(res => {
-            
-            if(res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
+            console.log(res);
+            if(res.eligibilityFiltersJuniorInput && res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
                 this.setState(res.eligibilityFiltersJuniorInput.hseState.inputValues)
                 
-            } else if (res.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersSenior) ) {
+            } else if (res.eligibilityFiltersSeniorInput && res.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersSenior) ) {
                 this.setState(res.eligibilityFiltersSeniorInput.hseState.inputValues)
             }
             
@@ -271,7 +271,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     }
 
     finish = () => {
-        this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
+        this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articleId, this.state, this.props.history);
     }
 
     
@@ -334,7 +334,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         }
     }
 
-    renderRelevance = (relevance) => {console.log(this.state);
+    renderRelevance = (relevance) => {
         if(relevance) {
             return (
                 <fieldset>
@@ -372,21 +372,21 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                         <label className="col-md-2 col-form-label"></label>
                         <div className="col-md-10">
                             <div>
-                                <h4>Ref ID: { this.props.match.params.articleId }</h4>
+                                <strong>Ref ID:</strong> { this.props.match.params.articleId }
                             </div>
                             <div>
-                                <h4>Live date: </h4>
+                                <strong>Live date: </strong>
                             </div>
                             <div>
-                                <h4>Document type: </h4>
+                                <strong>Document type: </strong>
                             </div>
                             <div>
-                                <h4>Question type: </h4>
+                                <strong>Question type: </strong>
                             </div>
                             <div>
                                 
                                 <div className="checkbox c-checkbox">
-                                    <h4>General focus?</h4>
+                                    <strong>General focus?</strong>
                                     <p>{" "}</p>
                                     <label>
                                     <Input type="checkbox" defaultValue=""/>
@@ -669,8 +669,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 <Card className="card-default">
                     <CardHeader><div  >
                             <div><h3>Filterer Inputs</h3></div>
-                            <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: { (this.props.currentArticle) && this.props.currentArticle.title } </div>
+                            <div><strong>Article Id:</strong> { this.props.match.params.articleId } </div>
+                            <div><strong>Title:</strong> { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>

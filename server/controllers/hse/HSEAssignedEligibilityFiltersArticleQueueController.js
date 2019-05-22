@@ -72,7 +72,7 @@ exports.setEligibilityFiltersValues = async (req, res) => {
         }
         
         if( !(user._id.equals(article._eligibilityFiltersJunior) || user._id.equals(article._eligibilityFiltersSenior) ) ){
-            console.log("Senior");
+            
             return res.status(404).send({
                 message: 'Not authorized to add inputs for eligibility and filter for article'
             });
@@ -261,61 +261,42 @@ exports.setEligibilityFiltersComplete = async (req, res) => {
                 message: 'Not authorized to add inputs for eligibility and filter for article'
             });
 
-        }/* else if ( article._eligibilityFilterJunior.equals(user._id) && article._eligibilityFilterSenior.equals(user._id) ) {
+        } else if( user._id.equals(article._eligibilityFiltersJunior) ) {
 
-            const newEligibilityFilters = new HSEArticleEligibilityFilterModelClass(inputValues);
-            newEligibilityFilters._article = articleId;
-            
-            article.eligibilityFiltersJuniorInput = newEligibilityFilters;
-            article.eligibilityFiltersSeniorInput = newEligibilityFilters;
-            
-            article.eligibilityFiltersJuniorCompleted = true;
-            article.eligibilityFiltersSeniorCompleted = true;
-
-            await article.save();
-
-            setFullEligibilityFiltersCompleteOrResolve(articleId);
-            
-            return res.status(201).send({
-                message: 'Inputs for Junior and Senior filter added for article'
-            });
-
-    } */ else if( user._id.equals(article._eligibilityFilterJunior) ) {
-
-            await HSEArticleEligibilityFilterModelClass.findByIdAndUpdate(
-                article.eligibilityFiltersJuniorInput,
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate(
+                { _id: article.eligibilityFiltersJuniorInput },
                 
-                {hseState: inputValues, eligibilityFilterJuniorCompleted: true},
-                
-                {new: true},
+                { hseState: inputValues },
+
+                {new: true, useFindAndModify: false},
                 
                 // the callback function
-                (err, article) => {
+                (err, todo) => {
                 // Handle any possible database errors
                     if (err) return res.status(500).send(err);
-                    
+                    console.log(todo)
                     return res.send({
-                        message: `Inputs for Junior filter added for article: ${article._id}`
+                        message: 'Inputs for Junior filter added for article'
                     });
                 }
             );
             
-        } else if( article._eligibilityFilterSenior.equals(user._id) ) {
+        } else if( user._id.equals(article._eligibilityFiltersSenior) ) {
 
-            await HSEArticleEligibilityFilterModelClass.findByIdAndUpdate(
-                article.eligibilityFiltersSeniorInput,
-                
-                {hseState: inputValues, eligibilityFilterSeniorCompleted: true},
-                
-                {new: true},
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate(
+                { _id: article.eligibilityFiltersSeniorInput },
+                   
+                { hseState: inputValues },
+
+                { new: true, useFindAndModify: false},
                 
                 // the callback function
-                (err, article) => {
+                (err, todo) => {
                 // Handle any possible database errors
                     if (err) return res.status(500).send(err);
-                    
+                    console.log(todo);
                     return res.send({
-                        message: `Inputs for Junior filter added for article: ${article._id}`
+                        message: 'Inputs for Senior filter added for article'
                     });
                 }
             );
@@ -396,86 +377,122 @@ exports.setSeniorEligibilityFiltersComplete = async (req, res) => {
 
 };
 
-const setFullEligibilityFiltersCompleteOrResolve = async (articleId) => {
+exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
+    
+    const { articleId } = req.params;
+
+    const inputValues = req.body;
+    
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    console.log(`*** user._id: ${user._id}`);
 
     HSEArticleModelClass.findById(articleId, async (err, article) => {
-
         if(err) {
 
-            //return res.send(err);
-            console.log(err);
+            return res.send(err);
 
         } else if(!article) {
-            /*
+
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-            */
-           console.log('No article with that identifier has been found');
+
+        }
+        console.log(`*** article._eligibilityFiltersJunior: ${article._eligibilityFiltersJunior}`);
+        console.log(`*** article._eligibilityFiltersSenior: ${article._eligibilityFiltersSenior}`);
+        if( !(user._id.equals(article._eligibilityFiltersJunior) || user._id.equals(article._eligibilityFiltersSenior) ) ){
+            
+            return res.status(404).send({
+                message: 'Not authorized to add inputs for eligibility and filter for article'
+            });
+
+        } else if( user._id.equals(article._eligibilityFiltersJunior) ) {
+            console.log(`*** INSIDE FINISHING FOR JUNIOR ELIGIBILITY FILTERS ***`);
+            console.log(`*** article._eligibilityFiltersJunior: ${article._eligibilityFiltersJunior}`);
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate(
+                { _id: article.eligibilityFiltersJuniorInput },
+                
+                { hseState: inputValues },
+
+                {new: true, useFindAndModify: false},
+                
+                // the callback function
+                (err, juniorEligibilityFilter) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    /*
+                    return res.send({
+                        message: 'Inputs for Junior filter added for article'
+                    });
+                    */
+                }
+            );
+
+            article.eligibilityFiltersJuniorCompleted = true;
+            await article.save();
+
+            
+        } else if( user._id.equals(article._eligibilityFiltersSenior) ) {
+
+            await HSEArticleEligibilityFilterModelClass.findOneAndUpdate(
+                { _id: article.eligibilityFiltersSeniorInput },
+                   
+                { hseState: inputValues },
+
+                { new: true, useFindAndModify: false},
+                
+                // the callback function
+                (err, seniorEligibilityFilter) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    /*
+                    return res.send({
+                        message: 'Inputs for Senior filter added for article'
+                    });
+                    */
+                }
+            );
+
+            article.eligibilityFiltersSeniorCompleted = true;
+            await article.save();
+            
         }
 
-        let newEligibilityFiltersJuniorInput = null;
-        let newEligibilityFiltersSeniorInput = null;
-
-        await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
-            
-            if(err) {
-                //console.log(err);
-                throw new Error(err);
-            } else if(!eligibilityFilterJuniorInput) {
-                throw new Error('Eligibility Filter for Junior Filter does not exist');
-            } else {
-                newEligibilityFilterJuniorInput = eligibilityFilterJuniorInput;
-            }
-
-        });
-
-        await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
-
-            if(err) {
-                //console.log(err);
-                throw new Error(err);
-            } else if(!eligibilityFilterSeniorInput) {
-                throw new Error('Eligibility Filter for Senior Filter does not exist');
-            } else {
-                newEligibilityFilterSeniorInput = eligibilityFilterSeniorInput;
-            }
-
-        });
-
-        if(article.eligibilityFilterJuniorCompleted && article.eligibilityFilterSeniorCompleted) {
-            
+        if(article.eligibilityFiltersJuniorCompleted && article.eligibilityFiltersSeniorCompleted) {
+            console.log("*** CHECKING TO SEE IF JUNIOR AND SENIOR FILTERS HAVE COMPLETED ***");
             // Call instance method to check if all fields on article's eligibilityFilter are equal
-            if( newEligibilityFilterJuniorInput.isEqualTo(newEligibilityFilterSeniorInput) ) {
+            if( article.eligibilityFiltersJuniorInput.isEqualTo(article.eligibilityFiltersSeniorInput) ) {
 
-                article.eligibilityFilterFullCompletion = true;
+                article.eligibilityFiltersFullCompletion = true;
+                article.eligibilityFilterFinalInput = eligibilityFiltersSeniorInput;
                 await article.save();
                 console.log(`Full completion set`);
-                /*
+                
                 return res.status(201).send({
                     message: 'Eligibility and Filter stage passed for this article'
                 });
-                */
+                
             } else {
 
-                article.eligibilityFilterResolve = true;
-                article.eligibilityFilterFinalInput = newEligibilityFilterSeniorInput;
+                article.eligibilityFiltersResolve = true;
                 await article.save();
                 console.log(`resolve completion set`);
-                /*
+                
                 return res.status(201).send({
                     message: 'Resolve Eligibility and Filter values for this article'
                 });
-                */
+                
             }
 
         } else {
-            /*
+
+            console.log('Senior and Junior Eligibility and filter are not completed for article');
+            
             return res.status(200).send({
                 message: 'Senior and Junior Eligibility and filter are not completed for article'
             });
-            */
-           console.log('Senior and Junior Eligibility and filter are not completed for article');
+            
         }
     });
 

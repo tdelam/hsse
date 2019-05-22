@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from "moment";
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -66,11 +67,10 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
                             { article[1].author }
                         </td>
                         <td>
-                            { article[1].harvestDate }
+                            { moment(article[1].harvestDate).format("DD-MM-YYYY") }
                         </td>
                         <td>
-                            {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._eligibilityFilterJuniorEmail + ", " + article[1]._eligibilityFilterSeniorEmail }</Link>
+                            { ( (article[1]._eligibilityFiltersJuniorEmail) && (this.props.currentUser.user.email === article[1]._eligibilityFiltersSeniorEmail) ) ? article[1]._eligibilityFiltersJuniorEmail : '' } { ((article[1]._eligibilityFiltersSeniorEmail) && (this.props.currentUser.user.email === article[1]._eligibilityFiltersJuniorEmail)) ? article[1]._eligibilityFiltersSeniorEmail: '' }
                         </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
@@ -149,8 +149,9 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
+function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
     return {
+        currentUser: auth.currentUser,
         errorMessage: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleErrorMessage,
         assignedArticles: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticles 
     }
