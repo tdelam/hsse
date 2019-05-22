@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from "moment";
 import ContentWrapper from '../Layout/ContentWrapper';
 import { 
     Card, 
@@ -134,7 +135,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                             { article[1].articleSource }
                         </td>
                         <td key={Math.random()}>
-                            { article[1].harvestDate }
+                            { moment(article[1].harvestDate).format("DD-MM-YYYY") }
                         </td>
                         <td>
                             {/* {article[1]._qualityAppraisalsJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>} */}

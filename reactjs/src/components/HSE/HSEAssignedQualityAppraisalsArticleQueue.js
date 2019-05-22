@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from "moment";
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -67,7 +68,7 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                             { article[1].author }
                         </td>
                         <td>
-                            { article[1].harvestDate }
+                            { moment(article[1].harvestDate).format("DD-MM-YYYY")}
                         </td>
                         <td>
                             {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
