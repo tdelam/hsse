@@ -77,7 +77,7 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
                         {/*<td>{ article[1].eligibilityFilterResolve ? <a className="mr-1 badge badge-danger" href="">Resolve</a> : "Incomplete" }</td> */}
-                        <td>{ article[1].eligibilityFilterResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedeligibilityfiltersarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
+                        <td>{ article[1].eligibilityFiltersResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedeligibilityfiltersarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
                         <td className="text-right">
                             
                             <Link to={{ pathname: "/hse/assignedeligibilityfiltersarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>

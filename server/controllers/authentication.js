@@ -61,7 +61,7 @@ const sendConfirmation = (args, emailToken) => {
     
     const confirmationUrl = `${config.backendServer}/confirmuser/${emailToken}`;
      transporter.sendMail({
-        from: 'sakksoftware@gmail.com',
+        from: 'forum@mcmaster.ca',
         to: args.email,
         subject: 'Confirm Registration Email',
         html: `Please click this email to confirm your email: <a href="${confirmationUrl}">${confirmationUrl}</a>`,
@@ -74,7 +74,7 @@ const sendResetEmail = (args, emailToken) => {
     
     const resetUrl = `${config.frontendServer}/resetpassword/${emailToken}`;
      transporter.sendMail({
-        from: 'sakksoftware@gmail.com',
+        from: 'forum@mcmaster.ca',
         to: args.email,
         subject: 'Reset Password Email',
         html: `Please click this to reset your password: <a href="${resetUrl}">${resetUrl}</a>`,

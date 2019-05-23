@@ -385,6 +385,8 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
+    console.log(user);
+
     console.log(`*** user._id: ${user._id}`);
 
     HSEArticleModelClass.findById(articleId, async (err, article) => {
@@ -462,28 +464,59 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
         if(article.eligibilityFiltersJuniorCompleted && article.eligibilityFiltersSeniorCompleted) {
             console.log("*** CHECKING TO SEE IF JUNIOR AND SENIOR FILTERS HAVE COMPLETED ***");
             // Call instance method to check if all fields on article's eligibilityFilter are equal
-            if( article.eligibilityFiltersJuniorInput.isEqualTo(article.eligibilityFiltersSeniorInput) ) {
 
-                article.eligibilityFiltersFullCompletion = true;
-                article.eligibilityFilterFinalInput = eligibilityFiltersSeniorInput;
-                await article.save();
-                console.log(`Full completion set`);
-                
-                return res.status(201).send({
-                    message: 'Eligibility and Filter stage passed for this article'
-                });
-                
-            } else {
+            await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFiltersJuniorInput, async (err, eligibilityFilterJunior) => {
+                if(err) {
 
-                article.eligibilityFiltersResolve = true;
-                await article.save();
-                console.log(`resolve completion set`);
+                    return res.send(err);
+        
+                } else if(!eligibilityFilterJunior) {
+        
+                    return res.status(404).send({
+                        message: 'No Eligibility Filter with that identifier has been found'
+                    });
+        
+                } else {
+                    await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFiltersJuniorInput, async (err, eligibilityFilterSenior) => {
+                        if(err) {
+
+                            return res.send(err);
                 
-                return res.status(201).send({
-                    message: 'Resolve Eligibility and Filter values for this article'
-                });
+                        } else if(!eligibilityFilterJunior) {
                 
-            }
+                            return res.status(404).send({
+                                message: 'No Eligibility Filter with that identifier has been found'
+                            });
+                
+                        } else {
+                            if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) ) {
+
+                                article.eligibilityFiltersFullCompletion = true;
+                                article.eligibilityFilterFinalInput = eligibilityFiltersSeniorInput;
+                                await article.save();
+                                console.log(`Full completion set`);
+                                
+                                return res.status(201).send({
+                                    message: 'Eligibility and Filter stage passed for this article'
+                                });
+                                
+                            } else {
+                
+                                article.eligibilityFiltersResolve = true;
+                                await article.save();
+                                console.log(`resolve completion set`);
+                                
+                                return res.status(201).send({
+                                    message: 'Resolve Eligibility and Filter values for this article'
+                                });
+                                
+                            }
+                        }
+                    });
+                }
+            });
+
+            
 
         } else {
 
