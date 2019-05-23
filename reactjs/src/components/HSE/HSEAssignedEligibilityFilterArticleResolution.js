@@ -260,11 +260,11 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
         const { currentArticle } = this.props;
 
-        if (currentArticle.eligibilityFiltersJuniorInput && res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
-            this.setState({ currentFilterState: res.eligibilityFiltersJuniorInput.hseState.inputValues, otherFilterState: res.eligibilityFiltersSeniorInput.hseState.inputValues });
+        if (currentArticle.eligibilityFiltersJuniorInput && currentArticle.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._eligibilityFiltersJunior) ) {
+            this.setState({ currentFilterState: currentArticle.eligibilityFiltersJuniorInput.hseState.inputValues, otherFilterState: currentArticle.eligibilityFiltersSeniorInput.hseState.inputValues });
             
-        } else if (currentArticle.eligibilityFiltersSeniorInput && res.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersSenior) ) {
-            this.setState({ currentFilterState: res.eligibilityFiltersSeniorInput.hseState.inputValues, otherFilterState: res.eligibilityFiltersJuniorInput.hseState.inputValues });
+        } else if (currentArticle.eligibilityFiltersSeniorInput && currentArticle.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._eligibilityFiltersSenior) ) {
+            this.setState({ currentFilterState: currentArticle.eligibilityFiltersSeniorInput.hseState.inputValues, otherFilterState: currentArticle.eligibilityFiltersJuniorInput.hseState.inputValues });
         }
         this.props.assignHSEAssignedEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
