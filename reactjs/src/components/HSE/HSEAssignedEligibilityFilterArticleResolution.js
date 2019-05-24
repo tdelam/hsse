@@ -49,6 +49,8 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
     state = {
 
+        fetchedArticle: false,
+
         currentFilterState: {
             selectedOption: '',
 
@@ -143,10 +145,10 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history).then(res => {
             console.log(res);
             if(res.eligibilityFiltersJuniorInput && res.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersJunior) ) {
-                this.setState({ currentFilterState: res.eligibilityFiltersJuniorInput.hseState.inputValues, otherFilterState: res.eligibilityFiltersSeniorInput.hseState.inputValues });
+                this.setState({ currentFilterState: res.eligibilityFiltersJuniorInput.hseState.inputValues, otherFilterState: res.eligibilityFiltersSeniorInput.hseState.inputValues, fetchedArticle: true });
                 
             } else if (res.eligibilityFiltersSeniorInput && res.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._eligibilityFiltersSenior) ) {
-                this.setState({ currentFilterState: res.eligibilityFiltersSeniorInput.hseState.inputValues, otherFilterState: res.eligibilityFiltersJuniorInput.hseState.inputValues });
+                this.setState({ currentFilterState: res.eligibilityFiltersSeniorInput.hseState.inputValues, otherFilterState: res.eligibilityFiltersJuniorInput.hseState.inputValues, fetchedArticle: true });
             }
             
         });
@@ -642,10 +644,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
     }
 
     render() {
-        console.log(`currentArticle: ${this.props.currentArticle}`);
-        console.log(this.props.currentUser);
-
-        this.getInputValues();
+        //console.log(`currentArticle: ${this.props.currentArticle}`);
 
         // used for react select
         const { selectedOption } = this.state;
@@ -653,7 +652,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
         // this.setState({ eligibilityFilterModel: this.getInputValues() });
 
-        console.log(this.state.eligibilityFilterModel);
+        // console.log(this.state.eligibilityFilterModel);
 
         return (
             <ContentWrapper>
@@ -669,44 +668,44 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                     <CardHeader><div  >
                             <div><h3>Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: {  } </div>
+                            <div>Title: { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>
                     <CardBody>
                         <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
+                            {console.log(this.state.fetchedArticle)}
+                            { this.state.fetchedArticle && this.renderGeneralArticleInformation(this.state.currentFilterState.showGeneralArticleInformation) }
 
-                            { this.renderGeneralArticleInformation(this.state.showGeneralArticleInformation) }
+                            { this.state.fetchedArticle && this.renderRelevance(this.state.currentFilterState.showRelevance) }
 
-                            { this.renderRelevance(this.state.showRelevance) }
+                            { this.state.fetchedArticle && this.renderEligibility(this.state.currentFilterState.showEligibility) }
 
-                            { this.renderEligibility(this.state.showEligibility) }
+                            { this.state.fetchedArticle && this.renderDocumentType(this.state.currentFilterState.documentType) }
+                            
+                            { this.state.fetchedArticle && this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.currentFilterState.showHealthSystemsTopics, false, this.onCheckHST, this.state.currentFilterState.checkedKeysHST) }
 
-                            { this.renderDocumentType(this.state.documentType) }
-                                
-                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false, this.onCheckHST, this.state.checkedKeysHST) }
+                            { this.state.fetchedArticle && this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.currentFilterState.showCanadianAreas, false, this.onCheckCA, this.state.currentFilterState.checkedKeysCA) }
 
-                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false, this.onCheckCA, this.state.checkedKeysCA) }
+                            { this.state.fetchedArticle && this.renderTreeSection("Domains", domainsTreeData, this.state.currentFilterState.showDomains, true, this.onCheckDomain, this.state.currentFilterState.checkedDomain) }
 
-                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true, this.onCheckDomain, this.state.checkedDomain) }
+                            { this.state.fetchedArticle && this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.currentFilterState.showLMICFocus, false, this.onCheckLMIC, this.state.currentFilterState.checkedLMIC) }
 
-                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false, this.onCheckLMIC, this.state.checkedLMIC) }
+                            { this.state.fetchedArticle && this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.currentFilterState.showProvinceFocus, false, this.onCheckProvince, this.state.currentFilterState.checkedProvince) }
 
-                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false, this.onCheckProvince, this.state.checkedProvince) }
+                            { this.state.fetchedArticle && this.renderTreeSection("Theme", themeTreeData, this.state.currentFilterState.showTheme, false, this.onCheckTheme, this.state.currentFilterState.checkedTheme) }
 
-                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false, this.onCheckTheme, this.state.checkedTheme) }
+                            { this.state.fetchedArticle && this.renderTreeSection("Population", populationTreeData, this.state.currentFilterState.showPopulation, false, this.onCheckPopulation, this.state.currentFilterState.checkedPopulation) }
 
-                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false, this.onCheckPopulation, this.state.checkedPopulation) }
+                            { this.state.fetchedArticle && this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.currentFilterState.showOntarioPriorityArea, false, this.onCheckOPA, this.state.currentFilterState.checkedOPA)}
 
-                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea, false, this.onCheckOPA, this.state.checkedOPA)}
+                            { this.state.fetchedArticle && this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.currentFilterState.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.currentFilterState.checkedCHSDT)}
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.checkedCHSDT)}
+                            { this.state.fetchedArticle && this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.currentFilterState.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.currentFilterState.checkedOHSDT)}
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.checkedOHSDT)}
+                            { this.state.fetchedArticle && this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.currentFilterState.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.currentFilterState.checkedIOHSDT)}
 
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.checkedIOHSDT)}
-
-                            { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
+                            { this.state.fetchedArticle && this.renderArticleAssessmentSection(value, this.state.currentFilterState.showArticleAssessment) }
 
 
                             
@@ -727,44 +726,44 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                     <CardHeader><div  >
                             <div><h3>Other Filterer's Inputs</h3></div>
                             <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: {  } </div>
+                            <div>Title: { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>
                     <CardBody>
                         <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
 
-                            { this.renderGeneralArticleInformation(this.state.showGeneralArticleInformation) }
+                            { this.renderGeneralArticleInformation(this.state.otherFilterState.showGeneralArticleInformation) }
 
-                            { this.renderRelevance(this.state.showRelevance) }
+                            { this.renderRelevance(this.state.otherFilterState.showRelevance) }
 
-                            { this.renderEligibility(this.state.showEligibility) }
+                            { this.renderEligibility(this.state.otherFilterState.showEligibility) }
 
-                            { this.renderDocumentType(this.state.documentType) }
+                            { this.renderDocumentType(this.state.otherFilterState.documentType) }
                                 
-                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false, this.onCheckHST, this.state.checkedKeysHST) }
+                            { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.otherFilterState.showHealthSystemsTopics, false, this.onCheckHST, this.state.otherFilterState.checkedKeysHST) }
 
-                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false, this.onCheckCA, this.state.checkedKeysCA) }
+                            { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.otherFilterState.showCanadianAreas, false, this.onCheckCA, this.state.otherFilterState.checkedKeysCA) }
 
-                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true, this.onCheckDomain, this.state.checkedDomain) }
+                            { this.renderTreeSection("Domains", domainsTreeData, this.state.otherFilterState.showDomains, true, this.onCheckDomain, this.state.otherFilterState.checkedDomain) }
 
-                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false, this.onCheckLMIC, this.state.checkedLMIC) }
+                            { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.otherFilterState.showLMICFocus, false, this.onCheckLMIC, this.state.otherFilterState.checkedLMIC) }
 
-                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.showProvinceFocus, false, this.onCheckProvince, this.state.checkedProvince) }
+                            { this.renderTreeSection("Province Focus", provinceFocusTreeData, this.state.otherFilterState.showProvinceFocus, false, this.onCheckProvince, this.state.otherFilterState.checkedProvince) }
 
-                            { this.renderTreeSection("Theme", themeTreeData, this.state.showTheme, false, this.onCheckTheme, this.state.checkedTheme) }
+                            { this.renderTreeSection("Theme", themeTreeData, this.state.otherFilterState.showTheme, false, this.onCheckTheme, this.state.otherFilterState.checkedTheme) }
 
-                            { this.renderTreeSection("Population", populationTreeData, this.state.showPopulation, false, this.onCheckPopulation, this.state.checkedPopulation) }
+                            { this.renderTreeSection("Population", populationTreeData, this.state.otherFilterState.showPopulation, false, this.onCheckPopulation, this.state.otherFilterState.checkedPopulation) }
 
-                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea, false, this.onCheckOPA, this.state.checkedOPA)}
+                            { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.otherFilterState.showOntarioPriorityArea, false, this.onCheckOPA, this.state.otherFilterState.checkedOPA)}
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.checkedCHSDT)}
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.otherFilterState.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.otherFilterState.checkedCHSDT)}
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.checkedOHSDT)}
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.otherFilterState.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.otherFilterState.checkedOHSDT)}
 
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.checkedIOHSDT)}
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.otherFilterState.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.otherFilterState.checkedIOHSDT)}
 
-                            { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
+                            { this.renderArticleAssessmentSection(value, this.state.otherFilterState.showArticleAssessment) }
 
                             
                         </form>
