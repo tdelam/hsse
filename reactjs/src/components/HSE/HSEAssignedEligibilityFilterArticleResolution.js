@@ -547,7 +547,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         return <TreeNode {...item} />;
       })
     
-    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine) => {
+    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine, checkedEvent, checkedKeyState) => {
         if(sectionStatus) {
             return (
                 <fieldset>
@@ -563,8 +563,8 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 defaultExpandAll={ true }
                                 onExpand={this.onExpand}
                                 autoExpandParent={true}
-                                onCheck={this.onCheck}
-                                // checkedKeys={true}
+                                onCheck={checkedEvent}
+                                checkedKeys={checkedKeyState}
                                 onSelect={this.onSelect}
                                 // selectedKeys={this.state.selectedKeys}
                             >
@@ -644,6 +644,9 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
     }
 
     render() {
+
+        if(!this.state.fetchedArticle)
+            return <div>Loading...</div>
         //console.log(`currentArticle: ${this.props.currentArticle}`);
 
         // used for react select
@@ -674,7 +677,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                     <hr className="my-4"/>
                     <CardBody>
                         <form className="form-horizontal" method="get" action="/" onSubmit={this.onSubmit}>
-                            {console.log(this.state.fetchedArticle)}
+                            {console.log(this.state.currentFilterState)}
                             { this.state.fetchedArticle && this.renderGeneralArticleInformation(this.state.currentFilterState.showGeneralArticleInformation) }
 
                             { this.state.fetchedArticle && this.renderRelevance(this.state.currentFilterState.showRelevance) }
