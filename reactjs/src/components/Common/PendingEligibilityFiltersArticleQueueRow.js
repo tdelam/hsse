@@ -53,18 +53,18 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
 
     }
 
-    swalCallbackAssignJunior(isConfirm, articleId) {
+    swalCallbackAssignJunior(isConfirm, articleId, history) {
         if(isConfirm)
-            this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, this.props.history);
+            this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, history);
     }
 
-    swalCallbackAssignSenior(isConfirm, articleId) {
+    swalCallbackAssignSenior(isConfirm, articleId, history) {
         if(isConfirm)
-            this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, this.props.history);
+            this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, history);
     }
 
     render() {
-        const { article } = this.props;
+        const { article, history } = this.props;
         return (
             <tr key={article._id}>
                 <td>LOW</td>{ /*this.renderPriority(article.priority)*/  }
@@ -75,10 +75,10 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
                     { moment(article.harvestDate).format("DD-MM-YYYY") }
                 </td>
                 <td key={Math.random()}>
-                    {article._eligibilityFiltersJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
+                    {article._eligibilityFiltersJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
                 </td>
                 <td key={Math.random()}>
-                {article._eligibilityFiltersSeniorEmail || <a ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id)} className="mr-1 badge badge-primary">Assign</Swal></a>}
+                {article._eligibilityFiltersSeniorEmail || <a ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} className="mr-1 badge badge-primary">Assign</Swal></a>}
                 </td>
                 <td key={Math.random()}>{ article._id }</td>
                 <td key={Math.random()}>{ article.title }</td>

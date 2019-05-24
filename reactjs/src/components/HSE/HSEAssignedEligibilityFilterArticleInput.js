@@ -644,8 +644,6 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     }
 
     render() {
-        //console.log(`currentArticle: ${this.props.currentArticle}`);
-        //console.log(this.props.currentUser);
         
 
         //this.getInputValues();
@@ -653,10 +651,6 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         // used for react select
         const { selectedOption } = this.state;
         const value = selectedOption && selectedOption.value;
-
-        // this.setState({ eligibilityFilterModel: this.getInputValues() });
-
-        // console.log(this.state.eligibilityFilterModel);
 
         return (
             <ContentWrapper>
