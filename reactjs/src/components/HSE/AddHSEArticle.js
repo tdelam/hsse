@@ -31,7 +31,7 @@ class AddHSEArticle extends Component {
             title: '',
             authors: '',
             journal: '',
-            harvestDate: new Date()
+            harvestDate: Date.now(),
         }
         
     }
@@ -95,7 +95,8 @@ class AddHSEArticle extends Component {
     }
 
     onDateChange(event) {
-        this.setState({ harvestDate: event._d })
+        // this.setState({ harvestDate: event._d })
+        console.log(event._d);
     }
 
     renderTitleField = ({input}) => {
@@ -143,7 +144,8 @@ class AddHSEArticle extends Component {
             inputProps={{className: 'form-control'}}
             timeFormat={false}
             onChange={this.onDateChange.bind(this)}
-            defaultValue=""
+            {...input}
+            //defaultValue=""
         />
     }
 
@@ -222,6 +224,7 @@ class AddHSEArticle extends Component {
                                                 <Field
                                                     name="publishedDate"
                                                     component={this.renderPublishedDateField}
+                                                    value={this.state.harvestDate}
                                                     />
                                             </Col>
                                         </div>
