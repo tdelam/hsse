@@ -69,13 +69,17 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, assign it!",
                 closeOnConfirm: true
-            }
+            },
+            pendingArticles: [],
         };
 
     }
 
     componentDidMount() {
-        this.props.listHSEPendingEligibilityFiltersArticlesQueue();
+        this.props.listHSEPendingEligibilityFiltersArticlesQueue().then(res => {
+            this.setState({ pendingArticles: res});
+            console.log(res);
+        });
     }
 
     toggleModal = (articleId) => {
@@ -128,57 +132,11 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 
     renderArticles() {
-        
-        if(this.props.pendingArticles) {
-            const rows = Object.entries(this.props.pendingArticles).map((article, index) => {
-                
-                return (
-                    <tr key={Math.random()}>
-                        {/*
-                        <td className="text-center">
-                            <span className="badge badge-success">{ article[1].priority }</span>
-                        </td>
-                        */}
-                        { this.renderPriority(article[1].priority) }
-                        <td key={Math.random()}>
-                            { article[1].articleSource }
-                        </td>
-                        <td key={Math.random()}>
-                            { moment(article[1].harvestDate).format("DD-MM-YYYY") }
-                        </td>
-                        <td key={Math.random()}>
-                            {/* {article[1]._eligibilityFiltersJuniorEmail || <Link to="/hse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>} */}
-                            {article[1]._eligibilityFiltersJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
-                        </td>
-                        <td key={Math.random()}>
-                            {/* {article[1]._eligibilityFiltersSeniorEmail || <Link to="/hse/assignedeligibilityfiltersarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>} */}
-                            {article[1]._eligibilityFiltersSeniorEmail || <a ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></a>}
-                        </td>
-                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
-                        <td key={Math.random()}>{ article[1]._id }</td>
-                        <td key={Math.random()}>{ article[1].title }</td>
-                        <td key={Math.random()}>{ article[1].author }</td>
-                        <td key={Math.random()}>{ article[1].language }</td>
-                        {/*}
-                        <td className="text-right">
-                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
-                        </td> */}
-                    {/*         
-                        <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-danger">
-                                <em className="fas fa-trash-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
-                        </td>
-                    */}    
-                    </tr>
-                )
-            });
+        if(this.state.pendingArticles.length > 0) { console.log(this.state.pendingArticles.length);
+        let testRows = this.state.pendingArticles.map(article => {
+            console.log(article);
+            return (<TableRow key = {article._id} article = {article} />);
+        });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
                 <div>
@@ -199,14 +157,17 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                                     {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
                                 </tr>
                             </thead>
-                            <tbody>
-                                { rows }
+                            <tbody>                            
+                                { testRows }
                             </tbody>
                         </table>
                     </Datatable>
                 </div>
             );
-        }    
+            } else {
+                return (<div />);
+            }
+            
     };
 
     render() {
@@ -237,6 +198,30 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             </ContentWrapper>
         );
     }
+}
+
+const TableRow = ({ article }) => {console.log(article);
+    return (
+        <tr key={Math.random()}>
+            <td>LOW</td>{ /*this.renderPriority(article.priority)*/  }
+            <td key={Math.random()}>
+                { article.articleSource }
+            </td>
+            <td key={Math.random()}>
+                { moment(article.harvestDate).format("DD-MM-YYYY") }
+            </td>
+            <td key={Math.random()}>
+                {article._eligibilityFiltersJuniorEmail || <a >test</a>}
+            </td>
+            <td key={Math.random()}>
+                {article._eligibilityFiltersSeniorEmail || <a >test</a>}
+            </td>
+            <td key={Math.random()}>{ article._id }</td>
+            <td key={Math.random()}>{ article.title }</td>
+            <td key={Math.random()}>{ article.authors }</td>
+            <td key={Math.random()}>{ article.language }</td>
+        </tr>
+    );
 }
 
 function mapStateToProps({ hsePendingEligibilityFiltersArticleQueue }) {

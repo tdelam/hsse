@@ -319,7 +319,7 @@ export const signout = () => {
 
 // HSE Article
 export const onHSEArticleSubmit = (values, history) => async dispatch => {
-  
+  console.log(values);
   try {
     const response = await axios.post(
       `${backendServer}/hse/articles`,
@@ -379,12 +379,13 @@ export const listHSEPendingEligibilityFiltersArticlesQueue = (history) => async 
     // history.push('/dashboard');
     // console.log(response.data);
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
+    return response.data;
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse eligibility filter article pending queue'});
   }
 };
 
-export const listHSEPendingQualityAppraisalsArticlesQueue = (history) => async dispatch => {
+export const listHSEPendingQualityAppraisalsArticlesQueue = () => async dispatch => {
   try {
     const response = await axios.get(`${backendServer}/hse/pendingqualityappraisalsarticlequeue`, {
       headers: { authorization: localStorage.getItem('token') }
@@ -392,6 +393,7 @@ export const listHSEPendingQualityAppraisalsArticlesQueue = (history) => async d
 
     // history.push('/dashboard');
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE, payload: response.data })
+    return response.data;
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse quality appraisals article pending queue'});
   }

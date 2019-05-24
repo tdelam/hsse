@@ -7,7 +7,7 @@ const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStud
 const HSEArticlePresentationDetailsModelClass = mongoose.model('HSEArticlePresentationDetails');
 
 exports.create = (req, res) => {
-
+    console.log(req.body);
     const newHSEArticle = new HSEArticleModelClass(req.body);
 
     const newEligibilityFilterJunior = new HSEArticleEligibilityFilterModelClass();

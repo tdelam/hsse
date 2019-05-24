@@ -72,7 +72,10 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
     }
 
     componentDidMount() {
-        this.props.listHSEPendingQualityAppraisalsArticlesQueue();
+        this.props.listHSEPendingQualityAppraisalsArticlesQueue().then(res => {
+            // this.props.pendingArticles = res.data;
+            console.log(res);
+        });
     }
 
     toggleModal = (articleId) => {
@@ -232,7 +235,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
 function mapStateToProps({ hsePendingQualityAppraisalsArticleQueue }) {
     return { 
         errorMessage: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticleErrorMessage,
-        pendingArticles: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticles 
+        // pendingArticles: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticles 
     }
 }
 

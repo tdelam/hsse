@@ -8,7 +8,7 @@ const HSEArticleSchema = new Schema({
     // Fields from EndNote
     referenceType: { type: String },
     rating: { type: String },
-    author: { type: String },
+    authors: { type: String },
     year: { type: String },
     title: { type: String },
     journal: { type: String },
@@ -47,7 +47,7 @@ const HSEArticleSchema = new Schema({
     translatedTitle: { type: String },
     nameOfDatabase: { type: String },
     databaseProvider: { type: String },
-    language: { type: String },
+    language: { type: String, default: 'English' },
     priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     source: { type: String },
 
@@ -57,6 +57,7 @@ const HSEArticleSchema = new Schema({
     questionType: { type: String },
     documentType: { type: String },
     
+    publishedDate: { type: Date },
 
 
     // Stage completions

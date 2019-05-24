@@ -256,7 +256,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
     save = () => {
 
-        let currentState = {};
+        //let currentState = {};
 
         const { currentArticle } = this.props;
 
