@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from "moment";
 import ContentWrapper from '../Layout/ContentWrapper';
 import { 
     Card, 
@@ -12,9 +11,10 @@ import {
     Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
+import PendingEligibilityFiltersArticleQueueRow from '../Common/PendingEligibilityFiltersArticleQueueRow';
 //import { Link } from 'react-router-dom';
 
-import Swal from '../Elements/Swal';
+// import Swal from '../Elements/Swal';
 
 
 import * as actions from '../../actions';
@@ -135,7 +135,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         if(this.state.pendingArticles.length > 0) { console.log(this.state.pendingArticles.length);
         let testRows = this.state.pendingArticles.map(article => {
             console.log(article);
-            return (<TableRow key = {article._id} article = {article} />);
+            return (<PendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);
         });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
@@ -151,7 +151,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                                     <th>Senior Filterer</th>
                                     <th>Article Id</th>
                                     <th>Title</th>
-                                    <th>Author</th>
+                                    <th>Author(s)</th>
                                     <th>Language</th>
                                     {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
                                     {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
@@ -198,30 +198,6 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             </ContentWrapper>
         );
     }
-}
-
-const TableRow = ({ article }) => {console.log(article);
-    return (
-        <tr key={Math.random()}>
-            <td>LOW</td>{ /*this.renderPriority(article.priority)*/  }
-            <td key={Math.random()}>
-                { article.articleSource }
-            </td>
-            <td key={Math.random()}>
-                { moment(article.harvestDate).format("DD-MM-YYYY") }
-            </td>
-            <td key={Math.random()}>
-                {article._eligibilityFiltersJuniorEmail || <a >test</a>}
-            </td>
-            <td key={Math.random()}>
-                {article._eligibilityFiltersSeniorEmail || <a >test</a>}
-            </td>
-            <td key={Math.random()}>{ article._id }</td>
-            <td key={Math.random()}>{ article.title }</td>
-            <td key={Math.random()}>{ article.authors }</td>
-            <td key={Math.random()}>{ article.language }</td>
-        </tr>
-    );
 }
 
 function mapStateToProps({ hsePendingEligibilityFiltersArticleQueue }) {

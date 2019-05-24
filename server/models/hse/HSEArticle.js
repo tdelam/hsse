@@ -51,7 +51,7 @@ const HSEArticleSchema = new Schema({
     priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     source: { type: String },
 
-    articleSource: { type: String },
+    articleSource: { type: String, default: 'Hand Searches' },
     harvestDate: { type: Date, default: Date.now },
 
     questionType: { type: String },
