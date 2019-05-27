@@ -256,7 +256,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 relevanceValue: event.target.value,
                 showEligibility: false
             });
-            this.props.addArticleToComplicatedQueue(this.props.match.params.articleId, this.props.history);
+            //this.props.addArticleToComplicatedQueue(this.props.match.params.articleId, this.props.history);
+            this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articleId, this.state, this.props.history);
             this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue');
         }
         
