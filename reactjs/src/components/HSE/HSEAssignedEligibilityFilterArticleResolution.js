@@ -384,6 +384,8 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
             this.setState({
                 showEligibility: true
             });*/
+        } else {
+            
         }
         
     }
