@@ -489,7 +489,7 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                             });
                 
                         } else {
-                            if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) ) {
+                            if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) ) {
 
                                 article.eligibilityFiltersFullCompletion = true;
                                 article.eligibilityFilterFinalInput = eligibilityFiltersSeniorInput;
