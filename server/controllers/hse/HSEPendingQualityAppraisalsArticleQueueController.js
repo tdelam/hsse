@@ -54,6 +54,10 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
             return res.status(404).send({
                 message: 'Junior quality appraiser has already been added'
             });
+        } else if (article._qualityAppraisalsSenior === user._id) {
+            return res.status(404).send({
+                message: 'Article has already been assigned to you as a senior appraiser'
+            });
         } else {
 
             if( hasRole('juniorappraiser', user) || hasRole('seniorappraiser', user) ) {
@@ -100,6 +104,10 @@ exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
             console.log(article._qualityAppraisalsSenior);
             return res.status(404).send({
                 message: 'A senior appraiser has already been added for this article'
+            });
+        } else if (article._qualityAppraisalsJunior === user._id) {
+            return res.status(404).send({
+                message: 'Article has already been assigned to you as a junior appraiser'
             });
         } else {
 

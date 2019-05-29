@@ -623,10 +623,11 @@ export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (article
     });
     
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER, payload: response.data });
-    history.push('/hse/assignedqualityappraisalsarticlequeue');
+    
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERROR, payload: 'Error assigning junior appraiser role for article'});
   }
+  history.push('/hse/assignedqualityappraisalsarticlequeue');
 };
 
 export const assignHSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , history) => async dispatch => {
