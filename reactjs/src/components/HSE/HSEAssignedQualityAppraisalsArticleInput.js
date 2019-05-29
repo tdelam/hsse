@@ -31,14 +31,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         super(props, context);
 
         //this.state = { ...props.currentArticle.hseState.inputValues };
-
-/*
-        if((props.currentUser) && (props.currentArticle) && props.currentUser.user_id === props.currentArticle._qualityAppraisalsJunior) {
-            this.state = {...props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues}
-        } else if ((props.currentUser) && props.currentUser.user_id === props.currentArticle._qualityAppraisalsSenior) {
-            this.state = {...props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues}
-        }
-*/       
+      
         this.state = {
 
             notInEnglish: false,
@@ -74,51 +67,10 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                 this.setState(res.qualityAppraisalsSeniorInput.hseState.inputValues)
             }
             
-        });
-
-        
-/*
-        if(this.props.currentArticle)
-            console.log(this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues);
-            
-        if( (this.props.currentUser) && (this.props.currentArticle) && (this.this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues.currentUser.user_id === this.props.currentArticle._qualityAppraisalsJunior) ) {
-            this.setState({...this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues});
-            console.log(this.props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues);
-        } else if( (this.props.currentUser) && (this.props.currentArticle) && this.props.currentUser.user_id === this.props.currentArticle._qualityAppraisalsSenior) {
-            this.setState({...this.props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues});
-            console.log(this.props.currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues);
-        }
-*/    
+        });    
     
     }
-/*
-    static getDerivedStateFromProps(props, state) {
-        if(props.currentArticle) {
-            if (props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues !== state) {
-                return {
-                    ...props.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues,
-                };
-            }
-        
-            // Return null if the state hasn't changed
-            //return null;
-        }
 
-        return null;
-        
-      }
-*/
-
-/*
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.currentArticle) {
-            return nextProps === prevState
-            ? {}
-            : {...nextProps.currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues}
-        return {...prevState};
-        }
-      }
-*/
     onSubmit = e => {
         console.log('Form submitted..');
         e.preventDefault();
@@ -163,6 +115,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         });
         // this.props.form.setFieldsValue({radio:e.target.value})
         console.log(`${e.target.name}:${e.target.value}`)
+        // save state
     }
 
     save = () => {
@@ -194,8 +147,8 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                 <Card className="card-default">
                     <CardHeader><div  >
                             <div><h3>Appraiser Inputs</h3></div>
-                            <div>Article Id: { this.props.match.params.articleId } </div>
-                            <div>Title: { (this.props.currentArticle) && this.props.currentArticle.title } </div>
+                            <div><strong>Article Id:</strong> { this.props.match.params.articleId } </div>
+                            <div><strong>Title:</strong> { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
                     <hr className="my-4"/>

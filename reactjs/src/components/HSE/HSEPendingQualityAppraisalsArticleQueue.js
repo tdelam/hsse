@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from "moment";
 import ContentWrapper from '../Layout/ContentWrapper';
 import { 
     Card, 
@@ -14,12 +13,11 @@ import {
 import { connect } from 'react-redux';
 //import { Link } from 'react-router-dom';
 
-import Swal from '../Elements/Swal';
-
 
 import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
+import PendingQualityAppraisalsArticleQueueRow from '../Common/PendingQualityAppraisalsArticleQueueRow';
 
 const dtOptions = {
     'paging': true, // Table pagination
@@ -66,14 +64,15 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, assign it!",
                 closeOnConfirm: true
-            }
+            },
+            pendingArticles: [],
         };
 
     }
 
     componentDidMount() {
         this.props.listHSEPendingQualityAppraisalsArticlesQueue().then(res => {
-            // this.props.pendingArticles = res.data;
+            this.setState({ pendingArticles: res });
             console.log(res);
         });
     }
@@ -123,60 +122,40 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
     }
 
     renderArticles() {
-        console.log(this.props);
-        if(this.props.pendingArticles) {
-            const rows = Object.entries(this.props.pendingArticles).map(article => {
-                return (
-                    <tr key={Math.random()}>
-                        {/*
-                        <td className="text-center">
-                            <span className="badge badge-success">{ article[1].priority }</span>
-                        </td>
-                        */}
-                        { this.renderPriority(article[1].priority) }
-                        <td key={Math.random()}>
-                            { article[1].articleSource }
-                        </td>
-                        <td key={Math.random()}>
-                            { moment(article[1].harvestDate).format("DD-MM-YYYY") }
-                        </td>
-                        <td>
-                            {/* {article[1]._qualityAppraisalsJuniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>} */}
-                            {article[1]._qualityAppraisalsJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
-                            
-                        </td>
-                        <td key={Math.random()}>
-                            {/*{article[1]._qualityAppraisalsSeniorEmail || <Link to="/hse/assignedqualityappraisalarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>} */}
-                            {article[1]._qualityAppraisalsSeniorEmail || <a><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></a>}
-                        </td>
-                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
-                        <td key={Math.random()}>{ article[1]._id }</td>
-                        <td key={Math.random()}>{ article[1].title }</td>
-                        <td key={Math.random()}>{ article[1].author }</td>
-                        <td key={Math.random()}>{ article[1].language }</td>
-                        {/*}
-                        <td className="text-right">
-                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
-                        </td> */}
-                    {/*         
-                        <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-danger">
-                                <em className="fas fa-trash-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
-                        </td>
-                    */}    
-                    </tr>
-                )
+        console.log(this.state.pendingArticles);
+        if(this.state.pendingArticles.length > 0) {
+            let testRows = this.state.pendingArticles.map(article => {console.log(article);
+                return (<PendingQualityAppraisalsArticleQueueRow key = {article._id} article = {article} history = {this.props.history} />);
             });
-        // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
-            return ( rows );
-        }    
+            return (
+                <div>
+                <Datatable options={dtOptions}>
+                    <table className="table table-striped my-4 w-100">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Priority</th>
+                                <th>Source</th>
+                                <th>Harvest Date</th>
+                                <th>Junior Appraiser</th>
+                                <th>Senior Appraiser</th>
+                                <th>Article Id</th>
+                                <th>Title</th>
+                                <th>Author(s)</th>
+                                <th>Language</th>
+                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
+                                {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { testRows }
+                        </tbody>
+                    </table>
+                </Datatable>
+            </div>
+            );
+        } else {
+            return (<div />);
+        }
     };
 
     render() {
@@ -201,30 +180,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        <div>
-                    <Datatable options={dtOptions}>
-                        <table className="table table-striped my-4 w-100">
-                            <thead>
-                                <tr>
-                                    <th data-priority="1">Priority</th>
-                                    <th>Source</th>
-                                    <th>Harvest Date</th>
-                                    <th>Junior Appraiser</th>
-                                    <th>Senior Appraiser</th>
-                                    <th>Article Id</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Language</th>
-                                    {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
-                                    {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { this.renderArticles() }
-                            </tbody>
-                        </table>
-                    </Datatable>
-                </div>
+                        { this.renderArticles() } 
                     </CardBody>
                 </Card>
             </ContentWrapper>
@@ -235,7 +191,7 @@ class HSEPendingQualityAppraisalsArticleQueue extends Component {
 function mapStateToProps({ hsePendingQualityAppraisalsArticleQueue }) {
     return { 
         errorMessage: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticleErrorMessage,
-        // pendingArticles: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticles 
+        pendingArticles: hsePendingQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticles 
     }
 }
 
