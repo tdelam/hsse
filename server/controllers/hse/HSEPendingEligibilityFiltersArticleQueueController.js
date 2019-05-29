@@ -57,7 +57,7 @@ exports.addArticleToJuniorEligibilityFilter= async (req, res) => {
         } else {
 
             if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
-                console.log(user._id + "******************");
+                
                 article._eligibilityFiltersJunior = user._id;
                 article._eligibilityFiltersJuniorEmail = user.email;
 
