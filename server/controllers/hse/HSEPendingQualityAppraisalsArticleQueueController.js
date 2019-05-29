@@ -6,7 +6,7 @@ const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find(/*{ eligibilityFiltersFullCompletion: true }*/ { complicated: false })
-       .or([ { _qualityAppraiserJunior: null }, { _qualityAppraiserSenior: null } ])
+       .or([ { _qualityAppraisalsJunior: null }, { _qualityAppraisalsSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);

@@ -72,7 +72,8 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                         </td>
                         <td>
                             {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._qualityAppraisalsJuniorEmail+ ", " + article[1]._qualityAppraisalsSeniorEmail }</Link>
+                            {/*<Link to="" className="mr-1 badge badge-primary" >{ article[1]._qualityAppraisalsJuniorEmail+ ", " + article[1]._qualityAppraisalsSeniorEmail }</Link>*/}
+                            { ( (article[1]._qualityAppraisalsJuniorEmail) && (this.props.currentUser.user.email === article[1]._qualityAppraisalsSeniorEmail) ) ? article[1]._qualityAppraisalsJuniorEmail : '' } { ((article[1]._qualityAppraisalsSeniorEmail) && (this.props.currentUser.user.email === article[1]._qualityAppraisalsJuniorEmail)) ? article[1]._qualityAppraisalsSeniorEmail: '' }
                         </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
@@ -151,8 +152,9 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue }) {
+function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
     return {
+        currentUser: auth.currentUser,
         errorMessage: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticleErrorMessage,
         assignedArticles: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticles 
     }

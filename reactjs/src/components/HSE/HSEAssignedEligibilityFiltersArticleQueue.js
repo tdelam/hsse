@@ -33,6 +33,7 @@ const dtOptions = {
 class HSEAssignedEligibilityFiltersArticleQueue extends Component {
 
     componentDidMount() {
+        this.props.getCurrentUser();
         this.props.listHSEAssignedEligibilityFiltersArticlesQueue();
     }
 
