@@ -74,7 +74,7 @@ exports.setQualityAppraisalsValues = async (req, res) => {
         if( !(user._id.equals(article._qualityAppraisalsJunior) || user._id.equals(article._qualityAppraisalsSenior) ) ){
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for quality appraisals for article'
             });
 
         } else if( user._id.equals(article._qualityAppraisalsJunior) ) {
@@ -147,7 +147,7 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
         if( !(article._qualityAppraisalsJunior.equals(user._id) || article._qualityAppraiasalsSenior.equals(user._id)) ) {
 
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for quality apraisals for article'
             });
 
         } else if ( article._eligibilityFilterJunior.equals(user._id) && article._eligibilityFilterSenior.equals(user._id) ) {
@@ -164,7 +164,7 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
         
             });
             
-            article.qualityAppraisalsJuniorInput = newQualityAppraisals;
+            article.qualityAppraisalsJuniorInput = newQualityAppraisal;
             article.qualityAppraisalsSeniorInput = newQualityAppraisals;
             
             article.qualityAppraisalsJuniorCompleted = true;
@@ -359,86 +359,155 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 
 };
 
-const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
+exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
+
+    const { articleId } = req.params;
+
+    const inputValues = req.body;
+    
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    console.log(user);
+
+    console.log(`*** user._id: ${user._id}`);
 
     HSEArticleModelClass.findById(articleId, async (err, article) => {
-
         if(err) {
 
-            //return res.send(err);
-            console.log(err);
+            return res.send(err);
 
         } else if(!article) {
-            /*
+
             return res.status(404).send({
                 message: 'No article with that identifier has been found'
             });
-            */
-           console.log('No article with that identifier has been found');
+
+        }
+        console.log(`*** article._qualityAppraisalsJunior: ${article._qualityAppraisalsJunior}`);
+        console.log(`*** article._qualityAppraisalsSenior: ${article._qualityAppraisalsSenior}`);
+        if( !(user._id.equals(article._qualityAppraisalsJunior) || user._id.equals(article._qualityAppraisalsSenior) ) ){
+            
+            return res.status(404).send({
+                message: 'Not authorized to add inputs for eligibility and filter for article'
+            });
+
+        } else if( user._id.equals(article._qualityAppraisalsJunior) ) {
+            console.log(`*** INSIDE FINISHING FOR JUNIOR QUALITY APPRAISALS ***`);
+            console.log(`*** article._qualityAppraisalsJunior: ${article._qualityAppraisalsJunior}`);
+            await HSEArticleQualityAppraisalModelClass.findOneAndUpdate(
+                { _id: article.qualityAppraisalsJuniorInput },
+                
+                { hseState: inputValues },
+
+                {new: true, useFindAndModify: false},
+                
+                // the callback function
+                (err, juniorQualityAppraisals) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    /*
+                    return res.send({
+                        message: 'Inputs for Junior filter added for article'
+                    });
+                    */
+                }
+            );
+
+            article.qualityAppraisalsJuniorCompleted = true;
+            await article.save();
+
+            
+        } else if( user._id.equals(article._qualityAppraisalsSenior) ) {
+
+            await HSEArticleQualityAppraisalModelClass.findOneAndUpdate(
+                { _id: article.qualityAppraisalsSeniorInput },
+                   
+                { hseState: inputValues },
+
+                { new: true, useFindAndModify: false},
+                
+                // the callback function
+                (err, seniorQualityAppraisals) => {
+                // Handle any possible database errors
+                    if (err) return res.status(500).send(err);
+                    /*
+                    return res.send({
+                        message: 'Inputs for Senior filter added for article'
+                    });
+                    */
+                }
+            );
+
+            article.qualityAppraisalsSeniorCompleted = true;
+            await article.save();
+            
         }
 
-        let newEligibilityFilterJuniorInput = null;
-        let newEligibilityFilterSeniorInput = null;
-
-        await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFilterJuniorInput, (err, eligibilityFilterJuniorInput) => {
-            
-            if(err) {
-                //console.log(err);
-                throw new Error(err);
-            } else if(!eligibilityFilterJuniorInput) {
-                throw new Error('Quality Appraisal for Junior Appraisal does not exist');
-            } else {
-                newEligibilityFilterJuniorInput = eligibilityFilterJuniorInput;
-            }
-
-        });
-
-        await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFilterSeniorInput, (err, eligibilityFilterSeniorInput) => {
-
-            if(err) {
-                //console.log(err);
-                throw new Error(err);
-            } else if(!eligibilityFilterSeniorInput) {
-                throw new Error('Quality Appraisal for Senior Filter does not exist');
-            } else {
-                newEligibilityFilterSeniorInput = eligibilityFilterSeniorInput;
-            }
-
-        });
-
-        if(article.qualityAppraisalJuniorCompleted && article.qualityAppraisalSeniorCompleted) {
-            
+        if(article.qualityAppraisalsJuniorCompleted && article.qualityAppraisalsSeniorCompleted) {
+            console.log("*** CHECKING TO SEE IF JUNIOR AND SENIOR APPRAISERS HAVE COMPLETED ***");
             // Call instance method to check if all fields on article's eligibilityFilter are equal
-            if( newQualityAppraisalJuniorInput.isEqualTo(newEligibilityFilterSeniorInput) ) {
 
-                article.eligibilityFilterFullCompletion = true;
-                await article.save();
-                console.log(`Full completion set`);
-                /*
-                return res.status(201).send({
-                    message: 'Eligibility and Filter stage passed for this article'
-                });
-                */
-            } else {
+            await HSEArticleQualityAppraisalModelClass.findById(article.qualityAppraisalsJuniorInput, async (err, qualityAppraisalJunior) => {
+                if(err) {
 
-                article.eligibilityFilterResolve = true;
-                article.eligibilityFilterFinalInput = newEligibilityFilterSeniorInput;
-                await article.save();
-                console.log(`resolve completion set`);
-                /*
-                return res.status(201).send({
-                    message: 'Resolve Eligibility and Filter values for this article'
-                });
-                */
-            }
+                    return res.send(err);
+        
+                } else if(!qualityAppraisalJunior) {
+        
+                    return res.status(404).send({
+                        message: 'No Eligibility Filter with that identifier has been found'
+                    });
+        
+                } else {
+                    await HSEArticleQualityAppraisalModelClass.findById(article.eligibilityFiltersJuniorInput, async (err, qualityAppraisalSenior) => {
+                        if(err) {
+
+                            return res.send(err);
+                
+                        } else if(!qualityAppraisalJunior) {
+                
+                            return res.status(404).send({
+                                message: 'No Eligibility Filter with that identifier has been found'
+                            });
+                
+                        } else {
+                            if( qualityAppraisalJunior.isEqualTo(qualityAppraisalSenior) && (qualityAppraisalJunior !== null) && (qualityAppraisalJunior !== null) ) {
+
+                                article.qualityAppraisalsFullCompletion = true;
+                                article.qualityAppraisalsFinalInput = qualityAppraisalSeniorInput;
+                                await article.save();
+                                console.log(`Full completion set`);
+                                
+                                return res.status(201).send({
+                                    message: 'Quality Appraisals stage passed for this article'
+                                });
+                                
+                            } else {
+                
+                                article.qualityAppraisalsResolve = true;
+                                await article.save();
+                                console.log(`resolve completion set`);
+                                
+                                return res.status(201).send({
+                                    message: 'Resolve Quality Appraisals values for this article'
+                                });
+                                
+                            }
+                        }
+                    });
+                }
+            });
+
+            
 
         } else {
-            /*
+
+            console.log('Senior and Junior Quality Appraisals are not completed for article');
+            
             return res.status(200).send({
-                message: 'Senior and Junior Eligibility and filter are not completed for article'
+                message: 'Senior and Junior Quality Appraisals are not completed for article'
             });
-            */
-           console.log('Senior and Junior Quality Appraisal are not completed for article');
+            
         }
     });
 

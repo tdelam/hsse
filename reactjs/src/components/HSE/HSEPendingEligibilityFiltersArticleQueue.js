@@ -44,6 +44,7 @@ const dtOptions = {
 
 class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
+    state = {};
 
     constructor(props, context) {
         super(props, context);
