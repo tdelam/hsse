@@ -113,7 +113,7 @@ const HSEArticleSchema = new Schema({
 
     linkingStudiesJuniorCompleted: { type: Boolean, default: false },
 
-    qualityAppraisalsJuniorCompleted: { type: Boolean, default: false },
+    presentationDetailsJuniorCompleted: { type: Boolean, default: false },
 
     // Set to true if an article needs to be resolved
     eligibilityFiltersResolve: { type: Boolean, default: false },
