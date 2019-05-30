@@ -612,7 +612,10 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
 };
 
 export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
-
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticlequeue/addjuniorappraiser/${articleId}`, 
     {
@@ -691,6 +694,10 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
 };
 
 export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.post(`${backendServer}/hse/pendingqualityappraisalsarticlequeue/addseniorappraiser/${articleId}`,
     {
