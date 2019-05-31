@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const HSEArticleQualityAppraisalSchema = new Schema({ 
     
-    _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
+_article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
 
     // Quality
     questionOne: { type: String, enum: ['Yes', 'No', "Can't answer", "Not applicable"] },
@@ -25,7 +25,7 @@ const HSEArticleQualityAppraisalSchema = new Schema({
 });
 
 HSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {
-
+    //console.log(otherInput);
     currentModel = this;
 
     var unEqualFields = 0;
@@ -35,7 +35,7 @@ HSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {
     console.log(props.length);
 
     HSEArticleQualityAppraisalSchema.eachPath(function(path) {
-        console.log(path);
+        
         if( currentModel[path] !== otherInput[path] && path != '_article' && path != '_id') {
             console.log(`${path}: ${currentModel[path]}, ${path}: ${otherInput[path]}`);
             unEqualFields++;
