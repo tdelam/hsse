@@ -449,6 +449,7 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
             // Call instance method to check if all fields on article's eligibilityFilter are equal
 
             await HSEArticleQualityAppraisalModelClass.findById(article.qualityAppraisalsJuniorInput, async (err, qualityAppraisalJunior) => {
+                //console.log(qualityAppraisalJunior);
                 if(err) {
 
                     return res.send(err);
@@ -460,8 +461,8 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
                     });
         
                 } else {
-                    await HSEArticleQualityAppraisalModelClass.findById(article.eligibilityFiltersJuniorInput, async (err, qualityAppraisalSenior) => {
-                        console.log()
+                    await HSEArticleQualityAppraisalModelClass.findById(article.qualityAppraisalsJuniorInput, async (err, qualityAppraisalSenior) => {
+                        console.log(qualityAppraisalSenior);
                         if(err) {
 
                             return res.send(err);
