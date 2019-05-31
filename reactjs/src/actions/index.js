@@ -551,6 +551,10 @@ export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) =>
 };
 
 export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => async dispatch => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.get(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/fetcharticle/${articleId}`, { headers });
   
@@ -561,7 +565,9 @@ export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => 
     return response.data;
     
   } catch(e) {
-    dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse quality appraisals assigned article'});
+    // dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: 'Error fetching hse quality appraisals assigned article'});
+    dispatch({ type: HSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR, payload: e});
+    return e;
   }
 };
 

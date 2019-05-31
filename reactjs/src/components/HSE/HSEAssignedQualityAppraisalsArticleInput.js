@@ -52,14 +52,14 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         
     }
 
-    componentDidMount() {
+    componentDidMount() {console.log("*****Mounting component in HSEAssignedQualityAppraisalsInput************");
 
         const { history } = this.props;
         const { articleId } = this.props.match.params;
         
 
         this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history).then(res => {
-            
+            console.log(res);
             if(res.qualityAppraisalsJuniorInput && res.qualityAppraisalsJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._qualityAppraisalsJunior) ) {
                 this.setState(res.qualityAppraisalsJuniorInput.hseState.inputValues)
                 
@@ -122,16 +122,16 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
         this.props.assignHSEAssignedQualityAppraisalsArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
 
-    cancel = () => {
+    cancel = () => {console.log("Inside cancel");
         this.props.history.push('/hse/assignedqualityappraisalsarticlequeue')
     }
 
     finish = () => {
-        this.props.assignHSEAssignedQualityAppraisalsArticleEditComplete(this.props.match.params.articeId, this.state, this.props.history);
+        this.props.assignHSEAssignedQualityAppraisalsArticleEditComplete(this.props.match.params.articleId, this.state, this.props.history);
     }
 
     render() {
-
+        
         if(!this.props.currentArticle) {
             return <div>Loading...</div>
         }
