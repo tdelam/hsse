@@ -388,7 +388,7 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
         if( !(user._id.equals(article._qualityAppraisalsJunior) || user._id.equals(article._qualityAppraisalsSenior) ) ){
             
             return res.status(404).send({
-                message: 'Not authorized to add inputs for eligibility and filter for article'
+                message: 'Not authorized to add inputs for quality appraisals for article'
             });
 
         } else if( user._id.equals(article._qualityAppraisalsJunior) ) {
@@ -430,6 +430,7 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
                 (err, seniorQualityAppraisals) => {
                 // Handle any possible database errors
                     if (err) return res.status(500).send(err);
+                    console.log(seniorQualityAppraisals);
                     /*
                     return res.send({
                         message: 'Inputs for Senior filter added for article'

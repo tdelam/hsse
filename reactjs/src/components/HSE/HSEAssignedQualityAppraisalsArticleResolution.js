@@ -326,19 +326,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.questionOne === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.currentAppraiserState.questionOne === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="no" checked={this.state.questionOne === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionOne" value="no" checked={this.state.currentAppraiserState.questionOne === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.questionOne === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.currentAppraiserState.questionOne === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.questionOne === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.currentAppraiserState.questionOne === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -346,19 +346,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.questionTwo === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.currentAppraiserState.questionTwo === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.questionTwo === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.currentAppraiserState.questionTwo === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.questionTwo === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.currentAppraiserState.questionTwo === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.questionTwo === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.currentAppraiserState.questionTwo === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -366,19 +366,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.questionThree === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.currentAppraiserState.questionThree === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="no" checked={this.state.questionThree === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionThree" value="no" checked={this.state.currentAppraiserState.questionThree === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.questionThree === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.currentAppraiserState.questionThree === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.questionThree === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.currentAppraiserState.questionThree === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -386,19 +386,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.questionFour === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.currentAppraiserState.questionFour === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="no" checked={this.state.questionFour === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionFour" value="no" checked={this.state.currentAppraiserState.questionFour === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.questionFour === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.currentAppraiserState.questionFour === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.questionFour === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.currentAppraiserState.questionFour === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -406,19 +406,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.questionFive === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.currentAppraiserState.questionFive === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="no" checked={this.state.questionFive === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionFive" value="no" checked={this.state.currentAppraiserState.questionFive === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.questionFive === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.currentAppraiserState.questionFive === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.questionFive === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.currentAppraiserState.questionFive === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -426,19 +426,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.questionSix === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.currentAppraiserState.questionSix === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="no" checked={this.state.questionSix === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionSix" value="no" checked={this.state.currentAppraiserState.questionSix === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.questionSix === "can't answer"} onChange={this.onChange}/> Can't answer
+                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.currentAppraiserState.questionSix === "can't answer"} onChange={this.onChange}/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.questionSix === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.currentAppraiserState.questionSix === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -446,19 +446,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.questionSeven === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.currentAppraiserState.questionSeven === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.questionSeven === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.currentAppraiserState.questionSeven === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.questionSeven === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.currentAppraiserState.questionSeven === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.questionSeven === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.currentAppraiserState.questionSeven === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -466,19 +466,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.questionEight === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.currentAppraiserState.questionEight === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="no" checked={this.state.questionEight === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionEight" value="no" checked={this.state.currentAppraiserState.questionEight === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.questionEight === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.currentAppraiserState.questionEight === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.questionEight === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.currentAppraiserState.questionEight === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -486,7 +486,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.questionNine === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.currentAppraiserState.questionNine === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
@@ -494,11 +494,11 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.questionNine === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.currentAppraiserState.questionNine === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.questionNine === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.currentAppraiserState.questionNine === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -506,19 +506,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.questionTen === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.currentAppraiserState.questionTen === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="no" checked={this.state.questionTen === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionTen" value="no" checked={this.state.currentAppraiserState.questionTen === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.questionTen === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.currentAppraiserState.questionTen === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.currentAppraiserState.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
 
@@ -588,19 +588,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.questionOne === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.otherAppraiserState.questionOne === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="no" checked={this.state.questionOne === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionOne" value="no" checked={this.state.otherAppraiserState.questionOne === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.questionOne === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.otherAppraiserState.questionOne === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.questionOne === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.otherAppraiserState.questionOne === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -608,19 +608,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.questionTwo === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.otherAppraiserState.questionTwo === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.questionTwo === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.otherAppraiserState.questionTwo === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.questionTwo === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.otherAppraiserState.questionTwo === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.questionTwo === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.otherAppraiserState.questionTwo === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -628,19 +628,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.questionThree === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.otherAppraiserState.questionThree === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="no" checked={this.state.questionThree === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionThree" value="no" checked={this.state.otherAppraiserState.questionThree === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.questionThree === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.otherAppraiserState.questionThree === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.questionThree === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.otherAppraiserState.questionThree === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -648,19 +648,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.questionFour === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.otherAppraiserState.questionFour === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="no" checked={this.state.questionFour === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionFour" value="no" checked={this.state.otherAppraiserState.questionFour === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.questionFour === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.otherAppraiserState.questionFour === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.questionFour === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.otherAppraiserState.questionFour === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -668,19 +668,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.questionFive === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.otherAppraiserState.questionFive === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="no" checked={this.state.questionFive === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionFive" value="no" checked={this.state.otherAppraiserState.questionFive === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.questionFive === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.otherAppraiserState.questionFive === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.questionFive === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.otherAppraiserState.questionFive === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -688,19 +688,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.questionSix === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.otherAppraiserState.questionSix === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="no" checked={this.state.questionSix === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionSix" value="no" checked={this.state.otherAppraiserState.questionSix === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.questionSix === "can't answer"} onChange={this.onChange}/> Can't answer
+                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.otherAppraiserState.questionSix === "can't answer"} onChange={this.onChange}/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.questionSix === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.otherAppraiserState.questionSix === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -708,19 +708,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.questionSeven === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.otherAppraiserState.questionSeven === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.questionSeven === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.otherAppraiserState.questionSeven === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.questionSeven === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.otherAppraiserState.questionSeven === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.questionSeven === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.otherAppraiserState.questionSeven === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -728,19 +728,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.questionEight === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.otherAppraiserState.questionEight === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="no" checked={this.state.questionEight === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionEight" value="no" checked={this.state.otherAppraiserState.questionEight === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.questionEight === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.otherAppraiserState.questionEight === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.questionEight === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.otherAppraiserState.questionEight === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -748,19 +748,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.questionNine === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.otherAppraiserState.questionNine === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="no" checked={this.state.questionNine === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionNine" value="no" checked={this.state.otherAppraiserState.questionNine === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.questionNine === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.otherAppraiserState.questionNine === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.questionNine === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.otherAppraiserState.questionNine === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -768,19 +768,19 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.questionTen === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.otherAppraiserState.questionTen === 'yes'} onChange={this.onChange} /> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="no" checked={this.state.questionTen === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionTen" value="no" checked={this.state.otherAppraiserState.questionTen === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.questionTen === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.otherAppraiserState.questionTen === "can't answer"} onChange={this.onChange} /> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.otherAppraiserState.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
 
