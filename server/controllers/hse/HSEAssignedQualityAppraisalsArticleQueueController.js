@@ -460,6 +460,7 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
         
                 } else {
                     await HSEArticleQualityAppraisalModelClass.findById(article.eligibilityFiltersJuniorInput, async (err, qualityAppraisalSenior) => {
+                        console.log()
                         if(err) {
 
                             return res.send(err);
@@ -471,7 +472,7 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
                             });
                 
                         } else {
-                            if( qualityAppraisalJunior.isEqualTo(qualityAppraisalSenior) && (qualityAppraisalJunior !== null) && (qualityAppraisalJunior !== null) ) {
+                            if( (qualityAppraisalJunior !== null) && (qualityAppraisalJunior !== null) && qualityAppraisalJunior.isEqualTo(qualityAppraisalSenior)  ) {
 
                                 article.qualityAppraisalsFullCompletion = true;
                                 article.qualityAppraisalsFinalInput = qualityAppraisalSeniorInput;
