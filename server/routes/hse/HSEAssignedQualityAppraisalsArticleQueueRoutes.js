@@ -5,5 +5,5 @@ module.exports = app => {
     app.get('/hse/assignedqualityappraisalsarticlequeue/fetcharticle/:articleId', HSEAssignedQualityAppraisalsArticleQueueController.fetchArticle);
 
     app.post('/hse/assignedqualityappraisalsarticlequeue/savevalues/:articleId', HSEAssignedQualityAppraisalsArticleQueueController.setQualityAppraisalsValues);
-    app.post('/hse/assignedqualityappraisalsarticlequeue/setcompleted/:articleId', HSEAssignedQualityAppraisalsArticleQueueController.setQualityAppraisalsComplete);
+    app.post('/hse/assignedqualityappraisalsarticlequeue/setcompleted/:articleId', HSEAssignedQualityAppraisalsArticleQueueController.setFullEligibilityFiltersCompleteOrResolve);
 }
