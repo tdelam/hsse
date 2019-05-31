@@ -20,7 +20,7 @@ import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
 
-class HSEAssignedEligibilityFilterArticleResolution extends Component {
+class HSEAssignedQualityAppraisalsArticleResolution extends Component {
 
     state = {
 
@@ -265,8 +265,9 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
     render() {
 
-        if(!this.state.fetchedArticle)
+        if(!this.props.currentArticle) {
             return <div>Loading...</div>
+        }
         //console.log(`currentArticle: ${this.props.currentArticle}`);
 
         // used for react select
@@ -821,11 +822,11 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
 // export default HSEAssignedEligibilityFilterArticleInput;
 
-function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
+function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: hseAssignedEligibilityFiltersArticleQueue.hsePendingEligibilityFiltersArticleErrorMessage,
-        currentArticle: hseAssignedEligibilityFiltersArticleQueue.hseAssignedEligibilityFiltersArticleFetch
+        errorMessage: hseAssignedQualityAppraisalsArticleQueue.hsePendingQualityAppraisalsArticleErrorMessage,
+        currentArticle: hseAssignedQualityAppraisalsArticleQueue.hseAssignedQualityAppraisalsArticleFetch
     }
 }
 
@@ -833,4 +834,4 @@ export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'eligibilityFilterResolution'
-    })) (HSEAssignedEligibilityFilterArticleResolution);
+    })) (HSEAssignedQualityAppraisalsArticleResolution);
