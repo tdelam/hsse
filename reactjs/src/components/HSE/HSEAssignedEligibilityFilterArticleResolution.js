@@ -181,8 +181,8 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         
         if(this.props.currentArticle && this.props.currentUser) {
             console.log(`inside isJuniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser._id}, _eligibilityFilterJunior: ${this.props.currentArticle._eligibilityFilterJunior}`);
-            return this.props.currentUser === this.props.currentArticle._eligibilityFilterJunior;
+            console.log(`currentUser: ${this.props.currentUser._id}, _eligibilityFiltersJunior: ${this.props.currentArticle._eligibilityFiltersJunior}`);
+            return this.props.currentUser === this.props.currentArticle._eligibilityFiltersJunior;
         }
             
     }
@@ -190,8 +190,8 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
     isSeniorFilter() {
         if(this.props.currentArticle && this.props.currentUser) {
             console.log(`inside isSeniorFilter`);
-            console.log(`currentUser: ${this.props.currentUser}, _eligibilityFilterSenior: ${this.props.currentArticle._eligibilityFilterSenior}`);
-            return this.props.currentUser === this.props.currentArticle._eligibilityFilterSenior;
+            console.log(`currentUser: ${this.props.currentUser}, _eligibilityFiltersSenior: ${this.props.currentArticle._eligibilityFiltersSenior}`);
+            return this.props.currentUser === this.props.currentArticle._eligibilityFiltersSenior;
         }
             
     }
