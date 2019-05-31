@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Tree } from 'antd';
 import {
-    Col,
+    Label,
     Card,
     CardHeader,
     CardBody,
@@ -14,7 +14,6 @@ import {
     Input,} from 'reactstrap';
 
 // React Select
-import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
@@ -70,10 +69,10 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         const { history } = this.props;
         const { articleId } = this.props.match.params;
         
-        this.props.fetchHSEAssignedEligibilityFiltersArticle(articleId, history).then(res => {
-            // console.log(res);
+        this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history).then(res => {
+            console.log(res);
             if(res.qualityAppraisalsJuniorInput && res.qualityAppraisalsJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._qualityAppraisalsJunior) ) {
-                this.setState({ currentAppraiserState: res.eligibilityFiltersJuniorInput.hseState.inputValues, otherAppraiserState: res.qualityAppraisalsSeniorInput.hseState.inputValues, fetchedArticle: true });
+                this.setState({ currentAppraiserState: res.qualityAppraisalsJuniorInput.hseState.inputValues, otherAppraiserState: res.qualityAppraisalsSeniorInput.hseState.inputValues, fetchedArticle: true });
                 
             } else if (res.qualityAppraisalsSeniorInput && res.qualityAppraisalsSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._qualityAppraisalsSenior) ) {
                 this.setState({ currentAppraiserState: res.qualityAppraisalsSeniorInput.hseState.inputValues, otherAppraiserState: res.qualityAppraisalsJuniorInput.hseState.inputValues, fetchedArticle: true });
@@ -126,14 +125,14 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
     getInputValues() {
 
-        if(this.isJuniorFilter()) {
+        if(this.isJuniorAppraiser()) {
             console.log(`isJuniorFilter`);
-            this.setState({ eligibilityFilterModel: { test: '' }/*this.props.currentArticle.eligibilityFilterJuniorInput*/ });
+            this.setState({ qualityAppraisalModel: { test: '' }/*this.props.currentArticle.qualityAppraisalsJuniorInput*/ });
 
-        } else if(this.isSeniorFilter()) {
+        } else if(this.isSeniorAppraiser()) {
 
             console.log(`isSeniorFilter`);
-            this.setState({ eligibilityFilterModel: this.props.currentArticle.eligibilityFilterSeniorInput });
+            this.setState({ qualityAppraisalModel: this.props.currentArticle.qualityAppraisalsJuniorInput });
 
         }
     }
@@ -173,6 +172,14 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         })
     }
     
+    onChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+        // this.props.form.setFieldsValue({radio:e.target.value})
+        console.log(`${e.target.name}:${e.target.value}`)
+        // save state
+    }
 
     save = () => {
 
@@ -180,17 +187,17 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
         const { currentArticle } = this.props;
 
-        if (currentArticle.eligibilityFiltersJuniorInput && currentArticle.eligibilityFiltersJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._eligibilityFiltersJunior) ) {
-            this.setState({ currentFilterState: currentArticle.eligibilityFiltersJuniorInput.hseState.inputValues, otherFilterState: currentArticle.eligibilityFiltersSeniorInput.hseState.inputValues });
+        if (currentArticle.qualityAppraisalsJuniorInput && currentArticle.qualityAppraisalsJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._qualityAppraisalsJunior) ) {
+            this.setState({ currentFilterState: currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues, otherFilterState: currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues });
             
-        } else if (currentArticle.eligibilityFiltersSeniorInput && currentArticle.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._eligibilityFiltersSenior) ) {
-            this.setState({ currentFilterState: currentArticle.eligibilityFiltersSeniorInput.hseState.inputValues, otherFilterState: currentArticle.eligibilityFiltersJuniorInput.hseState.inputValues });
+        } else if (currentArticle.qualityAppraisalsSeniorInput && currentArticle.qualityAppraisalsSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._qualityAppraisalsSenior) ) {
+            this.setState({ currentFilterState: currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues, otherFilterState: currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues });
         }
-        this.props.assignHSEAssignedEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
+        this.props.assignHSEAssignedQualityAppraisalsArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
 
     cancel = () => {
-        this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue')
+        this.props.history.push('/hse/assignedqualityappraisalsarticlequeue')
     }
 
     renderGeneralArticleInformation = (generalInfo) => {
@@ -263,8 +270,8 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         //console.log(`currentArticle: ${this.props.currentArticle}`);
 
         // used for react select
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
+        //const { selectedOption } = this.state;
+        //const value = selectedOption && selectedOption.value;
 
         // this.setState({ eligibilityFilterModel: this.getInputValues() });
 
