@@ -24,6 +24,7 @@
     "elasticsearch": "^15.2.0",
     "express": "^4.16.4",
     "jwt-simple": "^0.5.5",
+    "lodash": "^4.17.11",
     "mongoosastic": "^4.4.1",
     "mongoose": "^5.3.11",
     "morgan": "^1.9.1",

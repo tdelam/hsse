@@ -745,6 +745,10 @@ export const assignHSEAssignedEligibilityFiltersArticleEdit = (articleId, inputV
 };
 
 export const assignHSEAssignedQualityAppraisalsArticleEdit = (articleId, inputValues, history) => async dispatch => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.post(`${backendServer}/hse/assignedqualityappraisalsarticlequeue/savevalues/${articleId}`,
     {

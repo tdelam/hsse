@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -9,7 +10,7 @@ exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ complicated: false })
+    HSEArticleModelClass.find({ complicated: false, qualityAppraisalsFullCompletion: false })
     .or([ { _qualityAppraisalsJunior: user._id }, { _qualityAppraisalsSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
@@ -461,8 +462,8 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
                     });
         
                 } else {
-                    await HSEArticleQualityAppraisalModelClass.findById(article.qualityAppraisalsJuniorInput, async (err, qualityAppraisalSenior) => {
-                        console.log(qualityAppraisalSenior);
+                    await HSEArticleQualityAppraisalModelClass.findById(article.qualityAppraisalsSeniorInput, async (err, qualityAppraisalSenior) => {
+                        
                         if(err) {
 
                             return res.send(err);
@@ -474,10 +475,13 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
                             });
                 
                         } else {
-                            if( (qualityAppraisalJunior !== null) && (qualityAppraisalJunior !== null) && qualityAppraisalJunior.isEqualTo(qualityAppraisalSenior)  ) {
-
+                            //if( (qualityAppraisalJunior !== null) && (qualityAppraisalJunior !== null) && qualityAppraisalJunior.isEqualTo(qualityAppraisalSenior)  ) {
+                            if( (qualityAppraisalJunior !== null) && (qualityAppraisalJunior !== null) && _.isEqual(qualityAppraisalJunior.hseState, qualityAppraisalSenior.hseState) ) {
+                                console.log(qualityAppraisalJunior.hseState.inputValues);
+                                console.log(qualityAppraisalSenior.hseState.inputValues);
                                 article.qualityAppraisalsFullCompletion = true;
-                                article.qualityAppraisalsFinalInput = qualityAppraisalSeniorInput;
+                                article.qualityAppraisalsFinalInput = qualityAppraisalSenior;
+                                article.qualityAppraisalsResolve = false;
                                 await article.save();
                                 console.log(`Full completion set`);
                                 
