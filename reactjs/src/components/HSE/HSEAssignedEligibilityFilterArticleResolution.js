@@ -241,7 +241,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
     onCheckCA = (checkedKeys, event) => {
         let newCurrentFilterState = Object.assign({}, this.state.currentFilterState);
         newCurrentFilterState.checkedKeysCA = checkedKeys;
-        this.setState({ checkedKeysCA: checkedKeys });
+        this.setState({ currentFilterState: newCurrentFilterState });
     }
 
     onCheckCAOther = (checkedKeys, event) => {
@@ -313,7 +313,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
     onCheckOPA = (checkedKeys, event) => {
         let newCurrentFilterState = Object.assign({}, this.state.currentFilterState);
         newCurrentFilterState.checkedOPA = checkedKeys;
-        this.setState({ checkedOPA: checkedKeys });
+        this.setState({ currentFilterState: newCurrentFilterState });
     }
 
     onCheckOPAOther = (checkedKeys, event) => {
@@ -402,7 +402,7 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         } else if (currentArticle.eligibilityFiltersSeniorInput && currentArticle.eligibilityFiltersSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._eligibilityFiltersSenior) ) {
             this.setState({ currentFilterState: currentArticle.eligibilityFiltersSeniorInput.hseState.inputValues, otherFilterState: currentArticle.eligibilityFiltersJuniorInput.hseState.inputValues });
         }
-        this.props.assignHSEAssignedEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
+        this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articleId, this.state.currentFilterState, this.props.history);
     }                                                                    
 
     cancel = () => {
