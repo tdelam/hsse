@@ -35,15 +35,15 @@ HSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {
     console.log(props.length);
 
     HSEArticleQualityAppraisalSchema.eachPath(function(path) {
-        
-        if( currentModel[path] !== otherInput[path] && path != '_article' && path != '_id') {
+        console.log(`-------------------The path: ${path}`)
+        if( currentModel[path] !== otherInput[path] && path != '_article' && path != '_id' && path !== 'hseState'/*path != '__v'*/) {
             console.log(`${path}: ${currentModel[path]}, ${path}: ${otherInput[path]}`);
             unEqualFields++;
             console.log(path);
         }
     
     });
-
+    console.log(`This is the unEqualFields: ${unEqualFields}`);
     return unEqualFields === 0;
 
 };

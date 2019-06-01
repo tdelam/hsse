@@ -70,7 +70,7 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
         const { articleId } = this.props.match.params;
         
         this.props.fetchHSEAssignedQualityAppraisalsArticle(articleId, history).then(res => {
-            console.log(res);
+            
             if(res.qualityAppraisalsJuniorInput && res.qualityAppraisalsJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === res._qualityAppraisalsJunior) ) {
                 this.setState({ currentAppraiserState: res.qualityAppraisalsJuniorInput.hseState.inputValues, otherAppraiserState: res.qualityAppraisalsSeniorInput.hseState.inputValues, fetchedArticle: true });
                 
@@ -173,8 +173,21 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
     }
     
     onChange = (e) => {
+        let newCurrentAppraiserState = Object.assign({}, this.state.currentAppraiserState);
+        newCurrentAppraiserState[e.target.name] = e.target.value;
         this.setState({
-          [e.target.name]: e.target.value,
+            currentAppraiserState: newCurrentAppraiserState
+        });
+        // this.props.form.setFieldsValue({radio:e.target.value})
+        console.log(`${e.target.name}:${e.target.value}`)
+        // save state
+    }
+
+    onOtherChange = (e) => {
+        let newOtherAppraiserState = Object.assign({}, this.state.otherAppraiserState);
+        newOtherAppraiserState[e.target.name] = e.target.value;
+        this.setState({
+            otherAppraiserState: newOtherAppraiserState
         });
         // this.props.form.setFieldsValue({radio:e.target.value})
         console.log(`${e.target.name}:${e.target.value}`)
@@ -188,12 +201,12 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
         const { currentArticle } = this.props;
 
         if (currentArticle.qualityAppraisalsJuniorInput && currentArticle.qualityAppraisalsJuniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._qualityAppraisalsJunior) ) {
-            this.setState({ currentFilterState: currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues, otherFilterState: currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues });
+            this.setState({ currentAppraiserState: currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues, otherAppraiserState: currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues });
             
         } else if (currentArticle.qualityAppraisalsSeniorInput && currentArticle.qualityAppraisalsSeniorInput.hseState !== null && this.props.currentUser && (this.props.currentUser.user._id === currentArticle._qualityAppraisalsSenior) ) {
-            this.setState({ currentFilterState: currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues, otherFilterState: currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues });
+            this.setState({ currentAppraiserState: currentArticle.qualityAppraisalsSeniorInput.hseState.inputValues, otherAppraiserState: currentArticle.qualityAppraisalsJuniorInput.hseState.inputValues });
         }
-        this.props.assignHSEAssignedQualityAppraisalsArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
+        this.props.assignHSEAssignedQualityAppraisalsArticleEditComplete(this.props.match.params.articleId, this.state.currentAppraiserState, this.props.history);
     }                                                                    
 
     cancel = () => {
@@ -281,8 +294,8 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                    <div>Assessing Eligibility and Assigning Filters Articles
-                        <small>Article Input Page</small>
+                    <div>Quality Appraisals
+                        <small>Resolution Page</small>
                     </div>
                 </div>
                 <div className="row">
@@ -596,19 +609,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.otherAppraiserState.questionOne === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionOne" value="yes" checked={this.state.otherAppraiserState.questionOne === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="no" checked={this.state.otherAppraiserState.questionOne === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionOne" value="no" checked={this.state.otherAppraiserState.questionOne === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.otherAppraiserState.questionOne === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionOne" value="can't answer" checked={this.state.otherAppraiserState.questionOne === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.otherAppraiserState.questionOne === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionOne" value="not applicable" checked={this.state.otherAppraiserState.questionOne === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -616,19 +629,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.otherAppraiserState.questionTwo === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionTwo" value="yes" checked={this.state.otherAppraiserState.questionTwo === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.otherAppraiserState.questionTwo === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionTwo" value="no" checked={this.state.otherAppraiserState.questionTwo === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.otherAppraiserState.questionTwo === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionTwo" value="can't answer" checked={this.state.otherAppraiserState.questionTwo === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.otherAppraiserState.questionTwo === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionTwo" value="not applicable" checked={this.state.otherAppraiserState.questionTwo === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -636,19 +649,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.otherAppraiserState.questionThree === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionThree" value="yes" checked={this.state.otherAppraiserState.questionThree === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="no" checked={this.state.otherAppraiserState.questionThree === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionThree" value="no" checked={this.state.otherAppraiserState.questionThree === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.otherAppraiserState.questionThree === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionThree" value="can't answer" checked={this.state.otherAppraiserState.questionThree === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.otherAppraiserState.questionThree === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionThree" value="not applicable" checked={this.state.otherAppraiserState.questionThree === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -656,19 +669,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.otherAppraiserState.questionFour === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionFour" value="yes" checked={this.state.otherAppraiserState.questionFour === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="no" checked={this.state.otherAppraiserState.questionFour === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionFour" value="no" checked={this.state.otherAppraiserState.questionFour === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.otherAppraiserState.questionFour === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionFour" value="can't answer" checked={this.state.otherAppraiserState.questionFour === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.otherAppraiserState.questionFour === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionFour" value="not applicable" checked={this.state.otherAppraiserState.questionFour === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -676,19 +689,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.otherAppraiserState.questionFive === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionFive" value="yes" checked={this.state.otherAppraiserState.questionFive === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="no" checked={this.state.otherAppraiserState.questionFive === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionFive" value="no" checked={this.state.otherAppraiserState.questionFive === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.otherAppraiserState.questionFive === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionFive" value="can't answer" checked={this.state.otherAppraiserState.questionFive === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.otherAppraiserState.questionFive === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionFive" value="not applicable" checked={this.state.otherAppraiserState.questionFive === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -696,19 +709,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.otherAppraiserState.questionSix === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionSix" value="yes" checked={this.state.otherAppraiserState.questionSix === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="no" checked={this.state.otherAppraiserState.questionSix === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionSix" value="no" checked={this.state.otherAppraiserState.questionSix === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.otherAppraiserState.questionSix === "can't answer"} onChange={this.onChange}/> Can't answer
+                                        <Input type="radio" name="questionSix" value="can't answer" checked={this.state.otherAppraiserState.questionSix === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.otherAppraiserState.questionSix === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionSix" value="not applicable" checked={this.state.otherAppraiserState.questionSix === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -716,19 +729,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.otherAppraiserState.questionSeven === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionSeven" value="yes" checked={this.state.otherAppraiserState.questionSeven === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.otherAppraiserState.questionSeven === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionSeven" value="no" checked={this.state.otherAppraiserState.questionSeven === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.otherAppraiserState.questionSeven === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionSeven" value="can't answer" checked={this.state.otherAppraiserState.questionSeven === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.otherAppraiserState.questionSeven === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionSeven" value="not applicable" checked={this.state.otherAppraiserState.questionSeven === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -736,19 +749,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.otherAppraiserState.questionEight === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionEight" value="yes" checked={this.state.otherAppraiserState.questionEight === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="no" checked={this.state.otherAppraiserState.questionEight === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionEight" value="no" checked={this.state.otherAppraiserState.questionEight === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.otherAppraiserState.questionEight === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionEight" value="can't answer" checked={this.state.otherAppraiserState.questionEight === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.otherAppraiserState.questionEight === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionEight" value="not applicable" checked={this.state.otherAppraiserState.questionEight === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -756,19 +769,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.otherAppraiserState.questionNine === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionNine" value="yes" checked={this.state.otherAppraiserState.questionNine === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="no" checked={this.state.otherAppraiserState.questionNine === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionNine" value="no" checked={this.state.otherAppraiserState.questionNine === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.otherAppraiserState.questionNine === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionNine" value="can't answer" checked={this.state.otherAppraiserState.questionNine === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.otherAppraiserState.questionNine === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionNine" value="not applicable" checked={this.state.otherAppraiserState.questionNine === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
                                 <br />
@@ -776,19 +789,19 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                 <FormGroup check >
                                                                         
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.otherAppraiserState.questionTen === 'yes'} onChange={this.onChange} /> Yes
+                                        <Input type="radio" name="questionTen" value="yes" checked={this.state.otherAppraiserState.questionTen === 'yes'} onChange={this.onOtherChange} disabled/> Yes
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="no" checked={this.state.otherAppraiserState.questionTen === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionTen" value="no" checked={this.state.otherAppraiserState.questionTen === 'no'} onChange={this.onOtherChange} disabled/> No
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.otherAppraiserState.questionTen === "can't answer"} onChange={this.onChange} /> Can't answer
+                                        <Input type="radio" name="questionTen" value="can't answer" checked={this.state.otherAppraiserState.questionTen === "can't answer"} onChange={this.onOtherChange} disabled/> Can't answer
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.otherAppraiserState.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                        <Input type="radio" name="questionTen" value="not applicable" checked={this.state.otherAppraiserState.questionTen === 'not applicable'} onChange={this.onOtherChange} disabled/> Not applicable
                                     </Label>
                                 </FormGroup>
 
@@ -833,5 +846,5 @@ function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
-        form: 'eligibilityFilterResolution'
+        form: 'qualityAppraisalResolution'
     })) (HSEAssignedQualityAppraisalsArticleResolution);
