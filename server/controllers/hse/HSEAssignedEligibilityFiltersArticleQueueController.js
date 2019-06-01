@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -9,7 +10,7 @@ exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ complicated: false })
+    HSEArticleModelClass.find({ complicated: false, eligibilityFiltersFullCompletion: false })
     .or([ { _eligibilityFiltersJunior: user._id }, { _eligibilityFiltersSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
@@ -482,17 +483,19 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
 
                             return res.send(err);
                 
-                        } else if(!eligibilityFilterJunior) {
+                        } else if(!eligibilityFilterSenior) {
                 
                             return res.status(404).send({
                                 message: 'No Eligibility Filter with that identifier has been found'
                             });
                 
                         } else {
-                            if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) ) {
+                            //if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) ) {
+                            if( _.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState) && (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null) ) {
 
                                 article.eligibilityFiltersFullCompletion = true;
-                                article.eligibilityFilterFinalInput = eligibilityFiltersSeniorInput;
+                                article.eligibilityFilterFinalInput = eligibilityFilterSenior;
+                                article.eligibilityFiltersResolve = false;
                                 await article.save();
                                 console.log(`Full completion set`);
                                 
