@@ -714,7 +714,7 @@ export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (article
     });
 
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER, payload: response.data });
-    history.push('/hse/assignedeligibilityfiltersarticlequeue');
+    history.push('/hse/assignedqualityappraisalsarticlequeue');
     
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR, payload: 'Error assigning senior appraiser role for article'});
