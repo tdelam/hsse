@@ -491,8 +491,8 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                 
                         } else {
                             //if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) ) {
-                            if( _.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState) && (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null) ) {
-
+                            if( _.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState) /*&& (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null)*/ ) {
+                                console.log(_.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState));
                                 article.eligibilityFiltersFullCompletion = true;
                                 article.eligibilityFilterFinalInput = eligibilityFilterSenior;
                                 article.eligibilityFiltersResolve = false;
