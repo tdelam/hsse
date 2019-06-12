@@ -392,7 +392,7 @@ export const listHSEPendingQualityAppraisalsArticlesQueue = () => async dispatch
     });
 
     // history.push('/dashboard');
-    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE, payload: response.data })
+    dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE, payload: response.data });
     return response.data;
   } catch(e) {
     dispatch({ type: HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse quality appraisals article pending queue'});
@@ -407,6 +407,7 @@ export const listHSEPendingLinkingStudiesArticlesQueue = (history) => async disp
 
     // history.push('/dashboard');
     dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE, payload: response.data })
+    return response.data
   } catch(e) {
     dispatch({ type: HSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR, payload: 'Error showing hse linking studies article pending queue'});
   }

@@ -11,14 +11,11 @@ import {
     Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-import Swal from '../Elements/Swal';
-
 
 import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
+import PendingLinkingStudiesArticleQueueRow from '../Common/PendingLinkingStudiesArticleQueueRow';
 
 const dtOptions = {
     'paging': true, // Table pagination
@@ -68,13 +65,17 @@ class HSEPendingLinkingStudiesArticleQueue extends Component {
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, assign it!",
                 closeOnConfirm: true
-            }
+            },
+            pendingArticles: [],
         };
 
     }
 
-    componentDidMount() {
-        this.props.listHSEPendingLinkingStudiesArticlesQueue();
+    componentDidMount() {   
+        this.props.listHSEPendingLinkingStudiesArticlesQueue().then(res => {
+            console.log(res);
+            this.setState({ pendingArticles: res });
+        });
     }
 
     toggleModal = (articleId) => {
@@ -122,31 +123,13 @@ class HSEPendingLinkingStudiesArticleQueue extends Component {
     }
 
     renderArticles() {
-        
-        if(this.props.pendingArticles  !== undefined ) {
-            const rows = Object.entries(this.props.pendingArticles).map(article => {
-                return (
-                    <tr key={article[1]._id}>
-                        { this.renderPriority(article[1].priority) }
-                        <td>
-                            { article[1].articleSource }
-                        </td>
-                        <td>
-                            { article[1].harvestDate }
-                        </td>
-                        <td>
-                            {article[1]._linkingStudiesJuniorEmail || <Link to="/hse/assignedlinkingstudiesarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
-                            
-                        </td>
-                        <td>{ article[1]._id }</td>
-                        <td>{ article[1].title }</td>
-                        <td>{ article[1].author }</td>
-                        <td>{ article[1].language }</td>
-                           
-                    </tr>
-                )
+        console.log(this.state.pendingArticles);
+        if(this.state.pendingArticles.length > 0) {
+            let testRows = this.state.pendingArticles.map(article => {console.log(article);
+                return (<PendingLinkingStudiesArticleQueueRow key = {article._id} article = {article} history = {this.props.history} />);
             });
             return (
+                <div>
                 <Datatable options={dtOptions}>
                     <table className="table table-striped my-4 w-100">
                         <thead>
@@ -157,21 +140,47 @@ class HSEPendingLinkingStudiesArticleQueue extends Component {
                                 <th>Linker</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
-                                <th>Author</th>
+                                <th>Author(s)</th>
                                 <th>Language</th>
                             </tr>
                         </thead>
                         <tbody>
-                            { rows }
+                            { testRows }
                         </tbody>
                     </table>
                 </Datatable>
+            </div>
             );
-        }    
+        } else {
+            //return (<div />);
+            return (
+                <div>
+                <Datatable options={dtOptions}>
+                    <table className="table table-striped my-4 w-100">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Priority</th>
+                                <th>Source</th>
+                                <th>Harvest Date</th>
+                                <th>Linker</th>
+                                <th>Article Id</th>
+                                <th>Title</th>
+                                <th>Author(s)</th>
+                                <th>Language</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </Datatable>
+            </div>
+            );
+        }
     };
 
     render() {
-        console.log(this.props);
+        
         return (
             <ContentWrapper>
                 <div className="content-heading">
@@ -192,7 +201,7 @@ class HSEPendingLinkingStudiesArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        { this.renderArticles() }
+                        { this.renderArticles() } 
                     </CardBody>
                 </Card>
             </ContentWrapper>
