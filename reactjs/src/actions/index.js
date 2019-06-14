@@ -803,7 +803,7 @@ export const assignHSEAssignedPresentationDetailsArticleEdit = (articleId, input
   }
 };
 
-export const assignHSEAssignedEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {
+export const assignHSEAssignedEligibilityFiltersArticleEditComplete = (articleId, inputValues, history) => async dispatch => {console.log(inputValues);
   let headers = {
     'Content-Type': 'application/json',
     'Authorization': localStorage.getItem('token') 

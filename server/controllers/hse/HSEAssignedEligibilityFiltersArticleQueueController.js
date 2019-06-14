@@ -490,6 +490,17 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                             });
                 
                         } else {
+                            Object.entries(eligibilityFilterJunior.hseState).forEach(entry => {
+                                if (Array.isArray(entry)) {
+                                    entry = entry.sort();
+                                }
+                            });
+                            
+                            Object.entries(eligibilityFilterSenior.hseState).forEach(entry => {
+                                if (Array.isArray(entry)) {
+                                    entry = entry.sort();
+                                }
+                            });
                             //if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) ) {
                             if( _.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState) /*&& (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null)*/ ) {
                                 console.log(_.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState));
