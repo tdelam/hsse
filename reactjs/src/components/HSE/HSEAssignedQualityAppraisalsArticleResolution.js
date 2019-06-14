@@ -511,7 +511,7 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
                                     </Label>
                                     <br />
                                     <Label check>
-                                        <Input type="radio" name="questionNine" value="no" checked={this.state.questionNine === 'no'} onChange={this.onChange} /> No
+                                        <Input type="radio" name="questionNine" value="no" checked={this.state.currentAppraiserState.questionNine === 'no'} onChange={this.onChange} /> No
                                     </Label>
                                     <br />
                                     <Label check>
