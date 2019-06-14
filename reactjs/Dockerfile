@@ -8,7 +8,9 @@ WORKDIR '/app'
 
 COPY ./package.json ./
 
-RUN npm install --unsafe-perm
+#RUN npm install --unsafe-perm
+
+RUN npm install
 
 COPY ./ ./
 
