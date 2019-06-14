@@ -246,19 +246,27 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         if(event.target.value === 'Yes') {
             this.setState({
                 relevanceValue: event.target.value,
-                showEligibility: true
-            });/*
+                showEligibility: true,
+                showRelevance: false
+            });
+            console.log(event.target.value);
+            //this.finish();
+            /*
             this.setState({
                 showEligibility: true
             });*/
         } else if(event.target.value === 'No') {
+            console.log(event.target.value);
             this.setState({
                 relevanceValue: event.target.value,
-                showEligibility: false
+                showEligibility: false,
+                showRelevance: true
             });
+            console.log(this.state);
+            //this.finish();
             //this.props.addArticleToComplicatedQueue(this.props.match.params.articleId, this.props.history);
-            this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articleId, this.state, this.props.history);
-            this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue');
+            //this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articleId, this.state, this.props.history);
+            //this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue');
         }
         
     }
@@ -348,13 +356,13 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                             </div>
                             <div className="c-radio">
                                 <label>
-                                    <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} />
-                                    <span className="fa fa-circle"></span>{" "}Yes</label>
+                                    <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} checked={this.state.relevanceValue === "Yes"}/>
+                                    <span className="fa fa-check"></span>{" "}Yes</label>
                             </div>
                             <div className="c-radio">
                                 <label>
-                                    <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange}/>
-                                    <span className="fa fa-circle"></span>{" "}No</label>
+                                    <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange} checked={this.state.relevanceValue === "No"}/>
+                                    <span className="fa fa-check"></span>{" "}No</label>
                             </div>
                         </div>
                     </FormGroup>
