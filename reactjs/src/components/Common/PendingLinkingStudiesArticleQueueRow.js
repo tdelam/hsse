@@ -46,12 +46,8 @@ class PendingLinkingStudiesArticleQueueRow extends Component {
 
     swalCallbackAssignJunior(isConfirm, articleId, history) {
         if(isConfirm)
-            this.props.assignHSEPendingLinkingStudiesJuniorAppraiser(articleId, history);
-    }
-
-    swalCallbackAssignSenior(isConfirm, articleId, history) {
-        if(isConfirm)
-            this.props.assignHSEPendingLinkingStudiesArticlesSeniorAppraiser(articleId, history);
+            this.props.assignHSEPendingLinkingStudiesArticlesJuniorLinker(articleId, history);
+                       
     }
 
     render() {

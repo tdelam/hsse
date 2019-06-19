@@ -68,19 +68,15 @@ class HSEAssignedLinkingStudiesArticleQueue extends Component {
                         <td>
                             { article[1].harvestDate }
                         </td>
-                        <td>
-                            {/*<a className="mr-1 badge badge-primary" href="">Something</a>*/}
-                            <Link to="" className="mr-1 badge badge-primary" >{ article[1]._presentationDetailsJuniorEmail }</Link>
-                        </td>
                         <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
                         
-                        <td>{ article[1].presentationDetailsResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedpresentationdetailsarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
+                        <td>{ article[1].presentationDetailsResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedlinkingstudiesarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>
                         <td className="text-right">
                             
-                            <Link to={{ pathname: "/hse/assignedpresentationdetailsarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>
+                            <Link to={{ pathname: "/hse/assignedlinkingstudiesarticleinput/" + article[1]._id }} className="btn btn-block btn-secondary"><em className="fas fa-pencil-alt"></em></Link>
                             {/*<button type="button" className="btn btn-sm btn-secondary">
                                 <em className="fas fa-pencil-alt"></em>
                             </button>*/}
@@ -110,7 +106,6 @@ class HSEAssignedLinkingStudiesArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Other Filterer</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>

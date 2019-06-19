@@ -537,6 +537,10 @@ export const addArticleToComplicatedQueue = (articleId, history) => async dispat
 };
 
 export const fetchHSEAssignedEligibilityFiltersArticle = (articleId, history) => async dispatch => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.get(`${backendServer}/hse/assignedeligibilityfiltersarticlequeue/fetcharticle/${articleId}`, { headers });
   
@@ -658,7 +662,7 @@ export const assignHSEPendingLinkingStudiesArticlesJuniorLinker = (articleId , h
   }
 };
 
-export const assignHSEPendingPresentationDetailsArticlesJuniorLinker = (articleId , history) => async dispatch => {
+export const assignHSEPendingPresentationDetailsArticlesJuniorPresenter = (articleId , history) => async dispatch => {
 
   try {
     const response = await axios.post(`${backendServer}/hse/pendingpresentationdetailsarticlequeue/addjuniordetailer/${articleId}`, 
