@@ -478,7 +478,7 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                     });
         
                 } else {
-                    await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFiltersJuniorInput, async (err, eligibilityFilterSenior) => {
+                    await HSEArticleEligibilityFilterModelClass.findById(article.eligibilityFiltersSeniorInput, async (err, eligibilityFilterSenior) => {
                         if(err) {
 
                             return res.send(err);
@@ -490,20 +490,26 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                             });
                 
                         } else {
-                            Object.entries(eligibilityFilterJunior.hseState).forEach(entry => {
+                            Object.entries(eligibilityFilterJunior.hseState.inputValues).forEach(entry => {//console.log(entry);
                                 if (Array.isArray(entry)) {
                                     entry = entry.sort();
                                 }
                             });
                             
-                            Object.entries(eligibilityFilterSenior.hseState).forEach(entry => {
+                            Object.entries(eligibilityFilterSenior.hseState.inputValues).forEach(entry => {//console.log(entry);
                                 if (Array.isArray(entry)) {
                                     entry = entry.sort();
                                 }
                             });
-                            //if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) ) {
-                            if( _.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState) /*&& (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null)*/ ) {
-                                console.log(_.isEqual(eligibilityFilterJunior.hseState, eligibilityFilterSenior.hseState));
+
+                            //console.log(_.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputvalues, _.isEqual));
+                            //console.log(_.isEqual(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues));
+                            console.log(eligibilityFilterJunior.hseState.inputValues);
+                            console.log(eligibilityFilterSenior.hseState.inputValues);
+                            //if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) /* && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) */) {
+                            if( _.isEqual(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues) /*&& (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null)*/ ) {
+                            //if( _.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputvalues, _.isEqual).length === 0 ) {  
+                                
                                 article.eligibilityFiltersFullCompletion = true;
                                 article.eligibilityFilterFinalInput = eligibilityFilterSenior;
                                 article.eligibilityFiltersResolve = false;

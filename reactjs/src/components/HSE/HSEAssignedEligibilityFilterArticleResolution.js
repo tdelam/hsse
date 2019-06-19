@@ -54,7 +54,6 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         currentFilterState: {
             selectedOption: '',
 
-            eligibilityFilterModel: {},
 
             showTitle: true,
             showRelevance: true,
@@ -96,7 +95,6 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
         otherFilterState: {
             selectedOption: '',
 
-            eligibilityFilterModel: {},
 
             showTitle: true,
             showRelevance: true,

@@ -51,7 +51,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
         selectedOption: '',
 
-        eligibilityFilterModel: {},
+        
 
         showTitle: true,
         showRelevance: true,
