@@ -29,7 +29,7 @@
     "@fortawesome/fontawesome-free": "5.5.0",
     "animate.css": "3.7.2",
     "animo": "github:thrivingkings/animo.js",
-    "antd": "^3.12.3",
+    "antd": "^3.19.6",
     "axios": "^0.18.0",
     "bootstrap": "4.3.1",
     "bootstrap-filestyle": "github:markusslima/bootstrap-filestyle#v2.1.0",
