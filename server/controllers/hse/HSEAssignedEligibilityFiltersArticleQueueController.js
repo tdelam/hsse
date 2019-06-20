@@ -501,15 +501,18 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                                     entry = entry.sort();
                                 }
                             });
-
-                            //console.log(_.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputvalues, _.isEqual));
+                            console.log("Working");
+                            //console.log(_.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues, _.isEqual));
                             //console.log(_.isEqual(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues));
                             console.log(eligibilityFilterJunior.hseState.inputValues);
+                            //console.log(JSON.stringify(eligibilityFilterJunior.hseState.inputValues));
+                            console.log('-------------');
+                            //console.log(JSON.stringify(eligibilityFilterSenior.hseState.inputValues))
                             console.log(eligibilityFilterSenior.hseState.inputValues);
                             //if( eligibilityFilterJunior.isEqualTo(eligibilityFilterSenior) /* && (eligibilityFilterJunior !== null) && (eligibilityFilterJunior !== null) */) {
-                            if( _.isEqual(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues) /*&& (eligibilityFilterSenior !== null) && (eligibilityFilterJunior !== null)*/ ) {
-                            //if( _.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputvalues, _.isEqual).length === 0 ) {  
-                                
+                            if( _.isEqual(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues)  ) {
+                            //if( _.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues, _.isEqual).length === 0 ) {
+                            //if( JSON.stringify(eligibilityFilterJunior.hseState.inputValues) == JSON.stringify(eligibilityFilterSenior.hseState.inputValues) ) {
                                 article.eligibilityFiltersFullCompletion = true;
                                 article.eligibilityFilterFinalInput = eligibilityFilterSenior;
                                 article.eligibilityFiltersResolve = false;
