@@ -13,7 +13,16 @@ const HSEArticleLinkingStudiesSchema = new Schema({
     countriesNotReportedInDetails: { type: Boolean, default: false },
     noSpecificCountryFocus: { type: Boolean, defualt: false },
 
-    countries: { type: [String] },
+    links: { type: [String] },
+
+    links: [{
+        country: String,
+        url: String,
+        postedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }]
     
     
 });

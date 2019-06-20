@@ -501,7 +501,7 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
                                     entry = entry.sort();
                                 }
                             });
-
+                            console.log("Working");
                             //console.log(_.differenceWith(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues, _.isEqual));
                             //console.log(_.isEqual(eligibilityFilterJunior.hseState.inputValues, eligibilityFilterSenior.hseState.inputValues));
                             console.log(eligibilityFilterJunior.hseState.inputValues);
