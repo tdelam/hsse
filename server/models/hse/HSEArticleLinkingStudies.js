@@ -17,22 +17,14 @@ const HSEArticleLinkingStudiesSchema = new Schema({
 
     links: [{
         country: String,
-        url: String,
-        postedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    }]
-    
-    
+        linkName: String,
+        linkUrl: String,
+        atLeast: Boolean,
+        isFocus: Boolean,
+    }],
+        
+    status: { type: String, enum: ['New article', 'In progress', 'Completed', 'Unknown'], default: 'Unknown' },
+
 });
-
-
 
 mongoose.model('HSEArticleLinkingStudies', HSEArticleLinkingStudiesSchema);
-
-HSEArticleLinkingStudiesSchema.eachPath(function(path) {
-    //console.log(path);
-});
-
-var props = Object.keys(HSEArticleLinkingStudiesSchema.paths);

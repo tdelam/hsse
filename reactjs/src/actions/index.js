@@ -577,6 +577,10 @@ export const fetchHSEAssignedQualityAppraisalsArticle = (articleId, history) => 
 };
 
 export const fetchHSEAssignedLinkingStudiesArticle = (articleId, history) => async dispatch => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.get(`${backendServer}/hse/assignedlinkingstudiesarticlequeue/fetcharticle/${articleId}`, { headers });
   
@@ -589,6 +593,10 @@ export const fetchHSEAssignedLinkingStudiesArticle = (articleId, history) => asy
 };
 
 export const fetchHSEAssignedPresentationDetailsArticle = (articleId, history) => async dispatch => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
   try {
     const response = await axios.get(`${backendServer}/hse/assignedpresentationdetailsarticlequeue/fetcharticle/${articleId}`, { headers });
   
