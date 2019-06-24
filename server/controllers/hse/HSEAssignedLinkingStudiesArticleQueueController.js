@@ -97,26 +97,7 @@ exports.setLinkingStudiesValues = async (req, res) => {
                 message: 'Inputs for Junior Linking Studies added for article'
             });
 
-        } else if( article._linkingStudiesJunior.equals(user._id) ) {
-
-            const newLinkingStudies = new HSEArticleLinkingStudiesModelClass(inputValues);
-            newLinkingStudies.save( (err) => {
-                if(err) {
-                    return res.status(422).send({
-                        message: `Unable to save values for Linking Studies for article, err: ${err}`
-                    });
-                }
-        
-            });
-            
-            article.linkingStudiesJuniorInput = newLinkingStudies;
-            await article.save();
-            
-            return res.status(201).send({
-                message: 'Inputs for Junior linker added for article'
-            });
-            
-        }
+        } 
         
     });
 

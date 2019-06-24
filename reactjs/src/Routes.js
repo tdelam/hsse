@@ -351,7 +351,7 @@ const Routes = ({ location }) => {
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
 
                             <Route path="/hse/assignedqualityappraisalsarticlequeue" component={HSEAssignedQualityAppraisalsArticleQueue} />
-                            <Route path="/hse/assignedqualityappraisalsarticleinput/:articleId" component={HSEAssignedQualityAppraisalsArticleInput} />
+                            <Route exact path="/hse/assignedqualityappraisalsarticleinput/:articleId" component={HSEAssignedQualityAppraisalsArticleInput} />
                             <Route path="/hse/assignedqualityappraisalsarticleresolution/:articleId" component={HSEAssignedQualityAppraisalsArticleResolution} />
 
                             <Route path="/hse/assignedlinkingstudiesarticlequeue" component={HSEAssignedLinkingStudiesArticleQueue} />
