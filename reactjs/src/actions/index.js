@@ -8,6 +8,18 @@ import {
   CURRENT_USER,
   CURRENT_USER_ERROR,
 
+  ADD_USER_ROLE,
+  ADD_USER_ROLE_ERROR,
+
+  REMOVE_USER_ROLE,
+  REMOVE_USER_ROLE_ERROR,
+
+  ACTIVATE_USER,
+  ACTIVATE_USER_ERROR,
+
+  DEACTIVATE_USER,
+  DEACTIVATE_USER_ERROR,
+
   HSE_CREATE_ARTICLE,
   HSE_CREATE_ARTICLE_ERROR,
   HSE_CREATE_BATCHFILE,
@@ -315,6 +327,74 @@ export const signout = () => {
     payload: 'Successfully signed out'
   };
 
+};
+
+export const addRole = (value) => async dispatch => {
+  try { 
+    const response = await axios.post(`${backendServer}/addrole`, 
+    { value },
+    {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+  
+    dispatch({ type: ADD_USER_ROLE, payload: response.data });
+
+  } catch (e) {
+  
+    dispatch({ type: ADD_USER_ROLE_ERROR, payload: e });
+
+  }
+};
+
+export const removeRole = (value) => async dispatch => {
+  try { 
+    const response = await axios.post(`${backendServer}/removerole`, 
+    { value },
+    {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+  
+    dispatch({ type: REMOVE_USER_ROLE, payload: response.data });
+
+  } catch (e) {
+  
+    dispatch({ type: REMOVE_USER_ROLE_ERROR, payload: e });
+
+  }
+};
+
+export const activateUser = (value) => async dispatch => {
+  try { 
+    const response = await axios.post(`${backendServer}/activateuser`, 
+    { value },
+    {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+  
+    dispatch({ type: ACTIVATE_USER, payload: response.data });
+
+  } catch (e) {
+  
+    dispatch({ type: ACTIVATE_USER_ERROR, payload: e });
+
+  }
+};
+
+export const deactivateUser = (value) => async dispatch => {
+  try { 
+    const response = await axios.post(`${backendServer}/deactivateuser`, 
+    { value },
+    {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+  
+    dispatch({ type: DEACTIVATE_USER, payload: response.data });
+
+  } catch (e) {
+  
+    dispatch({ type: DEACTIVATE_USER_ERROR, payload: e });
+
+  }
 };
 
 // HSE Article

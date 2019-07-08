@@ -258,3 +258,163 @@ exports.getUserFromToken = async (token) => {
 
     return await UserModelClass.findOne({ _id: userId }).exec();
 }
+
+exports.list = (req, res) => {
+    UserModelClass.find( (err, users) => {
+        if(err) {
+            return res.send(err);
+        } else if(!users) {
+            return res.status(404).send({
+                message: 'No user has been found'
+            });
+        }
+        return res.status(200).send(users);
+    });
+}
+
+exports.addRole = async (req, res) => {
+
+    const values = req.body;
+
+    UserModelClass.findOneAndUpdate( (err, user) => {
+        if(err) {
+            return res.send(err);
+        } else if(!user) {
+            return res.status(404).send({
+                message: 'No user has been found'
+            });
+        }
+        return res.status(200).send(user);
+    });
+
+    const user = await getUserFromToken(req.headers.authorization);
+
+    await UserModelClass.findOneAndUpdate(
+        { _id:  user._id },
+        
+        { $push: { roles: values } },
+
+        { new: true, useFindAndModify: false },
+
+        { safe: true, upsert: trued },
+        
+        // the callback function
+        (err, user) => {
+        // Handle any possible database errors
+            if (err) {
+                console.log(err);
+                return res.status(500).send(err);
+            } else if (!user) {
+                console.log('No user found!');
+                return res.status(404).send({
+                    message: 'No user has been found'
+                });
+            } else {
+                console.log(user);
+                return res.send({
+                    message: `${values} added to ${user}`
+                });
+            }
+        }
+    );
+
+}
+
+exports.removeRole = async (req, res) => {
+
+    const values = req.body;
+
+    const user = await getUserIdFromToken(req.headers.authorization);
+
+    await UserModelClass.findOneAndUpdate(
+        
+        { _id: user._id },
+        
+        { $pull: { roles: values } },
+        
+        { safe: true, upsert: true },
+
+        (err, user) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send(err);
+            } else if (!user) {
+                console.log('No user found!');
+                return res.status(404).send({
+                    message: 'No user has been found'
+                });
+            } else {
+                console.log(user);
+                return res.send({
+                    message: `${values} added to ${user}`
+                });
+            }
+        }
+    );
+
+}
+
+exports.activateUser = async (req, res) => {
+
+    const user = req.body.values;
+
+    // await UserModelClass.findOneAndUpdate(
+    await UserModelClass.findByIdAndUpdate(
+
+        { _id: user._id },
+
+        { confirm: true },
+
+        { new: true, useFindAndModify: false },
+
+        (err, user) => {
+            if (err) {
+
+            } else if (!user) {
+                console.log('No user found!');
+                return res.status(404).send({
+                    message: 'No user has found'
+                })
+            } else {
+                console.log(user);
+                return res.send({
+                    message: `${values} added to ${user}`
+                });
+            }
+        }
+
+    );
+
+}
+
+exports.deactivateUser = async (req, rest) => {
+
+    const user = req.body.values;
+
+    await UserModelClass.findOneAndUpdate(
+
+        { _id: user._id },
+
+        { confirm: false },
+
+        { new: true, useFindAndModify: false },
+
+        (err, user) => {
+            if (err) {
+
+            } else if (!user) {
+                console.log('No user found!');
+                return res.status(404).send({
+                    message: 'No user has found'
+                })
+            } else {
+                console.log(user);
+                return res.send({
+                    message: `${values} added to ${user}`
+                });
+            }
+        }
+
+    );
+
+}

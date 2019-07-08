@@ -278,7 +278,7 @@ class FormStandard extends Component {
                                             <option defaultValue="2">Two</option>
                                             <option defaultValue="3">Three</option>
                                         </select>
-                                        <select defaultValue="" className="custom-select custom-select-sm">
+                                        <select defaultValue="" className="custom-select">
                                             <option>Open this select menu</option>
                                             <option defaultValue="1">One</option>
                                             <option defaultValue="2">Two</option>
