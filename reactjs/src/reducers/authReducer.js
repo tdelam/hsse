@@ -4,7 +4,11 @@ import {
     CONFIRM_USER_EMAIL,
     FORGOT_PASSWORD_EMAIL,
     CURRENT_USER,
-    CURRENT_USER_ERROR
+    CURRENT_USER_ERROR,
+    ADD_USER_ROLE,
+    REMOVE_USER_ROLE,
+    ACTIVATE_USER,
+    DEACTIVATE_USER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -28,6 +32,14 @@ export default function(state = INITIAL_STATE, action) {
             return { ...state, currentUserErrorMessage: action.payload };
         case FORGOT_PASSWORD_EMAIL: 
             return { ...state, forgotPasswordMessage: action.payload };
+        case ADD_USER_ROLE: 
+            return { ...state, errorMessage: action.payload }
+        case REMOVE_USER_ROLE: 
+            return { ...state, errorMessage: action.payload }
+        case ACTIVATE_USER: 
+            return { ...state, errorMessage: action.payload }
+        case DEACTIVATE_USER: 
+            return { ...state, errorMessage: action.payload }
         default:
             return state;
             

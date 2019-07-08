@@ -89,7 +89,7 @@ exports.setEligibilityFiltersValues = async (req, res) => {
                 
                 // the callback function
                 (err, todo) => {
-                // Handle any possible database errors
+                    // Handle any possible database errors
                     if (err) return res.status(500).send(err);
                     console.log(todo)
                     return res.send({

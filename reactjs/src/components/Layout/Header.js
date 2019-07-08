@@ -73,7 +73,7 @@ class Header extends Component {
                         { /* START lock screen */ }
                         <li className="nav-item d-none d-md-block">
                             <Link to="/signout" title="Sign out" className="nav-link">
-                                <em className="icon-lock"></em>
+                                <em className="icon-logout"></em>
                             </Link>
                         </li>
                         { /* END lock screen */ }

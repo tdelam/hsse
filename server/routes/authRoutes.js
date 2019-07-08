@@ -25,4 +25,10 @@ module.exports = (app) => {
     app.post('/resetpassword/:token', Authentication.resetPassword);
 
     app.get('/currentuser', Authentication.currentUser);
+
+    app.post('/activateuser', Authentication.activateUser);
+    app.post('/deactivateuser', Authentication.deactivateUser);
+
+    app.post('/addrole', Authentication.addRole);
+    app.post('/removerole', Authentication.removeRole);
 };

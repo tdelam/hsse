@@ -369,7 +369,7 @@ const Menu = [
         ]
     },{
         name: 'Monthly Email',
-        icon: 'icon-grid',
+        icon: 'icon-envelope',
         translate: 'sidebar.nav.table. MONTHLY EMAIL',
         submenu: [{
                 name: 'Standard',
@@ -396,27 +396,34 @@ const Menu = [
         heading: 'Settings',
         translate: 'sidebar.heading.SETTINGS'
     },{
-        name: 'Users',
-        icon: 'icon-people',
+        name: 'Account',
+        icon: 'icon-user',
         translate: 'sidebar.nav.table.USER',
         submenu: [{
-                name: 'Standard',
+                name: 'Basic',
                 path: 'table-standard',
-                translate: 'sidebar.nav.table.STANDARD'
+                translate: 'sidebar.nav.table.BASIC'
             },
             {
-                name: 'Extended',
+                name: 'Advanced',
                 path: 'table-extended',
-                translate: 'sidebar.nav.table.EXTENDED'
+                translate: 'sidebar.nav.table.ADVANCED'
+            }
+        ]
+        },
+        {
+        name: 'Administrator',
+        icon: 'icon-shield',
+        translate: 'sidebar.nav.table.USER',
+        submenu: [{
+                name: 'Users',
+                path: 'table-standard',
+                translate: 'sidebar.nav.table.USERS'
             },
             {
-                name: 'Datatable',
-                path: 'table-datatable',
-                translate: 'sidebar.nav.table.DATATABLE'
-            },
-            {
-                name: 'Datagrid',
-                path: 'table-datagrid',
+                name: 'Application',
+                path: 'table-extended',
+                translate: 'sidebar.nav.table.APPLICATION'
             }
         ]
     }

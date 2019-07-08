@@ -375,35 +375,74 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         if(generalInfo)
             return (
                 <fieldset>
-                    <legend className="offset-md-1">General article information</legend>
+                    <legend >General Article Information</legend>
                     <br />
-                    <FormGroup row>
+                    <FormGroup row >
                         <label className="col-md-2 col-form-label"></label>
                         <div className="col-md-10">
-                            <div>
-                                <strong>Ref ID:</strong> { this.props.match.params.articleId }
+                            <div className="row">
+                            <div className="col-md-2">
+                                <strong>Ref ID:</strong> 
                             </div>
+                                <div className="col-md-4">
+                                    { this.props.match.params.articleId }
+                                </div>
+                            </div>
+                            <br />
                             <div>
                                 <strong>Live date: </strong>
                             </div>
-                            <div>
-                                <strong>Document type: </strong>
-                            </div>
-                            <div>
-                                <strong>Question type: </strong>
-                            </div>
-                            <div>
-                                
-                                <div className="checkbox c-checkbox">
-                                    <strong>General focus?</strong>
-                                    <p>{" "}</p>
-                                    <label>
-                                    <Input type="checkbox" defaultValue=""/>
-                                        
-                                        <span className="fa fa-check"></span>{" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
-                                    </label>
+                            <br />
+                            <div className="row">
+                                <div className="col-md-2">
+                                    <span className="float-right"><strong>Document type: </strong></span>
+                                </div>
+                                <div className="col-xl-4">
+                                    <select defaultValue="" className="custom-select">
+                                        <option>Open this select menu</option>
+                                        <option>Evidence briefs for policy</option>
+                                        <option>Overviews of systematic reviews</option>
+                                        <option>Systematic reviews of effects</option>
+                                        <option>Systematic reviews addressing other questions</option>
+                                        <option>Systematic reviews in progress</option>
+                                        <option>Systematic reviews being planned</option>
+                                        <option>Economic evaluations and costing studies</option>
+                                        <option>Health reform descriptions</option>
+                                        <option>Health system descriptions</option>
+                                        <option>Intergovernmental organizations' health systems documents</option>
+                                        <option>Systematic reviews and other types of syntheses</option>
+                                        <option>Canada's health systems documents</option>
+                                        <option>Ontario's health system documents</option>
+                                    </select>
                                 </div>
                             </div>
+                            <br />
+                            <div className="row">
+                                <div className="col-xl-4">
+                                    <strong>Question type: </strong>
+                                </div>
+                                <div className="col-xl-4">
+                                    <select defaultValue="" className="custom-select">
+                                        <option>Open this select menu</option>
+                                        <option>Many</option>
+                                        <option>Effectiveness</option>
+                                        <option>Not effectiveness</option>
+                                        <option>Systematic reviews addressing other questions</option>
+                                        <option>Systematic reviews in progress</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div className="checkbox c-checkbox">
+                                <strong>General focus?</strong>
+                                <p>{" "}</p>
+                                <label>
+                                <Input type="checkbox" defaultValue=""/>
+                                    
+                                    <span className="fa fa-check"></span>{" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
+                                </label>
+                            </div>
+                            
                         </div>
                     </FormGroup>
                     {/** <hr className="my-4"/> **/}
@@ -560,7 +599,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         if(sectionStatus) {
             return (
                 <fieldset>
-                    <legend className="offset-md-1">{ sectionTitle }</legend>
+                    <legend >{ sectionTitle }</legend>
                     <br />
     
                     <FormGroup row>
