@@ -387,7 +387,7 @@ exports.activateUser = async (req, res) => {
 
 }
 
-exports.deactivateUser = async (req, rest) => {
+exports.deactivateUser = async (req, res) => {
 
     const user = req.body.values;
 
