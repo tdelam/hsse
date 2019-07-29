@@ -60,6 +60,8 @@ import SSEPendingTranslatingTitlesBatchfileQueueReducer from './SSEPendingTransl
 
 import SSEAssignedPresentationDetailsArticleQueueReducer from './SSEAssignedPresentationDetailsArticleReducer';
 
+import SSEAssignedTranslatingTitlesArticleQueueReducer from './SSEAssignedTranslatingTitlesArticleQueueReducer';
+
 
 export default combineReducers({
     hsePendingEligibilityFiltersArticleQueue: HSEPendingEligibilityFiltersArticleQueueReducer,
@@ -107,6 +109,12 @@ export default combineReducers({
     ssePendingPresentationDetailsBatchfileQueue: SSEPendingPresentationDetailsBatchfileQueueReducer,
   
     sseAssignedPresentationDetailsArticleQueue: SSEAssignedPresentationDetailsArticleQueueReducer,
+
+    ssePendingTranslatingTitlesArticleQueue: SSEPendingTranslatingTitlesArticleQueueReducer,
+    ssePendingTranslatingTitlesBatchfileQueue: SSEPendingTranslatingTitlesBatchfileQueueReducer,
+
+    sseAssignedTranslatingTitlesArticleQueue: SSEAssignedTranslatingTitlesArticleQueueReducer,
+
 
     sse: SSEArticleReducer,
     form: formReducer,
