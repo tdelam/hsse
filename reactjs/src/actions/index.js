@@ -8,11 +8,17 @@ import {
   CURRENT_USER,
   CURRENT_USER_ERROR,
 
+  FETCH_ALL_USERS,
+  FETCH_ALL_USERS_ERROR,
+
   ADD_USER_ROLE,
   ADD_USER_ROLE_ERROR,
 
   REMOVE_USER_ROLE,
   REMOVE_USER_ROLE_ERROR,
+
+  UPDATE_USER_ROLE,
+  UPDATE_USER_ROLE_ERROR,
 
   ACTIVATE_USER,
   ACTIVATE_USER_ERROR,
@@ -318,6 +324,23 @@ export const getCurrentUser = ( ) => async dispatch => {
   }
 };
 
+export const fetchAllUsers = ( ) => async dispatch => {
+  
+  try {
+      const response = await axios.get(`${backendServer}/fetchallusers`, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+    
+    dispatch({ type: FETCH_ALL_USERS, payload: response.data });
+    return response.data;
+
+  } catch (e) {
+    
+    dispatch({ type: FETCH_ALL_USERS_ERROR, payload: e });
+
+  }
+};
+
 export const signout = () => {
   
   localStorage.removeItem('token');
@@ -342,6 +365,24 @@ export const addRole = (value) => async dispatch => {
   } catch (e) {
   
     dispatch({ type: ADD_USER_ROLE_ERROR, payload: e });
+
+  }
+};
+
+export const updateRole = (value) => async dispatch => {
+  console.log(value)
+  try { 
+    const response = await axios.post(`${backendServer}/updaterole`, 
+    { value },
+    {
+      headers: { authorization: localStorage.getItem('token') }
+    });
+  
+    dispatch({ type: UPDATE_USER_ROLE, payload: response.data });
+
+  } catch (e) {
+  
+    dispatch({ type: UPDATE_USER_ROLE_ERROR, payload: e });
 
   }
 };

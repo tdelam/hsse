@@ -14,10 +14,10 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
 
     switch(action.type) {
-        case SSE_PENDING_TRANSLATING_TITLES_ARTICLE_QUEUE: 
+        case SSE_PENDING_TRANSLATING_TITLES_ARTICLE_QUEUE:
             return { ...state, ssePendingTranslatingTitlesArticles: action.payload };
 
-        case SSE_PENDING_TRANSLATING_TITLES_ARTICLE_QUEUE_ERROR: 
+        case SSE_PENDING_TRANSLATING_TITLES_ARTICLE_QUEUE_ERROR:
             return { ...state, ssePendingTranslatingTitlesErrorMessage: action.payload };
 
         case SSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR: 

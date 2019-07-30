@@ -25,6 +25,16 @@ import HSEPendingPresentationDetailsBatchfileQueueReducer from './HSEPendingPres
 
 import HSEAssignedPresentationDetailsArticleQueueReducer from './HSEAssignedPresentationDetailsArticleReducer';
 
+import HSEPendingTranslatingTitlesArticleQueueReducer from './HSEPendingTranslatingTitlesArticleQueueReducer';
+import HSEPendingTranslatingTitlesBatchfileQueueReducer from './HSEPendingTranslatingTitlesBatchfileQueueReducer';
+
+import HSEPendingTrackingPrioritizingArticleQueueReducer from './HSEPendingTrackingPrioritizingArticleQueueReducer';
+import HSEPendingTrackingPrioritizingBatchfileQueueReducer from './HSEPendingTrackingPrioritizingBatchfileQueueReducer';
+
+import HSEAssignedTrackingPrioritizingArticleQueueReducer from './HSEAssignedTrackingPrioritizingArticleReducer';
+
+
+
 import SSEArticleReducer from './SSEArticleReducer';
 import SSEPendingEligibilityFiltersArticleQueueReducer from './SSEPendingEligibilityFiltersArticleQueueReducer';
 import SSEPendingEligibilityFiltersBatchfileQueueReducer from './SSEPendingEligibilityFiltersBatchfileQueueReducer';
@@ -44,7 +54,13 @@ import SSEAssignedLinkingStudiesArticleQueueReducer from './SSEAssignedLinkingSt
 import SSEPendingPresentationDetailsArticleQueueReducer from './SSEPendingPresentationDetailsArticleQueueReducer';
 import SSEPendingPresentationDetailsBatchfileQueueReducer from './SSEPendingPresentationDetailsBatchfileQueueReducer';
 
+import SSEPendingTranslatingTitlesArticleQueueReducer from './SSEPendingTranslatingTitlesArticleQueueReducer';
+import SSEPendingTranslatingTitlesBatchfileQueueReducer from './SSEPendingTranslatingTitlesBatchfileQueueReducer';
+
+
 import SSEAssignedPresentationDetailsArticleQueueReducer from './SSEAssignedPresentationDetailsArticleReducer';
+
+import SSEAssignedTranslatingTitlesArticleQueueReducer from './SSEAssignedTranslatingTitlesArticleQueueReducer';
 
 
 export default combineReducers({
@@ -59,11 +75,18 @@ export default combineReducers({
 
     hsePendingPresentationDetailsArticleQueue: HSEPendingPresentationDetailsArticleQueueReducer,
     hsePendingPresentationDetailsBatchfileQueue: HSEPendingPresentationDetailsBatchfileQueueReducer,
+
+    hsePendingTranslatingTitlesArticleQueue: HSEPendingTranslatingTitlesArticleQueueReducer,
+    hsePendingTranslatingTitlesBatchfileQueue: HSEPendingTranslatingTitlesBatchfileQueueReducer,
+
+    hsePendingTrackingPrioritizingArticleQueue: HSEPendingTrackingPrioritizingArticleQueueReducer,
+    hsePendingTrackingPrioritizingBatchfileQueue: HSEPendingTrackingPrioritizingBatchfileQueueReducer,
     
     hseAssignedEligibilityFiltersArticleQueue: HSEAssignedEligibilityFiltersArticleQueueReducer,
     hseAssignedQualityAppraisalsArticleQueue: HSEAssignedQualityAppraisalsArticleQueueReducer,
     hseAssignedLinkingStudiesArticleQueue: HSEAssignedLinkingStudiesArticleQueueReducer,
     hseAssignedPresentationDetailsArticleQueue: HSEAssignedPresentationDetailsArticleQueueReducer,
+    hseAssignedTrackingPrioritizingArticleQueue: HSEAssignedTrackingPrioritizingArticleQueueReducer,
 
     hse: HSEArticleReducer,
 
@@ -86,6 +109,12 @@ export default combineReducers({
     ssePendingPresentationDetailsBatchfileQueue: SSEPendingPresentationDetailsBatchfileQueueReducer,
   
     sseAssignedPresentationDetailsArticleQueue: SSEAssignedPresentationDetailsArticleQueueReducer,
+
+    ssePendingTranslatingTitlesArticleQueue: SSEPendingTranslatingTitlesArticleQueueReducer,
+    ssePendingTranslatingTitlesBatchfileQueue: SSEPendingTranslatingTitlesBatchfileQueueReducer,
+
+    sseAssignedTranslatingTitlesArticleQueue: SSEAssignedTranslatingTitlesArticleQueueReducer,
+
 
     sse: SSEArticleReducer,
     form: formReducer,

@@ -6,6 +6,21 @@ const nodemailer = require('nodemailer');
 const ses = require('nodemailer-ses-transport');
 
 const config = require('../config/baseConfig');
+
+const USER = ['user'];
+const UPLOADER = ['user', 'uploader'];
+const JUNIOR_DETAILER = ['user', 'uploader', 'juniordetailer'];
+const SENIOR_DETAILER = ['user', 'uploader', 'juniordetailer', 'seniordetailer'];
+const JUNIOR_LINKER = ['user', 'uploader', 'juniordetailer', 'seniordetailer', 'juniorlinker'];
+const SENIOR_LINKER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker'];
+const JUNIOR_APPRAISER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser'];
+const SENIOR_APPRAISER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser'];
+const JUNIOR_FILTER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter'];
+const SENIOR_FILTER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter', 'seniorfilter'];
+const PRIORITIZER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter', 'seniorfilter', 'prioritizer'];
+const ADMINISTRATOR= ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter', 'seniorfilter', 'prioritizer', 'administrator'];
+
+
 /*
 aws.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -259,7 +274,7 @@ exports.getUserFromToken = async (token) => {
     return await UserModelClass.findOne({ _id: userId }).exec();
 }
 
-exports.list = (req, res) => {
+exports.fetchAllUsers = (req, res) => {
     UserModelClass.find( (err, users) => {
         if(err) {
             return res.send(err);
@@ -354,6 +369,84 @@ exports.removeRole = async (req, res) => {
 
 }
 
+exports.updateRole = async (req, res) => {
+    //console.log(req.body.value);
+    let values;
+    let { selectedRole, selectedEmail } = req.body.value;
+
+    switch(selectedRole) {
+        case 'user':
+            values =  USER;
+            break;
+        case 'uploader':
+            values = UPLOADER;
+            break;
+        case 'juniordetailer':
+            values = JUNIOR_DETAILER;
+            break;
+        case 'seniordetailer':
+            values = SENIOR_DETAILER;
+            break;
+        case 'juniorlinker': 
+            values = JUNIOR_LINKER;
+            break;
+        case 'seniorlinker': 
+            values = SENIOR_LINKER;
+            break;
+        case 'juniorappraiser':
+            values = JUNIOR_APPRAISER;
+            break;
+        case 'seniorappraiser':
+            values = SENIOR_APPRAISER;
+            break;
+        case 'juniorfilter':
+            values = JUNIOR_FILTER;
+            break;
+        case 'seniorfilter':
+            values = SENIOR_FILTER;
+            break;
+        case 'prioritizer': 
+            values = PRIORITIZER;
+            break;
+        case 'administrator': 
+            values = ADMINISTRATOR;
+            break;
+        default:
+            values = USER;
+    }
+
+    await UserModelClass.findOneAndUpdate(
+        
+        //{ _id: user._id },
+
+        { email: selectedEmail },
+        
+        { roles: values },
+
+        { useFindAndModify: true, upsert: true },
+        
+        //{ safe: true, upsert: true },
+
+        (err, user) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send(err);
+            } else if (!user) {
+                console.log('No user found!');
+                return res.status(404).send({
+                    message: 'No user has been found'
+                });
+            } else {
+                console.log(user);
+                return res.send({
+                    message: `${values} added to ${user}`
+                });
+            }
+        }
+    );
+
+}
+
 exports.activateUser = async (req, res) => {
 
     const user = req.body.values;
@@ -387,7 +480,7 @@ exports.activateUser = async (req, res) => {
 
 }
 
-exports.deactivateUser = async (req, rest) => {
+exports.deactivateUser = async (req, res) => {
 
     const user = req.body.values;
 

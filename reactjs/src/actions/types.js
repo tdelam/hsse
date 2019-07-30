@@ -3,6 +3,9 @@ export const AUTH_ERROR = 'auth_error';
 export const CONFIRM_USER_EMAIL = 'confirm_user_email';
 export const FORGOT_PASSWORD_EMAIL = 'forgot_password_email';
 
+export const FETCH_ALL_USERS = 'fetch_all_users';
+export const FETCH_ALL_USERS_ERROR = 'fetch_all_users_error';
+
 export const CURRENT_USER = 'current_user';
 export const CURRENT_USER_ERROR = 'current_user_error';
 
@@ -11,6 +14,9 @@ export const ADD_USER_ROLE_ERROR = 'add_user_role_error';
 
 export const REMOVE_USER_ROLE ='remove_user_role';
 export const REMOVE_USER_ROLE_ERROR ='remove_user_role_error';
+
+export const UPDATE_USER_ROLE = 'update_user_role';
+export const UPDATE_USER_ROLE_ERROR = 'update_user_role_error';
 
 export const ACTIVATE_USER = 'activate_user';
 export const ACTIVATE_USER_ERROR = 'activate_user_error';
@@ -98,6 +104,18 @@ export const HSE_PENDING_TRANSLATING_TITLES_BATCHFILE_QUEUE_ERROR = 'hse_pending
 export const HSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR = 'hse_pending_translating_titles_article_assign_junior_translator';
 export const HSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR_ERROR = 'hse_pending_translating_titles_article_assign_junior_translator_error';
 
+// HSE PENDING TRACKING PRIORITIZING
+export const HSE_PENDING_TRACKING_PRIORITIZING_ARTICLE_QUEUE = 'hse_pending_tracking_prioritizing_article_queue';
+export const HSE_PENDING_TRACKING_PRIORITIZING_ARTICLE_QUEUE_ERROR = 'hse_pending_tracking_prioritizing_titles_article_queue_error';
+
+export const HSE_PENDING_TRACKING_PRIORITIZING_BATCHFILE_QUEUE = 'hse_pending_tracking_prioritizing_batchfile_queue';
+export const HSE_PENDING_TRACKING_PRIORITIZING_BATCHFILE_QUEUE_ERROR = 'hse_pending_tracking_prioritizing_batchfile_queue_error';
+
+export const HSE_PENDING_TRACKING_PRIORITIZING_ARTICLE_ASSIGN_JUNIOR_PRIORITIZER = 'hse_pending_tracking_prioritizing_article_assign_junior_prioritizer';
+export const HSE_PENDING_TRACKING_PRIORITIZING_ARTICLE_ASSIGN_JUNIOR_PRIORITIZER_ERROR = 'hse_pending_tracking_prioriziting_article_assign_junior_prioritizer_error';
+
+export const HSE_PENDING_TRACKING_PRIORITIZING_ARTICLE_ASSIGN_SENIOR_PRIORITIZER = 'hse_pending_tracking_prioritizing_article_assign_senior_prioritizer';
+export const HSE_PENDING_TRACKING_PRIORITIZING_ARTICLE_ASSIGN_SENIOR_PRIORITIZER_ERROR = 'hse_pending_tracking_prioriziting_article_assign_senior_prioritizer_error';
 
 
 // HSE ASSIGNED QUEUE ELIGIBILITY & FILTERS
@@ -175,14 +193,30 @@ export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_QUEUE_ERROR = 'hse_assigned
 export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_FETCH = 'hse_assigned_translating_titles_article_fetch';
 export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_FETCH_ERROR = 'hse_assigned_translating_titles_article_fetch_error';
 
-export const HSE_ASSIGNED_TRANSLATING_TITLES_BATCHFILE_QUEUE = 'hse_assigned_presentationtranslating_titles_batchfile_queue';
+export const HSE_ASSIGNED_TRANSLATING_TITLES_BATCHFILE_QUEUE = 'hse_assigned_translating_titles_batchfile_queue';
 export const HSE_ASSIGNED_TRANSLATING_TITLES_BATCHFILE_QUEUE_ERROR = 'hse_assigned_translating_titles_batchfile_queue_error';
 
-export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT = 'hse_assigned_translating_titles_arcticle_edit';
-export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_ERROR = 'hse_assigned_translating_titles_edit_error';
+export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT = 'hse_assigned_translating_titles_article_edit';
+export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_ERROR = 'hse_assigned_translating_titles_article_edit_error';
 
-export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE = 'hse_assigned_translating_titles_edit_complete';
-export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE_ERROR = 'hse_assigned_translating_titles_edit_complete_error';
+export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE = 'hse_assigned_translating_titles_article_edit_complete';
+export const HSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE_ERROR = 'hse_assigned_translating_titles_article_edit_complete_error';
+
+// HSE ASSIGNED TRACKING PRIORITIZING
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_QUEUE = 'hse_assigned_tracking_prioritizing_article_queue';
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_QUEUE_ERROR = 'hse_assigned_tracking_prioritizing_article_queue_error';
+
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_FETCH = 'hse_assigned_tracking_prioritizing_article_fetch';
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_FETCH_ERROR = 'hse_assigned_tracking_prioritizing_article_fetch_error';
+
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_BATCHFILE_QUEUE = 'hse_assigned_tracking_prioritizing_batchfile_queue';
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_BATCHFILE_QUEUE_ERROR = 'hse_assigned_tracking_prioritizing_batchfile_queue_error';
+
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_EDIT = 'hse_assigned_tracking_prioritizing_article_edit';
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_EDIT_ERROR = 'hse_assigned_tracking_prioritizing_article_edit_error';
+
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_EDIT_COMPLETE = 'hse_assigned_tracking_prioritizing_article_edit_complete';
+export const HSE_ASSIGNED_TRACKING_PRIORITIZING_ARTICLE_EDIT_COMPLETE_ERROR = 'hse_assigned_tracking_prioritizing_article_edit_complete_error';
 
 
 // SSE PENDING QUEUE
@@ -198,6 +232,7 @@ export const SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'sse_pending_
 export const SSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE = 'sse_pending_eligibility_filters_batchfile_queue';
 export const SSE_PENDING_ELIGIBILITY_FILTERS_BATCHFILE_QUEUE_ERROR = 'sse_pending_eligibility_filters_batchfile_queue_error';
 
+
 export const SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE = 'sse_pending_quality_appraisals_article_queue';
 export const SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR = 'sse_pending_quality_appraisals_article_queue_error';
 
@@ -210,39 +245,57 @@ export const SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_JUNIOR_APPRAISER_ERRO
 export const SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER = 'sse_pending_eligibility_filters_article_assign_senior_filter';
 export const SSE_PENDING_QUALITY_APPRAISALS_ARTICLE_ASSIGN_SENIOR_APPRAISER_ERROR = 'sse_pending_eligibility_filters_article_assign_senior_filter_error';
 
-export const SSE_PENDING_QUALITY_APPRAISALS_QUEUE = 'sse_pending_quality_appraisal_queue';
-export const SSE_PENDING_QUALITY_APPRAISALS_QUEUE_ERROR = 'sse_pending_quality_appraisal_queue_error';
 
-export const SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE = 'sse_pending_linking_studies_queue';
-export const SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR = 'sse_pending_linking_studies_queue_error';
+export const SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE = 'sse_pending_linking_studies_articles_queue';
+export const SSE_PENDING_LINKING_STUDIES_ARTICLE_QUEUE_ERROR = 'sse_pending_linking_studies_article_queue_error';
             
 export const SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE = 'sse_pending_linking_studies_batchfile_queue';
 export const SSE_PENDING_LINKING_STUDIES_BATCHFILE_QUEUE_ERROR = 'sse_pending_linking_studies_batchfile_queue_error';
 
-export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE = 'sse_pending_presentation_details_queue';
-export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR = 'sse_pending_presentation_details_queue_error';
+export const SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER = 'sse_pending_linking_studies_article_assign_junior_linker';
+export const SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR = 'sse_pending_linking_studies_article_assign_junior_linker_error';
+
+
+export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE = 'sse_pending_presentation_details_article_queue';
+export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR = 'sse_pending_presentation_details_article_queue_error';
             
 export const SSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE = 'sse_pending_presentation_details_batchfile_queue';
 export const SSE_PENDING_PRESENTATION_DETAILS_BATCHFILE_QUEUE_ERROR = 'sse_pending_presentation_details_batchfile_queue_error';
 
+export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_PRESENTER = 'sse_pending_linking_studies_article_assign_junior_presenter';
+export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_PRESENTER_ERROR = 'sse_pending_linking_studies_article_assign_junior_presenter_error';
 
 
+export const SSE_PENDING_TRANSLATING_TITLES_ARTICLE_QUEUE = 'sse_pending_presentation_details_article_queue';
+export const SSE_PENDING_TRANSLATING_TITLES_ARTICLE_QUEUE_ERROR = 'sse_pending_presentation_details_article_queue_error';
+            
+export const SSE_PENDING_TRANSLATING_TITLES_BATCHFILE_QUEUE = 'sse_pending_presentation_details_batchfile_queue';
+export const SSE_PENDING_TRANSLATING_TITLES_BATCHFILE_QUEUE_ERROR = 'sse_pending_presentation_details_batchfile_queue_error';
 
-// SSE ASSIGNED QUEUE
+export const SSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_PRESENTER = 'sse_pending_linking_studies_article_assign_junior_presenter';
+export const SSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_PRESENTER_ERROR = 'sse_pending_linking_studies_article_assign_junior_presenter_error';
+
+export const SSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR = 'sse_pending_translating_titles_article_assign_junior_translator';
+export const SSE_PENDING_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR_ERROR = 'sse_pending_translating_titles_article_assign_junior_translator_error';
+
+
+// SSE ASSIGNED ELIGIBILITY FILTERS
 export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE = 'sse_assigned_eligibility_filters_queue';
 export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR = 'sse_assigned_eligibility_filters_queue_error';
 
-export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT = 'sse_assigned_eligibility_filters_edit';
-export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR = 'sse_assigned_eligibility_filters_edit_error';
+export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT = 'sse_assigned_eligibility_filters_article_edit';
+export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_ERROR = 'sse_assigned_eligibility_filters_article_edit_error';
 
-export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE = 'sse_assigned_eligibility_filters_edit_complete';
-export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_assigned_eligibility_filters_edit_complete_error';
+export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE = 'sse_assigned_eligibility_filters_article_edit_complete';
+export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_assigned_eligibility_filters_article_edit_complete_error';
 
 export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH = 'sse_assigned_eligibility_filters_article_fetch';
 export const SSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_FETCH_ERROR = 'sse_assigned_eligibility_filters_article_fetch_error';
 
-export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_QUEUE = 'sse_assigned_quality_appraisals_queue';
-export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR = 'sse_assigned_quality_appraisals_queue_error';
+
+// SSE ASSIGNED QUALITY APPRAISALS
+export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_QUEUE = 'sse_assigned_quality_appraisals_article_queue';
+export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_QUEUE_ERROR = 'sse_assigned_quality_appraisals_article_queue_error';
 
 export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT = 'sse_assigned_quality_appraisals_article_edit';
 export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_ERROR = 'sse_assigned_quality_appraisals_article_edit_error';
@@ -253,17 +306,15 @@ export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_
 export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH = 'sse_assigned_quality_appraisals_article_article_fetch';
 export const SSE_ASSIGNED_QUALITY_APPRAISALS_ARTICLE_FETCH_ERROR = 'sse_assigned_quality_appraisals_article_article_fetch_error';
 
+
 // SSE ASSIGNED LINKING STUDIES
-export const SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER = 'sse_pending_linking_studies_article_assign_junior_linker';
-export const SSE_PENDING_LINKING_STUDIES_ARTICLE_ASSIGN_JUNIOR_LINKER_ERROR = 'sse_pending_linking_studies_article_assign_junior_linker_error';
+export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE = 'sse_assigned_linking_studies_article_queue';
+export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR = 'sse_assigned_linking_studies_article_queue_error';
 
-export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE = 'sse_assigned_linking_studies_queue';
-export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_QUEUE_ERROR = 'sse_assigned_linking_studies_queue_error';
+export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT = 'sse_assigned_linking_studies_article_edit';
+export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR = 'sse_assigned_linking_studies_article_edit_error';
 
-export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT = 'sse_assigned_linking_studies_edit';
-export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_ERROR = 'sse_assigned_linking_studies_edit_error';
-
-export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE = 'sse_assigned_linking_studies_edit_complete';
+export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE = 'sse_assigned_linking_studies_artcle_edit_complete';
 export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_assigned_linking_studies_edit_complete_error';
 
 export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH = 'sse_assigned_linking_studies_article_fetch';
@@ -273,15 +324,30 @@ export const SSE_ASSIGNED_LINKING_STUDIES_ARTICLE_FETCH_ERROR = 'sse_assigned_li
 export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER = 'sse_pending_presentation_details_article_assign_junior_detailer';
 export const SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR = 'sse_pending_presentation_details_article_assign_junior_detailer_error';
 
-export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE = 'sse_assigned_presentation_details_queue';
-export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR = 'sse_assigned_presentation_details_queue_error';
+export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE = 'sse_assigned_presentation_details_article_queue';
+export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE_ERROR = 'sse_assigned_presentation_details_article_queue_error';
 
-export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT = 'sse_assigned_presentation_details_edit';
-export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_ERROR = 'sse_assigned_presentation_details_edit_error';
+export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT = 'sse_assigned_presentation_details_article_edit';
+export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_ERROR = 'sse_assigned_presentation_details_article_edit_error';
 
-export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE = 'sse_assigned_presentation_details_edit_complete';
-export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_assigned_presentation_details_edit_complete_error';
+export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE = 'sse_assigned_presentation_details_article_edit_complete';
+export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_assigned_presentation_details_article_edit_complete_error';
 
 export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH = 'sse_assigned_presentation_details_article_fetch';
 export const SSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_FETCH_ERROR = 'sse_assigned_presentation_details_article_fetch_error';
 
+// SSE ASSIGNED TRANSLATING TITLES
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR = 'sse_assigned_translating_titles_article_assign_junior_translator';
+export const SSE_ASSOGMED_TRANSLATING_TITLES_ARTICLE_ASSIGN_JUNIOR_TRANSLATOR_ERROR = 'sse_assigned_translating_titles_article_assign_junior_translator_error';
+
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_QUEUE = 'sse_assigned_translating_titles_article_queue';
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_QUEUE_ERROR = 'sse_assigned_translating_titles_article_queue_error';
+
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT = 'sse_assigned_translating_titles_article_edit';
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_ERROR = 'sse_assigned_translating_titles_article_edit_error';
+
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE = 'sse_assigned_translating_titles_article_edit_complete';
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_assigned_translating_titles_edit_complete_error';
+
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_FETCH = 'sse_assigned_translating_titles_article_fetch';
+export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_FETCH_ERROR = 'sse_assigned_translating_titles_article_fetch_error';
