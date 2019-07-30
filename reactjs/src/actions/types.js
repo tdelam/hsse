@@ -3,6 +3,9 @@ export const AUTH_ERROR = 'auth_error';
 export const CONFIRM_USER_EMAIL = 'confirm_user_email';
 export const FORGOT_PASSWORD_EMAIL = 'forgot_password_email';
 
+export const FETCH_ALL_USERS = 'fetch_all_users';
+export const FETCH_ALL_USERS_ERROR = 'fetch_all_users_error';
+
 export const CURRENT_USER = 'current_user';
 export const CURRENT_USER_ERROR = 'current_user_error';
 
@@ -11,6 +14,9 @@ export const ADD_USER_ROLE_ERROR = 'add_user_role_error';
 
 export const REMOVE_USER_ROLE ='remove_user_role';
 export const REMOVE_USER_ROLE_ERROR ='remove_user_role_error';
+
+export const UPDATE_USER_ROLE = 'update_user_role';
+export const UPDATE_USER_ROLE_ERROR = 'update_user_role_error';
 
 export const ACTIVATE_USER = 'activate_user';
 export const ACTIVATE_USER_ERROR = 'activate_user_error';

@@ -67,6 +67,8 @@ import NotFound from './components/Pages/NotFound';
 import Error500 from './components/Pages/Error500';
 import Maintenance from './components/Pages/Maintenance';
 
+import UserEditor from './components/Administrator/UserEditor';
+
 import Mailbox from './components/Extras/Mailbox';
 import Timeline from './components/Extras/Timeline';
 import Calendar from './components/Extras/Calendar';
@@ -341,6 +343,8 @@ const Routes = ({ location }) => {
                             <Route path="/social-board" component={SocialBoard}/>
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
+
+                            <Route path="/administrator/usereditor" component={UserEditor} />
 
                             {/* */}
                             <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />

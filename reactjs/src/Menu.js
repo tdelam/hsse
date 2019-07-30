@@ -416,9 +416,9 @@ const Menu = [
         icon: 'icon-shield',
         translate: 'sidebar.nav.table.USER',
         submenu: [{
-                name: 'Users',
-                path: 'table-standard',
-                translate: 'sidebar.nav.table.USERS'
+                name: 'User Editor',
+                path: '/administrator/usereditor',
+                translate: 'sidebar.nav.table.USEREDITOR'
             },
             {
                 name: 'Application',
