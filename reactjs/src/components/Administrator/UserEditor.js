@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ContentWrapper from '../Layout/ContentWrapper';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Row, Col, TabContent, TabPane, ListGroup, ListGroupItem } from 'reactstrap';
 // Filestyle
 import 'bootstrap-filestyle';
@@ -31,10 +33,24 @@ class UserEditor extends Component {
         }
     }
 
-    handleUpdate = (event) => {
+    notify = (message, type, position) => toast(message, {
+        type,
+        position
+    })
+
+    handleUpdate = async (event) => {
         event.preventDefault();
-        this.props.updateRole(this.state);
+        await this.props.updateRole(this.state).then(res => {
+            this.notify(res.message, "default", "top-right");
+        });
         //console.log(`${this.state.selectedEmail} => ${this.state.selectedRole}`);
+        
+    }
+
+    updateSelectedRole = (email) => {
+        this.props.fetchUserByEmail(email).then(res => {
+            console.log(res);
+        });
     }
 
     render() {
@@ -83,14 +99,14 @@ class UserEditor extends Component {
                                             <form action="">
                                                 <div className="form-group">
                                                     <label>Users</label>
-                                                    <select defaultValue="" className="custom-select" onChange={(event) => this.setState({ selectedEmail: event.target.value}) }>
+                                                    <select defaultValue="" className="custom-select" onChange={ (event) => { this.setState({ selectedEmail: event.target.value }); this.updateSelectedRole(event.target.value) } }>
                                                         <option value="">Select email address</option>
                                                         { this.state.userList.map((user) => <option key={user._id} value={user.email}>{user.email}</option>) }
                                                     </select>
                                                 </div>
                                                 <div className="form-group">
                                                     <label>Roles</label>
-                                                    <select defaultValue="" className="custom-select" onChange={(event) => this.setState({ selectedRole: event.target.value })}>
+                                                    <select defaultValue="" className="custom-select" onChange={(event) => this.setState({ selectedRole: event.target.value }) }>
                                                         <option value="">Select role</option>
                                                         <option value="user">User</option>
                                                         <option value="uploader">Uploader</option>
@@ -111,6 +127,7 @@ class UserEditor extends Component {
                                                     <small className="text-muted">* Integer fermentum accumsan metus, id sagittis ipsum molestie vitae</small>
                                                 </p>
                                             </form>
+                                            <ToastContainer />
                                         </div>
                                     </div>
                                 </TabPane>
@@ -298,7 +315,7 @@ class UserEditor extends Component {
 }
 
 function mapStateToProps({ auth }) {
-    return { errorState: auth.errorState }
+    return { currentUser: auth.currentUser, errorState: auth.errorState }
 }
 
 export default connect(mapStateToProps, actions) (UserEditor);

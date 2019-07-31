@@ -6,6 +6,9 @@ export const FORGOT_PASSWORD_EMAIL = 'forgot_password_email';
 export const FETCH_ALL_USERS = 'fetch_all_users';
 export const FETCH_ALL_USERS_ERROR = 'fetch_all_users_error';
 
+export const FETCH_USER_BY_EMAIL = 'fetch_user_by_email';
+export const FETCH_USER_BY_EMAIL_ERROR = 'fetch_user_by_email_error';
+
 export const CURRENT_USER = 'current_user';
 export const CURRENT_USER_ERROR = 'current_user_error';
 
