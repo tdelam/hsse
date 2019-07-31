@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import pubsub from 'pubsub-js';
 import { Collapse } from 'reactstrap';
+
+import * as actions from '../../actions';
 
 class SidebarUserBlock extends Component {
 
@@ -22,6 +25,7 @@ class SidebarUserBlock extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <Collapse id="user-block" isOpen={ this.state.userBlockCollapse }>
                 <div>
@@ -35,7 +39,7 @@ class SidebarUserBlock extends Component {
                        </div>
                        {/* Name and Job */}
                        <div className="user-block-info">
-                          <span className="user-block-name">Hello, { this.state.currentUser }</span>
+                          <span className="user-block-name">Hello, {  }</span>
                           <span className="user-block-role">Designer</span>
                        </div>
                     </div>
@@ -45,4 +49,8 @@ class SidebarUserBlock extends Component {
     }
 }
 
-export default SidebarUserBlock;
+function mapStateToProps({ auth }) {
+    return { currentUser: auth.currentUser }
+}
+
+export default connect (mapStateToProps, actions)(SidebarUserBlock);

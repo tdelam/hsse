@@ -166,6 +166,18 @@ exports.currentUser = async (req, res, next) => {
 
 }
 
+exports.fetchUserByEmail = async (req, res, next) => {
+
+    console.log(req.params);
+
+    const email = req.params.email;
+
+    const user = await UserModelClass.findOne({ email }).exec();
+
+    return res.status(200).send({ user });
+
+}
+
 exports.resetPassword = (req, res, next) => {
 
     console.log("**************** INSIDE RESET PASSWORD *******************");
@@ -434,12 +446,12 @@ exports.updateRole = async (req, res) => {
             } else if (!user) {
                 console.log('No user found!');
                 return res.status(404).send({
-                    message: 'No user has been found'
+                    message: 'Unable to update role!'
                 });
             } else {
                 console.log(user);
                 return res.send({
-                    message: `${values} added to ${user}`
+                    message: `Role "${selectedRole}" added to ${user.email}`
                 });
             }
         }

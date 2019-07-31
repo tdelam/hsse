@@ -11,6 +11,9 @@ import {
   FETCH_ALL_USERS,
   FETCH_ALL_USERS_ERROR,
 
+  FETCH_USER_BY_EMAIL,
+  FETCH_USER_BY_EMAIL_ERROR,
+
   ADD_USER_ROLE,
   ADD_USER_ROLE_ERROR,
 
@@ -316,11 +319,28 @@ export const getCurrentUser = ( ) => async dispatch => {
     });
     
     dispatch({ type: CURRENT_USER, payload: response.data });
-
+    return response.data;
   } catch (e) {
     
     dispatch({ type: CURRENT_USER_ERROR, payload: e });
 
+  }
+};
+
+export const fetchUserByEmail = (email) => async dispatch => {
+  
+  try {
+      const response = await axios.get(`${backendServer}/fetchuserbyemail`, {
+      headers: { authorization: localStorage.getItem('token') },
+      params: { email: email }
+    });
+    
+    dispatch({ type: FETCH_USER_BY_EMAIL, payload: response.data });
+    return response.data;
+  } catch (e) {
+    
+    dispatch({ type: FETCH_USER_BY_EMAIL_ERROR, payload: e });
+    return e;
   }
 };
 
@@ -379,10 +399,12 @@ export const updateRole = (value) => async dispatch => {
     });
   
     dispatch({ type: UPDATE_USER_ROLE, payload: response.data });
+    return response.data;
 
   } catch (e) {
   
     dispatch({ type: UPDATE_USER_ROLE_ERROR, payload: e });
+    return e;
 
   }
 };

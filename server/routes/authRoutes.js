@@ -26,6 +26,7 @@ module.exports = (app) => {
     app.post('/resetpassword/:token', Authentication.resetPassword);
 
     app.get('/currentuser', Authentication.currentUser);
+    app.get('/fetchuserbyemail', Authentication.fetchUserByEmail);
     app.get('/fetchallusers', Authentication.fetchAllUsers);
 
     app.post('/activateuser', Authentication.activateUser);

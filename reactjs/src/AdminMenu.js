@@ -1,4 +1,4 @@
-const Menu = [
+const AdminMenu = [
     {
         heading: 'Main Navigation',
         translate: 'sidebar.heading.HEADER'
@@ -410,7 +410,23 @@ const Menu = [
                 translate: 'sidebar.nav.table.ADVANCED'
             }
         ]
-        }
+        },
+        {
+        name: 'Administrator',
+        icon: 'icon-shield',
+        translate: 'sidebar.nav.table.USER',
+        submenu: [{
+                name: 'User Editor',
+                path: '/administrator/usereditor',
+                translate: 'sidebar.nav.table.USEREDITOR'
+            },
+            {
+                name: 'Application',
+                path: 'table-extended',
+                translate: 'sidebar.nav.table.APPLICATION'
+            }
+        ]
+    }
 ];
 
-export default Menu;
+export default AdminMenu;

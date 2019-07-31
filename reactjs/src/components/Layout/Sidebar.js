@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { translate, Trans } from 'react-i18next';
 import { Link, withRouter } from 'react-router-dom';
 import { Collapse, Badge } from 'reactstrap';
@@ -6,6 +7,9 @@ import SidebarRun from './Sidebar.run';
 import SidebarUserBlock from './SidebarUserBlock';
 
 import Menu from '../../Menu.js';
+import AdminMenu from '../../AdminMenu.js';
+
+import * as actions from '../../actions';
 
 /** Component to display headings on sidebar */
 const SidebarItemHeader = ({item}) => (
@@ -49,24 +53,39 @@ const SidebarSubHeader = ({item}) => (
 class Sidebar extends Component {
 
     state = {
-        collapse: {}
+        collapse: {},
+        user: '',
+        administrator: false
     }
 
     componentDidMount() {
-        // pass navigator to access router api
-        SidebarRun(this.navigator.bind(this));
-        // prepare the flags to handle menu collapsed states
-        this.buildCollapseList()
+        this.props.getCurrentUser().then(res => {
+            // console.log(res)
+            // pass navigator to access router api
+            SidebarRun(this.navigator.bind(this));
+            // prepare the flags to handle menu collapsed states
+            this.setState({ user: res.user, administrator: res.user.roles.includes('administrator') });
+            this.buildCollapseList(res.user)
+        });
     }
 
     /** prepare initial state of collapse menus. Doesnt allow same route names */
-    buildCollapseList = () => {
+    buildCollapseList = (user) => {
+        
         let collapse = {};
-        Menu
-            .filter(({heading}) => !heading)
-            .forEach(({name, path, submenu}) => {
-                collapse[name] = this.routeActive(submenu ? submenu.map(({path})=>path) : path)
-            })
+        if(user.roles.includes('administrator')) {
+            AdminMenu
+                .filter(({heading}) => !heading)
+                .forEach(({name, path, submenu}) => {
+                    collapse[name] = this.routeActive(submenu ? submenu.map(({path})=>path) : path)
+                })
+        } else {
+            Menu
+                .filter(({heading}) => !heading)
+                .forEach(({name, path, submenu}) => {
+                    collapse[name] = this.routeActive(submenu ? submenu.map(({path})=>path) : path)
+                })
+        }
         this.setState({collapse});
     }
 
@@ -107,6 +126,7 @@ class Sidebar extends Component {
     }
 
     render() {
+        
         return (
             <aside className='aside-container'>
                 { /* START Sidebar (left) */ }
@@ -122,6 +142,35 @@ class Sidebar extends Component {
 
                             { /* Iterates over all sidebar items */ }
                             {
+                                this.state.administrator && 
+                                AdminMenu.map((item, i) => {
+                                    // heading
+                                    if(this.itemType(item) === 'heading')
+                                        return (
+                                            <SidebarItemHeader item={item} key={i} />
+                                        )
+                                    else {
+                                        if(this.itemType(item) === 'menu')
+                                            return (
+                                                <SidebarItem isActive={this.routeActive(item.path)} item={item} key={i} />
+                                            )
+                                        if(this.itemType(item) === 'submenu')
+                                            return [
+                                                <SidebarSubItem item={item} isOpen={this.state.collapse[item.name]} handler={ this.toggleItemCollapse.bind(this, item.name) } isActive={this.routeActive(this.getSubRoutes(item))} key={i}>
+                                                    <SidebarSubHeader item={item} key={i}/>
+                                                    {
+                                                        item.submenu.map((subitem, i) =>
+                                                            <SidebarItem key={i} item={subitem} isActive={this.routeActive(subitem.path)} />
+                                                        )
+                                                    }
+                                                </SidebarSubItem>
+                                            ]
+                                    }
+                                    return null; // unrecognized item
+                                })
+                            } 
+                            {
+                                !this.state.administrator && 
                                 Menu.map((item, i) => {
                                     // heading
                                     if(this.itemType(item) === 'heading')
@@ -147,6 +196,8 @@ class Sidebar extends Component {
                                     }
                                     return null; // unrecognized item
                                 })
+
+
                             }
                         </ul>
                         { /* END sidebar nav */ }
@@ -158,4 +209,12 @@ class Sidebar extends Component {
     }
 }
 
-export default translate('translations')(withRouter(Sidebar));
+function mapStateToProps({auth}) {
+    return {
+        currentUser: auth.currentUser
+    }
+}
+
+export default connect(mapStateToProps, actions)(translate('translations')(withRouter(Sidebar)));
+
+// export default translate('translations')(withRouter(Sidebar));
