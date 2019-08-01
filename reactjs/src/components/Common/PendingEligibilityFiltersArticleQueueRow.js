@@ -63,7 +63,7 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
             this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, history);
     }
 
-    render() {
+    render() { console.log(this.props);
         const { article, history } = this.props;
         return (
             <tr key={article._id}>
@@ -89,5 +89,8 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
     }
 }
 
+function mapStateToProps({ auth }) {
+    return { currentUser: auth.currentUser, errorState: auth.errorState }
+}
 
-export default connect(null, actions)(PendingEligibilityFiltersArticleQueueRow); 
+export default connect(mapStateToProps, actions)(PendingEligibilityFiltersArticleQueueRow); 

@@ -198,7 +198,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     };
 
     render() {
-        
+        console.log(this.props);
         return (
             <ContentWrapper>
                 <div className="content-heading">
