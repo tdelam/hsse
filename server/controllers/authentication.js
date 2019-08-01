@@ -451,7 +451,7 @@ exports.updateRole = async (req, res) => {
             } else {
                 console.log(user);
                 return res.send({
-                    message: `Role "${selectedRole}" added to ${user.email}`
+                    message: `Role: "${selectedRole}" assigned to ${user.email}`
                 });
             }
         }

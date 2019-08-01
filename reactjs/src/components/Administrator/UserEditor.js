@@ -46,10 +46,43 @@ class UserEditor extends Component {
         //console.log(`${this.state.selectedEmail} => ${this.state.selectedRole}`);
         
     }
+    
+    getRoleName = (length) => {
+
+        switch(length) {
+            case 1:
+                return 'user';
+            case 2:
+                return 'uploader';
+            case 3:
+                return 'juniordetailer';
+            case 4:
+                return 'seniordetailer';
+            case 5: 
+                return 'juniorlinker';
+            case 6:
+                return 'seniorlinker';
+            case 7:
+                return 'juniorappraiser';
+            case 8:
+                return 'seniorappraiser';
+            case 9:
+                return 'juniorfilter';
+            case 10:
+                return 'seniorfilter';
+            case 11:
+                return 'prioritizer';
+            case 12:
+                return 'administrator';
+            default:
+                return '';
+        }
+
+    }
 
     updateSelectedRole = (email) => {
         this.props.fetchUserByEmail(email).then(res => {
-            console.log(res);
+            this.setState({ selectedRole: this.getRoleName(res.user.roles.length) });            
         });
     }
 
@@ -105,8 +138,8 @@ class UserEditor extends Component {
                                                     </select>
                                                 </div>
                                                 <div className="form-group">
-                                                    <label>Roles</label>
-                                                    <select defaultValue="" className="custom-select" onChange={(event) => this.setState({ selectedRole: event.target.value }) }>
+                                                    <label>Role</label>
+                                                    <select value={ this.state.selectedRole } className="custom-select" onChange={(event) => this.setState({ selectedRole: event.target.value }) } >
                                                         <option value="">Select role</option>
                                                         <option value="user">User</option>
                                                         <option value="uploader">Uploader</option>
