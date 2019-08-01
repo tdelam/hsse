@@ -25,7 +25,6 @@ class SidebarUserBlock extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <Collapse id="user-block" isOpen={ this.state.userBlockCollapse }>
                 <div>
@@ -39,8 +38,8 @@ class SidebarUserBlock extends Component {
                        </div>
                        {/* Name and Job */}
                        <div className="user-block-info">
-                          <span className="user-block-name">Hello, {  }</span>
-                          <span className="user-block-role">Designer</span>
+                          <span className="user-block-name">Hello, </span>
+                          <span className="user-block-role">{ this.props.currentUser && this.props.currentUser.user.email }</span>
                        </div>
                     </div>
                 </div>

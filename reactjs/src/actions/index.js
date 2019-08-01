@@ -330,9 +330,8 @@ export const getCurrentUser = ( ) => async dispatch => {
 export const fetchUserByEmail = (email) => async dispatch => {
   
   try {
-      const response = await axios.get(`${backendServer}/fetchuserbyemail`, {
+      const response = await axios.get(`${backendServer}/fetchuserbyemail/${email}`, {
       headers: { authorization: localStorage.getItem('token') },
-      params: { email: email }
     });
     
     dispatch({ type: FETCH_USER_BY_EMAIL, payload: response.data });
