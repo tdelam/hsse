@@ -55,13 +55,13 @@ class UserEditor extends Component {
             case 2:
                 return 'uploader';
             case 3:
-                return 'juniordetailer';
+                return 'detailer';
             case 4:
-                return 'seniordetailer';
+                return 'detailer';
             case 5: 
-                return 'juniorlinker';
+                return 'linker';
             case 6:
-                return 'seniorlinker';
+                return 'linker';
             case 7:
                 return 'juniorappraiser';
             case 8:
@@ -143,10 +143,8 @@ class UserEditor extends Component {
                                                         <option value="">Select role</option>
                                                         <option value="user">User</option>
                                                         <option value="uploader">Uploader</option>
-                                                        <option value="juniordetailer">Junior Detailer</option>
-                                                        <option value="seniordetailer">Senior Detailer</option>
-                                                        <option value="juniorlinker">Junior Linker</option>
-                                                        <option value="seniorlinker">Senior Linker</option>
+                                                        <option value="juniordetailer">Detailer</option>
+                                                        <option value="juniorlinker">Linker</option>
                                                         <option value="juniorappraiser">Junior Appraiser</option>
                                                         <option value="seniorappraiser">Senior Appraiser</option>
                                                         <option value="juniorfilter">Junior Filter</option>
