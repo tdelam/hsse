@@ -4,6 +4,8 @@ import Swal from '../Elements/Swal';
 
 import { connect } from 'react-redux';
 
+import { Button} from 'reactstrap';
+
 import * as actions from '../../actions';
 
 class PendingEligibilityFiltersArticleQueueRow extends Component {
@@ -63,7 +65,7 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
             this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, history);
     }
 
-    render() { console.log(this.props);
+    render() { console.log(this.props.currentUser.user.roles.includes('juniorfilter'));
         const { article, history } = this.props;
         return (
             <tr key={article._id}>
@@ -75,10 +77,10 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
                     { moment(article.harvestDate).format("DD-MM-YYYY") }
                 </td>
                 <td key={Math.random()}>
-                    {article._eligibilityFiltersJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
+                    {article._eligibilityFiltersJuniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={!this.props.currentUser.user.roles.includes('juniorfilter')  || this.props.currentUser.user.roles.includesd}><Swal disabled={!this.props.currentUser.user.roles.includes('juniorfilter')} options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)} >Assign</Swal></Button>}
                 </td>
                 <td key={Math.random()}>
-                {article._eligibilityFiltersSeniorEmail || <a ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} className="mr-1 badge badge-primary">Assign</Swal></a>}
+                {article._eligibilityFiltersSeniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={!this.props.currentUser.user.roles.includes('seniorfilter')}><Swal disabled={!this.props.currentUser.user.roles.includes('seniorfilter')} options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} >Assign</Swal></Button>}
                 </td>
                 <td key={Math.random()}>{ article._id }</td>
                 <td key={Math.random()}>{ article.title }</td>

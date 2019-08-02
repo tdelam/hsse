@@ -89,5 +89,9 @@ class PendingQualityAppraisalsArticleQueueRow extends Component {
     }
 }
 
+function mapStateToProps({ auth }) {
+    return { currentUser: auth.currentUser, errorState: auth.errorState }
+}
 
-export default connect(null, actions)(PendingQualityAppraisalsArticleQueueRow); 
+
+export default connect(mapStateToProps, actions)(PendingQualityAppraisalsArticleQueueRow); 

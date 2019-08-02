@@ -12,7 +12,8 @@ const Swal = props => {
     const handleClick = e => {
         e.preventDefault();
         // pass swal reference so is possible to chain popups
-        swal(props.options, p => props.callback(p, swal));
+        if(!props.disabled)
+            swal(props.options, p => props.callback(p, swal));
     }
 
     const { callback, ...rest } = props;
