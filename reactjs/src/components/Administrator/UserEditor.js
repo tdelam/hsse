@@ -57,22 +57,18 @@ class UserEditor extends Component {
             case 3:
                 return 'detailer';
             case 4:
-                return 'detailer';
+                return 'linker';
             case 5: 
-                return 'linker';
-            case 6:
-                return 'linker';
-            case 7:
                 return 'juniorappraiser';
-            case 8:
+            case 6:
                 return 'seniorappraiser';
+            case 7:
+                return 'juniorfilterer';
+            case 8:
+                return 'seniorfilterer';
             case 9:
-                return 'juniorfilter';
-            case 10:
-                return 'seniorfilter';
-            case 11:
                 return 'prioritizer';
-            case 12:
+            case 10:
                 return 'administrator';
             default:
                 return '';
@@ -143,12 +139,12 @@ class UserEditor extends Component {
                                                         <option value="">Select role</option>
                                                         <option value="user">User</option>
                                                         <option value="uploader">Uploader</option>
-                                                        <option value="juniordetailer">Detailer</option>
-                                                        <option value="juniorlinker">Linker</option>
+                                                        <option value="detailer">Detailer</option>
+                                                        <option value="linker">Linker</option>
                                                         <option value="juniorappraiser">Junior Appraiser</option>
                                                         <option value="seniorappraiser">Senior Appraiser</option>
-                                                        <option value="juniorfilter">Junior Filter</option>
-                                                        <option value="seniorfilter">Senior Filter</option>
+                                                        <option value="juniorfilterer">Junior Filterer</option>
+                                                        <option value="seniorfilterer">Senior Filterer</option>
                                                         <option value="prioritizer">Prioritizer</option>
                                                         <option value="administrator">Administrator</option>
                                                     </select>

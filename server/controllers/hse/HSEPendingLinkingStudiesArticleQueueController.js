@@ -5,8 +5,8 @@ const Authentication = require('../authentication');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 exports.listArticles = async (req, res) => {
-    HSEArticleModelClass.find({ complicated: false })
-        .and([ { _linkingStudiesJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
+    HSEArticleModelClass.find({ complicated: false/*, eligibilityFiltersFullCompletion: true*/ })
+        .and([ { _linkingStudiesJunior: null } ])
         .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -56,7 +56,7 @@ exports.addArticleToJuniorLinker = async (req, res) => {
             });
         } else {
 
-            if(hasRole('juniorlinker', user) ) {
+            if(hasRole('linker', user) ) {
 
                 article._linkingStudiesJunior = user._id;
                 article._linkingStudiesJuniorEmail = user.email;

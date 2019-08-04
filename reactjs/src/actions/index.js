@@ -389,7 +389,7 @@ export const addRole = (value) => async dispatch => {
 };
 
 export const updateRole = (value) => async dispatch => {
-  console.log(value)
+  
   try { 
     const response = await axios.post(`${backendServer}/updaterole`, 
     { value },
