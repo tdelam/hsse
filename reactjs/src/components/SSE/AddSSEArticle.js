@@ -173,12 +173,12 @@ class AddSSEArticle extends Component {
                                             <label className="col-md-2 col-form-label">Journal</label>
                                             <Col md={ 6 }>
                                                 <Input type="text"
-                                                    name="integer"
-                                                    invalid={this.hasError('sseSingleArticle','integer','integer')}
+                                                    name="journal"
+                                                    invalid={this.hasError('sseSingleArticle','text','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
                                                     value={this.state.sseSingleArticle.journal}/>
-                                                <span className="invalid-feedback">Field is required</span>
+                                                { this.hasError('sseSingleArticle','text','required') && <span className="invalid-feedback">Field is required</span> }
                                             </Col>
                                             <Col md={ 4 }>
                                             </Col>
