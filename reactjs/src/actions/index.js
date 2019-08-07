@@ -389,7 +389,7 @@ export const addRole = (value) => async dispatch => {
 };
 
 export const updateRole = (value) => async dispatch => {
-  console.log(value)
+  
   try { 
     const response = await axios.post(`${backendServer}/updaterole`, 
     { value },
@@ -756,7 +756,7 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
   };
   console.log(headers);
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilterer/${articleId}`, 
     {
       articleId
     },
@@ -837,7 +837,7 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
     'Authorization': localStorage.getItem('token') 
   };
   try {
-    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addseniorfilter/${articleId}`,
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addseniorfilterer/${articleId}`,
     {
       articleId
     },
@@ -1287,7 +1287,7 @@ export const fetchSSEAssignedPresentationDetailsArticle = (articleId, history) =
 export const assignSSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId , history) => async dispatch => {
 
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue/addjuniorfilter/${articleId}`, 
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue/addjuniorfilterer/${articleId}`, 
     {
       articleId
     },
@@ -1358,7 +1358,7 @@ export const assignSSEPendingPresentationDetailsArticlesJuniorDetailer = (articl
 
 export const assignSSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId, history) => async dispatch => {
   try {
-    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue/addseniorapraiser/${articleId}`,
+    const response = await axios.post(`${backendServer}/sse/pendingeligibilityfiltersarticlequeue/addseniorfilterer/${articleId}`,
     {
       articleId
     },

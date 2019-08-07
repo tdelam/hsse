@@ -5,6 +5,9 @@ const { Schema } = mongoose;
 
 const HSEArticleSchema = new Schema({
 
+    // Field to store article ids from the old system
+    articleId: { type: String },
+
     // Fields from EndNote
     referenceType: { type: String },
     rating: { type: String },

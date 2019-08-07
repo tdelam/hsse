@@ -17,13 +17,16 @@ import * as actions from '../../actions';
 const ARTICLE_SOURCES = [
     {value: 'referrals', label: 'Referrals'},
     {value: 'handSearches', label: 'Hand Searches'},
-    {value: 'cochrane', label: 'Cochrane'},
-    {value: 'plusSR', label: 'PLUS SR'},
-    {value: 'pubMedSR', label: 'PubMed SR'},
-    {value: 'lilacsSREE', label: 'LILACS SR & EE'},
-    {value: 'plusEE', label: 'PLUS EE'},
-    {value: 'pubMedEE', label: 'PubMed EE'},
-    {value: 'healthSystemHealthReformDescriptions', label: 'Health System and Health Reform Descriptions'},
+    {value: 'campbell', label: 'Campbell'},
+    {value: 'eppiCenter', label: 'EPPI-Centre'},
+    {value: '3iE', label: '3iE'},
+    {value: 'wosSr', label: 'WoS SR'},
+    {value: 'ebscoSr', label: 'EBSCO SR'},
+    {value: 'proquestSr', label: 'Proquest SR'},
+    {value: 'wosEe', label: 'WoS EE'},
+    {value: 'ebscoEe', label: 'EBSCO EE'},
+    {value: 'proquestEe', label: 'Proquest EE'},
+    {value: 'safetylit', label: 'SafetyLit'},
     {value: 'other', label: 'Other'}
 ]
 

@@ -9,16 +9,14 @@ const config = require('../config/baseConfig');
 
 const USER = ['user'];
 const UPLOADER = ['user', 'uploader'];
-const JUNIOR_DETAILER = ['user', 'uploader', 'juniordetailer'];
-const SENIOR_DETAILER = ['user', 'uploader', 'juniordetailer', 'seniordetailer'];
-const JUNIOR_LINKER = ['user', 'uploader', 'juniordetailer', 'seniordetailer', 'juniorlinker'];
-const SENIOR_LINKER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker'];
-const JUNIOR_APPRAISER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser'];
-const SENIOR_APPRAISER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser'];
-const JUNIOR_FILTER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter'];
-const SENIOR_FILTER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter', 'seniorfilter'];
-const PRIORITIZER = ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter', 'seniorfilter', 'prioritizer'];
-const ADMINISTRATOR= ['user', 'uploader', 'juniordetailer', 'seniordetailer','juniorlinker', 'seniorlinker', 'juniorappraiser', 'seniorappraiser', 'juniorfilter', 'seniorfilter', 'prioritizer', 'administrator'];
+const DETAILER = ['user', 'uploader', 'detailer'];
+const LINKER = ['user', 'uploader', 'detailer', 'linker'];
+const JUNIOR_APPRAISER = ['user', 'uploader', 'detailer', 'linker', 'juniorappraiser'];
+const SENIOR_APPRAISER = ['user', 'uploader', 'detailer', 'linker', 'juniorappraiser', 'seniorappraiser'];
+const JUNIOR_FILTERER = ['user', 'uploader', 'detailer', 'linker', 'juniorappraiser', 'seniorappraiser', 'juniorfilterer'];
+const SENIOR_FILTERER = ['user', 'uploader', 'detailer', 'linker', 'juniorappraiser', 'seniorappraiser', 'juniorfilterer', 'seniorfilterer'];
+const PRIORITIZER = ['user', 'uploader', 'detailer', 'linker', 'juniorappraiser', 'seniorappraiser', 'juniorfilterer', 'seniorfilterer', 'prioritizer'];
+const ADMINISTRATOR= ['user', 'uploader', 'detailer', 'linker', 'juniorappraiser', 'seniorappraiser', 'juniorfilterer', 'seniorfilterer', 'prioritizer', 'administrator'];
 
 
 /*
@@ -393,17 +391,11 @@ exports.updateRole = async (req, res) => {
         case 'uploader':
             values = UPLOADER;
             break;
-        case 'juniordetailer':
-            values = JUNIOR_DETAILER;
+        case 'detailer':
+            values = DETAILER;
             break;
-        case 'seniordetailer':
-            values = SENIOR_DETAILER;
-            break;
-        case 'juniorlinker': 
-            values = JUNIOR_LINKER;
-            break;
-        case 'seniorlinker': 
-            values = SENIOR_LINKER;
+        case 'linker': 
+            values = LINKER;
             break;
         case 'juniorappraiser':
             values = JUNIOR_APPRAISER;
@@ -411,11 +403,11 @@ exports.updateRole = async (req, res) => {
         case 'seniorappraiser':
             values = SENIOR_APPRAISER;
             break;
-        case 'juniorfilter':
-            values = JUNIOR_FILTER;
+        case 'juniorfilterer':
+            values = JUNIOR_FILTERER;
             break;
-        case 'seniorfilter':
-            values = SENIOR_FILTER;
+        case 'seniorfilterer':
+            values = SENIOR_FILTERER;
             break;
         case 'prioritizer': 
             values = PRIORITIZER;

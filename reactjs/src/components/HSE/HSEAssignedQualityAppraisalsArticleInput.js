@@ -47,6 +47,7 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
             questionEight: '',
             questionNine: '',
             questionTen: '',
+            questionEleven: '',
     
         };
         
@@ -187,6 +188,8 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                 <legend>Questions</legend>
                                 <fieldset></fieldset>
                                 <p>1. Was an 'a priori' design provided? The research question and inclusion criteria should be established before the conduct of the review.</p>
+                                <span>The research question and inclusion criteria should be established before the conduct of the review.</span>
+                                <span>Note: Need to refer to a protocol, ethics approval, or pre-determined/a priori published research objectives to score a "yes."</span>
                                 <FormGroup check >
                                                                         
                                     <Label check>
@@ -206,7 +209,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <p>2. Was there duplicate study selection and data extraction? There should be at least two independent data extractors and a consensus procedure for disagreements should be in place.</p>
+                                <p>2. Was there duplicate study selection and data extraction?</p>
+                                <span>There should be at least two independent data extractors and a consensus procedure for disagreements should be in place.</span>
+                                <span>Note: 2 people do study selection, 2 people do data extraction, consensus process or one person checks the other's work.</span>
                                 <FormGroup check >
                                                                         
                                     <Label check>
@@ -226,7 +231,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <p>3. Was a comprehensive literature search performed? At least two electronic sources should be searched. The report must include years and databases used (e.g., Central, EMBASE, and MEDLINE). Key words and/or MESH terms must be stated and where feasible the search strategy should be provided. All searches should be supplemented by consulting current contents, reviews, textbooks, specialized registers, or experts in the particular field of study, and by reviewing the references in the studies found.</p>
+                                <p>3. Was a comprehensive literature search performed?</p>
+                                <span> At least two electronic sources should be searched. The report must include years and databases used (e.g., Central, EMBASE, and MEDLINE). Key words and/or MESH terms must be stated and where feasible the search strategy should be provided. All searches should be supplemented by consulting current contents, reviews, textbooks, specialized registers, or experts in the particular field of study, and by reviewing the references in the studies found</span>
+                                <span>Note: If at least 2 sources + one supplementary strategy used, select "yes" (Cochrane register/Central counts as 2 sources; a grey literature search counts as supplementary).</span>
                                 <FormGroup check >
                                                                         
                                     <Label check>
@@ -246,7 +253,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <p>4. Was the status of publication (i.e. grey literature) not used as an inclusion criterion? The authors should state that they searched for reports regardless of their publication type. The authors should state whether or not they excluded any reports (from the systematic review), based on their publication status, language etc.</p>
+                                <p>4. Was the status of publication (i.e. grey literature) not used as an inclusion criterion?</p>
+                                <span>The authors should state that they searched for reports regardless of their publication type. The authors should state whether or not they excluded any reports (from the systematic review), based on their publication status, language etc.</span>
+                                <span>Note: If review indicates that there was a search for "grey literature" or "unpublished literature," indicate "yes." SIGLE database, dissertations, conference proceedings, and trial registries are all considered grey for this purpose. If search a source that contains both grey and non-grey, must specify that they were searching for grey/unpublished lit.</span>
                                 <FormGroup check >
                                                                         
                                     <Label check>
@@ -266,7 +275,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <p>5. Was a list of studies (included and excluded) provided? A list of included and excluded studies should be provided.</p>
+                                <p>5. Was a list of studies (included and excluded) provided?</p>
+                                <span>A list of included and excluded studies should be provided</span>
+                                <span>Note: Acceptable if the excluded studies are referenced. If there is an electronic link to the list but the link is dead, select "no."</span>
                                 <FormGroup check >
                                                                         
                                     <Label check>
@@ -286,7 +297,9 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                     </Label>
                                 </FormGroup>
                                 <br />
-                                <p>6. Were the characteristics of the included studies provided? In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</p>
+                                <p>6. Were the characteristics of the included studies provided?</p>
+                                <span>In an aggregated form such as a table, data from the original studies should be provided on the participants, interventions and outcomes. The ranges of characteristics in all the studies analyzed e.g., age, race, sex, relevant socioeconomic data, disease status, duration, severity, or other diseases should be reported.</span>
+                                <span>Note: Acceptable if not in table format as long as they are described as above</span>
                                 <FormGroup check >
                                                                         
                                     <Label check>
@@ -383,6 +396,30 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
                                     <br />
                                     <Label check>
                                         <Input type="radio" name="questionTen" value="not applicable" checked={this.state.questionTen === 'not applicable'} onChange={this.onChange} /> Not applicable
+                                    </Label>
+                                </FormGroup>
+                                <br />
+                                <p>11. Was the conflict of interest included?</p>
+                                <span>Potential sources of support should be clearly acknoleged in both the systematic review and the included studies.</span>
+                                <span>Note: To get a "yes", must indicate source of funding or support for the systematic review AND for eachof the included sutides.</span>
+                                <FormGroup check >
+                                                                        
+                                    <Label check>
+                                        <Input type="radio" name="questionEleven" value="yes" checked={this.state.questionEleven === 'yes'} onChange={this.onChange} /> Yes
+                                    </Label>
+                                    <br />
+                                    <Label check>
+                                        <Input type="radio" name="questionEleven" value="no" checked={this.state.questionEleven === 'no'} onChange={this.onChange} /> No
+                                    </Label>
+                                    <br />
+                                    <Label check>
+        
+                                        <Input type="radio" name="questionEleven" value="can't answer" checked={this.state.questionEleven === "can't answer"} onChange={this.onChange} /> Can't answer
+                                    </Label>
+                                    <br />
+                                    <Label check>
+        
+                                        <Input type="radio" name="questionEleven" value="not applicable" checked={this.state.questionEleven === 'not applicable'} onChange={this.onChange} /> Not applicable
                                     </Label>
                                 </FormGroup>
 

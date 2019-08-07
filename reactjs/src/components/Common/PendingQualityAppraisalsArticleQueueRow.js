@@ -4,6 +4,8 @@ import Swal from '../Elements/Swal';
 
 import { connect } from 'react-redux';
 
+import { Button} from 'reactstrap';
+
 import * as actions from '../../actions';
 
 class PendingQualityAppraisalsArticleQueueRow extends Component {
@@ -75,10 +77,10 @@ class PendingQualityAppraisalsArticleQueueRow extends Component {
                     { moment(article.harvestDate).format("DD-MM-YYYY") }
                 </td>
                 <td key={Math.random()}>
-                    {article._qualityAppraisalsJuniorEmail || <a><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)}  className="mr-1 badge badge-primary">Assign</Swal></a>}
+                    {article._qualityAppraisalsJuniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={ !(this.props.currentUser.user.roles.includes('juniorappraiser') || this.props.currentUser.user.roles.includes('seniorappraiser')) }><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)}  className="mr-1 badge badge-primary">Assign</Swal></Button>}
                 </td>
                 <td key={Math.random()}>
-                {article._qualityAppraisalsSeniorEmail || <a ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} className="mr-1 badge badge-primary">Assign</Swal></a>}
+                    {article._qualityAppraisalsSeniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={ !this.props.currentUser.user.roles.includes('seniorfilterer') }><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} className="mr-1 badge badge-primary">Assign</Swal></Button>}
                 </td>
                 <td key={Math.random()}>{ article._id }</td>
                 <td key={Math.random()}>{ article.title }</td>

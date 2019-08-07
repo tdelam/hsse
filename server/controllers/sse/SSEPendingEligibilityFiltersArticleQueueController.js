@@ -5,8 +5,8 @@ const Authentication = require('../authentication');
 const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 exports.listArticles = async (req, res) => {
-    SSEArticleModelClass.find()
-       .or([ { _eligibilityFilterJunior: null }, { _eligibilityFilterSenior: null } ])
+    SSEArticleModelClass.find({ complicated: false })
+       .or([ { _eligibilityFiltersJunior: null }, { _eligibilityFiltersSenior: null } ])
        .exec(function(err, articles) {
            if(err) {
                return res.send(err);
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
     
 }
 
-exports.addArticleToJuniorEligibilityFilter = async (req, res) => {
+exports.addArticleToJuniorEligibilityFilterer = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -52,18 +52,18 @@ exports.addArticleToJuniorEligibilityFilter = async (req, res) => {
             });
         } else if(article._eligibilityFiltersJunior !== null) {
             return res.status(404).send({
-                message: 'A junior filter has already been added for this article'
+                message: 'A junior filterer has already been added for this article'
             });
         } else {
 
-            if(hasRole('juniorfilter', user) || hasRole('seniorfilter', user)) {
+            if(hasRole('juniorfilterer', user) || hasRole('seniorfilterer', user)) {
 
                 article._eligibilityFiltersJunior = user._id;
                 article._eligibilityFiltersJuniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
-                    message: 'Junior eligibility and filter user added'
+                    message: 'Junior eligibility and filterer user added'
                 });
             } else {
                 return res.status(400).send({
@@ -76,7 +76,7 @@ exports.addArticleToJuniorEligibilityFilter = async (req, res) => {
 
 };
 
-exports.addArticleToSeniorEligibilityFilter = async (req, res) => {
+exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 
     const { articleId } = req.params;
     
@@ -97,18 +97,18 @@ exports.addArticleToSeniorEligibilityFilter = async (req, res) => {
             });
         } else if(article._eligibilityFiltersSenior !== null) {
             return res.status(404).send({
-                message: 'A senior filter has already been added for this article'
+                message: 'A senior filterer has already been added for this article'
             });
         } else {
 
-            if(hasRole('seniorfilter', user)) {
+            if(hasRole('seniorfilterer', user)) {
 
                 article._eligibilityFiltersSenior = user._id;
                 article._eligibilityFiltersSeniorEmail = user.email;
 
                 await article.save();
                 return res.status(200).send({
-                    message: 'Senior eligibility and filter user added'
+                    message: 'Senior eligibility and filterer user added'
                 });
             } else {
                 return res.status(400).send({
