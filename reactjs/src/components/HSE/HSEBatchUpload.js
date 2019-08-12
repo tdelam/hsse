@@ -29,12 +29,13 @@ const ARTICLE_SOURCES = [
 
 const LANGUAGES = [
     {value: 'english', label: 'English'},
+    {value: 'arabic', label: 'Arabic'},
+    {value: 'chinese', label: 'Chinese'},
     {value: 'french', label: 'French'},
-    {value: 'spanish', label: 'Spanish'},
     {value: 'portuguese', label: 'Portuguese'},
     {value: 'russian', label: 'Russian'},
-    {value: 'arabic', label: 'Arabic'},
-    {value: 'chinese', label: 'Chinese'}
+    {value: 'spanish', label: 'Spanish'},
+    {value: 'other', label: 'Other'}
 ]
 
 class HSEBatchUpload extends Component {
@@ -42,7 +43,7 @@ class HSEBatchUpload extends Component {
     state = {
 
         selectedSourceOption: '',
-        selectedLanguageOption: '',
+        selectedLanguageOption: LANGUAGES[0],
 
         languages: [],
         articleSources: [],
@@ -245,12 +246,12 @@ class HSEBatchUpload extends Component {
                                             <label className="col-md-2 col-form-label mb">Harvest Date</label>
                                             <Col md={ 6 }>
                                                 <Datetime 
-                                                    dateFormat="YYYY-MM-DD" 
+                                                    dateFormat="YYYY" 
                                                     timeFormat={false} 
                                                     inputProps={{className: 'form-control'}}
                                                     onChange={this.onDateChange.bind(this)}
                                                     defaultValue=""
-                                                    />
+                                                />
                                             </Col>
                                         </div>
                                     </fieldset>

@@ -1,9 +1,16 @@
 const mongoose = require('mongoose');
+const shortid = require('shortid');
 
 const { Schema } = mongoose;
 
 const SSEArticleSchema = new Schema({
     //articleName: { type: String, unique: true },
+
+    // Field to store article id from old system
+    articleId: { type: String },
+
+    // Field for short id generation
+    articleIdShort: { type: String, default: shortid.generate() },
 
     system: { type: String },
     eligible: { type: Boolean, default: false },

@@ -16,6 +16,9 @@ import PendingEligibilityFiltersArticleQueueRow from '../Common/PendingEligibili
 
 // import Swal from '../Elements/Swal';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import * as actions from '../../actions';
 
@@ -123,17 +126,26 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 
     swalCallbackAssignJunior(isConfirm, articleId) {
-        if(isConfirm)
-            this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, this.props.history);
+        if(isConfirm) {
+            const result = this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, this.props.history);
+            console.log(result);
+        }
     }
 
     swalCallbackAssignSenior(isConfirm, articleId) {
-        if(isConfirm)
-            this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, this.props.history);
+        if(isConfirm) {
+            const result = this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, this.props.history);
+            console.log(result);
+        }
     }
 
+    notify = (message, type, position) => toast(message, {
+        type,
+        position
+    });
+
     renderArticles() {
-        if(this.state.pendingArticles.length > 0) { console.log(this.state.pendingArticles.length);
+        if(this.state.pendingArticles.length > 0 ) { console.log(this.state.pendingArticles.length);
         let testRows = this.state.pendingArticles.map(article => {
             console.log(article);
             return (<PendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);
@@ -163,37 +175,10 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                             </tbody>
                         </table>
                     </Datatable>
+                    <ToastContainer />
                 </div>
             );
-            } else {
-                //return (<div />);
-                return (
-                    <div>
-                        <Datatable options={dtOptions}>
-                            <table className="table table-striped my-4 w-100">
-                                <thead>
-                                    <tr>
-                                        <th data-priority="1">Priority</th>
-                                        <th>Source</th>
-                                        <th>Harvest Date</th>
-                                        <th>Junior Filterer</th>
-                                        <th>Senior Filterer</th>
-                                        <th>Article Id</th>
-                                        <th>Title</th>
-                                        <th>Author(s)</th>
-                                        <th>Language</th>
-                                        {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
-                                        {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
-                                    </tr>
-                                </thead>
-                                <tbody>                            
-                                    
-                                </tbody>
-                            </table>
-                        </Datatable>
-                    </div>
-                );
-            }
+        } 
             
     };
 
