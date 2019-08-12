@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { compose } from 'redux';
@@ -31,7 +32,8 @@ class AddSSEArticle extends Component {
             title: '',
             authors: '',
             journal: '',
-            harvestDate: new Date()
+            harvestDate: Date.now(),
+            articleSource: ''
         }
     }
 
@@ -127,6 +129,7 @@ class AddSSEArticle extends Component {
                                             <Col md={ 6 }>
                                                 <Input type="text"
                                                     name="title"
+                                                    placeholder="Enter title"
                                                     invalid={this.hasError('sseSingleArticle','text','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
@@ -144,6 +147,7 @@ class AddSSEArticle extends Component {
                                             <Col md={ 6 }>
                                                 <Input type="text"
                                                     name="authors"
+                                                    placeholder="Enter author(s)"
                                                     invalid={this.hasError('sseSingleArticle','text','required')||this.hasError('formDemo','email','email')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
@@ -159,7 +163,7 @@ class AddSSEArticle extends Component {
                                             <label className="col-md-2 col-form-label mb">Published Date</label>
                                             <Col md={ 6 }>
                                                 <Datetime
-                                                    dateFormat="YYYY-MM-DD"
+                                                    dateFormat="YYYY"
                                                     inputProps={{className: 'form-control'}}
                                                     timeFormat={false}
                                                     onChange={this.onDateChange.bind(this)}
@@ -184,7 +188,23 @@ class AddSSEArticle extends Component {
                                             </Col>
                                         </div>
                                     </fieldset>
-                                            
+                                    <fieldset>
+                                        <div className="form-group row align-items-center">
+                                            <label className="col-md-2 col-form-label">Article Source</label>
+                                            <Col md={ 6 }>
+                                                <Input type="select"
+                                                    name="articleSource"
+                                                    invalid={this.hasError('sseSingleArticle','select','required')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["required"]'
+                                                    value={this.state.sseSingleArticle.articleSource}/>
+                                                    <option value="one">1</option>
+                                                    <option value="two">2</option>
+                                            </Col>
+                                            <Col md={ 4 }>
+                                            </Col>
+                                        </div>
+                                    </fieldset>
                                 </CardBody>
                                 <CardFooter className="text-center">
                                     <button type="submit" className="btn btn-danger">Cancel</button>

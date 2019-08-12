@@ -110,15 +110,15 @@ const Menu = [
                 translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
             },
             {
-                name: 'Eligibility & Filters Article',
+                name: 'Eligibility & Filters',
                 path: '/hse/pendingeligibilityfiltersarticlequeue',
                 translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
-            },
+            },/*
             {
                 name: 'Eligibility & Filters Batch',
                 path: '/hse/pendingeligibilityfiltersbatchfilequeue',
                 translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
-            },
+            },*/
             {
                 name: 'Quality Appraisals',
                 path: '/hse/pendingqualityappraisalsarticlequeue',
@@ -160,15 +160,15 @@ const Menu = [
             translate: 'sidebar.nav.element.BATCHHSEUPLOAD'
         },
         {
-            name: 'Eligibility & Filters Article',
+            name: 'Eligibility & Filters',
             path: '/sse/pendingeligibilityfiltersarticlequeue',
             translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERARTICLES'
-        },
+        },/*
         {
             name: 'Eligibility & Filters Batch',
             path: '/sse/pendingeligibilityfiltersbatchfilequeue',
             translate: 'sidebar.nav.element.PENDINGELIGIBILITYFILTERBATCHFILES'
-        },
+        },*/
         {
             name: 'Quality Appraisals',
             path: '/sse/pendingqualityappraisalsarticlequeue',

@@ -32,12 +32,13 @@ const ARTICLE_SOURCES = [
 
 const LANGUAGES = [
     {value: 'english', label: 'English'},
+    {value: 'arabic', label: 'Arabic'},
+    {value: 'chinese', label: 'Chinese'},
     {value: 'french', label: 'French'},
-    {value: 'spanish', label: 'Spanish'},
     {value: 'portuguese', label: 'Portuguese'},
     {value: 'russian', label: 'Russian'},
-    {value: 'arabic', label: 'Arabic'},
-    {value: 'chinese', label: 'Chinese'}
+    {value: 'spanish', label: 'Spanish'},
+    {value: 'other', label: 'Other'}
 ]
 
 class SSEBatchUpload extends Component {
@@ -45,7 +46,7 @@ class SSEBatchUpload extends Component {
     state = {
 
         selectedSourceOption: '',
-        selectedLanguageOption: '',
+        selectedLanguageOption: LANGUAGES[0],
 
         languages: [],
         articleSources: [],

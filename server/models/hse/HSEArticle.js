@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 const mongoosastic = require('mongoosastic');
+const shortid = require('shortid');
 
 const { Schema } = mongoose;
 
 const HSEArticleSchema = new Schema({
 
-    // Field to store article ids from the old system
+    // Field to store article id from the old system
     articleId: { type: String },
+
+    // Field for short id generation
+    articleIdShort: { type: String, default: shortid.generate() },
 
     // Fields from EndNote
     referenceType: { type: String },

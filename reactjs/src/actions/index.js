@@ -765,11 +765,13 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
     });
     
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER, payload: response.data });
+    return response;
     
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR, payload: 'Error assigning junior filter role for article'});
+    return e;
   }
-  history.push('/hse/assignedeligibilityfiltersarticlequeue');
+  // history.push('/hse/assignedeligibilityfiltersarticlequeue');
 };
 
 export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
@@ -846,12 +848,13 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
     });
     
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER, payload: response.data });
-    
+    return response.data;
     
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR, payload: 'Error assigning senior filter role for article'});
+    return e;
   }
-  history.push('/hse/assignedeligibilityfiltersarticlequeue');
+  // history.push('/hse/assignedeligibilityfiltersarticlequeue');
 };
 
 export const assignHSEPendingQualityAppraisalsArticlesSeniorAppraiser = (articleId, history) => async dispatch => {

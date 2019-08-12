@@ -32,6 +32,7 @@ class AddHSEArticle extends Component {
             authors: '',
             journal: '',
             harvestDate: Date.now(),
+            articleSource: ''
         }
         
     }
@@ -129,7 +130,7 @@ class AddHSEArticle extends Component {
         return <Input type="text"
             name="journal"
             className="border-right-0"
-            placeholder="Enter Journal"
+            placeholder="Enter journal"
             invalid={this.hasError('hseSingleArticle','journal','required')}
             onChange={this.validateOnChange}
             data-validate='["required"]'
@@ -140,13 +141,30 @@ class AddHSEArticle extends Component {
 
     renderPublishedDateField = ({input}) => {
         return <Datetime
-            dateFormat="YYYY-MM-DD"
+            dateFormat="YYYY"
             inputProps={{className: 'form-control'}}
             timeFormat={false}
             onChange={this.onDateChange.bind(this)}
             {...input}
             //defaultValue=""
         />
+    }
+
+    renderSourceField = ({input}) => {
+        return <Input
+            type="select"
+            name="articleSource"
+            className="border-right-0"
+            placeholder="Select source"
+            invalid={this.hasError('hseSingleArticle','articleSource','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        >
+            <option value="Single article from referrals">Single article from referrals</option>
+            <option value="Single article from referrals">Single article from other sources</option>
+        </Input>
     }
 
     render() {
@@ -231,16 +249,33 @@ class AddHSEArticle extends Component {
                                     </fieldset>
                                     <fieldset>
                                         <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Journal</label>
-                                            <Col md={ 6 }>
+                                            <label className="col-md-2 col-form-label mb">Journal</label>
+                                            <Col md={ 5 }>
                                                 <Field 
-                                                    type="text"
+                                                    /*type="select"*/
                                                     name="journal"
                                                     component={this.renderJournalField}
-                                                    invalid={this.hasError('hseSingleArticle','text','required')}
+                                                    invalid={this.hasError('hseSingleArticle','articleArouce','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
                                                     value={this.state.hseSingleArticle.journal}/>
+                                                <span className="invalid-feedback">Field is required</span>
+                                            </Col>
+                                            <Col md={ 4 }>
+                                            </Col>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div className="form-group row align-items-center">
+                                            <label className="col-md-2 col-form-label mb">Article Source</label>
+                                            <Col md={ 6 }>
+                                                <Field
+                                                    name="articleSource"
+                                                    component={this.renderSourceField}
+                                                    invalid={this.hasError('hseSingleArticle','text','required')}
+                                                    onChange={this.validateOnChange}
+                                                    data-validate='["required"]'
+                                                    value={this.state.hseSingleArticle.articleSource} />
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>

@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
+const shortid = require('shortid');
 
 const { Schema } = mongoose;
 
-const HSEArticleBatchFileSchema = new Schema({ 
+const HSEArticleBatchFileSchema = new Schema({
+
+    // Field to store batchfile id from the old system
+    batchfileId: { type: String },
+
+    // Field for short id generation
+    batchfileIdShort: { type: String, default: shortid.generate() },
 
     referenceType: { type: String },
     
@@ -15,12 +22,6 @@ const HSEArticleBatchFileSchema = new Schema({
     priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     // _articles: [{ type: Schema.Types.ObjectId], ref: 'HSEArticles'}]
     // test
-
-    _eligibilityFiltersJunior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _eligibilityFiltersJuniorEmail: { type: String, default: null },
-
-    _eligibilityFiltersSenior: { type: Schema.Types.ObjectId, ref: 'Users', default: null },
-    _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
 })
 

@@ -73,7 +73,7 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
                         <td>
                             { ( (article[1]._eligibilityFiltersJuniorEmail) && (this.props.currentUser.user.email === article[1]._eligibilityFiltersSeniorEmail) ) ? article[1]._eligibilityFiltersJuniorEmail : '' } { ((article[1]._eligibilityFiltersSeniorEmail) && (this.props.currentUser.user.email === article[1]._eligibilityFiltersJuniorEmail)) ? article[1]._eligibilityFiltersSeniorEmail: '' }
                         </td>
-                        <td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>
+                        <td>{ article[1]._id }</td>
                         <td>{ article[1].title }</td>
                         <td>{ article[1].author }</td>
                         <td>{ article[1].language }</td>
