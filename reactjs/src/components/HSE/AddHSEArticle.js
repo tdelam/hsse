@@ -24,16 +24,24 @@ import HSEFormValidator from './HSEFormValidator.js';
  * 6- Similarly, onSubmit event does a bulk validation on all form elements
  */
 
+/*
+ const ARTICLE_SOURCES = [
+     { value: '', label: '' },
+     { value: '', label: '' }
+ ];
+ */
+
 class AddHSEArticle extends Component {
 
     state = {
-        hseSingleArticle: {
-            title: '',
-            authors: '',
-            journal: '',
-            harvestDate: Date.now(),
-            articleSource: ''
-        }
+
+        selectedSourceOption: '',
+
+        title: '',
+        authors: '',
+        journal: '',
+        harvestDate: Date.now(),
+        articleSource: ''
         
     }
 
@@ -98,6 +106,10 @@ class AddHSEArticle extends Component {
     onDateChange(event) {
         // this.setState({ harvestDate: event._d })
         console.log(event._d);
+    }
+
+    handleChangeSelect = (selectedSourceOption) => {
+        this.setState({ selectedSourceOption });
     }
 
     renderTitleField = ({input}) => {
@@ -169,6 +181,10 @@ class AddHSEArticle extends Component {
 
     render() {
 
+        const { selectedSourceOption } = this.state;
+        const SourceValue = selectedSourceOption && selectedSourceOption.value;
+
+
         const { handleSubmit } = this.props;
 
         return (
@@ -207,7 +223,7 @@ class AddHSEArticle extends Component {
                                                     invalid={this.hasError('hseSingleArticle','title','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
-                                                    value={this.state.hseSingleArticle.title}
+                                                    value={this.state.title}
                                                 />
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
@@ -228,7 +244,7 @@ class AddHSEArticle extends Component {
                                                     invalid={this.hasError('hseSingleArticle', 'text', 'required')||this.hasError('hseSingleArticle','email','email')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
-                                                    value={this.state.hseSingleArticle.authors}/>
+                                                    value={this.state.authors}/>
                                                 { this.hasError('hseSingleArticle', 'authors', 'required') && <span className="invalid-feedback">Field is required</span> }
                                             </Col>
                                             <Col md={ 4 }></Col>
@@ -258,7 +274,7 @@ class AddHSEArticle extends Component {
                                                     invalid={this.hasError('hseSingleArticle','articleArouce','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
-                                                    value={this.state.hseSingleArticle.journal}/>
+                                                    value={this.state.journal}/>
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>
@@ -273,9 +289,9 @@ class AddHSEArticle extends Component {
                                                     name="articleSource"
                                                     component={this.renderSourceField}
                                                     invalid={this.hasError('hseSingleArticle','text','required')}
-                                                    onChange={this.validateOnChange}
+                                                    onChange={this.handleChangeSelect}
                                                     data-validate='["required"]'
-                                                    value={this.state.hseSingleArticle.articleSource} />
+                                                    value={SourceValue} />
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>

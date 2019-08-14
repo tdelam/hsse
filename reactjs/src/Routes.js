@@ -67,7 +67,7 @@ import NotFound from './components/Pages/NotFound';
 import Error500 from './components/Pages/Error500';
 import Maintenance from './components/Pages/Maintenance';
 
-import UserEditor from './components/Administrator/UserEditor';
+import UserEditor from './components/Settings/UserEditor';
 
 import Mailbox from './components/Extras/Mailbox';
 import Timeline from './components/Extras/Timeline';
@@ -339,12 +339,12 @@ const Routes = ({ location }) => {
                             <Route path="/plans" component={Plans}/>
                             <Route path="/project-details" component={ProjectDetails}/>
                             <Route path="/projects" component={Projects}/>
-                            <Route path="/settings" component={Settings}/>
+                            <Route path="/settings" exact component={Settings}/>
                             <Route path="/social-board" component={SocialBoard}/>
                             <Route path="/team-viewer" component={TeamViewer}/>
                             <Route path="/vote-links" component={VoteLinks}/>
 
-                            <Route path="/administrator/usereditor" component={UserEditor} />
+                            <Route path="/settings/usereditor" component={UserEditor} />
 
                             {/* */}
                             <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />

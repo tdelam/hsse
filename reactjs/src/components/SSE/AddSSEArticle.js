@@ -192,7 +192,8 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Article Source</label>
                                             <Col md={ 6 }>
-                                                <Input type="select"
+                                                <Input 
+                                                    type="select"
                                                     name="articleSource"
                                                     invalid={this.hasError('sseSingleArticle','select','required')}
                                                     onChange={this.validateOnChange}
