@@ -246,7 +246,7 @@ class HSEBatchUpload extends Component {
                                             <label className="col-md-2 col-form-label mb">Harvest Date</label>
                                             <Col md={ 6 }>
                                                 <Datetime 
-                                                    dateFormat="YYYY" 
+                                                    dateFormat="YYYY-MM-DD" 
                                                     timeFormat={false} 
                                                     inputProps={{className: 'form-control'}}
                                                     onChange={this.onDateChange.bind(this)}

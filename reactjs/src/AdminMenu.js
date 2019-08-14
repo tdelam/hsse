@@ -393,6 +393,42 @@ const AdminMenu = [
         ]
     },
     {
+        heading: 'Administrator',
+        translate: 'sidebar.heading.Administrator'
+    },
+    {
+        name: 'Health Systems',
+        icon: 'icon-user',
+        translate: 'sidebar.nav.table.ADMINISTRATORHEALTHSYSTEMS',
+        submenu: [{
+            name: 'Go Live Queue',
+                path: '/hse/administrator/hsegolivequeue',
+                translate: 'sidebar.nav.table.ADMININISTRATORHSEGOLIVEQUEUE'
+            },
+            {
+                name: 'Tracking & Prioritizing',
+                path: '/hse/administrator/hsegolivequeue',
+                translate: 'sidebar.nav.table.ADMINISTRATORHSETRACKINGPRIORITIZINGQUEUE'
+            }
+        ]
+    },
+    {
+        name: 'Social Systems',
+        icon: 'icon-user',
+        translate: 'sidebar.nav.table.ADMINISTRATORSOCIALSYSTEMS',
+        submenu: [{
+            name: 'Go Live Queue',
+                path: '/sse/administrator/golivequeue',
+                translate: 'sidebar.nav.table.SSEGOLIVEQUEUE'
+            },
+            {
+                name: 'Tracking & Prioritizing',
+                path: '/sse/administrator/trackingprioritizing',
+                translate: 'sidebar.nav.table.SSETRACKINGPRIORITIZING'
+            }
+        ]
+    },
+    {
         heading: 'Settings',
         translate: 'sidebar.heading.SETTINGS'
     },{
@@ -417,13 +453,8 @@ const AdminMenu = [
         translate: 'sidebar.nav.table.USER',
         submenu: [{
                 name: 'User Editor',
-                path: '/administrator/usereditor',
-                translate: 'sidebar.nav.table.USEREDITOR'
-            },
-            {
-                name: 'Application',
-                path: 'table-extended',
-                translate: 'sidebar.nav.table.APPLICATION'
+                path: '/settings/usereditor',
+                translate: 'sidebar.nav.table.SETTINGSUSEREDITOR'
             }
         ]
     }
