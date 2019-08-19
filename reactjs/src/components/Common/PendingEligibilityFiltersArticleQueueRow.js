@@ -36,6 +36,7 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
                 closeOnConfirm: true
             },
             pendingArticles: [],
+            selectedIds: []
         };
 
     }
@@ -63,6 +64,16 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
     swalCallbackAssignSenior(isConfirm, articleId, history) {
         if(isConfirm)
             this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, history);
+    }
+
+    swalCallbackAssignAllJunior(isConfirm, history) {
+        if(isConfirm)
+            this.props.assignAllHSEPendingEligibilityFiltersArticlesJuniorFilter(this.state.selectedIds, history);
+    }
+
+    swalCallbackAssignAllSenior(isConfirm, history) {
+        if(isConfirm)
+            this.props.assignAllHSEPendingEligibilityFiltersArticlesSeniorFilter(this.state.selectedIds, history);
     }
 
     render() { console.log(this.props.currentUser.user.roles.includes('juniorfilter'));

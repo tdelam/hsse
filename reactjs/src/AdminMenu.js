@@ -407,7 +407,7 @@ const AdminMenu = [
             },
             {
                 name: 'Tracking & Prioritizing',
-                path: '/hse/administrator/hsegolivequeue',
+                path: '/hse/administrator/trackingprioritizing',
                 translate: 'sidebar.nav.table.ADMINISTRATORHSETRACKINGPRIORITIZINGQUEUE'
             }
         ]
