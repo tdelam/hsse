@@ -58,8 +58,14 @@ import {
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER_ERROR,
 
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_JUNIOR_FILTER,
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_JUNIOR_FILTER_ERROR,
+
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR,
+
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_SENIOR_FILTER,
+  HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_SENIOR_FILTER_ERROR,
 
   // Quality Appraisals 
   HSE_PENDING_QUALITY_APPRAISALS_ARTICLE_QUEUE,
@@ -774,6 +780,31 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
   // history.push('/hse/assignedeligibilityfiltersarticlequeue');
 };
 
+export const assignAllHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleIds , history) => async dispatch => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
+  console.log(headers);
+  try {
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addalljuniorfilterer`, 
+    {
+      articleIds
+    },
+    {
+      headers 
+    });
+    
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_JUNIOR_FILTER, payload: response.data });
+    return response;
+    
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_JUNIOR_FILTER_ERROR, payload: 'Error assigning junior filter role for all articles'});
+    return e;
+  }
+  // history.push('/hse/assignedeligibilityfiltersarticlequeue');
+};
+
 export const assignHSEPendingQualityAppraisalsArticlesJuniorAppraiser = (articleId , history) => async dispatch => {
   let headers = {
     'Content-Type': 'application/json',
@@ -852,6 +883,30 @@ export const assignHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleId
     
   } catch(e) {
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_SENIOR_FILTER_ERROR, payload: 'Error assigning senior filter role for article'});
+    return e;
+  }
+  // history.push('/hse/assignedeligibilityfiltersarticlequeue');
+};
+
+export const assignAllHSEPendingEligibilityFiltersArticlesSeniorFilter = (articleIds, history) => async dispatch => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token') 
+  };
+  try {
+    const response = await axios.post(`${backendServer}/hse/pendingeligibilityfiltersarticlequeue/addallseniorfilterer`,
+    {
+      articleIds
+    },
+    {
+      headers
+    });
+    
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_SENIOR_FILTER, payload: response.data });
+    return response.data;
+    
+  } catch(e) {
+    dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_ALL_SENIOR_FILTER_ERROR, payload: 'Error assigning senior filter role for all article'});
     return e;
   }
   // history.push('/hse/assignedeligibilityfiltersarticlequeue');

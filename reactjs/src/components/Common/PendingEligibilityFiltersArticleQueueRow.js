@@ -4,7 +4,7 @@ import Swal from '../Elements/Swal';
 
 import { connect } from 'react-redux';
 
-import { Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 
 import * as actions from '../../actions';
 
@@ -36,6 +36,7 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
                 closeOnConfirm: true
             },
             pendingArticles: [],
+            selectedIds: []
         };
 
     }
@@ -65,11 +66,22 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
             this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, history);
     }
 
+    swalCallbackAssignAllJunior(isConfirm, history) {
+        if(isConfirm)
+            this.props.assignAllHSEPendingEligibilityFiltersArticlesJuniorFilter(this.state.selectedIds, history);
+    }
+
+    swalCallbackAssignAllSenior(isConfirm, history) {
+        if(isConfirm)
+            this.props.assignAllHSEPendingEligibilityFiltersArticlesSeniorFilter(this.state.selectedIds, history);
+    }
+
     render() { console.log(this.props.currentUser.user.roles.includes('juniorfilter'));
         const { article, history } = this.props;
         return (
             <tr key={article._id}>
-                <td>LOW</td>{ /*this.renderPriority(article.priority)*/  }
+                <td></td>{ /*this.renderPriority(article.priority)*/  }
+                <td>LOW</td>
                 <td key={Math.random()}>
                     { article.articleSource }
                 </td>
@@ -82,7 +94,7 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
                 <td key={Math.random()}>
                 {article._eligibilityFiltersSeniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={!this.props.currentUser.user.roles.includes('seniorfilterer')}><Swal disabled={!this.props.currentUser.user.roles.includes('seniorfilterer')} options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} >Assign</Swal></Button>}
                 </td>
-                <td key={Math.random()}>{ article._id }</td>
+                <td key={Math.random()}>{ article.articleIdShort }</td>
                 <td key={Math.random()}>{ article.title }</td>
                 <td key={Math.random()}>{ article.authors }</td>
                 <td key={Math.random()}>{ article.language }</td>

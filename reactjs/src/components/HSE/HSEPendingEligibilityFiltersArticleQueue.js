@@ -23,7 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
-
+/*
 const dtOptions = {
     'paging': true, // Table pagination
     'ordering': true, // Column ordering
@@ -42,8 +42,42 @@ const dtOptions = {
             sNext: '<em class="fa fa-caret-right"></em>',
             sPrevious: '<em class="fa fa-caret-left"></em>'
         }
-    }
+    },
+    columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ],
+        dom: 'Bfrtipl',
+        buttons: [
+            'selectAll',
+            'selectNone',
+            {
+                text: 'Assign as Junior',
+                className: 'btn-secondary',
+                action: function () {
+                   // var count = table.rows( { selected: true } ).count();
+ 
+                    //events.prepend( '<div>'+count+' row(s) selected</div>' );
+                }
+            },
+            {
+                text: 'Assign as Senior',
+                className: 'btn-danger',
+                action: function () {
+                    //var count = table.rows( { selected: true } ).count();
+ 
+                    //events.prepend( '<div>'+count+' row(s) selected</div>' );
+                }
+            }
+        ],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]]
 }
+*/
 
 class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
@@ -144,6 +178,76 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         position
     });
 
+    dtOptions2 = {
+        'paging': true, // Table pagination
+        'ordering': true, // Column ordering
+        'info': true, // Bottom left status text
+        responsive: true,
+        // Text translation options
+        // Note the required keywords between underscores (e.g _MENU_)
+        oLanguage: {
+            sSearch: '<em class="fa fa-search"></em>',
+            sLengthMenu: '_MENU_ records per page',
+            info: 'Showing page _PAGE_ of _PAGES_',
+            zeroRecords: 'Nothing found - sorry',
+            infoEmpty: 'No records available',
+            infoFiltered: '(filtered from _MAX_ total records)',
+            oPaginate: {
+                sNext: '<em class="fa fa-caret-right"></em>',
+                sPrevious: '<em class="fa fa-caret-left"></em>'
+            }
+        },
+        columnDefs: [ {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0
+            } ],
+            dom: 'Bfrtipl',
+            buttons: [
+                'selectAll',
+                'selectNone',
+                {
+                    text: 'Select Filtered',
+                    className: 'btn-info',
+                    action: () => {
+                       // var count = table.rows( { selected: true } ).count();
+     
+                        //events.prepend( '<div>'+count+' row(s) selected</div>' );
+                        this.logConsole(this);
+                    }
+                },
+                {
+                    text: 'Assign as Junior',
+                    className: 'btn-secondary',
+                    action: () => {
+                       // var count = table.rows( { selected: true } ).count();
+     
+                        //events.prepend( '<div>'+count+' row(s) selected</div>' );
+                    }
+                },
+                {
+                    text: 'Assign as Senior',
+                    className: 'btn-danger',
+                    action: () => {
+                        //var count = table.rows( { selected: true } ).count();
+     
+                        //events.prepend( '<div>'+count+' row(s) selected</div>' );
+
+                        this.logConsole("Hello, Kwadwo");
+                    }
+                }
+            ],
+            select: {
+                style:    'multi',
+                selector: 'td:first-child'
+            },
+            order: [[ 1, 'asc' ]]
+    };
+
+    logConsole = (message) => {
+        console.log(message);
+    }
+
     renderArticles() {
         if(this.state.pendingArticles.length > 0 ) { console.log(this.state.pendingArticles.length);
         let testRows = this.state.pendingArticles.map(article => {
@@ -153,11 +257,12 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
                 <div>
-                    <Datatable options={dtOptions}>
+                    <Datatable options={this.dtOptions2}>
                         <table className="table table-striped my-4 w-100">
                             <thead>
                                 <tr>
-                                    <th data-priority="1">Priority</th>
+                                    <th data-priority="1">Select</th>
+                                    <th>Priority</th>
                                     <th>Source</th>
                                     <th>Harvest Date</th>
                                     <th>Junior Filterer</th>

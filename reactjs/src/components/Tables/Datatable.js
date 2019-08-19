@@ -21,6 +21,11 @@ require('jszip/dist/jszip.js');
 require('pdfmake/build/pdfmake.js');
 require('pdfmake/build/vfs_fonts.js');
 
+require('datatables.net-select-bs');
+require('datatables.net-select-bs/css/select.bootstrap.css');
+
+require('datatables.net-buttons-bs/css/buttons.bootstrap.css');
+
 /**
  * Wrapper component for dataTable plugin
  * Only DOM child elements, componets are not supported (e.g. <Table>)
@@ -42,6 +47,8 @@ export default class Datatable extends Component {
 
     componentDidMount() {
         const dtInstance = $(this.tableElement).dataTable(this.props.options);
+
+        console.log($(this.tableElement).dataTable(this.props.options));
 
         if(this.props.dtInstance)
             this.props.dtInstance(dtInstance)

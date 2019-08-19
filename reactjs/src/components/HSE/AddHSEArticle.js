@@ -34,15 +34,15 @@ import HSEFormValidator from './HSEFormValidator.js';
 class AddHSEArticle extends Component {
 
     state = {
+        hseSingleArticle: {
+            selectedSourceOption: '',
 
-        selectedSourceOption: '',
-
-        title: '',
-        authors: '',
-        journal: '',
-        harvestDate: Date.now(),
-        articleSource: ''
-        
+            title: '',
+            authors: '',
+            journal: '',
+            harvestDate: Date.now(),
+            articleSource: ''
+        }
     }
 
      /**
