@@ -136,10 +136,15 @@ import HSEPendingPresentationDetailsArticleQueue from './components/HSE/HSEPendi
 import HSEPendingTranslatingTitlesQueue from './components/HSE/HSEPendingTranslatingTitlesArticleQueue';
 import HSEPendingTrackingPrioritizingQueue from './components/HSE/HSEPendingTrackingPrioritizingArticleQueue';
 
-import HSEGoLiveQueue from './components/Administrator/HSEGoLiveQueue';
-import HSETrackingPrioritizingQueue from './components/Administrator/HSETrackingPrioritizingQueue';
+// HSE
+import HSEAdministratorEligibilityFiltersQueue from './components/Administrator/HSE/HSEAdministratorTrackingPrioritizingQueue';
+import HSEAdministratorQualityAppraisalsQueue from './components/Administrator/HSE/HSEAdministratorQualityAppraisalsQueue';
+import HSEAdministratorLinkingStudiesQueue from './components/Administrator/HSE/HSEAdministratorLinkingStudiesQueue';
+import HSEAdministratorPresentationDetailsQueue from './components/Administrator/HSE/HSEAdministratorPresentationDetailsQueue';
+import HSEAdministratorGoLiveQueue from './components/Administrator/HSE/HSEAdministratorGoLiveQueue';
+import HSEAdministratorTrackingPrioritizingQueue from './components/Administrator/HSE/HSEAdministratorTrackingPrioritizingQueue';
 
-
+// SSE
 import SSEAssignedEligibilityFilterResolution from './components/SSE/SSEAssignedEligibilityFilterResolution';
 import SSEAssignedEligibilityFilterArticleInput from './components/SSE/SSEAssignedEligibilityFilterArticleInput';
 import SSEAssignedEligibilityFiltersArticleQueue from './components/SSE/SSEAssignedEligibilityFiltersArticleQueue';
@@ -172,9 +177,13 @@ import SSEPendingPresentationDetailsArticleQueue from './components/SSE/SSEPendi
 import SSEPendingTranslatingTitlesArticleQueue from './components/SSE/SSEPendingTranslatingTitlesArticleQueue';
 import SSEPendingTrackingPrioritizingArticleQueue from './components/SSE/SSEPendingTrackingPrioritizingArticleQueue';
 
-import SSEGoLiveQueue from './components/Administrator/SSEGoLiveQueue';
-import SSETrackingPrioritizingQueue from './components/Administrator/SSETrackingPrioritizingQueue';
-
+// SSE Administrator
+import SSEAdministratorEligibilityFiltersQueue from './components/Administrator/SSE/SSEAdministratorEligibilityFiltersQueue';
+import SSEAdministratorQualityAppraisalsQueue from './components/Administrator/SSE/SSEAdministratorQualityAppraisalsQueue';
+import SSEAdministratorLinkingStudiesQueue from './components/Administrator/SSE/SSEAdministratorLinkingStudiesQueue';
+import SSEAdministratorPresentationDetailsQueue from './components/Administrator/SSE/SSEAdministratorPresentationDetailsQueue';
+import SSEAdministratorGoLiveQueue from './components/Administrator/SSE/SSEAdministratorGoLiveQueue';
+import SSEAdministratorTrackingPrioritizingQueue from './components/Administrator/SSE/SSEAdministratorTrackingPrioritizingQueue';
 
 // List of routes that uses the page layout
 // listed here to Switch between layouts
@@ -351,13 +360,22 @@ const Routes = ({ location }) => {
                             <Route path="/vote-links" component={VoteLinks}/>
 
                             <Route path="/settings/usereditor" component={UserEditor} />
+{/*
+                            <Route path="/hse/administrator/hsegolivequeue" component={HSEAdministratorGoLiveQueue} />
+                            <Route path="/hse/administrator/trackingprioritizing" component={HSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/hse/administrator/eligibilityfilters" component={HSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/hse/administrator/qualityappraisals" component={HSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/hse/administrator/linkingstudies" component={HSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/hse/administrator/presentationdetails" component={HSEAdministratorTrackingPrioritizingQueue} />
 
-                            {/*<Route path="/hse/administrator/hsegolivequeue" component={HSEGoLiveQueue} />*/}
-                            <Route path="/hse/administrator/trackingprioritizing" component={HSETrackingPrioritizingQueue} />
 
-                            {/*<Route path="/sse/administrator/ssegolivequeue" component={SSEGoLiveQueue} />*/}
-                            <Route path="/sse/administrator/trackingprioritizing" component={SSETrackingPrioritizingQueue} />
-
+                            <Route path="/sse/administrator/ssegolivequeue" component={SSEAdministratorGoLiveQueue} />
+                            <Route path="/sse/administrator/trackingprioritizing" component={SSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/sse/administrator/trackingprioritizing" component={SSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/sse/administrator/trackingprioritizing" component={SSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/sse/administrator/trackingprioritizing" component={SSEAdministratorTrackingPrioritizingQueue} />
+                            <Route path="/sse/administrator/trackingprioritizing" component={SSEAdministratorTrackingPrioritizingQueue} />
+*/}
                             {/* */}
                             <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />
 

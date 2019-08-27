@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import moment from "moment";
-import ContentWrapper from '../Layout/ContentWrapper';
+import ContentWrapper from '../../Layout/ContentWrapper';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
-import Datatable from '../Tables/Datatable';
+import Datatable from '../../Tables/Datatable';
 
 const dtOptions = {
     'paging': true, // Table pagination
