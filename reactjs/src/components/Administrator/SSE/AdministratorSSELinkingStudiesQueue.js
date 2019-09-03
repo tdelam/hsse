@@ -1,3 +1,9 @@
+/**
+ * @name AdministratorSSELinkingStudiesQueue.js
+ * @author Kwadwo Sakyi
+ * @description Defines the routing paths for HSE Administrator section of application
+ */
+
 import React, { Component } from 'react';
 import moment from "moment";
 import ContentWrapper from '../../Layout/ContentWrapper';
@@ -30,7 +36,7 @@ const dtOptions = {
     }
 }
 
-class HSEAssignedTrackingPrioritizingQueue extends Component {
+class AdministratorSSELinkingStudiesQueue extends Component {
 
     componentDidMount() {
         this.props.getCurrentUser();
@@ -137,8 +143,8 @@ class HSEAssignedTrackingPrioritizingQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Appraisaing Tracking Prioritizing Articles
-                            <small>Health Systems Evidence - Assigned Queue</small>
+                        <div>Linking Studies Articles
+                            <small>Social Systems Evidence - Assigned Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -152,12 +158,12 @@ class HSEAssignedTrackingPrioritizingQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedTrackingPrioritizingQueue, auth }) {
+function mapStateToProps({ administratorSSELinkingStudiesQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: hseAssignedTrackingPrioritizingQueue.hseAssignedTrackingPrioritizingErrorMessage,
+        errorMessage: administratorSSELinkingStudiesQueue.administratorSSELinkingStudiesQueueErrorMessage,
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEAssignedTrackingPrioritizingQueue);
+export default connect(mapStateToProps, actions)(AdministratorSSELinkingStudiesQueue);
 
