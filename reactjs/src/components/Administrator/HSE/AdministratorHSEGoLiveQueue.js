@@ -40,7 +40,7 @@ class AdministratorHSEGoLiveQueue extends Component {
 
     componentDidMount() {
         this.props.getCurrentUser();
-        this.props.listHSEAssignedTrackingPrioritizingArticlesQueue();
+        //this.props.listHSEAssignedTrackingPrioritizingArticlesQueue();
     }
 
     renderPriority(priority) {
