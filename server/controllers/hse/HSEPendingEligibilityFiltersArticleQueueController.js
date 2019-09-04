@@ -76,49 +76,52 @@ exports.addArticleToJuniorEligibilityFilterer= async (req, res) => {
 
 };
 
-exports.addAllArticleToJuniorEligibilityFilterer= async (req, res) => {
+exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
 
-    const { articleId } = req.params;
+    const { articleIds } = req.body;
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
+   
+    articleIds.forEach( (articleId, index) => {
 
-    if(!mongoose.Types.ObjectId.isValid(articleId)) {
-        return res.status(400).send({
-            message: 'Article is invalid'
-        });
-    }
-    
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
-        if(err) {
-            return res.send(err);
-        } else if(!article) {
-            return res.status(404).send({
-                message: 'No article with that identifier has been found'
+        if(!mongoose.Types.ObjectId.isValid(articleId)) {
+            return res.status(400).send({
+                message: 'Article is invalid'
             });
-        } else if(article._eligibilityFiltersJunior !== null) {
-            return res.status(404).send({
-                message: 'A junior filterer has already been added for this article'
-            });
-        } else {
+        }
 
-            if(hasRole('juniorfilterer', user) || hasRole('seniorfilterer', user)) {
-                
-                article._eligibilityFiltersJunior = user._id;
-                article._eligibilityFiltersJuniorEmail = user.email;
-
-                await article.save();
-                return res.status(200).send({
-                    message: 'Junior eligibility and filterer user added'
+        HSEArticleModelClass.findById(articleId, async (err, article) => {
+            if(err) {
+                return res.send(err);
+            } else if(!article) {
+                return res.status(404).send({
+                    message: 'No article with that identifier has been found'
+                });
+            } else if(article._eligibilityFiltersJunior !== null) {
+                return res.status(404).send({
+                    message: 'A junior filterer has already been added for this article'
                 });
             } else {
-                return res.status(400).send({
-                    message: 'User does not have persmission'
-                })
+    
+                if(hasRole('juniorfilterer', user) || hasRole('seniorfilterer', user)) {
+                    
+                    article._eligibilityFiltersJunior = user._id;
+                    article._eligibilityFiltersJuniorEmail = user.email;
+    
+                    await article.save();
+                    return res.status(200).send({
+                        message: 'Junior eligibility and filterer user added'
+                    });
+                } else {
+                    return res.status(400).send({
+                        message: 'User does not have persmission'
+                    })
+                }
+                
             }
-            
-        }
+        });
     });
-
+    
 };
 
 exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
@@ -170,52 +173,58 @@ exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 
 };
 
-exports.addAllArticleToSeniorEligibilityFilterer = async (req, res) => {
+exports.addAllArticlesToSeniorEligibilityFilterer = async (req, res) => {
 
-    const { articleIds } = req.params;
+    const { articleIds } = req.body;
     console.log(req.headers);
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    if(!mongoose.Types.ObjectId.isValid(articleId)) {
-        return res.status(400).send({
-            message: 'Article is invalid'
-        });
-    }
+    articleIds.forEach((articleId, index) => {
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
-        if(err) {
-            return res.send(err);
-        } else if(!article) {
-            return res.status(404).send({
-                message: 'No article with that identifier has been found'
+        if(!mongoose.Types.ObjectId.isValid(articleId)) {
+            return res.status(400).send({
+                message: 'Article is invalid'
             });
-        } else if(article._eligibilityFiltersSenior !== null) {
-            return res.status(404).send({
-                message: 'A senior filterer has already been added for this article'
-            });
-        } else {
-
-            if(hasRole('seniorfilterer', user)) {
-
-                articleIds.foreach( async (article) => {
-                    article._eligibilityFiltersSenior = user._id;
-                    article._eligibilityFiltersSeniorEmail = user.email;
-                    await article.save();
-                });
-                
-                return res.status(200).send({
-                    message: 'Senior eligibility and filterer user added'
-                });
-
-            } else {
-                return res.status(400).send({
-                    message: 'User does not have persmission'
-                })
-            }
         }
+        
+        HSEArticleModelClass.findById(articleId, async (err, article) => {
+            if(err) {
+                return res.send(err);
+            } else if(!article) {
+                return res.status(404).send({
+                    message: 'No article with that identifier has been found'
+                });
+            } else if(article._eligibilityFiltersSenior !== null) {
+                return res.status(404).send({
+                    message: 'A senior filterer has already been added for this article'
+                });
+            } else {
+    
+                if(hasRole('seniorfilterer', user)) {
+    
+                    articleIds.forEach( async (article) => {
+                        
+                        article._eligibilityFiltersSenior = user._id;
+                        article._eligibilityFiltersSeniorEmail = user.email;
+    
+                        await article.save();
+    
+                    });
+    
+                    return res.status(200).send({
+                        message: 'Senior eligibility and filterer user added'
+                    });
+                } else {
+                    return res.status(400).send({
+                        message: 'User does not have persmission'
+                    })
+                }
+            }
+        });
     });
 
 };
+
 
 const hasRole = (role, user) => {
     return user.roles.includes(role);

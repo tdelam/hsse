@@ -623,4 +623,202 @@ exports.setEligibilityFilterInputs = async (req, res) => {
        });
 };
 
+exports.removeArticleFromJuniorEligibilityFilterer = async (req, res) => {
 
+    const { articleId } = req.params;
+    
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    if(!mongoose.Types.ObjectId.isValid(articleId)) {
+        return res.status(400).send({
+            message: 'Article is invalid'
+        });
+    }
+    
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
+        if(err) {
+            return res.send(err);
+        } else if(!article) {
+            return res.status(404).send({
+                message: 'No article with that identifier has been found'
+            });
+        } else if(article._eligibilityFiltersJunior === null) {
+            return res.status(404).send({
+                message: 'A junior filterer has not been added for this article'
+            });
+        } else {
+
+            if(hasRole('juniorfilterer', user) || hasRole('seniorfilterer', user)) {
+                
+                article._eligibilityFiltersJunior = null;
+                article._eligibilityFiltersJuniorEmail = null;
+
+                await article.save();
+                return res.status(200).send({
+                    message: 'Junior eligibility and filterer user removed'
+                });
+            } else {
+                return res.status(400).send({
+                    message: 'User does not have persmission'
+                })
+            }
+            
+        }
+    });
+
+};
+
+
+exports.removeAllArticlesFromJuniorEligibilityFilterer = async (req, res) => {
+
+    const { articleIds } = req.body;
+    
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    articleIds.forEach((articleId, index) => {
+
+        if(!mongoose.Types.ObjectId.isValid(articleId)) {
+            return res.status(400).send({
+                message: 'Article is invalid'
+            });
+        }
+
+        HSEArticleModelClass.findById(articleId, async (err, article) => {
+            if(err) {
+                return res.send(err);
+            } else if(!article) {
+                return res.status(404).send({
+                    message: 'No article with that identifier has been found'
+                });
+            } else if(article._eligibilityFiltersJunior === null) {
+                return res.status(404).send({
+                    message: 'A junior filterer has not been added for this article'
+                });
+            } else {
+    
+                if(hasRole('juniorfilterer', user) || hasRole('seniorfilterer', user)) {
+                    
+                    article._eligibilityFiltersJunior = null;
+                    article._eligibilityFiltersJuniorEmail = null;
+    
+                    await article.save();
+                    
+                } else {
+                    return res.status(400).send({
+                        message: 'User does not have persmission'
+                    })
+                }
+                
+            }
+        });
+    });
+
+    return res.status(200).send({
+        message: 'Junior eligibility and filterer user removed'
+    });
+
+};
+
+exports.removeArticleFromSeniorEligibilityFilterer = async (req, res) => {
+
+    const { articleId } = req.params;
+    console.log(req.headers);
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    if(!mongoose.Types.ObjectId.isValid(articleId)) {
+        return res.status(400).send({
+            message: 'Article is invalid'
+        });
+    }
+
+    HSEArticleModelClass.findById(articleId, async (err, article) => {
+        if(err) {
+            return res.send(err);
+        } else if(!article) {
+            return res.status(404).send({
+                message: 'No article with that identifier has been found'
+            });
+        } else if(article._eligibilityFiltersSenior !== null) {
+            return res.status(404).send({
+                message: 'A senior filterer has already been added for this article'
+
+            });
+        } else {
+
+            if(hasRole('seniorfilterer', user)) {
+
+                articleIds.forEach( async (article) => {
+                    
+                    article._eligibilityFiltersSenior = null;
+                    article._eligibilityFiltersSeniorEmail = null;
+
+                    await article.save();
+
+                });
+
+                return res.status(200).send({
+                    message: 'Senior eligibility and filterer user added'
+                });
+            } else {
+                return res.status(400).send({
+                    message: 'User does not have persmission'
+                })
+            }
+        }
+    });
+
+};
+
+exports.removeAllArticlesFromSeniorEligibilityFilterer = async (req, res) => {
+
+    const { articleIds } = req.body;
+    console.log(req.headers);
+    const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    articleIds.forEach((articleId, index) => {
+
+        if(!mongoose.Types.ObjectId.isValid(articleId)) {
+            return res.status(400).send({
+                message: 'Article is invalid'
+            });
+        }
+
+        HSEArticleModelClass.findById(articleId, async (err, article) => {
+            if(err) {
+                return res.send(err);
+            } else if(!article) {
+                return res.status(404).send({
+                    message: 'No article with that identifier has been found'
+                });
+            } else if(article._eligibilityFiltersSenior === null) {
+                return res.status(404).send({
+                    message: 'A senior filterer has not been added for this article'
+                });
+            } else {
+    
+                if(hasRole('seniorfilterer', user)) {
+    
+                    articleIds.forEach( async (article) => {
+                        
+                        article._eligibilityFiltersSenior = null;
+                        article._eligibilityFiltersSeniorEmail = null;
+    
+                        await article.save();
+    
+                    });
+    
+                } else {
+                    return res.status(400).send({
+                        message: 'User does not have persmission'
+                    })
+                }
+            }
+
+        });
+    });
+
+    return res.status(200).send({
+        message: 'Senior eligibility and filterer removed for selected articles'
+    });
+
+};

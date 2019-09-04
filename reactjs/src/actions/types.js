@@ -364,3 +364,104 @@ export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_EDIT_COMPLETE_ERROR = 'sse_
 
 export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_FETCH = 'sse_assigned_translating_titles_article_fetch';
 export const SSE_ASSIGNED_TRANSLATING_TITLES_ARTICLE_FETCH_ERROR = 'sse_assigned_translating_titles_article_fetch_error';
+
+// ADMINISTRATOR HSE
+
+// GO LIVE
+export const ADMINISTRATOR_HSE_GO_LIVE_QUEUE = 'administrator_hse_tracking_prioritizing_queue';
+export const ADMINISTRATOR_HSE_GO_LIVE_QUEUE_ERROR = 'administrator_hse_tracking_prioritizing_queue';
+
+export const ADMINISTRATOR_HSE_GO_LIVE_ASSIGN_LIVE = 'administrator_hse_go_live_assign_live';
+export const ADMINISTRATOR_HSE_GO_LIVE_ASSIGN_LIVE_ERROR = 'administrator_hse_go_live_assign_live_error';
+
+// TRACKING PRIORITIZING
+export const ADMINISTRATOR_HSE_TRACKING_PRIORITIZING_QUEUE = 'administrator_hse_tracking_prioriziting_queue';
+export const ADMINISTRATOR_HSE_TRACKING_PRIORITIZING_QUEUE_ERROR = 'administrator_hse_tracking_prioriziting_queue_error';
+
+export const ADMINISTRATOR_HSE_TRACKING_PRIORITIZING_ASSIGN_PRIORITIZERS = 'administrator_hse_tracking_prioritizing_assign_prioritizers';
+export const ADMINISTRATOR_HSE_TRACKING_PRIORITIZING_ASSIGN_PRIORITIZERS_ERROR = 'administrator_hse_tracking_prioritizing_assign_prioritizers_error';
+
+// ELIGIBILITY FILTERS
+export const ADMINISTRATOR_HSE_ELIGIBILITY_FILTERS_QUEUE = 'administrator_hse_eligibility_filters_queue';
+export const ADMINISTRATOR_HSE_ELIGIBILITY_FILTERS_QUEUE_ERROR  = 'administrator_hse_eligibility_filters_queue';
+
+export const ADMINISTRATOR_HSE_ELIGIBILITY_FILTERS_ASSIGN_JUNIOR_FILTERERS = 'administrator_hse_eligibility_filters_assign_junior_filterers';
+export const ADMINISTRATOR_HSE_ELIGIBILITY_FILTERS_ASSIGN_JUNIOR_FILTERERS_ERROR = 'administrator_hse_eligibility_filters_assign_junior_filterers';
+             
+export const ADMINISTRATOR_HSE_ELIGIBILITY_FILTERS_ASSIGN_SENIOR_FILTERERS = 'administrator_hse_eligibility_filters_assign_senior_filterers';
+export const ADMINISTRATOR_HSE_ELIGIBILITY_FILTERS_ASSIGN_SENIOR_FILTERERS_ERROR = 'administrator_hse_eligibility_filters_assign_senior_filterers';
+
+// QUALITY APPRAISALS
+export const ADMINISTRATOR_HSE_QUALITY_APPRAISALS_QUEUE = 'administrator_hse_quality_appraisals_queue';
+export const ADMINISTRATOR_HSE_QUALITY_APPRAISALS_QUEUE_ERROR  = 'administrator_hse_quality_appraisals_queue';
+
+export const ADMINISTRATOR_HSE_QUALITY_APPRAISALS_ASSIGN_JUNIOR_APPRAISERS = 'administrator_hse_quality_appraisals_assign_junior_appraisers';
+export const ADMINISTRATOR_HSE_QUALITY_APPRAISALS_ASSIGN_JUNIOR_APPRAISERS_ERROR = 'administrator_hse_quality_appraisals_assign_junior_appraisers';
+
+export const ADMINISTRATOR_HSE_QUALITY_APPRAISALS_ASSIGN_SENIOR_APPRAISERS = 'administrator_hse_quality_appraisals_assign_senior_appraisers';
+export const ADMINISTRATOR_HSE_QUALITY_APPRAISALS_ASSIGN_SENIOR_APPRAISERS_ERROR = 'administrator_hse_quality_appraisals_assign_senior_appraisers';
+
+// LINKING STUDIES
+export const ADMINISTRATOR_HSE_LINKING_STUDIES_QUEUE = 'administrator_hse_linking_studies_queue';
+export const ADMINISTRATOR_HSE_LINKING_STUDIES_QUEUE_ERROR = 'administrator_hse_linking_studies_queue_error';
+
+export const ADMINISTRATOR_HSE_LINKING_STUDIES_ASSIGN_LINKERS = 'administrator_hse_linking_studies_assign_linkers';
+export const ADMINISTRATOR_HSE_LINKING_STUDIES_ASSIGN_LINKERS_ERROR = 'administrator_hse_linking_studiesk_assign_linkers_error';
+
+// PRESENTATION DETAILS
+export const ADMINISTRATOR_HSE_PRESENTATION_DETAILS_QUEUE = 'administrator_hse_presentation_details_queue';
+export const ADMINISTRATOR_HSE_PRESENTATION_DETAILS_QUEUE_ERROR = 'administrator_hse_presentation_details_queue_error';
+
+export const ADMINISTRATOR_HSE_PRESENTATION_DETAILS_ASSIGN_DETAILERS = 'administrator_hse_presentation_details_assign_detailers';
+export const ADMINISTRATOR_HSE_PRESENTATION_DETAILS_ASSIGN_DETAILERS_ERROR = 'administrator_hse_presentation_details_assign_detailers';
+
+
+// ADMINISTRATOR SSE
+
+// GO LIVE
+export const ADMINISTRATOR_SSE_GO_LIVE_QUEUE = 'sse_administrator_sse_tracking_prioritizing_queue';
+export const ADMINISTRATOR_SSE_GO_LIVE_QUEUE_ERROR = 'sse_administrator_sse_tracking_prioritizing_queue';
+
+export const ADMINISTRATOR_SSE_GO_LIVE_ASSIGN_LIVE = 'sse_administrator_sse_go_live_assign_live';
+export const ADMINISTRATOR_SSE_GO_LIVE_ASSIGN_LIVE_ERROR = 'sse_administrator_sse_go_live_assign_live_error';
+
+// TRACKING PRIORITIZING
+export const ADMINISTRATOR_SSE_TRACKING_PRIORITIZING_QUEUE = 'administrator_sse_tracking_prioriziting_queue';
+export const ADMINISTRATOR_SSE_TRACKING_PRIORITIZING_QUEUE_ERROR = 'administrator_sse_tracking_prioriziting_queue_error';
+
+export const ADMINISTRATOR_SSE_TRACKING_PRIORITIZING_ASSIGN_PRIORITIZERS = 'administrator_sse_tracking_prioritizing_assign_prioritizers';
+export const ADMINISTRATOR_SSE_TRACKING_PRIORITIZING_ASSIGN_PRIORITIZERS_ERROR = 'administrator_sse_tracking_prioritizing_assign_prioritizers_error';
+
+// ELIGIBILITY FILTERS
+export const ADMINISTRATOR_SSE_ELIGIBILITY_FILTERS_QUEUE = 'administrator_sse_eligibility_filters_queue';
+export const ADMINISTRATOR_SSE_ELIGIBILITY_FILTERS_QUEUE_ERROR  = 'administrator_sse_eligibility_filters_queue';
+
+export const ADMINISTRATOR_SSE_ELIGIBILITY_FILTERS_ASSIGN_JUNIOR_FILTERERS = 'administrator_sse_eligibility_filters_assign_junior_filterers';
+export const ADMINISTRATOR_SSE_ELIGIBILITY_FILTERS_ASSIGN_JUNIOR_FILTERERS_ERROR = 'administrator_sse_eligibility_filters_assign_junior_filterers';
+
+export const ADMINISTRATOR_SSE_ELIGIBILITY_FILTERS_ASSIGN_SENIOR_FILTERERS = 'administrator_sse_eligibility_filters_assign_senior_filterers';
+export const ADMINISTRATOR_SSE_ELIGIBILITY_FILTERS_ASSIGN_SENIOR_FILTERERS_ERROR = 'administrator_sse_eligibility_filters_assign_senior_filterers';
+
+// QUALITY APPRAISALS
+export const ADMINISTRATOR_SSE_QUALITY_APPRAISALS_QUEUE = 'administrator_sse_quality_appraisals_queue';
+export const ADMINISTRATOR_SSE_QUALITY_APPRAISALS_QUEUE_ERROR  = 'administrator_sse_quality_appraisals_queue';
+
+export const ADMINISTRATOR_SSE_QUALITY_APPRAISALS_ASSIGN_JUNIOR_APPRAISERS = 'administrator_sse_quality_appraisals_assign_junior_appraisers';
+export const ADMINISTRATOR_SSE_QUALITY_APPRAISALS_ASSIGN_JUNIOR_APPRAISERS_ERROR = 'administrator_sse_quality_appraisals_assign_junior_appraisers';
+
+export const ADMINISTRATOR_SSE_QUALITY_APPRAISALS_ASSIGN_SENIOR_APPRAISERS = 'administrator_sse_quality_appraisals_assign_senior_appraisers';
+export const ADMINISTRATOR_SSE_QUALITY_APPRAISALS_ASSIGN_SENIOR_APPRAISERS_ERROR = 'administrator_sse_quality_appraisals_assign_senior_appraisers';
+
+// LINKING STUDIES
+export const ADMINISTRATOR_SSE_LINKING_STUDIES_QUEUE = 'administrator_sse_linking_studies_queue';
+export const ADMINISTRATOR_SSE_LINKING_STUDIES_QUEUE_ERROR = 'administrator_sse_linking_studies_queue_error';
+        
+export const ADMINISTRATOR_SSE_LINKING_STUDIES_ASSIGN_LINKERS = 'administrator_sse_linking_studies_assign_linkers';
+export const ADMINISTRATOR_SSE_LINKING_STUDIES_ASSIGN_LINKERS_ERROR = 'administrator_sse_linking_studiesk_assign_linkers_error';
+
+// PRESENTATION DETAILS
+export const ADMINISTRATOR_SSE_PRESENTATION_DETAILS_QUEUE = 'administrator_sse_presentation_details_queue';
+export const ADMINISTRATOR_SSE_PRESENTATION_DETAILS_QUEUE_ERROR = 'administrator_sse_presentation_details_queue_error';
+             
+export const ADMINISTRATOR_SSE_PRESENTATION_DETAILS_ASSIGN_DETAILERS = 'administrator_sse_presentation_details_assign_detailers';
+export const ADMINISTRATOR_SSE_PRESENTATION_DETAILS_ASSIGN_DETAILERS_ERROR = 'administrator_sse_presentation_details_assign_detailers';

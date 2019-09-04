@@ -7,7 +7,7 @@ module.exports = app => {
     app.get('/hse/pendingeligibilityfiltersarticlequeue', HSEEligibilityFilterArticleQueueController.listArticles);
     app.get('/hse/pendingeligibilityfiltersarticlequeue/fetcharticle/:id', HSEEligibilityFilterArticleQueueController.listArticle);
     app.post('/hse/pendingeligibilityfiltersarticlequeue/addjuniorfilterer/:articleId', HSEEligibilityFilterArticleQueueController.addArticleToJuniorEligibilityFilterer);
-    app.post('/hse/pendingeligibilityfiltersarticlequeue/addalljuniorfilterer', HSEEligibilityFilterArticleQueueController.addAllArticleToJuniorEligibilityFilterer);
+    app.post('/hse/pendingeligibilityfiltersarticlequeue/addalljuniorfilterer', HSEEligibilityFilterArticleQueueController.addAllArticlesToJuniorEligibilityFilterer);
     app.post('/hse/pendingeligibilityfiltersarticlequeue/addseniorfilterer/:articleId', HSEEligibilityFilterArticleQueueController.addArticleToSeniorEligibilityFilterer);
-    app.post('/hse/pendingeligibilityfiltersarticlequeue/addallseniorfilterer', HSEEligibilityFilterArticleQueueController.addAllArticleToSeniorEligibilityFilterer);
+    app.post('/hse/pendingeligibilityfiltersarticlequeue/addallseniorfilterer', HSEEligibilityFilterArticleQueueController.addAllArticlesToSeniorEligibilityFilterer);
 }

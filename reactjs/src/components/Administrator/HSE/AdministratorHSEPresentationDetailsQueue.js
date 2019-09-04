@@ -1,13 +1,19 @@
+/**
+ * @name HSEAdministratorPresentationDetailsQueue.js
+ * @author Kwadwo Sakyi
+ * @description Defines the routing paths for HSE Administrator section of application
+ */
+
 import React, { Component } from 'react';
 import moment from "moment";
-import ContentWrapper from '../Layout/ContentWrapper';
+import ContentWrapper from '../../Layout/ContentWrapper';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
-import Datatable from '../Tables/Datatable';
+import Datatable from '../../Tables/Datatable';
 
 const dtOptions = {
     'paging': true, // Table pagination
@@ -30,11 +36,11 @@ const dtOptions = {
     }
 }
 
-class HSEAssignedTrackingPrioritizingQueue extends Component {
+class AdministratorHSEPresentationDetailsQueue extends Component {
 
     componentDidMount() {
         this.props.getCurrentUser();
-        this.props.listHSEAssignedTrackingPrioritizingArticlesQueue();
+        //this.props.listHSEAssignedTrackingPrioritizingArticlesQueue();
     }
 
     renderPriority(priority) {
@@ -137,8 +143,8 @@ class HSEAssignedTrackingPrioritizingQueue extends Component {
         return (
             <ContentWrapper>
                 <div className="content-heading">
-                        <div>Appraisaing Tracking Prioritizing Articles
-                            <small>Health Systems Evidence - Assigned Queue</small>
+                        <div>Presntation Details Articles
+                            <small>Health Systems Evidence - Administrator Queue</small>
                         </div>
                         </div>
                 <Card className="card-default">
@@ -152,12 +158,12 @@ class HSEAssignedTrackingPrioritizingQueue extends Component {
     }
 }
 
-function mapStateToProps({ hseAssignedTrackingPrioritizingQueue, auth }) {
+function mapStateToProps({ administratorHSEPresentationDetailsQueue, auth }) {
     return {
         currentUser: auth.currentUser,
-        errorMessage: hseAssignedTrackingPrioritizingQueue.hseAssignedTrackingPrioritizingErrorMessage,
+        errorMessage: administratorHSEPresentationDetailsQueue.administratorHSEPresentationDetailsQueueErrorMessage,
     }
 }
 
-export default connect(mapStateToProps, actions)(HSEAssignedTrackingPrioritizingQueue);
+export default connect(mapStateToProps, actions)(AdministratorHSEPresentationDetailsQueue);
 

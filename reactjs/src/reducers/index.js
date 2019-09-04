@@ -1,3 +1,9 @@
+/**
+ * @name index.js
+ * @author Kwadwo Sakyi
+ * @description This file is responsible for combining all the reducers
+ */
+
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
@@ -63,7 +69,29 @@ import SSEAssignedPresentationDetailsArticleQueueReducer from './SSEAssignedPres
 import SSEAssignedTranslatingTitlesArticleQueueReducer from './SSEAssignedTranslatingTitlesArticleQueueReducer';
 
 
+// ADMINISTRATOR HSE SECTION
+import AdministratorHSEGoLiveQueueReducer from './AdministratorHSEGoLiveQueueReducer';
+import AdministratorHSETrackingPrioritizingQueueReducer from './AdministratorHSETrackingPrioritizingQueueReducer';
+import AdministratorHSEEligibilityFiltersQueueReducer from './AdministratorHSEEligibilityFiltersQueueReducer';
+import AdministratorHSEQualityAppraisalsQueueReducer from './AdministratorHSEQualityAppraisalsQueueReducer';
+import AdministratorHSELinkingStudiesQueueReducer from './AdministratorHSELinkingStudiesQueueReducer';
+import AdministratorHSEPresentationDetailsQueueReducer from './AdministratorHSEPresentationDetailsQueueReducer';
+
+// ADMINISTRATOR SSE SECTION
+import AdministratorSSEGoLiveQueueReducer from './AdministratorSSEGoLiveQueueReducer';
+import AdministratorSSETrackingPrioritizingQueueReducer from './AdministratorSSETrackingPrioritizingQueueReducer';
+import AdministratorSSEEligibilityFiltersQueueReducer from './AdministratorSSEEligibilityFiltersQueueReducer';
+import AdministratorSSEQualityAppraisalsQueueReducer from './AdministratorSSEQualityAppraisalsQueueReducer';
+import AdministratorSSELinkingStudiesQueueReducer from './AdministratorSSELinkingStudiesQueueReducer';
+import AdministratorSSEPresentationDetailsQueueReducer from './AdministratorSSEPresentationDetailsQueueReducer';
+
+
 export default combineReducers({
+
+    sse: SSEArticleReducer,
+    form: formReducer,
+    auth: authReducer,
+
     hsePendingEligibilityFiltersArticleQueue: HSEPendingEligibilityFiltersArticleQueueReducer,
     hsePendingEligibilityFiltersBatchfileQueue: HSEPendingEligibilityFiltersBatchfileQueueReducer,
     
@@ -115,8 +143,21 @@ export default combineReducers({
 
     sseAssignedTranslatingTitlesArticleQueue: SSEAssignedTranslatingTitlesArticleQueueReducer,
 
+    
+    administratorHSEEligibilityFiltersQueue: AdministratorHSEEligibilityFiltersQueueReducer,
+    administratorHSEQualityAppraisalsQueue: AdministratorHSEQualityAppraisalsQueueReducer,
+    administratorHSELinkingStudiesQueue: AdministratorHSELinkingStudiesQueueReducer,
+    administratorHSEPresentationDetailsQueue: AdministratorHSEPresentationDetailsQueueReducer,
+    administratorHSEGoLiveQueue: AdministratorHSEGoLiveQueueReducer,
+    administratorHSETrackingPrioritizingQueue: AdministratorHSETrackingPrioritizingQueueReducer,
 
-    sse: SSEArticleReducer,
-    form: formReducer,
-    auth: authReducer
+
+    administratorSSEEligibilityFiltersQueue: AdministratorSSEEligibilityFiltersQueueReducer,
+    administratorSSEQualityAppraisalsQueue: AdministratorSSEQualityAppraisalsQueueReducer,
+    administratorSSELinkingStudiesQueue: AdministratorSSELinkingStudiesQueueReducer,
+    administratorSSEPresentationDetailsQueue: AdministratorSSEPresentationDetailsQueueReducer,
+    administratorSSEGoLiveQueue: AdministratorSSEGoLiveQueueReducer,
+    administratorSSETrackingPrioritizingQueue: AdministratorSSETrackingPrioritizingQueueReducer
+
+
 });
