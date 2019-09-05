@@ -8,7 +8,7 @@ class Recover extends Component {
 
     handleSubmit({ email }) {
         this.props.forgotpassword({ email }, this.logSendingEmail);
-        this.props.history.push('/confirmresetpassword');
+        this.props.history.push('/confirmpasswordreset');
     }
 
     renderEmailField = ({ input }) => {

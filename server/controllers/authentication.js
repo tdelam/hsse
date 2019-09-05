@@ -227,9 +227,10 @@ exports.resetPassword = (req, res, next) => {
 
         })
 
-        return res.redirect(config.frontendServer + "/successfulpasswordreset" ); 
+        //return res.redirect(config.frontendServer + "/successfulpasswordreset" );
+        //return res.redirect( "/successfulpasswordreset" ); 
     });
-
+    return res.status(200).send({ message: 'Password has been successfully reset'});
 }
 
 exports.sendPasswordResetEmail = (req, res, next) => {
@@ -248,7 +249,7 @@ exports.sendPasswordResetEmail = (req, res, next) => {
 
             sendResetEmail(existingUser, userToken(existingUser));
             console.log("**************** SENDING RESSET EMAIL ***********************");
-            
+            return res.status(200).send({ message: 'Password reset email sent'})
 
         } else { console.log("************" + email + "************ FOUND ONE ***************");
             return res.status(422).send({ error: 'User is not registered' });

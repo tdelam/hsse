@@ -335,7 +335,7 @@ export const signin = (formProps, callback) => async dispatch => {
   }
 };
 
-export const resetPassword = (formProps, token, callback) => async dispatch => {
+export const resetPassword = (formProps, token, history) => async dispatch => {
   try {
     await axios.post(
       `${backendServer}/resetpassword/${token}`,
@@ -344,7 +344,7 @@ export const resetPassword = (formProps, token, callback) => async dispatch => {
 
     dispatch({ type: AUTH_USER, payload: 'Password has been reset' });
     
-    callback();
+    history.push('/successfulpasswordreset');
   } catch (e) {
     dispatch({ type: AUTH_ERROR, payload: 'Password could NOT be reset' });
   }
