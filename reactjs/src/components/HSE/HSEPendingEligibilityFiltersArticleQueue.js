@@ -1,3 +1,9 @@
+/**
+ * @name HSEPendingEligibilityFiltersArticleQueue.js
+ * @author Kwadwo Sakyi
+ * @description This component renders articles that are pending (have not been assigned yet)
+ */
+
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { 
@@ -209,12 +215,12 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 {
                     text: 'Select Filtered',
                     className: 'btn-info',
-                    action: () => {
+                    /*action: () => {
                        // var count = table.rows( { selected: true } ).count();
      
                         //events.prepend( '<div>'+count+' row(s) selected</div>' );
                         this.logConsole(this);
-                    }
+                    }*/
                 },
                 {
                     text: 'Assign as Junior',
@@ -228,13 +234,13 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 {
                     text: 'Assign as Senior',
                     className: 'btn-danger',
-                    action: () => {
+                    /*action: () => {
                         //var count = table.rows( { selected: true } ).count();
      
                         //events.prepend( '<div>'+count+' row(s) selected</div>' );
 
                         this.logConsole("Hello, Kwadwo");
-                    }
+                    }*/
                 }
             ],
             select: {

@@ -1,3 +1,10 @@
+/**
+ * @name HSEPendingEligibilityFiltersArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for listing articles in the pending queue
+ * and assigning articles to junior and senior filterers
+ */
+
 const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
@@ -126,8 +133,8 @@ exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
 
 exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 
-    const { articleIds } = req.params;
-    console.log(req.headers);
+    const { articleId } = req.params;
+    
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     if(!mongoose.Types.ObjectId.isValid(articleId)) {
@@ -150,15 +157,11 @@ exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
         } else {
 
             if(hasRole('seniorfilterer', user)) {
-
-                articleIds.forEach( async (article) => {
                     
-                    article._eligibilityFiltersSenior = user._id;
-                    article._eligibilityFiltersSeniorEmail = user.email;
+                article._eligibilityFiltersSenior = user._id;
+                article._eligibilityFiltersSeniorEmail = user.email;
 
-                    await article.save();
-
-                });
+                await article.save();
 
                 return res.status(200).send({
                     message: 'Senior eligibility and filterer user added'

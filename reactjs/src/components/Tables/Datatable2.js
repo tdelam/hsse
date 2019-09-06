@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import $ from 'jquery';
 
 // Datatables
 require('datatables.net-bs')
@@ -26,32 +24,11 @@ require('datatables.net-select-bs/css/select.bootstrap.css');
 
 require('datatables.net-buttons-bs/css/buttons.bootstrap.css');
 
-/**
- * Wrapper component for dataTable plugin
- * Only DOM child elements, componets are not supported (e.g. <Table>)
- */
+
 export default class Datatable2 extends Component {
 
-    static propTypes = {
-        /** datatables options object */
-        options: PropTypes.object,
-        /** only one children allowed */
-        children: PropTypes.element.isRequired,
-        /** callback that receives the datatable instance as param */
-        dtInstance: PropTypes.func
-    }
-
-    static defaultProps = {
-        options: {}
-    }
-
     componentDidMount() {
-        const dtInstance = $(this.tableElement).dataTable(this.props.options);
-
-        console.log($(this.tableElement).dataTable(this.props.options));
-
-        if(this.props.dtInstance)
-            this.props.dtInstance(dtInstance)
+        
     }
 
     componentWillUnmount() {
@@ -62,9 +39,7 @@ export default class Datatable2 extends Component {
 
     render() {
         return (
-            React.cloneElement(React.Children.only(this.props.children), {
-                ref: this.setRef
-            })
+            <table className="table table-striped my-4 w-100" ref={el => this.el = el} />
         )
     }
 }

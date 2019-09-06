@@ -1,3 +1,9 @@
+/**
+ * @name PendingEligibilityFiltersArticleQueueRow.js
+ * @author Kwadwo Sakyi
+ * @description Component for the row in Pending Eligibility Filters Queue
+ */
+
 import React, { Component } from 'react';
 import moment from "moment";
 import Swal from '../Elements/Swal';
@@ -59,21 +65,25 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
     swalCallbackAssignJunior(isConfirm, articleId, history) {
         if(isConfirm)
             this.props.assignHSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, history);
+        window.location.reload()
     }
 
     swalCallbackAssignSenior(isConfirm, articleId, history) {
         if(isConfirm)
             this.props.assignHSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, history);
+        window.location.reload()
     }
 
     swalCallbackAssignAllJunior(isConfirm, history) {
         if(isConfirm)
             this.props.assignAllHSEPendingEligibilityFiltersArticlesJuniorFilter(this.state.selectedIds, history);
+            window.location.reload()
     }
 
     swalCallbackAssignAllSenior(isConfirm, history) {
         if(isConfirm)
             this.props.assignAllHSEPendingEligibilityFiltersArticlesSeniorFilter(this.state.selectedIds, history);
+        window.location.reload()
     }
 
     render() { console.log(this.props.currentUser.user.roles.includes('juniorfilter'));
@@ -89,10 +99,12 @@ class PendingEligibilityFiltersArticleQueueRow extends Component {
                     { moment(article.harvestDate).format("DD-MM-YYYY") }
                 </td>
                 <td key={Math.random()}>
-                    {article._eligibilityFiltersJuniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={ !(this.props.currentUser.user.roles.includes('juniorfilterer')  || this.props.currentUser.user.roles.includes('seniorfilterer')) }><Swal disabled={!this.props.currentUser.user.roles.includes('juniorfilter')} options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)} >Assign</Swal></Button>}
+                    {/*article._eligibilityFiltersJuniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={ !(this.props.currentUser.user.roles.includes('juniorfilterer')  || this.props.currentUser.user.roles.includes('seniorfilterer')) }><Swal disabled={!this.props.currentUser.user.roles.includes('juniorfilter')} options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)} >Assign</Swal></Button>*/}
+                    {/*article._eligibilityFiltersJuniorEmail || <Swal className="btn btn-primary btn-oval" disabled={!this.props.currentUser.user.roles.includes('juniorfilter')} options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)} >Assign</Swal>*/}
+                    {article._eligibilityFiltersJuniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={!(this.props.currentUser.user.roles.includes('juniorfilter') || this.props.currentUser.user.roles.includes('seniorfilterer'))}><Swal disabled={!(this.props.currentUser.user.roles.includes('juniorfilter') || this.props.currentUser.user.roles.includes('seniorfilterer'))} options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article._id, history)} >Assign</Swal></Button>}
                 </td>
                 <td key={Math.random()}>
-                {article._eligibilityFiltersSeniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={!this.props.currentUser.user.roles.includes('seniorfilterer')}><Swal disabled={!this.props.currentUser.user.roles.includes('seniorfilterer')} options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} >Assign</Swal></Button>}
+                    {article._eligibilityFiltersSeniorEmail || <Button size="xs" color="primary" className="btn-oval" disabled={!this.props.currentUser.user.roles.includes('seniorfilterer')}><Swal disabled={!this.props.currentUser.user.roles.includes('seniorfilterer')} options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article._id, history)} >Assign</Swal></Button>}
                 </td>
                 <td key={Math.random()}>{ article.articleIdShort }</td>
                 <td key={Math.random()}>{ article.title }</td>
