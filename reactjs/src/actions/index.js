@@ -819,6 +819,7 @@ export const assignHSEPendingEligibilityFiltersArticlesJuniorFilter = (articleId
     });
     
     dispatch({ type: HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_ASSIGN_JUNIOR_FILTER, payload: response.data });
+    history.push('/hse/pendingeligibilityfiltersarticlequeue');
     return response;
     
   } catch(e) {
