@@ -385,17 +385,27 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                 <strong>Ref ID:</strong> 
                             </div>
                                 <div className="col-md-4">
-                                    { this.props.match.params.articleId }
+                                    {/* this.props.match.params.articleId */}
+                                    { this.props.currentArticle && this.props.currentArticle.articleIdShort }
                                 </div>
-                            </div>
-                            <br />
-                            <div>
-                                <strong>Live date: </strong>
                             </div>
                             <br />
                             <div className="row">
                                 <div className="col-md-2">
-                                    <span className="float-right"><strong>Document type: </strong></span>
+                                    <strong>Live Date: </strong>
+                                </div>
+                                <div className="col-xl-4">
+                                    <select defaultValue="" className="custom-select">
+                                        <option>Open this select menu</option>
+                                        <option>Many</option>
+                                        <option>Effectiveness</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div className="row">
+                                <div className="col-md-2">
+                                    <strong>Document type: </strong>
                                 </div>
                                 <div className="col-xl-4">
                                     <select defaultValue="" className="custom-select">
@@ -418,7 +428,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                             </div>
                             <br />
                             <div className="row">
-                                <div className="col-xl-4">
+                                <div className="col-md-2">
                                     <strong>Question type: </strong>
                                 </div>
                                 <div className="col-xl-4">
@@ -433,14 +443,18 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                 </div>
                             </div>
                             <br />
-                            <div className="checkbox c-checkbox">
-                                <strong>General focus?</strong>
-                                <p>{" "}</p>
+                            <div className="row">
+                                <div className="col-md-2">
+                                    <strong>General focus?</strong>
+                                </div>
+                                <div className="col-xl-6">
                                 <label>
-                                <Input type="checkbox" defaultValue=""/>
-                                    
-                                    <span className="fa fa-check"></span>{" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
+                                    <Input type="checkbox" defaultValue=""/>
+                                        
+                                        {" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
                                 </label>
+                                </div>
+                                
                             </div>
                             
                         </div>
@@ -632,8 +646,9 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     renderArticleAssessmentSection = (value, show) => {
         if(show)
             return(
-                <fieldset className="col-md-10 offset-md-1">
-                    <legend>Assessment and Assignment Status</legend>
+                <fieldset>
+                {/*<fieldset className="col-md-10 offset-md-1">*/}
+                    <legend >Assessment and Assignment Status</legend>
                     <br />
                     <div className="form-group row mb">
                     <label className="col-md-6 col-form-label">
@@ -711,7 +726,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 <Card className="card-default">
                     <CardHeader><div  >
                             <div><h3>Filterer Inputs</h3></div>
-                            <div><strong>Article Id:</strong> { this.props.match.params.articleId } </div>
+                            <div><strong>Article Id:</strong> { this.props.currentArticle && this.props.currentArticle.articleIdShort } </div>
                             <div><strong>Title:</strong> { (this.props.currentArticle) && this.props.currentArticle.title } </div>
                         </div>
                     </CardHeader>
@@ -731,7 +746,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
                             { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false, this.onCheckCA, this.state.checkedKeysCA) }
 
-                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, true, this.onCheckDomain, this.state.checkedDomain) }
+                            { this.renderTreeSection("Domains", domainsTreeData, this.state.showDomains, false, this.onCheckDomain, this.state.checkedDomain) }
 
                             { this.renderTreeSection("LMIC Focus", lmicFocusTreeData, this.state.showLMICFocus, false, this.onCheckLMIC, this.state.checkedLMIC) }
 

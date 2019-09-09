@@ -46,6 +46,7 @@ export default class Datatable extends Component {
     }
 
     componentDidMount() {
+        console.log(this.tableElement);
         const dtInstance = $(this.tableElement).dataTable(this.props.options);
 
         if(this.props.dtInstance)
@@ -56,7 +57,11 @@ export default class Datatable extends Component {
         $(this.tableElement).dataTable({destroy: true});
     }
 
-    setRef = node => this.tableElement = node;
+    // setRef = node => this.tableElement = node;
+    setRef = node => {
+        console.log(node);
+        this.tableElement = node
+    };
 
     render() {
         return (
