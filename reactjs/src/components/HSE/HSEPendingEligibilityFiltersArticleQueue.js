@@ -29,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
+import $ from 'jquery';
 /*
 const dtOptions = {
     'paging': true, // Table pagination
@@ -252,6 +253,18 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
 
     logConsole = (message) => {
         console.log(message);
+    }
+
+    // Access to internal datatable instance for customizations
+    dtInstance = dtInstance => {
+        console.log(dtInstance);
+        const inputSearchClass = 'datatable_input_col_search';
+        const columnInputs = $('tfoot .' + inputSearchClass);
+        // On input keyup trigger filtering
+        columnInputs
+            .keyup(function() {
+                dtInstance.fnFilter(this.value, columnInputs.index(this));
+            });
     }
 
     renderArticles() {

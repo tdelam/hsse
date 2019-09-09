@@ -86,8 +86,15 @@ exports.addArticleToJuniorEligibilityFilterer= async (req, res) => {
 exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
 
     const { articleIds } = req.body;
+    const { assignUser } = req.body;
     
     const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    if(!hasRole('administrater'), user)
+        return res.status(404).send({
+            message: 'Permission denied'
+        });
+
    
     articleIds.forEach( (articleId, index) => {
 
@@ -110,10 +117,10 @@ exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
                 });
             } else {
     
-                if(hasRole('juniorfilterer', user) || hasRole('seniorfilterer', user)) {
+                if(hasRole('juniorfilterer', assignUser) || hasRole('seniorfilterer', assignUser)) {
                     
-                    article._eligibilityFiltersJunior = user._id;
-                    article._eligibilityFiltersJuniorEmail = user.email;
+                    article._eligibilityFiltersJunior = assignUser._id;
+                    article._eligibilityFiltersJuniorEmail = assignUser.email;
     
                     await article.save();
                     return res.status(200).send({
@@ -179,8 +186,14 @@ exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 exports.addAllArticlesToSeniorEligibilityFilterer = async (req, res) => {
 
     const { articleIds } = req.body;
-    console.log(req.headers);
+    const { assignUser } = req.body;
+
     const user = await Authentication.getUserFromToken(req.headers.authorization);
+
+    if(!hasRole('administrater'), user)
+        return res.status(404).send({
+            message: 'Permission denied'
+        });
 
     articleIds.forEach((articleId, index) => {
 
@@ -203,12 +216,12 @@ exports.addAllArticlesToSeniorEligibilityFilterer = async (req, res) => {
                 });
             } else {
     
-                if(hasRole('seniorfilterer', user)) {
+                if(hasRole('seniorfilterer', assignUser)) {
     
                     articleIds.forEach( async (article) => {
                         
-                        article._eligibilityFiltersSenior = user._id;
-                        article._eligibilityFiltersSeniorEmail = user.email;
+                        article._eligibilityFiltersSenior = assignUser._id;
+                        article._eligibilityFiltersSeniorEmail = assignUser.email;
     
                         await article.save();
     
