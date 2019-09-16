@@ -83,6 +83,7 @@ class DatatableView extends Component {
 
     // Access to internal datatable instance for customizations
     dtInstance = dtInstance => {
+        console.log(dtInstance);
         const inputSearchClass = 'datatable_input_col_search';
         const columnInputs = $('tfoot .' + inputSearchClass);
         // On input keyup trigger filtering

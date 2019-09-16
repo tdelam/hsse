@@ -9,6 +9,8 @@ const HSEArticleEligibilityFilterSchema = new Schema({
     // Relevance
     relevance: { type: Boolean, default: false },
 
+    liveDate: { type: Date },
+
     // Eligibility
     documentType: {
         type: String, 

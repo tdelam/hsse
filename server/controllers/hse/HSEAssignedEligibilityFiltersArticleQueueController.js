@@ -24,7 +24,7 @@ exports.listArticles = async (req, res) => { // REFACTOR: rename function to lis
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ complicated: false, eligibilityFiltersFullCompletion: false })
+    HSEArticleModelClass.find({ lostArticle: false, complicated: false, eligibilityFiltersFullCompletion: false })
     .or([ { _eligibilityFiltersJunior: user._id }, { _eligibilityFiltersSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {

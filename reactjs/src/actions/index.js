@@ -37,6 +37,9 @@ import {
   HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE,
   HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR,
 
+  HSE_ADD_ARTICLE_TO_LOST_QUEUE,
+  HSE_ADD_ARTICLE_TO_LOST_QUEUE_ERROR,
+
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE,
   HSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR,
 
@@ -237,7 +240,7 @@ import {
 
   SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER,
   SSE_PENDING_PRESENTATION_DETAILS_ARTICLE_ASSIGN_JUNIOR_DETAILER_ERROR,
-
+/*
   // Administrator HSE
   ADMINISTRATOR_HSE_GO_LIVE_QUEUE,
   ADMINISTRATOR_HSE_GO_LIVE_QUEUE_ERROR,
@@ -286,6 +289,7 @@ import {
   ADMINISTRATOR_HSE_PRESENTATION_DETAILS_ASSIGN_DETAILERS,
   ADMINISTRATOR_HSE_PRESENTATION_DETAILS_ASSIGN_DETAILERS_ERROR
 
+*/
 } from './types';
 
 const backendServer = "/api";
@@ -729,6 +733,16 @@ export const addArticleToComplicatedQueue = (articleId, history) => async dispat
     dispatch({ type: HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE, payload: response.data })
   } catch(e) {
     dispatch({ type: HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR, payload: e.message });
+  }
+};
+
+export const addArticleToLostQueue = (articleId, history) => async dispatch => {
+  try {
+    const response = await axios.post(`${backendServer}/hse/articles/addtolostqueue/${articleId}`, {}, { headers });
+  
+    dispatch({ type: HSE_ADD_ARTICLE_TO_LOST_QUEUE, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_ADD_ARTICLE_TO_LOST_QUEUE_ERROR, payload: e.message });
   }
 };
 

@@ -1,4 +1,4 @@
-// Production keys here
+// Development keys here
 
 module.exports = {
     mongoUri: process.env.MONGO_URI,

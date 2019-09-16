@@ -45,12 +45,16 @@ export default class Datatable extends Component {
         options: {}
     }
 
-    componentDidMount() {
-        console.log(this.tableElement);
+    componentDidMount() {console.log(this.props)
         const dtInstance = $(this.tableElement).dataTable(this.props.options);
 
         if(this.props.dtInstance)
             this.props.dtInstance(dtInstance)
+    }
+
+    handleSelected = () => {
+        //console.log($(this.tableElement).dataTable());
+       this.props.selected(this.props.dtInstance)
     }
 
     componentWillUnmount() {
@@ -59,7 +63,6 @@ export default class Datatable extends Component {
 
     // setRef = node => this.tableElement = node;
     setRef = node => {
-        console.log(node);
         this.tableElement = node
     };
 

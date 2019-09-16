@@ -30,9 +30,9 @@ import {
     themeTreeData,
     populationTreeData,
     ontarioPriorityAreasTreeData,
-    canadaHealthSystemDocumentTypeData,
-    ontarioHealthDocumentTypeData,
-    intergovernmentalOrganizationHealthSystemDocumentTypeData
+    canadaHealthSystemSubtype,
+    ontarioHealthSubtype,
+    intergovernmentalOrganizationSubtype
 
 } from './HSEEligibilityFilterTrees';
 
@@ -623,11 +623,11 @@ class HSEArticleEdit extends Component {
 
                             { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea) }
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.showCanadianHealthSystemDocument, false ) }
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemSubtype, this.state.showCanadianHealthSystemDocument, false ) }
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false) }
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.showOntarianHealthSystemDocument, false) }
 
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false) }
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false) }
 
                             { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
 

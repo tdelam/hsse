@@ -143,6 +143,9 @@ const HSEArticleSchema = new Schema({
     // Complicated tag
     complicated: { type: Boolean, default: false },
 
+    // Lost tag
+    lostArticle: { type: Boolean, default: false },
+
     // Translators
     _translatorsFrench: { type: Schema.Types.ObjectId, ref: 'User' },
     _translatorsSpanish: { type: Schema.Types.ObjectId, ref: 'User' },
