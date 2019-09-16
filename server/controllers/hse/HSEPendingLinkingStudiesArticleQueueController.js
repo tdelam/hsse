@@ -1,9 +1,22 @@
+/**
+ * @name 
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for 
+ */
+
 const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
+/**
+ * Rename to list
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find({ complicated: false/*, eligibilityFiltersFullCompletion: true*/ })
         .and([ { _linkingStudiesJunior: null } ])
@@ -19,6 +32,13 @@ exports.listArticles = async (req, res) => {
        });
 };
 
+/**
+ * Rename to fetch
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
@@ -27,10 +47,21 @@ exports.listArticle = async (req, res) => {
 
 };
 
+/**
+ * DEFUNCT
+ */
 exports.create = (req, res) => {
     
 }
 
+/**
+ * Assign the article to a user for the linking queue
+ * Rename: assignToLinker
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.addArticleToJuniorLinker = async (req, res) => {
 
     const { articleId } = req.params;

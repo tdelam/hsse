@@ -1,7 +1,19 @@
+/**
+ * @name 
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for 
+ */
+
 const mongoose = require('mongoose');
 
 const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listBatchfiles = async (req, res) => {
     HSEArticleBatchfileModelClass.find()
         .or([ { _eligibilityFilterJunior: null }, { _eligibilityFilterSenior: null } ])
@@ -17,6 +29,12 @@ exports.listBatchfiles = async (req, res) => {
         });
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listBatchfile = async (req, res) => {
 
     const id = req.param.id;
@@ -25,6 +43,12 @@ exports.listBatchfile = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.create = (req, res) => {
     
 }

@@ -1,3 +1,10 @@
+/**
+ * @name HSEArticleController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for 
+ * @description This file contains the CRUD controller methods for HSE articles
+ */
+
 const mongoose = require('mongoose');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
@@ -6,6 +13,13 @@ const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAp
 const HSEArticleLinkingStudiesModelClass = mongoose.model('HSEArticleLinkingStudies');
 const HSEArticlePresentationDetailsModelClass = mongoose.model('HSEArticlePresentationDetails');
 
+/**
+ * Creates a new article and writes it to the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param object req.body An object containing all of the article's properties
+ * @param WritableStream res The function's response body
+ */
 exports.create = (req, res) => {
     console.log(req.body);
     const newHSEArticle = new HSEArticleModelClass(req.body);
@@ -54,7 +68,14 @@ exports.create = (req, res) => {
     
 };
 
-exports.read = (req, res) => {
+/**
+ * Returns an article's details from the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.articleId The ID of the article to read
+ * @param WritableStream res The function's response body
+ */
+exports.read = (req, res) => { // REFACTOR: rename function to fetch
 
     const { articleId } = req.params;
 
@@ -77,12 +98,27 @@ exports.read = (req, res) => {
 
 }
 
+/**
+ * Updates an article's details in the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.articleId The ID of the article to update
+ * @param object req.body An object of properties to update the article with
+ * @param WritableStream res The function's response body
+ */
 exports.update = (req, res) => {
     HSEArticleModelClass.findByIdAndUpdate(req.params.articleId, req.body, (err ) => {
 
     });
 }
 
+/**
+ * Removes an article from the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.articleId The ID of the article to remove
+ * @param WritableStream res The function's response body
+ */
 exports.delete = (req, res) => {
     HSEArticleModelClass.findByIdAndRemove(req.params.articleId, (err) => {
         if(err) {
@@ -93,6 +129,12 @@ exports.delete = (req, res) => {
     })
 }
 
+/**
+ * Returns a list of articles from the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.list = (req, res) => {
     HSEArticleModelClass.find( (err, articles) => {
         if(err) {
@@ -106,6 +148,13 @@ exports.list = (req, res) => {
     });
 }
 
+/**
+ * Adds an article to the complicated queue
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.articleId The ID of the article to add to the complicated queue
+ * @param WritableStream res The function's response body
+ */
 exports.addToComplicatedQueue = async (req, res) => {
 
     const { articleId } = req.params;

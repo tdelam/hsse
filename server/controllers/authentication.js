@@ -1,6 +1,9 @@
 /**
- * This file defines all functions that manage user authentication
+ * @name authentication.js
+ * @author Kwadwo Sakyi
+ * @description This file defines all functions that manage user authentication
  */
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jwt-simple');
@@ -113,8 +116,8 @@ exports.signin = (req, res, next) => {
  * Signs up a user with a new account
  * 
  * @param ReadableStream req The function's request body
- * @param string req.email The user's email address
- * @param string req.password The user's password
+ * @param string req.body.email The user's email address
+ * @param string req.body.password The user's password
  * @param WritableStream res The function's response body
  * @param ? next TODO: document
  */

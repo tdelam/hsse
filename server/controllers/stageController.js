@@ -1,8 +1,11 @@
+/**
+ * TO BE REMOVED
+ */
 const mongoose = require('mongoose');
 
 const StageModelClass = mongoose.model('stages');
 
-exports.create = (req, res) => {
+exports.create = (req, res) => { // DEFUNCT
 
     const newStage = new StageModelClass(req.body);
 
@@ -19,7 +22,7 @@ exports.create = (req, res) => {
     
 }
 
-exports.read = (req, res) => {
+exports.read = (req, res) => { // DEFUNCT
 
     const { stageId } = req.params;
 
@@ -42,13 +45,13 @@ exports.read = (req, res) => {
 
 }
 
-exports.update = (req, res) => {
+exports.update = (req, res) => { // DEFUNCT
     StageModelClass.findByIdAndUpdate(req.params.stageId, req.body, (err ) => {
 
     });
 }
 
-exports.delete = (req, res) => {
+exports.delete = (req, res) => { // DEFUNCT
     StageModelClass.findByIdAndRemove(req.params.stageId, (err) => {
         if(err) {
             res.send(err);
@@ -59,7 +62,7 @@ exports.delete = (req, res) => {
 }
 
 
-exports.list = function (req, res) {
+exports.list = function (req, res) { // DEFUNCT
     StageModelClass.find().exec(function (err, stages) {
       if (err) {
         return res.status(422).send({
