@@ -116,6 +116,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 closeOnConfirm: true
             },
             pendingArticles: [],
+            instance: null
         };
 
     }
@@ -210,40 +211,7 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
                 targets:   0
             } ],
             dom: 'Bfrtipl',
-            buttons: [
-                'selectAll',
-                'selectNone',
-                {
-                    text: 'Select Filtered',
-                    className: 'btn-info',
-                    /*action: () => {
-                       // var count = table.rows( { selected: true } ).count();
-     
-                        //events.prepend( '<div>'+count+' row(s) selected</div>' );
-                        this.logConsole(this);
-                    }*/
-                },
-                {
-                    text: 'Assign as Junior',
-                    className: 'btn-secondary',
-                    action: () => {
-                       // var count = table.rows( { selected: true } ).count();
-     
-                        //events.prepend( '<div>'+count+' row(s) selected</div>' );
-                    }
-                },
-                {
-                    text: 'Assign as Senior',
-                    className: 'btn-danger',
-                    /*action: () => {
-                        //var count = table.rows( { selected: true } ).count();
-     
-                        //events.prepend( '<div>'+count+' row(s) selected</div>' );
 
-                        this.logConsole("Hello, Kwadwo");
-                    }*/
-                }
-            ],
             select: {
                 style:    'multi',
                 selector: 'td:first-child'
@@ -255,9 +223,16 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
         console.log(message);
     }
 
+    handleSelected = (tableElement) => {
+        console.log(tableElement);
+        this.setState({ instance : tableElement })
+    }
+
     // Access to internal datatable instance for customizations
     dtInstance = dtInstance => {
+
         console.log(dtInstance);
+        
         const inputSearchClass = 'datatable_input_col_search';
         const columnInputs = $('tfoot .' + inputSearchClass);
         // On input keyup trigger filtering
@@ -265,18 +240,23 @@ class HSEPendingEligibilityFiltersArticleQueue extends Component {
             .keyup(function() {
                 dtInstance.fnFilter(this.value, columnInputs.index(this));
             });
+
+        const selectedFilteredButton = $('select-filtered');
+        selectedFilteredButton.click(function() {
+            console.log('select-filtered')
+        })
     }
 
     renderArticles() {
-        if(this.state.pendingArticles.length > 0 ) { console.log(this.state.pendingArticles.length);
+        if(this.state.pendingArticles.length > 0 ) {
         let testRows = this.state.pendingArticles.map(article => {
-            console.log(article);
+            
             return (<PendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);
         });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
                 <div>
-                    <Datatable options={this.dtOptions2}>
+                    <Datatable options={this.dtOptions2} onSelected={this.handleSelected} >
                         <table className="table table-striped my-4 w-100">
                             <thead>
                                 <tr>
