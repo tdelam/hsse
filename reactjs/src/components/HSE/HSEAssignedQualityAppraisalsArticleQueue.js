@@ -113,7 +113,7 @@ class HSEAssignedQualityAppraisalsArticleQueue extends Component {
                                 <th data-priority="1">Priority</th>
                                 <th>Source</th>
                                 <th>Harvest Date</th>
-                                <th>Other Filterer</th>
+                                <th>Other Appraiser</th>
                                 <th>Article Id</th>
                                 <th>Title</th>
                                 <th>Author</th>
