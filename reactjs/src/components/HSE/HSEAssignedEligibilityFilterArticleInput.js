@@ -3,6 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import ContentWrapper from '../Layout/ContentWrapper';
+import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import { Tree } from 'antd';
 import {
     Col,
@@ -334,6 +336,30 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         
     }
 
+    continue = () => {
+        this.setState({
+
+            showHealthSystemsTopics: true,
+            showCanadianAreas: true,
+            showDomains: true,
+            showLMICFocus: true,
+            showProvinceFocus: true,
+            showTheme: true,
+            showPopulation: true,
+            showOntarioPriorityArea: true,
+            showArticleAssessment: true,
+            showGeneralArticleInformation: true,
+            
+            showIntergovernmentalSystemSubtype: false,
+            showCanadaHealthSystemSubtype: false,
+            showOntarioHealthSystemSubtype: false,
+
+            showRelevance: false,
+            showEligibility: false
+            //show
+        });
+    }
+
     save = () => {
         this.props.assignHSEAssignedEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
@@ -363,14 +389,14 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
     handleGeneralEligibility = (event) => {
         switch(event.target.value) {
-            case 'evidenceBriefsForPolicy': 
-            case 'overviewsOfSystematicReviews': 
-            case 'systematicReviewsAddressingOtherQuestions': case 'systematicReviewsInProgress':
-            case 'systematicReviewsBeingPlanned': case 'economicEvaluationsAndCostingStudies':
-            case 'healthReformDescriptions': case 'healthSystemDescriptions':
+            case 'Evidence briefs for policy': 
+            case 'Overviews of systematic reviews': 
+            case 'Systematic reviews addressing other questions': case 'Systematic reviews in progress':
+            case 'Systematic reviews being planned': case 'Economic evaluations and costing studies':
+            case 'Health reform descriptions': case 'Health system descriptions':
                 this.setState({
 
-                    documentType: event.target.name,
+                    documentType: event.target.value,
 
                     showHealthSystemsTopics: true,
                     showCanadianAreas: true,
@@ -383,34 +409,41 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     showArticleAssessment: true,
                     showGeneralArticleInformation: true,
                     
-                    showIntergovernmentalSubtype: false,
+                    showIntergovernmentalSystemSubtype: false,
                     showCanadaHealthSystemSubtype: false,
-                    showOntarioHealthSubtype: false,
+                    showOntarioHealthSystemSubtype: false,
 
                     showRelevance: false,
                     showEligibility: false
                     //show
                 });
                 break;
-            case "intergovernmentalOrganizationsHealthSystemsDocuments":
+            case "Intergovernmental organizations' health systems documents":
                 this.setState({
-                    documentType: event.target.name,
+                    documentType: event.target.value,
 
-                    showIntergovernmentalSubtype: true
+                    showIntergovernmentalSystemSubtype: true,
+                    showCanadaHealthSystemSubtype: false,
+                    showOntarioHealthSystemSubtype: false
                 });
                 break;
-            case  "CanadasHealthSystemsDocuments":
+            case  "Canada's health systems documents":
                 this.setState({
-                    documentType: event.target.name,
+                    documentType: event.target.value,
 
-                    showCanadaHealthSubtype: true
+                    showCanadaHealthSystemSubtype: true,
+                    showIntergovernmentalSystemSubtype: false,
+                    showOntarioHealthSystemSubtype: false
                 });
                 break;
-            case "ontariosHealthSystemDocuments":
+            case "Ontario's health system documents":
                 this.setState({
-                    documentType: event.target.name,
+                    documentType: event.target.value,
 
-                    showOntarioHealthSubtype: true
+                    showOntarioHealthSystemSubtype: true,
+                    showIntergovernmentalSystemSubtype: false,
+                    showCanadaHealthSystemSubtype: false
+                    
                 });
                 break;
             default:
@@ -584,62 +617,62 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Evidence briefs for policy" value="evidenceBriefsForPolicy" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Evidence briefs for policy" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Evidence briefs for policy</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Overviews of systematic reviews" value="overviewsOfSystematicReviews" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Overviews of systematic reviews" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Overviews of systematic reviews</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Systematic reviews addressing other questions" value="systematicReviewsAddressingOtherQuestions" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Systematic reviews addressing other questions" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews addressing other questions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Systematic reviews in progress" value="systematicReviewsInProgress" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Systematic reviews in progress" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews in progress</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Systematic reviews being planned" value="systematicReviewsBeingPlanned" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Systematic reviews being planned" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews being planned</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Economic evaluations and costing studies" value="economicEvaluationsAndCostingStudies" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Economic evaluations and costing studies" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Economic evaluations and costing studies</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Health reform descriptions" value="healthReformDescriptions" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Health reform descriptions" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Health reform descriptions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Health system descriptions" value="healthSystemDescriptions" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Health system descriptions" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Health system descriptions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Intergovernmental organizations' health systems documents" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Intergovernmental organizations' health systems documents" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Intergovernmental organizations' health systems documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Canada's health systems documents" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Canada's health systems documents" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Canada's health systems documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="Ontario's health system documents" value="option2" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Ontario's health system documents" name="documentType" onChange={this.handleGeneralEligibility}/>
                                   <span className="fa fa-circle"></span>{" "}Ontario's health system documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="lostQueue" value="option2" onChange={this.handleLostQueue}/>
+                                  <Input type="radio" name="documentType" onChange={this.handleLostQueue}/>
                                   <span className="fa fa-circle"></span>{" "}NO. After reviewing the docuement types and eligibility criteria, this record is not eligible for inclutions in HSE.</label>
                           </div>
                          
@@ -899,7 +932,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         return <TreeNode {...item} />;
       })
     
-    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine, checkedEvent, checkedKeyState) => {
+    renderTreeSection = (sectionTitle, sectionTreeData, sectionStatus, showLine, checkedEvent, checkedKeyState, showLink) => {
         if(sectionStatus) {
             return (
                 <fieldset>
@@ -926,6 +959,17 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     </FormGroup>
                     <br />
                     <br />
+                    {   
+                        (showLink) && 
+                        (
+                            <div>
+                                <Button color="link" onClick={this.continue} ><h4>Continue</h4></Button>
+                                {/*<Link to="register" className="btn btn-block btn-secondary">Save and continue</Link>*/}
+                                <br />
+                                <br />
+                            </div>
+                        )
+                    }
                 </fieldset>
             );
         } else {
@@ -1048,11 +1092,11 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
                             { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.showOntarioPriorityArea, false, this.onCheckOPA, this.state.checkedOPA)}
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemSubtype, this.state.showCanadaHealthSystemSubtype, false, this.onCheckCHSDT, this.state.checkedCHSDT)}
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemSubtype, this.state.showCanadaHealthSystemSubtype, false, this.onCheckCHSDT, this.state.checkedCHSDT, true)}
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.checkedOHSDT)}
-
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.checkedIOHSDT)}
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.showOntarioHealthSystemSubtype, false, this.onCheckOHSDT, this.state.checkedOHSDT, true)}
+                            
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.showIntergovernmentalSystemSubtype, false, this.onCheckIOHSDT, this.state.checkedIOHSDT, true)}
 
                             { this.renderArticleAssessmentSection(this.state.assessingAndAssignmentStatus, this.state.showArticleAssessment) }
 
