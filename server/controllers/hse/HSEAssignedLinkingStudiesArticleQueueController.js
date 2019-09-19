@@ -188,13 +188,14 @@ exports.setLinkingStudiesComplete = async (req, res) => {
 
 };
 
-/*
+
 /**
  * TODO: document
  * @param ReadableStream req The function's request body
  * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
+/*
 exports.setEligibilityFilterComplete = async (req, res) => {
 
     const { articleId } = req.params;
