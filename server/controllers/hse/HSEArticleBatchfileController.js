@@ -1,3 +1,10 @@
+/**
+ * @name HSEArticleBatchfileController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing HSE article batch files.
+ * Note that batch files are stored in an S3 object storage service
+ */
+
 const axios = require('axios');
 const AWS = require('aws-sdk');
 const uuid = require('uuid/v1');
@@ -18,6 +25,12 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.HSSE_S3_SECRET_KEY
 });
 
+/**
+ * Returns the batch file's URL in the S3 object storage service
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.getFileUrl = (req, res) => {
 
     const key = `${Date.now()}-${uuid()}.txt`;
@@ -34,6 +47,17 @@ exports.getFileUrl = (req, res) => {
     });
 };
 
+/**
+ * Creates a new batch file and writes it to the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.body.url The URL which contains the batch file itself
+ * @param Date req.body.harvestDate The date that the batch file was harvested
+ * @param string req.body.articleSource The source of the articles contained within the batch file
+ * @param string req.body.language The language of the articles contained within the batch file
+ * @param string req.body.fileName The batch file's original name
+ * @param WritableStream res The function's response body
+ */
 exports.create = async (req, res) => {
 
     const { url, harvestDate, articleSource, language, fileName } = req.body; 
@@ -152,6 +176,12 @@ exports.create = async (req, res) => {
     return res.status(200).send(newHSEArticleBatchfile);
 };
 
+/**
+ * Returns a list of batch files from the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.list = (req, res) => {
     HSEArticleBatchfileModelClass.find( (err, batchfiles) => {
         if(err) {
@@ -165,7 +195,14 @@ exports.list = (req, res) => {
     });
 };
 
-exports.read = (req, res) => {
+/**
+ * Read's a batch file's details from the database
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.batchfileId The batch file's identifier
+ * @param WritableStream res The function's response body
+ */
+exports.read = (req, res) => { // REFACTOR: rename function to fetch
 
     const { batchfileId } = req.params;
 

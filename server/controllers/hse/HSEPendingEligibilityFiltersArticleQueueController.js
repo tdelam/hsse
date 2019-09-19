@@ -11,6 +11,12 @@ const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find({ complicated: false })
        .or([ { _eligibilityFiltersJunior: null }, { _eligibilityFiltersSenior: null } ])
@@ -26,6 +32,12 @@ exports.listArticles = async (req, res) => {
        });
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
@@ -34,10 +46,22 @@ exports.listArticle = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.create = (req, res) => {
     
 }
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.addArticleToJuniorEligibilityFilterer= async (req, res) => {
 
     const { articleId } = req.params;
@@ -83,6 +107,12 @@ exports.addArticleToJuniorEligibilityFilterer= async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
 
     const { articleIds } = req.body;
@@ -138,6 +168,12 @@ exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
     
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 
     const { articleId } = req.params;
@@ -183,6 +219,12 @@ exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.addAllArticlesToSeniorEligibilityFilterer = async (req, res) => {
 
     const { articleIds } = req.body;
