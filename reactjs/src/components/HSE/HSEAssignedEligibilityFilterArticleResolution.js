@@ -30,9 +30,9 @@ import {
     themeTreeData,
     populationTreeData,
     ontarioPriorityAreasTreeData,
-    canadaHealthSystemDocumentTypeData,
-    ontarioHealthDocumentTypeData,
-    intergovernmentalOrganizationHealthSystemDocumentTypeData
+    canadaHealthSystemSubtype,
+    ontarioHealthSubtype,
+    intergovernmentalOrganizationSubtype
 
 } from './HSEEligibilityFilterTrees';
 
@@ -823,11 +823,11 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
                             { this.state.fetchedArticle && this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.currentFilterState.showOntarioPriorityArea, false, this.onCheckOPA, this.state.currentFilterState.checkedOPA, false)}
 
-                            { this.state.fetchedArticle && this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.currentFilterState.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.currentFilterState.checkedCHSDT, false)}
+                            { this.state.fetchedArticle && this.renderTreeSection("Canadian health system document type", canadaHealthSystemSubtype, this.state.currentFilterState.showCanadianHealthSystemDocument, false, this.onCheckCHSDT, this.state.currentFilterState.checkedCHSDT, false)}
 
-                            { this.state.fetchedArticle && this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.currentFilterState.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.currentFilterState.checkedOHSDT, false)}
+                            { this.state.fetchedArticle && this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.currentFilterState.showOntarianHealthSystemDocument, false, this.onCheckOHSDT, this.state.currentFilterState.checkedOHSDT, false)}
 
-                            { this.state.fetchedArticle && this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.currentFilterState.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.currentFilterState.checkedIOHSDT, false)}
+                            { this.state.fetchedArticle && this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.currentFilterState.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDT, this.state.currentFilterState.checkedIOHSDT, false)}
 
                             { this.state.fetchedArticle && this.renderArticleAssessmentSection(value, this.state.currentFilterState.showArticleAssessment) }
 
@@ -881,11 +881,11 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
                             { this.renderTreeSection("Ontario priority areas", ontarioPriorityAreasTreeData, this.state.otherFilterState.showOntarioPriorityArea, false, this.onCheckOPAOther, this.state.otherFilterState.checkedOPA, true)}
 
-                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemDocumentTypeData, this.state.otherFilterState.showCanadianHealthSystemDocument, false, this.onCheckCHSDTOther, this.state.otherFilterState.checkedCHSDT, true)}
+                            { this.renderTreeSection("Canadian health system document type", canadaHealthSystemSubtype, this.state.otherFilterState.showCanadianHealthSystemDocument, false, this.onCheckCHSDTOther, this.state.otherFilterState.checkedCHSDT, true)}
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.otherFilterState.showOntarianHealthSystemDocument, false, this.onCheckOHSDTOther, this.state.otherFilterState.checkedOHSDT, true)}
+                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.otherFilterState.showOntarianHealthSystemDocument, false, this.onCheckOHSDTOther, this.state.otherFilterState.checkedOHSDT, true)}
 
-                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.otherFilterState.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDTOther, this.state.otherFilterState.checkedIOHSDT, true)}
+                            { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.otherFilterState.showIntergovernmentalOrganizationHealthSystemDocument, false, this.onCheckIOHSDTOther, this.state.otherFilterState.checkedIOHSDT, true)}
 
                             { this.renderArticleAssessmentSection(value, this.state.otherFilterState.showArticleAssessment) }
 

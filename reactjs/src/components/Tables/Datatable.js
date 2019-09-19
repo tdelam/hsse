@@ -45,18 +45,26 @@ export default class Datatable extends Component {
         options: {}
     }
 
-    componentDidMount() {
+    componentDidMount() {console.log(this.props)
         const dtInstance = $(this.tableElement).dataTable(this.props.options);
 
         if(this.props.dtInstance)
             this.props.dtInstance(dtInstance)
     }
 
+    handleSelected = () => {
+        //console.log($(this.tableElement).dataTable());
+       this.props.selected(this.props.dtInstance)
+    }
+
     componentWillUnmount() {
         $(this.tableElement).dataTable({destroy: true});
     }
 
-    setRef = node => this.tableElement = node;
+    // setRef = node => this.tableElement = node;
+    setRef = node => {
+        this.tableElement = node
+    };
 
     render() {
         return (

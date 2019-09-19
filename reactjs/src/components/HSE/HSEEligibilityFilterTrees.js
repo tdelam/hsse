@@ -419,7 +419,7 @@ export const provinceFocusExpandedKeys = [
 
 ];
 
-export const canadaHealthSystemDocumentTypeData = [
+export const canadaHealthSystemSubtype = [
     { title: 'Health and health system data', key: 'healthAndHealthSystemData' },
     { title: 'Health expenditure review', key: 'healthExpenditureReview' },
     { title: 'National health account', key: 'nationalHealthAccount' },
@@ -444,64 +444,58 @@ export const canadaHealthSystemDocumentTypeData = [
     { title: 'Government legislation', key: 'governmentLegislation' },
     { title: 'Intergovernmental communiqué', key: 'intergovernmentalCommunique' },
     { title: 'Intergovernmental accord', key: 'intergovernmentalAccord' },
+    { title: 'Government/third party accord', key: 'governmentThirdPartyAccord' }
+];
+
+export const ontarioHealthSubtype = [
+    { title: 'Health and health system data', key: 'healthAndHealthSystemData' },
+    { title: 'Health expenditure review', key: 'healthExpenditureReview' },
+    { title: 'Provincial health account', key: 'provincialHealthAccount' },
+    { title: 'Health system research priorities', key: 'healthSystemResearchPriorities' },
+    { title: 'Situation analysis', key: 'situationAnalysis' },
+    { title: 'Jurisdictional review', key: 'jurisdictionalReview' },
+    { title: 'Performance review', key: 'performanceReview' },
+    { title: 'External evaluation', key: 'externalEvaluation' },
+    { title: 'Literature review', key: 'literatureReview' },
+    { title: 'Framework', key: 'framework' },
+    { title: 'Toolkit', key: 'toolkit' },
+    { title: 'Options framing', key: 'optionsFraming' },
+    { title: 'Guidance', key: 'guidance' },
+    { title: 'Citizen/patient input', key: 'citizenPatientInput' },
+    { title: 'Stakeholder input', key: 'stakeholderInput' },
+    { title: 'Stakeholder position paper', key: 'stakeholderPositionPaper' },
+    { title: 'Political party platform', key: 'politicalPartyPlatform' },
+    { title: 'Government discussion paper', key: 'governmentDiscussionPaper' },
+    { title: 'Government position paper', key: 'governmentPositionPaper' },
+    { title: 'Government strategic plan for the health sector', key: 'governmentStrategicPlanForTheHealthSector' },
+    { title: 'Government policy', key: 'governmentPolicy' },
+    { title: 'Government legislation', key: 'governmentLegislation' },
+    { title: 'Intergovernmental communiqué', key: 'intergovernmentalCommunique' },
+    { title: 'Intergovernmental accord', key: 'intergovernmentalAccord' },
     { title: 'Government/third party accord', key: 'governmentThirdPartyAccord' },
-    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'canadianHealthSystemDocumentTypeNoEligible' },
 ];
 
-export const canadaHealthSystemDocumentTypeExpandedKeys = [
-
-];
-
-export const ontarioHealthDocumentTypeData = [
-    { title: 'Health and health system data', key: '' },
-    { title: 'Health expenditure review', key: '' },
-    { title: 'Provincial health account', key: '' },
-    { title: 'Health system research priorities', key: '' },
-    { title: 'Situation analysis', key: '' },
-    { title: 'Jurisdictional review', key: '' },
-    { title: 'Performance review', key: '' },
-    { title: 'External evaluation', key: '' },
-    { title: 'Literature review', key: '' },
-    { title: 'Framework', key: '' },
-    { title: 'Toolkit', key: '' },
-    { title: 'Options framing', key: '' },
-    { title: 'Guidance', key: '' },
-    { title: 'Citizen/patient input', key: '' },
-    { title: 'Stakeholder input', key: '' },
-    { title: 'Stakeholder position paper', key: '' },
-    { title: 'Political party platform', key: '' },
-    { title: 'Government discussion paper', key: '' },
-    { title: 'Government position paper', key: '' },
-    { title: 'Government strategic plan for the health sector', key: '' },
-    { title: 'Government policy', key: '' },
-    { title: 'Government legislation', key: '' },
-    { title: 'Intergovernmental communiqué', key: '' },
-    { title: 'Intergovernmental accord', key: '' },
-    { title: 'Government/third party accord', key: '' },
-    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'ontarioHealthSystemDocumentTypeNoEligible' }
-];
-
-export const intergovernmentalOrganizationHealthSystemDocumentTypeData = [
-    { title: 'Health and health system data', key: '' },
-    { title: 'Health expenditure review', key: '' },
-    { title: 'Health system research priorities', key: '' },
-    { title: 'Situation analysis', key: '' },
-    { title: 'Jurisdictional review', key: '' },
-    { title: 'Performance review', key: '' },
-    { title: 'External evaluation', key: '' },
-    { title: 'Literature review', key: '' },
-    { title: 'Framework', key: '' },
-    { title: 'Toolkit', key: '' },
-    { title: 'Options framing', key: '' },
-    { title: 'Guidance', key: '' },
-    { title: 'Citizen/patient input', key: '' },
-    { title: 'Stakeholder input', key: '' },
-    { title: 'WHO discussion paper', key: '' },
-    { title: 'WHO strategic plan', key: '' },
-    { title: 'WHO policy', key: '' },
-    { title: 'World Health Assembly resolution', key: '' },
-    { title: 'Inter-agency communiqué', key: '' },
-    { title: 'Inter-agency accord', key: '' },
-    { title: 'WHO/third party accord', key: '' },
-    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: '' },
+export const intergovernmentalOrganizationSubtype = [
+    { title: 'Health and health system data', key: 'healthAndHealthSystemData' },
+    { title: 'Health expenditure review', key: 'healthExpenditureReview' },
+    { title: 'Health system research priorities', key: 'healtySystemResearchPriorities' },
+    { title: 'Situation analysis', key: 'situationAnalysis' },
+    { title: 'Jurisdictional review', key: 'jurisdictionalReview' },
+    { title: 'Performance review', key: 'performanceReview' },
+    { title: 'External evaluation', key: 'externalEvaluation' },
+    { title: 'Literature review', key: 'literatureReview' },
+    { title: 'Framework', key: 'framework' },
+    { title: 'Toolkit', key: 'toolkit' },
+    { title: 'Options framing', key: 'optionsFraming' },
+    { title: 'Guidance', key: 'guidance' },
+    { title: 'Citizen/patient input', key: 'citizenPatientInput' },
+    { title: 'Stakeholder input', key: 'stakeholderInput' },
+    { title: 'WHO discussion paper', key: 'wHODiscussionPaper' },
+    { title: 'WHO position paper', key: 'wHOPositionPaper' },
+    { title: 'WHO strategic plan', key: 'wHOStrategicPlan' },
+    { title: 'WHO policy', key: 'WHOPolicy' },
+    { title: 'World Health Assembly resolution', key: 'worldHealthAssemplyResolution' },
+    { title: 'Inter-agency communiqué', key: 'interAgencyCommunique' },
+    { title: 'Inter-agency accord', key: 'interAgencyAccord' },
+    { title: 'WHO/third party accord', key: 'wHOThirdPartyAccord' }
 ];

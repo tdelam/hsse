@@ -1,3 +1,10 @@
+/**
+ * @name HSEAssignedEligibilityFiltersArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles in the assigned
+ * eligibility and filters queue
+ */
+
 const _ = require('lodash');
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
@@ -6,11 +13,18 @@ const HSEArticleModelClass = mongoose.model('HSEArticles');
 const HSEArticleEligibilityFilterModelClass = mongoose.model('HSEArticleEligibilityFilters');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {
+/**
+ * Returns a list of articles which are in the eligibility and filters queue and assigned to a particular user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param WritableStream res The function's response body
+ */
+exports.listArticles = async (req, res) => { // REFACTOR: rename function to list
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    HSEArticleModelClass.find({ complicated: false, eligibilityFiltersFullCompletion: false })
+    HSEArticleModelClass.find({ lostArticle: false, complicated: false, eligibilityFiltersFullCompletion: false })
     .or([ { _eligibilityFiltersJunior: user._id }, { _eligibilityFiltersSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
@@ -24,7 +38,15 @@ exports.listArticles = async (req, res) => {
     });
 };
 
-exports.fetchArticle = async (req, res) => {
+/**
+ * Returns the details of an article assigned to a particular user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename function to fetch
 
     const { articleId } = req.params;
     
@@ -51,7 +73,16 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
-exports.setEligibilityFiltersValues = async (req, res) => {
+/**
+ * Sets an assigned article's details
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
+exports.setEligibilityFiltersValues = async (req, res) => { // REFACTOR: rename to setValues
 
     const { articleId } = req.params;
 
@@ -125,7 +156,7 @@ exports.setEligibilityFiltersValues = async (req, res) => {
 };
 
 /*
-exports.setEligibilityFiltersValues = async (req, res) => {
+exports.setEligibilityFiltersValues = async (req, res) => { // NOTE: commented out
 
     const { articleId } = req.params;
 
@@ -235,7 +266,10 @@ exports.setEligibilityFiltersValues = async (req, res) => {
 };
 */
 
-exports.setEligibilityFiltersComplete = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setEligibilityFiltersComplete = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
 
@@ -308,7 +342,10 @@ exports.setEligibilityFiltersComplete = async (req, res) => {
 };
 
 
-exports.setJuniorEligibilityFilterComplete = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setJuniorEligibilityFilterComplete = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
     
@@ -339,7 +376,10 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
 };
 
-exports.setSeniorEligibilityFiltersComplete = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setSeniorEligibilityFiltersComplete = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
     
@@ -378,7 +418,17 @@ exports.setSeniorEligibilityFiltersComplete = async (req, res) => {
 
 };
 
-exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
+/**
+ * SAVES CHANGES AND MARKS ARTICLE AS COMPLETE BY ASSIGNED USER
+ * REFACTOR: why not call setEligibilityFiltersValues() within this method instead of re-implementing settting inputs?
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
+exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => { // REFACTOR rename to setCompleteOrResolve
     
     const { articleId } = req.params;
 
@@ -554,7 +604,10 @@ exports.setFullEligibilityFiltersCompleteOrResolve = async (req, res) => {
 
 };
 
-exports.setFullCompletion = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setFullCompletion = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
 
@@ -598,7 +651,10 @@ const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
     
 };
 
-exports.setEligibilityFilterInputs = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setEligibilityFilterInputs = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
 
@@ -623,7 +679,15 @@ exports.setEligibilityFilterInputs = async (req, res) => {
        });
 };
 
-exports.removeArticleFromJuniorEligibilityFilterer = async (req, res) => {
+/**
+ * Remove a junior assigned article from a user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
+exports.removeArticleFromJuniorEligibilityFilterer = async (req, res) => { // REFACTOR: rename to removeFromJunior
 
     const { articleId } = req.params;
     
@@ -669,7 +733,17 @@ exports.removeArticleFromJuniorEligibilityFilterer = async (req, res) => {
 };
 
 
-exports.removeAllArticlesFromJuniorEligibilityFilterer = async (req, res) => {
+/**
+ * Remove multiple junior assigned articles from a user
+ * REFACTOR: this and removeArticleFromJuniorEligibilityFilterer() are identical other than working on one or multiple articles
+ *           so why not merge the two?
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param array req.params.articleIds An array of article IDs to affect
+ * @param WritableStream res The function's response body
+ */
+exports.removeAllArticlesFromJuniorEligibilityFilterer = async (req, res) => { // REFACTOR: rename to removeAllFromJunior
 
     const { articleIds } = req.body;
     
@@ -719,7 +793,15 @@ exports.removeAllArticlesFromJuniorEligibilityFilterer = async (req, res) => {
 
 };
 
-exports.removeArticleFromSeniorEligibilityFilterer = async (req, res) => {
+/**
+ * Remove a senior assigned article from a user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
+exports.removeArticleFromSeniorEligibilityFilterer = async (req, res) => { // REFACTOR: rename to removeFromSenior
 
     const { articleId } = req.params;
     console.log(req.headers);
@@ -769,7 +851,17 @@ exports.removeArticleFromSeniorEligibilityFilterer = async (req, res) => {
 
 };
 
-exports.removeAllArticlesFromSeniorEligibilityFilterer = async (req, res) => {
+/**
+ * Remove multiple senior assigned articles from a user
+ * REFACTOR: this and removeArticleFromSeniorEligibilityFilterer() are identical other than working on one or multiple articles
+ *           so why not merge the two?
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param array req.params.articleIds An array of article IDs to affect
+ * @param WritableStream res The function's response body
+ */
+exports.removeAllArticlesFromSeniorEligibilityFilterer = async (req, res) => { // REFACTOR: rename to removeAllFromSenior
 
     const { articleIds } = req.body;
     console.log(req.headers);

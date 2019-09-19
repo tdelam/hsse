@@ -1,9 +1,21 @@
+/**
+ * @name 
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for 
+ */
+
 const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticles = async (req, res) => {
     HSEArticleModelClass.find({ complicated: false })
        .and([ { _presentationDetailsJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
@@ -19,6 +31,12 @@ exports.listArticles = async (req, res) => {
        });
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticle = async (req, res) => {
 
     const id = req.param.id;
@@ -27,10 +45,22 @@ exports.listArticle = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.create = (req, res) => {
     
 }
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.addArticleToJuniorPresentationDetailer = async (req, res) => {
 
     const { articleId } = req.params;

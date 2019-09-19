@@ -30,7 +30,10 @@ export const DEACTIVATE_USER_ERROR = 'deactivate_user_error';
 export const HSE_ARTICLE_ERROR = 'hse_article_error';
 
 export const HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE = 'hse_add_article_to_complicated_queue';
-export const HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR = 'hsek_add_article_to_complicatedk_queue_error';
+export const HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR = 'hse_add_article_to_complicated_queue_error';
+
+export const HSE_ADD_ARTICLE_TO_LOST_QUEUE = 'hse_add_article_to_lost_queue';
+export const HSE_ADD_ARTICLE_TO_LOST_QUEUE_ERROR = 'hse_add_article_to_lost_queue_error';
 
 export const HSE_FETCH_ARTICLE = 'hse_fetch_article';
 export const HSE_FETCH_ARTICLE_ERROR = 'hse_fetch_article_error';

@@ -1,3 +1,9 @@
+/**
+ * @name authentication.js
+ * @author Kwadwo Sakyi
+ * @description This file defines all functions that manage user authentication
+ */
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jwt-simple');
@@ -94,10 +100,27 @@ const sendResetEmail = (args, emailToken) => {
     });
 }
 
+/**
+ * Signs a user into the application
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.signin = (req, res, next) => {
     res.send({ token: userToken(req.user) });
 }
 
+/**
+ * Signs up a user with a new account
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.body.email The user's email address
+ * @param string req.body.password The user's password
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.signup = (req, res, next) => {
     const { email } = req.body;
     const { password } = req.body;
@@ -136,6 +159,14 @@ exports.signup = (req, res, next) => {
     
 }
 
+/**
+ * Sends an account confirmation email to a user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.token The JWT user token
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.confirmUser = (req, res, next) => {
 
     const { sub } = jwt.decode(req.params.token, process.env.JWT_SECRET);
@@ -154,6 +185,14 @@ exports.confirmUser = (req, res, next) => {
 
 }
 
+/**
+ * Returns the current user's database document
+ * 
+ * @param ReadableStream req The function's request body
+ * @param object req.headers The request headers containing an authorization token
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.currentUser = async (req, res, next) => {
 
     const userId = getUserIdFromToken(req.headers.authorization);
@@ -164,6 +203,14 @@ exports.currentUser = async (req, res, next) => {
 
 }
 
+/**
+ * Returns a user's database document based on their email address
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.email The user's email address
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.fetchUserByEmail = async (req, res, next) => {
 
     console.log(req.params);
@@ -176,6 +223,15 @@ exports.fetchUserByEmail = async (req, res, next) => {
 
 }
 
+/**
+ * Resets a user's password
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.token The JWT user token
+ * @param object req.body An object containing "password" and "confirmPassword" properties
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.resetPassword = (req, res, next) => {
 
     console.log("**************** INSIDE RESET PASSWORD *******************");
@@ -233,6 +289,14 @@ exports.resetPassword = (req, res, next) => {
     return res.status(200).send({ message: 'Password has been successfully reset'});
 }
 
+/**
+ * Sends an email to a user enabling them to reset their password
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.body.email The user's email address
+ * @param WritableStream res The function's response body
+ * @param ? next TODO: document
+ */
 exports.sendPasswordResetEmail = (req, res, next) => {
 
     const { email } = req.body;
@@ -278,6 +342,11 @@ exports.getUserFromToken = (token) => {
 }
 */
 
+/**
+ * Returns a user's database document based on the JWT authentication token
+ * 
+ * @param JWTToken token
+ */
 exports.getUserFromToken = async (token) => {
 
     const userId = getUserIdFromToken(token);
@@ -285,6 +354,12 @@ exports.getUserFromToken = async (token) => {
     return await UserModelClass.findOne({ _id: userId }).exec();
 }
 
+/**
+ * Returns a list of all users
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.fetchAllUsers = (req, res) => {
     UserModelClass.find( (err, users) => {
         if(err) {
@@ -298,6 +373,9 @@ exports.fetchAllUsers = (req, res) => {
     });
 }
 
+/**
+ * DEFUNCT: to be removed
+ */
 exports.addRole = async (req, res) => {
 
     const values = req.body;
@@ -346,6 +424,9 @@ exports.addRole = async (req, res) => {
 
 }
 
+/**
+ * DEFUNCT: to be removed
+ */
 exports.removeRole = async (req, res) => {
 
     const values = req.body;
@@ -380,6 +461,13 @@ exports.removeRole = async (req, res) => {
 
 }
 
+/**
+ * Updates a user's role
+ * 
+ * @param ReadableStream req The function's request body
+ * @param object req.body.value An object containing "selectedRole" and "selectedEmail" properties
+ * @param WritableStream res The function's response body
+ */
 exports.updateRole = async (req, res) => {
     //console.log(req.body.value);
     let values;
@@ -452,6 +540,13 @@ exports.updateRole = async (req, res) => {
 
 }
 
+/**
+ * Allows a user account to be used
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.body.values The username to activate
+ * @param WritableStream res The function's response body
+ */
 exports.activateUser = async (req, res) => {
 
     const user = req.body.values;
@@ -485,6 +580,13 @@ exports.activateUser = async (req, res) => {
 
 }
 
+/**
+ * Disables a user account, not allowing it to be used
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.body.values The username to deactivate
+ * @param WritableStream res The function's response body
+ */
 exports.deactivateUser = async (req, res) => {
 
     const user = req.body.values;

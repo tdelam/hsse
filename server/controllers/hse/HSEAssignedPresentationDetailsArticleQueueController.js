@@ -1,3 +1,9 @@
+/**
+ * @name 
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for 
+ */
+
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -5,6 +11,12 @@ const HSEArticleModelClass = mongoose.model('HSEArticles');
 const HSEArticlePresentationDetailsModelClass = mongoose.model('HSEArticlePresentationDetails');
 const Authentication = require('../authentication');
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.listArticles = async (req, res) => {
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
@@ -22,6 +34,12 @@ exports.listArticles = async (req, res) => {
     });
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.fetchArticle = async (req, res) => {
 
     const { articleId } = req.params;
@@ -48,6 +66,12 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setPresentationDetailsValues = async (req, res) => {
 
     const { articleId } = req.params;
@@ -122,6 +146,12 @@ exports.setPresentationDetailsValues = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -178,6 +208,12 @@ exports.setPresentationDetailsComplete = async (req, res) => {
 };
 
 /*
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setEligibilityFilterComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -238,6 +274,12 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setJuniorPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -269,6 +311,12 @@ exports.setJuniorPresentationDetailsComplete = async (req, res) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setSeniorPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -392,6 +440,12 @@ const setFullPresentationDetailsComplete = async (articleId) => {
 
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setFullCompletion = async (req, res) => {
 
     const { articleId } = req.params;
@@ -436,6 +490,12 @@ const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
     
 };
 
+/**
+ * TODO: document
+ * @param ReadableStream req The function's request body
+ * @param string req.user The username of the user to sign in.
+ * @param WritableStream res The function's response body
+ */
 exports.setQualityAppraisalInputs = async (req, res) => {
 
     const { articleId } = req.params;

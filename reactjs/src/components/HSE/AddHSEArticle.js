@@ -175,7 +175,7 @@ class AddHSEArticle extends Component {
             {...input}
         >
             <option value="Single article from referrals">Single article from referrals</option>
-            <option value="Single article from referrals">Single article from other sources</option>
+            <option value="Single article from other sources">Single article from other sources</option>
         </Input>
     }
 
