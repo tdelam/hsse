@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import ContentWrapper from '../Layout/ContentWrapper';
@@ -29,6 +29,8 @@ class AddSSEArticle extends Component {
 
     state = {
         sseSingleArticle: {
+            selectedSourceOption: '',
+
             title: '',
             authors: '',
             journal: '',
@@ -81,7 +83,7 @@ class AddSSEArticle extends Component {
     }
 
     handleSubmit = (formProps) => {
-        this.props.signin(formProps, this.gotoDashboard);
+        this.props.onSSEArticleSubmit(formProps, this.props.history);
     }
 
     /* Simplify error check */
@@ -96,7 +98,81 @@ class AddSSEArticle extends Component {
         this.setState({ harvestDate: event._d })
     }
 
+    handleChangeSelect = (selectedSourceOption) => {
+        this.setState({ selectedSourceOption });
+    }
+
+    renderTitleField = ({input}) => {
+        return <Input type="text"
+            name="title"
+            className="border-right-0"
+            placeholder="Enter title"
+            invalid={this.hasError('sseSingleArticle','title','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        />
+    }
+
+    renderAuthorsField = ({input}) => {
+        return <Input type="text"
+            name="authors"
+            className="border-right-0"
+            placeholder="Enter author(s)"
+            invalid={this.hasError('sseSingleArticle','authors','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        />
+    }
+
+    renderJournalField = ({input}) => {
+        return <Input type="text"
+            name="journal"
+            className="border-right-0"
+            placeholder="Enter journal"
+            invalid={this.hasError('sseSingleArticle','journal','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        />
+    }
+
+    renderPublishedDateField = ({input}) => {
+        return <Datetime
+            dateFormat="YYYY"
+            inputProps={{className: 'form-control'}}
+            timeFormat={false}
+            onChange={this.onDateChange.bind(this)}
+            {...input}
+            //defaultValue=""
+        />
+    }
+
+    renderSourceField = ({input}) => {
+        return <Input
+            type="select"
+            name="articleSource"
+            className="border-right-0"
+            placeholder="Select source"
+            invalid={this.hasError('sseSingleArticle','articleSource','required')}
+            onChange={this.validateOnChange}
+            data-validate='["required"]'
+            //value={this.state.formLogin.email}
+            {...input}
+        >
+            <option value="Single article from referrals">Single article from referrals</option>
+            <option value="Single article from other sources">Single article from other sources</option>
+        </Input>
+    }
+
     render() {
+
+        const { selectedSourceOption } = this.state;
+        const SourceValue = selectedSourceOption && selectedSourceOption.value;
 
         const { handleSubmit } = this.props;
 
@@ -115,7 +191,7 @@ class AddSSEArticle extends Component {
                 { /* START row */ }
                 <Row>
                     <div className="col-md-12">
-                        <form onSubmit={ handleSubmit(this.onSubmit) } action="" name="sseSingleArticle">
+                        <form onSubmit={ handleSubmit(this.handleSubmit) } name="sseSingleArticle">
                             { /* START card */ }
                             <Card className="card-default">
                                 <CardHeader>
@@ -145,14 +221,17 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Authors</label>
                                             <Col md={ 6 }>
-                                                <Input type="text"
+                                            <Field 
+                                                    type="text"
                                                     name="authors"
-                                                    placeholder="Enter author(s)"
-                                                    invalid={this.hasError('sseSingleArticle','text','required')||this.hasError('formDemo','email','email')}
+                                                    component={this.renderAuthorsField}
+                                                    autoComplete="none"
+                                                    className="form-control"
+                                                    invalid={this.hasError('sseSingleArticle', 'text', 'required')||this.hasError('sseSingleArticle','email','email')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
-                                                    value={this.state.sseSingleArticle.authors}/>
-                                                { this.hasError('sseSingleArticle','text','required') && <span className="invalid-feedback">Field is required</span> }
+                                                    value={this.state.authors}/>
+                                                { this.hasError('sseSingleArticle', 'authors', 'required') && <span className="invalid-feedback">Field is required</span> }
                                             </Col>
                                             <Col md={ 4 }></Col>
                                         </div>
@@ -176,13 +255,15 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Journal</label>
                                             <Col md={ 6 }>
-                                                <Input type="text"
+                                            <Field 
+                                                    /*type="select"*/
                                                     name="journal"
-                                                    invalid={this.hasError('sseSingleArticle','text','required')}
+                                                    component={this.renderJournalField}
+                                                    invalid={this.hasError('sseSingleArticle','articleArticleSource','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
-                                                    value={this.state.sseSingleArticle.journal}/>
-                                                { this.hasError('sseSingleArticle','text','required') && <span className="invalid-feedback">Field is required</span> }
+                                                    value={this.state.journal}/>
+                                                <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>
                                             </Col>
@@ -192,15 +273,14 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Article Source</label>
                                             <Col md={ 6 }>
-                                                <Input 
-                                                    type="select"
-                                                    name="articleSource"
-                                                    invalid={this.hasError('sseSingleArticle','select','required')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["required"]'
-                                                    value={this.state.sseSingleArticle.articleSource}/>
-                                                    <option value="one">1</option>
-                                                    <option value="two">2</option>
+                                            <Field
+                                                name="articleSource"
+                                                component={this.renderSourceField}
+                                                invalid={this.hasError('sseSingleArticle','text','required')}
+                                                onChange={this.handleChangeSelect}
+                                                data-validate='["required"]'
+                                                value={SourceValue} />
+                                            <span className="invalid-feedback">Field is required</span>
                                             </Col>
                                             <Col md={ 4 }>
                                             </Col>

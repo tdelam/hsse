@@ -8,8 +8,10 @@ const config = require('../../config/baseConfig');
 module.exports = (app) => {
     
     // app.get('/api/ssearticles', requireSignin, SSEArticleController.list);
-    app.get('/api/ssearticle/:articleId', SSEArticleController.read);
-    app.post('/api/ssearticles', SSEArticleController.create);
-    app.delete('/api/ssearticles/:articleId', SSEArticleController.delete);
+    app.get('/sse/articles', SSEArticleController.list);
+    app.get('/sse/article/:articleId', SSEArticleController.read);
+    app.post('/sse/articles', SSEArticleController.create);
+    app.post('/sse/articles/addtocomplicatedqueue/:articleId', SSEArticleController.addToComplicatedQueue);
+    app.delete('/sse/articles/:articleId', SSEArticleController.delete);
     
 };
