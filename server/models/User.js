@@ -1,3 +1,9 @@
+/**
+ * @name User.js
+ * @author Kwadwo Sakyi
+ * @description Defines the user model
+ */
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
@@ -22,6 +28,9 @@ const userSchema = new Schema({
    
 });
 
+/**
+ * A pre-middleware function which hashes the user's password before saving
+ */
 userSchema.pre('save', function(next) {
     const user = this;
 
@@ -38,6 +47,11 @@ userSchema.pre('save', function(next) {
 
 });
 
+/**
+ * Tests a user's password
+ * 
+ * @param string candidatePassword The password to test
+ */
 userSchema.methods.comparePassword = function(candidatePassword, callback) {
     
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
