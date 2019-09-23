@@ -11,12 +11,12 @@ const Authentication = require('../authentication');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
-exports.listArticles = async (req, res) => {
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
     HSEArticleModelClass.find({ complicated: false })
        .and([ { _presentationDetailsJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
        .exec(function(err, articles) {
@@ -32,12 +32,12 @@ exports.listArticles = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
-exports.listArticle = async (req, res) => {
+exports.listArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const id = req.param.id;
 
@@ -45,20 +45,14 @@ exports.listArticle = async (req, res) => {
 
 };
 
-/**
- * TODO: document
- * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
- * @param WritableStream res The function's response body
- */
-exports.create = (req, res) => {
+exports.create = (req, res) => { // DEFUNCT
     
 }
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.addArticleToJuniorPresentationDetailer = async (req, res) => {

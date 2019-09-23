@@ -14,10 +14,9 @@ const HSEArticleModelClass = mongoose.model('HSEArticles');
  * Rename to list
  * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
-exports.listArticles = async (req, res) => {
+exports.listArticles = async (req, res) => { // REFACTOR: Rename to list
     HSEArticleModelClass.find({ complicated: false/*, eligibilityFiltersFullCompletion: true*/ })
         .and([ { _linkingStudiesJunior: null } ])
         .exec(function(err, articles) {
@@ -36,10 +35,10 @@ exports.listArticles = async (req, res) => {
  * Rename to fetch
  * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
+ * @param string req.param.id The ID of the 
  * @param WritableStream res The function's response body
  */
-exports.listArticle = async (req, res) => {
+exports.listArticle = async (req, res) => { // REFACTOR: Rename to fetch
 
     const id = req.param.id;
 
@@ -47,22 +46,17 @@ exports.listArticle = async (req, res) => {
 
 };
 
-/**
- * DEFUNCT
- */
-exports.create = (req, res) => {
+exports.create = (req, res) => { // DEFUNCT
     
 }
 
 /**
  * Assign the article to a user for the linking queue
- * Rename: assignToLinker
  * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
-exports.addArticleToJuniorLinker = async (req, res) => {
+exports.addArticleToJuniorLinker = async (req, res) => { // REFACTOR: rename to assignToLinker
 
     const { articleId } = req.params;
     

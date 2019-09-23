@@ -202,7 +202,7 @@ exports.list = (req, res) => {
  * @param string req.params.batchfileId The batch file's identifier
  * @param WritableStream res The function's response body
  */
-exports.read = (req, res) => { // REFACTOR: rename function to fetch
+exports.read = (req, res) => { // REFACTOR: rename to fetch
 
     const { batchfileId } = req.params;
 
