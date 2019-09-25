@@ -191,7 +191,8 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
     }
 
     renderArticles() {
-        if(this.state.pendingArticles.length > 0 ) {
+        console.log(this.state)
+        if(this.state.pendingArticles && this.state.pendingArticles.length > 0 ) {
         let testRows = this.state.pendingArticles.map(article => {
             
             return (<PendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);

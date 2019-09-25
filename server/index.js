@@ -22,8 +22,6 @@ require('./models/sse/SSEArticleQualityAppraisal');
 require('./models/sse/SSEArticleLinkingStudies');
 require('./models/sse/SSEArticlePresentationDetails');
 
-require('./models/Stage');
-
 mongoose.connect(
     process.env.MONGO_URI,
     { useNewUrlParser: true },
@@ -46,7 +44,6 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 require('./routes/authRoutes')(app);
 
 // Common Routes
-require('./routes/stageRoutes')(app);
 require('./routes/uploadRoutes')(app);
 
 // SSE Routes
