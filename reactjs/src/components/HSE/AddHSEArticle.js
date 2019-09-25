@@ -271,7 +271,7 @@ class AddHSEArticle extends Component {
                                                     /*type="select"*/
                                                     name="journal"
                                                     component={this.renderJournalField}
-                                                    invalid={this.hasError('hseSingleArticle','articleArouce','required')}
+                                                    invalid={this.hasError('hseSingleArticle','articleSource','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["integer"]'
                                                     value={this.state.journal}/>

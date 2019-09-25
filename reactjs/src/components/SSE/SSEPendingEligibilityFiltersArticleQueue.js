@@ -1,3 +1,9 @@
+/**
+ * @name SSEPendingEligibilityFiltersArticleQueue.js
+ * @author Kwadwo Sakyi
+ * @description This component renders articles that are pending (have not been assigned yet)
+ */
+
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { 
@@ -11,38 +17,21 @@ import {
     Button
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import Swal from '../Elements/Swal';
+import { ToastContainer, toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 
+import PendingEligibilityFiltersArticleQueueRow from '../Common/PendingEligibilityFiltersArticleQueueRow';
 import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
+import $ from 'jquery';
 
-const dtOptions = {
-    'paging': true, // Table pagination
-    'ordering': true, // Column ordering
-    'info': true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-        sSearch: '<em class="fa fa-search"></em>',
-        sLengthMenu: '_MENU_ records per page',
-        info: 'Showing page _PAGE_ of _PAGES_',
-        zeroRecords: 'Nothing found - sorry',
-        infoEmpty: 'No records available',
-        infoFiltered: '(filtered from _MAX_ total records)',
-        oPaginate: {
-            sNext: '<em class="fa fa-caret-right"></em>',
-            sPrevious: '<em class="fa fa-caret-left"></em>'
-        }
-    }
-}
 
 class SSEPendingEligibilityFiltersArticleQueue extends Component {
 
+    state = {};
 
     constructor(props, context) {
         super(props, context);
@@ -68,13 +57,18 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, assign it!",
                 closeOnConfirm: true
-            }
+            },
+            pendingArticles: [],
+            instance: null
         };
 
     }
 
     componentDidMount() {
-        this.props.listSSEPendingEligibilityFiltersArticlesQueue();
+        this.props.listSSEPendingEligibilityFiltersArticlesQueue().then(res => {
+            this.setState({ pendingArticles: res});
+            console.log(res);
+        });
     }
 
     toggleModal = (articleId) => {
@@ -112,101 +106,132 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
 
     }
 
-
     swalCallback(isConfirm, swal) {
         swal("Assigned!", "The article has been assigned to your pending Eligibility & Filter list.", "success");
     }
 
     swalCallbackAssignJunior(isConfirm, articleId) {
-        if(isConfirm)
-            this.props.assignSSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, this.props.history);
+        if(isConfirm) {
+            const result = this.props.assignSSEPendingEligibilityFiltersArticlesJuniorFilter(articleId, this.props.history);
+            console.log(result);
+        }
     }
 
     swalCallbackAssignSenior(isConfirm, articleId) {
-        if(isConfirm)
-            this.props.assignSSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, this.props.history);
+        if(isConfirm) {
+            const result = this.props.assignSSEPendingEligibilityFiltersArticlesSeniorFilter(articleId, this.props.history);
+            console.log(result);
+        }
+    }
+
+    notify = (message, type, position) => toast(message, {
+        type,
+        position
+    });
+
+    dtOptions2 = {
+        'paging': true, // Table pagination
+        'ordering': true, // Column ordering
+        'info': true, // Bottom left status text
+        responsive: true,
+        // Text translation options
+        // Note the required keywords between underscores (e.g _MENU_)
+        oLanguage: {
+            sSearch: '<em class="fa fa-search"></em>',
+            sLengthMenu: '_MENU_ records per page',
+            info: 'Showing page _PAGE_ of _PAGES_',
+            zeroRecords: 'Nothing found - sorry',
+            infoEmpty: 'No records available',
+            infoFiltered: '(filtered from _MAX_ total records)',
+            oPaginate: {
+                sNext: '<em class="fa fa-caret-right"></em>',
+                sPrevious: '<em class="fa fa-caret-left"></em>'
+            }
+        },
+        columnDefs: [ {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0
+            } ],
+            dom: 'Bfrtipl',
+
+            select: {
+                style:    'multi',
+                selector: 'td:first-child'
+            },
+            order: [[ 1, 'asc' ]]
+    };
+
+    logConsole = (message) => {
+        console.log(message);
+    }
+
+    handleSelected = (tableElement) => {
+        console.log(tableElement);
+        this.setState({ instance : tableElement })
+    }
+
+    // Access to internal datatable instance for customizations
+    dtInstance = dtInstance => {
+
+        console.log(dtInstance);
+        
+        const inputSearchClass = 'datatable_input_col_search';
+        const columnInputs = $('tfoot .' + inputSearchClass);
+        // On input keyup trigger filtering
+        columnInputs
+            .keyup(function() {
+                dtInstance.fnFilter(this.value, columnInputs.index(this));
+            });
+
+        const selectedFilteredButton = $('select-filtered');
+        selectedFilteredButton.click(function() {
+            console.log('select-filtered')
+        })
     }
 
     renderArticles() {
-        console.log("Testing ");
-        if(this.props.pendingArticles != null ) {
-            const rows = Object.entries(this.props.pendingArticles).map(article => {
-                return (
-                    <tr key={article[1]._id}>
-                        {/*
-                        <td className="text-center">
-                            <span className="badge badge-success">{ article[1].priority }</span>
-                        </td>
-                        */}
-                        { this.renderPriority(article[1].priority) }
-                        <td>
-                            { article[1].articleSource }
-                        </td>
-                        <td>
-                            { article[1].harvestDate }
-                        </td>
-                        <td>
-                            {article[1]._eligibilityFiltersJuniorEmail || <Link to="/sse/assignedeligibilityfiltersarticlequeue"><Swal options={this.state.swalOptionJunior} callback={ (isConfirm) => this.swalCallbackAssignJunior(isConfirm, article[1]._id)}  className="mr-1 badge badge-primary">Assign</Swal></Link>}
-                            {/*article[1]._eligibilityFilterJunior || <a href=""><Swal options={this.state.swalOptionJunior} callback={this.swalCallback} className="mr-1 badge badge-primary">Assign</Swal></a>*/}
-                        </td>
-                        <td>
-                            {article[1]._eligibilityFiltersSeniorEmail || <Link to="/sse/assignedeligibilityfiltersarticlequeue" ><Swal options={this.state.swalOptionSenior} callback={ (isConfirm) => this.swalCallbackAssignSenior(isConfirm, article[1]._id)} className="mr-1 badge badge-primary">Assign</Swal></Link>}
-                        </td>
-                        {/*<td><a className="mr-1 badge badge-primary" href="">{ article[1]._id }</a></td>*/}
-                        <td>{ article[1]._id }</td>
-                        <td>{ article[1].title }</td>
-                        <td>{ article[1].author }</td>
-                        <td>{ article[1].language }</td>
-                        {/*}
-                        <td className="text-right">
-                            <Swal options={this.state.swalOption} callback={this.swalCallback} className="btn btn-primary">AssignJ</Swal>
-                        </td> */}
-                    {/*         
-                        <td className="text-right">
-                            <button type="button" className="btn btn-sm btn-secondary">
-                                <em className="fas fa-pencil-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-danger">
-                                <em className="fas fa-trash-alt"></em>
-                            </button>
-                            <button type="button" className="btn btn-sm btn-success">
-                                <em className="fa fa-check"></em>
-                            </button>
-                        </td>
-                    */}    
-                    </tr>
-                )
-            });
+        console.log(this.state)
+        if(this.state.pendingArticles && this.state.pendingArticles.length > 0 ) {
+        let testRows = this.state.pendingArticles.map(article => {
+            
+            return (<PendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);
+        });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (
-                <Datatable options={dtOptions}>
-                    <table className="table table-striped my-4 w-100">
-                        <thead>
-                            <tr>
-                                <th data-priority="1">Priority</th>
-                                <th>Source</th>
-                                <th>Harvest Date</th>
-                                <th>Junior Filterer</th>
-                                <th>Senior Filterer</th>
-                                <th>Article Id</th>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Language</th>
-                                {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
-                                {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { rows }
-                        </tbody>
-                    </table>
-                </Datatable>
+                <div>
+                    <Datatable options={this.dtOptions2} onSelected={this.handleSelected} >
+                        <table className="table table-striped my-4 w-100">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Select</th>
+                                    <th>Priority</th>
+                                    <th>Source</th>
+                                    <th>Harvest Date</th>
+                                    <th>Junior Filterer</th>
+                                    <th>Senior Filterer</th>
+                                    <th>Article Id</th>
+                                    <th>Title</th>
+                                    <th>Author(s)</th>
+                                    <th>Language</th>
+                                    {/*<th style={{width:"10px"}} className="text-right" data-priority="2">Assign</th>*/}
+                                    {/* <th style={{width:"130px"}} className="text-right" data-priority="2">Assign</th> */}
+                                </tr>
+                            </thead>
+                            <tbody>                            
+                                { testRows }
+                            </tbody>
+                        </table>
+                    </Datatable>
+                    <ToastContainer />
+                </div>
             );
-        }    
+        } 
+            
     };
 
     render() {
-        
+        console.log(this.props);
         return (
             <ContentWrapper>
                 <div className="content-heading">
@@ -227,7 +252,7 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        { this.renderArticles() }
+                            { this.renderArticles() }
                     </CardBody>
                 </Card>
             </ContentWrapper>
