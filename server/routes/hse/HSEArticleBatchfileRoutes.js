@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticleBatchfileRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for HSE article batch files
+ */
+
 const passport = require('passport');
 
 const HSEArticleBatchfileController = require('../../controllers/hse/HSEArticleBatchfileController');

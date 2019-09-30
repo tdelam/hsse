@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticleRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for HSE articles
+ */
+
 const passport = require('passport');
 
 const HSEArticleController = require('../../controllers/hse/HSEArticleController');

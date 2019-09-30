@@ -1,8 +1,7 @@
 /**
  * @name HSEArticleController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
- * @description This file contains the CRUD controller methods for HSE articles
+ * @description This file contains the CRUD controller methods for HSE articles.
  */
 
 const mongoose = require('mongoose');

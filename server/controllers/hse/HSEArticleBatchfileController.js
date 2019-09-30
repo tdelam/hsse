@@ -2,7 +2,7 @@
  * @name HSEArticleBatchfileController.js
  * @author Kwadwo Sakyi
  * @description This file contains the controller methods for managing HSE article batch files.
- * Note that batch files are stored in an S3 object storage service
+ * Note that batch files are stored in an S3 object storage service.
  */
 
 const axios = require('axios');

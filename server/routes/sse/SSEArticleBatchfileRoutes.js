@@ -1,3 +1,9 @@
+/**
+ * @name SSEArticleBatchfileRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for SSE article batch files
+ */
+
 const passport = require('passport');
 
 const SSEArticleBatchfileController = require('../../controllers/sse/SSEArticleBatchfileController');

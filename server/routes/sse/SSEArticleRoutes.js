@@ -1,3 +1,9 @@
+/**
+ * @name SSEArticleRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for SSE articles
+ */
+
 const passport = require('passport');
 
 const SSEArticleController = require('../../controllers/sse/SSEArticleController');

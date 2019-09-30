@@ -1,3 +1,10 @@
+/**
+ * @name HSEPendingLinkingStudiesArticleQueueRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for articles which are in the linking studies queue
+ * and are not assigned to any user.
+ */
+
 const HSEPendingLinkingStudiesArticleQueueController = require('../../controllers/hse/HSEPendingLinkingStudiesArticleQueueController');
 
 module.exports = app => {

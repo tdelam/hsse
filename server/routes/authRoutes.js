@@ -1,3 +1,9 @@
+/**
+ * @name authRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all authentication routes
+ */
+
 const jwt = require('jwt-simple');
 const Authentication = require('../controllers/authentication');
 const passportService = require('../services/passport');

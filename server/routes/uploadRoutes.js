@@ -1,3 +1,9 @@
+/**
+ * @name uploadRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all upload routes
+ */
+
 const AWS = require('aws-sdk');
 const uuid = require('uuid/v1');
 const jwt = require('jwt-simple');

@@ -1,3 +1,10 @@
+/**
+ * @name SSEPendingQualityAppraisalsArticleQueueRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for articles which are in the quality appraisal queue
+ * and are not assigned to any user.
+ */
+
 const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false});
 

@@ -1,7 +1,7 @@
 /**
- * @name 
+ * @name HSEPendingEligibilityFiltersBatchfileQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
+ * @description TODO: not sure what this file is for
  */
 
 const mongoose = require('mongoose');

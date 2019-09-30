@@ -1,3 +1,8 @@
+/**
+ * @name stageRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all stage routes
+ */
 
 const StageController = require('../controllers/stageController');
 

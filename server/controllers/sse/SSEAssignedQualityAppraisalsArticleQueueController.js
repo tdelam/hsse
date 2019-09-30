@@ -1,3 +1,10 @@
+/**
+ * @name SSEAssignedQualityAppraisalsArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles which are in the quality appraisal queue
+ * and assigned to the current user.
+ */
+
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -5,7 +12,13 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 const SSEArticleQualityAppraisalModelClass = mongoose.model('SSEArticleQualityAppraisals');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
     SSEArticleModelClass.find()
@@ -22,7 +35,13 @@ exports.listArticles = async (req, res) => {
     });
 };
 
-exports.fetchArticle = async (req, res) => {
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
     
@@ -49,6 +68,12 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setQualityAppraisalValues = async (req, res) => {
 
     const { articleId } = req.params;
@@ -143,6 +168,12 @@ exports.setQualityAppraisalValues = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setnewQualityAppraisalComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -250,6 +281,12 @@ exports.setnewQualityAppraisalComplete = async (req, res) => {
 
 
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -281,6 +318,12 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -314,6 +357,12 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
     SSEArticleModelClass.findById(articleId, async (err, article) => {
@@ -399,6 +448,12 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setFullCompletion = async (req, res) => {
 
     const { articleId } = req.params;
@@ -443,6 +498,12 @@ const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
     
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setQualityAppraisalInputs = async (req, res) => {
 
     const { articleId } = req.params;

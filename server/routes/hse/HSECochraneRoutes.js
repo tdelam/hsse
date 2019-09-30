@@ -1,3 +1,9 @@
+/**
+ * @name HSECochraneRoutes.js
+ * @author Kwadwo Sakyi
+ * @description TODO: unknown
+ */
+
 const passport = require('passport');
 
 const HSECochrane = require('../../controllers/cochrane/HSECochraneController');

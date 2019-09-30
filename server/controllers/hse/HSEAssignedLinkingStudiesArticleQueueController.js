@@ -1,7 +1,8 @@
 /**
- * @name 
+ * @name HSEAssignedLinkingStudiesArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
+ * @description This file contains the controller methods for managing articles which are in the linking studies queue
+ * and assigned to the current user.
  */
 
 const mongoose = require('mongoose');

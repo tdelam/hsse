@@ -1,8 +1,8 @@
 /**
  * @name HSEAssignedEligibilityFiltersArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for managing articles in the assigned
- * eligibility and filters queue
+ * @description This file contains the controller methods for managing articles which are in the eligibility and filters queue
+ * and assigned to the current user.
  */
 
 const _ = require('lodash');
