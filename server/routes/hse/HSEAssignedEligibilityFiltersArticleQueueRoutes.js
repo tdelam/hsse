@@ -1,7 +1,8 @@
 /**
- *  Routing for eligibility and filter queue
- *  
- *  @author Kwadwo Sakyi
+ * @name HSEAssignedEligibilityFiltersArticleQueueRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for articles which are in the assigned eligibility and filters queue
+ * and assigned to the current user.
  */
 
 const HSEAssignedEligibilityFiltersArticleQueueController = require('../../controllers/hse/HSEAssignedEligibilityFiltersArticleQueueController');
