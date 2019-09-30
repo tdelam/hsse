@@ -13,12 +13,12 @@ const HSEArticleQualityAppraisalModelClass = mongoose.model('HSEArticleQualityAp
 const Authentication = require('../authentication');
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
-exports.listArticles = async (req, res) => {
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
@@ -37,12 +37,12 @@ exports.listArticles = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
-exports.fetchArticle = async (req, res) => {
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
     
@@ -70,9 +70,9 @@ exports.fetchArticle = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.setQualityAppraisalsValues = async (req, res) => {
@@ -149,9 +149,9 @@ exports.setQualityAppraisalsValues = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.setQualityAppraisalsComplete = async (req, res) => {
@@ -260,14 +260,8 @@ exports.setQualityAppraisalsComplete = async (req, res) => {
 };
 
 
-/**
- * TODO: document
- * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
- * @param WritableStream res The function's response body
- */
 /*
-exports.setEligibilityFilterComplete = async (req, res) => {
+exports.setEligibilityFilterComplete = async (req, res) => { // NOTE: commented out
 
     const { articleId } = req.params;
 
@@ -327,12 +321,7 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
-/**
- * TODO: document
- * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
- * @param WritableStream res The function's response body
- */
+// 
 exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -365,9 +354,9 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.setSeniorEligibilityFilterComplete = async (req, res) => {
@@ -410,9 +399,9 @@ exports.setSeniorEligibilityFilterComplete = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
@@ -576,9 +565,9 @@ exports.setFullQualityAppraisalCompleteOrResolve = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.setFullCompletion = async (req, res) => {
@@ -626,9 +615,9 @@ const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.setQualityAppraisalInputs = async (req, res) => {

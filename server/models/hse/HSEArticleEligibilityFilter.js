@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticleEligibilityFilter.js
+ * @author Kwadwo Sakyi
+ * @description The model representing an article's eligibility filter details as input by junior and senior data entry users
+ */
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -404,7 +410,11 @@ const HSEArticleEligibilityFilterSchema = new Schema({
 
 // mongoose.model('HSEArticleEligibilityFilters', HSEArticleEligibilityFilterSchema);
 
-
+/**
+ * Compares this object to another to determine if they represent the same data
+ * 
+ * @param HSEArticleEligibilityFilterSchema otherInput The object to test.
+ */
 HSEArticleEligibilityFilterSchema.methods.isEqualTo = function (otherInput) {
 
     currentModel = this;

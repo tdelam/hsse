@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticleQualityAppraisal.js
+ * @author Kwadwo Sakyi
+ * @description The model representing an article's quality appraisal details as input by junior and senior data entry users
+ */
+
  const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -27,6 +33,11 @@ _article: { type: Schema.Types.ObjectId, ref: 'HSEArticles'},
 
 });
 
+/**
+ * Compares this object to another to determine if they represent the same data
+ * 
+ * @param HSEArticleQualityAppraisalSchema otherInput The object to test.
+ */
 HSEArticleQualityAppraisalSchema.methods.isEqualTo = function (otherInput) {
     //console.log(otherInput);
     currentModel = this;
