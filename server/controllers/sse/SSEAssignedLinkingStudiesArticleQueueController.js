@@ -451,7 +451,7 @@ const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
 
     const isEqual = false;
 
-    HSEArticleModelClass.findById(articleId, async (err, article) => {
+    HSEArticleModelClass.findById(articleId, async (err, article) => { // TODO: referencing HSE in SSE code
         if(err) {
             return res.send(err);
         } else if(!article) {

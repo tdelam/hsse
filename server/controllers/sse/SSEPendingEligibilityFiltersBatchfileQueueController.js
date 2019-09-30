@@ -6,7 +6,7 @@
 
 const mongoose = require('mongoose');
 
-const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
+const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles'); // TODO: referencing HSE in SSE code
 
 /**
  * TODO: document
@@ -15,7 +15,7 @@ const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
  * @param WritableStream res The function's response body
  */
 exports.listBatchfiles = async (req, res) => { // REFACTOR: rename to list
-    HSEArticleBatchfileModelClass.find()
+    HSEArticleBatchfileModelClass.find() // TODO: referencing HSE in SSE code
         .or([ { _eligibilityFilterJunior: null }, { _eligibilityFilterSenior: null } ])
         .exec(function(err, batchfiles) {
             if(err) {
@@ -39,7 +39,7 @@ exports.listBatchfile = async (req, res) => { // REFACTOR: rename to fetch
 
     const id = req.param.id;
 
-    return await HSEArticleBatchfileModelClass.findById(id);
+    return await HSEArticleBatchfileModelClass.findById(id); // TODO: referencing HSE in SSE code
 
 };
 
