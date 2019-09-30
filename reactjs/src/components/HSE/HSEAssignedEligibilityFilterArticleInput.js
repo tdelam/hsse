@@ -122,6 +122,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
         showSubtype: false,
 
+        edit: false,
+
         relevanceValue: '',
         documentType: '',
         questionType: '',
@@ -141,7 +143,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         checkedOHSDT: [],
         checkedIOHSDT: [],
 
-        assessingAndAssignmentStatus: ''
+        assessingAndAssignmentStatus: '',
+        deletedRemovalReason: ''
     };
 
     componentDidMount() {
@@ -174,6 +177,14 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
     handleQuestionType = (event) => {
         this.setState({ questionType: event.value})
         console.log(this.state.questionType)
+    }
+
+    handleAssessmentAssignmentStatus = (event) => {console.log(event)
+        this.setState({ assessingAndAssignmentStatus: event.value})
+    }
+
+    handleDeletedRemovalReason = (event) => {
+        this.setState({ deletedRemovalReason: event.target.value})
     }
 
     onSubmit = e => {
@@ -355,25 +366,108 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             showOntarioHealthSystemSubtype: false,
 
             showRelevance: false,
-            showEligibility: false
-            //show
+            showEligibility: false,
+            edit: false
         });
     }
 
+    edit = () => {
+        this.setState({
+
+            selectedOption: '',
+
+            edit: true,
+
+            showTitle: true,
+            showRelevance: true,
+            //documentType: false,
+            showGeneralArticleInformation: false,
+            showEligibility: true,
+            showHealthSystemsTopics: false,
+            showCanadianAreas: false,
+            showDomains: false,
+            showLMICFocus: false,
+            showProvinceFocus: false,
+            showTheme: false,
+            showPopulation: false,
+            showOntarioPriorityArea: false,
+            showTarget: false,
+            showOntarioFocus: false,
+            showArticle: false,
+
+            showIntergovernmentalSubtype: false,
+            showOntarioHealthSubtype: false,
+            showCanadaHealthSystemSubtype: false,
+
+            showArticleAssessment: false,
+
+            showSubtype: false,
+
+            //relevanceValue: '',
+            //documentType: '',
+            //questionType: '',
+            //generalFocus: '',
+            /*
+            subtypes: [],
+
+            checkedKeysHST: [],
+            checkedKeysCA: [],
+            checkedDomain: [],
+            checkedLMIC: [],
+            checkedProvince: [],
+            checkedTheme: [], 
+            checkedPopulation: [],
+            checkedOPA: [],
+            checkedCHSDT: [],
+            checkedOHSDT: [],
+            checkedIOHSDT: [],
+            
+            assessingAndAssignmentStatus: ''
+            */
+        });
+        
+        switch(this.state.documentType) {
+            case "Intergovernmental organizations' health systems documents":
+                this.setState({
+                    showIntergovernmentalSystemSubtype: true
+                });
+                break;
+            case  "Canada's health systems documents":
+                this.setState({
+                    showCanadaHealthSystemSubtype: true
+                });
+                break;
+            case "Ontario's health system documents":
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            default:
+                break;
+            /*    
+                "NO. After reviewing the document types and eligibility criteria, this record is not eligible for inclutions in HSE.":
+            */
+           
+        }
+    }
+
     save = () => {
+        this.setState({ edit: false })
         this.props.assignHSEAssignedEligibilityFiltersArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
 
     cancel = () => {
+        this.setState({ edit: false })
         this.props.history.push('/hse/assignedeligibilityfiltersarticlequeue')
     }
 
     finish = () => {
+        this.setState({ edit: false })
         this.props.assignHSEAssignedEligibilityFiltersArticleEditComplete(this.props.match.params.articleId, this.state, this.props.history);
     }
 
     lostQueue = () => {
-
+        this.setstate({ documentType: 'No' })
     }
 
     
@@ -415,35 +509,37 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
 
                     showRelevance: false,
                     showEligibility: false
-                    //show
+                    
                 });
                 break;
             case "Intergovernmental organizations' health systems documents":
                 this.setState({
                     documentType: event.target.value,
-
+                    
                     showIntergovernmentalSystemSubtype: true,
                     showCanadaHealthSystemSubtype: false,
-                    showOntarioHealthSystemSubtype: false
+                    showOntarioHealthSystemSubtype: false,
+                    edit: true
                 });
                 break;
             case  "Canada's health systems documents":
                 this.setState({
                     documentType: event.target.value,
-
+                    
                     showCanadaHealthSystemSubtype: true,
                     showIntergovernmentalSystemSubtype: false,
-                    showOntarioHealthSystemSubtype: false
+                    showOntarioHealthSystemSubtype: false,
+                    edit: true
                 });
                 break;
             case "Ontario's health system documents":
                 this.setState({
                     documentType: event.target.value,
-
+                    
                     showOntarioHealthSystemSubtype: true,
                     showIntergovernmentalSystemSubtype: false,
-                    showCanadaHealthSystemSubtype: false
-                    
+                    showCanadaHealthSystemSubtype: false,
+                    edit: true
                 });
                 break;
             default:
@@ -454,6 +550,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
             /*    
                 "NO. After reviewing the document types and eligibility criteria, this record is not eligible for inclutions in HSE.":
             */
+           
         }
     }
 
@@ -479,12 +576,12 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                             </div>
                             <div className="c-radio">
                                 <label>
-                                    <Input type="radio" name="a" value="Yes" onChange={this.handleRelevanceChange} checked={this.state.relevanceValue === "Yes"}/>
+                                    <Input type="radio" name="relevance" value="Yes" onChange={this.handleRelevanceChange} checked={this.state.relevanceValue === "Yes"}/>
                                     <span className="fa fa-check"></span>{" "}Yes</label>
                             </div>
                             <div className="c-radio">
                                 <label>
-                                    <Input type="radio" name="a" value="No" onChange={this.handleRelevanceChange} checked={this.state.relevanceValue === "No"}/>
+                                    <Input type="radio" name="relevance" value="No" onChange={this.handleRelevanceChange} checked={this.state.relevanceValue === "No"}/>
                                     <span className="fa fa-check"></span>{" "}No</label>
                             </div>
                         </div>
@@ -500,8 +597,10 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                 <fieldset>
                     <legend >General Article Information</legend>
                     <br />
+                    <button onClick={this.edit}>Edit</button>
+                    <br />
                     <FormGroup row >
-                        <label className="col-md-2 col-form-label"></label>
+                        <span className="col-md-2 col-form-label"></span>
                         <div className="col-md-10">
                             <div className="row">
                             <div className="col-md-2">
@@ -536,12 +635,13 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                 <div className="col-md-2">
                                     <strong>Document type: </strong>
                                 </div>
-                                <div className="col-xl-4">
+                                <div className="col-xl-5">
                                     { this.props.currentArticle && this.props.currentArticle.documentType || this.state.documentType }
-                                    { this.props.currentArticle && this.props.currentArticle.documentType && this.props.intergovernmentalOrganizationHealthSystemDocumentTypeData || this.renderSubtype(this.state.showSubtype) }
                                     {  }
                                 </div>
                             </div>
+                            <br />
+                            { this.props.currentArticle && this.props.currentArticle.documentType || this.renderSubtype(this.state.documentType) }
                             <br />
                             <div className="row">
                                 <div className="col-md-2">
@@ -573,33 +673,63 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                 <label>
                                     <Input type="checkbox" defaultValue="" checked={ this.state.generalFocus } onChange={this.handleGeneralFocus}/>
                                         
-                                        {" "}Yes, this article has a general docus (review definition and code accordingly, nothing that the default is set to specific)
+                                        {" "}Yes, this article has a general focus (review definition and code accordingly, nothing that the default is set to specific)
                                 </label>
                                 </div>
                                 
                             </div>
                             
                         </div>
+                        
                     </FormGroup>
                     {/** <hr className="my-4"/> **/}
               </fieldset>
             );
     }
 
-    renderSubtype = (subtypes, subtypeList) => {
-        if(subtypes) {
-            return (
-                <div className="row">
-                    <div className="col-md-2">
-                        <strong>Subtypes: </strong>
+    renderSubtype = (documentType) => {
+        switch(documentType) {
+            case "Intergovernmental organizations' health systems documents":
+                return (
+                    <div className="row">
+                        <div className="col-md-2">
+                            <strong>Subtypes: </strong>
+                        </div>
+                        <div className="col-xl-4">
+                            <ul>
+                                { this.state.checkedIOHSDT.map(item => <li key={item}>{item}</li>) }
+                            </ul>
+                        </div>
                     </div>
-                    <div className="col-xl-4">
-                        <ul>
-                            { subtypeList.forEach(element => <li key={element}>{element}</li>) }
-                        </ul>
+                );
+            case "Canada's health systems documents":
+                return (
+                    <div className="row">
+                        <div className="col-md-2">
+                            <strong>Subtypes: </strong>
+                        </div>
+                        <div className="col-xl-4">
+                            <ul>
+                                { this.state.checkedCHSDT.map(item => <li key={item}>{item}</li>) }
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            case "Ontario's health system documents":
+                return (
+                    <div className="row">
+                        <div className="col-md-2">
+                            <strong>Subtypes: </strong>
+                        </div>
+                        <div className="col-xl-4">
+                            <ul>
+                                { this.state.checkedOHSDT.forEach(item => <li key={item}>{item}</li>) }
+                            </ul>
+                        </div>
+                    </div>
+                );
+            default:
+                return (<div></div>)
         }
     }
 
@@ -617,62 +747,62 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Evidence briefs for policy" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Evidence briefs for policy" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Evidence briefs for policy"}/>
                                   <span className="fa fa-circle"></span>{" "}Evidence briefs for policy</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Overviews of systematic reviews" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Overviews of systematic reviews" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Overviews of systematic reviews"}/>
                                   <span className="fa fa-circle"></span>{" "}Overviews of systematic reviews</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Systematic reviews addressing other questions" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Systematic reviews addressing other questions" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Systematic reviews addressing other questions"}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews addressing other questions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Systematic reviews in progress" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Systematic reviews in progress" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Systematic reviews in progress"}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews in progress</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Systematic reviews being planned" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Systematic reviews being planned" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Systematic reviews being planned"}/>
                                   <span className="fa fa-circle"></span>{" "}Systematic reviews being planned</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Economic evaluations and costing studies" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Economic evaluations and costing studies" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Economic evaluations and costing studies"}/>
                                   <span className="fa fa-circle"></span>{" "}Economic evaluations and costing studies</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Health reform descriptions" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Health reform descriptions" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Health reform descriptions"}/>
                                   <span className="fa fa-circle"></span>{" "}Health reform descriptions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Health system descriptions" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Health system descriptions" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Health system descriptions"}/>
                                   <span className="fa fa-circle"></span>{" "}Health system descriptions</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Intergovernmental organizations' health systems documents" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Intergovernmental organizations' health systems documents" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Intergovernmental organizations' health systems documents"}/>
                                   <span className="fa fa-circle"></span>{" "}Intergovernmental organizations' health systems documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Canada's health systems documents" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Canada's health systems documents" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Canada's health systems documents"}/>
                                   <span className="fa fa-circle"></span>{" "}Canada's health systems documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" value="Ontario's health system documents" name="documentType" onChange={this.handleGeneralEligibility}/>
+                                  <Input type="radio" value="Ontario's health system documents" name="documentType" onChange={this.handleGeneralEligibility} checked={this.state.documentType === "Ontario's health system documents"}/>
                                   <span className="fa fa-circle"></span>{" "}Ontario's health system documents</label>
                           </div>
                           <div className="c-radio">
                               <label>
-                                  <Input type="radio" name="documentType" onChange={this.handleLostQueue}/>
+                                  <Input type="radio" value="No" name="documentType" onChange={this.handleLostQueue} checked={this.state.documentType === 'No'}/>
                                   <span className="fa fa-circle"></span>{" "}NO. After reviewing the docuement types and eligibility criteria, this record is not eligible for inclutions in HSE.</label>
                           </div>
                          
@@ -960,7 +1090,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     <br />
                     <br />
                     {   
-                        (showLink) && 
+                        (false) && 
                         (
                             <div>
                                 <Button color="link" onClick={this.continue} ><h4>Continue</h4></Button>
@@ -977,7 +1107,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         }
     }
 
-    renderArticleAssessmentSection = (value, show) => {
+    renderArticleAssessmentSection = (show) => {
         if(show)
             return(
                 <fieldset>
@@ -989,8 +1119,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                     <Col md={ 12 } style={{ paddingLeft: 0 }}>
                             <Select
                                 name="select-name"
-                                value={value}
-                                onChange={this.handleChangeSelect}
+                                value={this.state.assessingAndAssignmentStatus}
+                                onChange={this.handleAssessmentAssignmentStatus}
                                 options={STATES}
                             />
                             <br />
@@ -1011,7 +1141,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                     </p>
                                 </label>
                                 <div className="col-md-12">
-                                    <Input type="textarea"  disabled=""/>
+                                    <Input name="deletedRemovalReason" value={this.state.deletedRemovalReason} type="textarea"  disabled="" onChange={this.handleDeletedRemovalReason}/>
                                 </div>
                         </Col>
                     </div>
@@ -1098,9 +1228,9 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                             
                             { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.showIntergovernmentalSystemSubtype, false, this.onCheckIOHSDT, this.state.checkedIOHSDT, true)}
 
-                            { this.renderArticleAssessmentSection(this.state.assessingAndAssignmentStatus, this.state.showArticleAssessment) }
+                            { this.renderArticleAssessmentSection(this.state.showArticleAssessment) }
 
-
+                            { this.state.edit && <Button color="link" onClick={this.continue} ><h4>Continue</h4></Button> }
                             
                         </form>
                     </CardBody>
@@ -1108,7 +1238,7 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                         <div className="d-flex align-items-center">
                             <div className="ml-auto">
                                 <button type="submit" className="btn btn-warning" onClick={this.cancel} >Cancel</button>{' '}
-                                <button type="submit" className="btn btn-info" onClick={this.save}>Save</button>
+                                <button type="submit" className="btn btn-info" onClick={this.save}>Save </button>
                             </div>
                             <div className="ml-auto">
                                 <button type="submit" className="btn btn-success" onClick={this.finish}>Finish</button>
