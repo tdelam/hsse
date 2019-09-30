@@ -1,7 +1,8 @@
 /**
- * @name 
+ * @name HSEAssignedQualityAppraisalsArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
+ * @description This file contains the controller methods for managing articles which are in the quality appraisal queue
+ * and assigned to the current user.
  */
 
 const _ = require('lodash');
@@ -321,7 +322,12 @@ exports.setEligibilityFilterComplete = async (req, res) => { // NOTE: commented 
 
 */
 
-// 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
     const { articleId } = req.params;

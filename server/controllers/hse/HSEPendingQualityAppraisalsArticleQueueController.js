@@ -1,7 +1,8 @@
 /**
- * @name 
+ * @name HSEPendingQualityAppraisalsArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
+ * @description This file contains the controller methods for managing articles which are in the quality appraisal queue
+ * and are not assigned to any user.
  */
 
 const mongoose = require('mongoose');
