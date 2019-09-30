@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticleTranslatingTitles.js
+ * @author Kwadwo Sakyi
+ * @description The model representing an article's translation details
+ */
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;

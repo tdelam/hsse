@@ -75,7 +75,7 @@ exports.create = (req, res) => {
  * @param string req.params.articleId The ID of the article to read
  * @param WritableStream res The function's response body
  */
-exports.read = (req, res) => { // REFACTOR: rename function to fetch
+exports.read = (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
 

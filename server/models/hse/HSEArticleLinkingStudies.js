@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticleLinkingStudies.js
+ * @author Kwadwo Sakyi
+ * @description The model representing an article's linking studies details
+ */
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;

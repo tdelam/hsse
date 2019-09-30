@@ -9,9 +9,9 @@ const mongoose = require('mongoose');
 const HSEArticleBatchfileModelClass = mongoose.model('HSEArticleBatchFiles');
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.listBatchfiles = async (req, res) => {
@@ -30,9 +30,9 @@ exports.listBatchfiles = async (req, res) => {
 };
 
 /**
- * TODO: document
+ * TODO: document (code is not finished)
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.listBatchfile = async (req, res) => {
@@ -43,12 +43,6 @@ exports.listBatchfile = async (req, res) => {
 
 };
 
-/**
- * TODO: document
- * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
- * @param WritableStream res The function's response body
- */
-exports.create = (req, res) => {
+exports.create = (req, res) => { // DEFUNCT
     
 }
