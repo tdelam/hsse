@@ -1,3 +1,10 @@
+/**
+ * @name SSEAssignedQualityAppraisalsArticleQueueRoutes.js
+ * @author Kwadwo Sakyi
+ * @description Declaration of all administrator-based routes for articles which are in the quality appraisal queue
+ * and assigned to the current user.
+ */
+
 const SSEAssignedQualityAppraisalsArticleQueueController = require('../../controllers/sse/SSEAssignedQualityAppraisalsArticleQueueController');
 
 module.exports = app => {
