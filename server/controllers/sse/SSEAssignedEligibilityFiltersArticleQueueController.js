@@ -1,3 +1,10 @@
+/**
+ * @name SSEAssignedEligibilityFiltersArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles which are in the eligibility and filters queue
+ * and assigned to the current user.
+ */
+
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -5,7 +12,14 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 const SSEArticleEligibilityFilterModelClass = mongoose.model('SSEArticleEligibilityFilters');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {
+/**
+ * Returns a list of articles which are in the eligibility and filters queue and assigned to a particular user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param WritableStream res The function's response body
+ */
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
@@ -23,7 +37,15 @@ exports.listArticles = async (req, res) => {
     });
 };
 
-exports.fetchArticle = async (req, res) => {
+/**
+ * Returns the details of an article assigned to a particular user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
     
@@ -50,7 +72,16 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
-exports.setEligibilityFilterValues = async (req, res) => {
+/**
+ * Sets an assigned article's details
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
+exports.setEligibilityFilterValues = async (req, res) => { // REFACTOR: rename to setValues
 
     const { articleId } = req.params;
 
@@ -144,7 +175,10 @@ exports.setEligibilityFilterValues = async (req, res) => {
 
 };
 
-exports.setEligibilityFilterComplete = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setEligibilityFilterComplete = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
 
@@ -310,7 +344,10 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
-exports.setJuniorEligibilityFilterComplete = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setJuniorEligibilityFilterComplete = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
     
@@ -341,7 +378,10 @@ exports.setJuniorEligibilityFilterComplete = async (req, res) => {
 
 };
 
-exports.setSeniorEligibilityFilterComplete = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setSeniorEligibilityFilterComplete = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
     
@@ -465,7 +505,10 @@ const setFullEligibilityFilterCompleteOrResolve = async (articleId) => {
 
 };
 
-exports.setFullCompletion = async (req, res) => {
+/**
+ * TO BE REMOVED
+ */
+exports.setFullCompletion = async (req, res) => { // DEFUNCT
 
     const { articleId } = req.params;
 

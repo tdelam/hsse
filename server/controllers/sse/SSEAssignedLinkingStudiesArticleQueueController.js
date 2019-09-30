@@ -1,3 +1,10 @@
+/**
+ * @name SSEAssignedLinkingStudiesArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles which are in the linking studies queue
+ * and assigned to the current user.
+ */
+
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -5,7 +12,14 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 const SSEArticleLinkingStudiesModelClass = mongoose.model('SSEArticleLinkingStudies');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {
+/**
+ * Returns a list of articles which are in the linking studies queue and assigned to a particular user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param WritableStream res The function's response body
+ */
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
@@ -22,7 +36,15 @@ exports.listArticles = async (req, res) => {
     });
 };
 
-exports.fetchArticle = async (req, res) => {
+/**
+ * Returns the details of an article assigned to a particular user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
     
@@ -48,7 +70,17 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
-exports.setLinkingStudiesValues = async (req, res) => {
+/**
+ * Sets an assigned article's details
+ * REFACTOR: significant duplication of code in setLinkingStudiesValues and setLinkingStudiesComplete
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
+exports.setLinkingStudiesValues = async (req, res) => { // REFACTOR: rename to setValues
 
     const { articleId } = req.params;
 
@@ -141,7 +173,17 @@ exports.setLinkingStudiesValues = async (req, res) => {
 
 };
 
-exports.setQualityAppraisalsComplete = async (req, res) => {
+/**
+ * Sets an assigned article's details and also marks it as complete
+ * REFACTOR: significant duplication of code in setLinkingStudiesValues and setLinkingStudiesComplete
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
+exports.setQualityAppraisalsComplete = async (req, res) => { // REFACTOR: rename to setComplete
 
     const { articleId } = req.params;
 
@@ -272,7 +314,10 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
-exports.setJuniorLinkingStudiesComplete = async (req, res) => {
+/**
+ * TO BE REMOVED?
+ */
+exports.setJuniorLinkingStudiesComplete = async (req, res) => { // REFACTOR: rename to setJuniorComplete
 
     const { articleId } = req.params;
     
@@ -374,6 +419,9 @@ const setFullLinkingStudiesComplete = async (articleId) => {
 
 };
 
+/**
+ * TO BE REMOVED?
+ */
 exports.setFullCompletion = async (req, res) => {
 
     const { articleId } = req.params;
@@ -418,6 +466,7 @@ const isEligibilityFilterJuniorSeniorInputEqual = (articleId) => {
     
 };
 
+// Function refers to quality appraisal, probably doesn't belong here and should be removed
 exports.setQualityAppraisalInputs = async (req, res) => {
 
     const { articleId } = req.params;

@@ -1,8 +1,7 @@
 /**
  * @name SSEArticleController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
- * @description This file contains the CRUD controller methods for SSE articles
+ * @description This file contains the CRUD controller methods for SSE articles.
  */
 
 const mongoose = require('mongoose');
@@ -75,7 +74,7 @@ exports.create = (req, res) => {
  * @param string req.params.articleId The ID of the article to read
  * @param WritableStream res The function's response body
  */
-exports.read = (req, res) => { // REFACTOR: rename function to fetch
+exports.read = (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
 

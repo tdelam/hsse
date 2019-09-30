@@ -1,10 +1,23 @@
+/**
+ * @name SSEPendingPresentationDetailsQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles which are in the presentation details queue
+ * and are not assigned to any user.
+ */
+
 const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
 const SSEArticleModelClass = mongoose.model('SSEArticles');
 
-exports.listArticles = async (req, res) => {
+/**
+ * Returns a list of articles which are in the linking studies queue and not assigned to any user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */   
+exports.listArticles = async (req, res) => { // REFACTOR: Rename to list
     SSEArticleModelClass.find()
        .or([ { _presentationDetailsJunior: null }/*, { eligibilityFiltersFullCompletion: true }*/ ])
        .exec(function(err, articles) {
@@ -19,7 +32,14 @@ exports.listArticles = async (req, res) => {
        });
 };
 
-exports.listArticle = async (req, res) => {
+/**
+ * Returns the details of an article not assigned to any user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.param.id The ID of the 
+ * @param WritableStream res The function's response body
+ */
+exports.listArticle = async (req, res) => { // REFACTOR: Rename to fetch
 
     const id = req.param.id;
 
@@ -27,11 +47,17 @@ exports.listArticle = async (req, res) => {
 
 };
 
-exports.create = (req, res) => {
+exports.create = (req, res) => { // DEFUNCT
     
 }
 
-exports.addArticleToJuniorPresenter = async (req, res) => {
+/**
+ * Assign the article to a user
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
+exports.addArticleToJuniorPresenter = async (req, res) => { // REFACTOR: rename to assignToLinker
 
     const { articleId } = req.params;
     

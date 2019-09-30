@@ -1,10 +1,23 @@
+/**
+ * @name SSEPendingQualityAppraisalsArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles which are in the quality appraisal queue
+ * and are not assigned to any user.
+ */
+
 const mongoose = require('mongoose');
 
 const Authentication = require('../authentication');
 
 const SSEArticleModelClass = mongoose.model('SSEArticles');
 
-exports.listArticles = async (req, res) => {
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */   
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
     SSEArticleModelClass.find(/*, { eligibilityFiltersFullCompletion: true }*/)
        .or([ { _qualityAppraisalsJunior: null }, { _qualityAppraisalsSenior: null } ])
        .exec(function(err, articles) {
@@ -19,7 +32,13 @@ exports.listArticles = async (req, res) => {
        });
 };
 
-exports.listArticle = async (req, res) => {
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
+exports.listArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const id = req.param.id;
 
@@ -27,10 +46,16 @@ exports.listArticle = async (req, res) => {
 
 };
 
-exports.create = (req, res) => {
+exports.create = (req, res) => { // DEFUNCT
     
 }
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
 
     const { articleId } = req.params;
@@ -74,6 +99,12 @@ exports.addArticleToJuniorQualityAppraiser = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param WritableStream res The function's response body
+ */
 exports.addArticleToSeniorQualityAppraiser = async (req, res) => {
 
     const { articleId } = req.params;
