@@ -1,3 +1,9 @@
+/**
+ * @name HSEArticle.js
+ * @author Kwadwo Sakyi
+ * @description The model representing an article
+ */
+
 const mongoose = require('mongoose');
 const mongoosastic = require('mongoosastic');
 const shortid = require('shortid');

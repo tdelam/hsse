@@ -20,7 +20,7 @@ const Authentication = require('../authentication');
  * @param string req.headers.authorization An authorization token which identifies the user
  * @param WritableStream res The function's response body
  */
-exports.listArticles = async (req, res) => { // REFACTOR: rename function to list
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
@@ -46,7 +46,7 @@ exports.listArticles = async (req, res) => { // REFACTOR: rename function to lis
  * @param string req.params.articleId The ID of the article
  * @param WritableStream res The function's response body
  */
-exports.fetchArticle = async (req, res) => { // REFACTOR: rename function to fetch
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
     
