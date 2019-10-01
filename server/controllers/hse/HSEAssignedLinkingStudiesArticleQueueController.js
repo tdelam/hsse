@@ -259,7 +259,6 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 };
 
-*/
 
 /**
  * TO BE REMOVED?
