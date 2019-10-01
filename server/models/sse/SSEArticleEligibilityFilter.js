@@ -1,3 +1,9 @@
+/**
+ * @name SSEArticleEligibilityFilter.js
+ * @author Kwadwo Sakyi
+ * @description The model representing an article's eligibility filter details as input by junior and senior data entry users
+ */
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;

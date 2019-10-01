@@ -1,8 +1,8 @@
 /**
  * @name SSEPendingEligibilityFiltersArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for listing articles in the pending queue
- * and assigning articles to junior and senior filterers
+ * @description This file contains the controller methods for managing articles which are in the eligibility and filters queue
+ * and are not assigned to any user.
  */
 
 const mongoose = require('mongoose');
@@ -13,8 +13,8 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.listArticles = async (req, res) => {
@@ -34,8 +34,8 @@ exports.listArticles = async (req, res) => {
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.listArticle = async (req, res) => {
@@ -48,8 +48,8 @@ exports.listArticle = async (req, res) => {
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.create = (req, res) => {
@@ -58,8 +58,8 @@ exports.create = (req, res) => {
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.addArticleToJuniorEligibilityFilterer= async (req, res) => {
@@ -109,8 +109,8 @@ exports.addArticleToJuniorEligibilityFilterer= async (req, res) => {
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
@@ -170,8 +170,8 @@ exports.addAllArticlesToJuniorEligibilityFilterer= async (req, res) => {
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
@@ -221,8 +221,8 @@ exports.addArticleToSeniorEligibilityFilterer = async (req, res) => {
 
 /**
  * TODO: document
+ * 
  * @param ReadableStream req The function's request body
- * @param string req.user The username of the user to sign in.
  * @param WritableStream res The function's response body
  */
 exports.addAllArticlesToSeniorEligibilityFilterer = async (req, res) => {

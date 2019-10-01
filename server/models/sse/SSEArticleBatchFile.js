@@ -1,3 +1,9 @@
+/**
+ * @name SSEArticleBatchFile.js
+ * @author Kwadwo Sakyi
+ * @description The model representing a batch file containing multiple articles which are imported at one time
+ */
+
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 

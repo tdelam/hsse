@@ -1,3 +1,10 @@
+/**
+ * @name SSEAssignedPresentationDetailsArticleQueueController.js
+ * @author Kwadwo Sakyi
+ * @description This file contains the controller methods for managing articles which are in the presentation details queue
+ * and assigned to the current user.
+ */
+
 const mongoose = require('mongoose');
 // const UserModelClass = mongoose.model('Users');
 
@@ -5,7 +12,14 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
 const SSEArticlePresentationDetailsModelClass = mongoose.model('SSEArticlePresentationDetails');
 const Authentication = require('../authentication');
 
-exports.listArticles = async (req, res) => {
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param WritableStream res The function's response body
+ */
+exports.listArticles = async (req, res) => { // REFACTOR: rename to list
 
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
@@ -22,7 +36,15 @@ exports.listArticles = async (req, res) => {
     });
 };
 
-exports.fetchArticle = async (req, res) => {
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
+exports.fetchArticle = async (req, res) => { // REFACTOR: rename to fetch
 
     const { articleId } = req.params;
     
@@ -48,6 +70,15 @@ exports.fetchArticle = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body 
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
 exports.setPresentationDetailsValues = async (req, res) => {
 
     const { articleId } = req.params;
@@ -122,6 +153,15 @@ exports.setPresentationDetailsValues = async (req, res) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param object req.body The details to set
+ * @param WritableStream res The function's response body
+ */
 exports.setPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -225,6 +265,14 @@ exports.setEligibilityFilterComplete = async (req, res) => {
 
 */
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.headers.authorization An authorization token which identifies the user
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
 exports.setJuniorPresentationDetailsComplete = async (req, res) => {
 
     const { articleId } = req.params;
@@ -327,6 +375,13 @@ const setFullEligibilityFilterComplete = async (articleId) => {
 
 };
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
 exports.setFullCompletion = async (req, res) => {
 
     const { articleId } = req.params;
@@ -348,6 +403,13 @@ exports.setFullCompletion = async (req, res) => {
 };
 
 
+/**
+ * TODO: document (code is not finished)
+ * 
+ * @param ReadableStream req The function's request body
+ * @param string req.params.articleId The ID of the article
+ * @param WritableStream res The function's response body
+ */
 exports.setQualityAppraisalInputs = async (req, res) => {
 
     const { articleId } = req.params;

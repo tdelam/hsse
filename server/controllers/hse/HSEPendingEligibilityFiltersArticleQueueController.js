@@ -1,8 +1,8 @@
 /**
  * @name HSEPendingEligibilityFiltersArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for listing articles in the pending queue
- * and assigning articles to junior and senior filterers
+ * @description This file contains the controller methods for managing articles which are in the eligibility and filters queue
+ * and are not assigned to any user.
  */
 
 const mongoose = require('mongoose');

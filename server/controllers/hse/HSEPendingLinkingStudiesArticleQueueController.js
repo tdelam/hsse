@@ -1,7 +1,8 @@
 /**
- * @name 
+ * @name HSEPendingLinkingStudiesArticleQueueController.js
  * @author Kwadwo Sakyi
- * @description This file contains the controller methods for 
+ * @description This file contains the controller methods for managing articles which are in the linking studies queue
+ * and are not assigned to any user.
  */
 
 const mongoose = require('mongoose');
@@ -11,7 +12,7 @@ const Authentication = require('../authentication');
 const HSEArticleModelClass = mongoose.model('HSEArticles');
 
 /**
- * Rename to list
+ * Returns a list of articles which are in the linking studies queue and not assigned to any user
  * 
  * @param ReadableStream req The function's request body
  * @param WritableStream res The function's response body
@@ -32,7 +33,7 @@ exports.listArticles = async (req, res) => { // REFACTOR: Rename to list
 };
 
 /**
- * Rename to fetch
+ * Returns the details of an article not assigned to any user
  * 
  * @param ReadableStream req The function's request body
  * @param string req.param.id The ID of the 
@@ -51,7 +52,7 @@ exports.create = (req, res) => { // DEFUNCT
 }
 
 /**
- * Assign the article to a user for the linking queue
+ * Assign the article to a user
  * 
  * @param ReadableStream req The function's request body
  * @param WritableStream res The function's response body
