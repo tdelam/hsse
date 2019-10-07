@@ -48,6 +48,12 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
             questionNine: '',
             questionTen: '',
             questionEleven: '',
+
+            questions: [],
+
+            amstarStatus: 'In progress',
+            amstarNumerator: 0,
+            amstarDenominator: 11,
     
         };
         
@@ -111,15 +117,93 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
     }
 
     onChange = (e) => {
+
+        switch(e.target.name) {
+            case questionOne:
+                this.setState({
+                    showIntergovernmentalSystemSubtype: true
+                });
+                break;
+            case questionTwo:
+                this.setState({
+                    showCanadaHealthSystemSubtype: true
+                });
+                break;
+            case questionThree:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionFour:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionFive:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionSix:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionSeven:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionEight:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionNine:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionTen:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            case questionEleven:
+                this.setState({
+                    showOntarioHealthSystemSubtype: true
+                });
+                break;
+            default:
+                break;
+            /*    
+                "NO. After reviewing the document types and eligibility criteria, this record is not eligible for inclutions in HSE.":
+            */
+           
+        }
+
         this.setState({
           [e.target.name]: e.target.value,
         });
         // this.props.form.setFieldsValue({radio:e.target.value})
-        console.log(`${e.target.name}:${e.target.value}`)
+
+        if(e.target.value === 'yes') {    
+            this.setState({ amstarNumerator: this.state.amstarNumerator + 1 });
+        } else if (e.target.value === 'no' && this.state[e.target.name] === 'yes' ) {
+            this.setState({ amstarNumerator: this.state.amstarNumerator - 1 })
+        } else if (e.target.value === 'not applicable') {
+            this.setState({ amstarDenominator: this.state.amstarDenominator - 1});
+        } else if (e.target.value === "can't answer") {
+
+        }
+
+        console.log(`${e.target.name} : ${e.target.value}`);
+        // console.log(`Numerator: ${this.state.numerator}, Denominator: ${this.state.denominator}`);
         // save state
     }
 
     save = () => {
+        console.log(`Numerator: ${this.state.numerator}, Denominator: ${this.state.denominator}`);
         this.props.assignHSEAssignedQualityAppraisalsArticleEdit(this.props.match.params.articleId, this.state, this.props.history);
     }                                                                    
 

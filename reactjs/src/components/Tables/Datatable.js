@@ -45,7 +45,7 @@ export default class Datatable extends Component {
         options: {}
     }
 
-    componentDidMount() {console.log(this.props)
+    componentDidMount() {
         const dtInstance = $(this.tableElement).dataTable(this.props.options);
 
         if(this.props.dtInstance)

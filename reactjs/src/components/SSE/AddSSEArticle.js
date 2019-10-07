@@ -203,13 +203,15 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row align-items-center">
                                             <label className="col-md-2 col-form-label">Title</label>
                                             <Col md={ 6 }>
-                                                <Input type="text"
+                                                <Field 
+                                                    type="text"
                                                     name="title"
+                                                    component={this.renderTitleField}
                                                     placeholder="Enter title"
                                                     invalid={this.hasError('sseSingleArticle','text','required')}
                                                     onChange={this.validateOnChange}
                                                     data-validate='["required"]'
-                                                    value={this.state.sseSingleArticle.text}
+                                                    value={this.state.sseSingleArticle.title}
                                                 />
                                                 <span className="invalid-feedback">Field is required</span>
                                             </Col>
@@ -222,15 +224,15 @@ class AddSSEArticle extends Component {
                                             <label className="col-md-2 col-form-label">Authors</label>
                                             <Col md={ 6 }>
                                             <Field 
-                                                    type="text"
-                                                    name="authors"
-                                                    component={this.renderAuthorsField}
-                                                    autoComplete="none"
-                                                    className="form-control"
-                                                    invalid={this.hasError('sseSingleArticle', 'text', 'required')||this.hasError('sseSingleArticle','email','email')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["required"]'
-                                                    value={this.state.authors}/>
+                                                type="text"
+                                                name="authors"
+                                                component={this.renderAuthorsField}
+                                                autoComplete="none"
+                                                className="form-control"
+                                                invalid={this.hasError('sseSingleArticle', 'text', 'required')||this.hasError('sseSingleArticle','email','email')}
+                                                onChange={this.validateOnChange}
+                                                data-validate='["required"]'
+                                                value={this.state.authors}/>
                                                 { this.hasError('sseSingleArticle', 'authors', 'required') && <span className="invalid-feedback">Field is required</span> }
                                             </Col>
                                             <Col md={ 4 }></Col>
@@ -241,13 +243,11 @@ class AddSSEArticle extends Component {
                                         <div className="form-group row mb">
                                             <label className="col-md-2 col-form-label mb">Published Date</label>
                                             <Col md={ 6 }>
-                                                <Datetime
-                                                    dateFormat="YYYY"
-                                                    inputProps={{className: 'form-control'}}
-                                                    timeFormat={false}
-                                                    onChange={this.onDateChange.bind(this)}
-                                                    defaultValue=""
-                                                    />
+                                                <Field
+                                                    name="publishedDate"
+                                                    component={this.renderPublishedDateField}
+                                                    value={this.state.harvestDate}
+                                                />
                                             </Col>
                                         </div>
                                     </fieldset>
@@ -290,7 +290,7 @@ class AddSSEArticle extends Component {
                                 <CardFooter className="text-center">
                                     <button type="submit" className="btn btn-danger">Cancel</button>
                                     {" "}
-                                    <button type="submit" className="btn btn-success">Next</button>
+                                    <button type="submit" className="btn btn-success">Save</button>
                                 </CardFooter>
                             </Card>
                             { /* END card */ }

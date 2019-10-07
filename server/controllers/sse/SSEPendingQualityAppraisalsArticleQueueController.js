@@ -18,7 +18,7 @@ const SSEArticleModelClass = mongoose.model('SSEArticles');
  * @param WritableStream res The function's response body
  */   
 exports.listArticles = async (req, res) => { // REFACTOR: rename to list
-    SSEArticleModelClass.find(/*, { eligibilityFiltersFullCompletion: true }*/)
+    SSEArticleModelClass.find({ complicated: false /* eligibilityFiltersFullCompletion: true */})
        .or([ { _qualityAppraisalsJunior: null }, { _qualityAppraisalsSenior: null } ])
        .exec(function(err, articles) {
            if(err) {

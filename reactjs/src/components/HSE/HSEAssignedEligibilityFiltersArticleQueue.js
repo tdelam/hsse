@@ -65,7 +65,7 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
                         */}
                         { this.renderPriority(article[1].priority) }
                         <td>
-                            { article[1].author }
+                            { article[1].articleSource }
                         </td>
                         <td>
                             { moment(article[1].harvestDate).format("DD-MM-YYYY") }
@@ -75,7 +75,7 @@ class HSEAssignedEligibilityFiltersArticleQueue extends Component {
                         </td>
                         <td>{ article[1].articleIdShort }</td>
                         <td>{ article[1].title }</td>
-                        <td>{ article[1].author }</td>
+                        <td>{ article[1].authors }</td>
                         <td>{ article[1].language }</td>
                         {/*<td>{ article[1].eligibilityFilterResolve ? <a className="mr-1 badge badge-danger" href="">Resolve</a> : "Incomplete" }</td> */}
                         <td>{ article[1].eligibilityFiltersResolve ? <Link className="mr-1 badge badge-danger" to={{ pathname: "/hse/assignedeligibilityfiltersarticleresolution/" + article[1]._id }}>Resolve</Link> : "Incomplete" }</td>

@@ -1,507 +1,1456 @@
-export const healthSystemTopicsTreeData = [{
-
-    title: 'Government arrangement',
-    key: 'governmentArrangement',
-    children: [{
-        title: 'Policy authority',
-        key: 'policyAuthority',
-        children: [
-            { title: 'Centralization/decentralization of policy authority', key: 'centralizationDecentralizationOfPolicyAuthority' },
-            { title: "Accountability of the state sector's role in financing & delivery", key: 'accountabilityOfTheStateSectorsRoleInFinancingDelivery' },
-            { title: "Stewardship of the non-state sector's role in financing & delivery", key: 'stewardshipOfTheNonStateSectorsRoleInFinancingDelivery' },
-            { title: 'Decision-making authority about who is covered and what can or must be provided to them', key: 'decisionMakingAuthorityAboutWhoIsCoveredAndWhatCanOrMustBeProvidedToThem' },
-            { title: 'Corruption protections', key: 'corruptionProtections' }
-        ]
-    },
-    {
-        title: 'Organizational authority',
-        key: 'organizationalAuthority',
-        children: [
-            { title: 'Ownership', key: 'ownership' },
-            { title: 'Management approaches', key: 'managementApproaches' },
-            { title: 'Accreditation', key: 'accreditation' },
-            { title: 'Networks/multi-institutional arrangements', key: 'networksMultiInstitutionalArrangements' }
-        ]
-    },
-    {
-        title: 'Commercial authority',
-        key: 'commercialAuthority',
-        children: [
-            { title: 'Licensure & registration requirements', key: 'licensureRegistrationRequirements' },
-            { title: 'Patents & profits', key: 'patentsProfits' },
-            { title: 'Pricing & purchasing', key: 'pricingPurchasing' },
-            { title: 'Marketing', key: 'marketing' },
-            { title: 'Sales & dispensing', key: 'salesDispensing' },
-            { title: 'Commercial liability', key: 'commercialLiability'}
-        ]
-    },
-    {
-        title: 'Professional authority',
-        key: 'professionalAuthority',
-        children: [
-            { title: 'Training & licensure requirements', key: 'trainingLicensureRequirements' },
-            { title: 'Scope of practice', key: 'scopeOfPractice' },
-            { title: 'Setting of practice', key: 'settingOfPractice' },
-            { title: 'Continuing competence', key: 'continuingCompetence' },
-            { title: 'Quality & safety', key: 'salesDispensing' },
-            { title: 'Professional liability', key: 'professionalLiability'},
-            { title: 'Strike/job action', key: 'strikeJobAction' }
-        ]
-    },
-    {
-        title: 'Consumer & stakeholder involvement',
-        key: 'consumerStakeholderInvolvement',
-        children: [
-            { title: 'Consumer participation in policy & organizational decisions', key: 'consumerParticipationInPolicyOrganizationalDecisions' },
-            { title: 'Consumer participation in system monitoring', key: 'consumerParticipationInSystemMonitoring' },
-            { title: 'Consumer participation in service delivery', key: 'consumerParticipationInServiceDelivery' },
-            { title: 'Consumer complaints management', key: 'consumerComplaintsManagement' },
-            { title: 'Stakeholder participation in policy & organizational decisions (or monitoring)', key: 'stakeholderParticipationInPolicyOrganizationalDecisionsOrMonitoring' }
-        ]
-    }],
-    }, {
-    title: 'Financial arrangements',
-    key: 'financialArrangements',
-    children: [{
-        title: 'Financing systems',
-        key: 'financingSystems',
-        children: [
-            { title: 'Taxation', key: 'taxation' },
-            { title: 'Social health insurance', key: 'socialHealthInsurance' },
-            { title: 'Community-based health insurance', key: 'communityBasedHealthInsurance' },
-            { title: 'Community loan funds', key: 'communityLoanFunds' },
-            { title: 'Private insurance', key: 'privateInsurance' },
-            { title: 'Health savings accounts (Individually financed)', key: 'healthSavingsAccountsIndividuallyFinanced' },
-            { title: 'User fees', key: 'userFees' },
-            { title: 'Donor contributions', key: 'donorContributions' },
-            { title: 'Fundraising', key: 'fundraising' }
-        ]
-    },
-    {
-        title: 'Funding organizations',
-        key: 'fundingOrganizations',
-        children: [
-            { title: 'Fee-for-service (Funding)', key: 'feesForServiceFunding' },
-            { title: 'Capitation (Funding)', key: 'capitationFunding' },
-            { title: 'Global budget', key: 'globalBudget' },
-            { title: 'Prospective payment (Funding)', key: 'prospectivePaymentFunding' },
-            { title: 'Indicative budgets (Funding)', key: 'indicativeBudgets' },
-            { title: 'Targeted payments/penalties (Funding)', key: 'targetedPaymentsPenaltiesFunding' }
-        ]
-    },
-    {
-        title: 'Remunerating providers',
-        key: 'remuneratingProviders',
-        children: [
-            { title: 'Fee-for-service (Remuneration)', key: 'feeForServiceRemuneration' },
-            { title: 'Capitation (Remuneration)', key: 'capitationRenumeration' },
-            { title: 'Salary', key: 'salary' },
-            { title: 'Prospective payment (Remuneration)', key: 'prospectivePaymentRenumeration' },
-            { title: 'Fundholding', key: 'fundholding' },
-            { title: 'Indicative budgets (Remuneration)', key: 'indicativeBudgetsRenumeration'},
-            { title: 'Targeted payments/penalties (Remuneration)', key: 'targetedPaymentPenaltiesRenumeration' }
-        ]
-    },
-    {
-        title: 'Purchasing products & services',
-        key: 'purchasingProductsServices',
-        children: [
-            { title: 'Scope & nature of insurance plans', key: 'scopeNatureOfInsurancePlans' },
-            { title: 'Lists of covered/reimbursed organizations, providers, services & products', key: 'listsOfCoveredReimbursedOrganizationsProvidersServicesProducts' },
-            { title: 'Restrictions in coverage/reimbursement rates for organizations, providers, services & products', key: 'restrictionsInCoverageReimbursementRatesForOrganizationsProvidersServicesProducts' },
-            { title: 'Caps on coverage/reimbursement for organizations, providers, services & products', key: 'capsOnCoverageReimbursementForOrganizationsProvidersServicesProducts' },
-            { title: 'Prior approval requirements for organizations, providers, services & products', key: 'priorApprovalRequirementsForOrganizationsProvidersServicesProducts' },
-            { title: 'Lists of substitutable services & products', key: 'listsOfSubstitutableServicesAndProducts' }
-        ]
-    },
-    {
-        title: 'Incentivizing consumers',
-        key: 'incentivizingConsumers',
-        children: [
-            { title: 'Premium (level & features)', key: 'premiumLevelAndFeatures' },
-            { title: 'Cost-sharing', key: 'costSharing' },
-            { title: 'Health savings accounts (Third party contributions)', key: 'healthSavingsAccountsThirdPartyContributions' },
-            { title: 'Targeted payments/penalties (Incentivizing consumers)', key: 'targetedPaymentsPenaltiesIncentivizingConsumers' },
-        ]
-    }],
-    }, {
-    title: 'Delivery arrangements',
-    key: 'deliveryArrangements',
-    children: [{
-        title: "How care is designed to meet consumers' needs",
-        key: 'howCareIsDesignedToMeetConsumersNeeds',
-        children: [
-            { title: 'Availability of care', key: 'availabilityOfCare' },
-            { title: 'Timely access to care', key: 'timelyAccessToCare' },
-            { title: 'Culturally appropriate care', key: 'culturallyAppropriateCare' },
-            { title: 'Case management', key: 'caseManagement' },
-            { title: 'Package of care/care pathways/disease management', key: 'packageOfCareCarePathwaysDiseaseManagement' },
-            { title: 'Group care', key: 'groupCare' }
-        ]
-    },
-    {
-        title: 'By whom care is provided',
-        key: 'byWhomCareIsProvided',
-        children: [
-            { title: 'System - Need, demand & supply', key: 'systemNeedDemandSupply' },
-            { title: 'System - Recruitment, retention & transitions', key: 'systemRecruitmentRetentionTransitions' },
-            { title: 'System - Performance management', key: 'systemPerformanceManagement' },
-            { title: 'Workplace conditions - Provider satisfaction', key: 'workplaceConditionsProviderSatisfaction' },
-            { title: 'Workplace conditions - Health & safety', key: 'workplaceConditionsHealthSafety' }, 
-            { title: 'Skill mix - Role performance', key: 'skillMixRolePerformance' },
-            { title: 'Skill mix - Role expansion or extension', key: 'skillMixRoleExpansionOrExtension' },
-            { title: 'Skill mix - Task shifting / substitution', key: 'skillMixTaskShiftingSubstitution' },
-            { title: 'Skill mix - Multidisciplinary teams', key: 'skillMixMultidisciplinaryTeams' },
-            { title: 'Skill mix - Volunteers or informal/family caregivers', key: 'skillMixVolunteersOrInformalFamilyCaregivers' },
-            { title: 'Skill mix - Communication & case discussion between distant health professionals', key: 'skillMixCommunicationCaseDiscussionBetweenDistantHealthProfessionals' },
-            { title: 'Staff - Training', key: 'staffTraining' },
-            { title: 'Staff - Support', key: 'staffSupport' },
-            { title: 'Staff - Workload/workflow/intensity', key: 'staffWorkloadWorkflowIntensity' },
-            { title: 'Staff - Continuity of care', key: 'staffContinuityOfCare' },
-            { title: 'Staff/self - Shared decision-making', key: 'staffSelfSharedDecisionMaking' },
-            { title: 'Self-management', key: 'selfManagement' },
-        ]
-    },
-    {
-        title: 'Where care is provided',
-        key: 'whereCareIsProvided',
-        children: [
-            { title: 'Site of service delivery', key: 'siteOfServiceDelivery' },
-			{ title: 'Physical structure, facilities & equipment', key: 'physicalstructureFacilitiesEquipment' },
-			{ title: 'Organizational scale', key: 'organizationalScale' },
-			{ title: 'Integration of services', key: 'integrationOfServices' },
-			{ title: 'Continuity of care', key: 'continuityOfCare' },
-			{ title: 'Outreach', key: 'outreach' },
-        ]
-    },
-    {
-        title: 'With what supports is care provided',
-        key: 'withwhatSupportsIsCareProvided',
-        children: [
-            { title: 'Health record systems', key: 'healthRecordSystems' },
-            { title: 'Electronic health record', key: 'electronicHealthRecord' },
-            { title: 'Other ICT that support individuals who provide care', key: 'otherICTThatSupportIndividualsWhoProvideCare' },
-            { title: 'ICT that support individuals who receive care', key: 'iCTThatSupportIndividualsWhoReceiveCare' },
-            { title: 'Quality monitoring and improvement systems', key: 'qualityMonitoringAndImprovementSystems'},
-            { title: 'Safety monitoring and improvement systems', key: 'safetyMonitoringAndImprovementSystems' }
-        ]
-    }],
-    }, {
-        title: 'Implementation strategies',
-        key: 'implementationStrategies',
-        children: [{
-            title: 'Consumer-targeted strategy',
-            key: 'consumerTargetedStrategy',
-            children: [
-                { title: 'Information or education provision', key: 'informationOrEducationProvision' },
-                { title: 'Behaviour change support', key: 'behaviourChangeSupport' },
-                { title: 'Skills and competencies development', key: 'skillsAndCompetenciesDevelopment' },
-                { title: '(Personal) Support', key: 'personalSupport' },
-                { title: 'Communication and decision-making facilitation', key: 'communicationAndDecisionMakingFacilitation' },
-                { title: 'System participation', key: 'systemParticipation' }
-            ]
-        },
-        {
-            title: 'Provider-targeted strategy',
-            key: 'providerTargetedStrategy',
-            children: [
-                { title: 'Educational material', key: 'educationalMaterial' },
-                { title: 'Educational meeting', key: 'educationalMeeting' },
-                { title: 'Educational outreach visit', key: 'educationalOutreachVisit' },
-                { title: 'Local opinion leader', key: 'localOpinionLeader' },
-                { title: 'Local consensus process', key: 'localConsensusProcess' },
-                { title: 'Peer review', key: 'peerReview' },
-                { title: 'Audit and feedback', key: 'auditAndFeedback' },
-                { title: 'Reminders and prompts', key: 'remindersAndPrompts' },
-                { title: 'Tailored intervention', key: 'tailoredIntervention' },
-                { title: 'Patient-mediated intervention', key: 'patientMediatedIntervention' },
-                { title: 'Multi-faceted intervention', key: 'multiFacetedIntervention' }
-            ]
-        }, 
-    {
-        title: 'Organization-targeted strategy',
-        key: 'organizationTargetedStrategy',
-
-    }],
-    }, 
-
-];
-
-export const healthSystemTopicsExpandedKeys=[
-    'governmentArrangement',
-    'policyAuthority',
-    'organizationalAuthority',
-    'commercialAuthority',
-    'professionalAuthority',
-    'consumerStakeholderInvolvement',
-    'financialArrangements',
-    'financingSystems',
-    'fundingOrganizations',
-    'remuneratingProviders',
-    'purchasingProductsServices',
-    'incentivizingConsumers',
-    'deliveryArrangements',
-    'howCareIsDesignedToMeetConsumersNeeds',
-    'byWhomCareIsProvided',
-    'whereCareIsProvided',
-    'withwhatSupportsIsCareProvided',
-    'implementationStrategies',
-    'consumerTargetedStrategy',
-    'providerTargetedStrategy',
-];
-
-export const canadianAreasTreeData=[
-    { title: 'Home and community care', key: 'homeAndCommunityCare' },
-    { title: "Mental health addiction services", key: 'mentalHealthAndAddictionServices' },
-    { title: 'Indigenous health (Fedral)', key: 'indigenousHealthFederal' },
-    { title: 'Aging (emergent)', key: 'agingEmergent' }
-];
-
-export const canadianAreasExpandedKeys=[
+export const domainTopicsTreeData = [{
     
-];
-
-export const domainsTreeData = [{
-    title: 'Conditions',
-    key: 'conditions',
+    title: 'Programs and services',
+    key: 'Programs and services',
     children: [{
-        title: 'Infectious diseases',
-        key: 'infectiousDiseases',
+        title: 'Children and youth services',
+        key: 'Children and youth services',
         children: [
-            { title: 'HIV/AIDS', key: 'HIVAIDS' },
-            { title: 'Tuberculosis', key: 'tuberculosis' },
-            { title: 'Malaria', key: 'malaria' },
-            { title: 'Diarrhoeal disease', key: 'diarrhoealDisease' },
-            { title: 'Lower respiratory infections', key: 'lowerRespiratoryInfections' }
+            { title: 'Adoption services', key: 'Adoption services' },
+            { title: 'Caregiver support', key: 'Caregiver support' },
+            { title: 'Early childhood development servies', key: 'Early childhood development servies' },
+            { title: 'Special needs services', key: 'Student support services' },
+            { title: 'Student support services', key: 'Student support services' },
+            { title: 'Parent/legal guardian support services', key: 'Parent/legal guardian support services' },
+            { title: 'Child protection', key: 'Child protection' }
         ],
-    }, {
-        title: 'Non-communicable diseases',
-        key: 'nonCommunicableDiseases',
+        title: 'Citizenship',
+        key: 'Citizenship',
         children: [
-            { title: 'Cancer', key: 'cancer' },
-            { title: 'Cardiovascular disease', key: 'cardiovascularDisease' },
-            { title: 'Diabetes', key: 'diabetes' },
-            { title: 'Alzheimer and other dementias', key: 'alzheimerAndOtherDementias' },
-            { title: 'Chronic obstructive pulmonary disease', key: 'chronicObstructivePulmonaryDisease' }
+            { title: 'Admissibility, security and visa services', key: 'Admissibility, security and visa services' },
+            { title: 'Border services', key: 'Border services' },
+            { title: 'Refugee services', key: 'Refugee services' },
+            { title: 'Temporary residence permits', key: 'Temporary residence permits' },
+            { title: 'Permanent residence permits', key: 'Permanent residence permits' },
+            { title: 'Citizenship grants', key: 'Citizenship grants' },
+            { title: 'Settlement/re-settlement', key: 'Settlement/re-settlement' },
+            { title: 'Civic engagement/volunteering', key: 'Civic engagement/volunteering' },
+            { title: 'Civic/cultural integration', key: 'Civic/cultural integration' },
+            { title: 'Undocumented individuals', key: 'Undocumented individuals' },
+            { title: 'Migration', key: 'Migration' },
+            { title: 'Detention, deportation and extradition', key: 'Detention, deportation and extradition' },
+            { title: 'Sub-national cooperation', key: 'Sub-national cooperation' },
+            { title: 'International cooperation', key: 'International cooperation' }
         ],
-    },  {
-        title: 'Other',
-        key: 'domainsOther',
-        children: [
-            { title: 'Maternal and child health', key: 'maternalAndChildHealth' },
-            { title: 'Accidents', key: 'accidents' },
-            { title: 'Mental health and addictions', key: 'mentalHealthAndAddictions' },
-        ],
+        
+    }],
+    title: 'System arrangements',
+    key: 'System arrangements',
+    children: [{
+        
+    }],
+    title: 'Implementation strategies',
+    key: 'Implementation strategies',
+    children: [{
+
+    }],
+    title: 'Sustainable Development Goals',
+    key: 'Sustainable Development Goals',
+    children: [{
+
+    }],
+    title: 'Perspectives',
+    key: 'Perspectives',
+    children: [{
+
     }]
-    }, {
-        title: 'Technologies',
-        key: 'technologies',
-        children: [
-            { title: 'Drugs', key: 'drugs' },
-            { title: 'Devices', key: 'devices' },
-            { title: 'Diagnotics', key: 'diagnostics' },
-            { title: 'Surgery', key: 'surgery' }
-        ]
-    }, {
-        title: 'Sectors',
-        key: 'sectors',
-        children: [
-            { title: 'Home and community care', key: 'homeAndCommunityCare' },
-            { title: 'Primary care', key: 'primaryCare' },
-            { title: 'Specialty (hospital) care', key: 'specialHospitalCare' },
-            { title: 'Rehabilitation care', key: 'rehabilitationCare' },
-            { title: 'Long-term care', key: 'longTermCare' },
-            { title: 'Public health', key: 'publicHealth' }
-        ]
-    }, {
-        title: 'Providers',
-        key: 'providers',
-        children: [{
-            title: 'Physician',
-            key: 'physician',
-            children: [
-                { title: 'Generalist', key: 'generalist' },
-                { title: 'Specialist', key: 'specialist' },
-            ]
-        }, {
-            title: 'Nurse', key: 'nurse',
-        }, {
-            title: 'Pharmacist',
-            key: 'Pharmacist',
-        }, {
-            title: 'Allied health professional',
-            key: 'alliedHealthProfessional',
-        }, {
-            title: 'Lay/community health worker',
-            key: 'layCommunityCealthWorker'
-        }, {
-            title: 'Informal/family caregivers',
-            key: 'informalFamilyCaregivers'
-        }]
-    },
-];
+}];
 
-export const domainsExpandedKeys = [
-    'conditions',
-    'infectiousDiseases',
-    'nonCommunicableDiseases',
-    'domainsOther',
-    'technologies',
-    'sectors',
-    'providers',
-    'physician'
-];
 
-export const lmicFocusTreeData = [
-    { title: 'Target of document', key: 'generalist' },
-    { title: 'At least one LMIC author', key: 'atLeastOneLMICAuthor' },
-    { title: 'At least one LMIC study included', key: 'atLeastOneLMICStudyIncluded' }
-];
+	
 
-export const lmicFocusExpandedKeys = [
 
-];
+	
 
-export const themeTreeData = [
-    { title: 'Optimal aging', key: 'optimalAging' },
-    { title: 'Health promotion/primary prevention', key: 'healthPromotionPrimaryPrevention' }
-];
+Collapse 	Climate action
 
-export const themeExpandedKeys = [
-    
-];
 
-export const populationTreeData = [
-    { title: 'Children and youth', key: 'childrenAndYouth' },
-    { title: 'Indigenous peoples', key: 'indigenousPeoples' },
-    { title: 'Old Adults', key: 'oldAdults' }
-];
+Collapse 	Energy-use reductions
 
-export const populationExpandedKeys = [
 
-];
 
-export const ontarioPriorityAreasTreeData = [
-    { title: 'Community-based care', key: 'communityBasedCare' },
-    { title: 'Health system performance and sustainability' , key: 'healthSystemPerformanceAndSustainability' },
-    { title: 'Healthy living, with a focus on tobacco control' , key: 'healthyLivingWithAFocusOnTobaccoControl' },
-    { title: 'Mental health and addictions' , key: 'mentalHealthAndAddictions' },
-    { title: 'Nursing research' , key: 'nursingResearch' },
-    { title: 'Primary care reform' , key: 'primaryCareReform' },
-    { title: 'Quality improvement and safety', key: 'qualityImprovementSndSafety' },
-    { title: "Seniors’ care" , key: 'seniorsCare' },
-    { title: 'Vulnerable and special health needs populations' , key: 'vulnerableAndSpecialHealthNeedsPopulations' },
-    { title: "Women’s health", key: 'womensHealth' },
-];
+	Buildings
 
-export const ontarioPriorityAreasExpandedKeys = [
 
-];
 
-export const provinceFocusTreeData = [
-    { title: 'Federal/national', key: 'federalNational' },
-    { title: 'Alberta', key: 'alberta' },
-    { title: 'British Columbia', key: '' },
-    { title: 'Manitoba', key: '' },
-    { title: 'New Brunswick', key: '' },
-    { title: 'Newfoundland and Labrador', key: '' },
-    { title: 'Northwest Territories', key: '' },
-    { title: 'Nova Scotia', key: '' },
-    { title: 'Nunavut', key: '' },
-    { title: 'Ontario', key: '' },
-    { title: 'Prince Edward Island', key: 'princeEdwardIsland' },
-    { title: 'Quebec', key: 'quebec' },
-    { title: 'Saskatchewan', key: 'saskatchewan' },
-    { title: 'Yukon', key: 'yukon' }
-];
+	Energy production
 
-export const provinceFocusExpandedKeys = [
 
-];
 
-export const canadaHealthSystemDocumentTypeData = [
-    { title: 'Health and health system data', key: 'healthAndHealthSystemData' },
-    { title: 'Health expenditure review', key: 'healthExpenditureReview' },
-    { title: 'National health account', key: 'nationalHealthAccount' },
-    { title: 'Health system research priorities', key: 'healthSystemResearchPriorities' },
-    { title: 'Situation analysis', key: 'situationAnalysis' },
-    { title: 'Jurisdictional review', key: 'jurisdictionalReview' },
-    { title: 'Performance review', key: 'performanceReview' },
-    { title: 'External evaluation', key: 'externalEvaluation' },
-    { title: 'Literature review', key: 'literatureReview' },
-    { title: 'Framework', key: 'framework' },
-    { title: 'Toolkit', key: 'toolkit' },
-    { title: 'Options framing', key: 'optionsFraming' },
-    { title: 'Guidance', key: 'guidance' },
-    { title: 'Citizen/patient input', key: 'citizenPatientInput' },
-    { title: 'Stakeholder input', key: 'stakeholderInput' },
-    { title: 'Stakeholder position paper', key: 'stakeholderPositionPaper' },
-    { title: 'Political party platform ', key: 'politicalPartyPlatform' },
-    { title: 'Government discussion paper', key: 'governmentDiscussionPaper' },
-    { title: 'Government position paper', key: 'governmentPositionPaper' },
-    { title: 'Government strategic plan for the health sector', key: 'governmentStrategicPlanForTheHealthSector' },
-    { title: 'Government policy', key: 'governmentPolicy' },
-    { title: 'Government legislation', key: 'governmentLegislation' },
-    { title: 'Intergovernmental communiqué', key: 'intergovernmentalCommunique' },
-    { title: 'Intergovernmental accord', key: 'intergovernmentalAccord' },
-    { title: 'Government/third party accord', key: 'governmentThirdPartyAccord' },
-    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'canadianHealthSystemDocumentTypeNoEligible' },
-];
+	Households
 
-export const canadaHealthSystemDocumentTypeExpandedKeys = [
 
-];
 
-export const ontarioHealthDocumentTypeData = [
-    { title: 'Health and health system data', key: '' },
-    { title: 'Health expenditure review', key: '' },
-    { title: 'Provincial health account', key: '' },
-    { title: 'Health system research priorities', key: '' },
-    { title: 'Situation analysis', key: '' },
-    { title: 'Jurisdictional review', key: '' },
-    { title: 'Performance review', key: '' },
-    { title: 'External evaluation', key: '' },
-    { title: 'Literature review', key: '' },
-    { title: 'Framework', key: '' },
-    { title: 'Toolkit', key: '' },
-    { title: 'Options framing', key: '' },
-    { title: 'Guidance', key: '' },
-    { title: 'Citizen/patient input', key: '' },
-    { title: 'Stakeholder input', key: '' },
-    { title: 'Stakeholder position paper', key: '' },
-    { title: 'Political party platform', key: '' },
-    { title: 'Government discussion paper', key: '' },
-    { title: 'Government position paper', key: '' },
-    { title: 'Government strategic plan for the health sector', key: '' },
-    { title: 'Government policy', key: '' },
-    { title: 'Government legislation', key: '' },
-    { title: 'Intergovernmental communiqué', key: '' },
-    { title: 'Intergovernmental accord', key: '' },
-    { title: 'Government/third party accord', key: '' },
-    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: 'ontarioHealthSystemDocumentTypeNoEligible' }
-];
+	Industries
 
-export const intergovernmentalOrganizationHealthSystemDocumentTypeData = [
-    { title: 'Health and health system data', key: '' },
-    { title: 'Health expenditure review', key: '' },
-    { title: 'Health system research priorities', key: '' },
-    { title: 'Situation analysis', key: '' },
-    { title: 'Jurisdictional review', key: '' },
-    { title: 'Performance review', key: '' },
-    { title: 'External evaluation', key: '' },
-    { title: 'Literature review', key: '' },
-    { title: 'Framework', key: '' },
-    { title: 'Toolkit', key: '' },
-    { title: 'Options framing', key: '' },
-    { title: 'Guidance', key: '' },
-    { title: 'Citizen/patient input', key: '' },
-    { title: 'Stakeholder input', key: '' },
-    { title: 'WHO discussion paper', key: '' },
-    { title: 'WHO strategic plan', key: '' },
-    { title: 'WHO policy', key: '' },
-    { title: 'World Health Assembly resolution', key: '' },
-    { title: 'Inter-agency communiqué', key: '' },
-    { title: 'Inter-agency accord', key: '' },
-    { title: 'WHO/third party accord', key: '' },
-    { title: 'After reviewing the document types and eligibility criteria, this record is not eligible for inclusion in HSE', key: '' },
-];
+
+
+	Land use
+
+
+
+	Tourism
+
+
+
+	Transport
+
+
+Collapse 	Low- or zero-carbon electricity supply
+
+
+
+	Nuclear power
+
+
+
+	Renewable energy
+
+
+Collapse 	Electrification and other fuel switching
+
+
+
+	Appliances
+
+
+
+	Supporting infrastructure
+
+
+
+	Vehicles
+
+
+Collapse 	Non-energy emission solutions
+
+
+
+	Bio-sequestration
+
+
+
+	Carbon capture and storage
+
+
+
+	Fugitive-emission reduction
+
+
+
+	Industrial-process improvements
+
+
+
+	Reuse and recycling
+
+
+Collapse 	Climate-change risk management
+
+
+	Financial
+
+
+	Human
+
+
+	Property
+
+
+	Settlement
+
+Collapse 	Community and social services
+
+
+	Accessibility services
+
+
+	Disability services
+
+
+	Problem gambling services
+
+
+	Other social services
+
+
+	Community services
+
+
+	Community development
+
+
+	Emergency response and preparedness
+
+Collapse 	Consumer protection
+
+
+	Consumer awareness and education
+
+
+	Consumer advocacy and rights
+
+
+	Personal financial services standards
+
+
+	Advertising and marketing standards
+
+
+	Consumer promotion standards
+
+
+	Responsible consumption initiatives
+
+
+	Product safety
+
+
+	Fraud
+
+
+	Privacy
+
+
+	Competition supports
+
+
+	E-commerce and the sharing economy
+
+Collapse 	Culture and gender
+
+
+	Arts
+
+
+	Heritage
+
+
+	Cultural industries
+
+
+	Cultural protectionism
+
+
+	Cultural competency training
+
+
+	Multiculturalism
+
+
+	Gender mainstreaming
+
+
+	Gender equality
+
+
+	Human rights
+
+Collapse 	Economic development and growth
+
+
+	Access to finance
+
+
+	Area-based initiatives
+
+
+	Broadband access
+
+
+	Business advice
+
+
+	Housing stock renewal
+
+
+	Human capital investments
+
+
+	Innovation supports
+
+
+	Public space improvements
+
+
+	Sport/culture events and facilities
+
+
+	Transportation enhancements
+
+
+	General fiscal policy tools
+
+
+	General monetary policy tools
+
+
+	General trade policy tools
+
+Collapse 	Education
+
+
+	Pre-primary education
+
+
+	Primary education
+
+
+	Secondary education
+
+
+	Tertiary/higher education
+
+
+	Academic planning
+
+
+	Revenue streams
+
+
+	Tuition setting and subsidy
+
+
+	Marketing
+
+
+	Admissions and recruitment
+
+
+	Streaming
+
+
+	Curriculum
+
+
+	Literacy training
+
+
+	Apprenticeships
+
+
+	Teaching
+
+
+	Assessment
+
+
+	Student engagement
+
+
+	Parent/legal guardian engagement
+
+
+	Teacher/faculty engagement
+
+
+	Community engagement
+
+
+	Prospective employers engagement
+
+Collapse 	Employment
+
+
+	Job training/retraining
+
+
+	Wages
+
+
+	Benefits
+
+
+	Employment conditions
+
+
+	Displaced workers
+
+
+	Unemployment
+
+
+	Unpaid labour
+
+
+	Workplace safety and prevention
+
+
+	Workplace violence and harassment
+
+
+	Unions and collective bargaining
+
+
+	Labour-market interventions
+
+
+	Industry-level interventions
+
+Collapse 	Energy supply
+
+
+Collapse 	Biofuel
+
+
+
+	First-generation biofuels
+
+
+
+	Second-generation biofuels
+
+
+	Coal
+
+
+Collapse 	Hydro-electricity
+
+
+
+	Pumped storage
+
+
+
+	Reservoir
+
+
+
+	Run-of-river
+
+
+
+	Tidal range
+
+
+
+	Tidal stream
+
+
+	Natural gas
+
+
+	Nuclear energy
+
+
+	Petroleum products
+
+
+	Solar power
+
+
+	Wind power
+
+
+Collapse 	Non-carbon fuel
+
+
+
+	Ammonia
+
+
+
+	Hydrogen
+
+
+Collapse 	Geothermal
+
+
+
+	Electricity generation
+
+
+
+	Heating and heating systems
+
+
+
+	Heat pump
+
+
+Collapse 	Waste (to) energy
+
+
+
+	Biological treatment
+
+
+
+	Thermochemical treatment
+
+
+Collapse 	Co-generation
+
+
+
+	Power and heat
+
+
+
+	Power, heat and cooling (trigeneration)
+
+
+
+	Power, heat, cooling and other products (polygeneration)
+
+
+Collapse 	Energy storage
+
+
+
+	Domestic
+
+
+
+	Industrial
+
+
+Collapse 	Energy systems
+
+
+	Energy mix
+
+
+	Energy efficiency initiatives
+
+
+	Grid design
+
+
+	On-and off- grid source balancing
+
+
+	Supply security
+
+Collapse 	Environmental conservation
+
+
+	Air
+
+
+Collapse 	Land
+
+
+
+	Land-use planning
+
+
+
+	Parks and other protected areas
+
+
+Collapse 	Water
+
+
+
+	Freshwater (lakes & rivers)
+
+
+
+	Seas (marine & coasts, including coastal erosion) & their catchments
+
+
+Collapse 	Biodiversity
+
+
+
+	Fauna protection
+
+
+
+	Flora protection
+
+
+
+	Conservation status assessment
+
+
+
+	Sustainable harvesting
+
+
+Collapse 	Recycling
+
+
+
+	Personal
+
+
+
+	Industrial
+
+
+Collapse 	Restoration
+
+
+
+	Environmental remediation
+
+
+
+	Land restoration
+
+
+
+	Land rehabilitation
+
+
+Collapse 	Waste
+
+
+
+	Hazardous solid, liquid or other waste
+
+
+
+	Non-hazardous solid, liquid or other waste
+
+
+Collapse 	Environmental resilience
+
+
+
+	Social
+
+
+
+	Economic
+
+
+
+	Institutional
+
+
+
+	Physical
+
+
+
+	Natural
+
+
+Collapse 	Environmental-threats management
+
+
+	Fires
+
+
+	Invasive species
+
+
+	Light
+
+
+	Noise
+
+Collapse 	Financial protection
+
+
+	Social assistance
+
+
+	Minimum wage
+
+
+	Wage disparity limitations
+
+
+	Employment/unemployment insurance
+
+
+	Pensions and allowances
+
+
+	Poverty reduction
+
+
+	Goods and services subsidy
+
+
+	Guaranteed minimum income
+
+
+	Other income re-distribution
+
+
+	Income reporting
+
+
+	Asset reporting
+
+Collapse 	Food safety and security
+
+
+	Food access
+
+
+	Nutritional awareness and education
+
+
+	Food aid
+
+
+	Food standards
+
+
+	Food import/export
+
+
+	International food relief
+
+Collapse 	Government services
+
+
+	Identification, licensing and registration
+
+
+	Service awareness and education
+
+
+	e-Government
+
+
+	Service coordination
+
+
+	Government corruption protections
+
+
+	Government inclusivity protections
+
+
+	Government accountability protections
+
+
+	Elections administration
+
+Collapse 	Housing
+
+
+	Access to housing
+
+
+	Temporary housing
+
+
+	Public/social housing
+
+
+	Affordable housing
+
+
+	Housing assistance
+
+
+	Housing mix
+
+
+	Housing safety
+
+
+	Property rights
+
+Collapse 	Infrastructure
+
+
+	Capital planning
+
+
+	Urban planning
+
+
+	Social infrastructure
+
+
+	Broadband infrastructure
+
+
+	Transportation infrastructure
+
+
+	Waste management infrastructure
+
+
+	Water and sanitation infrastructure
+
+
+	Sustainable development
+
+
+	Capital spending
+
+
+	Public financing
+
+
+	Public/private partnerships
+
+
+	Private financing
+
+
+	Foreign investment
+
+
+	Risk management
+
+Collapse 	Natural resources
+
+
+Collapse 	Aquatic life
+
+
+
+	Fishing and fisheries
+
+
+
+	Aquatic plants including coral
+
+
+	Water
+
+
+Collapse 	Forests
+
+
+
+	Timber industries
+
+
+Collapse 	Ground-based resources
+
+
+
+	Metals
+
+
+
+	Minerals
+
+
+
+	Petroleum
+
+
+
+	Gas
+
+
+	Wildlife
+
+Collapse 	Public safety and justice
+
+
+	Crime prevention
+
+
+	Crime reduction
+
+
+	Security services
+
+
+	National security
+
+
+	Counter-terrorism
+
+
+	Military
+
+
+	Policing
+
+
+	Court system
+
+
+	Restorative justice
+
+
+	Youth justice
+
+
+	Domestic violence support
+
+
+	Victim support
+
+
+	Offender diversion and support
+
+
+	Sentencing
+
+
+	Prison administration and management
+
+
+	Probation and parole
+
+
+	Community corrections
+
+
+	Reintegration
+
+Collapse 	Recreation
+
+
+	Promotion of recreation
+
+
+	Public spaces
+
+
+	Community/recreation programs
+
+
+	Private recreation
+
+
+	Competitive sport
+
+Collapse 	Transportation
+
+	Accessible transportation options
+
+	Congestion management
+
+	Public transportation
+
+	Safety - Pedestrian
+
+	Safety - Cycling
+
+	Safety - Transportation
+
+	Sustainable transportation options
+
+	Transportation subsidies
+
+	Road tolls
+Collapse 	System arrangements
+
+Collapse 	Governance arrangements
+
+
+Collapse 	Policy authority
+
+
+
+	Centralization/decentralization of policy authority
+
+
+
+	Accountability of the state sector's role in financing & delivery
+
+
+
+	Stewardship of the non-state sector's role in financing & delivery
+
+
+
+	Decision-making authority about who is covered and what can or must be provided to them
+
+
+
+	Corruption protections
+
+
+Collapse 	Organizational authority
+
+
+
+	Ownership
+
+
+
+	Management approaches
+
+
+
+	Accreditation
+
+
+
+	Networks/multi-institutional arrangements
+
+
+Collapse 	Commercial authority
+
+
+
+	Licensure & registration requirements
+
+
+
+	Patents & profits
+
+
+
+	Pricing & purchasing
+
+
+
+	Marketing
+
+
+
+	Sales
+
+
+
+	Commercial liability
+
+
+Collapse 	Professional authority
+
+
+
+	Training & licensure requirements
+
+
+
+	Scope of practice
+
+
+
+	Setting of practice
+
+
+
+	Continuing competence
+
+
+
+	Quality & safety
+
+
+
+	Professional liability
+
+
+
+	Strike/job action
+
+
+Collapse 	Citizen & stakeholder involvement
+
+
+	Citizen participation in policy & organizational decisions
+
+
+	Citizen participation in system monitoring
+
+
+	Citizen participation in service delivery
+
+
+	Citizen complaints management
+
+
+	Stakeholder participation in policy & organizational decisions (or monitoring)
+
+Collapse 	Financial arrangements
+
+
+Collapse 	Financing systems
+
+
+
+	Taxation
+
+
+
+	Social insurance
+
+
+
+	Community-based insurance
+
+
+
+	Community loan funds
+
+
+
+	Private insurance
+
+
+
+	Social savings accounts (Individually financed)
+
+
+
+	User fees
+
+
+
+	Donor contributions
+
+
+
+	Fundraising
+
+
+Collapse 	Funding organizations
+
+
+
+	Fee-for-service (Funding)
+
+
+
+	Capitation (Funding)
+
+
+
+	Global budget
+
+
+
+	Case-mix funding
+
+
+
+	Targeted payments/penalties (Funding)
+
+
+Collapse 	Remunerating providers
+
+
+
+	Fee-for-service (Remuneration)
+
+
+
+	Capitation (Remuneration)
+
+
+
+	Salary
+
+
+
+	Episode-based payment
+
+
+
+	Fundholding
+
+
+
+	Targeted payments/penalties (Remuneration)
+
+
+Collapse 	Purchasing products & services
+
+
+
+	Scope & nature of insurance plans
+
+
+
+	Lists of covered/reimbursed organizations, providers, services & products
+
+
+
+	Restrictions in coverage/reimbursement rates for organizations, providers, services & products
+
+
+
+	Caps on coverage/reimbursement for organizations, providers, services & products
+
+
+
+	Prior approval requirements for organizations, providers, services & products
+
+
+
+	Lists of substitutable services & products
+
+
+Collapse 	Incentivizing citizens
+
+
+	Premium (level & features)
+
+
+	Cost sharing
+
+
+	Social savings accounts (Third party contributions)
+
+
+	Targeted payments/penalties (Incentivizing citizens)
+
+Collapse 	Delivery arrangements
+
+Collapse 	How services are designed to meet citizens’ needs
+
+
+	Availability of services
+
+
+	Timely access to services
+
+
+	Culturally appropriate services
+
+
+	Case management
+
+
+	Package of services/service pathways
+
+
+	Group services
+
+Collapse 	By whom services are provided
+
+
+	System - Need, demand & supply
+
+
+	System - Recruitment, retention & transitions
+
+
+	System - Performance management
+
+
+	Workplace conditions - Provider satisfaction
+
+
+	Workplace conditions - Health & safety
+
+
+	Skill mix - Role performance
+
+
+	Skill mix - Role expansion or extension
+
+
+	Skill mix - Task shifting / substitution
+
+
+	Skill mix - Multidisciplinary teams
+
+
+	Skill mix - Volunteers or caregivers
+
+
+	Skill mix – Communication & case discussion between distant professionals
+
+
+	Staff - Training
+
+
+	Staff - Support
+
+
+	Staff - Workload/workflow/intensity
+
+
+	Staff - Continuity of services
+
+
+	Staff/self - Shared decision-making
+
+
+	Self-management
+
+Collapse 	Where services are provided
+
+
+	Site of service delivery
+
+
+	Physical structure, facilities & equipment
+
+
+	Organizational scale
+
+
+	Organizational structure
+
+
+	Integration of services
+
+
+	Continuity of services
+
+
+	Outreach
+
+Collapse 	With what supports are services provided
+
+	Record systems
+
+	Electronic records
+
+	Other ICT that support individuals who provide services
+
+	ICT that support individuals who receive services
+
+	Financial monitoring and improvement systems
+
+	Quality monitoring and improvement systems
+
+	Safety monitoring and improvement systems
+Collapse 	Implementation strategies
+
+Collapse 	Citizen-targeted strategy
+
+
+	Information or education provision
+
+
+	Behaviour change support
+
+
+	Skills and competencies development
+
+
+	(Personal) Support
+
+
+	Communication and decision-making facilitation
+
+
+	System participation
+
+Collapse 	Provider-targeted strategy
+
+
+	Educational material
+
+
+	Educational meeting
+
+
+	Educational outreach visit
+
+
+	Local opinion leader
+
+
+	Local consensus process
+
+
+	Peer review
+
+
+	Audit and feedback
+
+
+	Reminders and prompts
+
+
+	Tailored intervention
+
+
+	Citizen-mediated intervention
+
+
+	Multi-faceted intervention
+
+	Organization-targeted strategy
+Collapse 	Sustainable Development Goals
+
+	1. No poverty
+
+	2. Zero hunger
+
+	3. Good health and well-being (partially covered)
+
+	4. Quality education
+
+	5. Gender equality
+
+	6. Clean water and sanitation
+
+	7. Affordable and clean energy
+
+	8. Decent work and economic growth
+
+	9. Industry, innovation and infrastructure
+
+	10. Reduced inequalities
+
+	11. Sustainable cities and communities
+
+	12. Responsible consumption and production
+
+	13. Climate action
+
+	14. Life below water
+
+	15. Life on land
+
+	16. Peace, justice and strong institutions
+
+	17. Partnerships for the goals
+Collapse 	Perspectives
+Collapse 	Populations
+
+	Children and youth
+
+	Ethnocultural minorities
+
+	Linguistic minorities
+
+	Immigrants and refugees
+
+	Indigenous peoples
+
+	Individuals who are homeless or marginally housed
+
+	LGBTQ
+
+	Older adults
+
+	People living in rural and remote communities
+
+	People with disabilities
+Collapse 	Outcomes
+
+	Economic
+
+	Education
+
+	Employment
+
+	Health
+
+	Housing
+
+	Social inclusion
+
+	Well-being
+
+	Other sector/area-specific outcomes
+Collapse 	Disciplines
+	Anthropology
+	Arts
+	Business administration
+	Communications
+	Criminology
+	Economics
+	Engineering
+	Geography
+	Gerontology
+	History
+	Law
+	Philosophy
+	Political science
+	Psychology
+	Public administration
+	Social work
+	Sociology
+
+
+
+
+}]

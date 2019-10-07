@@ -20,11 +20,11 @@ const Authentication = require('../authentication');
  * @param WritableStream res The function's response body
  */
 exports.listArticles = async (req, res) => { // REFACTOR: rename to list
-
+    
     const user = await Authentication.getUserFromToken(req.headers.authorization);
 
-    SSEArticleModelClass.find()
-    .or([ { _eligibilityFilterJunior: user._id }, { _eligibilityFilterSenior: user._id } ])
+    SSEArticleModelClass.find({ lostArticle: false, complicated: false, eligibilityFiltersFullCompletion: false })
+    .or([ { _eligibilityFiltersJunior: user._id }, { _eligibilityFiltersSenior: user._id } ])
     .exec(function(err, articles) {
         if(err) {
             return res.send(err);
@@ -33,6 +33,7 @@ exports.listArticles = async (req, res) => { // REFACTOR: rename to list
                 message: 'No article in your Eligibility Filters Queue'
             });
         }
+        console.log(' ********** ' + user._id);
         return res.status(200).send(articles);
     });
 };
