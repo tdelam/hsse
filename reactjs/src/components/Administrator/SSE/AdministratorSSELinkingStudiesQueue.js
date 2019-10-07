@@ -1,7 +1,7 @@
 /**
  * @name AdministratorSSELinkingStudiesQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the routing paths for HSE Administrator section of application
+ * @description Defines the administrator's linking studies queue copmonent
  */
 
 import React, { Component } from 'react';

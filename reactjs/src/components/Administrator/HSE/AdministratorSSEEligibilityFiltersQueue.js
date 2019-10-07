@@ -1,7 +1,9 @@
 /**
- * @name AdministratorHSEEligibilityFiltersQueue.js
+ * @name AdministratorSSEEligibilityFiltersQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the routing paths for Administrator SSE queue of application
+ * @description Defines the administrator's eligibility filters queue component
+ * 
+ * TODO: this file should be renamed to AdministratorHSEEligibilityFiltersQueue.js
  */
 
 import React, { Component } from 'react';
