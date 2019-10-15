@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-class HSEMailBox extends Component {
+class Mailbox extends Component {
 
   render() {
     return (
@@ -19,10 +19,10 @@ class HSEMailBox extends Component {
 }
 
 
-function mapStateToProps({ HSEMailBox, auth }) {
+function mapStateToProps({ Mailbox, auth }) {
   return {
     currentUser: auth.currentUser
   }
 }
 
-export default connect(mapStateToProps, actions)(HSEMailBox);
+export default connect(mapStateToProps, actions)(Mailbox);

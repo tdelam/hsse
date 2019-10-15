@@ -370,7 +370,7 @@ const Menu = [
     },{
         name: 'Monthly Email',
         translate: 'sidebar.nav.table. MONTHLY EMAIL',
-        path: '/hse/HSEMailBox',
+        path: '/hse/mailbox',
     },
     {
         heading: 'Settings',
