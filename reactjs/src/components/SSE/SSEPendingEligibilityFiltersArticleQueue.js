@@ -22,7 +22,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import PendingEligibilityFiltersArticleQueueRow from '../Common/PendingEligibilityFiltersArticleQueueRow';
+import SSEPendingEligibilityFiltersArticleQueueRow from '../Common/SSEPendingEligibilityFiltersArticleQueueRow';
 import * as actions from '../../actions';
 
 import Datatable from '../Tables/Datatable';
@@ -195,7 +195,7 @@ class SSEPendingEligibilityFiltersArticleQueue extends Component {
         if(this.state.pendingArticles && this.state.pendingArticles.length > 0 ) {
         let testRows = this.state.pendingArticles.map(article => {
             
-            return (<PendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);
+            return (<SSEPendingEligibilityFiltersArticleQueueRow key = {article._id} article = {article} history = {this.props.history}/>);
         });
         // <a className="mr-1 badge badge-success" href="">{ article[1].language }</a>
             return (

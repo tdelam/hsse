@@ -5,6 +5,7 @@
  */
 
 const mongoose = require('mongoose');
+const mongoosastic = require('mongoosastic');
 const shortid = require('shortid');
 
 const { Schema } = mongoose;
@@ -18,9 +19,65 @@ const SSEArticleSchema = new Schema({
     // Field for short id generation
     articleIdShort: { type: String, default: shortid.generate() },
 
+
+    // Fields from EndNote
+    referenceType: { type: String },
+    rating: { type: String },
+    authors: { type: String },
+    year: { type: String },
+    title: { type: String },
+    journal: { type: String },
+    volume: { type: String },
+    issue: { type: String },
+    pages: { type: String },
+    startPage: { type: String },
+    ePubDate: { type: String },
+    date: { type: String },
+    typeOfArticle: { type: String },
+    shortTitle: { type: String },
+    alternateJournal: { type: String },
+    ISSN: { type: String },
+    DOI: { type: String },
+    originalPublication: { type: String },
+    rePrintEdition: { type: String },
+    reviewedItem: { type: String },
+    legalNote: { type: String },
+    PMCID: { type: String },
+    NIHMSID: { type: String },
+    articleNumber: { type: String },
+    accessionNumber: { type: String },
+    callNumber: { type: String },
+    label: { type: String },
+    keywords: { type: String },
+    abstract: { type: String },
+    notes: { type: String },
+    researchNotes: { type: String },
+    URL: { type: String },
+    fileAttachments: { type: String },
+    authorAddress: { type: String },
+    figure: { type: String },
+    caption: { type: String },
+    accessDate: { type: String },
+    translatedAuthor: { type: String },
+    translatedTitle: { type: String },
+    nameOfDatabase: { type: String },
+    databaseProvider: { type: String },
+    language: { type: String, default: 'English' },
+    priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
+    source: { type: String },
+
+    articleSource: { type: String, default: 'Single article from referrals' },
+    harvestDate: { type: Date, default: Date.now },
+
+    questionType: { type: String },
+    documentType: { type: String },
+    
+    publishedDate: { type: Date },
+
+
+/*    
     system: { type: String },
     eligible: { type: Boolean, default: false },
-    harvestDate: { type: Date, default: Date.now },
 
 
     // General Article Information
@@ -58,12 +115,20 @@ const SSEArticleSchema = new Schema({
     epocReview: { type: Boolean, default: false },
     general: { type: Boolean, default: false },
     hotDocs: { type: Boolean, default: false },
-
-    // Temporary
-    priority: { type: String },
-    articleSource: { type: String },
-    language: { type: String },
+    priority: { type: String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW' },
     
+    language: { type: String, default: 'English' },
+    source: { type: String },
+
+    articleSource: { type: String, default: 'Single article from referrals' },
+    harvestDate: { type: Date, default: Date.now },
+
+    questionType: { type: String },
+    documentType: { type: String },
+
+    publishedDate: { type: Date },
+*/
+
     _eligibilityFiltersJuniorEmail: { type: String, default: null },
     _eligibilityFiltersSeniorEmail: { type: String, default: null },
 
@@ -138,7 +203,30 @@ const SSEArticleSchema = new Schema({
     // Complicated tag
     complicated: { type: Boolean, default: false },
 
+    // Lost tag
+    lostArticle: { type: Boolean, default: false },
+
+    // Translators
+    _translatorsFrench: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsSpanish: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsPortugese: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsRussian: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsArabic: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsChinese: { type: Schema.Types.ObjectId, ref: 'User' },
+    _translatorsEnglish: { type: Schema.Types.ObjectId, ref: 'User' },
+    
+    // Article relation to Batchfile
+    _batchFile: { type: Schema.Types.ObjectId, ref: 'SSEArticleBatchFiles' },
+
+    // Steps for Eligibility Filter Stage
+    showGeneralArticleInformation: { type: Boolean, default: false },
+    stepRelevance: { type: Boolean, default: true },
+    stepEligibility: { type: Boolean, default: false },
+    stepDocumentType: { type: Boolean, default: false },
+
 
 });
+
+SSEArticleSchema.plugin(mongoosastic);
 
 mongoose.model('SSEArticles', SSEArticleSchema);

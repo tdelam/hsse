@@ -1,7 +1,7 @@
 /**
- * @name HSEAdministratorGoLiveQueue.js
+ * @name AdministratorHSEGoLiveQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the routing paths for HSE Administrator section of application
+ * @description Defines the administrator's go live queue component
  */
 
 import React, { Component } from 'react';

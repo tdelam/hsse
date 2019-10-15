@@ -41,7 +41,7 @@ class AddHSEArticle extends Component {
             authors: '',
             journal: '',
             harvestDate: Date.now(),
-            articleSource: ''
+            articleSource: 'Single article from referrals'
         }
     }
 

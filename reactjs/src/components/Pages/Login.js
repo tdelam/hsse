@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Input } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 import * as actions from '../../actions';
 
@@ -62,10 +63,23 @@ class Login extends Component {
         e.preventDefault()
     }
 
-    gotoDashboard = () => this.props.history.push('/dashboardmain');
+    successResult = () => {
+        this.props.history.push('/dashboardmain');
+    }
+    
+    failureResult = () => {
+        this.notify('Unauthorized credentials', "error", "top-right");
+    }
+
+
+
+    notify = (message, type, position) => toast(message, {
+        type,
+        position
+    })
 
     handleSubmit = (formProps) => {
-        this.props.signin(formProps, this.gotoDashboard);
+        this.props.signin(formProps, this.successResult, this.failureResult);
     }
 
     /* Simplify error check */
@@ -168,6 +182,7 @@ class Login extends Component {
                             </div>
                             <button className="btn btn-block btn-primary mt-3" type="submit">Login</button>
                         </form>
+                        <ToastContainer />
                         <p className="pt-3 text-center">Need to Signup?</p>
                         <Link to="register" className="btn btn-block btn-secondary">Register Now</Link>
                     </div>

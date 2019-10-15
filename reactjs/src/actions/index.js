@@ -1,3 +1,10 @@
+/**
+ * @name index.js
+ * @author Kwadwo Sakyi
+ * @description This file defines all functions used by components.  Each function will dispatch an event with a
+ * type defined in ./types.js
+ */
+
 import axios from 'axios';
 import { 
   AUTH_USER, 
@@ -318,7 +325,7 @@ export const signup = (formProps, callback) => async dispatch => {
   }
 };
 
-export const signin = (formProps, callback) => async dispatch => {
+export const signin = (formProps, successCallback, failureCallback) => async dispatch => {
   
   try {
     const response = await axios.post(
@@ -330,12 +337,15 @@ export const signin = (formProps, callback) => async dispatch => {
 
     localStorage.setItem('token', response.data.token);
 
-    callback();
+    successCallback();
+    //return response.data
 
   } catch (e) {
 
     dispatch({ type: AUTH_ERROR, payload: 'Invalid login credentials or Unconfirmed email' });
-
+    
+    failureCallback();
+    //return e;
   }
 };
 
@@ -1220,6 +1230,7 @@ export const listSSEPendingEligibilityFiltersArticlesQueue = (history) => async 
     // history.push('/dashboard');
     // console.log(response.data);
     dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE, payload: response.data })
+    return response.data;
   } catch(e) {
     dispatch({ type: SSE_PENDING_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR, payload: 'Error showing sse eligibility filter article pending queue'});
   }

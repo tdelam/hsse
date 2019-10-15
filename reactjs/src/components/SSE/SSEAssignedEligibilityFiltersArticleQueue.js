@@ -32,6 +32,7 @@ const dtOptions = {
 class SSEAssignedEligibilityFiltersArticleQueue extends Component {
 
     componentDidMount() {
+        this.props.getCurrentUser();
         this.props.listSSEAssignedEligibilityFiltersArticlesQueue();
     }
 
@@ -51,8 +52,8 @@ class SSEAssignedEligibilityFiltersArticleQueue extends Component {
     }
 
     renderArticles() {
-        
-        if(this.props.assignedArticles != null ) {
+        console.log(this.props.assignedArticles);
+        if(this.props.assignedArticles !== undefined ) {
             const rows = Object.entries(this.props.assignedArticles).map(article => {
                 return (
                     <tr key={article[1]._id}>
@@ -149,8 +150,9 @@ class SSEAssignedEligibilityFiltersArticleQueue extends Component {
     }
 }
 
-function mapStateToProps({ sseAssignedEligibilityFiltersArticleQueue }) {
+function mapStateToProps({ sseAssignedEligibilityFiltersArticleQueue, auth }) {
     return {
+        currentUser: auth.currentUser,
         errorMessage: sseAssignedEligibilityFiltersArticleQueue.sseAssignedEligibilityFiltersArticleErrorMessage,
         assignedArticles: sseAssignedEligibilityFiltersArticleQueue.sseAssignedEligibilityFiltersArticles 
     }

@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Tree } from 'antd';
 import {
@@ -40,14 +40,14 @@ import {
 
 const { TreeNode } = Tree;
 
-const LIVE_DATE = [
+/*const LIVE_DATE = [
     { value: 'newArticle', label: 'New Article' },
     { value: 'dataEntryComplete', label: 'Data Entry Complete' },
     { value: 'live', label: 'Live', className: 'State-Vic' },
     { value: 'deleted', label: 'Deleted' }
-]
+]*/
 
-const DOCUMENT_TYPE = [
+/*const DOCUMENT_TYPE = [
     { value: 'new-article', label: 'New Article'},
     { value: 'dataEntryComplete', label: 'Data Entry Complete' },
     { value: 'live', label: 'Live' },
@@ -65,13 +65,13 @@ const DOCUMENT_TYPE = [
     { value: 'systematicReviewsAndOtherTypesOfSyntheses', label: 'Systematic reviews and other types of syntheses' },
     { value: 'canadasHealthSystemsDocument', label: "Canada's health systems documents" },
     { value: "OntariosHealthSystemDocuments", label: "Ontario's health system documents" }
-]
-
+]*/
+/*
 const REF_TYPE = [
     { value: 'journal', label: 'Journal' },
     { value: 'bookWhole', label: 'Book (Whole)' },
     { value: 'bookChapter', label: 'Book (Chapter)' }
-]
+]*/
 
 const QUESTION_TYPE = [
     { value: 'many', label: 'Many'},
@@ -636,12 +636,12 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
                                     <strong>Document type: </strong>
                                 </div>
                                 <div className="col-xl-5">
-                                    { this.props.currentArticle && this.props.currentArticle.documentType || this.state.documentType }
+                                    { (this.props.currentArticle && this.props.currentArticle.documentType) || this.state.documentType }
                                     {  }
                                 </div>
                             </div>
                             <br />
-                            { this.props.currentArticle && this.props.currentArticle.documentType || this.renderSubtype(this.state.documentType) }
+                            { (this.props.currentArticle && this.props.currentArticle.documentType) || this.renderSubtype(this.state.documentType) }
                             <br />
                             <div className="row">
                                 <div className="col-md-2">
@@ -1176,8 +1176,8 @@ class HSEAssignedEligibilityFilterArticleInput extends Component {
         //this.getInputValues();
 
         // used for react select
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
+        // const { selectedOption } = this.state;
+        // const value = selectedOption && selectedOption.value;
 
         return (
             <ContentWrapper>

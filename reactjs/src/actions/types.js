@@ -1,3 +1,10 @@
+/**
+ * @name types.js
+ * @author Kwadwo Sakyi
+ * @description This file defines all types of events which are dispatched by components, which are in turn
+ * rendered as a result of a route.  See ../Routes.js for more details. 
+ */
+
 export const AUTH_USER = 'auth_user';
 export const AUTH_ERROR = 'auth_error';
 export const CONFIRM_USER_EMAIL = 'confirm_user_email';

@@ -1,7 +1,7 @@
 /**
- * @name HSEAdministratorPresentationDetailsQueue.js
+ * @name AdministratorHSEPresentationDetailsQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the routing paths for HSE Administrator section of application
+ * @description Defines the administrator's presentation details queue component
  */
 
 import React, { Component } from 'react';

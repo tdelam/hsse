@@ -46,7 +46,17 @@ class HSEAssignedLinkingStudiesArticleInput extends Component {
 
         selectedOption: '',
 
-        linkingStudiesModel: {},       
+        linkingStudiesModel: {},   
+        
+        notInEnglish: false,
+        notFreeFullText: false,
+        largeReview: false,
+
+        countriesNotReportedInDetail: false,
+        noSpecificCountryFocus: false,
+
+        tempCountry: '',
+        tempCount: 0
 
     };
 

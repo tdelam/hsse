@@ -22,17 +22,11 @@ import 'antd/dist/antd.css';
 import * as actions from '../../actions';
 
 import {
-    healthSystemTopicsTreeData,
-    canadianAreasTreeData,
-    domainsTreeData,
-    lmicFocusTreeData,
-    provinceFocusTreeData,
+    domainTreeData,
+    limicFocusTreeData,
     themeTreeData,
-    populationTreeData,
-    ontarioPriorityAreasTreeData,
-    canadaHealthSystemDocumentTypeData,
-    ontarioHealthDocumentTypeData,
-    intergovernmentalOrganizationHealthSystemDocumentTypeData
+    ageTreeData,
+    targetTreeData
 
 } from './SSEEligibilityFilterTrees';
 
