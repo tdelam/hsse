@@ -1,4 +1,4 @@
-export const domainTopicsTreeData = [{
+export const domainTreeData = [{
     
     title: 'Programs and services',
     key: 'Programs and services',
@@ -829,16 +829,16 @@ export const domainTopicsTreeData = [{
 	}
 ];
 
-export const limicFocus = [
+export const limicFocusTreeData = [
 	{ title: 'Target of document', key: 'Target of document' },
 	{ title: 'At least oen LMIC study included', key: '' }
 ];
 
-export const theme = [
+export const themeTreeData = [
 	{ title: 'Optimal aging', key: 'Optimal aging' }
 ];
 
-export const age = [
+export const ageTreeData = [
 	{ title: 'Neonates (birth to 1 month)', key: 'Neonates (birth to 1 month)' },
 	{ title: 'Pediatrics (>1 month to <13 years)', key: 'Pediatrics (>1 month to <13 years)' },
 	{ title: 'Adolescents (13 years to <19 years)', key: 'Adolescents (13 years to <19 years)' },
@@ -846,7 +846,7 @@ export const age = [
 	{ title: 'Geriatrics (>=60 years)', key: 'Geriatrics (>=60 years)' }
 ];
 
-export const target = [
+export const targetTreeData = [
 	{ title: 'Individual', key: 'Individual' },
 	{ title: 'Family/household', key: 'Family/household' },
 	{ title: 'Community', key: 'Community' },
