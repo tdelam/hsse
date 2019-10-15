@@ -1,7 +1,7 @@
 /**
- * @name HSEAdministratorTrackingPrioritizingQueue.js
+ * @name AdministratorHSEQualityAppraisalsQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the routing paths for HSE Administrator section of application
+ * @description Defines the administrator's quality appraisals queue component
  */
 
 import React, { Component } from 'react';

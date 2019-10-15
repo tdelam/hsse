@@ -1,7 +1,7 @@
 /**
  * @name AdministratorSSEEligibilityFiltersQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the  paths for Administrator SSE queue of application
+ * @description Defines the administrator's eligibility filters queue component
  */
 
 import React, { Component } from 'react';

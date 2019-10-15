@@ -1,3 +1,20 @@
+/**
+ * @name Routes.js
+ * @author Kwadwo Sakyi
+ * @description This file defines all routes used by the front-end to render a user interface for various paths.
+ * 
+ * Every route combines a path (which can be loaded in a browser) and a component which is rendered when that
+ * path is loaded.  Components are all fond in the ./components/ directory and include all markup required to
+ * render the UI.
+ * 
+ * For example, the route for the path "/hse/assignedeligibilityfiltersarticlequeue", below, renders the
+ * HSEAssignedEligibilityFiltersArticleQueue component, which in turn calls
+ * listHSEAssignedEligibilityFiltersArticlesQueue(), a function defined in actions/index.js which makes a
+ * request to the backend and then dispatches either the HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE or
+ * HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR signal (based on whether the request is successful or
+ * not) which are defined in actions/types.js
+ */
+
 import React from 'react';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';

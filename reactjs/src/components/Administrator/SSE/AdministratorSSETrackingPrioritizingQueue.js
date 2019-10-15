@@ -1,7 +1,7 @@
 /**
- * @name SSEAdministratorTrackingPrioritizing.js
+ * @name AdministratorSSETrackingPrioritizingQueue.js
  * @author Kwadwo Sakyi
- * @description Defines the routing paths for SSE Administrator section of application
+ * @description Defines the administrator's tracking and prioritizing queue copmonent
  */
 
 import React, { Component } from 'react';
