@@ -727,7 +727,7 @@ export const listHSEAssignedPresentationDetailsArticlesQueue = (history) => asyn
     const response = await axios.get(`${backendServer}/hse/assignedpresentationdetailsarticlequeue`, {
       headers: { authorization: localStorage.getItem('token') }
     });
-
+    console.log("response ", response);
     // history.push('/dashboard');
     dispatch({ type: HSE_ASSIGNED_PRESENTATION_DETAILS_ARTICLE_QUEUE, payload: response.data })
   } catch(e) {

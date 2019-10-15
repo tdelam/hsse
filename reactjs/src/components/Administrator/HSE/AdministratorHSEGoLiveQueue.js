@@ -59,7 +59,6 @@ class AdministratorHSEGoLiveQueue extends Component {
     }
 
     renderArticles() {
-        
         if(this.props.assignedArticles !== undefined ) {
             const rows = Object.entries(this.props.assignedArticles).map(article => {
                 return (

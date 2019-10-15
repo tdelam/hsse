@@ -369,28 +369,8 @@ const Menu = [
         ]
     },{
         name: 'Monthly Email',
-        icon: 'icon-envelope',
         translate: 'sidebar.nav.table. MONTHLY EMAIL',
-        submenu: [{
-                name: 'Standard',
-                path: 'table-standard',
-                translate: 'sidebar.nav.table.STANDARD'
-            },
-            {
-                name: 'Extended',
-                path: 'table-extended',
-                translate: 'sidebar.nav.table.EXTENDED'
-            },
-            {
-                name: 'Datatable',
-                path: 'table-datatable',
-                translate: 'sidebar.nav.table.DATATABLE'
-            },
-            {
-                name: 'Datagrid',
-                path: 'table-datagrid',
-            }
-        ]
+        path: '/hse/HSEMailBox',
     },
     {
         heading: 'Settings',
