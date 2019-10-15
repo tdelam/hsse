@@ -121,7 +121,7 @@ import HSEAssignedPresentationDetailsArticleQueue from './components/HSE/HSEAssi
 
 import HSEAssignedTranslatingTitlesArticleQueue from './components/HSE/HSEAssignedTranslatingTitlesArticleQueue';
 import HSEAssignedTrackingPrioritizingArticleQueue from './components/HSE/HSEAssignedTrackingPrioritizingArticleQueue';
-
+import HSEMailBox from './components/HSE/HSEMailBox';
 
 
 import AddHSEArticle from './components/HSE/AddHSEArticle';
@@ -390,6 +390,8 @@ const Routes = ({ location }) => {
 
                             <Route path="/hse/assignedlinkingstudiesarticlequeue" component={HSEAssignedLinkingStudiesArticleQueue} />
                             <Route path="/hse/assignedlinkingstudiesarticleinput/:articleId" component={HSEAssignedLinkingStudiesArticleInput} />
+                            
+                            <Route path="/hse/mailbox" component={HSEMailBox} />
 
                             <Route path="/hse/assignedpresentationdetailsarticlequeue" component={HSEAssignedPresentationDetailsArticleQueue} />
                             <Route path="/hse/assignedpresentationdetailsarticleinput/:articleId" component={HSEAssignedPresentationDetailsArticleInput} />
