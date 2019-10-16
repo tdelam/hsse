@@ -600,7 +600,7 @@ class SSEAssignedEligibilityFilterArticleInput extends Component {
                             { this.renderEligibility(this.state.showEligibility) }
 
                             { this.renderDocumentType(this.state.documentType) }
-                                                   
+{/*                                                   
                             { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false) }
 
                             { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false) }
@@ -622,7 +622,7 @@ class SSEAssignedEligibilityFilterArticleInput extends Component {
                             { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false)}
 
                             { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false)}
-
+*/}
                             { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
 
 

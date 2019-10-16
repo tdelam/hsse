@@ -20,7 +20,7 @@ import 'react-select/dist/react-select.css';
 import 'antd/dist/antd.css';
 
 import * as actions from '../../actions';
-
+/*
 import {
     healthSystemTopicsTreeData,
     canadianAreasTreeData,
@@ -35,7 +35,7 @@ import {
     intergovernmentalOrganizationHealthSystemDocumentTypeData
 
 } from './SSEEligibilityFilterTrees';
-
+*/
 const { TreeNode } = Tree;
 
 const STATES = [
@@ -606,7 +606,7 @@ class SSEArticleEdit extends Component {
                             { this.renderEligibility(this.state.showEligibility) }
 
                             { this.renderDocumentType(this.state.documentType) }
-                                                   
+{/*                                                   
                             { this.renderTreeSection("Health System Topics", healthSystemTopicsTreeData, this.state.showHealthSystemsTopics, false) }
 
                             { this.renderTreeSection("Canadian Areas", canadianAreasTreeData, this.state.showCanadianAreas, false) }
@@ -628,7 +628,7 @@ class SSEArticleEdit extends Component {
                             { this.renderTreeSection("Ontarian health system document type", ontarioHealthDocumentTypeData, this.state.showOntarianHealthSystemDocument, false) }
 
                             { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationHealthSystemDocumentTypeData, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false) }
-
+*/}
                             { this.renderArticleAssessmentSection(value, this.state.showArticleAssessment) }
 
 
