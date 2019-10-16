@@ -30,7 +30,7 @@ import {
     themeTreeData,
     populationTreeData,
     ontarioPriorityAreasTreeData,
-    canadaHealthSystemDocumentTypeData,
+    // canadaHealthSystemDocumentTypeData,
     ontarioHealthDocumentTypeData,
     intergovernmentalOrganizationHealthSystemDocumentTypeData
 

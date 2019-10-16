@@ -86,7 +86,7 @@ import Maintenance from './components/Pages/Maintenance';
 
 import UserEditor from './components/Settings/UserEditor';
 
-import Mailbox from './components/Extras/Mailbox';
+// import Mailbox from './components/Extras/Mailbox';
 import Timeline from './components/Extras/Timeline';
 import Calendar from './components/Extras/Calendar';
 import Invoice from './components/Extras/Invoice';
