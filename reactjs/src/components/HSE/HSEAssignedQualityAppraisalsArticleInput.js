@@ -119,57 +119,57 @@ class HSEAssignedQualityAppraisalsArticleInput extends Component {
     onChange = (e) => {
 
         switch(e.target.name) {
-            case questionOne:
+            case this.state.questionOne:
                 this.setState({
                     showIntergovernmentalSystemSubtype: true
                 });
                 break;
-            case questionTwo:
+            case this.state.questionTwo:
                 this.setState({
                     showCanadaHealthSystemSubtype: true
                 });
                 break;
-            case questionThree:
+            case this.state.questionThree:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionFour:
+            case this.state.questionFour:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionFive:
+            case this.state.questionFive:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionSix:
+            case this.state.questionSix:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionSeven:
+            case this.state.questionSeven:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionEight:
+            case this.state.questionEight:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionNine:
+            case this.state.questionNine:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionTen:
+            case this.state.questionTen:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
                 break;
-            case questionEleven:
+            case this.state.questionEleven:
                 this.setState({
                     showOntarioHealthSystemSubtype: true
                 });
