@@ -202,6 +202,9 @@ import AdministratorSSEPresentationDetailsQueue from './components/Administrator
 import AdministratorSSEGoLiveQueue from './components/Administrator/SSE/AdministratorSSEGoLiveQueue';
 import AdministratorSSETrackingPrioritizingQueue from './components/Administrator/SSE/AdministratorSSETrackingPrioritizingQueue';
 
+// MailManager
+import MailManager from './components/HSE/MonthlyEmail/MailManager';
+
 // List of routes that uses the page layout
 // listed here to Switch between layouts
 // depending on the current pathname
@@ -426,6 +429,8 @@ const Routes = ({ location }) => {
                             
                             <Route path="/hse/pendingtranslatingtitlesqueue" component={HSEPendingTranslatingTitlesQueue} />
                             <Route path="/hse/pendingtrackingprioritizingqueue" component={HSEPendingTrackingPrioritizingQueue} />
+
+                            <Route path="/hse/monthly-email" component={MailManager} />
                             
                             {/* HSE Forms */}
 
