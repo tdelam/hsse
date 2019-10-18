@@ -268,7 +268,7 @@ class MailManager extends Component {
                 </table>
               </div>
               <div className="card-footer text-right">
-                <a className="btn btn-secondary btn-sm" href="">View All Transactions</a>
+                <a className="btn btn-secondary btn-sm" href="">Resend LIVE Emails</a>
               </div>
             </TabPane>
             <TabPane tabId="resendEmail">
