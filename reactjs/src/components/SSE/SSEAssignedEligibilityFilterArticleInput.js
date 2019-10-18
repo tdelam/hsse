@@ -22,11 +22,11 @@ import 'antd/dist/antd.css';
 import * as actions from '../../actions';
 
 import {
-    domainTreeData,
-    limicFocusTreeData,
-    themeTreeData,
-    ageTreeData,
-    targetTreeData
+    // domainTreeData,
+    // limicFocusTreeData,
+    // themeTreeData,
+    // ageTreeData,
+    // targetTreeData
 
 } from './SSEEligibilityFilterTrees';
 

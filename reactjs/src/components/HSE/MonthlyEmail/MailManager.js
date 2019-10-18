@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../../Layout/ContentWrapper';
-import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Collapse } from 'reactstrap';
 
@@ -12,15 +11,7 @@ class MailManager extends Component {
         collapse: false
     }
 
-    toggleCollapse = () => {
-        this.setState({
-            collapse: !this.state.collapse
-        })
-    }
-
-
   render() {
-        
     return (
             <ContentWrapper>
                 <div className="content-heading">MailBox</div>
@@ -30,9 +21,6 @@ class MailManager extends Component {
                             <button className="btn btn-purple btn-sm mb-compose-button">
                                 <em className="fas fa-pencil-alt mr-2"></em>
                                 <span>Compose</span>
-                            </button>
-                            <button className="btn btn-sm btn-secondary mb-toggle-button ml-auto" type="button" onClick={this.toggleCollapse}>
-                                <em className="fa fa-bars fa-fw fa-lg"></em>
                             </button>
                         </div>
                         {/* START mailbox list */}
