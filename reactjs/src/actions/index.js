@@ -41,6 +41,9 @@ import {
   HSE_CREATE_BATCHFILE,
   HSE_CREATE_BATCHFILE_ERROR,
 
+  HSE_CREATE_RECIPIENT,
+  HSE_CREATE_RECIPIENT_ERROR,
+
   HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE,
   HSE_ADD_ARTICLE_TO_COMPLICATED_QUEUE_ERROR,
 
@@ -307,7 +310,16 @@ let headers = {
 };
 
 export const saveRecipient = (values) => async dispatch => {
-  console.log("recipient: ", values);
+  try {
+    const response = await axios.post(
+      `${backendServer}/hse/saveRecipient`,
+      values
+    );
+    
+    dispatch({ type: HSE_CREATE_RECIPIENT, payload: response.data })
+  } catch(e) {
+    dispatch({ type: HSE_CREATE_RECIPIENT_ERROR, payload: 'Error saving recipient'});
+  }
 };
 
 

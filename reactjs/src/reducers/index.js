@@ -38,7 +38,7 @@ import HSEPendingTrackingPrioritizingArticleQueueReducer from './HSEPendingTrack
 import HSEPendingTrackingPrioritizingBatchfileQueueReducer from './HSEPendingTrackingPrioritizingBatchfileQueueReducer';
 
 import HSEAssignedTrackingPrioritizingArticleQueueReducer from './HSEAssignedTrackingPrioritizingArticleReducer';
-
+import MailManagerReducer from './MailManager/MailManagerReducer';
 
 
 import SSEArticleReducer from './SSEArticleReducer';
@@ -116,6 +116,7 @@ export default combineReducers({
     hseAssignedPresentationDetailsArticleQueue: HSEAssignedPresentationDetailsArticleQueueReducer,
     hseAssignedTrackingPrioritizingArticleQueue: HSEAssignedTrackingPrioritizingArticleQueueReducer,
 
+    hseMailManager: MailManagerReducer,
     hse: HSEArticleReducer,
 
     ssePendingEligibilityFiltersArticleQueue: SSEPendingEligibilityFiltersArticleQueueReducer,

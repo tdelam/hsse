@@ -49,6 +49,9 @@ export const HSE_CREATE_ARTICLE_ERROR = 'hse_create_article_error';
 export const HSE_CREATE_BATCHFILE = 'hse_create_batchfile';
 export const HSE_CREATE_BATCHFILE_ERROR = 'hse_create_batchfile_error';
 
+export const HSE_CREATE_RECIPIENT = 'hse_create_recipient';
+export const HSE_CREATE_RECIPIENT_ERROR = 'hse_create_recipient_error';
+
 export const HSE_DELETE_ARTICLE = 'delete_hse_article';
 
 export const SSE_ARTICLE_ERROR = 'sse_article_error';

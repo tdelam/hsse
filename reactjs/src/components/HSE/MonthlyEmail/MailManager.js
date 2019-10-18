@@ -53,6 +53,7 @@ class MailManager extends Component {
   }
 
   toggleModal = () => {
+    this.props.saveRecipient(this.state.emailAddress);
     this.setState({
       modal: !this.state.modal
     });
