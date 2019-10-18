@@ -169,116 +169,59 @@ class MailManager extends Component {
                 <button className="btn btn-secondary btn-sm" type="button">View All Activity</button>
               </div>
             </TabPane>
-                        <TabPane tabId="liveEmail">
-                            <div className="table-responsive">
-                                <table className="table table-bordered table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Order #</th>
-                                            <th>Order Date</th>
-                                            <th>Order Time</th>
-                                            <th>Amount (USD)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:29 PM</td>
-                                            <td>$321.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3325</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:20 PM</td>
-                                            <td>$234.34</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3324</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:03 PM</td>
-                                            <td>$724.17</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3323</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:00 PM</td>
-                                            <td>$23.71</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3322</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:49 PM</td>
-                                            <td>$8345.23</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3321</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:23 PM</td>
-                                            <td>$245.12</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3320</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:15 PM</td>
-                                            <td>$5663.54</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3319</td>
-                                            <td>10/21/2013</td>
-                                            <td>2:13 PM</td>
-                                            <td>$943.45</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            {/* END table responsive */}
-                            <div className="card-footer text-right">
-                                <a className="btn btn-secondary btn-sm" href="">View All Transactions</a>
-                            </div>
-                        </TabPane>
-                        <TabPane tabId="resendEmail">
-                            {/* START table responsive */}
-                            <div className="table-responsive">
-                                <table className="table table-bordered table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Order #</th>
-                                            <th>Order Date</th>
-                                            <th>Order Time</th>
-                                            <th>Amount (USD)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:29 PM</td>
-                                            <td>$321.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3325</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:20 PM</td>
-                                            <td>$234.34</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3324</td>
-                                            <td>10/21/2013</td>
-                                            <td>3:03 PM</td>
-                                            <td>$724.17</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            {/* END table responsive */}
-                            <div className="card-footer text-right">
-                                <a className="btn btn-secondary btn-sm" href="">Yippee</a>
-                            </div>
-                        </TabPane>
-                    </TabContent>
-                </div>
-            </ContentWrapper>
+            <TabPane tabId="liveEmail">
+              <div className="table-responsive">
+                <table className="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Order #</th>
+                      <th>Order Date</th>
+                      <th>Order Time</th>
+                      <th>Amount (USD)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>3326</td>
+                      <td>10/21/2013</td>
+                      <td>3:29 PM</td>
+                      <td>$321.33</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="card-footer text-right">
+                <a className="btn btn-secondary btn-sm" href="">View All Transactions</a>
+              </div>
+            </TabPane>
+            <TabPane tabId="resendEmail">
+              <div className="table-responsive">
+                <table className="table table-bordered table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Order #</th>
+                      <th>Order Date</th>
+                      <th>Order Time</th>
+                      <th>Amount (USD)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>3326</td>
+                      <td>10/21/2013</td>
+                      <td>3:29 PM</td>
+                      <td>$321.33</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="card-footer text-right">
+                <a className="btn btn-secondary btn-sm" href="">Yippee</a>
+              </div>
+            </TabPane>
+          </TabContent>
+        </div>
+      </ContentWrapper>
     );
   }
 }
