@@ -141,7 +141,7 @@ import HSEAssignedTrackingPrioritizingArticleQueue from './components/HSE/HSEAss
 
 
 
-import AddHSEArticle from './components/HSE/Article/AddHSEArticle';
+import AddArticle from './components/HSE/Article/AddArticle';
 import HSEArticleEdit from './components/HSE/Article/HSEArticleEdit';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
@@ -416,7 +416,7 @@ const Routes = ({ location }) => {
                             
 
                             {/* Pending HSE Queue */}
-                            <Route path="/hse/addarticle" component={AddHSEArticle} />
+                            <Route path="/hse/addarticle" component={AddArticle} />
                             <Route path="/hse/batchfileupload" component={HSEBatchUpload} />
                             <Route path="/hse/pendingeligibilityfiltersarticlequeue" component={HSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />

@@ -31,7 +31,7 @@ import HSEFormValidator from '../HSEFormValidator.js';
  ];
  */
 
-class AddHSEArticle extends Component {
+class AddArticle extends Component {
 
     state = {
         hseSingleArticle: {
@@ -326,5 +326,5 @@ export default compose(
     reduxForm({
         form: 'addhsearticleform'
     })
-) (AddHSEArticle);
+) (AddArticle);
 
