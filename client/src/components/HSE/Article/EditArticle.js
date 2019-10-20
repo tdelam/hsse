@@ -625,7 +625,7 @@ class EditArticle extends Component {
 
                             { this.renderTreeSection("Canadian health system document type", canadaHealthSystemSubtype, this.state.showCanadianHealthSystemDocument, false ) }
 
-                            { this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.showOntarianHealthSystemDocument, false) }
+                            {/* this.renderTreeSection("Ontarian health system document type", ontarioHealthSubtype, this.state.showOntarianHealthSystemDocument, false) */}
 
                             { this.renderTreeSection("Intergovernmental organization health system document type", intergovernmentalOrganizationSubtype, this.state.showIntergovernmentalOrganizationHealthSystemDocument, false) }
 

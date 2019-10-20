@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import ContentWrapper from '../../Layout/ContentWrapper';
+import ContentWrapper from '../../../Layout/ContentWrapper';
 //import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Tree } from 'antd';
@@ -21,7 +21,7 @@ import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
 
-import * as actions from '../../../actions';
+import * as actions from '../../../../actions';
 
 import {
     healthSystemTopicsTreeData,
@@ -36,7 +36,7 @@ import {
     ontarioHealthSubtype,
     intergovernmentalOrganizationSubtype
 
-} from '../HSEEligibilityFilterTrees';
+} from '../../HSEEligibilityFilterTrees';
 
 const { TreeNode } = Tree;
 

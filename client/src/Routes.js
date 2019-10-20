@@ -8,7 +8,7 @@
  * render the UI.
  * 
  * For example, the route for the path "/hse/assignedeligibilityfiltersarticlequeue", below, renders the
- * HSEAssignedEligibilityFiltersArticleQueue component, which in turn calls
+ * ArticleQueue component, which in turn calls
  * listHSEAssignedEligibilityFiltersArticlesQueue(), a function defined in actions/index.js which makes a
  * request to the backend and then dispatches either the HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE or
  * HSE_ASSIGNED_ELIGIBILITY_FILTERS_ARTICLE_QUEUE_ERROR signal (based on whether the request is successful or
@@ -126,7 +126,7 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 import FilterArticleInput from './components/HSE/Article/AssignedEligibility/FilterArticleInput';
 //import FilterResolution from './components/HSE/Article/AssignedEligibility/FilterResolution';
 import ArticleResolution from './components/HSE/Article/AssignedEligibility/ArticleResolution';
-import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
+import ArticleQueue from './components/HSE/Article/AssignedEligibility/ArticleQueue';
 import HSEAssignedQualityAppraisalsArticleQueue from './components/HSE/HSEAssignedQualityAppraisalsArticleQueue';
 import HSEAssignedQualityAppraisalsArticleInput from './components/HSE/HSEAssignedQualityAppraisalsArticleInput';
 import HSEAssignedQualityAppraisalsArticleResolution from './components/HSE/HSEAssignedQualityAppraisalsArticleResolution';
@@ -399,7 +399,7 @@ const Routes = ({ location }) => {
                             {/* Assigned HSE Queue */}
                             <Route path="/hse/assigned-eligibility-filters-article-input/:articleId" component={FilterArticleInput} />
                             <Route path="/hse/assigned-eligibility-filters-article-resolution/:articleId" component={ArticleResolution} />
-                            <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
+                            <Route path="/hse/assigned-eligibility-filters-articlequeue" component={ArticleQueue} />
 
                             <Route path="/hse/assignedqualityappraisalsarticlequeue" component={HSEAssignedQualityAppraisalsArticleQueue} />
                             <Route exact path="/hse/assignedqualityappraisalsarticleinput/:articleId" component={HSEAssignedQualityAppraisalsArticleInput} />
