@@ -123,7 +123,7 @@ import ForumCategories from './components/Forum/ForumCategories';
 import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
-import HSEAssignedEligibilityFilterArticleInput from './components/HSE/HSEAssignedEligibilityFilterArticleInput';
+import FilterArticleInput from './components/HSE/Article/AssignedEligibility/FilterArticleInput';
 //import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
 import HSEAssignedEligibilityFilterArticleResolution from './components/HSE/HSEAssignedEligibilityFilterArticleResolution';
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
@@ -397,7 +397,7 @@ const Routes = ({ location }) => {
                             <Route path="/hse/edit-article/:articleId" component={EditArticle} />
 
                             {/* Assigned HSE Queue */}
-                            <Route path="/hse/assignedeligibilityfiltersarticleinput/:articleId" component={HSEAssignedEligibilityFilterArticleInput} />
+                            <Route path="/hse/assigned-eligibility-filters-article-input/:articleId" component={FilterArticleInput} />
                             <Route path="/hse/assignedeligibilityfiltersarticleresolution/:articleId" component={HSEAssignedEligibilityFilterArticleResolution} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
 

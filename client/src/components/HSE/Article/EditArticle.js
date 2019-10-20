@@ -31,7 +31,7 @@ import {
     populationTreeData,
     ontarioPriorityAreasTreeData,
     canadaHealthSystemSubtype,
-    ontarioHealthSubtype,
+
     intergovernmentalOrganizationSubtype
 
 } from '../HSEEligibilityFilterTrees';
@@ -653,8 +653,6 @@ class EditArticle extends Component {
     }
 
 }
-
-// export default HSEAssignedEligibilityFilterArticleInput;
 
 function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
     return {

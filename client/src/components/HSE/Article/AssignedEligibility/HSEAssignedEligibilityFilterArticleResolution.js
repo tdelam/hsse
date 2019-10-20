@@ -911,8 +911,6 @@ class HSEAssignedEligibilityFilterArticleResolution extends Component {
 
 }
 
-// export default HSEAssignedEligibilityFilterArticleInput;
-
 function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
-import ContentWrapper from '../Layout/ContentWrapper';
+import ContentWrapper from '../../Layout/ContentWrapper';
 import { Card, CardHeader, CardBody, Input, FormGroup } from 'reactstrap';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
 import $ from 'jquery';
 // Wizard (jquery.steps)
@@ -14,7 +14,7 @@ import 'jquery-validation/dist/jquery.validate.js';
 import 'jquery-steps/build/jquery.steps.min.js';
 
 
-class HSEAssignedEligibilityFilterArticleInput extends Component {
+class FilterArticleInput extends Component {
 
     state = {
         userName: '',
@@ -650,10 +650,10 @@ function mapStateToProps({ hseAssignedEligibilityFiltersArticleQueue }) {
     }
 }
 
-//export default connect(mapStateToProps, actions)(HSEAssignedEligibilityFilterArticleInput);
+//export default connect(mapStateToProps, actions)(FilterArticleInput);
 
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'eligibilityFilterInput'
-    })) (HSEAssignedEligibilityFilterArticleInput);
+    })) (FilterArticleInput);

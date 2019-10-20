@@ -833,8 +833,6 @@ class HSEAssignedQualityAppraisalsArticleResolution extends Component {
 
 }
 
-// export default HSEAssignedEligibilityFilterArticleInput;
-
 function mapStateToProps({ hseAssignedQualityAppraisalsArticleQueue, auth }) {
     return {
         currentUser: auth.currentUser,
