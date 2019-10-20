@@ -45,7 +45,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class HSEArticleEdit extends Component {
+class EditArticle extends Component {
 
     state = {
 
@@ -668,4 +668,4 @@ export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'eligibilityFilterInput'
-    })) (HSEArticleEdit);
+    })) (EditArticle);

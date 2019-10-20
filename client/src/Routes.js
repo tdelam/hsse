@@ -142,7 +142,7 @@ import HSEAssignedTrackingPrioritizingArticleQueue from './components/HSE/HSEAss
 
 
 import AddArticle from './components/HSE/Article/AddArticle';
-import HSEArticleEdit from './components/HSE/Article/HSEArticleEdit';
+import EditArticle from './components/HSE/Article/EditArticle';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
 import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
@@ -394,7 +394,7 @@ const Routes = ({ location }) => {
                             <Route path="/administrator/ssepresentationdetailsqueue" component={AdministratorSSEPresentationDetailsQueue} />
 
                             {/* */}
-                            <Route path="/hse/editarticle/:articleId" component={HSEArticleEdit} />
+                            <Route path="/hse/edit-article/:articleId" component={EditArticle} />
 
                             {/* Assigned HSE Queue */}
                             <Route path="/hse/assignedeligibilityfiltersarticleinput/:articleId" component={HSEAssignedEligibilityFilterArticleInput} />
@@ -416,7 +416,7 @@ const Routes = ({ location }) => {
                             
 
                             {/* Pending HSE Queue */}
-                            <Route path="/hse/addarticle" component={AddArticle} />
+                            <Route path="/hse/add-article" component={AddArticle} />
                             <Route path="/hse/batchfileupload" component={HSEBatchUpload} />
                             <Route path="/hse/pendingeligibilityfiltersarticlequeue" component={HSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/hse/pendingeligibilityfiltersbatchfilequeue" component={HSEPendingEligibilityFiltersBatchfileQueue} />
@@ -454,7 +454,7 @@ const Routes = ({ location }) => {
                             
 
                             {/* Pending SSE Queue */}
-                            <Route path="/sse/addarticle" component={AddSSEArticle} />
+                            <Route path="/sse/add-article" component={AddSSEArticle} />
                             <Route path="/sse/batchfileupload" component={SSEBatchUpload} />
                             <Route path="/sse/pendingeligibilityfiltersarticlequeue" component={SSEPendingEligibilityFiltersArticleQueue} />
                             <Route path="/sse/pendingeligibilityfiltersbatchfilequeue" component={SSEPendingEligibilityFiltersBatchfileQueue} />
