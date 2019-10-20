@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import ContentWrapper from '../Layout/ContentWrapper';
+import ContentWrapper from '../../Layout/ContentWrapper';
 import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
 import Datetime from 'react-datetime';
 
-import HSEFormValidator from './HSEFormValidator.js';
+import HSEFormValidator from '../HSEFormValidator.js';
 
 /**
  * Validation flow using controlled components

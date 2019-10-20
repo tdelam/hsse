@@ -141,8 +141,8 @@ import HSEAssignedTrackingPrioritizingArticleQueue from './components/HSE/HSEAss
 
 
 
-import AddHSEArticle from './components/HSE/AddHSEArticle';
-import HSEArticleEdit from './components/HSE/HSEArticleEdit';
+import AddHSEArticle from './components/HSE/Article/AddHSEArticle';
+import HSEArticleEdit from './components/HSE/Article/HSEArticleEdit';
 import HSEBatchUpload from './components/HSE/HSEBatchUpload';
 import HSEPendingEligibilityFiltersArticleQueue from './components/HSE/HSEPendingEligibilityFiltersArticleQueue';
 import HSEPendingEligibilityFiltersBatchfileQueue from './components/HSE/HSEPendingEligibilityFiltersBatchfileQueue';
