@@ -125,7 +125,7 @@ import ForumDiscussion from './components/Forum/ForumDiscussion';
 
 import FilterArticleInput from './components/HSE/Article/AssignedEligibility/FilterArticleInput';
 //import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
-import HSEAssignedEligibilityFilterArticleResolution from './components/HSE/HSEAssignedEligibilityFilterArticleResolution';
+import ArticleResolution from './components/HSE/Article/AssignedEligibility/ArticleResolution';
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalsArticleQueue from './components/HSE/HSEAssignedQualityAppraisalsArticleQueue';
 import HSEAssignedQualityAppraisalsArticleInput from './components/HSE/HSEAssignedQualityAppraisalsArticleInput';
@@ -398,7 +398,7 @@ const Routes = ({ location }) => {
 
                             {/* Assigned HSE Queue */}
                             <Route path="/hse/assigned-eligibility-filters-article-input/:articleId" component={FilterArticleInput} />
-                            <Route path="/hse/assignedeligibilityfiltersarticleresolution/:articleId" component={HSEAssignedEligibilityFilterArticleResolution} />
+                            <Route path="/hse/assigned-eligibility-filters-article-resolution/:articleId" component={ArticleResolution} />
                             <Route path="/hse/assignedeligibilityfiltersarticlequeue" component={HSEAssignedEligibilityFiltersArticleQueue} />
 
                             <Route path="/hse/assignedqualityappraisalsarticlequeue" component={HSEAssignedQualityAppraisalsArticleQueue} />
