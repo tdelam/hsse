@@ -124,7 +124,7 @@ import ForumTopic from './components/Forum/ForumTopics';
 import ForumDiscussion from './components/Forum/ForumDiscussion';
 
 import FilterArticleInput from './components/HSE/Article/AssignedEligibility/FilterArticleInput';
-//import HSEAssignedEligibilityFilterResolution from './components/HSE/HSEAssignedEligibilityFilterResolution';
+//import FilterResolution from './components/HSE/Article/AssignedEligibility/FilterResolution';
 import ArticleResolution from './components/HSE/Article/AssignedEligibility/ArticleResolution';
 import HSEAssignedEligibilityFiltersArticleQueue from './components/HSE/HSEAssignedEligibilityFiltersArticleQueue';
 import HSEAssignedQualityAppraisalsArticleQueue from './components/HSE/HSEAssignedQualityAppraisalsArticleQueue';

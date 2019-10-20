@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import ContentWrapper from '../Layout/ContentWrapper';
+import ContentWrapper from '../../Layout/ContentWrapper';
 import { Tree } from 'antd';
 import {
     Col,
@@ -19,7 +19,7 @@ import 'react-select/dist/react-select.css';
 
 import 'antd/dist/antd.css';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
 import {
     healthSystemTopicsTreeData,
@@ -34,7 +34,7 @@ import {
     ontarioHealthDocumentTypeData,
     intergovernmentalOrganizationHealthSystemDocumentTypeData
 
-} from './HSEEligibilityFilterTrees';
+} from '../HSEEligibilityFilterTrees';
 
 const { TreeNode } = Tree;
 
@@ -45,7 +45,7 @@ const STATES = [
     { value: 'deleted', label: 'Deleted', className: 'State-Qld' }
 ]
 
-class HSEAssignedEligibilityFilterResolution extends Component {
+class FilterResolution extends Component {
 
     state = {
 
@@ -742,4 +742,4 @@ export default compose(
     connect(mapStateToProps, actions),
     reduxForm({
         form: 'eligibilityFilterInput'
-    })) (HSEAssignedEligibilityFilterResolution);
+    })) (FilterResolution);
