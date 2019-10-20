@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Root from './Root';
-import App from './components/App';
+import App from './App';
 
-import registerServiceWorker from './registerServiceWorker';
+import './i18n';
 
 ReactDOM.render(
     <Root>
         <App />
-    </Root>, 
-    document.getElementById('root'));
-
-registerServiceWorker();
+    </Root>,
+    document.getElementById('app'));
