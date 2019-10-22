@@ -25,7 +25,7 @@ const dtOptions = {
     }
 }
 
-const HSEAssignedEligibilityFiltersBatchfileQueue = () => (
+const FiltersBatchfileQueue = () => (
     <ContentWrapper>
         <div className="content-heading">
                    <div>Eligibility and Filters
@@ -368,4 +368,4 @@ const HSEAssignedEligibilityFiltersBatchfileQueue = () => (
     </ContentWrapper>
 );
 
-export default HSEAssignedEligibilityFiltersBatchfileQueue;
+export default FiltersBatchfileQueue;
