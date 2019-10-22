@@ -3,13 +3,13 @@ services:
   - docker
 
 before_install:
-  - docker build -t sakksoftware/hsse-admin-client-test -f ./reactjs/Dockerfile.dev ./reactjs
+  - docker build -t sakksoftware/hsse-admin-client-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run sakksoftware/hsse-admin-client-test npm test -- --coverage
 
 after_success:
-  - docker build -t sakksoftware/hsse-admin-client ./reactjs
+  - docker build -t sakksoftware/hsse-admin-client ./client
   - docker build -t sakksoftware/hsse-nginx ./nginx
   - docker build -t sakksoftware/hsse-server ./server
   # Log in to the docker CLI
